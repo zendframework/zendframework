@@ -80,4 +80,17 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
         $strategy = new ExplodeStrategy('-', '3');
         $this->assertEquals(array('foo', 'bar', 'baz-bat'), $strategy->hydrate('foo-bar-baz-bat'));
     }
+
+    public function testHydrateWithInvalidScalarType()
+    {
+        $strategy = new ExplodeStrategy();
+
+        $this->setExpectedException(
+            'Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException',
+            'Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
+            . ' array provided instead'
+        );
+
+        $strategy->hydrate(array());
+    }
 }

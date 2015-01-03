@@ -1,0 +1,9 @@
+<?php
+
+if (!isset($this->vars()->obj)) {
+	echo "No object model passed";
+} else {
+	echo $this->obj->message;
+	$this->obj->helper->setObjectKey($this->vars()->obj->objectKey);
+	echo $this->obj->helper->__invoke('partialLoopChildObject.phtml', $obj->data); 
+}

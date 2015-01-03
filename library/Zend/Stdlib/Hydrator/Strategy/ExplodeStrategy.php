@@ -62,6 +62,8 @@ final class ExplodeStrategy implements StrategyInterface
      *
      * Split a string by delimiter
      *
+     * @return string[]
+     *
      * @throws Exception\InvalidArgumentException
      */
     public function hydrate($value)

@@ -116,7 +116,7 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     public function getValidHydratedValues()
     {
         return array(
-            array(null, ',', array('')),
+            array(null, ',', array()),
             array('', ',', array('')),
             array('foo', ',', array('foo')),
             array('foo,bar', ',', array('foo', 'bar')),

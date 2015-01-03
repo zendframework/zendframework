@@ -62,4 +62,22 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $char->show());
         $this->assertEquals('baz', $char->show());
     }
+
+    public function testProducesStarSymbolOnInput()
+    {
+        $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('t'));
+        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('b'));
+        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
+
+        $char = new Password('New password? ', true);
+
+        $char->setConsole($this->adapter);
+
+        ob_start();
+        $char->show();
+        $output = ob_get_clean();
+
+        $this->assertSame('***', $output);
+    }
 }

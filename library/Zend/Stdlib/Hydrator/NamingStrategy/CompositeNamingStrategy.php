@@ -37,7 +37,7 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
             $strategies
         );
 
-        $this->defaultNamingStrategy = $defaultNamingStrategy;
+        $this->defaultNamingStrategy = $defaultNamingStrategy ?: new IdentityNamingStrategy();
     }
 
     /**

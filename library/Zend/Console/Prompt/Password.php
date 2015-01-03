@@ -47,13 +47,15 @@ final class Password extends AbstractPrompt
      */
     public function show()
     {
-        $this->getConsole()->write($this->promptText);
+        $console = $this->getConsole();
+
+        $console->write($this->promptText);
 
         /**
          * Read characters from console
          */
         while (true) {
-            $char = $this->getConsole()->readChar();
+            $char = $console->readChar();
 
             if (PHP_EOL == $char) {
                 break;

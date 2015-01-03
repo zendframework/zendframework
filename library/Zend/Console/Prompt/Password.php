@@ -14,17 +14,17 @@ final class Password extends AbstractPrompt
     /**
      * @var string
      */
-    protected $promptText = 'Password: ';
+    private $promptText = 'Password: ';
 
     /**
      * @var bool
      */
-    protected $echo = true;
+    private $echo = true;
 
     /**
      * @var string
      */
-    protected $password = '';
+    private $password = '';
 
     /**
      * Ask the user for a password

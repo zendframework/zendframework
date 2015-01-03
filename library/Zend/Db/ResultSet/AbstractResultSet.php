@@ -171,7 +171,9 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         if ($this->buffer === null) {
             $this->buffer = -2; // implicitly disable buffering from here on
         }
-        $this->dataSource->next();
+        if (!is_array($this->buffer) || $this->position == $this->dataSource->key()) {
+            $this->dataSource->next();
+        }
         $this->position++;
     }
 

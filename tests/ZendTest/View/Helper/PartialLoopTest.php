@@ -318,6 +318,9 @@ class PartialLoopTest extends TestCase
         }
     }
 
+    /**
+     * @group 7093
+     */
     public function testNestedCallsShouldNotOverrideObjectKey()
     {
         $data = array();

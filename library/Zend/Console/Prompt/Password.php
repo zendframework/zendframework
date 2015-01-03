@@ -29,7 +29,7 @@ final class Password extends AbstractPrompt
      */
     public function __construct(
         $promptText = 'Password: ',
-        $echo = true
+        $echo = false
     ) {
         $this->promptText = (string) $promptText;
         $this->echo       = (bool) $echo;

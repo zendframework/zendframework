@@ -42,17 +42,24 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $char->show());
     }
 
-    public function testCanPromptPasswordWithNewQuestion()
+    public function testCanPromptPasswordRepeatedly()
     {
-        $this->markTestIncomplete();
-        fwrite($this->adapter->stream, 'sh its a secret');
+        $this->adapter->expects($this->at(0))->method('write')->with('New password? ');
+        $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('b'));
+        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('r'));
+        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->at(5))->method('write')->with('New password? ');
+        $this->adapter->expects($this->at(6))->method('readChar')->will($this->returnValue('b'));
+        $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(8))->method('readChar')->will($this->returnValue('z'));
+        $this->adapter->expects($this->at(9))->method('readChar')->will($this->returnValue(PHP_EOL));
 
-        $char = new Password("What is the secret?", false);
+        $char = new Password('New password? ', false);
+
         $char->setConsole($this->adapter);
-        ob_start();
-        $response = $char->show();
-        $text = ob_get_clean();
-        $this->assertEquals($text, "What is the secret\n");
-        $this->assertEquals('sh its a secret', $response);
+
+        $this->assertEquals('bar', $char->show());
+        $this->assertEquals('baz', $char->show());
     }
 }

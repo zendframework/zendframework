@@ -95,6 +95,9 @@ class FormDateSelectTest extends CommonTestCase
         $this->assertEquals(31, count($element->getDayElement()->getValueOptions()));
     }
 
+    /**
+     * @group 6656
+     */
     public function testGetElements()
     {
         $element = new DateSelect('foo');

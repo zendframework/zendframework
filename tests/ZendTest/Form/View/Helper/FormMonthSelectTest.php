@@ -95,6 +95,9 @@ class FormMonthSelectTest extends CommonTestCase
         $this->assertEquals(12, count($element->getMonthElement()->getValueOptions()));
     }
 
+    /**
+     * @group 6656
+     */
     public function testGetElements()
     {
         $element = new MonthSelect('foo');

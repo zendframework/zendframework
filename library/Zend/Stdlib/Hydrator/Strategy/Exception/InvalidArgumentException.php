@@ -9,6 +9,6 @@
 
 namespace Zend\Stdlib\Hydrator\Strategy\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

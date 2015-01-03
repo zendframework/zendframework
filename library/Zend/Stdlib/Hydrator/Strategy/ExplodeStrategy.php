@@ -52,7 +52,7 @@ final class ExplodeStrategy implements StrategyInterface
             ));
         }
 
-        if ($delimiter === '') {
+        if (empty($delimiter)) {
             throw new Exception\InvalidArgumentException('Delimiter cannot be empty.');
         }
 

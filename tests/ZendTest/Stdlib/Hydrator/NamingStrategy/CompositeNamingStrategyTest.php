@@ -12,6 +12,11 @@ namespace ZendTest\Stdlib\Hydrator\NamingStrategy;
 use Zend\Stdlib\Hydrator\NamingStrategy\CompositeNamingStrategy;
 use Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface;
 
+/**
+ * Tests for {@see \Zend\Stdlib\Hydrator\NamingStrategy\CompositeNamingStrategy}
+ *
+ * @covers \Zend\Stdlib\Hydrator\NamingStrategy\CompositeNamingStrategy
+ */
 class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName()

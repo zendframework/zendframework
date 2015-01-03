@@ -91,10 +91,13 @@ final class ExplodeStrategy implements StrategyInterface
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Join array elements with delimiter
      *
-     * @param  array  $value The original value.
-     * @return string Returns the value that should be extracted.
+     * @param string[] $value The original value.
+     *
+     * @return string|null
      */
     public function extract($value)
     {

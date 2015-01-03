@@ -9,7 +9,7 @@
 
 namespace Zend\Console\Prompt;
 
-class Password extends AbstractPrompt
+final class Password extends AbstractPrompt
 {
     /**
      * @var string

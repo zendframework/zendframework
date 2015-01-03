@@ -41,8 +41,9 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
         $this->adapter->expects($this->at(5))->method('readChar')->will($this->returnValue('o'));
         $this->adapter->expects($this->at(6))->method('clearLine');
         $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->never())->method('write');
 
-        $char = new Password('Password: ', false);
+        $char = new Password('Password: ');
 
         $char->setConsole($this->adapter);
 
@@ -67,8 +68,9 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
         $this->adapter->expects($this->at(13))->method('readChar')->will($this->returnValue('z'));
         $this->adapter->expects($this->at(14))->method('clearLine');
         $this->adapter->expects($this->at(15))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->never())->method('write');
 
-        $char = new Password('New password? ', false);
+        $char = new Password('New password? ');
 
         $char->setConsole($this->adapter);
 

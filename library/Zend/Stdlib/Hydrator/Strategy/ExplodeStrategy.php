@@ -31,9 +31,7 @@ final class ExplodeStrategy implements StrategyInterface
     {
         $this->setValueDelimiter($delimiter);
 
-        if ($explodeLimit !== null) {
-            $this->explodeLimit = (int) $explodeLimit;
-        }
+        $this->explodeLimit = ($explodeLimit === null) ? null : (int) $explodeLimit;
     }
 
     /**

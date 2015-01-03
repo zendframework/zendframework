@@ -114,7 +114,7 @@ class Int extends AbstractValidator
             if (intl_is_failure($format->getErrorCode())) {
                 throw new Exception\InvalidArgumentException("Invalid locale string given");
             }
-        } catch(IntlException $e) {
+        } catch (IntlException $e) {
             throw new Exception\InvalidArgumentException("Invalid locale string given");
         }
 
@@ -124,7 +124,7 @@ class Int extends AbstractValidator
                 $this->error(self::NOT_INT);
                 return false;
             }
-        } catch(IntlException $e) {
+        } catch (IntlException $e) {
             $this->error(self::NOT_INT);
             return false;
         }

@@ -127,7 +127,7 @@ class Float extends AbstractValidator
             if (intl_is_failure($formatter->getErrorCode())) {
                 throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
             }
-        } catch(IntlException $e) {
+        } catch (IntlException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
 

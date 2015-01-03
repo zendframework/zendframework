@@ -64,7 +64,8 @@ class Partial extends AbstractHelper
     /**
      * Set object key
      *
-     * @param  string $key
+     * @param string|null $key
+     *
      * @return Partial
      */
     public function setObjectKey($key)

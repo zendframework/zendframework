@@ -41,34 +41,6 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * Checks if the naming strategy with the given name exists.
-     *
-     * @param  string $name The name of the naming strategy to check for.
-     * @return bool
-     */
-    private function has($name)
-    {
-        return array_key_exists($name, $this->namingStrategies)
-            || ($this->defaultNamingStrategy instanceof NamingStrategyInterface);
-    }
-
-    /**
-     * Gets the naming strategy with the given name.
-     *
-     * @param string $name The name of the naming strategy to get.
-     *
-     * @return NamingStrategyInterface
-     */
-    private function get($name)
-    {
-        if (array_key_exists($name, $this->namingStrategies)) {
-            return $this->namingStrategies[$name];
-        }
-
-        return $this->defaultNamingStrategy;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function extract($name)

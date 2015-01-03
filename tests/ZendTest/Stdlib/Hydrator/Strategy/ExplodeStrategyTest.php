@@ -24,7 +24,11 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $strategy = new ExplodeStrategy($delimiter);
 
-        $this->assertEquals($expected, $strategy->extract($extractValue));
+        if (is_numeric($expected)) {
+            $this->assertEquals($expected, $strategy->extract($extractValue));
+        } else {
+            $this->assertSame($expected, $strategy->extract($extractValue));
+        }
     }
 
     public function testGetExceptionWithInvalidArgumentOnHydration()
@@ -44,7 +48,7 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGetEmptyArrayWhenHydratingNullValue()
     {
         $strategy = new ExplodeStrategy();
-        $this->assertEquals(array(), $strategy->hydrate(null));
+        $this->assertSame(array(), $strategy->hydrate(null));
     }
 
     public function testGetExceptionWithEmptyDelimiter()
@@ -62,10 +66,10 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     public function testHydrateWithExplodeLimit()
     {
         $strategy = new ExplodeStrategy('-', 2);
-        $this->assertEquals(array('foo', 'bar-baz-bat'), $strategy->hydrate('foo-bar-baz-bat'));
+        $this->assertSame(array('foo', 'bar-baz-bat'), $strategy->hydrate('foo-bar-baz-bat'));
 
         $strategy = new ExplodeStrategy('-', '3');
-        $this->assertEquals(array('foo', 'bar', 'baz-bat'), $strategy->hydrate('foo-bar-baz-bat'));
+        $this->assertSame(array('foo', 'bar', 'baz-bat'), $strategy->hydrate('foo-bar-baz-bat'));
     }
 
     public function testHydrateWithInvalidScalarType()

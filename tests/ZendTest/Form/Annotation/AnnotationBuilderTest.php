@@ -278,6 +278,9 @@ class AnnotationBuilderTest extends TestCase
         }
     }
 
+    /**
+     * @group 6753
+     */
     public function testInputFilterAnnotationAllowsComposition()
     {
         $entity = new TestAsset\Annotation\EntityWithInputFilterAnnotation();

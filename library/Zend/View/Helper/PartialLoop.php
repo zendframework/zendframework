@@ -108,11 +108,9 @@ class PartialLoop extends Partial
     {
         if (null === $key) {
             unset($this->objectKeyStack[$this->nestingLevel]);
-
-            return parent::setObjectKey($key);
+        } else {
+            $this->objectKeyStack[$this->nestingLevel] = (string) $key;
         }
-
-        $this->objectKeyStack[$this->nestingLevel] = (string) $key;
 
         return parent::setObjectKey($key);
     }

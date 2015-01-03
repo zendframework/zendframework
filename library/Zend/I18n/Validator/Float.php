@@ -12,6 +12,7 @@ namespace Zend\I18n\Validator;
 use Locale;
 use NumberFormatter;
 use Traversable;
+use IntlException;
 use Zend\I18n\Exception as I18nException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\StringUtils;
@@ -122,8 +123,12 @@ class Float extends AbstractValidator
         // Need to check if this is scientific formatted string. If not, switch to decimal.
         $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::SCIENTIFIC);
 
-        if (intl_is_failure($formatter->getErrorCode())) {
-            throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
+        try {
+            if (intl_is_failure($formatter->getErrorCode())) {
+                throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
+            }
+        } catch (IntlException $intlException) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), 0, $intlException);
         }
 
         if (StringUtils::hasPcreUnicodeSupport()) {

@@ -347,6 +347,16 @@ class PartialLoopTest extends TestCase
             $this->assertContains($string, $result, $result);
         }
     }
+
+    public function testPartialLoopWithInvalidValuesWillRaiseException()
+    {
+        $this->setExpectedException(
+            'Zend\View\Exception\InvalidArgumentException',
+            'PartialLoop helper requires iterable data, string given'
+        );
+
+        $this->helper->__invoke('partialLoopParentObject.phtml', 'foo');
+    }
 }
 
 class IteratorTest implements Iterator

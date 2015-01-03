@@ -31,7 +31,7 @@ class PartialLoop extends Partial
      *
      * @var int
      */
-    protected $nestedLevel = 0;
+    protected $nestingLevel = 0;
 
     /**
      * Stack with object keys for each nested level
@@ -79,7 +79,7 @@ class PartialLoop extends Partial
             $this->partialCounter++;
             $content .= parent::__invoke($name, $item);
 
-            $this->unnestObjectKey();
+            $this->unNestObjectKey();
         }
 
         return $content;
@@ -104,13 +104,13 @@ class PartialLoop extends Partial
     public function setObjectKey($key)
     {
         if (null === $key) {
-            unset($this->objectKeyStack[$this->nestedLevel]);
+            unset($this->objectKeyStack[$this->nestingLevel]);
             $this->objectKey = null;
 
             return $this;
         }
 
-        $this->objectKeyStack[$this->nestedLevel] = (string) $key;
+        $this->objectKeyStack[$this->nestingLevel] = (string) $key;
         $this->objectKey = (string) $key;
 
         return $this;
@@ -123,7 +123,7 @@ class PartialLoop extends Partial
      */
     protected function nestObjectKey()
     {
-        $this->nestedLevel++;
+        $this->nestingLevel++;
         $this->setObjectKey($this->getObjectKey());
 
         return $this;
@@ -134,11 +134,11 @@ class PartialLoop extends Partial
      *
      * @return self
      */
-    protected function unnestObjectKey()
+    protected function unNestObjectKey()
     {
         $this->setObjectKey(null);
-        $this->nestedLevel--;
-        $this->objectKey = $this->objectKeyStack[$this->nestedLevel];
+        $this->nestingLevel--;
+        $this->objectKey = $this->objectKeyStack[$this->nestingLevel];
 
         return $this;
     }

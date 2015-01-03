@@ -24,14 +24,18 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     private $defaultNamingStrategy;
 
     /**
-     * @param array $strategies
+     * @param NamingStrategyInterface[]    $strategies
      * @param NamingStrategyInterface|null $defaultNamingStrategy
      */
     public function __construct(array $strategies, NamingStrategyInterface $defaultNamingStrategy = null)
     {
-        foreach ($strategies as $name => $strategy) {
-            $this->add($name, $strategy);
-        }
+        $this->namingStrategies = array_map(
+            function (NamingStrategyInterface $strategy) {
+                // this callback is here only to ensure type-safety
+                return $strategy;
+            },
+            $strategies
+        );
 
         $this->defaultNamingStrategy = $defaultNamingStrategy;
     }

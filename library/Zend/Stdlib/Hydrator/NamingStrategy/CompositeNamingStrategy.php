@@ -73,11 +73,11 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        if (!$this->has($name)) {
-            return $name;
-        }
+        $strategy = isset($this->namingStrategies[$name])
+            ? $this->namingStrategies[$name]
+            : $this->defaultNamingStrategy;
 
-        return $this->get($name)->extract($name);
+        return $strategy->extract($name);
     }
 
     /**
@@ -85,10 +85,10 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        if (!$this->has($name)) {
-            return $name;
-        }
+        $strategy = isset($this->namingStrategies[$name])
+            ? $this->namingStrategies[$name]
+            : $this->defaultNamingStrategy;
 
-        return $this->get($name)->hydrate($name);
+        return $strategy->hydrate($name);
     }
 }

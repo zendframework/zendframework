@@ -9,8 +9,6 @@
 
 namespace Zend\Stdlib\Hydrator\NamingStrategy;
 
-use Zend\Stdlib\Exception;
-
 final class CompositeNamingStrategy implements NamingStrategyInterface
 {
     /**

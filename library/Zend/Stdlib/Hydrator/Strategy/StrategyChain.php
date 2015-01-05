@@ -10,70 +10,41 @@
 namespace Zend\Stdlib\Hydrator\Strategy;
 
 use Traversable;
-use Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\ArrayUtils;
 
 final class StrategyChain implements StrategyInterface
 {
     /**
-     * Default priority at which strategies are added
+     * Strategy chain for extraction
+     *
+     * @var StrategyInterface[]
      */
-    const DEFAULT_PRIORITY = 1;
+    private $extractionStrategies;
 
     /**
-     * Strategy chain
+     * Strategy chain for hydration
      *
-     * @var PriorityQueue
+     * @var StrategyInterface[]
      */
-    private $strategies;
+    private $hydrationStrategies;
 
     /**
-     * Initialize Strategy chain
+     * Constructor
      *
-     * @param array|Traversable $strategies
+     * @param array|Traversable $extractionStrategies
      */
-    public function __construct($strategies)
+    public function __construct($extractionStrategies)
     {
-        $this->strategies = new PriorityQueue();
-        $this->setStrategies($strategies);
-    }
+        $extractionStrategies = ArrayUtils::iteratorToArray($extractionStrategies);
+        $this->extractionStrategies = array_map(
+            function (StrategyInterface $strategy) {
+                // this callback is here only to ensure type-safety
+                return $strategy;
+            },
+            $extractionStrategies
+        );
 
-    /**
-     * Sets strategies
-     *
-     * @param  array|Traversable                  $strategies
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    private function setStrategies($strategies)
-    {
-        if (!is_array($strategies) && !$strategies instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected array or Traversable; received "%s"',
-                (is_object($strategies) ? get_class($strategies) : gettype($strategies))
-            ));
-        }
-
-        foreach ($strategies as $value) {
-            if (is_array($value)) {
-                if (!isset($value['strategy'])) {
-                    throw new Exception\DomainException('No strategy is provided.');
-                }
-                $strategy = $value['strategy'];
-                $priority = isset($value['priority']) ? $value['priority'] : self::DEFAULT_PRIORITY;
-            } else {
-                $strategy = $value;
-                $priority = self::DEFAULT_PRIORITY;
-            }
-
-            if (!$strategy instanceof StrategyInterface) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Strategy must implement Zend\Stdlib\Hydrator\Strategy\StrategyInterface, "%s provided instead"',
-                    (is_object($strategy) ? get_class($strategy) : gettype($strategy))
-                ));
-            }
-
-            $this->strategies->insert($strategy, $priority);
-        }
+        $this->hydrationStrategies = array_reverse($extractionStrategies);
     }
 
     /**
@@ -81,7 +52,7 @@ final class StrategyChain implements StrategyInterface
      */
     public function extract($value)
     {
-        foreach ($this->strategies as $strategy) {
+        foreach ($this->extractionStrategies as $strategy) {
             $value = $strategy->extract($value);
         }
 
@@ -93,7 +64,7 @@ final class StrategyChain implements StrategyInterface
      */
     public function hydrate($value)
     {
-        foreach (array_reverse(iterator_to_array($this->strategies)) as $strategy) {
+        foreach ($this->hydrationStrategies as $strategy) {
             $value = $strategy->hydrate($value);
         }
 

@@ -116,16 +116,18 @@ class BytesTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingFalseMode()
     {
-        $filter = new BytesFilter();
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $filter->setMode('invalid');
+        $filter = new BytesFilter(array(
+            'mode' => 'invalid',
+        ));
     }
 
     public function testSettingFalseType()
     {
-        $filter = new BytesFilter();
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $filter->setType('invalid');
+        $filter = new BytesFilter(array(
+            'type' => 'invalid',
+        ));
     }
 
     public static function decimalBytesTestProvider()

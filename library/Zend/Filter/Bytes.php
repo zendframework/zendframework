@@ -24,7 +24,7 @@ final class Bytes extends AbstractFilter
      *
      * @var array
      */
-    protected static $modes = array(
+    private static $modes = array(
         self::MODE_BINARY,
         self::MODE_DECIMAL,
     );
@@ -34,7 +34,7 @@ final class Bytes extends AbstractFilter
      *
      * @var array
      */
-    protected static $types = array(
+    private static $types = array(
         self::TYPE_BITS,
         self::TYPE_BYTES,
     );
@@ -45,7 +45,7 @@ final class Bytes extends AbstractFilter
      *
      * @var array
      */
-    protected static $standardizedPrefixes = array(
+    private static $standardizedPrefixes = array(
         // binary IEC units:
         self::MODE_BINARY => array('', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi', 'Yi'),
         // decimal SI units:
@@ -83,7 +83,7 @@ final class Bytes extends AbstractFilter
      *
      * @throws InvalidArgumentException
      */
-    public function setMode($mode)
+    protected function setMode($mode)
     {
         $mode = strtolower($mode);
         if (!in_array($mode, self::$modes)) {
@@ -129,7 +129,7 @@ final class Bytes extends AbstractFilter
      *
      * @throws InvalidArgumentException
      */
-    public function setType($type)
+    protected function setType($type)
     {
         if (!in_array($type, self::$types)) {
             throw new InvalidArgumentException(sprintf('Invalid binary type: %s', $type));
@@ -152,7 +152,7 @@ final class Bytes extends AbstractFilter
      *
      * @param $precision
      */
-    public function setPrecision($precision)
+    protected function setPrecision($precision)
     {
         $this->options['precision'] = (int) $precision;
     }
@@ -172,7 +172,7 @@ final class Bytes extends AbstractFilter
      *
      * @param array $prefixes
      */
-    public function setPrefixes(array $prefixes)
+    protected function setPrefixes(array $prefixes)
     {
         $this->options['prefixes'] = $prefixes;
     }

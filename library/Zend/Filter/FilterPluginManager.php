@@ -30,6 +30,7 @@ class FilterPluginManager extends AbstractPluginManager
         'alpha'                      => 'Zend\I18n\Filter\Alpha',
         'basename'                   => 'Zend\Filter\BaseName',
         'boolean'                    => 'Zend\Filter\Boolean',
+        'bytes'                      => 'Zend\Filter\Bytes',
         'callback'                   => 'Zend\Filter\Callback',
         'compress'                   => 'Zend\Filter\Compress',
         'compressbz2'                => 'Zend\Filter\Compress\Bz2',

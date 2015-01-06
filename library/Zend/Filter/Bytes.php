@@ -16,8 +16,8 @@ final class Bytes extends AbstractFilter
     const MODE_BINARY = 'binary';
     const MODE_DECIMAL = 'decimal';
 
-    const TYPE_BITS = 'b';
-    const TYPE_BYTES = 'B';
+    const BASE_BINARY = 1024;
+    const BASE_DECIMAL = 1000;
 
     /**
      * A list of all possible filter modes:
@@ -27,16 +27,6 @@ final class Bytes extends AbstractFilter
     private static $modes = array(
         self::MODE_BINARY,
         self::MODE_DECIMAL,
-    );
-
-    /**
-     * A list of all possible filter types
-     *
-     * @var array
-     */
-    private static $types = array(
-        self::TYPE_BITS,
-        self::TYPE_BYTES,
     );
 
     /**
@@ -59,7 +49,7 @@ final class Bytes extends AbstractFilter
      */
     protected $options = array(
         'mode'         => self::MODE_DECIMAL,
-        'type'         => self::TYPE_BYTES,
+        'unit'         => '',
         'precision'    => 2,
         'prefixes'     => array(),
     );
@@ -70,7 +60,11 @@ final class Bytes extends AbstractFilter
     public function __construct($options = array())
     {
         if (!static::isOptions($options)) {
-            return;
+            throw new InvalidArgumentException('The unit filter needs options to work.');
+        }
+
+        if (!isset($options['unit'])) {
+            throw new InvalidArgumentException('The unit filter needs a unit to work with.');
         }
 
         $this->setOptions($options);
@@ -97,7 +91,7 @@ final class Bytes extends AbstractFilter
      *
      * @return string
      */
-    public function getMode()
+    protected function getMode()
     {
         return $this->options['mode'];
     }
@@ -107,7 +101,7 @@ final class Bytes extends AbstractFilter
      *
      * @return bool
      */
-    public function isDecimalMode()
+    protected function isDecimalMode()
     {
         return $this->getMode() == self::MODE_DECIMAL;
     }
@@ -117,24 +111,19 @@ final class Bytes extends AbstractFilter
      *
      * @return bool
      */
-    public function isBinaryMode()
+    protected function isBinaryMode()
     {
         return $this->getMode() == self::MODE_BINARY;
     }
 
     /**
-     * Define the type of the filter. Possible values can be fount at self::$types.
+     * Define the unit of the filter. Possible values can be fount at self::$types.
      *
-     * @param string $type One of b or B (bits / bytes)
-     *
-     * @throws InvalidArgumentException
+     * @param string $unit
      */
-    protected function setType($type)
+    protected function setUnit($unit)
     {
-        if (!in_array($type, self::$types)) {
-            throw new InvalidArgumentException(sprintf('Invalid binary type: %s', $type));
-        }
-        $this->options['type'] = $type;
+        $this->options['unit'] = (string) $unit;
     }
 
     /**
@@ -142,9 +131,9 @@ final class Bytes extends AbstractFilter
      *
      * @return string
      */
-    public function getType()
+    protected function getUnit()
     {
-        return $this->options['type'];
+        return $this->options['unit'];
     }
 
     /**
@@ -162,7 +151,7 @@ final class Bytes extends AbstractFilter
      *
      * @return int
      */
-    public function getPrecision()
+    protected function getPrecision()
     {
         return $this->options['precision'];
     }
@@ -182,7 +171,7 @@ final class Bytes extends AbstractFilter
      *
      * @return array
      */
-    public function getPrefixes()
+    protected function getPrefixes()
     {
         $prefixes = $this->options['prefixes'];
         if ($prefixes) {
@@ -199,7 +188,7 @@ final class Bytes extends AbstractFilter
      *
      * @return string|null
      */
-    public function getPrefixAt($index)
+    protected function getPrefixAt($index)
     {
         $prefixes = $this->getPrefixes();
         return isset($prefixes[$index]) ? $prefixes[$index] : null;
@@ -224,22 +213,33 @@ final class Bytes extends AbstractFilter
         // Parse to float and check if value is not zero
         $amount = (float) $value;
         if ($amount == 0) {
-            return $amount . $this->getType();
+            return $this->formatAmount($amount);
         }
 
         // Calculate the correct size and prefix:
-        $orderOfMagnitude = $this->isBinaryMode() ? 1024 : 1000;
-        $power = floor(log($amount, $orderOfMagnitude));
-        $result = ($amount / pow($orderOfMagnitude, $power));
-        $formatted = number_format($result, $this->getPrecision());
+        $base = $this->isBinaryMode() ? self::BASE_BINARY : self::BASE_DECIMAL;
+        $power = floor(log($amount, $base));
         $prefix = $this->getPrefixAt((int)$power);
 
         // When the amount is too big, no prefix can be found:
         if (is_null($prefix)) {
-            return $amount . $this->getType();
+            return $this->formatAmount($amount);
         }
 
         // return formatted value:
-        return $formatted . $prefix . $this->getType();
+        $result = ($amount / pow($base, $power));
+        $formatted = number_format($result, $this->getPrecision());
+        return $this->formatAmount($formatted, $prefix);
+    }
+
+    /**
+     * @param      $amount
+     * @param null $prefix
+     *
+     * @return string
+     */
+    protected function formatAmount($amount, $prefix = null)
+    {
+        return sprintf('%s %s%s', $amount, $prefix, $this->getUnit());
     }
 }

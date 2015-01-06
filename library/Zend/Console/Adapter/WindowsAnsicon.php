@@ -165,7 +165,6 @@ class WindowsAnsicon extends Posix
     /**
      * Get charset currently in use by this adapter.
      *
-
      * @return CharsetInterface $charset
      */
     public function getCharset()

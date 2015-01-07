@@ -71,7 +71,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that parseScheme throws an exception in case of invalid input
-
+     *
      * @param  mixed $input
      * @dataProvider notStringInputProvider
      */

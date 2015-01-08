@@ -203,7 +203,7 @@ class AnnotationBuilderTest extends TestCase
 
     public function provideOptionsAnnotationAndComposedObjectAnnotation()
     {
-        return [['child'], ['childTheSecond']];
+        return array(array('child'), array('childTheSecond'));
     }
 
     public function testCanHandleOptionsAnnotation()

@@ -184,6 +184,28 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($target->has('password'));
     }
 
+    /**
+     * @dataProvider provideOptionsAnnotationAndComposedObjectAnnotation
+     * @param $childName
+     */
+    public function testOptionsAnnotationAndComposedObjectAnnotation($childName)
+    {
+        $entity  = new TestAsset\Annotation\EntityUsingComposedObjectAndOptions();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $child = $form->get($childName);
+
+        $target = $child->getTargetElement();
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $target);
+        $this->assertEquals('My label', $child->getLabel());
+    }
+
+    public function provideOptionsAnnotationAndComposedObjectAnnotation()
+    {
+        return [['child'], ['childTheSecond']];
+    }
+
     public function testCanHandleOptionsAnnotation()
     {
         $entity  = new TestAsset\Annotation\EntityUsingOptions();

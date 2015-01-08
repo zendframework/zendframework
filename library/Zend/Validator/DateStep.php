@@ -358,15 +358,13 @@ class DateStep extends Date
         // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
         // before we reach the max on 64 bit machines
         $maxInteger = min(pow(2,31), PHP_INT_MAX);
-        if ($minSteps * $maximumInterval > $maxInteger)
-        {
+        if ($minSteps * $maximumInterval > $maxInteger) {
             $stepIterationsRequired =  ceil(($minSteps * $maximumInterval) / $maxInteger);
             $minSteps = floor($minSteps / $stepIterationsRequired);
         }
 
-        $multipliedParts = [];
-        foreach($intervalParts as $unit => $value)
-        {
+        $multipliedParts = array();
+        foreach($intervalParts as $unit => $value) {
             $multipliedParts[$unit] = $value * $minSteps;
         }
         $multipliedIntervalString = sprintf('P%dY%dM%dDT%dH%dM%dS', $multipliedParts['years'],
@@ -375,7 +373,7 @@ class DateStep extends Date
         $minimumInterval = new DateInterval($multipliedIntervalString);
 
         if ($baseDate < $valueDate) {
-            if($minSteps > 0){
+            if($minSteps > 0) {
                 for($i =0; $i<$stepIterationsRequired; $i++)
                 {
                     $baseDate->add($minimumInterval);
@@ -388,7 +386,7 @@ class DateStep extends Date
                 }
             }
         } else {
-            if($minSteps > 0){
+            if($minSteps > 0) {
                 for($i=0; $i<$stepIterationsRequired; $i++)
                 {
                     $baseDate->sub($minimumInterval);

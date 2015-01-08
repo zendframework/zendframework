@@ -70,6 +70,9 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             // complex
             array('P2M2DT12H', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-03-03T12:00:00Z', true ),
             array('P2M2DT12M', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-03-03T12:00:00Z', false),
+            // long interval
+            array('PT1M20S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '2020-09-13T12:26:40Z', true), // 20,000,000 steps
+            array('PT1M20S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '2020-09-13T12:26:41Z', false),
         );
 
         // bug in DateTime fixed in 5.3.7

@@ -11,7 +11,7 @@ namespace Zend\Filter;
 
 use Zend\Filter\Exception\InvalidArgumentException;
 
-final class Bytes extends AbstractFilter
+final class DataUnitFormatter extends AbstractFilter
 {
     const MODE_BINARY = 'binary';
     const MODE_DECIMAL = 'decimal';

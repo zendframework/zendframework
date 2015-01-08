@@ -9,12 +9,12 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Bytes as BytesFilter;
+use Zend\Filter\DataUnitFormatter as DataUnitFormatterFilter;
 
 /**
  * @group      Zend_Filter
  */
-class BytesTest extends \PHPUnit_Framework_TestCase
+class DataUnitFormatterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @param float $value
@@ -23,8 +23,8 @@ class BytesTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecimalBytes($value, $expected)
     {
-        $filter = new BytesFilter(array(
-            'mode' => BytesFilter::MODE_DECIMAL,
+        $filter = new DataUnitFormatterFilter(array(
+            'mode' => DataUnitFormatterFilter::MODE_DECIMAL,
             'unit' => 'B'
         ));
         $this->assertEquals($expected, $filter->filter($value));
@@ -37,8 +37,8 @@ class BytesTest extends \PHPUnit_Framework_TestCase
      */
     public function testBinaryBytes($value, $expected)
     {
-        $filter = new BytesFilter(array(
-            'mode' => BytesFilter::MODE_BINARY,
+        $filter = new DataUnitFormatterFilter(array(
+            'mode' => DataUnitFormatterFilter::MODE_BINARY,
             'unit' => 'B'
         ));
         $this->assertEquals($expected, $filter->filter($value));
@@ -46,7 +46,7 @@ class BytesTest extends \PHPUnit_Framework_TestCase
 
     public function testPrecision()
     {
-        $filter = new BytesFilter(array(
+        $filter = new DataUnitFormatterFilter(array(
             'unit' => 'B',
             'precision' => 3,
         ));
@@ -56,7 +56,7 @@ class BytesTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomPrefixes()
     {
-        $filter = new BytesFilter(array(
+        $filter = new DataUnitFormatterFilter(array(
             'unit' => 'B',
             'prefixes' => array('', 'kilos'),
         ));
@@ -67,19 +67,19 @@ class BytesTest extends \PHPUnit_Framework_TestCase
     public function testSettingNoOptions()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $filter = new BytesFilter();
+        $filter = new DataUnitFormatterFilter();
     }
 
     public function testSettingNoUnit()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $filter = new BytesFilter(array());
+        $filter = new DataUnitFormatterFilter(array());
     }
 
     public function testSettingFalseMode()
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException');
-        $filter = new BytesFilter(array(
+        $filter = new DataUnitFormatterFilter(array(
             'unit' => 'B',
             'mode' => 'invalid',
         ));

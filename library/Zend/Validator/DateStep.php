@@ -24,12 +24,12 @@ class DateStep extends Date
     /**
      * @var array
      */
-    protected $messageTemplates = [
+    protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
         self::INVALID_DATE => "The input does not appear to be a valid date",
         self::FALSEFORMAT  => "The input does not fit the date format '%format%'",
         self::NOT_STEP     => "The input is not a valid step",
-    ];
+    );
 
     /**
      * Optional base date value
@@ -59,7 +59,7 @@ class DateStep extends Date
      *
      * @param array $options
      */
-    public function __construct($options = [])
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -212,7 +212,7 @@ class DateStep extends Date
         $intervalParts = explode('|', $step->format('%y|%m|%d|%h|%i|%s'));
         $partCounts    = array_count_values($intervalParts);
 
-        $unitKeys = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
+        $unitKeys = array('years', 'months', 'days', 'hours', 'minutes', 'seconds');
         $intervalParts = array_combine($unitKeys, $intervalParts);
 
         // Get absolute time difference
@@ -233,7 +233,7 @@ class DateStep extends Date
             }
 
             // Check date units
-            if (in_array($intervalUnit, ['years', 'months', 'days'])) {
+            if (in_array($intervalUnit, array('years', 'months', 'days'))) {
                 switch ($intervalUnit) {
                     case 'years':
                         if (0 == $diffParts['months'] && 0 == $diffParts['days']
@@ -271,7 +271,7 @@ class DateStep extends Date
             }
 
             // Check time units
-            if (in_array($intervalUnit, ['hours', 'minutes', 'seconds'])) {
+            if (in_array($intervalUnit, array('hours', 'minutes', 'seconds'))) {
                 // Simple test if $stepValue is 1.
                 if (1 == $stepValue) {
                     if ('hours' === $intervalUnit

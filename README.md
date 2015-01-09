@@ -1,4 +1,5 @@
-### Welcome to the *Zend Framework 2.3* Release!
+![Logo](http://framework.zend.com/images/logos/ZendFramework-logo.png)
+# Welcome to the *Zend Framework 2.3* Release!
 
 Master:
 [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)

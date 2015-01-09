@@ -83,4 +83,10 @@ class DateSelectTest extends TestCase
         $dayAttributes = $sut->getDayAttributes();
         $this->assertEquals('test', $dayAttributes['class']);
     }
+
+    public function testValueSetterReturnsSameObjectType()
+    {
+        $element  = new DateSelectElement();
+        $this->assertInstanceOf(get_class($element), $element->setValue('hello world'));
+    }
 }

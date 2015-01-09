@@ -1,4 +1,6 @@
-### Welcome to the *Zend Framework 2.4* Release!
+![Logo](http://https://raw.githubusercontent.com/zendframework/zf2/234b554f2ca202095aea32e4fa557553f8849664/resources/ZendFramework-logo.png)
+
+# Welcome to the *Zend Framework 2.4* Release!
 
 Master:
 [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)

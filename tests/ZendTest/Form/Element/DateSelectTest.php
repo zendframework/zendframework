@@ -87,6 +87,6 @@ class DateSelectTest extends TestCase
     public function testValueSetterReturnsSameObjectType()
     {
         $element  = new DateSelectElement();
-        $this->assertInstanceOf(get_class($element), $element->setValue('hello world'));
+        $this->assertSame($element, $element->setValue('2014-01-01'));
     }
 }

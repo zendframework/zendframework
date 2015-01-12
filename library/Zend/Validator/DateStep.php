@@ -351,13 +351,13 @@ class DateStep extends Date
         array $diffParts,
         DateInterval $step
     ) {
-        list($minSteps, $requiredStepIterations) = $this->getMinStepAndRequiredStepIterations($intervalParts, $diffParts);
+        list($minSteps, $requiredIterations) = $this->getMinStepAndRequiredIterations($intervalParts, $diffParts);
 
         $minimumInterval           = $this->getMinimumInterval($intervalParts, $minSteps);
         $isIncrementalStepping     = $baseDate < $valueDate;
         $dateModificationOperation = $isIncrementalStepping ? 'add' : 'sub';
 
-        for ($i = 0; $minSteps && $i < $requiredStepIterations; $i += 1) {
+        for ($offsetIterations = 0; $offsetIterations < $requiredIterations; $offsetIterations += 1) {
             $baseDate->{$dateModificationOperation}($minimumInterval);
         }
 
@@ -403,7 +403,7 @@ class DateStep extends Date
      *
      * @return int[] (ordered tuple containing minimum steps and required step iterations
      */
-    private function getMinStepAndRequiredStepIterations(array $intervalParts, array $diffParts)
+    private function getMinStepAndRequiredIterations(array $intervalParts, array $diffParts)
     {
         $minSteps = $this->getMinSteps($intervalParts, $diffParts);
 
@@ -419,7 +419,7 @@ class DateStep extends Date
             $minSteps               = floor($minSteps / $requiredStepIterations);
         }
 
-        return array($minSteps, $requiredStepIterations);
+        return array($minSteps, $minSteps ? $requiredStepIterations : 0);
     }
 
     /**

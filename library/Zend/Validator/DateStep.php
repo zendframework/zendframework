@@ -357,10 +357,8 @@ class DateStep extends Date
         $isIncrementalStepping     = $baseDate < $valueDate;
         $dateModificationOperation = $isIncrementalStepping ? 'add' : 'sub';
 
-        if ($minSteps) {
-            for ($i = 0; $i < $requiredStepIterations; $i += 1) {
-                $baseDate->{$dateModificationOperation}($minimumInterval);
-            }
+        for ($i = 0; $minSteps && $i < $requiredStepIterations; $i += 1) {
+            $baseDate->{$dateModificationOperation}($minimumInterval);
         }
 
         while (($isIncrementalStepping && $baseDate < $valueDate)

@@ -186,7 +186,9 @@ class AnnotationBuilderTest extends TestCase
 
     /**
      * @dataProvider provideOptionsAnnotationAndComposedObjectAnnotation
-     * @param $childName
+     * @param string $childName
+     *
+     * @group 7108
      */
     public function testOptionsAnnotationAndComposedObjectAnnotation($childName)
     {
@@ -201,6 +203,11 @@ class AnnotationBuilderTest extends TestCase
         $this->assertEquals('My label', $child->getLabel());
     }
 
+    /**
+     * Data provider
+     *
+     * @return string[][]
+     */
     public function provideOptionsAnnotationAndComposedObjectAnnotation()
     {
         return array(array('child'), array('childTheSecond'));

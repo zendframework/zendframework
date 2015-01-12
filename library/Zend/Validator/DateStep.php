@@ -332,11 +332,8 @@ class DateStep extends Date
         // iterations by starting at the lower bound of steps needed to reach
         // the target
 
-        $intervalMaxSeconds = $this->getIntervalMaxSeconds($intervalParts);
-        $diffMinSeconds     = $this->getDiffMinSeconds($diffParts);
-
         // Multiply the step interval by the lower bound of steps to reach the target
-        $minSteps = $intervalMaxSeconds == 0 ? 0 : max(floor($diffMinSeconds / $intervalMaxSeconds) - 1, 0);
+        $minSteps = $this->getMinSteps($intervalParts, $diffParts);
 
         // check for integer overflow and split $minimum interval if needed
         $maximumInterval = max($intervalParts);
@@ -397,6 +394,23 @@ class DateStep extends Date
 
         $this->error(self::NOT_STEP);
         return false;
+    }
+
+    /**
+     * Multiply the step interval by the lower bound of steps to reach the target
+     *
+     * @param int[] $intervalParts
+     * @param int[] $diffParts
+     *
+     * @return int
+     */
+    private function getMinSteps(array $intervalParts, array $diffParts)
+    {
+        $intervalMaxSeconds = $this->getIntervalMaxSeconds($intervalParts);
+
+        return (0 == $intervalMaxSeconds)
+            ? 0
+            : max(floor($this->getDiffMinSeconds($diffParts) / $intervalMaxSeconds) - 1, 0);
     }
 
     /**

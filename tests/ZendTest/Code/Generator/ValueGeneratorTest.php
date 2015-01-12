@@ -43,7 +43,7 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $expectedSource = <<<EOS
 array(
-    'foo'
+    'foo',
 )
 EOS;
 
@@ -102,9 +102,9 @@ array(
             'baz1',
             'baz2',
             'constant2' => ArrayObject::STD_PROP_LIST
-        )
+        ),
     ),
-    PHP_EOL
+    PHP_EOL,
 )
 EOS;
 
@@ -133,7 +133,7 @@ array(
     0 => 'b',
     'c',
     7 => 'd',
-    3 => 'e'
+    3 => 'e',
 )
 EOS;
 

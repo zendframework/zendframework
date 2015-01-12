@@ -283,7 +283,9 @@ class DateStep extends Date
                     } elseif ('seconds' === $intervalUnit) {
                         return true;
                     }
+
                     $this->error(self::NOT_STEP);
+
                     return false;
                 }
 
@@ -332,8 +334,7 @@ class DateStep extends Date
         // the target
 
         // get upper bound of interval in seconds
-        $intervalMaxSeconds =
-            + ($intervalParts['years'] * 60 * 60 * 24 * 366)
+        $intervalMaxSeconds = ($intervalParts['years'] * 60 * 60 * 24 * 366)
             + ($intervalParts['months'] * 60 * 60 * 24 * 31)
             + ($intervalParts['days'] * 60 * 60 * 24)
             + ($intervalParts['hours'] * 60 * 60)
@@ -341,8 +342,7 @@ class DateStep extends Date
             + $intervalParts['seconds'];
 
         // get lower bound of difference in seconds
-        $diffMinSeconds =
-            + ($diffParts['years'] * 60 * 60 * 24 * 365)
+        $diffMinSeconds = ($diffParts['years'] * 60 * 60 * 24 * 365)
             + ($diffParts['months'] * 60 * 60 * 24 * 28)
             + ($diffParts['days'] * 60 * 60 * 24)
             + ($diffParts['hours'] * 60 * 60)
@@ -358,27 +358,36 @@ class DateStep extends Date
         // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
         // before we reach the max on 64 bit machines
         $maxInteger = min(pow(2,31), PHP_INT_MAX);
-        if ($minSteps * $maximumInterval > $maxInteger) {
+
+        if (($minSteps * $maximumInterval) > $maxInteger) {
             $stepIterationsRequired =  ceil(($minSteps * $maximumInterval) / $maxInteger);
             $minSteps = floor($minSteps / $stepIterationsRequired);
         }
 
         $multipliedParts = array();
+
         foreach($intervalParts as $unit => $value) {
             $multipliedParts[$unit] = $value * $minSteps;
         }
-        $multipliedIntervalString = sprintf('P%dY%dM%dDT%dH%dM%dS', $multipliedParts['years'],
-            $multipliedParts['months'], $multipliedParts['days'], $multipliedParts['hours'],
-            $multipliedParts['minutes'], $multipliedParts['seconds']);
+
+        $multipliedIntervalString = sprintf(
+            'P%dY%dM%dDT%dH%dM%dS',
+            $multipliedParts['years'],
+            $multipliedParts['months'],
+            $multipliedParts['days'],
+            $multipliedParts['hours'],
+            $multipliedParts['minutes'],
+            $multipliedParts['seconds']
+        );
         $minimumInterval = new DateInterval($multipliedIntervalString);
 
         if ($baseDate < $valueDate) {
-            if($minSteps > 0) {
-                for($i =0; $i<$stepIterationsRequired; $i++)
-                {
+            if ($minSteps > 0) {
+                for ($i = 0; $i < $stepIterationsRequired; $i += 1) {
                     $baseDate->add($minimumInterval);
                 }
             }
+
             while ($baseDate < $valueDate) {
                 $baseDate->add($step);
                 if ($baseDate == $valueDate) {
@@ -386,12 +395,12 @@ class DateStep extends Date
                 }
             }
         } else {
-            if($minSteps > 0) {
-                for($i=0; $i<$stepIterationsRequired; $i++)
-                {
+            if ($minSteps > 0) {
+                for ($i = 0; $i < $stepIterationsRequired; $i += 1) {
                     $baseDate->sub($minimumInterval);
                 }
             }
+
             while ($baseDate > $valueDate) {
                 $baseDate->sub($step);
                 if ($baseDate == $valueDate) {

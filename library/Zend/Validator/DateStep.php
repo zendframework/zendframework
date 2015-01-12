@@ -334,37 +334,28 @@ class DateStep extends Date
 
         list($minSteps, $requiredStepIterations) = $this->getMinStepAndRequiredStepIterations($intervalParts, $diffParts);
 
-        $minimumInterval = $this->getMinimumInterval($intervalParts, $minSteps);
+        $minimumInterval           = $this->getMinimumInterval($intervalParts, $minSteps);
+        $isIncrementalStepping     = $baseDate < $valueDate;
+        $dateModificationOperation = $isIncrementalStepping ? 'add' : 'sub';
 
-        if ($baseDate < $valueDate) {
-            if ($minSteps > 0) {
-                for ($i = 0; $i < $requiredStepIterations; $i += 1) {
-                    $baseDate->add($minimumInterval);
-                }
+        if ($minSteps) {
+            for ($i = 0; $i < $requiredStepIterations; $i += 1) {
+                $baseDate->{$dateModificationOperation}($minimumInterval);
             }
+        }
 
-            while ($baseDate < $valueDate) {
-                $baseDate->add($step);
-                if ($baseDate == $valueDate) {
-                    return true;
-                }
-            }
-        } else {
-            if ($minSteps > 0) {
-                for ($i = 0; $i < $requiredStepIterations; $i += 1) {
-                    $baseDate->sub($minimumInterval);
-                }
-            }
+        while (($isIncrementalStepping && $baseDate < $valueDate)
+            || (! $isIncrementalStepping && $baseDate > $valueDate)
+        ) {
+            $baseDate->{$dateModificationOperation}($step);
 
-            while ($baseDate > $valueDate) {
-                $baseDate->sub($step);
-                if ($baseDate == $valueDate) {
-                    return true;
-                }
+            if ($baseDate == $valueDate) {
+                return true;
             }
         }
 
         $this->error(self::NOT_STEP);
+
         return false;
     }
 

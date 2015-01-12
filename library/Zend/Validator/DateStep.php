@@ -323,15 +323,34 @@ class DateStep extends Date
             }
         }
 
-        // Fall back to slower (but accurate) method for complex intervals.
-        // Keep adding steps to the base date until a match is found
-        // or until the value is exceeded.
-        //
-        // This is really slow if the interval is small, especially if the
-        // default base date of 1/1/1970 is used. We can skip a chunk of
-        // iterations by starting at the lower bound of steps needed to reach
-        // the target
+        return $this->fallbackLoopingIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
+    }
 
+    /**
+     * Fall back to slower (but accurate) method for complex intervals.
+     * Keep adding steps to the base date until a match is found
+     * or until the value is exceeded.
+     *
+     * This is really slow if the interval is small, especially if the
+     * default base date of 1/1/1970 is used. We can skip a chunk of
+     * iterations by starting at the lower bound of steps needed to reach
+     * the target
+     *
+     * @param DateTime     $baseDate
+     * @param DateTime     $valueDate
+     * @param int[]        $intervalParts
+     * @param int[]        $diffParts
+     * @param DateInterval $step
+     *
+     * @return bool
+     */
+    private function fallbackLoopingIterationLogic(
+        DateTime $baseDate,
+        DateTime $valueDate,
+        array $intervalParts,
+        array $diffParts,
+        DateInterval $step
+    ) {
         list($minSteps, $requiredStepIterations) = $this->getMinStepAndRequiredStepIterations($intervalParts, $diffParts);
 
         $minimumInterval           = $this->getMinimumInterval($intervalParts, $minSteps);

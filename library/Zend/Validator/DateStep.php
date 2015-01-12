@@ -332,21 +332,8 @@ class DateStep extends Date
         // iterations by starting at the lower bound of steps needed to reach
         // the target
 
-        // get upper bound of interval in seconds
-        $intervalMaxSeconds = ($intervalParts['years'] * 60 * 60 * 24 * 366)
-            + ($intervalParts['months'] * 60 * 60 * 24 * 31)
-            + ($intervalParts['days'] * 60 * 60 * 24)
-            + ($intervalParts['hours'] * 60 * 60)
-            + ($intervalParts['minutes'] * 60)
-            + $intervalParts['seconds'];
-
-        // get lower bound of difference in seconds
-        $diffMinSeconds = ($diffParts['years'] * 60 * 60 * 24 * 365)
-            + ($diffParts['months'] * 60 * 60 * 24 * 28)
-            + ($diffParts['days'] * 60 * 60 * 24)
-            + ($diffParts['hours'] * 60 * 60)
-            + ($diffParts['minutes'] * 60)
-            + $diffParts['seconds'];
+        $intervalMaxSeconds = $this->getIntervalMaxSeconds($intervalParts);
+        $diffMinSeconds     = $this->getDiffMinSeconds($diffParts);
 
         // Multiply the step interval by the lower bound of steps to reach the target
         $minSteps = $intervalMaxSeconds == 0 ? 0 : max(floor($diffMinSeconds / $intervalMaxSeconds) - 1, 0);
@@ -410,5 +397,41 @@ class DateStep extends Date
 
         $this->error(self::NOT_STEP);
         return false;
+    }
+
+    /**
+     * Get upper bound of the given interval in seconds
+     * Converts a given `$intervalParts` array into seconds
+     *
+     * @param int[] $intervalParts
+     *
+     * @return int
+     */
+    private function getIntervalMaxSeconds(array $intervalParts)
+    {
+        return ($intervalParts['years'] * 60 * 60 * 24 * 366)
+            + ($intervalParts['months'] * 60 * 60 * 24 * 31)
+            + ($intervalParts['days'] * 60 * 60 * 24)
+            + ($intervalParts['hours'] * 60 * 60)
+            + ($intervalParts['minutes'] * 60)
+            + $intervalParts['seconds'];
+    }
+
+    /**
+     * Get lower bound of difference in secondss
+     * Converts a given `$diffParts` array into seconds
+     *
+     * @param int[] $diffParts
+     *
+     * @return int
+     */
+    private function getDiffMinSeconds(array $diffParts)
+    {
+        return ($diffParts['years'] * 60 * 60 * 24 * 365)
+            + ($diffParts['months'] * 60 * 60 * 24 * 28)
+            + ($diffParts['days'] * 60 * 60 * 24)
+            + ($diffParts['hours'] * 60 * 60)
+            + ($diffParts['minutes'] * 60)
+            + $diffParts['seconds'];
     }
 }

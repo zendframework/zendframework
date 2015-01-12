@@ -112,6 +112,7 @@ class DateSelect extends MonthSelect
         $this->yearElement->setValue($value['year']);
         $this->monthElement->setValue($value['month']);
         $this->dayElement->setValue($value['day']);
+
         return $this;
     }
 

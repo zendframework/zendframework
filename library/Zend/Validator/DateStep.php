@@ -343,7 +343,7 @@ class DateStep extends Date
         $stepIterationsRequired = 1;
         // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
         // before we reach the max on 64 bit machines
-        $maxInteger = min(pow(2,31), PHP_INT_MAX);
+        $maxInteger = min(pow(2, 31), PHP_INT_MAX);
 
         if (($minSteps * $maximumInterval) > $maxInteger) {
             $stepIterationsRequired =  ceil(($minSteps * $maximumInterval) / $maxInteger);

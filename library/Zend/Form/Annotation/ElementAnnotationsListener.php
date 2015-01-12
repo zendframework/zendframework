@@ -141,7 +141,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
             $elementSpec['spec']['type'] = 'Zend\Form\Element\Collection';
             $elementSpec['spec']['name'] = $name;
-            $elementSpec['spec']['options'] = new ArrayObject($annotation->getOptions());
+            $elementSpec['spec']['options'] = new ArrayObject($this->mergeOptions($elementSpec, $annotation));
             $elementSpec['spec']['options']['target_element'] = $specification;
             $elementSpec['spec']['options']['target_element']['options']['input_filter_spec'] = $inputFilter;
 
@@ -162,14 +162,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
                 $specification['type'] = 'Zend\Form\Fieldset';
             }
 
-            // Merge options of composed object with the ones of the target object:
-            $options = (isset($elementSpec['spec']['options']) && is_array($elementSpec['spec']['options'])) ? $elementSpec['spec']['options'] : array();
-            $options = array_merge($options, $annotation->getOptions());
-
             // Add element spec:
             $elementSpec['spec'] = $specification;
             $elementSpec['spec']['name'] = $name;
-            $elementSpec['spec']['options'] = new ArrayObject($options);
+            $elementSpec['spec']['options'] = new ArrayObject($this->mergeOptions($elementSpec, $annotation));
         }
     }
 
@@ -323,7 +319,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         }
 
         $elementSpec = $e->getParam('elementSpec');
-        $elementSpec['spec']['options'] = $annotation->getOptions();
+        $elementSpec['spec']['options'] = $this->mergeOptions($elementSpec, $annotation);
     }
 
     /**
@@ -394,5 +390,26 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             $inputSpec['validators'] = array();
         }
         $inputSpec['validators'][] = $annotation->getValidator();
+    }
+
+    /**
+     * @param array                  $elementSpec
+     * @param ComposedObject|Options $annotation
+     *
+     * @return array
+     */
+    private function mergeOptions(array $elementSpec, $annotation)
+    {
+        if (isset($elementSpec['spec']['options'])) {
+            if (is_array($elementSpec['spec']['options'])) {
+                return array_merge($elementSpec['spec']['options'], $annotation->getOptions());
+            }
+
+            if ($elementSpec['spec']['options'] instanceof ArrayObject) {
+                return array_merge($elementSpec['spec']['options']->getArrayCopy(), $annotation->getOptions());
+            }
+        }
+
+        return $annotation->getOptions();
     }
 }

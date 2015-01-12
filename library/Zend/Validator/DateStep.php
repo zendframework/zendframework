@@ -323,7 +323,7 @@ class DateStep extends Date
             }
         }
 
-        return $this->fallbackLoopingIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
+        return $this->fallbackIncrementalIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
     }
 
     /**
@@ -344,16 +344,16 @@ class DateStep extends Date
      *
      * @return bool
      */
-    private function fallbackLoopingIterationLogic(
+    private function fallbackIncrementalIterationLogic(
         DateTime $baseDate,
         DateTime $valueDate,
         array $intervalParts,
         array $diffParts,
         DateInterval $step
     ) {
-        list($minSteps, $requiredIterations) = $this->getMinStepAndRequiredIterations($intervalParts, $diffParts);
+        list($minSteps, $requiredIterations) = $this->computeMinStepAndRequiredIterations($intervalParts, $diffParts);
 
-        $minimumInterval           = $this->getMinimumInterval($intervalParts, $minSteps);
+        $minimumInterval           = $this->computeMinimumInterval($intervalParts, $minSteps);
         $isIncrementalStepping     = $baseDate < $valueDate;
         $dateModificationOperation = $isIncrementalStepping ? 'add' : 'sub';
 
@@ -384,7 +384,7 @@ class DateStep extends Date
      *
      * @return DateInterval
      */
-    private function getMinimumInterval(array $intervalParts, $minSteps)
+    private function computeMinimumInterval(array $intervalParts, $minSteps)
     {
         return new DateInterval(sprintf(
             'P%dY%dM%dDT%dH%dM%dS',
@@ -403,9 +403,9 @@ class DateStep extends Date
      *
      * @return int[] (ordered tuple containing minimum steps and required step iterations
      */
-    private function getMinStepAndRequiredIterations(array $intervalParts, array $diffParts)
+    private function computeMinStepAndRequiredIterations(array $intervalParts, array $diffParts)
     {
-        $minSteps = $this->getMinSteps($intervalParts, $diffParts);
+        $minSteps = $this->computeMinSteps($intervalParts, $diffParts);
 
         // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
         // before we reach the max on 64 bit machines
@@ -430,13 +430,13 @@ class DateStep extends Date
      *
      * @return int
      */
-    private function getMinSteps(array $intervalParts, array $diffParts)
+    private function computeMinSteps(array $intervalParts, array $diffParts)
     {
-        $intervalMaxSeconds = $this->getIntervalMaxSeconds($intervalParts);
+        $intervalMaxSeconds = $this->computeIntervalMaxSeconds($intervalParts);
 
         return (0 == $intervalMaxSeconds)
             ? 0
-            : max(floor($this->getDiffMinSeconds($diffParts) / $intervalMaxSeconds) - 1, 0);
+            : max(floor($this->computeDiffMinSeconds($diffParts) / $intervalMaxSeconds) - 1, 0);
     }
 
     /**
@@ -447,7 +447,7 @@ class DateStep extends Date
      *
      * @return int
      */
-    private function getIntervalMaxSeconds(array $intervalParts)
+    private function computeIntervalMaxSeconds(array $intervalParts)
     {
         return ($intervalParts['years'] * 60 * 60 * 24 * 366)
             + ($intervalParts['months'] * 60 * 60 * 24 * 31)
@@ -465,7 +465,7 @@ class DateStep extends Date
      *
      * @return int
      */
-    private function getDiffMinSeconds(array $diffParts)
+    private function computeDiffMinSeconds(array $diffParts)
     {
         return ($diffParts['years'] * 60 * 60 * 24 * 365)
             + ($diffParts['months'] * 60 * 60 * 24 * 28)

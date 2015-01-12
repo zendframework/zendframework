@@ -332,20 +332,7 @@ class DateStep extends Date
         // iterations by starting at the lower bound of steps needed to reach
         // the target
 
-        // Multiply the step interval by the lower bound of steps to reach the target
-        $minSteps = $this->getMinSteps($intervalParts, $diffParts);
-
-        // check for integer overflow and split $minimum interval if needed
-        $maximumInterval = max($intervalParts);
-        $stepIterationsRequired = 1;
-        // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
-        // before we reach the max on 64 bit machines
-        $maxInteger = min(pow(2, 31), PHP_INT_MAX);
-
-        if (($minSteps * $maximumInterval) > $maxInteger) {
-            $stepIterationsRequired =  ceil(($minSteps * $maximumInterval) / $maxInteger);
-            $minSteps = floor($minSteps / $stepIterationsRequired);
-        }
+        list($minSteps, $requiredStepIterations) = $this->getMinStepAndRequiredStepIterations($intervalParts, $diffParts);
 
         $multipliedParts = array();
 
@@ -366,7 +353,7 @@ class DateStep extends Date
 
         if ($baseDate < $valueDate) {
             if ($minSteps > 0) {
-                for ($i = 0; $i < $stepIterationsRequired; $i += 1) {
+                for ($i = 0; $i < $requiredStepIterations; $i += 1) {
                     $baseDate->add($minimumInterval);
                 }
             }
@@ -379,7 +366,7 @@ class DateStep extends Date
             }
         } else {
             if ($minSteps > 0) {
-                for ($i = 0; $i < $stepIterationsRequired; $i += 1) {
+                for ($i = 0; $i < $requiredStepIterations; $i += 1) {
                     $baseDate->sub($minimumInterval);
                 }
             }
@@ -394,6 +381,31 @@ class DateStep extends Date
 
         $this->error(self::NOT_STEP);
         return false;
+    }
+
+    /**
+     * @param int[] $intervalParts
+     * @param int[] $diffParts
+     *
+     * @return int[] (ordered tuple containing minimum steps and required step iterations
+     */
+    private function getMinStepAndRequiredStepIterations(array $intervalParts, array $diffParts)
+    {
+        $minSteps = $this->getMinSteps($intervalParts, $diffParts);
+
+        // If we use PHP_INT_MAX DateInterval::__construct falls over with a bad format error
+        // before we reach the max on 64 bit machines
+        $maxInteger             = min(pow(2, 31), PHP_INT_MAX);
+        // check for integer overflow and split $minimum interval if needed
+        $maximumInterval        = max($intervalParts);
+        $requiredStepIterations = 1;
+
+        if (($minSteps * $maximumInterval) > $maxInteger) {
+            $requiredStepIterations = ceil(($minSteps * $maximumInterval) / $maxInteger);
+            $minSteps               = floor($minSteps / $requiredStepIterations);
+        }
+
+        return array($minSteps, $requiredStepIterations);
     }
 
     /**

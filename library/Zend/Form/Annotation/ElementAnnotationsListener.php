@@ -394,21 +394,23 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     }
 
     /**
-     * @param $elementSpec
-     * @param $annotation
+     * @param array                  $elementSpec
+     * @param ComposedObject|Options $annotation
+     *
      * @return array
      */
-    private function mergeOptions($elementSpec, $annotation)
+    private function mergeOptions(array $elementSpec, $annotation)
     {
-        $options  = array();
         if (isset($elementSpec['spec']['options'])) {
             if (is_array($elementSpec['spec']['options'])) {
-                $options = $elementSpec['spec']['options'];
-            } elseif ($elementSpec['spec']['options'] instanceof ArrayObject) {
-                $options = $elementSpec['spec']['options']->getArrayCopy();
+                return array_merge($elementSpec['spec']['options'], $annotation->getOptions());
+            }
+
+            if ($elementSpec['spec']['options'] instanceof ArrayObject) {
+                return array_merge($elementSpec['spec']['options']->getArrayCopy(), $annotation->getOptions());
             }
         }
 
-        return array_merge($options, $annotation->getOptions());
+        return $annotation->getOptions();
     }
 }

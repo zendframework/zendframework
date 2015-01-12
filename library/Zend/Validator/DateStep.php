@@ -217,8 +217,7 @@ class DateStep extends Date
 
         // Get absolute time difference
         $timeDiff  = $valueDate->diff($baseDate, true);
-        $diffParts = explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s'));
-        $diffParts = array_combine($unitKeys, $diffParts);
+        $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
 
         if (5 === $partCounts["0"]) {
             // Find the unit with the non-zero interval

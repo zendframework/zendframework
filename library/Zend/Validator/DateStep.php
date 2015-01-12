@@ -334,22 +334,7 @@ class DateStep extends Date
 
         list($minSteps, $requiredStepIterations) = $this->getMinStepAndRequiredStepIterations($intervalParts, $diffParts);
 
-        $multipliedParts = array();
-
-        foreach($intervalParts as $unit => $value) {
-            $multipliedParts[$unit] = $value * $minSteps;
-        }
-
-        $multipliedIntervalString = sprintf(
-            'P%dY%dM%dDT%dH%dM%dS',
-            $multipliedParts['years'],
-            $multipliedParts['months'],
-            $multipliedParts['days'],
-            $multipliedParts['hours'],
-            $multipliedParts['minutes'],
-            $multipliedParts['seconds']
-        );
-        $minimumInterval = new DateInterval($multipliedIntervalString);
+        $minimumInterval = $this->getMinimumInterval($intervalParts, $minSteps);
 
         if ($baseDate < $valueDate) {
             if ($minSteps > 0) {
@@ -381,6 +366,27 @@ class DateStep extends Date
 
         $this->error(self::NOT_STEP);
         return false;
+    }
+
+    /**
+     * Computes minimum interval to use for iterations while checking steps
+     *
+     * @param int[] $intervalParts
+     * @param int   $minSteps
+     *
+     * @return DateInterval
+     */
+    private function getMinimumInterval(array $intervalParts, $minSteps)
+    {
+        return new DateInterval(sprintf(
+            'P%dY%dM%dDT%dH%dM%dS',
+            $intervalParts['years'] * $minSteps,
+            $intervalParts['months'] * $minSteps,
+            $intervalParts['days'] * $minSteps,
+            $intervalParts['hours'] * $minSteps,
+            $intervalParts['minutes'] * $minSteps,
+            $intervalParts['seconds'] * $minSteps
+        ));
     }
 
     /**

@@ -166,7 +166,7 @@ return array(
     "Minimum expected size for file is '%min%' but '%size%' detected"                                                           => "Die mindestens erwartete Größe für die Datei ist '%min%', aber es wurde '%size%' entdeckt",
     "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
-    // Zend_Validator_File_Upload
+    // Zend_Validator_File_UploadFile
     "File exceeds the defined ini size"                                                                                         => "Die Datei übersteigt die definierte Größe in der Konfiguration",
     "File exceeds the defined form size"                                                                                        => "Die Datei übersteigt die definierte Größe des Formulars",
     "File was only partially uploaded"                                                                                          => "Die Datei wurde nur teilweise hochgeladen",
@@ -178,6 +178,18 @@ return array(
     "File was not found"                                                                                                        => "Die Datei wurde nicht gefunden",
     "Unknown error while uploading file '%value%'"                                                                              => "Ein unbekannter Fehler ist aufgetreten wärend die Datei '%value%' hochgeladen wurde",
 
+    // Zend_Validator_File_Upload
+    "File '%value%' exceeds the defined ini size"                                                                               => "Die Datei '%value%' übersteigt die definierte Größe in der Konfiguration",
+    "File '%value%' exceeds the defined form size"                                                                              => "Die Datei '%value%' übersteigt die definierte Größe des Formulars",
+    "File '%value%' was only partially uploaded"                                                                                => "Die Datei '%value%' wurde nur teilweise hochgeladen",
+    "File '%value%' was not uploaded"                                                                                           => "Die Datei '%value%'wurde nicht hochgeladen",
+    "No temporary directory was found for file '%value%'"                                                                       => "Für die Datei '%value%' wurde kein temporäres Verzeichnis gefunden",
+    "File '%value%' can't be written"                                                                                           => "Die Datei '%value%' konnte nicht geschrieben werden",
+    "A PHP extension returned an error while uploading the file '%value%'"                                                      => "Eine PHP Erweiterung hat einen Fehler ausgegeben wärend die Datei '%value%' hochgeladen wurde",
+    "File '%value%' was illegally uploaded. This could be a possible attack"                                                    => "Die Datei '%value%' wurde illegal hochgeladen. Dies könnte eine mögliche Attacke sein",
+    "File '%value%' was not found"                                                                                              => "Die Datei '%value%' wurde nicht gefunden",
+    "Unknown error while uploading file '%value%'"                                                                              => "Ein unbekannter Fehler ist aufgetreten wärend die Datei '%value%' hochgeladen wurde",
+    
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted"                                                    => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",
     "Too few words, minimum '%min%' are expected but '%count%' were counted"                                                    => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",

@@ -101,7 +101,7 @@ array(
         array(
             'baz1',
             'baz2',
-            'constant2' => ArrayObject::STD_PROP_LIST
+            'constant2' => ArrayObject::STD_PROP_LIST,
         ),
     ),
     PHP_EOL,

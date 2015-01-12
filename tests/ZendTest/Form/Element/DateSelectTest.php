@@ -83,4 +83,14 @@ class DateSelectTest extends TestCase
         $dayAttributes = $sut->getDayAttributes();
         $this->assertEquals('test', $dayAttributes['class']);
     }
+
+    /**
+     * @group 7114
+     */
+    public function testValueSetterReturnsSameObjectType()
+    {
+        $element = new DateSelectElement();
+
+        $this->assertSame($element, $element->setValue('2014-01-01'));
+    }
 }

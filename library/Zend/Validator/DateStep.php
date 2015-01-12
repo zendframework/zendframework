@@ -352,10 +352,9 @@ class DateStep extends Date
         DateInterval $step
     ) {
         list($minSteps, $requiredIterations) = $this->computeMinStepAndRequiredIterations($intervalParts, $diffParts);
-
-        $minimumInterval           = $this->computeMinimumInterval($intervalParts, $minSteps);
-        $isIncrementalStepping     = $baseDate < $valueDate;
-        $dateModificationOperation = $isIncrementalStepping ? 'add' : 'sub';
+        $minimumInterval                     = $this->computeMinimumInterval($intervalParts, $minSteps);
+        $isIncrementalStepping               = $baseDate < $valueDate;
+        $dateModificationOperation           = $isIncrementalStepping ? 'add' : 'sub';
 
         for ($offsetIterations = 0; $offsetIterations < $requiredIterations; $offsetIterations += 1) {
             $baseDate->{$dateModificationOperation}($minimumInterval);

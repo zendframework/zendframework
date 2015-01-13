@@ -189,7 +189,7 @@ return array(
     "File '%value%' was illegally uploaded. This could be a possible attack"                                                    => "Die Datei '%value%' wurde illegal hochgeladen. Dies könnte eine mögliche Attacke sein",
     "File '%value%' was not found"                                                                                              => "Die Datei '%value%' wurde nicht gefunden",
     "Unknown error while uploading file '%value%'"                                                                              => "Ein unbekannter Fehler ist aufgetreten wärend die Datei '%value%' hochgeladen wurde",
-    
+
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted"                                                    => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",
     "Too few words, minimum '%min%' are expected but '%count%' were counted"                                                    => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",

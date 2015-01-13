@@ -499,6 +499,31 @@ class FieldsetTest extends TestCase
         $this->assertEquals('notModified', $object->disabled);
     }
 
+    /**
+     * @group 7109
+     */
+    public function testBindValuesDoesNotSkipElementsWithFalsyDisabledValues()
+    {
+        $object = new \stdClass();
+        $object->disabled = 'notModified';
+        $object->not_disabled = 'notModified';
+
+        $textInput = new Element\Text('not_disabled');
+        $disabledInput = new Element\Text('disabled');
+        $disabledInput->setAttribute('disabled', '');
+
+        $form = new Form();
+        $form->add($textInput);
+        $form->add($disabledInput);
+
+        $form->setObject($object);
+        $form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+        $form->bindValues(array('not_disabled' => 'modified', 'disabled' => 'modified'));
+
+        $this->assertEquals('modified', $object->not_disabled);
+        $this->assertEquals('modified', $object->disabled);
+    }
+
     public function testSetObjectWithStringRaisesException()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');

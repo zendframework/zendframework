@@ -100,20 +100,20 @@ return array(
     "Too few files, minimum '%min%' are expected but '%count%' are given"                                                       => "Zu wenige Dateien. Minimal '%min%' wurden erwartet aber nur '%count%' wurden angegeben",
 
     // Zend_Validator_File_Crc32
-    "File '%value%' does not match the given crc32 hashes"                                                                      => "Die Datei '%value%' entspricht nicht den angegebenen Crc32 Hashes",
+    "File does not match the given crc32 hashes"                                                                                => "Die Datei entspricht nicht den angegebenen Crc32 Hashes",
     "A crc32 hash could not be evaluated for the given file"                                                                    => "Für die angegebene Datei konnte kein Crc32 Hash evaluiert werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_ExcludeExtension
-    "File '%value%' has a false extension"                                                                                      => "Die Datei '%value%' hat einen falschen Dateityp",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File has an incorrect extension"                                                                                           => "Die Datei hat einen falschen Dateityp",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_Exists
-    "File '%value%' does not exist"                                                                                             => "Die Datei '%value%' existiert nicht",
+    "File does not exist"                                                                                                       => "Die Datei existiert nicht",
 
     // Zend_Validator_File_Extension
-    "File '%value%' has a false extension"                                                                                      => "Die Datei '%value%' hat einen falschen Dateityp",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File has an incorrect extension"                                                                                           => "Die Datei hat einen falschen Dateityp",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected"                                         => "Alle Dateien sollten in Summe eine maximale Größe von '%max%' haben, aber es wurde '%size%' erkannt",
@@ -121,56 +121,68 @@ return array(
     "One or more files can not be read"                                                                                         => 'Ein oder mehrere Dateien konnten nicht gelesen werden',
 
     // Zend_Validator_File_Hash
-    "File '%value%' does not match the given hashes"                                                                            => "Die Datei '%value%' entspricht nicht den angegebenen Hashes",
+    "File does not match the given hashes"                                                                                      => "Die Datei entspricht nicht den angegebenen Hashes",
     "A hash could not be evaluated for the given file"                                                                          => "Für die angegebene Datei konnte kein Hash evaluiert werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected"                                   => "Die maximal erlaubte Breite für das Bild '%value%' ist '%maxwidth%', aber es wurde '%width%' erkannt",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected"                                  => "Die minimal erlaubte Breite für das Bild '%value%' ist '%minwidth%', aber es wurde '%width%' erkannt",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected"                                => "Die maximal erlaubte Höhe für das Bild '%value%' ist '%maxheight%', aber es wurde '%height%' erkannt",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected"                               => "Die minimal erlaubte Höhe für das Bild '%value%' ist '%minheight%', aber es wurde '%height%' erkannt",
-    "The size of image '%value%' could not be detected"                                                                         => "Die Größe des Bildes '%value%' konnte nicht erkannt werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected"                                             => "Die maximal erlaubte Breite für das Bild ist '%maxwidth%', aber es wurde '%width%' erkannt",
+    "Minimum expected width for image should be '%minwidth%' but '%width%' detected"                                            => "Die minimal erlaubte Breite für das Bild ist '%minwidth%', aber es wurde '%width%' erkannt",
+    "Maximum allowed height for image should be '%maxheight%' but '%height%' detected"                                          => "Die maximal erlaubte Höhe für das Bild ist '%maxheight%', aber es wurde '%height%' erkannt",
+    "Minimum expected height for image should be '%minheight%' but '%height%' detected"                                         => "Die minimal erlaubte Höhe für das Bild ist '%minheight%', aber es wurde '%height%' erkannt",
+    "The size of image could not be detected"                                                                                   => "Die Größe des Bildes konnte nicht erkannt werden",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_IsCompressed
-    "File '%value%' is not compressed, '%type%' detected"                                                                       => "Die Datei '%value%' ist nicht komprimiert. Es wurde '%type%' erkannt",
-    "The mimetype of file '%value%' could not be detected"                                                                      => "Der Mimetyp der Datei '%value%' konnte nicht erkannt werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is not compressed, '%type%' detected"                                                                                 => "Die Datei ist nicht komprimiert. Es wurde '%type%' erkannt",
+    "The mimetype could not be detected from the file"                                                                          => "Der Mimetyp der Datei konnte nicht erkannt werden",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_IsImage
-    "File '%value%' is no image, '%type%' detected"                                                                             => "Die Datei '%value%' ist kein Bild. Es wurde '%type%' erkannt",
-    "The mimetype of file '%value%' could not be detected"                                                                      => "Der Mimetyp der Datei '%value%' konnte nicht erkannt werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is no image, '%type%' detected"                                                                                       => "Die Datei ist kein Bild. Es wurde '%type%' erkannt",
+    "The mimetype could not be detected from the file"                                                                          => "Der Mimetyp der Datei konnte nicht erkannt werden",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_Md5
-    "File '%value%' does not match the given md5 hashes"                                                                        => "Die Datei '%value%' entspricht nicht den angegebenen Md5 Hashes",
+    "File does not match the given md5 hashes"                                                                                  => "Die Datei entspricht nicht den angegebenen Md5 Hashes",
     "A md5 hash could not be evaluated for the given file"                                                                      => "Für die angegebene Datei konnte kein Md5 Hash evaluiert werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_MimeType
-    "File '%value%' has a false mimetype of '%type%'"                                                                           => "Die Datei '%value%' hat einen falschen Mimetyp von '%type%'",
-    "The mimetype of file '%value%' could not be detected"                                                                      => "Der Mimetyp der Datei '%value%' konnte nicht erkannt werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File has an incorrect mimetype of '%type%'"                                                                                => "Die Datei hat einen falschen Mimetyp von '%type%'",
+    "The mimetype could not be detected from the file"                                                                          => "Der Mimetyp der Datei konnte nicht erkannt werden",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_NotExists
-    "File '%value%' exists"                                                                                                     => "Die Datei '%value%' existiert bereits",
+    "File exists"                                                                                                               => "Die Datei existiert bereits",
 
     // Zend_Validator_File_Sha1
-    "File '%value%' does not match the given sha1 hashes"                                                                       => "Die Datei '%value%' entspricht nicht den angegebenen Sha1 Hashes",
+    "File does not match the given sha1 hashes"                                                                                 => "Die Datei entspricht nicht den angegebenen Sha1 Hashes",
     "A sha1 hash could not be evaluated for the given file"                                                                     => "Für die angegebene Datei konnte kein Sha1 Hash evaluiert werden",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_Size
-    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected"                                                  => "Die maximal erlaubte Größe für die Datei '%value%' ist '%max%', aber es wurde '%size%' entdeckt",
-    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected"                                                 => "Die mindestens erwartete Größe für die Datei '%value%' ist '%min%', aber es wurde '%size%' entdeckt",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "Maximum allowed size for file is '%max%' but '%size%' detected"                                                            => "Die maximal erlaubte Größe für die Datei ist '%max%', aber es wurde '%size%' entdeckt",
+    "Minimum expected size for file is '%min%' but '%size%' detected"                                                           => "Die mindestens erwartete Größe für die Datei ist '%min%', aber es wurde '%size%' entdeckt",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+
+    // Zend_Validator_File_UploadFile
+    "File exceeds the defined ini size"                                                                                         => "Die Datei übersteigt die definierte Größe in der Konfiguration",
+    "File exceeds the defined form size"                                                                                        => "Die Datei übersteigt die definierte Größe des Formulars",
+    "File was only partially uploaded"                                                                                          => "Die Datei wurde nur teilweise hochgeladen",
+    "File was not uploaded"                                                                                                     => "Die Datei wurde nicht hochgeladen",
+    "No temporary directory was found for file"                                                                                 => "Für die Datei wurde kein temporäres Verzeichnis gefunden",
+    "File can't be written"                                                                                                     => "Die Datei konnte nicht geschrieben werden",
+    "A PHP extension returned an error while uploading the file"                                                                => "Eine PHP Erweiterung hat einen Fehler ausgegeben wärend die Datei hochgeladen wurde",
+    "File was illegally uploaded. This could be a possible attack"                                                              => "Die Datei wurde illegal hochgeladen. Dies könnte eine mögliche Attacke sein",
+    "File was not found"                                                                                                        => "Die Datei wurde nicht gefunden",
+    "Unknown error while uploading file '%value%'"                                                                              => "Ein unbekannter Fehler ist aufgetreten wärend die Datei '%value%' hochgeladen wurde",
 
     // Zend_Validator_File_Upload
     "File '%value%' exceeds the defined ini size"                                                                               => "Die Datei '%value%' übersteigt die definierte Größe in der Konfiguration",
     "File '%value%' exceeds the defined form size"                                                                              => "Die Datei '%value%' übersteigt die definierte Größe des Formulars",
     "File '%value%' was only partially uploaded"                                                                                => "Die Datei '%value%' wurde nur teilweise hochgeladen",
-    "File '%value%' was not uploaded"                                                                                           => "Die Datei '%value%' wurde nicht hochgeladen",
+    "File '%value%' was not uploaded"                                                                                           => "Die Datei '%value%'wurde nicht hochgeladen",
     "No temporary directory was found for file '%value%'"                                                                       => "Für die Datei '%value%' wurde kein temporäres Verzeichnis gefunden",
     "File '%value%' can't be written"                                                                                           => "Die Datei '%value%' konnte nicht geschrieben werden",
     "A PHP extension returned an error while uploading the file '%value%'"                                                      => "Eine PHP Erweiterung hat einen Fehler ausgegeben wärend die Datei '%value%' hochgeladen wurde",
@@ -180,8 +192,8 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted"                                                    => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",
-    "Too few words, minimum '%min%' are expected but '%count%' were counted"                                                   => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",
-    "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted"                                                    => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",
+    "File is not readable or does not exist"                                                                                    => "Die Datei konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_GreaterThan
     "The input is not greater than '%min%'"                                                                                     => "Der Eingabewert ist nicht größer als '%min%'",

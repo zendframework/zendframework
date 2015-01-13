@@ -394,12 +394,12 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     }
 
     /**
-     * @param array                  $elementSpec
+     * @param array|\ArrayAccess     $elementSpec
      * @param ComposedObject|Options $annotation
      *
      * @return array
      */
-    private function mergeOptions(array $elementSpec, $annotation)
+    private function mergeOptions($elementSpec, $annotation)
     {
         if (isset($elementSpec['spec']['options'])) {
             if (is_array($elementSpec['spec']['options'])) {

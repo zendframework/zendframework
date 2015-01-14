@@ -26,17 +26,6 @@ DD MMM YYY
   the `isValid()` method of an InputFilter, you will need to add
   `$context = null` as an argument.
 
-This release contains security fixes:
-
-- **ZF2015-01:** Session validators were not run if set before session start.
-  Essentially, the validators were writing to the `$_SESSION` superglobal before
-  session start, which meant the data was overwritten once the session began.
-  This meant on subsequent calls, the validators had no data to compare against,
-  making the sessions automatically valid. We have provided patches to ensure
-  that validators are run only after the session has begun, which will ensure
-  they validate sessions correctly going forward. If you use `Zend\Session`
-  validators, we recommend upgrading immediately.
-
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

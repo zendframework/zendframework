@@ -5,29 +5,24 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.8*
+*Zend Framework 2.2.9*
 
-This is the eighth maintenance release for the 2.2 series.
+This is the ninth maintenance release for the 2.2 series.
 
-17 Sep 2014
+14 Jan 2015
 
-### UPDATES IN 2.2.8
+### UPDATES IN 2.2.9
 
 **This release contains security updates:**
 
-- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
-  possible to perform an unauthenticated simple bind against a LDAP server by
-  using a null byte for the password, regardless of whether or not the user
-  normally requires a password. We have provided a patch in order to protect
-  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
-  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
-  version of PHP, we recommend upgrading immediately.
-- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
-  Server adapter to manually quote values due to the fact that it was not
-  escaping null bytes. Code was added to ensure null bytes are escaped, and
-  thus mitigate the SQLi vector. We do not recommend manually quoting values,
-  but if you do, and use the SQL Server adapter without PDO, we recommend
-  upgrading immediately.
+- **ZF2015-01:** Session validators were not run if set before session start.
+  Essentially, the validators were writing to the `$_SESSION` superglobal before
+  session start, which meant the data was overwritten once the session began.
+  This meant on subsequent calls, the validators had no data to compare against,
+  making the sessions automatically valid. We have provided patches to ensure
+  that validators are run only after the session has begun, which will ensure
+  they validate sessions correctly going forward. If you use `Zend\Session`
+  validators, we recommend upgrading immediately.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

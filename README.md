@@ -11,24 +11,13 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.4*
+*Zend Framework 2.3.5dev*
 
-This is the fourth maintenance release for the version 2.3 series.
+This is the fifth maintenance release for the version 2.3 series.
 
-14 Jan 2015
+DD MMM YYYY
 
-### UPDATES IN 2.3.4
-
-This release contains important security fixes:
-
-- **ZF2015-01:** Session validators were not run if set before session start.
-  Essentially, the validators were writing to the `$_SESSION` superglobal before
-  session start, which meant the data was overwritten once the session began.
-  This meant on subsequent calls, the validators had no data to compare against,
-  making the sessions automatically valid. We have provided patches to ensure
-  that validators are run only after the session has begun, which will ensure
-  they validate sessions correctly going forward. If you use `Zend\Session`
-  validators, we recommend upgrading immediately.
+### UPDATES IN 2.3.5
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

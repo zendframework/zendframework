@@ -122,6 +122,11 @@ class Curl implements HttpAdapter, StreamInterface
             unset($options['proxyuser'], $options['proxypass']);
         }
 
+        if (isset($options['sslverifypeer'])) {
+            $this->setCurlOption(CURLOPT_SSL_VERIFYPEER, $options['sslverifypeer']);
+            unset($options['sslverifypeer']);
+        }
+
         foreach ($options as $k => $v) {
             $option = strtolower($k);
             switch ($option) {

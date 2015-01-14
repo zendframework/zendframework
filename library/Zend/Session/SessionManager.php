@@ -10,6 +10,7 @@
 namespace Zend\Session;
 
 use Zend\EventManager\EventManagerInterface;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -92,7 +93,15 @@ class SessionManager extends AbstractManager
             $this->registerSaveHandler($saveHandler);
         }
 
+        $oldSessionData = $_SESSION;
+
         session_start();
+
+        if ($oldSessionData instanceof \Traversable
+            || (! empty($oldSessionData) && is_array($oldSessionData))
+        ) {
+            $_SESSION = ArrayUtils::merge($oldSessionData, $_SESSION, true);
+        }
 
         $storage = $this->getStorage();
 

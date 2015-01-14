@@ -11,6 +11,7 @@ namespace ZendTest\Session;
 
 use Zend\Session\SessionManager;
 use Zend\Session;
+use Zend\Session\Validator\RemoteAddr;
 
 /**
  * @group      Zend_Session
@@ -550,5 +551,85 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->getValidatorChain()->attach('session.validate', $validator);
 
         $this->assertTrue($this->manager->isValid());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testProducedSessionManagerWillNotReplaceSessionSuperGlobalValues()
+    {
+        $_SESSION['foo'] = 'bar';
+
+        $this->manager->start();
+
+        $this->assertArrayHasKey('foo', $_SESSION);
+        $this->assertSame('bar', $_SESSION['foo']);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testValidatorChainSessionMetadataIsPreserved()
+    {
+        $this
+            ->manager
+            ->getValidatorChain()
+            ->attach('session.validate', array(new RemoteAddr(), 'isValid'));
+
+        $this->assertFalse($this->manager->sessionExists());
+
+        $this->manager->start();
+
+        $this->assertSame(
+            array(
+                'Zend\Session\Validator\RemoteAddr' => '',
+            ),
+            $_SESSION['__ZF']['_VALID']
+        );
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRemoteAddressValidationWillFailOnInvalidAddress()
+    {
+        $this
+            ->manager
+            ->getValidatorChain()
+            ->attach('session.validate', array(new RemoteAddr('123.123.123.123'), 'isValid'));
+
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Session validation failed');
+        $this->manager->start();
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRemoteAddressValidationWillSucceedWithValidPreSetData()
+    {
+        $_SESSION = array(
+            '__ZF' => array(
+                '_VALID' => array('Zend\Session\Validator\RemoteAddr' => ''),
+            ),
+        );
+
+        $this->manager->start();
+
+        $this->assertTrue($this->manager->isValid());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRemoteAddressValidationWillFailWithInvalidPreSetData()
+    {
+        $_SESSION = array(
+            '__ZF' => array(
+                '_VALID' => array('Zend\Session\Validator\RemoteAddr' => '123.123.123.123'),
+            ),
+        );
+
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Session validation failed');
+        $this->manager->start();
     }
 }

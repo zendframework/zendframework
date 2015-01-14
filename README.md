@@ -11,15 +11,15 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.4dev*
+*Zend Framework 2.3.4*
 
 This is the fourth maintenance release for the version 2.3 series.
 
-DD MMM YYYY
+14 Jan 2015
 
 ### UPDATES IN 2.3.4
 
-This release contains security fixes:
+This release contains important security fixes:
 
 - **ZF2015-01:** Session validators were not run if set before session start.
   Essentially, the validators were writing to the `$_SESSION` superglobal before

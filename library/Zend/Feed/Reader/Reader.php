@@ -17,7 +17,7 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
 */
-class Reader
+class Reader implements ReaderImportInterface
 {
     /**
      * Namespace constants

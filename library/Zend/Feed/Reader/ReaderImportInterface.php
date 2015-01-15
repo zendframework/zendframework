@@ -59,6 +59,4 @@ interface ReaderImportInterface
      * @return Feed\FeedInterface
      */
     public static function importFile($filename);
-
-
 }

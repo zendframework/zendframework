@@ -87,4 +87,16 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $manager->getValidatorChain()->getListeners('session.validate')->count());
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testStartingSessionManagerFromFactoryDoesNotTriggerUndefinedVariable()
+    {
+        $storage = new ArrayStorage();
+        $this->services->setService('Zend\Session\Storage\StorageInterface', $storage);
+
+        $manager = $this->services->get('Zend\Session\ManagerInterface');
+        $manager->start();
+    }
 }

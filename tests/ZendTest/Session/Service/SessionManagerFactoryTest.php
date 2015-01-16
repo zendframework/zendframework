@@ -98,5 +98,7 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
 
         $manager = $this->services->get('Zend\Session\ManagerInterface');
         $manager->start();
+
+        $this->assertSame($storage, $manager->getStorage());
     }
 }

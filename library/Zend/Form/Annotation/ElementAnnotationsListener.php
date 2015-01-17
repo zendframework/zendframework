@@ -163,6 +163,11 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
                 $specification['type'] = 'Zend\Form\Fieldset';
             }
 
+            if (isset($elementSpec['spec']['options'])) {
+                $specification['options'] = isset($specification['options']) ? $specification['options'] : array();
+                $specification['options'] = array_merge($elementSpec['spec']['options'], $specification['options']);
+            }
+
             // Add element spec:
             $elementSpec['spec'] = $specification;
             $elementSpec['spec']['name'] = $name;

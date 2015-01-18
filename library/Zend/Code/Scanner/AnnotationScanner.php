@@ -213,7 +213,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         }
 
         if ($MACRO_HAS_CONTEXT($CONTEXT_CLASS)) {
-            if (in_array($currentChar, array(' ', '(', "\n"))) {
+            if (in_array($currentChar, array(' ', '(', "\n", "\r"))) {
                 $context &= ~$CONTEXT_CLASS;
                 $MACRO_TOKEN_ADVANCE();
             } else {
@@ -225,8 +225,9 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
         }
 
-        // Since we don't know what line endings are used in the file, we check for all scenarios. If we find
-        // a cariage return (\r), we check the next character for a line feed (\n). If so we consume it.
+        // Since we don't know what line endings are used in the file, we check for all scenarios. If we find a
+        // cariage return (\r), we check the next character for a line feed (\n). If so we consume it and act as
+        // if the cariage return was a line feed.
         $lineEnded = $currentChar === "\n";
         if ($currentChar === "\r") {
             $lineEnded = true;
@@ -235,6 +236,8 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             if ($nextChar !== "\n") {
                 $streamIndex--;
             }
+
+            $currentChar = "\n";
         }
 
         if ($lineEnded) {

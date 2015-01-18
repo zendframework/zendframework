@@ -231,9 +231,9 @@ foreach ($matches as $match) {
     $maxWidth = max($maxWidth, strlen($match[1]));
 }
 
-$content = preg_replace_callback('(\n\s+([^=]+)=>)', function ($matches)
-{
+$content = preg_replace_callback('(\n\s+([^=]+)=>)', function ($matches) {
     global $maxWidth;
+
     return str_replace(' =>', str_repeat(' ', $maxWidth - strlen($matches[1])) . ' =>', $matches[0]);
 }, $content);
 

@@ -95,7 +95,7 @@ class Request extends AbstractMessage implements RequestInterface
 
         $parsedUri = parse_url($matches['uri']);
         if(array_key_exists('query', $parsedUri)) {
-            $parsedQuery = [];
+            $parsedQuery = array();
             parse_str($parsedUri['query'], $parsedQuery);
             $request->setQuery(new Parameters($parsedQuery));
         }

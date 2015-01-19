@@ -17,11 +17,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 {
     public function testRequestFromStringFactoryCreatesValidRequest()
     {
-        $string = "GET /foo HTTP/1.1\r\n\r\nSome Content";
+        $string = "GET /foo?myparam=myvalue HTTP/1.1\r\n\r\nSome Content";
         $request = Request::fromString($string);
 
         $this->assertEquals(Request::METHOD_GET, $request->getMethod());
-        $this->assertEquals('/foo', $request->getUri());
+        $this->assertEquals('/foo?myparam=myvalue', $request->getUri());
+        $this->assertEquals('myvalue', $request->getQuery()->get('myparam'));
         $this->assertEquals(Request::VERSION_11, $request->getVersion());
         $this->assertEquals('Some Content', $request->getContent());
     }

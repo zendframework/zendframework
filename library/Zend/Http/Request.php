@@ -93,6 +93,13 @@ class Request extends AbstractMessage implements RequestInterface
         $request->setMethod($matches['method']);
         $request->setUri($matches['uri']);
 
+        $parsedUri = parse_url($matches['uri']);
+        if (array_key_exists('query', $parsedUri)) {
+            $parsedQuery = array();
+            parse_str($parsedUri['query'], $parsedQuery);
+            $request->setQuery(new Parameters($parsedQuery));
+        }
+
         if (isset($matches['version'])) {
             $request->setVersion($matches['version']);
         }

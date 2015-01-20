@@ -137,9 +137,15 @@ class RestfulControllerTest extends TestCase
 
     public function testDispatchInvokesDeleteListMethodWhenNoActionPresentAndDeleteInvokedWithoutIdentifier()
     {
-        $this->request->setMethod('DELETE');
+        $entities = array(
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+        );
+        $string = http_build_query($entities);
+        $this->request->setMethod('DELETE')
+                      ->setContent($string);
         $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertSame($this->response, $result);
         $this->assertEquals(204, $result->getStatusCode());
         $this->assertTrue($result->getHeaders()->has('X-Deleted'));
         $this->assertEquals('deleteList', $this->routeMatch->getParam('action'));

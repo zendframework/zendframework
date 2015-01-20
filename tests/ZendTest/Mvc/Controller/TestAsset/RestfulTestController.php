@@ -49,7 +49,7 @@ class RestfulTestController extends AbstractRestfulController
      *
      * @return \Zend\Http\Response
      */
-    public function deleteList()
+    public function deleteList($data)
     {
         $response = $this->getResponse();
         $response->setStatusCode(204);

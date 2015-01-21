@@ -21,6 +21,11 @@ use Zend\ServiceManager;
 class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * @var \Zend\Mvc\Application
      */
     protected $application;
@@ -35,7 +40,7 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $config = array(
+        $this->config = array(
             'MyModule' => array(
                 'foo' => array(
                     'bar'
@@ -56,7 +61,7 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
             ))
         );
 
-        $sm->setService('Config', $config);
+        $sm->setService('Config', $this->config);
     }
 
     /**
@@ -130,5 +135,16 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $serviceLocator->get('phly-blog.config'));
         $this->assertInternalType('array', $serviceLocator->get('phly-blog-config'));
         $this->assertInternalType('array', $serviceLocator->get('config-phly-blog'));
+    }
+
+    /**
+     * @depends testCreateService
+     * @return void
+     */
+    public function testCreateServiceWithRequestedConfigKey()
+    {
+        $serviceLocator = $this->serviceManager;
+        $this->assertSame($this->config['MyModule'], $serviceLocator->get('MyModule\Config'));
+        $this->assertSame($this->config['phly-blog'], $serviceLocator->get('phly-blog-config'));
     }
 }

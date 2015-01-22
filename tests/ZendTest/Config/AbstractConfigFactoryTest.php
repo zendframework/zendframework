@@ -139,7 +139,9 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testCreateService
-     * @return void
+     *
+     * @group 7142
+     * @group 7144
      */
     public function testCreateServiceWithRequestedConfigKey()
     {

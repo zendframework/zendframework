@@ -36,18 +36,18 @@ class Uri implements UriInterface
      * Place 1 or 0 in the different positions for enable or disable the part.
      * Finally use a hexadecimal representation.
      */
-    const HOST_IPV4                 = 0x01; //00001
-    const HOST_IPV6                 = 0x02; //00010
-    const HOST_IPVFUTURE            = 0x04; //00100
-    const HOST_IPVANY               = 0x07; //00111
-    const HOST_DNS                  = 0x08; //01000
-    const HOST_DNS_OR_IPV4          = 0x09; //01001
-    const HOST_DNS_OR_IPV6          = 0x0A; //01010
-    const HOST_DNS_OR_IPV4_OR_IPV6  = 0x0B; //01011
-    const HOST_DNS_OR_IPVANY        = 0x0F; //01111
-    const HOST_REGNAME              = 0x10; //10000
-    const HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME = 0x13; //10011
-    const HOST_ALL                  = 0x1F; //11111
+    const HOST_IPV4                           = 0x01; //00001
+    const HOST_IPV6                           = 0x02; //00010
+    const HOST_IPVFUTURE                      = 0x04; //00100
+    const HOST_IPVANY                         = 0x07; //00111
+    const HOST_DNS                            = 0x08; //01000
+    const HOST_DNS_OR_IPV4                    = 0x09; //01001
+    const HOST_DNS_OR_IPV6                    = 0x0A; //01010
+    const HOST_DNS_OR_IPV4_OR_IPV6            = 0x0B; //01011
+    const HOST_DNS_OR_IPVANY                  = 0x0F; //01111
+    const HOST_REGNAME                        = 0x10; //10000
+    const HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME = 0x1B; //11011
+    const HOST_ALL                            = 0x1F; //11111
 
     /**
      * URI scheme

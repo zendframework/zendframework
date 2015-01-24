@@ -254,7 +254,7 @@ class ModuleAutoloader implements SplAutoloader
             $absModulePath = $this->pharBasePath ? (string) $file : $file->getRealPath();
             require_once $absModulePath;
             if (class_exists($class)) {
-                $this->moduleClassMap[$class] = $absModulePath;;
+                $this->moduleClassMap[$class] = $absModulePath;
                 return $class;
             }
         }

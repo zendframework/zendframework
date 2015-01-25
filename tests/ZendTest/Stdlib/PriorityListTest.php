@@ -9,7 +9,6 @@
 
 namespace ZendTest\Stdlib;
 
-use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\PriorityList;
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -245,16 +244,5 @@ class PriorityListTest extends TestCase
             ),
             $orders2
         );
-    }
-
-    public function testKey()
-    {
-        $this->list->insert('bar', 'foo', 0);
-        $this->list->insert('baz', 'f00', 2);
-
-        $list = ArrayUtils::iteratorToArray($this->list);
-
-        end($list);
-        $this->assertEquals('bar', key($list));
     }
 }

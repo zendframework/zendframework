@@ -14,6 +14,7 @@ install:
   - composer install --dev --prefer-source
 
 before_script:
+  - php --version
   - mkdir -p build/coverage
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
 

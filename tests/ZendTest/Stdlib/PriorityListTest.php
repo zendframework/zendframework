@@ -245,4 +245,13 @@ class PriorityListTest extends TestCase
             $orders2
         );
     }
+
+    public function testKey()
+    {
+        $this->list->insert('bar', 'foo', 0);
+        $this->list->insert('baz', 'f00', 2);
+
+        end($this->list);
+        $this->assertEquals('bar', key($this->list));
+    }
 }

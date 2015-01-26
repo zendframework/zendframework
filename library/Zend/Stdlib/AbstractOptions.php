@@ -110,7 +110,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
             throw new Exception\BadMethodCallException(sprintf(
                 'The option "%s" does not have a callable "%s" setter method which must be defined',
                 $key,
-                'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+                'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key))),
+                $setter
             ));
         }
     }

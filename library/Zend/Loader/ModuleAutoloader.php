@@ -243,7 +243,7 @@ class ModuleAutoloader implements SplAutoloader
     protected function loadModuleFromDir($dirPath, $class)
     {
         $modulePath = $dirPath . '/Module.php';
-        if (substr($modulePath, 0, 7) == 'phar://') {
+        if (substr($modulePath, 0, 7) === 'phar://') {
             $file = new PharFileInfo($modulePath);
         } else {
             $file = new SplFileInfo($modulePath);

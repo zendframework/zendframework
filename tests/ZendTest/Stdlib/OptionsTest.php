@@ -150,4 +150,16 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
 
         new TestOptionsDerived(array('derived_private' => 1));
     }
+
+    public function testExceptionMessageContainsActualUsedSetter()
+    {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'The option "foo bar" does not have a matching "setFooBar" ("setfoo bar") setter method which must be defined'
+        );
+
+        new TestOptions(array(
+            'foo bar' => 'baz',
+        ));
+    }
 }

@@ -9,7 +9,6 @@
 
 namespace ZendTest\Mvc\Router;
 
-use Zend\Mvc\Router\PriorityList;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Stdlib\ArrayUtils;
 
@@ -137,16 +136,5 @@ class PriorityListTest extends TestCase
         }
 
         $this->assertEquals(array('bar', 'foo', 'baz'), $orders);
-    }
-
-    public function testKey()
-    {
-        $this->list->insert('bar', 'foo', 0);
-        $this->list->insert('baz', 'f00', 2);
-
-        $list = ArrayUtils::iteratorToArray($this->list);
-
-        end($list);
-        $this->assertEquals('bar', key($list));
     }
 }

@@ -843,6 +843,7 @@ class Hostname extends AbstractValidator
      * (.COM) International http://www.verisign.com/information-services/naming-services/internationalized-domain-names/index.html
      * (.DE) Germany http://www.denic.de/en/domains/idns/liste.html
      * (.DK) Danmark http://www.dk-hostmaster.dk/index.php?id=151
+     * (.EE) Estonia https://www.iana.org/domains/idn-tables/tables/pl_et-pl_1.0.html
      * (.ES) Spain https://www.nic.es/media/2008-05/1210147705287.pdf
      * (.FI) Finland http://www.ficora.fi/en/index/palvelut/fiverkkotunnukset/aakkostenkaytto.html
      * (.GR) Greece https://grweb.ics.forth.gr/CharacterTable1_en.jsp

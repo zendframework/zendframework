@@ -9,9 +9,8 @@
 
 namespace ZendTest\Mvc\Router;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Router\PriorityList;
-use Zend\Stdlib\ArrayUtils;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group      Zend_Router

@@ -133,6 +133,20 @@ class ModuleAutoloaderTest extends TestCase
         $loader->unregister();
     }
 
+    public function testCanAutoloadModulesFromWithinExecutedPhar()
+    {
+        $loader   = new ModuleAutoloader;
+
+        $class    = new \ReflectionClass('Zend\Loader\ModuleAutoloader');
+        $property = $class->getProperty("pharBasePath");
+        $property->setAccessible(true);
+        $property->setValue($loader, 'phar://' . __DIR__ . '/_files/ApplicationModulePhar.phar');
+
+        $loader->registerPath('./module');
+        $loader->register();
+        $this->assertTrue(class_exists('Application\Module'));
+    }
+
     public function testProvidesFluidInterface()
     {
         $loader = new ModuleAutoloader;

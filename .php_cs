@@ -45,6 +45,7 @@ $config->fixers(
         'parenthesis',
         'multiple_use',
         'method_argument_space',
+        'object_operator',
         'php_closing_tag',
         'psr0',
         'remove_lines_between_uses',

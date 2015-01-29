@@ -139,7 +139,7 @@ class FormCollectionTest extends TestCase
         $fact = $this->helper->__invoke($form);
 
 
-        $this->assertContains('<f ieldset', $fact);
+        $this->assertContains('<fieldset', $fact);
     }
 
     public function testShouldWrapReturnsDefaultTrue()

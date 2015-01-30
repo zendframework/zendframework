@@ -9,6 +9,9 @@ use Zend\Filter\Word\SeparatorToSeparator;
 
 class SeparatorToSeparatorFactory implements FactoryInterface
 {
+    /**
+     * @var array
+     */
     protected $options;
 
     /**
@@ -16,14 +19,15 @@ class SeparatorToSeparatorFactory implements FactoryInterface
      *
      * @param array $options
      */
-    public function __construct($options = array()) {
+    public function __construct(array $options = array())
+    {
         $this->options = $options;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @return Forward
+     * @return SeparatorToSeparator
      * @throws ServiceNotCreatedException if Controllermanager service is not found in application service locator
      */
     public function createService(ServiceLocatorInterface $plugins)

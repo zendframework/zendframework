@@ -37,5 +37,4 @@ class SeparatorToSeparatorFactory implements FactoryInterface
             isset($this->options['replacement_separator']) ? $this->options['replacement_separator'] : '-'
         );
     }
-
 }

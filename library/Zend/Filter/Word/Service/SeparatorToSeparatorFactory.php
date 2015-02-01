@@ -5,14 +5,16 @@ namespace Zend\Filter\Word\Service;
 use Zend\Filter\Word\SeparatorToSeparator;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\MutableCreationOptionsInterface;
-use Zend\ServiceManager\MutableCreationOptionsTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class SeparatorToSeparatorFactory implements
     FactoryInterface,
     MutableCreationOptionsInterface
 {
-    use MutableCreationOptionsTrait;
+    /**
+     * @var array
+     */
+    protected $creationOptions = array();
 
     /**
      * Constructor.
@@ -22,6 +24,27 @@ class SeparatorToSeparatorFactory implements
     public function __construct(array $options = array())
     {
         $this->setCreationOptions($options);
+    }
+
+    /**
+     * Set creation options
+     *
+     * @param array $creationOptions
+     * @return void
+     */
+    public function setCreationOptions(array $creationOptions)
+    {
+        $this->creationOptions = $creationOptions;
+    }
+
+    /**
+     * Get creation options
+     *
+     * @return array
+     */
+    public function getCreationOptions()
+    {
+        return $this->creationOptions;
     }
 
     /**

@@ -30,6 +30,7 @@ $config->level(null);
 $config->fixers(
     array(
         'braces',
+        'duplicate_semicolon',
         'elseif',
         'empty_return',
         'encoding',
@@ -37,12 +38,14 @@ $config->fixers(
         'function_call_space',
         'function_declaration',
         'indentation',
+        'join_function',
         'line_after_namespace',
         'linefeed',
         'lowercase_keywords',
         'parenthesis',
         'multiple_use',
         'method_argument_space',
+        'object_operator',
         'php_closing_tag',
         'psr0',
         'remove_lines_between_uses',

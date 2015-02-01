@@ -53,4 +53,24 @@ class FilterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(';', $filter->getSearchSeparator());
         $this->assertEquals('|', $filter->getReplacementSeparator());
     }
+
+    public function testFiltersConstructedAreDifferent()
+    {
+        $filterOne = $this->filters->get(
+            'wordseparatortoseparator',
+            array(
+                'search_separator'      => ';',
+                'replacement_separator' => '|',
+            )
+        );
+        $filterTwo = $this->filters->get(
+            'wordseparatortoseparator',
+            array(
+                'search_separator'      => '.',
+                'replacement_separator' => ',',
+            )
+        );
+
+        $this->assertNotEquals($filterOne, $filterTwo);
+    }
 }

@@ -2,17 +2,17 @@
 
 namespace Zend\Filter\Word\Service;
 
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Filter\Word\SeparatorToSeparator;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\MutableCreationOptionsInterface;
+use Zend\ServiceManager\MutableCreationOptionsTrait;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class SeparatorToSeparatorFactory implements FactoryInterface
+class SeparatorToSeparatorFactory implements
+    FactoryInterface,
+    MutableCreationOptionsInterface
 {
-    /**
-     * @var array
-     */
-    protected $options;
+    use MutableCreationOptionsTrait;
 
     /**
      * Constructor.
@@ -21,7 +21,7 @@ class SeparatorToSeparatorFactory implements FactoryInterface
      */
     public function __construct(array $options = array())
     {
-        $this->options = $options;
+        $this->setCreationOptions($options);
     }
 
     /**
@@ -33,8 +33,8 @@ class SeparatorToSeparatorFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $plugins)
     {
         return new SeparatorToSeparator(
-            isset($this->options['search_separator']) ? $this->options['search_separator'] : ' ',
-            isset($this->options['replacement_separator']) ? $this->options['replacement_separator'] : '-'
+            isset($this->creationOptions['search_separator']) ? $this->creationOptions['search_separator'] : ' ',
+            isset($this->creationOptions['replacement_separator']) ? $this->creationOptions['replacement_separator'] : '-'
         );
     }
 }

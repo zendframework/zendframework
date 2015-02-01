@@ -40,6 +40,9 @@ class FilterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->filters->get('test');
     }
 
+    /**
+     * @group 7169
+     */
     public function testFilterSuccessfullyConstructed()
     {
         $search_separator = ';';
@@ -54,6 +57,9 @@ class FilterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('|', $filter->getReplacementSeparator());
     }
 
+    /**
+     * @group 7169
+     */
     public function testFiltersConstructedAreDifferent()
     {
         $filterOne = $this->filters->get(

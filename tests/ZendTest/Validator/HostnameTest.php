@@ -170,8 +170,8 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check IDN matching
         $valuesExpected = array(
-            array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
-            array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
+            array(true, array('bürger.com', 'hãllo.com', 'hållo.com', 'plekitööd.ee')),
+            array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com', 'plekitÖÖd.ee')),
             array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
             );
         foreach ($valuesExpected as $element) {

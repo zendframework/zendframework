@@ -50,6 +50,7 @@ class HttpTest extends TestCase
             array('http://www.example.org/',            false),
             array('www.example.org:80',                 false),
             array('www.example.org',                    true),
+            array('plekitööd.ee',                       true),
             array('http://foo',                         false),
             array('foo',                                true),
             array('ftp://user:pass@example.org/',       false),

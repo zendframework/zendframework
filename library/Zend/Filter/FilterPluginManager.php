@@ -21,6 +21,15 @@ use Zend\ServiceManager\AbstractPluginManager;
 class FilterPluginManager extends AbstractPluginManager
 {
     /**
+     * Default set of plugins factories
+     *
+     * @var array
+     */
+    protected $factories = array(
+        'wordseparatortoseparator' => 'Zend\Filter\Word\Service\SeparatorToSeparatorFactory',
+    );
+
+    /**
      * Default set of filters
      *
      * @var array
@@ -75,7 +84,6 @@ class FilterPluginManager extends AbstractPluginManager
         'worddashtounderscore'       => 'Zend\Filter\Word\DashToUnderscore',
         'wordseparatortocamelcase'   => 'Zend\Filter\Word\SeparatorToCamelCase',
         'wordseparatortodash'        => 'Zend\Filter\Word\SeparatorToDash',
-        'wordseparatortoseparator'   => 'Zend\Filter\Word\SeparatorToSeparator',
         'wordunderscoretocamelcase'  => 'Zend\Filter\Word\UnderscoreToCamelCase',
         'wordunderscoretostudlycase' => 'Zend\Filter\Word\UnderscoreToStudlyCase',
         'wordunderscoretodash'       => 'Zend\Filter\Word\UnderscoreToDash',

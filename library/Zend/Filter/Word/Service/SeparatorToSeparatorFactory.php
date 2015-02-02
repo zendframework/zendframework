@@ -17,16 +17,6 @@ class SeparatorToSeparatorFactory implements
     protected $creationOptions = array();
 
     /**
-     * Constructor.
-     *
-     * @param array $options
-     */
-    public function __construct(array $options = array())
-    {
-        $this->setCreationOptions($options);
-    }
-
-    /**
      * Set creation options
      *
      * @param array $creationOptions

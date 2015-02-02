@@ -84,7 +84,6 @@ class FilterPluginManager extends AbstractPluginManager
         'worddashtounderscore'       => 'Zend\Filter\Word\DashToUnderscore',
         'wordseparatortocamelcase'   => 'Zend\Filter\Word\SeparatorToCamelCase',
         'wordseparatortodash'        => 'Zend\Filter\Word\SeparatorToDash',
-        'wordseparatortoseparator'   => 'Zend\Filter\Word\SeparatorToSeparator',
         'wordunderscoretocamelcase'  => 'Zend\Filter\Word\UnderscoreToCamelCase',
         'wordunderscoretostudlycase' => 'Zend\Filter\Word\UnderscoreToStudlyCase',
         'wordunderscoretodash'       => 'Zend\Filter\Word\UnderscoreToDash',

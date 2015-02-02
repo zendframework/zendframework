@@ -39,4 +39,44 @@ class FilterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Filter\Exception\RuntimeException');
         $this->filters->get('test');
     }
+
+    /**
+     * @group 7169
+     */
+    public function testFilterSuccessfullyConstructed()
+    {
+        $search_separator = ';';
+        $replacement_separator = '|';
+        $options = array(
+            'search_separator'      => $search_separator,
+            'replacement_separator' => $replacement_separator,
+        );
+        $filter = $this->filters->get('wordseparatortoseparator', $options);
+        $this->assertInstanceOf('Zend\Filter\Word\SeparatorToSeparator', $filter);
+        $this->assertEquals(';', $filter->getSearchSeparator());
+        $this->assertEquals('|', $filter->getReplacementSeparator());
+    }
+
+    /**
+     * @group 7169
+     */
+    public function testFiltersConstructedAreDifferent()
+    {
+        $filterOne = $this->filters->get(
+            'wordseparatortoseparator',
+            array(
+                'search_separator'      => ';',
+                'replacement_separator' => '|',
+            )
+        );
+        $filterTwo = $this->filters->get(
+            'wordseparatortoseparator',
+            array(
+                'search_separator'      => '.',
+                'replacement_separator' => ',',
+            )
+        );
+
+        $this->assertNotEquals($filterOne, $filterTwo);
+    }
 }

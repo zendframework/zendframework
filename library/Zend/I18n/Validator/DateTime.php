@@ -272,7 +272,7 @@ class DateTime extends AbstractValidator
                 throw new ValidatorException\InvalidArgumentException($formatter->getErrorMessage());
             }
         } catch (IntlException $intlException) {
-            throw new ValidatorException\InvalidArgumentException($e->getMessage(), 0, $intlException);
+            throw new ValidatorException\InvalidArgumentException($intlException->getMessage(), 0, $intlException);
         }
 
 

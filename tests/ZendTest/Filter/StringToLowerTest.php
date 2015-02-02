@@ -183,7 +183,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilterUsesGetEncodingMethod()
     {
-        $filterMock = $this->getMock('\Zend\Filter\StringToLower', array('getEncoding'));
+        $filterMock = $this->getMock('Zend\Filter\StringToLower', array('getEncoding'));
         $filterMock->expects($this->once())
                    ->method('getEncoding')
                    ->with();

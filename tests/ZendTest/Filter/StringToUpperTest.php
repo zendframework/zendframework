@@ -181,7 +181,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilterUsesGetEncodingMethod()
     {
-        $filterMock = $this->getMock('\Zend\Filter\StringToUpper', array('getEncoding'));
+        $filterMock = $this->getMock('Zend\Filter\StringToUpper', array('getEncoding'));
         $filterMock->expects($this->once())
                    ->method('getEncoding')
                    ->with();

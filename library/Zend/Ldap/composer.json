@@ -21,7 +21,8 @@
         "zendframework/zend-eventmanager": "self.version"
     },
     "suggest": {
-        "zendframework/zend-eventmanager": "Zend\\EventManager component"
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "ext-ldap": "To support Zend\\Ldap\\Ldap($options) instantiation"
     },
     "extra": {
         "branch-alias": {

@@ -119,8 +119,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Zend\Stdlib\Exception\BadMethodCallException',
-            'The option "parent_private" does not have a callable "setParentPrivate" setter method '
-            . 'which must be defined'
+            'The option "parent_private" does not have a callable "setParentPrivate" ("setparentprivate")'
+            . ' setter method which must be defined'
         );
 
         new TestOptionsDerived(array('parent_private' => 1));
@@ -144,8 +144,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Zend\Stdlib\Exception\BadMethodCallException',
-            'The option "derived_private" does not have a callable "setDerivedPrivate" setter method '
-            . 'which must be defined'
+            'The option "derived_private" does not have a callable "setDerivedPrivate" ("setderivedprivate")'
+            .' setter method which must be defined'
         );
 
         new TestOptionsDerived(array('derived_private' => 1));
@@ -155,7 +155,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'The option "foo bar" does not have a matching "setFooBar" ("setfoo bar") setter method which must be defined'
+            'The option "foo bar" does not have a callable "setFooBar" ("setfoo bar")'
+            . ' setter method which must be defined'
         );
 
         new TestOptions(array(

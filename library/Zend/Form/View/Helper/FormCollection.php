@@ -113,7 +113,7 @@ class FormCollection extends AbstractHelper
 
         foreach ($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                $markup .= $fieldsetHelper($elementOrFieldset);
+                $markup .= $fieldsetHelper($elementOrFieldset, $this->shouldWrap());
             } elseif ($elementOrFieldset instanceof ElementInterface) {
                 $markup .= $elementHelper($elementOrFieldset);
             }
@@ -178,7 +178,7 @@ class FormCollection extends AbstractHelper
         $elementOrFieldset = $collection->getTemplateElement();
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            $templateMarkup .= $fieldsetHelper($elementOrFieldset);
+            $templateMarkup .= $fieldsetHelper($elementOrFieldset, $this->shouldWrap());
         } elseif ($elementOrFieldset instanceof ElementInterface) {
             $templateMarkup .= $elementHelper($elementOrFieldset);
         }

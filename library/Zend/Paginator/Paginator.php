@@ -372,11 +372,8 @@ class Paginator implements Countable, IteratorAggregate
             $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_KEY);
             foreach ($cacheIterator as $key) {
-                $tags = static::$cache->getTags($key);
-                if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
-                    if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        static::$cache->removeItem($this->_getCacheId((int)substr($key, $prefixLength)));
-                    }
+                if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
+                    static::$cache->removeItem($this->_getCacheId((int)substr($key, $prefixLength)));
                 }
             }
         } else {
@@ -617,7 +614,6 @@ class Paginator implements Countable, IteratorAggregate
         if ($this->cacheEnabled()) {
             $cacheId = $this->_getCacheId($pageNumber);
             static::$cache->setItem($cacheId, $items);
-            static::$cache->setTags($cacheId, array($this->_getCacheInternalId()));
         }
 
         return $items;
@@ -710,11 +706,8 @@ class Paginator implements Countable, IteratorAggregate
             $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_VALUE);
             foreach ($cacheIterator as $key => $value) {
-                $tags = static::$cache->getTags($key);
-                if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
-                    if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        $data[(int) substr($key, $prefixLength)] = $value;
-                    }
+                if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
+                    $data[(int) substr($key, $prefixLength)] = $value;
                 }
             }
         }

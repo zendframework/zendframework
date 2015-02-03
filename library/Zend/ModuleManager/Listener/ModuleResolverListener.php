@@ -29,7 +29,6 @@ class ModuleResolverListener extends AbstractListener
             return false;
         }
 
-        $module = new $class;
-        return $module;
+        return new $class;
     }
 }

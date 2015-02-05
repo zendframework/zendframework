@@ -279,6 +279,22 @@ class FormButtonTest extends CommonTestCase
         $this->assertContains('>translated content<', $markup);
     }
 
+    public function testCanTranslateButtonContentParameter()
+    {
+        $element = new Element('foo');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element, "translate me");
+        $this->assertContains('>translated content<', $markup);
+    }
+
     public function testTranslatorMethods()
     {
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');

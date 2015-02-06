@@ -62,10 +62,10 @@ class GlobTest extends TestCase
         return array(
             array(
                 "{{,*.}alph,{,*.}bet}a",
-                [
+                array(
                     'alpha', 'eta.alpha', 'zeta.alpha', 'beta', 'eta.beta',
                     'zeta.beta'
-                ]
+                )
             )
         );
     }

@@ -12,7 +12,7 @@ namespace Zend\Form\Element;
 use DateTime as PhpDateTime;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\ValidatorInterface;
@@ -290,10 +290,10 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         $name = $this->getName();
         $this->monthElement->setName($name . '[month]');

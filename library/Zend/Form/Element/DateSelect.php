@@ -11,7 +11,7 @@ namespace Zend\Form\Element;
 
 use DateTime as PhpDateTime;
 use Zend\Form\Exception\InvalidArgumentException;
-use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Date as DateValidator;
 use Exception;
@@ -132,10 +132,10 @@ class DateSelect extends MonthSelect
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         parent::prepareElement($form);
 

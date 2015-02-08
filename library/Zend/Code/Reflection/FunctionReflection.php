@@ -203,7 +203,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get method body
      *
-     * @return string|bool
+     * @return string|false
      */
     public function getBody()
     {
@@ -249,6 +249,9 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         return $body;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return $this->__toString();

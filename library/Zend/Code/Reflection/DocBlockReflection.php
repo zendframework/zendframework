@@ -264,6 +264,9 @@ class DocBlockReflection implements ReflectionInterface
         $this->isReflected = true;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         $str = "DocBlock [ /* DocBlock */ ] {" . PHP_EOL . PHP_EOL;

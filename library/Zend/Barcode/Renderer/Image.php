@@ -358,7 +358,7 @@ class Image extends AbstractRenderer
      * @param string $font
      * @param int $color
      * @param string $alignment
-     * @param float $orientation
+     * @param float|int $orientation
      * @throws Exception\RuntimeException
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
@@ -382,7 +382,7 @@ class Image extends AbstractRenderer
                  * imagestring() doesn't allow orientation, if orientation
                  * needed: a TTF font is required.
                  * Throwing an exception here, allow to use automaticRenderError
-                 * to informe user of the problem instead of simply not drawing
+                 * to inform user of the problem instead of simply not drawing
                  * the text
                  */
                 throw new Exception\RuntimeException(

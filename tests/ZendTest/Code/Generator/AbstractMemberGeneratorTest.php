@@ -10,6 +10,7 @@
 namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\AbstractMemberGenerator;
+use Zend\Code\Generator\Exception\InvalidArgumentException;
 
 class AbstractMemberGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,4 +37,11 @@ class AbstractMemberGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $this->fixture->isFinal());
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetDocBlockThrowsExceptionWithInvalidType()
+    {
+        $this->fixture->setDocBlock(new \stdClass());
+    }
 }

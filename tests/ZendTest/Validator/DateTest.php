@@ -10,6 +10,7 @@
 namespace ZendTest\Validator;
 
 use DateTime;
+use DateTimeImmutable;
 use stdClass;
 use Zend\Validator;
 
@@ -94,6 +95,15 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setFormat($format);
         $this->assertEquals($result, $this->validator->isValid($input));
+    }
+
+    public function testDateTimeImmutable()
+    {
+        if (PHP_VERSION_ID < 50500) {
+            $this->markTestSkipped('`DateTimeImmutable` is only supported in PHP >=5.5.0');
+        }
+
+        $this->assertTrue($this->validator->isValid(new DateTimeImmutable()));
     }
 
     /**

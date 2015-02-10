@@ -10,6 +10,7 @@
 namespace Zend\Validator;
 
 use DateTime;
+use DateTimeInterface;
 use Traversable;
 
 /**
@@ -126,7 +127,8 @@ class Date extends AbstractValidator
      */
     protected function convertToDateTime($param, $addErrors = true)
     {
-        if ($param instanceof DateTime) {
+        // @TODO: when minimum dependency will be PHP 5.5, we can only keep check against DateTimeInterface
+        if ($param instanceof DateTime || $param instanceof DateTimeInterface) {
             return $param;
         }
 

@@ -101,32 +101,17 @@ class MongoDbOptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($resourceId, $this->object->getResourceId());
     }
 
-    public function testSetLibOptions()
+    public function testSetServer()
     {
         $resourceManager = new MongoDbResourceManager();
         $this->object->setResourceManager($resourceManager);
 
-        $this->assertAttributeEmpty('resources', $this->object->getResourceManager());
+        $resourceId = $this->object->getResourceId();
+        $server     = 'mongodb://test:1234';
 
-        $libOptions = array('foo' => 'bar');
+        $this->assertFalse($this->object->getResourceManager()->hasResource($resourceId));
 
-        $this->object->setLibOptions($libOptions);
-
-        $expected = array(
-            $this->object->getResourceId() => array(
-                'collection' => 'cache',
-                'database' => 'zend',
-                'driverOptions' => array(),
-                'foo' => 'bar',
-                'initialized' => false,
-                'options' => array(
-                    'fsync' => false,
-                    'journal' => true,
-                ),
-                'server' => 'mongodb://localhost:27017',
-            )
-        );
-
-        $this->assertAttributeEquals($expected, 'resources', $this->object->getResourceManager());
+        $this->object->setServer($server);
+        $this->assertSame($server, $this->object->getResourceManager()->getServer($resourceId));
     }
 }

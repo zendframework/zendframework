@@ -49,6 +49,7 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
     public function testQuoteIdentifier()
     {
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifier('identifier'));
+        $this->assertEquals('"identifier ""with"" double-quotes"', $this->platform->quoteIdentifier('identifier "with" double-quotes'));
     }
 
     /**
@@ -59,6 +60,7 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain(array('identifier')));
         $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema','identifier')));
+        $this->assertEquals('"schema"."identifier ""with"" double-quotes"', $this->platform->quoteIdentifierChain(array('schema','identifier "with" double-quotes')));
     }
 
     /**
@@ -86,12 +88,12 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteTrustedValue()
     {
-        $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
-        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("E'value'", $this->platform->quoteTrustedValue('value'));
+        $this->assertEquals("E'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals('E\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
 
         //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
-        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("E'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -103,7 +105,7 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
             'PHPUnit_Framework_Error',
             'Attempting to quote a value in Zend\Db\Adapter\Platform\Postgresql without extension/driver support can introduce security vulnerabilities in a production environment'
         );
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
+        $this->assertEquals("'Foo O\'\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
     /**

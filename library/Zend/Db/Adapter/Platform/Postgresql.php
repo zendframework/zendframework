@@ -73,7 +73,7 @@ class Postgresql implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
-        return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
+        return '"' . str_replace('"', '""', $identifier) . '"';
     }
 
     /**
@@ -84,7 +84,7 @@ class Postgresql implements PlatformInterface
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        $identifierChain = str_replace('"', '\\"', $identifierChain);
+        $identifierChain = str_replace('"', '""', $identifierChain);
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
         }
@@ -122,7 +122,7 @@ class Postgresql implements PlatformInterface
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
                 . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -144,7 +144,7 @@ class Postgresql implements PlatformInterface
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -204,7 +204,7 @@ class Postgresql implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
+                    $parts[$i] = '"' . str_replace('"', '""' . '"', $part) . '"';
             }
         }
         return implode('', $parts);

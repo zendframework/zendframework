@@ -14,7 +14,6 @@ use FirePHP as FirePHPService;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
-use FirePhp\FirePhpInterface;
 
 class FirePhp extends AbstractWriter
 {
@@ -42,7 +41,7 @@ class FirePhp extends AbstractWriter
             $instance = isset($instance['instance']) ? $instance['instance'] : null;
         }
 
-        if ($instance instanceof FirePhpInterface) {
+        if ($instance !== null && !($instance instanceof FirePhp\FirePhpInterface)) {
             throw new Exception\InvalidArgumentException('You must pass a valid FirePhp\FirePhpInterface');
         }
 

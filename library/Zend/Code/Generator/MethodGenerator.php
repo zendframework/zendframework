@@ -61,9 +61,38 @@ class MethodGenerator extends AbstractMemberGenerator
             $method->setParameter(ParameterGenerator::fromReflection($reflectionParameter));
         }
 
-        $method->setBody($reflectionMethod->getBody());
+        $method->setBody(self::clearBodyIndention($reflectionMethod->getBody()));
 
         return $method;
+    }
+
+    /**
+     * Identify the space indention from the first line and remove this indention
+     * from all lines
+     *
+     * @param string $body
+     *
+     * @return string
+     */
+    protected static function clearBodyIndention($body)
+    {
+        if (empty($body)) {
+            return $body;
+        }
+
+        $lines = explode(PHP_EOL, $body);
+
+        $indention = str_replace(trim($lines[1]), '', $lines[1]);
+
+        foreach ($lines as $key => $line) {
+            if (substr($line, 0, strlen($indention)) == $indention) {
+                $lines[$key] = substr($line, strlen($indention));
+            }
+        }
+
+        $body = implode(PHP_EOL, $lines);
+
+        return $body;
     }
 
     /**

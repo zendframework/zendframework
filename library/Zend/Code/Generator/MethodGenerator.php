@@ -61,7 +61,7 @@ class MethodGenerator extends AbstractMemberGenerator
             $method->setParameter(ParameterGenerator::fromReflection($reflectionParameter));
         }
 
-        $method->setBody(self::clearBodyIndention($reflectionMethod->getBody()));
+        $method->setBody(static::clearBodyIndention($reflectionMethod->getBody()));
 
         return $method;
     }

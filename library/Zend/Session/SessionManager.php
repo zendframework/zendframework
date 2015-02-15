@@ -140,6 +140,11 @@ class SessionManager extends AbstractManager
         $validatorValues = $this->getStorage()->getMetadata('_VALID');
 
         foreach ($this->validators as $validator) {
+            // Ignore validators which are already present in Storage
+            if (is_array($validatorValues) && array_key_exists($validator, $validatorValues)) {
+                continue;
+            }
+
             $referenceValue = null;
             if (is_array($validatorValues) && array_key_exists($validator, $validatorValues)) {
                 $referenceValue = $validatorValues[$validator];

@@ -136,4 +136,34 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Foo'    , $validatorData['Zend\Session\Validator\HttpUserAgent']);
         $this->assertSame('1.2.3.4', $validatorData['Zend\Session\Validator\RemoteAddr']);
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testFactoryDoesNotAttachValidatorTwoTimes()
+    {
+        $storage = new ArrayStorage();
+        $storage->setMetadata('_VALID', array(
+            'Zend\Session\Validator\RemoteAddr' => '1.2.3.4',
+        ));
+        $this->services->setService('Zend\Session\Storage\StorageInterface', $storage);
+
+        $config = array(
+            'session_manager' => array(
+                'validators' => array(
+                    'Zend\Session\Validator\RemoteAddr',
+                ),
+            ),
+        );
+        $this->services->setService('Config', $config);
+
+        $manager = $this->services->get('Zend\Session\ManagerInterface');
+        try {
+            $manager->start();
+        } catch (\RuntimeException $e) {
+            // Ignore exception, because we are not interested whether session validation passes in this test
+        }
+
+        $this->assertEquals(1, $manager->getValidatorChain()->getListeners('session.validate')->count());
+    }
 }

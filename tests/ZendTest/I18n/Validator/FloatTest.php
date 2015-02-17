@@ -166,7 +166,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             'ar'    => array('10.1', '66notflot.6'),
             'ru'    => array('10.1', '66notflot.6', '2,000.00', '2 00'),
             'en'    => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
-            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00")
+            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', "2'00")
         );
 
         //Loop locales and examples for a more thorough set of "true" test data

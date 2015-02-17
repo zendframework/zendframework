@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.3.5 (TBD)
+
+### SECURITY UPDATES
+
+- **ZF2015-02:** `Zend\Db\Adapter\Platform\Postgresql` was incorrectly using
+  `\\` to escape double quotes in identifiers and values, which could lead to
+  SQL injection vectors. We have provided patches that use proper escaping. If
+  you use Postgresql with Zend Framework 2, we recommend upgrading immediately.
+
 ## 2.3.4 (2015-01-14)
 
 - [3758: partialLoop/partial View Helper can not be nested when using setObjectKey](https://github.com/zendframework/zf2/issues/3758)
@@ -702,6 +711,15 @@
 - [5942: Mvc\I18n\Translator -&gt; setLocale](https://github.com/zendframework/zf2/pull/5942)
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
+
+## 2.2.10 (2015-02-18)
+
+### SECURITY UPDATES
+
+- **ZF2015-02:** `Zend\Db\Adapter\Platform\Postgresql` was incorrectly using
+  `\\` to escape double quotes in identifiers and values, which could lead to
+  SQL injection vectors. We have provided patches that use proper escaping. If
+  you use Postgresql with Zend Framework 2, we recommend upgrading immediately.
 
 ## 2.2.9 (2015-01-14)
 

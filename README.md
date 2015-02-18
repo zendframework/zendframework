@@ -11,11 +11,11 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.5dev*
+*Zend Framework 2.3.5*
 
 This is the fifth maintenance release for the version 2.3 series.
 
-DD MMM YYYY
+18 Feb 2015
 
 ### UPDATES IN 2.3.5
 

@@ -228,6 +228,10 @@ class MenuTest extends AbstractTest
 
     public function testTranslationUsingZendTranslateWithTextDomain()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslatorWithTextDomain();
         $this->_helper->setTranslator($translator);
 

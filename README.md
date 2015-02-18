@@ -19,6 +19,13 @@ DD MMM YYYY
 
 ### UPDATES IN 2.3.5
 
+This release contains security updates:
+
+- **ZF2015-02:** `Zend\Db\Adapter\Platform\Postgresql` was incorrectly using
+  `\\` to escape double quotes in identifiers and values, which could lead to
+  SQL injection vectors. We have provided patches that use proper escaping. If
+  you use Postgresql with Zend Framework 2, we recommend upgrading immediately.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

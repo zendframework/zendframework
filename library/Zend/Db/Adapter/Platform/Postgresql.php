@@ -17,6 +17,13 @@ use Zend\Db\Adapter\Exception;
 class Postgresql extends AbstractPlatform
 {
     /**
+     * Overrides value from AbstractPlatform to use proper escaping for Postgres
+     *
+     * @var string
+     */
+    protected $quoteIdentifierTo = '""';
+
+    /**
      * @var resource|\PDO
      */
     protected $resource = null;
@@ -63,7 +70,7 @@ class Postgresql extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
+        return '"' . implode('"."', (array) str_replace('"', '""', $identifierChain)) . '"';
     }
 
     /**
@@ -92,7 +99,7 @@ class Postgresql extends AbstractPlatform
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
                 . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -109,7 +116,7 @@ class Postgresql extends AbstractPlatform
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**

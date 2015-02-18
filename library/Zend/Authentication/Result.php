@@ -85,7 +85,7 @@ class Result
      */
     public function isValid()
     {
-        return ($this->code > 0) ? true : false;
+        return ($this->code > 0);
     }
 
     /**

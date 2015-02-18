@@ -658,7 +658,7 @@ class Imap
         $result = $this->requestAndResponse('STORE', array($set, $item, $flags), $silent);
 
         if ($silent) {
-            return $result ? true : false;
+            return (bool) $result;
         }
 
         $tokens = $result;

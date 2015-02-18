@@ -270,7 +270,7 @@ class Pop3 extends AbstractStorage
             } catch (MailException\ExceptionInterface $e) {
                 // ignoring error
             }
-            $this->has['uniqueid'] = $id ? true : false;
+            $this->has['uniqueid'] = (bool) $id;
             return $this->has['uniqueid'];
         }
 

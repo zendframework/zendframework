@@ -162,7 +162,7 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
      */
     protected function isTransactionEnabled()
     {
-        $os =  php_uname('s') == 'OS400' ? true : false;
+        $os = (php_uname('s') == 'OS400');
         if ($os) {
             return ini_get('ibm_db2.i5_allow_commit') == 1;
         }

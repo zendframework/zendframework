@@ -184,7 +184,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
      */
     public function setAutoEscape($autoEscape = true)
     {
-        $this->autoEscape = ($autoEscape) ? true : false;
+        $this->autoEscape = (bool) $autoEscape;
         return $this;
     }
 

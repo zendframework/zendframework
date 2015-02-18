@@ -428,7 +428,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $lis = substr_count($string, "\n        <li>");
         $this->assertEquals(3, $lis);
-        $this->assertTrue((strstr($string, "    <ul>\n")) ? true : false, $string);
-        $this->assertTrue((strstr($string, "\n    </ul>")) ? true : false);
+        $this->assertTrue((bool) strstr($string, "    <ul>\n"), $string);
+        $this->assertTrue((bool) strstr($string, "\n    </ul>"));
     }
 }

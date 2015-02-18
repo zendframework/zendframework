@@ -204,9 +204,9 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
                      ->__invoke($style3, 'APPEND');
         $this->assertEquals(3, count($this->helper));
         $values = $this->helper->getArrayCopy();
-        $this->assertTrue((strstr($values[0]->content, $style2)) ? true : false);
-        $this->assertTrue((strstr($values[1]->content, $style1)) ? true : false);
-        $this->assertTrue((strstr($values[2]->content, $style3)) ? true : false);
+        $this->assertTrue((bool) strstr($values[0]->content, $style2));
+        $this->assertTrue((bool) strstr($values[1]->content, $style1));
+        $this->assertTrue((bool) strstr($values[2]->content, $style3));
     }
 
     public function testToStyleGeneratesValidHtml()

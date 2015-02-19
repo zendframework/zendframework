@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\Service;
 
-
 class TranslatorPluginManagerFactory extends AbstractPluginManagerFactory
 {
     const PLUGIN_MANAGER_CLASS = 'Zend\I18n\Translator\LoaderPluginManager';

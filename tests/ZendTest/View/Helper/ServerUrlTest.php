@@ -87,6 +87,15 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('https://example.com:8181', $url->__invoke());
     }
 
+    public function testConstructorWithHostReversedProxyHttpsTrue()
+    {
+        $_SERVER['HTTP_HOST'] = 'example.com';
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com', $url->__invoke());
+    }
+
     public function testConstructorWithHttpHostIncludingPortAndPortSet()
     {
         $_SERVER['HTTP_HOST'] = 'example.com:8181';

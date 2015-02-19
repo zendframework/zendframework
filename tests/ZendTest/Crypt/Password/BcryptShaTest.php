@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -20,20 +20,20 @@ use Zend\Crypt\Password\Exception;
 class BcryptShaTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Bcrypt */
-    public $bcrypt;
+    private $bcrypt;
     /** @var string */
-    public $salt;
+    private $salt;
     /** @var string */
-    public $bcryptPassword;
+    private $bcryptPassword;
     /** @var string */
-    public $password;
+    private $password;
 
     public function setUp()
     {
         $this->bcrypt   = new BcryptSha();
         $this->salt     = '1234567890123456';
         $this->password = 'test';
-        $this->prefix = '$2y$';
+        $this->prefix   = '$2y$';
 
         $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1NeqZGfIabq2.v6vX10KI4/z0pMoIoDyVa';
     }

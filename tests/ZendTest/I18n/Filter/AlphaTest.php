@@ -61,7 +61,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         $this->locale               = Locale::getDefault();
         $language                   = Locale::getPrimaryLanguage($this->locale);
         self::$meansEnglishAlphabet = in_array($language, array('ja'));
-        self::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a'));
+        self::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**

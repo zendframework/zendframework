@@ -753,7 +753,7 @@ class Imap
 
     /**
      * subscribe to a folder
-     * 
+     *
      * @param string $folder folder name
      * @return bool success
      */

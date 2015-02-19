@@ -49,6 +49,7 @@ class TranslatorServiceFactory implements FactoryInterface
                     || $config['translator'] instanceof Traversable)
             ) {
                 $i18nTranslator = Translator::factory($config['translator']);
+                $i18nTranslator->setPluginManager($serviceLocator->get('TranslatorPluginManager'));
                 $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
                 return new MvcTranslator($i18nTranslator);
             }

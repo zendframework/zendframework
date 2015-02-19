@@ -121,6 +121,12 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\LogWriterProviderInterface',
             'getLogWriterConfig'
         );
+        $serviceListener->addServiceManager(
+            'TranslatorPluginManager',
+            'translator_plugins',
+            'Zend\ModuleManager\Feature\TranslatorPluginProviderInterface',
+            'getTranslatorPluginConfig'
+        );
 
         $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

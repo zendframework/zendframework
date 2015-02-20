@@ -106,16 +106,15 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $message = $this->getMessage();
         $this->transport->send($message);
 
-        $this->assertEquals('ralph.schindler@zend.com', $this->connection->getMail());
         $expectedRecipients = array('zf-devteam@zend.com', 'matthew@zend.com', 'zf-crteam@lists.zend.com');
         $this->assertEquals($expectedRecipients, $this->connection->getRecipients());
 
-        $data = $this->connection->getLog();
+        $data = $this->connection->getLog();echo $data;
+        $this->assertContains('MAIL FROM:<ralph.schindler@zend.com>', $data);
         $this->assertContains('To: ZF DevTeam <zf-devteam@zend.com>', $data);
         $this->assertContains('Subject: Testing Zend\Mail\Transport\Sendmail', $data);
         $this->assertContains("Cc: matthew@zend.com\r\n", $data);
         $this->assertNotContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $data);
-        $this->assertNotContains("zf-crteam@lists.zend.com", $data);
         $this->assertContains("From: zf-devteam@zend.com,\r\n Matthew <matthew@zend.com>\r\n", $data);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $data);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $data);

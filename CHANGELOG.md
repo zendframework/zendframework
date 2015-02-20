@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 2.3.5 (2015-02-18)
+
+- [6666: bugfix : options can't be passed to SeparatorToSeparator via PluginManager](https://github.com/zendframework/zf2/pull/6666)
+- [6676: Respecting line endings in AnnotationScanner](https://github.com/zendframework/zf2/pull/6676)
+- [7005: Zend\Http\PhpEnvironment\Request omits query string](https://github.com/zendframework/zf2/issues/7005)
+- [7127: SessionManagerFactory with ArrayStorage triggers undefined variable](https://github.com/zendframework/zf2/pull/7127)
+- [7134: classmap&#95;generator Deprecated: preg&#95;replace():](https://github.com/zendframework/zf2/issues/7134)
+- [7135: Fixing deprecated preg&#95;replace usage in classmap&#95;generator.php](https://github.com/zendframework/zf2/pull/7135)
+- [7137: Request from string](https://github.com/zendframework/zf2/pull/7137)
+- [7139: Fixing comment about email validator, when should be uri](https://github.com/zendframework/zf2/pull/7139)
+- [7142: AbstractConfigFactory returns complete configuration array at first config call](https://github.com/zendframework/zf2/issues/7142)
+- [7144: hotfix/#7142: AbstractConfigFactory now returns requested config array ](https://github.com/zendframework/zf2/pull/7144)
+- [7148: ModuleLoader not capable of loading modules contained within an application.phar](https://github.com/zendframework/zf2/issues/7148)
+- [7150: Estonian IDN definition &amp; fixed binary code for HOST&#95;DNS&#95;OR&#95;IPV4&#95;OR&#95;IPV6&#95;OR&#95;REGNAME](https://github.com/zendframework/zf2/pull/7150)
+- [7151: Applications packaged as not capable of loading modules contained within the archive](https://github.com/zendframework/zf2/pull/7151)
+- [7157: Exception message in Zend\Stdlib\AbstractOptions should use the actual used setter](https://github.com/zendframework/zf2/pull/7157)
+- [7162: Incorrect response for HTTP status code 414](https://github.com/zendframework/zf2/pull/7162)
+- [7167: Fixation form collection helper lost second argument](https://github.com/zendframework/zf2/pull/7167)
+- [7168: Typo in #6598 pull request.](https://github.com/zendframework/zf2/pull/7168)
+- [7169: bugfix : options can't be passed to SeparatorToSeparator ](https://github.com/zendframework/zf2/pull/7169)
+- [7170: Fixed wrong phpdoc type hint.](https://github.com/zendframework/zf2/pull/7170)
+- [7180: Fix: Inline variable](https://github.com/zendframework/zf2/pull/7180)
+- [7200: Add support for DateTimeImmutable](https://github.com/zendframework/zf2/pull/7200)
+
+### SECURITY UPDATES
+
+- **ZF2015-02:** `Zend\Db\Adapter\Platform\Postgresql` was incorrectly using
+  `\\` to escape double quotes in identifiers and values, which could lead to
+  SQL injection vectors. We have provided patches that use proper escaping. If
+  you use Postgresql with Zend Framework 2, we recommend upgrading immediately.
+
 ## 2.3.4 (2015-01-14)
 
 - [3758: partialLoop/partial View Helper can not be nested when using setObjectKey](https://github.com/zendframework/zf2/issues/3758)
@@ -702,6 +733,15 @@
 - [5942: Mvc\I18n\Translator -&gt; setLocale](https://github.com/zendframework/zf2/pull/5942)
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
+
+## 2.2.10 (2015-02-18)
+
+### SECURITY UPDATES
+
+- **ZF2015-02:** `Zend\Db\Adapter\Platform\Postgresql` was incorrectly using
+  `\\` to escape double quotes in identifiers and values, which could lead to
+  SQL injection vectors. We have provided patches that use proper escaping. If
+  you use Postgresql with Zend Framework 2, we recommend upgrading immediately.
 
 ## 2.2.9 (2015-01-14)
 

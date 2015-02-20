@@ -160,7 +160,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
             $currentChar = $stream[$streamIndex];
             $matches     = array();
-            $currentLine = (preg_match('#(.*)\n#', $stream, $matches, null, $streamIndex) === 1) ? $matches[1] : substr($stream, $streamIndex);
+            $currentLine = (preg_match('#(.*?)(?:\n|\r\n?)#', $stream, $matches, null, $streamIndex) === 1) ? $matches[1] : substr($stream, $streamIndex);
             if ($currentChar === ' ') {
                 $currentWord = (preg_match('#( +)#', $currentLine, $matches) === 1) ? $matches[1] : $currentLine;
             } else {
@@ -213,7 +213,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         }
 
         if ($MACRO_HAS_CONTEXT($CONTEXT_CLASS)) {
-            if (in_array($currentChar, array(' ', '(', "\n"))) {
+            if (in_array($currentChar, array(' ', '(', "\n", "\r"))) {
                 $context &= ~$CONTEXT_CLASS;
                 $MACRO_TOKEN_ADVANCE();
             } else {
@@ -225,7 +225,22 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
         }
 
-        if ($currentChar === "\n") {
+        // Since we don't know what line endings are used in the file, we check for all scenarios. If we find a
+        // cariage return (\r), we check the next character for a line feed (\n). If so we consume it and act as
+        // if the cariage return was a line feed.
+        $lineEnded = $currentChar === "\n";
+        if ($currentChar === "\r") {
+            $lineEnded = true;
+
+            $nextChar = $MACRO_STREAM_ADVANCE_CHAR();
+            if ($nextChar !== "\n") {
+                $streamIndex--;
+            }
+
+            $currentChar = "\n";
+        }
+
+        if ($lineEnded) {
             $MACRO_TOKEN_SET_TYPE('ANNOTATION_NEWLINE');
             $MACRO_TOKEN_APPEND_CHAR();
             $MACRO_TOKEN_ADVANCE();

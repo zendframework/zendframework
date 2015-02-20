@@ -84,7 +84,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 
         $config = $serviceLocator->get('Config');
         $this->configs[$requestedName] = $this->configs[$key] = $config[$key];
-        return $config;
+        return $config[$key];
     }
 
     /**

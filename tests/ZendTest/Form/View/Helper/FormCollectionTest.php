@@ -122,6 +122,28 @@ class FormCollectionTest extends TestCase
         $this->assertContains('id="customFieldsetfieldsets"', $markup);
     }
 
+    /**
+     * @group 7167
+     */
+    public function testShouldNotWrapAtSubInvokeHelper()
+    {
+        $this->assertNotContains(
+            '<fieldset',
+            $this->helper->__invoke($this->getForm(), false)
+        );
+    }
+
+    /**
+     * @group 7167
+     */
+    public function testShouldWrapAtRecursiveHelperCall()
+    {
+        $this->assertContains(
+            '<fieldset',
+            $this->helper->__invoke($this->getForm())
+        );
+    }
+
     public function testShouldWrapReturnsDefaultTrue()
     {
         $this->assertTrue($this->helper->shouldWrap());

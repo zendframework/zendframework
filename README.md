@@ -3,21 +3,21 @@
 # Welcome to the *Zend Framework 2.3* Release!
 
 Master:
-[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=master)](https://coveralls.io/r/zendframework/zf2)
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.svg?branch=master)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zf2)
 Develop:
-[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=develop)](http://travis-ci.org/zendframework/zf2)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=develop)](https://coveralls.io/r/zendframework/zf2)
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.svg?branch=develop)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.svg?branch=develop)](https://coveralls.io/r/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.5dev*
+*Zend Framework 2.3.6dev*
 
-This is the fifth maintenance release for the version 2.3 series.
+This is the sixth maintenance release for the version 2.3 series.
 
 DD MMM YYYY
 
-### UPDATES IN 2.3.5
+### UPDATES IN 2.3.6
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

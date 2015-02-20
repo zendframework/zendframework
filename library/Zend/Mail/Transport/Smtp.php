@@ -271,8 +271,8 @@ class Smtp implements TransportInterface
      */
     protected function prepareFromAddress(Message $message)
     {
-        if ($this->envelope) {
-            return $this->getEnvelope()->from;
+        if ($this->getEnvelope() && $this->getEnvelope()->getFrom()) {
+            return $this->getEnvelope()->getFrom();
         }
 
         $sender = $message->getSender();
@@ -301,8 +301,8 @@ class Smtp implements TransportInterface
      */
     protected function prepareRecipients(Message $message)
     {      
-        if (isset($this->envelope->to)) {
-           return (array) $this->envelope->to;
+        if ($this->getEnvelope() && $this->getEnvelope()->getTo()) {
+            return (array) $this->getEnvelope()->getTo();
         }
 
         $recipients = array();

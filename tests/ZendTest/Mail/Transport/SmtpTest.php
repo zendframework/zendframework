@@ -13,6 +13,7 @@ use Zend\Mail\Headers;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Envelope;
 use ZendTest\Mail\TestAsset\SmtpProtocolSpy;
 
 /**
@@ -77,6 +78,56 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $message = new Message();
         $message->setSender('ralph.schindler@zend.com', 'Ralph Schindler');
         $this->transport->send($message);
+    }
+
+    public function testSendMailWithEnvelopeFrom()
+    {
+        $message = $this->getMessage();
+        $envelope = new Envelope(array(
+            'from' => 'mailer@lists.zend.com',
+                )
+        );
+        $this->transport->setEnvelope($envelope)->send($message);
+
+        $data = $this->connection->getLog();
+        $this->assertContains('MAIL FROM:<mailer@lists.zend.com>', $data);
+        $this->assertContains('RCPT TO:<matthew@zend.com>', $data);
+        $this->assertContains('RCPT TO:<zf-crteam@lists.zend.com>', $data);
+        $this->assertContains("From: zf-devteam@zend.com,\r\n Matthew <matthew@zend.com>\r\n", $data);
+    }
+
+    public function testSendMailWithEnvelopeTo()
+    {
+        $message = $this->getMessage();
+        $envelope = new Envelope(array(
+            'to' => 'users@lists.zend.com',
+                )
+        );
+        $this->transport->setEnvelope($envelope)->send($message);
+
+        $data = $this->connection->getLog();
+        $this->assertContains('MAIL FROM:<ralph.schindler@zend.com>', $data);
+        $this->assertContains('RCPT TO:<users@lists.zend.com>', $data);
+        $this->assertContains('To: ZF DevTeam <zf-devteam@zend.com>', $data);
+    }
+
+    public function testSendMailWithEnvelope()
+    {
+        $message = $this->getMessage();
+        $to = array('users@lists.zend.com', 'dev@lists.zend.com');
+        $envelope = new Envelope(array(
+            'from' => 'mailer@lists.zend.com',
+            'to' => $to,
+                )
+        );
+        $this->transport->setEnvelope($envelope)->send($message);
+
+        $this->assertEquals($to, $this->connection->getRecipients());
+       
+        $data = $this->connection->getLog();
+        $this->assertContains('MAIL FROM:<mailer@lists.zend.com>', $data);
+        $this->assertContains('RCPT TO:<users@lists.zend.com>', $data);
+        $this->assertContains('RCPT TO:<dev@lists.zend.com>', $data);
     }
 
     public function testSendMinimalMail()

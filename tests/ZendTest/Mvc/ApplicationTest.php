@@ -185,6 +185,24 @@ class ApplicationTest extends TestCase
         $this->assertSame(array($viewManager, 'onBootstrap'), $callback);
     }
 
+    public function testBootstrapCanRegisterHttpMethodListener()
+    {
+        $httpMethodListener = $this->serviceManager->get('HttpMethodListener');
+        $this->application->bootstrap(array('HttpMethodListener'));
+        $events = $this->application->getEventManager();
+        $listeners = $events->getListeners(MvcEvent::EVENT_ROUTE);
+        $foundListener = false;
+        foreach($listeners as $listener) {
+            $callback = $listener->getCallback();
+            $foundListener = $callback === array($httpMethodListener, 'onRoute');
+            if ($foundListener) {
+                break;
+            }
+        }
+
+        $this->assertTrue($foundListener);
+    }
+
     public function testBootstrapRegistersConfiguredMvcEvent()
     {
         $this->assertNull($this->application->getMvcEvent());

@@ -41,7 +41,7 @@ class HttpMethodListener extends AbstractListenerAggregate
      * @param bool  $enabled
      * @param array $allowedMethods
      */
-    public function __construct($enabled = true, array $allowedMethods = array())
+    public function __construct($enabled = true, $allowedMethods = array())
     {
         $this->setEnabled($enabled);
 

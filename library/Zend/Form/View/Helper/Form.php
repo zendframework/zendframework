@@ -37,7 +37,7 @@ class Form extends AbstractHelper
      * Invoke as function
      *
      * @param  null|FormInterface $form
-     * @return Form
+     * @return Form|string
      */
     public function __invoke(FormInterface $form = null)
     {

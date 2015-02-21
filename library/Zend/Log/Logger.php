@@ -416,7 +416,7 @@ class Logger implements LoggerInterface
     {
         if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$priority must be an integer > 0 and < %d; received %s',
+                '$priority must be an integer >= 0 and < %d; received %s',
                 count($this->priorities),
                 var_export($priority, 1)
             ));

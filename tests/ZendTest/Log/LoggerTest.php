@@ -452,4 +452,16 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         // Temporary hide errors, because we don't want the fatal error to fail the test
         @$this->callToNonExistingMethod();
     }
+
+    /**
+     * @group ZF2-7238
+     */
+    public function testCatchExceptionNotValidPriority()
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException',
+                                    '$priority must be an integer >= 0 and < 8; received -1');
+        $writer = new MockWriter();
+        $this->logger->addWriter($writer);
+        $this->logger->log(-1, 'Foo');
+    }
 }

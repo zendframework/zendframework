@@ -225,7 +225,7 @@ class AnnotationBuilderTest extends TestCase
 
         $child = $form->get($childName);
 
-        $target = ($child instanceof Collection)? $child->getTargetElement() : $child;
+        $target = $child->getTargetElement();
         $this->assertInstanceOf('Zend\Form\FieldsetInterface', $target);
         $this->assertEquals('My label', $child->getLabel());
     }
@@ -237,7 +237,35 @@ class AnnotationBuilderTest extends TestCase
      */
     public function provideOptionsAnnotationAndComposedObjectAnnotation()
     {
-        return array(array('child'), array('childTheSecond'), array('childTheThird'), array('childTheFourth'));
+        return array(array('child'), array('childTheSecond'));
+    }
+
+    /**
+     * @dataProvider provideOptionsAnnotationAndComposedObjectAnnotationNoneCollection
+     * @param string $childName
+     *
+     * @group 7108
+     */
+    public function testOptionsAnnotationAndComposedObjectAnnotationNoneCollection($childName)
+    {
+        $entity  = new TestAsset\Annotation\EntityUsingComposedObjectAndOptions();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $child = $form->get($childName);
+
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $child);
+        $this->assertEquals('My label', $child->getLabel());
+    }
+
+    /**
+     * Data provider
+     *
+     * @return string[][]
+     */
+    public function provideOptionsAnnotationAndComposedObjectAnnotationNoneCollection()
+    {
+        return array(array('childTheThird'), array('childTheFourth'));
     }
 
     public function testCanHandleOptionsAnnotation()

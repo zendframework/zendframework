@@ -137,70 +137,68 @@ class ApplicationTest extends TestCase
         $this->assertAttributeEquals(array(), 'identifiers', $sharedEvents);
     }
 
-    public function testBootstrapRegistersRouteListener()
+    /**
+     * @param string $listenerServiceName
+     * @param string $event
+     * @param string $method
+     *
+     * @dataProvider bootstrapRegistersListenersProvider
+     */
+    public function testBootstrapRegistersListeners($listenerServiceName, $event, $method, $isCustom = false)
     {
-        $routeListener = $this->serviceManager->get('RouteListener');
-        $this->application->bootstrap();
+        $listenerService = $this->serviceManager->get($listenerServiceName);
+        $this->application->bootstrap($isCustom ? (array) $listenerServiceName : array());
         $events = $this->application->getEventManager();
-        $listeners = $events->getListeners(MvcEvent::EVENT_ROUTE);
-        $this->assertEquals(1, count($listeners));
-        $listener = $listeners->top();
-        $callback = $listener->getCallback();
-        $this->assertSame(array($routeListener, 'onRoute'), $callback);
-    }
+        $listeners = $events->getListeners($event);
 
-    public function testBootstrapRegistersDispatchListener()
-    {
-        $dispatchListener = $this->serviceManager->get('DispatchListener');
-        $this->application->bootstrap();
-        $events = $this->application->getEventManager();
-        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
-        $this->assertEquals(1, count($listeners));
-        $listener = $listeners->top();
-        $callback = $listener->getCallback();
-        $this->assertSame(array($dispatchListener, 'onDispatch'), $callback);
-    }
-
-    public function testBootstrapRegistersSendResponseListener()
-    {
-        $sendResponseListener = $this->serviceManager->get('SendResponseListener');
-        $this->application->bootstrap();
-        $events = $this->application->getEventManager();
-        $listeners = $events->getListeners(MvcEvent::EVENT_FINISH);
-        $this->assertEquals(1, count($listeners));
-        $listener = $listeners->top();
-        $callback = $listener->getCallback();
-        $this->assertSame(array($sendResponseListener, 'sendResponse'), $callback);
-    }
-
-    public function testBootstrapRegistersViewManagerAsBootstrapListener()
-    {
-        $viewManager = $this->serviceManager->get('ViewManager');
-        $this->application->bootstrap();
-        $events = $this->application->getEventManager();
-        $listeners = $events->getListeners(MvcEvent::EVENT_BOOTSTRAP);
-        $this->assertEquals(1, count($listeners));
-        $listener = $listeners->top();
-        $callback = $listener->getCallback();
-        $this->assertSame(array($viewManager, 'onBootstrap'), $callback);
-    }
-
-    public function testBootstrapCanRegisterHttpMethodListener()
-    {
-        $httpMethodListener = $this->serviceManager->get('HttpMethodListener');
-        $this->application->bootstrap(array('HttpMethodListener'));
-        $events = $this->application->getEventManager();
-        $listeners = $events->getListeners(MvcEvent::EVENT_ROUTE);
         $foundListener = false;
-        foreach($listeners as $listener) {
+        foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
-            $foundListener = $callback === array($httpMethodListener, 'onRoute');
+            $foundListener = $callback === array($listenerService, $method);
             if ($foundListener) {
                 break;
             }
         }
-
         $this->assertTrue($foundListener);
+    }
+
+    public function bootstrapRegistersListenersProvider()
+    {
+        return array(
+            array('RouteListener', MvcEvent::EVENT_ROUTE, 'onRoute'),
+            array('DispatchListener', MvcEvent::EVENT_DISPATCH, 'onDispatch'),
+            array('SendResponseListener', MvcEvent::EVENT_FINISH, 'sendResponse'),
+            array('ViewManager', MvcEvent::EVENT_BOOTSTRAP, 'onBootstrap'),
+            array('HttpMethodListener', MvcEvent::EVENT_ROUTE, 'onRoute'),
+            array('BootstrapListener', MvcEvent::EVENT_BOOTSTRAP, 'onBootstrap', true),
+        );
+    }
+
+    public function testBootstrapAlwaysRegistersDefaultListeners()
+    {
+        $refl = new \ReflectionProperty($this->application, 'defaultListeners');
+        $refl->setAccessible(true);
+        $defaultListenersNames = $refl->getValue($this->application);
+        $defaultListeners = array();
+        foreach ($defaultListenersNames as $defaultListenerName) {
+            $defaultListeners[] = $this->serviceManager->get($defaultListenerName);
+        }
+
+        $this->application->bootstrap(array('BootstrapListener'));
+        $eventManager = $this->application->getEventManager();
+
+        $registeredListeners = array();
+        foreach ($eventManager->getEvents() as $event) {
+            $listeners = $eventManager->getListeners($event);
+            foreach ($listeners as $listener) {
+                $callback = $listener->getCallBack();
+                $registeredListeners[] = $callback[0];
+            }
+        }
+
+        foreach ($defaultListeners as $defaultListener) {
+            $this->assertContains($defaultListener, $registeredListeners);
+        }
     }
 
     public function testBootstrapRegistersConfiguredMvcEvent()
@@ -646,28 +644,6 @@ class ApplicationTest extends TestCase
         $event  = $this->application->getMvcEvent();
         $result = $method->invoke($this->application, $event);
         $this->assertSame($this->application, $result);
-    }
-
-
-    public function testCustomListener()
-    {
-        $this->application->bootstrap(array('BootstrapListener'));
-
-        // must contain custom bootstrap listeners
-        $bootstrapListener = $this->serviceManager->get('BootstrapListener');
-        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
-        $bootstrapListeners = $bootstrapListener->getListeners();
-        $this->assertTrue($listeners->contains($bootstrapListeners[0]));
-
-        // must contain default listeners
-        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
-        $this->assertEquals(1, count($listeners));
-
-        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_ROUTE);
-        $this->assertEquals(1, count($listeners));
-
-        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_FINISH);
-        $this->assertEquals(1, count($listeners));
     }
 
     public function testFailedRoutingShouldBePreventable()

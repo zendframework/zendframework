@@ -88,8 +88,6 @@ class Curl implements HttpAdapter, StreamInterface
             CURLOPT_PORT,
             CURLOPT_MAXREDIRS,
             CURLOPT_CONNECTTIMEOUT,
-            CURL_HTTP_VERSION_1_1,
-            CURL_HTTP_VERSION_1_0,
         );
     }
 

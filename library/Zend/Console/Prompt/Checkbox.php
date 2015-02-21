@@ -65,7 +65,6 @@ final class Checkbox extends AbstractPrompt
      */
     public function show()
     {
-        $console = $this->getConsole();
         $this->checkedOptions = array();
         $mask = $this->prepareMask();
 
@@ -75,7 +74,7 @@ final class Checkbox extends AbstractPrompt
             $response = $this->readOption($mask);
 
             if ($this->echo) {
-                $this->showResponse();
+                $this->showResponse($response);
             }
 
             $this->checkOrUncheckOption($response);
@@ -181,5 +180,4 @@ final class Checkbox extends AbstractPrompt
 
         $this->options = $options;
     }
-
 }

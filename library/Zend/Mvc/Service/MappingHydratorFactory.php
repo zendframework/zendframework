@@ -11,21 +11,21 @@ namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Hydrator\StandardHydrator;
+use Zend\Stdlib\Hydrator\MappingHydrator;
 
-class StandardHydratorFactory implements FactoryInterface
+class MappingHydratorFactory implements FactoryInterface
 {
     /**
      * Creates StandardHydrator
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return StandardHydrator
+     * @return MappingHydrator
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /** @var ServiceLocatorInterface $hydratorManager */
         $hydratorManager = $serviceLocator->get('HydratorManager');
 
-        return new StandardHydrator($hydratorManager);
+        return new MappingHydrator($hydratorManager);
     }
 }

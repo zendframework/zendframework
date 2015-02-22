@@ -9,18 +9,18 @@
 
 namespace ZendTest\Stdlib\Hydrator;
 
-use Zend\Stdlib\Hydrator\StandardHydrator;
+use Zend\Stdlib\Hydrator\MappingHydrator;
 use ArrayObject;
 
 /**
- * Unit tests for {@see \Zend\Stdlib\Hydrator\StandardHydrator}
+ * Unit tests for {@see \Zend\Stdlib\Hydrator\MappingHydrator}
  *
- * @covers \Zend\Stdlib\Hydrator\StandardHydrator
+ * @covers \Zend\Stdlib\Hydrator\MappingHydrator
  */
-class StandardHydratorTest extends \PHPUnit_Framework_TestCase
+class MappingHydratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var StandardHydrator
+     * @var MappingHydrator
      */
     protected $hydrator;
 
@@ -40,7 +40,7 @@ class StandardHydratorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->hydrators = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->hydrator = new StandardHydrator($this->hydrators);
+        $this->hydrator = new MappingHydrator($this->hydrators);
         $this->object = new ArrayObject;
     }
 

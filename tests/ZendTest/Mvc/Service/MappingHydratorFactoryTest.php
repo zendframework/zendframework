@@ -9,9 +9,9 @@
 
 namespace ZendTest\Mvc\Service;
 
-use Zend\Mvc\Service\StandardHydratorFactory;
+use Zend\Mvc\Service\MappingHydratorFactory;
 
-class StandardHydratorFactoryTest extends \PHPUnit_Framework_TestCase
+class MappingHydratorFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testFactory()
     {
@@ -23,8 +23,8 @@ class StandardHydratorFactoryTest extends \PHPUnit_Framework_TestCase
             ->with('HydratorManager')
             ->will($this->returnValue($hydratorManager));
 
-        $factory = new StandardHydratorFactory();
-        $this->assertInstanceOf('Zend\Stdlib\Hydrator\StandardHydrator', $factory->createService($serviceLocator));
+        $factory = new MappingHydratorFactory();
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\MappingHydrator', $factory->createService($serviceLocator));
 
     }
 }

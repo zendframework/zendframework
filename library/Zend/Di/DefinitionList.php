@@ -171,11 +171,11 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function getClassSupertypes($class)
     {
-        if (!($classDefinition = $this->getDefinitionForClass($class))) {
+        if (false === ($classDefinition = $this->getDefinitionForClass($class))) {
             return array();
         }
         $supertypes = $classDefinition->getClassSupertypes($class);
-        if(!($classDefinition instanceof Definition\PartialMarker)) {
+        if (! $classDefinition instanceof Definition\PartialMarker) {
             return $supertypes;
         }
         /** @var $definition Definition\DefinitionInterface */
@@ -200,14 +200,14 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function getInstantiator($class)
     {
-        if (!($classDefinition = $this->getDefinitionForClass($class))) {
+        if (! $classDefinition = $this->getDefinitionForClass($class)) {
             return false;
         }
         $value = $classDefinition->getInstantiator($class);
-        if (!is_null($value)){
+        if (!is_null($value)) {
             return $value;
         }
-        if(!($classDefinition instanceof Definition\PartialMarker)) {
+        if (! $classDefinition instanceof Definition\PartialMarker) {
             return false;
         }
         /** @var $definition Definition\DefinitionInterface */
@@ -233,13 +233,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function hasMethods($class)
     {
-        if (!($classDefinition = $this->getDefinitionForClass($class))) {
+        if (! $classDefinition = $this->getDefinitionForClass($class)) {
             return false;
         }
-        if (false !== ($methods = $classDefinition->hasMethods($class))){
+        if (false !== ($methods = $classDefinition->hasMethods($class))) {
             return $methods;
         }
-        if(!($classDefinition instanceof Definition\PartialMarker)) {
+        if (! $classDefinition instanceof Definition\PartialMarker) {
             return false;
         }
         /** @var $definition Definition\DefinitionInterface */
@@ -289,11 +289,11 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function getMethods($class)
     {
-        if (!($classDefinition = $this->getDefinitionForClass($class))) {
+        if (false === ($classDefinition = $this->getDefinitionForClass($class))) {
             return array();
         }
         $methods = $classDefinition->getMethods($class);
-        if(!($classDefinition instanceof Definition\PartialMarker)) {
+        if (! $classDefinition instanceof Definition\PartialMarker) {
             return $methods;
         }
         /** @var $definition Definition\DefinitionInterface */
@@ -328,7 +328,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
      */
     public function getMethodParameters($class, $method)
     {
-        if (!($classDefinition = $this->getDefinitionForClass($class))) {
+        if (false === ($classDefinition = $this->getDefinitionForClass($class))) {
             return array();
         }
         if ($classDefinition->hasMethod($class, $method) && $classDefinition->hasMethodParameters($class, $method)) {
@@ -339,7 +339,10 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
             if ($definition === $classDefinition) {
                 continue;
             }
-            if ($definition->hasClass($class) && $definition->hasMethod($class, $method) && $definition->hasMethodParameters($class, $method)) {
+            if ($definition->hasClass($class)
+                && $definition->hasMethod($class, $method)
+                && $definition->hasMethodParameters($class, $method)
+            ) {
                 return $definition->getMethodParameters($class, $method);
             }
         }

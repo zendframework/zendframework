@@ -18,6 +18,7 @@ use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Form\Exception;
 use Zend\Form\Factory;
 use Zend\Form\FormFactoryAwareInterface;
@@ -29,6 +30,11 @@ use Zend\Stdlib\ArrayUtils;
  */
 class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareInterface
 {
+    /**
+     * @var Parser\DoctrineAnnotationParser
+     */
+    protected $annotationParser;
+
     /**
      * @var AnnotationManager
      */
@@ -92,7 +98,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
     {
-        $parser = new Parser\DoctrineAnnotationParser();
+        $parser = $this->getAnnotationParser();
         foreach ($this->defaultAnnotations as $annotationName) {
             $class = __NAMESPACE__ . '\\' . $annotationName;
             $parser->registerAnnotation($class);
@@ -381,6 +387,18 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             return (true === $r);
         });
         return (bool) $results->last();
+    }
+
+    /**
+     * @return \Zend\Code\Annotation\Parser\DoctrineAnnotationParser
+     */
+    public function getAnnotationParser()
+    {
+        if (null === $this->annotationParser) {
+            $this->annotationParser = new Parser\DoctrineAnnotationParser();
+        }
+
+        return $this->annotationParser;
     }
 
     /**

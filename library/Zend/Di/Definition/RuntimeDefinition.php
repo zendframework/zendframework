@@ -39,6 +39,11 @@ class RuntimeDefinition implements DefinitionInterface
     protected $injectionMethods = array();
 
     /**
+     * @var array
+     */
+    protected $processedClass = array();
+
+    /**
      * Constructor
      *
      * @param null|IntrospectionStrategy $introspectionStrategy
@@ -176,23 +181,18 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @param string $class
-     *
-     * @return bool
-     */
-    protected function hasProcessedClass($class)
-    {
-        return array_key_exists($class, $this->classes) && is_array($this->classes[$class]);
-    }
-
-    /**
-     * @param string $class
      * @param bool $forceLoad
      */
     protected function processClass($class, $forceLoad = false)
     {
-        if (!$forceLoad && $this->hasProcessedClass($class)) {
+        if (!isset($this->processedClass[$class]) || $this->processedClass[$class] === false) {
+            $this->processedClass[$class] = (array_key_exists($class, $this->classes) && is_array($this->classes[$class]));
+        }
+
+        if (!$forceLoad && $this->processedClass[$class]) {
             return;
         }
+
         $strategy = $this->introspectionStrategy; // localize for readability
 
         /** @var $rClass \Zend\Code\Reflection\ClassReflection */
@@ -231,7 +231,7 @@ class RuntimeDefinition implements DefinitionInterface
             $rTarget = $rTargetParent;
         } while (true);
 
-        $def['supertypes'] = $supertypes;
+        $def['supertypes'] = array_keys(array_flip($supertypes));
 
         if ($def['instantiator'] == null) {
             if ($rClass->isInstantiable()) {

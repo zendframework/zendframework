@@ -89,12 +89,24 @@ class FilesSize extends Size
     {
         if (is_string($value)) {
             $value = array($value);
+        } elseif (is_array($value) && isset($value['tmp_name'])) {
+            $value = array($value);
         }
 
         $min  = $this->getMin(true);
         $max  = $this->getMax(true);
         $size = $this->getSize();
         foreach ($value as $files) {
+            if (is_array($files)) {
+                if (!isset($files['tmp_name']) || !isset($files['name'])) {
+                    throw new Exception\InvalidArgumentException(
+                        'Value array must be in $_FILES format'
+                    );
+                }
+                $file = $files;
+                $files = $files['tmp_name'];
+            }
+
             // Is file readable ?
             if (empty($files) || false === stream_resolve_include_path($files)) {
                 $this->throwError($file, self::NOT_READABLE);

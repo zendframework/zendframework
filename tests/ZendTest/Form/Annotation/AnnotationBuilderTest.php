@@ -113,6 +113,29 @@ class AnnotationBuilderTest extends TestCase
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
 
+    public function testFieldsetOrder()
+    {
+        $entity  = new TestAsset\Annotation\FieldsetOrderEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $element = $form->get('element');
+        $first  = $form->getIterator()->getIterator()->current();
+        $this->assertSame($element, $first, 'Test is element ' . $first->getName());
+    }
+
+    public function testFieldsetOrderWithPreserve()
+    {
+        $entity  = new TestAsset\Annotation\FieldsetOrderEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $builder->setPreserveDefinedOrder(true);
+        $form    = $builder->createForm($entity);
+
+        $fieldset = $form->get('fieldset');
+        $first  = $form->getIterator()->getIterator()->current();
+        $this->assertSame($fieldset, $first, 'Test is element ' . $first->getName());
+    }
+
     public function testCanRetrieveOnlyFormSpecification()
     {
         $entity  = new TestAsset\Annotation\ComplexEntity();

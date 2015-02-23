@@ -83,15 +83,26 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Adapter\Platform\IbmDb2::quoteValue
      */
-    public function testQuoteValue()
+    public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         if (!function_exists('db2_escape_string')) {
             $this->setExpectedException(
-                'PHPUnit_Framework_Error',
+                'PHPUnit_Framework_Error_Notice',
                 'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
             );
         }
-        $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+        $this->platform->quoteValue('value');
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\IbmDb2::quoteValue
+     */
+    public function testQuoteValue()
+    {
+        $this->assertEquals("'value'", @$this->platform->quoteValue('value'));
+        $this->assertEquals("'Foo O''Bar'", @$this->platform->quoteValue("Foo O'Bar"));
+        $this->assertEquals("'''; DELETE FROM some_table; -- '", @$this->platform->quoteValue("'; DELETE FROM some_table; -- "));
+        $this->assertEquals("'\\''; \nDELETE FROM some_table; -- '", @$this->platform->quoteValue("\\'; \nDELETE FROM some_table; -- "));
     }
 
     /**

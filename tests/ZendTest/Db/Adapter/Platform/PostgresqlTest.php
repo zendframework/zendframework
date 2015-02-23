@@ -74,13 +74,24 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Adapter\Platform\Postgresql::quoteValue
      */
-    public function testQuoteValue()
+    public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         $this->setExpectedException(
-            'PHPUnit_Framework_Error',
+            'PHPUnit_Framework_Error_Notice',
             'Attempting to quote a value in Zend\Db\Adapter\Platform\Postgresql without extension/driver support can introduce security vulnerabilities in a production environment'
         );
-        $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+        $this->platform->quoteValue('value');
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteValue
+     */
+    public function testQuoteValue()
+    {
+        $this->assertEquals("E'value'", @$this->platform->quoteValue('value'));
+        $this->assertEquals("E'Foo O\\'Bar'", @$this->platform->quoteValue("Foo O'Bar"));
+        $this->assertEquals('E\'\\\'; DELETE FROM some_table; -- \'', @$this->platform->quoteValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("E'\\\\\\'; DELETE FROM some_table; -- '", @$this->platform->quoteValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**

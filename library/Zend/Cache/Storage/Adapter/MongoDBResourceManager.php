@@ -15,7 +15,7 @@ use Traversable;
 use Zend\Cache\Exception;
 use Zend\Stdlib\ArrayUtils;
 
-class MongoDbResourceManager
+class MongoDBResourceManager
 {
     /**
      * Registered resources

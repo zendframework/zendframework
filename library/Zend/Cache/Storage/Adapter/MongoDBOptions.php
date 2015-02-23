@@ -9,7 +9,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-class MongoDbOptions extends AdapterOptions
+class MongoDBOptions extends AdapterOptions
 {
     /**
      * The namespace separator
@@ -65,11 +65,11 @@ class MongoDbOptions extends AdapterOptions
     /**
      * Set the mongodb resource manager to use
      *
-     * @param null|MongoDbResourceManager $resourceManager
+     * @param null|MongoDBResourceManager $resourceManager
      *
      * @return self
      */
-    public function setResourceManager(MongoDbResourceManager $resourceManager = null)
+    public function setResourceManager(MongoDBResourceManager $resourceManager = null)
     {
         if ($this->resourceManager !== $resourceManager) {
             $this->triggerOptionEvent('resource_manager', $resourceManager);
@@ -83,11 +83,11 @@ class MongoDbOptions extends AdapterOptions
     /**
      * Get the mongodb resource manager
      *
-     * @return MongoDbResourceManager
+     * @return MongoDBResourceManager
      */
     public function getResourceManager()
     {
-        return $this->resourceManager ?: $this->resourceManager = new MongoDbResourceManager();
+        return $this->resourceManager ?: $this->resourceManager = new MongoDBResourceManager();
     }
 
     /**

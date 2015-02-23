@@ -52,6 +52,7 @@ class HelperPluginManager extends AbstractPluginManager
         'escapecss'           => 'Zend\View\Helper\EscapeCss',
         'escapeurl'           => 'Zend\View\Helper\EscapeUrl',
         'gravatar'            => 'Zend\View\Helper\Gravatar',
+        'htmltag'             => 'Zend\View\Helper\HtmlTag',
         'headlink'            => 'Zend\View\Helper\HeadLink',
         'headmeta'            => 'Zend\View\Helper\HeadMeta',
         'headscript'          => 'Zend\View\Helper\HeadScript',

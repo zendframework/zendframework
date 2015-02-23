@@ -17,7 +17,7 @@ use Zend\Cache\Exception;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\FlushableInterface;
 
-class MongoDB extends AbstractAdapter implements FlushableInterface
+class MongoDb extends AbstractAdapter implements FlushableInterface
 {
     /**
      * Has this instance be initialized
@@ -29,7 +29,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     /**
      * the mongodb resource manager
      *
-     * @var null|MongoDBResourceManager
+     * @var null|MongoDbResourceManager
      */
     private $resourceManager;
 
@@ -55,7 +55,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     public function __construct($options = null)
     {
         if (!class_exists('Mongo') || !class_exists('MongoClient')) {
-            throw new Exception\ExtensionNotLoadedException('MongoDB extension not loaded or Mongo polyfill not included');
+            throw new Exception\ExtensionNotLoadedException('MongoDb extension not loaded or Mongo polyfill not included');
         }
 
         parent::__construct($options);
@@ -75,7 +75,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      *
      * @return MongoResource
      */
-    private function getMongoDBResource()
+    private function getMongoDbResource()
     {
         if (! $this->initialized) {
             $options = $this->getOptions();
@@ -95,11 +95,14 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     public function setOptions($options)
     {
-        return parent::setOptions($options instanceof MongoDBOptions ? $options : new MongoDBOptions($options));
+        return parent::setOptions($options instanceof MongoDbOptions ? $options : new MongoDbOptions($options));
     }
 
     /**
-     * {@inheritDoc}
+     * Get options.
+     *
+     * @return MongoDbOptions
+     * @see    setOptions()
      */
     public function getOptions()
     {
@@ -158,7 +161,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $mongo     = $this->getMongoDBResource();
+        $mongo     = $this->getMongoDbResource();
         $key       = $this->namespacePrefix . $normalizedKey;
         $ttl       = $this->getOptions()->getTTl();
         $expires   = null;
@@ -192,7 +195,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     protected function internalRemoveItem(& $normalizedKey)
     {
         try {
-            $result = $this->getMongoDBResource()->remove(array('key' => $this->namespacePrefix . $normalizedKey));
+            $result = $this->getMongoDbResource()->remove(array('key' => $this->namespacePrefix . $normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
@@ -207,7 +210,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     public function flush()
     {
-        $result = $this->getMongoDBResource()->drop();
+        $result = $this->getMongoDbResource()->drop();
 
         return ((double) 1) === $result['ok'];
     }
@@ -274,7 +277,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     private function fetchFromCollection(& $normalizedKey)
     {
         try {
-            return $this->getMongoDBResource()->findOne(array('key' => $this->namespacePrefix . $normalizedKey));
+            return $this->getMongoDbResource()->findOne(array('key' => $this->namespacePrefix . $normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }

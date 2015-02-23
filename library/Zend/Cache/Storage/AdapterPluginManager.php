@@ -34,7 +34,7 @@ class AdapterPluginManager extends AbstractPluginManager
         'memcache'       => 'Zend\Cache\Storage\Adapter\Memcache',
         'memcached'      => 'Zend\Cache\Storage\Adapter\Memcached',
         'memory'         => 'Zend\Cache\Storage\Adapter\Memory',
-        'mongodb'        => 'Zend\Cache\Storage\Adapter\MongoDB',
+        'mongodb'        => 'Zend\Cache\Storage\Adapter\MongoDb',
         'redis'          => 'Zend\Cache\Storage\Adapter\Redis',
         'session'        => 'Zend\Cache\Storage\Adapter\Session',
         'xcache'         => 'Zend\Cache\Storage\Adapter\XCache',

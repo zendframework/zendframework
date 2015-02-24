@@ -148,7 +148,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
 
     public function testPlatformQuotesNullByteCharacter()
     {
-        set_error_handler(function () {} );
+        set_error_handler(function () {});
         $string = "1\0";
         $value = $this->platform->quoteValue($string);
         restore_error_handler();

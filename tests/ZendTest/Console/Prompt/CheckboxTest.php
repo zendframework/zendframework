@@ -104,5 +104,4 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(2, substr_count($text, '6) [ ] bar'));
         $this->assertEquals(['0' => 'foo'], $response);
     }
-
 }

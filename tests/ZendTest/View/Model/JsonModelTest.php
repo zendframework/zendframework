@@ -30,12 +30,25 @@ class JsonModelTest extends TestCase
         $this->assertEquals(Json::encode($array), $model->serialize());
     }
 
-
     public function testCanSerializeWithJsonpCallback()
     {
         $array = array('foo' => 'bar');
         $model = new JsonModel($array);
         $model->setJsonpCallback('callback');
         $this->assertEquals('callback(' . Json::encode($array) . ');', $model->serialize());
+    }
+
+    public function testPrettyPrint()
+    {
+        $array = array(
+            'simple'=>'simple test string',
+            'stringwithjsonchars'=>'\"[1,2]',
+            'complex'=>array(
+                'foo'=>'bar',
+                'far'=>'boo'
+            )
+        );
+        $model = new JsonModel($array, array('prettyPrint' => true));
+        $this->assertEquals(Json::encode($array, false, array('prettyPrint' => true)), $model->serialize());
     }
 }

@@ -64,24 +64,9 @@ class ClassGenerator extends AbstractGenerator
     protected $methods = array();
 
     /**
-     * @var array Array of string names
+     * @var TraitUsageGenerator Object to encapsulate trait usage logic
      */
-    protected $uses = array();
-
-    /**
-     * @var array Array of trait names
-     */
-    protected $traits = array();
-
-    /**
-     * @var array Array of trait aliases
-     */
-    protected $traitAliases = array();
-
-    /**
-     * @var array Array of trait overrides
-     */
-    protected $traitOverrides = array();
+    protected $traitUsageGenerator;
 
     /**
      * Build a Code Generation Php Object from a Class Reflection
@@ -225,6 +210,8 @@ class ClassGenerator extends AbstractGenerator
         $methods = array(),
         $docBlock = null
     ) {
+        $this->traitUsageGenerator = new TraitUsageGenerator($this);
+
         if ($name !== null) {
             $this->setName($name);
         }
@@ -504,23 +491,6 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * Add a class to "use" classes
-     *
-     * @param  string $use
-     * @param  string|null $useAlias
-     * @return ClassGenerator
-     */
-    public function addUse($use, $useAlias = null)
-    {
-        if (!empty($useAlias)) {
-            $use .= ' as ' . $useAlias;
-        }
-
-        $this->uses[$use] = $use;
-        return $this;
-    }
-
-    /**
      * @return PropertyGenerator[]
      */
     public function getProperties()
@@ -544,13 +514,27 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * Add a class to "use" classes
+     *
+     * @param  string $use
+     * @param  string|null $useAlias
+     * @return ClassGenerator
+     */
+    public function addUse($use, $useAlias = null)
+    {
+        $this->traitUsageGenerator->addUse($use, $useAlias);
+
+        return $this;
+    }
+
+    /**
      * Returns the "use" classes
      *
      * @return array
      */
     public function getUses()
     {
-        return array_values($this->uses);
+        return $this->traitUsageGenerator->getUses();
     }
 
     /**
@@ -674,287 +658,93 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * Add trait takes an array of trait options or string as arguments.
-     *
-     * Array Format:
-     * key: traitName value: String
-     *
-     * key: aliases value: array of arrays
-     *      key: method value: @see addTraitAlias
-     *      key: alias value: @see addTraitAlias
-     *      key: visibility value: @see addTraitAlias
-     *
-     * key: insteadof value: array of arrays
-     *      key: method value: @see self::addTraitOverride
-     *      key: traitToReplace value: @see self::addTraitOverride
-     *
-     * @param mixed $trait String | Array
-     * @return ClassGenerator
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function addTrait($trait)
     {
-        $traitName = $trait;
-        if (true === is_array($trait)) {
-            if (false === array_key_exists('traitName', $trait)) {
-                throw new Exception\InvalidArgumentException("Missing required value for traitName.");
-            }
-            $traitName = $trait['traitName'];
-
-            if (true === array_key_exists('aliases', $trait)) {
-                foreach ($trait['aliases'] as $alias) {
-                    $this->addAlias($alias);
-                }
-            }
-
-            if (true === array_key_exists('insteadof', $trait)) {
-                foreach ($trait['insteadof'] as $insteadof) {
-                    $this->addTraitOverride($insteadof);
-                }
-            }
-        }
-
-        if (false === $this->hasTrait($traitName)) {
-            $this->traits[] = $traitName;
-        }
+        $this->traitUsageGenerator->addTrait($trait);
 
         return $this;
     }
 
     /**
-     * Add multiple traits.  Trait can be an array of trait names or array of trait
-     * configurations
-     *
-     * @param array $traitName Array of string names or configurations (@see addTrait)
-     * @return ClassGenerator
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function addTraits(array $traits)
     {
-        foreach ($traits as $trait) {
-            $this->addTrait($trait);
-        }
+        $this->traitUsageGenerator->addTraits($traits);
 
         return $this;
     }
 
     /**
-     * Check to see if the class has a trait defined
-     *
-     * @param strint $traitName
-     * @return bool
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function hasTrait($traitName)
     {
-        return in_array($traitName, $this->traits);
+        return $this->traitUsageGenerator->hasTrait($traitName);
     }
 
     /**
-     * Get a list of trait names
-     *
-     * @return array
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function getTraits()
     {
-        return $this->traits;
+        return $this->traitUsageGenerator->getTraits();
     }
 
     /**
-     * Remove a trait by its name
-     *
-     * @param $traitName
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function removeTrait($traitName)
     {
-        $key = array_search($traitName, $this->traits);
-        if (false !== $key) {
-            unset($this->traits[$key]);
-        }
-
-        return $this;
+        return $this->traitUsageGenerator->removeTrait($traitName);
     }
 
     /**
-     * Add a trait alias.  This will be used to generate the AS portion of the use statement.
-     *
-     * $method:
-     * This method provides 2 ways for defining the trait method.
-     * Option 1: String
-     * Option 2: Array
-     * key: traitName value: name of trait
-     * key: method value: trait method
-     *
-     * $alias:
-     * Alias is a string representing the new method name.
-     *
-     * $visibilty:
-     * ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PRIVATE| ReflectionMethod::IS_PROTECTED
-     *
-     * @param mixed $method String or Array
-     * @param string $alias
-     * @param int $visiblity
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function addTraitAlias($method, $alias, $visibility = null)
     {
-        $traitAndMethod = $method;
-        if (true === is_array($method)) {
-            if (false === array_key_exists('traitName', $method)) {
-                throw new Exception\InvalidArgumentException('Missing required argument "traitName" for $method');
-            }
-
-            if (false === array_key_exists('method', $method)) {
-                throw new Exception\InvalidArgumentException('Missing required argument "method" for $method');
-            }
-
-            $traitAndMethod = $method['traitName'] ."::". $method['method'];
-        }
-
-        // Validations
-        if (false === strpos($traitAndMethod, "::")) {
-            throw new Exception\InvalidArgumentException('Invalid Format: $method must be in the format of trait::method');
-        } elseif (false === is_string($alias)) {
-            throw new Exception\InvalidArgumentException('Invalid Alias: $alias must be a string or array.');
-        } elseif($this->hasMethod($alias)) {
-            throw new Exception\InvalidArgumentException('Invalid Alias: Method name already exists on this class.');
-        } elseif (false === is_null($visibility) && ($visibility !== \ReflectionMethod::IS_PUBLIC && $visibility !== \ReflectionMethod::IS_PRIVATE && $visibility !== \ReflectionMethod::IS_PROTECTED)) {
-            throw new Exception\InvalidArgumentException('Invalid Type: $visibility must of ReflectionMethod::IS_PUBLIC, ReflectionMethod::IS_PRIVATE or ReflectionMethod::IS_PROTECTED');
-        }
-
-        list($trait, $method) = explode("::", $traitAndMethod);
-        if (false === $this->hasTrait($trait)) {
-            throw new Exception\InvalidArgumentException('Invalid trait: Trait does not exists on this class.');
-        }
-
-        $this->traitAliases[$traitAndMethod] = array(
-            'alias' => $alias,
-            'visibility' => $visibility
-        );
+        $this->traitUsageGenerator->addTraitAlias($method, $alias, $visibility);
 
         return $this;
     }
 
     /**
-     * @return array
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function getTraitAliases()
     {
-        return $this->traitAliases;
+        return $this->traitUsageGenerator->getTraitAliases();
     }
 
     /**
-     * Add a trait method override.  This will be used to generate the INSTEADOF portion of the use
-     * statement.
-     *
-     * $method:
-     * This method provides 2 ways for defining the trait method.
-     * Option 1: String Format: <trait name>::<method name>
-     * Option 2: Array
-     * key: traitName value: trait name
-     * key: method value: method name
-     *
-     * $traitToReplace
-     * The name of the trait that you wish to supersede.
-     *
-     * This method provides 2 ways for defining the trait method.
-     * Option 1: String of trait to replace
-     * Option 2: Array of strings of traits to replace
-
-     * @param mixed $method
-     * @param mixed $traitToReplace
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function addTraitOverride($method, $traitsToReplace)
     {
-        if (false === is_array($traitsToReplace)) {
-            $traitsToReplace = array($traitsToReplace);
-        }
-
-        $traitAndMethod = $method;
-        if (true === is_array($method)) {
-            if (false === array_key_exists('traitName', $method)) {
-                throw new Exception\InvalidArgumentException('Missing required argument "traitName" for $method');
-            }
-
-            if (false === array_key_exists('method', $method)) {
-                throw new Exception\InvalidArgumentException('Missing required argument "method" for $method');
-            }
-
-            $traitAndMethod = (string) $method['traitName'] ."::". (string) $method['method'];
-        }
-
-        // Validations
-        if (false === strpos($traitAndMethod, "::")) {
-            throw new Exception\InvalidArgumentException('Invalid Format: $method must be in the format of trait::method');
-        }
-
-        list($trait, $method) = explode("::", $traitAndMethod);
-        if (false === $this->hasTrait($trait)) {
-            throw new Exception\InvalidArgumentException('Invalid trait: Trait does not exists on this class.');
-        }
-
-        if (false === array_key_exists($traitAndMethod, $this->traitOverrides)) {
-            $this->traitOverrides[$traitAndMethod] = array();
-        }
-
-        foreach ($traitsToReplace as $traitToReplace) {
-            if (false === is_string($traitToReplace)) {
-                throw new Exception\InvalidArgumentException('Invalid Argument: $traitToReplace must be a string or array of strings.');
-            }
-            if (false === in_array($traitToReplace, $this->traitOverrides[$traitAndMethod])) {
-                $this->traitOverrides[$traitAndMethod][] = $traitToReplace;
-            }
-        }
+        $this->traitUsageGenerator->addTraitOverride($method, $traitsToReplace);
 
         return $this;
     }
 
     /**
-     * Remove an override for a given trait::method
-     *
-     * $method:
-     * This method provides 2 ways for defining the trait method.
-     * Option 1: String Format: <trait name>::<method name>
-     * Option 2: Array
-     * key: traitName value: trait name
-     * key: method value: method name
-     *
-     * $overridesToRemove
-     * The name of the trait that you wish to remove.
-     *
-     * This method provides 2 ways for defining the trait method.
-     * Option 1: String of trait to replace
-     * Option 2: Array of strings of traits to replace
-     *
-     * @param $traitAndMethod
-     * @param null $overridesToRemove
-     * @return $this
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function removeTraitOverride($method, $overridesToRemove = null)
     {
-        if (false === array_key_exists($method, $this->traitOverrides)) {
-            return $this;
-        }
-
-        if (false === is_null($overridesToRemove)) {
-            $overridesToRemove = (!is_array($overridesToRemove)) ? array($overridesToRemove) : $overridesToRemove;
-            foreach ($overridesToRemove as $traitToRemove) {
-                $key = array_search($traitToRemove, $this->traitOverrides[$method]);
-                if (false !== $key) {
-                    unset($this->traitOverrides[$method][$key]);
-                }
-            }
-        } else {
-            unset($this->traitOverrides[$method]);
-        }
+        $this->traitUsageGenerator->removeTraitOverride($method, $overridesToRemove);
 
         return $this;
     }
 
     /**
-     * Return trait overrides
-     *
-     * @return array
+     * @inherit Zend\Code\Generator\TraitUsageInterface
      */
     public function getTraitOverrides()
     {
-        return $this->traitOverrides;
+        return $this->traitUsageGenerator->getTraitOverrides();
     }
 
     /**
@@ -982,7 +772,7 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * @return string
+     * @inherit Zend\Code\Generator\GeneratorInterface
      */
     public function generate()
     {
@@ -1029,36 +819,7 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;
-
-        $traits = $this->getTraits();
-        if (!empty($traits)) {
-            $output .= $indent . "use ". join(", ", $traits);
-
-            $aliases = $this->getTraitAliases();
-            $overrides = $this->getTraitOverrides();
-            if (!empty($aliases) || !empty($overrides)) {
-                $output .= " {" . self::LINE_FEED;
-                foreach ($aliases as $method => $alias) {
-                    $visibility = (!is_null($alias['visibility'])) ? current(\Reflection::getModifierNames($alias['visibility'])) ." " : "";
-
-                    //validation check
-                    if ($this->hasMethod($alias['alias'])) {
-                        throw new Exception\RuntimeException("Generation Error: Aliased method {$alias['alias']} already exists on this class.");
-                    }
-                    $output .= $indent . $indent . $method ." as ". $visibility . $alias['alias'] . ";" . self::LINE_FEED;
-                }
-
-                foreach ($overrides as $method => $insteadofTraits) {
-                    foreach ($insteadofTraits as $insteadofTrait) {
-                        $output .= $indent . $indent . $method . " insteadof " . $insteadofTrait . ";" . self::LINE_FEED;
-                    }
-
-                }
-                $output .= self::LINE_FEED . $indent . "}" . self::LINE_FEED . self::LINE_FEED;
-            } else {
-                $output .= ";" . self::LINE_FEED . self::LINE_FEED;
-            }
-        }
+        $output .= $this->traitUsageGenerator->generate();
 
         $properties = $this->getProperties();
         if (!empty($properties)) {

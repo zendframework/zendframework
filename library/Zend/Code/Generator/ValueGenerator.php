@@ -374,6 +374,9 @@ class ValueGenerator extends AbstractGenerator
                     : ' ';
                 $output .= implode(',' . $padding, $outputParts);
                 if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
+                    if (count($outputParts) > 0) {
+                        $output .= ',';
+                    }
                     $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth);
                 }
                 $output .= ')';

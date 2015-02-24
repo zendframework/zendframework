@@ -91,6 +91,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+        $_SERVER['SERVER_PORT'] = 80;
 
         $url = new Helper\ServerUrl();
         $this->assertEquals('https://example.com', $url->__invoke());

@@ -39,8 +39,44 @@ class Encrypt extends AbstractFilter
     }
 
     /**
+     * Returns the adapter instance
+     *
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     * @return Encrypt\EncryptionAlgorithmInterface
+     */
+    public function getAdapterInstance()
+    {
+        if ($this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            return $this->adapter;
+        }
+
+        $adapter = $this->adapter;
+        $options = $this->getOptions();
+        if (! class_exists($adapter)) {
+            $adapter = __CLASS__ . '\\' . ucfirst($adapter);
+            if (! class_exists($adapter)) {
+                throw new Exception\RuntimeException(sprintf(
+                    '%s unable to load adapter; class "%s" not found',
+                    __METHOD__,
+                    $this->adapter
+                ));
+            }
+        }
+
+        $this->adapter = new $adapter($options);
+        if (! $this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Encryption adapter "%s" does not implement %s\\EncryptionAlgorithmInterface',
+                $adapter,
+                __CLASS__
+            ));
+        }
+        return $this->adapter;
+    }
+
+    /**
      * Returns the name of the set adapter
-     * @todo inconsitent: get adapter should return the adapter and not the name
      *
      * @return string
      */

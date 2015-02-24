@@ -38,10 +38,11 @@ class Part
      */
     public function __construct($content = '')
     {
-        if (!is_string($content) && !is_resource($content)) {
-            throw new Exception\InvalidArgumentException(
-                "'{$content}' must be string or resource"
-            );
+        if (! is_string($content) && ! is_resource($content)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "'%s' must be string or resource",
+                $content
+            ));
         }
 
         $this->content = $content;
@@ -263,9 +264,10 @@ class Part
      */
     public function setContent($content)
     {
-        if (!is_string($content) && !is_resource($content)) {
+        if (! is_string($content) && ! is_resource($content)) {
             throw new Exception\InvalidArgumentException(
-                "'{$content}' must be string or resource"
+                "'%s' must be string or resource",
+                $content
             );
         }
         $this->content = $content;
@@ -339,7 +341,7 @@ class Part
      */
     public function getEncodedStream($EOL = Mime::LINEEND)
     {
-        if (!$this->isStream) {
+        if (! $this->isStream) {
             throw new Exception\RuntimeException('Attempt to get a stream from a string part');
         }
 
@@ -359,7 +361,7 @@ class Part
                     )
                 );
                 $this->filters[Mime::ENCODING_QUOTEDPRINTABLE] = $filter;
-                if (!is_resource($filter)) {
+                if (! is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append quoted-printable filter');
                 }
                 break;
@@ -377,7 +379,7 @@ class Part
                     )
                 );
                 $this->filters[Mime::ENCODING_BASE64] = $filter;
-                if (!is_resource($filter)) {
+                if (! is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append base64 filter');
                 }
                 break;

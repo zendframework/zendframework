@@ -49,15 +49,25 @@ abstract class AbstractManager implements Manager
     protected $saveHandler;
 
     /**
+     * @var array
+     */
+    protected $validators;
+
+    /**
      * Constructor
      *
-     * @param  Config|null $config
-     * @param  Storage|null $storage
+     * @param  Config|null      $config
+     * @param  Storage|null     $storage
      * @param  SaveHandler|null $saveHandler
+     * @param  array            $validators
      * @throws Exception\RuntimeException
      */
-    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
-    {
+    public function __construct(
+        Config $config = null,
+        Storage $storage = null,
+        SaveHandler $saveHandler = null,
+        array $validators = array()
+    ) {
         // init config
         if ($config === null) {
             if (!class_exists($this->defaultConfigClass)) {
@@ -106,6 +116,8 @@ abstract class AbstractManager implements Manager
         if ($saveHandler !== null) {
             $this->saveHandler = $saveHandler;
         }
+
+        $this->validators = $validators;
     }
 
     /**

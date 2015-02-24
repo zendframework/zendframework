@@ -82,7 +82,6 @@ class Curl implements HttpAdapter, StreamInterface
             CURLOPT_HEADER,
             CURLOPT_RETURNTRANSFER,
             CURLOPT_HTTPHEADER,
-            CURLOPT_POSTFIELDS,
             CURLOPT_INFILE,
             CURLOPT_INFILESIZE,
             CURLOPT_PORT,

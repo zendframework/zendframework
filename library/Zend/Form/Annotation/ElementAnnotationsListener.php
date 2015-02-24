@@ -44,6 +44,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAllowEmptyAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAttributesAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleComposedObjectAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleContinueIfEmptyAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleErrorMessageAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
@@ -167,6 +168,25 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             $elementSpec['spec']['name'] = $name;
             $elementSpec['spec']['options'] = new ArrayObject($this->mergeOptions($elementSpec, $annotation));
         }
+    }
+
+    /**
+     * Handle the ContinueIfEmpty annotation
+     *
+     * Sets the continue_if_empty flag on the input specification array.
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleContinueIfEmptyAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof ContinueIfEmpty) {
+            return;
+        }
+
+        $inputSpec = $e->getParam('inputSpec');
+        $inputSpec['continue_if_empty'] = true;
     }
 
     /**

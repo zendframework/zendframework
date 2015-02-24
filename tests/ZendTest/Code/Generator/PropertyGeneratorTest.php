@@ -103,7 +103,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
         'two' => '2',
         'null' => null,
         'true' => true,
-        'bar\'s' => 'bar\'s'
+        'bar\'s' => 'bar\'s',
     );
 EOS;
 

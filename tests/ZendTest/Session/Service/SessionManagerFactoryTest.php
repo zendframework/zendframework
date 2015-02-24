@@ -133,7 +133,7 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
         $manager = $this->services->get('Zend\Session\ManagerInterface');
 
         $validatorData = $storage->getMetaData('_VALID');
-        $this->assertSame('Foo'    , $validatorData['Zend\Session\Validator\HttpUserAgent']);
+        $this->assertSame('Foo', $validatorData['Zend\Session\Validator\HttpUserAgent']);
         $this->assertSame('1.2.3.4', $validatorData['Zend\Session\Validator\RemoteAddr']);
     }
 

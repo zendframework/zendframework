@@ -49,6 +49,7 @@ class FilterPluginManager extends AbstractPluginManager
         'compresssnappy'             => 'Zend\Filter\Compress\Snappy',
         'compresstar'                => 'Zend\Filter\Compress\Tar',
         'compresszip'                => 'Zend\Filter\Compress\Zip',
+        'dataunitformatter'          => 'Zend\Filter\DataUnitFormatter',
         'datetimeformatter'          => 'Zend\Filter\DateTimeFormatter',
         'decompress'                 => 'Zend\Filter\Decompress',
         'decrypt'                    => 'Zend\Filter\Decrypt',

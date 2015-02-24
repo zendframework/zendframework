@@ -867,23 +867,28 @@ class JsonTest extends \PHPUnit_Framework_TestCase
                 'far'=>'boo',
                 'faz'=>array(
                     'obj'=>$o
-                )
+                ),
+                'fay'=>array('foo', 'bar')
             )
         );
         $pretty = Json\Json::prettyPrint(Json\Json::encode($test), array("indent"  => " "));
         $expected = <<<EOB
 {
- "simple":"simple test string",
- "stringwithjsonchars":"\\\\\\u0022[1,2]",
- "complex":{
-  "foo":"bar",
-  "far":"boo",
-  "faz":{
-   "obj":{
-    "test":1,
-    "faz":"fubar"
+ "simple": "simple test string",
+ "stringwithjsonchars": "\\\\\\u0022[1,2]",
+ "complex": {
+  "foo": "bar",
+  "far": "boo",
+  "faz": {
+   "obj": {
+    "test": 1,
+    "faz": "fubar"
    }
-  }
+  },
+  "fay": [
+   "foo",
+   "bar"
+  ]
  }
 }
 EOB;
@@ -893,14 +898,79 @@ EOB;
     public function testPrettyPrintDoublequoteFollowingEscapedBackslashShouldNotBeTreatedAsEscaped()
     {
         $this->assertEquals(
-            "[\n\t1,\n\t\"\\\\\",\n\t3\n]",
+            "[\n    1,\n    \"\\\\\",\n    3\n]",
             Json\Json::prettyPrint(Json\Json::encode(array(1, '\\', 3)))
         );
 
         $this->assertEquals(
-            "{\n\t\"a\":\"\\\\\"\n}",
+            "{\n    \"a\": \"\\\\\"\n}",
            Json\Json::prettyPrint(Json\Json::encode(array('a' => '\\')))
         );
+    }
+
+    public function testPrettyPrintRePrettyPrint()
+    {
+        $expected = <<<EOB
+{
+ "simple": "simple test string",
+ "stringwithjsonchars": "\\\\\\u0022[1,2]",
+ "complex": {
+  "foo": "bar",
+  "far": "boo",
+  "faz": {
+   "obj": {
+    "test": 1,
+    "faz": "fubar"
+   }
+  }
+ }
+}
+EOB;
+
+        $this->assertSame(
+            $expected,
+            Json\Json::prettyPrint($expected, array("indent"  => " "))
+        );
+    }
+
+    public function testEncodeWithPrettyPrint()
+    {
+        $o = new \stdClass();
+        $o->test = 1;
+        $o->faz = 'fubar';
+
+        // The escaped double-quote in item 'stringwithjsonchars' ensures that
+        // escaped double-quotes don't throw off prettyPrint's string literal detection
+        $test = array(
+            'simple'=>'simple test string',
+            'stringwithjsonchars'=>'\"[1,2]',
+            'complex'=>array(
+                'foo'=>'bar',
+                'far'=>'boo',
+                'faz'=>array(
+                    'obj'=>$o
+                )
+            )
+        );
+        $pretty = Json\Json::encode($test, false, array("prettyPrint" => true));
+
+        $expected = <<<EOB
+{
+    "simple": "simple test string",
+    "stringwithjsonchars": "\\\\\\u0022[1,2]",
+    "complex": {
+        "foo": "bar",
+        "far": "boo",
+        "faz": {
+            "obj": {
+                "test": 1,
+                "faz": "fubar"
+            }
+        }
+    }
+}
+EOB;
+        $this->assertSame($expected, $pretty);
     }
 
     /**

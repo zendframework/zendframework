@@ -53,9 +53,9 @@ class Encrypt extends AbstractFilter
 
         $adapter = $this->adapter;
         $options = $this->getOptions();
-        if (!class_exists($adapter)) {
-            $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
-            if (!class_exists($adapter)) {
+        if (! class_exists($adapter)) {
+            $adapter = __CLASS__ . '\\' . ucfirst($adapter);
+            if (! class_exists($adapter)) {
                 throw new Exception\RuntimeException(sprintf(
                     '%s unable to load adapter; class "%s" not found',
                     __METHOD__,
@@ -65,8 +65,12 @@ class Encrypt extends AbstractFilter
         }
 
         $this->adapter = new $adapter($options);
-        if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
-            throw new Exception\InvalidArgumentException("Encryption adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
+        if (! $this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Encryption adapter "%s" does not implement %s\\EncryptionAlgorithmInterface',
+                $adapter,
+                __CLASS__
+            ));
         }
         return $this->adapter;
     }

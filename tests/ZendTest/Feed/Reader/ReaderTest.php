@@ -255,9 +255,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         require_once __DIR__ . '/_files/My/Extension/JungleBooks/Entry.php';
         require_once __DIR__ . '/_files/My/Extension/JungleBooks/Feed.php';
-        $manager = Reader\Reader::getExtensionManager();
+        $manager = new Reader\ExtensionManager(new Reader\ExtensionPluginManager());
         $manager->setInvokableClass('JungleBooks\Entry', 'My\Extension\JungleBooks\Entry');
         $manager->setInvokableClass('JungleBooks\Feed', 'My\Extension\JungleBooks\Feed');
+        Reader\Reader::setExtensionManager($manager);
         Reader\Reader::registerExtension('JungleBooks');
 
         $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));

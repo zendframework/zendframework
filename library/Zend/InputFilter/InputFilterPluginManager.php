@@ -46,7 +46,6 @@ class InputFilterPluginManager extends AbstractPluginManager
         parent::__construct($configuration);
 
         $this->addInitializer(array($this, 'populateFactory'));
-        $this->addAbstractFactory('Zend\InputFilter\InputFilterAbstractServiceFactory');
     }
 
     /**

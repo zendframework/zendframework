@@ -148,6 +148,8 @@ class InputFilterAbstractServiceFactoryTest extends TestCase
                 ),
             ),
         ));
+        $this->services->get('InputFilterManager')->addAbstractFactory('Zend\InputFilter\InputFilterAbstractServiceFactory');
+
         $inputFilter = $this->services->get('InputFilterManager')->get('foobar');
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
     }

@@ -118,7 +118,6 @@ class Json
 
         // Encoding
         if (function_exists('json_encode') && static::$useBuiltinEncoderDecoder !== true) {
-
             $encodeOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
 
             if ($prettyPrint && defined('JSON_PRETTY_PRINT')) {

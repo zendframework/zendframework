@@ -192,7 +192,7 @@ class Forward extends AbstractPlugin
                     }
 
                     foreach ($classArray as $class) {
-                        if (is_a($currentCallback, $class)) {
+                        if ($currentCallback instanceof $class) {
                             $sharedEvents->detach($id, $currentEvent);
                             $results[$id][$eventName][] = $currentEvent;
                         }

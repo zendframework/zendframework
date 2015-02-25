@@ -25,7 +25,6 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
      * @param ServiceLocatorInterface $inputFilters
      * @param string                  $cName
      * @param string                  $rName
-     *
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $inputFilters, $cName, $rName)
@@ -51,7 +50,6 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
      * @param ServiceLocatorInterface $inputFilters
      * @param string                  $cName
      * @param string                  $rName
-     *
      * @return \Zend\InputFilter\InputFilterInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $inputFilters, $cName, $rName)
@@ -67,7 +65,6 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * @param ServiceLocatorInterface $services
-     *
      * @return Factory
      */
     protected function getInputFilterFactory(ServiceLocatorInterface $services)
@@ -89,7 +86,6 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * @param ServiceLocatorInterface $services
-     *
      * @return FilterPluginManager
      */
     protected function getFilterPluginManager(ServiceLocatorInterface $services)
@@ -103,7 +99,6 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * @param ServiceLocatorInterface $services
-     *
      * @return ValidatorPluginManager
      */
     protected function getValidatorPluginManager(ServiceLocatorInterface $services)

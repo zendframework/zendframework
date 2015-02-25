@@ -142,10 +142,14 @@ class RestfulControllerTest extends TestCase
             array('id' => uniqid(), 'name' => __FUNCTION__),
             array('id' => uniqid(), 'name' => __FUNCTION__),
         );
+
+        $this->controller->entity = $entities;
+
         $string = http_build_query($entities);
         $this->request->setMethod('DELETE')
                       ->setContent($string);
         $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEmpty($this->controller->entity);
         $this->assertEquals(204, $result->getStatusCode());
         $this->assertTrue($result->getHeaders()->has('X-Deleted'));
         $this->assertEquals('deleteList', $this->routeMatch->getParam('action'));

@@ -51,9 +51,21 @@ class RestfulTestController extends AbstractRestfulController
      */
     public function deleteList($data)
     {
+        if (is_array($this->entity)) {
+            foreach ($data as $row) {
+                foreach ($this->entity as $index => $entity) {
+                    if ($row['id'] == $entity['id']) {
+                        unset($this->entity[$index]);
+                        break;
+                    }
+                }
+            }
+        }
+
         $response = $this->getResponse();
         $response->setStatusCode(204);
         $response->getHeaders()->addHeaderLine('X-Deleted', 'true');
+
         return $response;
     }
 

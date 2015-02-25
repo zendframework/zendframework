@@ -15,6 +15,7 @@
     "target-dir": "Zend/Ldap",
     "require": {
         "php": ">=5.3.23",
+        "ext-ldap": "*",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {

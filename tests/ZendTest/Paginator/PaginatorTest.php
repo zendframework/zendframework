@@ -13,6 +13,7 @@ use ArrayIterator;
 use ArrayObject;
 use ReflectionMethod;
 use stdClass;
+use Zend\Cache\Storage\StorageInterface;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Config;
 use Zend\Db\ResultSet\ResultSet;
@@ -41,6 +42,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected $testCollection = null;
 
+    /**
+     * @var StorageInterface
+     */
     protected $cache;
     protected $cacheDir;
 
@@ -573,6 +577,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setCurrentPageNumber(2)->getCurrentItems();
         $this->paginator->setCurrentPageNumber(3)->getCurrentItems();
 
+        // cache entry to check that paginator loads only own items
+        $this->cache->addItem('not_paginator_item', 42);
+
         $pageItems = $this->paginator->getPageItemCache();
         $expected = array(
            1 => new \ArrayIterator(range(1, 10)),
@@ -588,6 +595,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setCurrentPageNumber(2)->getCurrentItems();
         $this->paginator->setCurrentPageNumber(3)->getCurrentItems();
 
+        // cache entry to check that paginator deletes only own items
+        $this->cache->addItem('not_paginator_item', 42);
+
         // clear only page 2 items
         $this->paginator->clearPageItemCache(2);
         $pageItems = $this->paginator->getPageItemCache();
@@ -601,6 +611,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->clearPageItemCache();
         $pageItems = $this->paginator->getPageItemCache();
         $this->assertEquals(array(), $pageItems);
+
+        // assert that cache items not from paginator are not cleared
+        $this->assertEquals(42, $this->cache->getItem('not_paginator_item'));
     }
 
     public function testWithCacheDisabled()

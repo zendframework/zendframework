@@ -37,18 +37,16 @@ class Envelope extends AbstractOptions
      * Set MAIL FROM
      *
      * @param  string $from
-     * @return Envelope
      */
     public function setFrom($from)
     {
         $this->from = (string) $from;
-        return $this;
     }
 
     /**
      * Get RCPT TO
      *
-     * @return string
+     * @return string|null
      */
     public function getTo()
     {
@@ -59,11 +57,9 @@ class Envelope extends AbstractOptions
      * Set RCPT TO
      *
      * @param  string $to
-     * @return Envelope
      */
     public function setTo($to)
     {
         $this->to = $to;
-        return $this;
     }
 }

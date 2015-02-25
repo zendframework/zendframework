@@ -86,12 +86,10 @@ class Smtp implements TransportInterface
      * Set options
      *
      * @param  Envelope $envelope
-     * @return Smtp
      */
     public function setEnvelope(Envelope $envelope)
     {
         $this->envelope = $envelope;
-        return $this;
     }
     
     /**
@@ -281,7 +279,8 @@ class Smtp implements TransportInterface
         }
 
         $from = $message->getFrom();
-        if (!count($from)) { // Per RFC 2822 3.6
+        if (!count($from)) {
+            // Per RFC 2822 3.6
             throw new Exception\RuntimeException(sprintf(
                 '%s transport expects either a Sender or at least one From address in the Message; none provided',
                 __CLASS__
@@ -300,7 +299,7 @@ class Smtp implements TransportInterface
      * @return array
      */
     protected function prepareRecipients(Message $message)
-    {      
+    {
         if ($this->getEnvelope() && $this->getEnvelope()->getTo()) {
             return (array) $this->getEnvelope()->getTo();
         }

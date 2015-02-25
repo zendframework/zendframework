@@ -937,4 +937,47 @@ class BaseInputFilterTest extends TestCase
             array_keys($inputFilter->getInputs())
         );
     }
+
+    public function testAllowEmptyTestsFilteredValueAndOverrulesValidatorChain()
+    {
+        $input = new Input('foo');
+        $input->setAllowEmpty(true);
+        $input->setContinueIfEmpty(false);
+        // Filter chain produces empty value which should be evaluated instead of raw value
+        $input->getFilterChain()->attach(new Filter\Callback(function () {
+            return '';
+        }));
+        // Validator chain says "not valid", but should not be invoked at all
+        $input->getValidatorChain()->attach(new Validator\Callback(function () {
+            return false;
+        }));
+
+        $filter = new \Zend\InputFilter\InputFilter;
+        $filter->add($input)
+               ->setData(array('foo' => 'nonempty'));
+
+        $this->assertTrue($filter->isValid());
+        $this->assertEquals(array('foo' => ''), $filter->getValues());
+    }
+
+    public function testAllowEmptyTestsFilteredValueAndContinuesIfEmpty()
+    {
+        $input = new Input('foo');
+        $input->setAllowEmpty(true);
+        $input->setContinueIfEmpty(true);
+        // Filter chain produces empty value which should be evaluated instead of raw value
+        $input->getFilterChain()->attach(new Filter\Callback(function () {
+            return '';
+        }));
+        // Validator chain says "not valid", explicitly requested despite empty input
+        $input->getValidatorChain()->attach(new Validator\Callback(function () {
+            return false;
+        }));
+
+        $filter = new \Zend\InputFilter\InputFilter;
+        $filter->add($input)
+               ->setData(array('foo' => 'nonempty'));
+
+        $this->assertFalse($filter->isValid());
+    }
 }

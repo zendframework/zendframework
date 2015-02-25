@@ -276,7 +276,7 @@ class Connection extends AbstractConnection
             return $this->i5;
         }
 
-        $this->i5 = php_uname('s') == 'OS400' ? true : false;
+        $this->i5 = (php_uname('s') == 'OS400');
 
         return $this->i5;
     }

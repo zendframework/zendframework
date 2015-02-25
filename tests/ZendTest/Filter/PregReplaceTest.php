@@ -30,7 +30,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
 
     public function testDetectsPcreUnicodeSupport()
     {
-        $enabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        $enabled = (bool) @preg_match('/\pL/u', 'a');
         $this->assertEquals($enabled, PregReplaceFilter::hasPcreUnicodeSupport());
     }
 

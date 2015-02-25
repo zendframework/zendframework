@@ -152,7 +152,7 @@ class Inflector extends AbstractFilter
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
-        $this->throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
+        $this->throwTargetExceptionsOn = (bool) $throwTargetExceptionsOn;
         return $this;
     }
 

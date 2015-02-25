@@ -212,7 +212,7 @@ class Bcmath implements AdapterInterface
     public function intToBin($operand, $twoc = false)
     {
         $nb = chr(0);
-        $isNegative = (strpos($operand, '-') === 0) ? true : false;
+        $isNegative = (strpos($operand, '-') === 0);
         $operand    = ltrim($operand, '+-0');
 
         if (empty($operand)) {

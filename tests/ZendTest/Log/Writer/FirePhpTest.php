@@ -89,4 +89,15 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $filters);
         $this->assertEquals($filter, $filters[0]);
     }
+
+    /**
+     * Verify behavior of __construct when 'instance' is not an FirePhpInterface
+     *
+     * @expectedException Zend\Log\Exception\InvalidArgumentException
+     * @expectedExceptionMessage You must pass a valid FirePhp\FirePhpInterface
+     */
+    public function testConstructWithInvalidInstance()
+    {
+        new FirePhp(new \StdClass());
+    }
 }

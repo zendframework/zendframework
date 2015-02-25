@@ -85,9 +85,9 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $message = $this->getMessage();
         $envelope = new Envelope(array(
             'from' => 'mailer@lists.zend.com',
-                )
-        );
-        $this->transport->setEnvelope($envelope)->send($message);
+        ));
+        $this->transport->setEnvelope($envelope);
+        $this->transport->send($message);
 
         $data = $this->connection->getLog();
         $this->assertContains('MAIL FROM:<mailer@lists.zend.com>', $data);
@@ -101,9 +101,9 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $message = $this->getMessage();
         $envelope = new Envelope(array(
             'to' => 'users@lists.zend.com',
-                )
-        );
-        $this->transport->setEnvelope($envelope)->send($message);
+        ));
+        $this->transport->setEnvelope($envelope);
+        $this->transport->send($message);
 
         $data = $this->connection->getLog();
         $this->assertContains('MAIL FROM:<ralph.schindler@zend.com>', $data);
@@ -118,9 +118,9 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $envelope = new Envelope(array(
             'from' => 'mailer@lists.zend.com',
             'to' => $to,
-                )
-        );
-        $this->transport->setEnvelope($envelope)->send($message);
+        ));
+        $this->transport->setEnvelope($envelope);
+        $this->transport->send($message);
 
         $this->assertEquals($to, $this->connection->getRecipients());
        

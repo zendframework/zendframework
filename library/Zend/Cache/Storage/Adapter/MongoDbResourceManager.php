@@ -55,8 +55,15 @@ class MongoDbResourceManager
                 'collection'          => (string) $resource,
                 'collection_instance' => $resource,
             );
-
             return $this;
+        }
+
+        if (! is_array($resource)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or MongoCollection; received %s',
+                __METHOD__,
+                (is_object($resource) ? get_class($resource) : gettype($resource))
+            ));
         }
 
         $this->resources[$id] = $resource;
@@ -78,17 +85,14 @@ class MongoDbResourceManager
 
         $resource = $this->resources[$id];
         if (!isset($resource['collection_instance'])) {
-
             try {
-
                 if (!isset($resource['db_instance'])) {
-
                     if (!isset($resource['client_instance'])) {
                         $clientClass = version_compare(phpversion('mongo'), '1.3.0', '<') ? 'Mongo' : 'MongoClient';
                         $resource['client_instance'] = new $clientClass(
                             isset($resource['server']) ? $resource['server'] : null,
                             isset($resource['connection_options']) ? $resource['connection_options'] : array(),
-                            isset($resource['driver_options']) ? $resource['driver_options'] : array() 
+                            isset($resource['driver_options']) ? $resource['driver_options'] : array()
                         );
                     }
 
@@ -103,7 +107,6 @@ class MongoDbResourceManager
                 $collection->ensureIndex(array('key' => 1));
 
                 $this->resources[$id]['collection_instance'] = $collection;
-
             } catch (MongoException $e) {
                 throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
@@ -143,9 +146,11 @@ class MongoDbResourceManager
     {
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
-        }   
+        }
 
-        return isset($this->resources[$id]['connection_options']) ? $this->resources[$id]['connection_options'] : array();
+        return isset($this->resources[$id]['connection_options'])
+            ? $this->resources[$id]['connection_options']
+            : array();
     }
 
     public function setDriverOptions($id, array $driverOptions)
@@ -161,7 +166,7 @@ class MongoDbResourceManager
     {
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
-        }   
+        }
         
         return isset($this->resources[$id]['driver_options']) ? $this->resources[$id]['driver_options'] : array();
     }
@@ -178,7 +183,7 @@ class MongoDbResourceManager
     {
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
-        }   
+        }
         
         return isset($this->resources[$id]['db']) ? $this->resources[$id]['db'] : '';
     }

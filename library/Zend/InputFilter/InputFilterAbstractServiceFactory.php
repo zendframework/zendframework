@@ -90,7 +90,7 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * @param ServiceLocatorInterface $services
      *
-     * @return \Zend\ServiceManager\AbstractPluginManager
+     * @return FilterPluginManager
      */
     protected function getFilterPluginManager(ServiceLocatorInterface $services)
     {
@@ -104,7 +104,7 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * @param ServiceLocatorInterface $services
      *
-     * @return \Zend\ServiceManager\AbstractPluginManager
+     * @return ValidatorPluginManager
      */
     protected function getValidatorPluginManager(ServiceLocatorInterface $services)
     {

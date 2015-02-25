@@ -121,17 +121,38 @@ class MongoDbOptions extends AdapterOptions
     }
 
     /**
-     * set mongo options
+     * Set the mongo DB server
      *
-     * @param array $libOptions
-     *
+     * @param string $server
      * @return self
      */
-    public function setLibOptions(array $libOptions)
+    public function setServer($server)
     {
-        $this->triggerOptionEvent('lib_option', $libOptions);
-        $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
+        $this->getResourceManager()->setServer($this->getResourceId(), $server);
+        return $this;
+    }
 
+    public function setConnectionOptions(array $connectionOptions)
+    {
+        $this->getResourceManager()->setConnectionOptions($this->getResourceId(), $connectionOptions);
+        return $this;
+    }   
+    
+    public function setDriverOptions(array $driverOptions)
+    {
+        $this->getResourceManager()->setDriverOptions($this->getResourceId(), $driverOptions);
+        return $this;
+    }   
+    
+    public function setDatabase($database)
+    {
+        $this->getResourceManager()->setDatabase($this->getResourceId(), $database);
+        return $this;
+    }   
+    
+    public function setCollection($collection)
+    {
+        $this->getResourceManager()->setCollection($this->getResourceId(), $collection);
         return $this;
     }
 }

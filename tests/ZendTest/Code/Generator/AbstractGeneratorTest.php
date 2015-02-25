@@ -26,4 +26,14 @@ class AbstractGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Code\Generator\GeneratorInterface', $generator);
         $this->assertEquals('foo', $generator->getIndentation());
     }
+
+    /**
+     * @expectedException \Zend\Code\Generator\Exception\InvalidArgumentException
+     */
+    public function testSetOptionsThrowsExceptionOnInvalidArgument()
+    {
+        $generator = $this->getMockForAbstractClass('Zend\Code\Generator\AbstractGenerator', array(
+            'sss',
+        ));
+    }
 }

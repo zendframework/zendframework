@@ -385,6 +385,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($md5, md5($response->getBody()));
     }
 
+    /**
+     * Test automatic clean reason phrase
+     */
     public function testOverrideReasonPraseByStatusCode()
     {
         $response = new Response();

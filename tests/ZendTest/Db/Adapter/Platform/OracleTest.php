@@ -95,11 +95,11 @@ class OracleTest extends \PHPUnit_Framework_TestCase
     public function testQuoteTrustedValue()
     {
         $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
-        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals('\'\'\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
 
         //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
-        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'\\''; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -111,7 +111,7 @@ class OracleTest extends \PHPUnit_Framework_TestCase
             'PHPUnit_Framework_Error',
             'Attempting to quote a value in Zend\Db\Adapter\Platform\Oracle without extension/driver support can introduce security vulnerabilities in a production environment'
         );
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
     /**

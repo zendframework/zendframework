@@ -244,7 +244,7 @@ class InputTest extends TestCase
         $this->input->setAllowEmpty(true)
                     ->setContinueIfEmpty(false)
                     ->setValue($emptyValue)
-                    ->getValidatorChain()->attach(new Validator\Callback(function() {
+                    ->getValidatorChain()->attach(new Validator\Callback(function () {
                         return false;
                     }));
         $this->assertTrue($this->input->isValid());
@@ -276,7 +276,7 @@ class InputTest extends TestCase
     public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
     {
         $message = 'failure by explicit validator';
-        $validator = new Validator\Callback(function($value) {
+        $validator = new Validator\Callback(function ($value) {
             return false;
         });
         $validator->setMessage($message);
@@ -293,7 +293,7 @@ class InputTest extends TestCase
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
     {
         $this->input->setValue('nonempty')
-                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
                         return '';
                     }));
         $this->assertFalse($this->input->isValid());
@@ -302,7 +302,7 @@ class InputTest extends TestCase
     public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
     {
         $this->input->setValue('')
-                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
                         return 'nonempty';
                     }));
         $this->assertTrue($this->input->isValid());

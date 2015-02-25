@@ -232,7 +232,7 @@ class ArrayInputTest extends InputTest
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
     {
         $this->input->setValue(array('nonempty'))
-                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
                         return '';
                     }));
         $this->assertFalse($this->input->isValid());
@@ -241,7 +241,7 @@ class ArrayInputTest extends InputTest
     public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
     {
         $this->input->setValue(array(''))
-                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
                         return 'nonempty';
                     }));
         $this->assertTrue($this->input->isValid());

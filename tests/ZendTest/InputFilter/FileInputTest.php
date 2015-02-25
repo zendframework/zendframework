@@ -415,7 +415,7 @@ class FileInputTest extends InputTest
     public function testAllowEmptyOptionSet($emptyValue)
     {
         // UploadFile validator is disabled, pretend one
-        $validator = new Validator\Callback(function() {
+        $validator = new Validator\Callback(function () {
             return false; // This should never be called
         });
         $this->input->getValidatorChain()->attach($validator);
@@ -429,7 +429,7 @@ class FileInputTest extends InputTest
     {
         // UploadFile validator is disabled, pretend one
         $message = 'pretend failing UploadFile validator';
-        $validator = new Validator\Callback(function() {
+        $validator = new Validator\Callback(function () {
             return false;
         });
         $validator->setMessage($message);

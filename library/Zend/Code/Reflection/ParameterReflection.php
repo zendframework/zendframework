@@ -98,11 +98,17 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
         return;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return parent::__toString();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return parent::__toString();

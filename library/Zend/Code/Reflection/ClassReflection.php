@@ -230,11 +230,17 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $zendReflections;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return parent::__toString();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return parent::__toString();

@@ -22,7 +22,6 @@ use Zend\Mvc\Service\ServiceListenerFactory;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
-
 class ApplicationTest extends TestCase
 {
     /**

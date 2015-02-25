@@ -28,5 +28,4 @@ class TestSampleSingleClassMultiLines
 
         /* test test */
     }
-
 }

@@ -184,6 +184,17 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($data->toArray()), $data->count());
     }
 
+    public function testCountWithDoubleKeys()
+    {
+        $config = new Config(array(), true);
+
+        $config->foo = 1;
+        $config->foo = 2;
+        $this->assertSame(2, $config->foo);
+        $this->assertCount(1, $config->toArray());
+        $this->assertCount(1, $config);
+    }
+
     public function testIterator()
     {
         // top level

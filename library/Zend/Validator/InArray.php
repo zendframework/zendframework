@@ -217,7 +217,7 @@ class InArray extends AbstractValidator
                 }
             }
 
-            if (in_array($value, $haystack, $this->strict == self::COMPARE_STRICT ? true : false)) {
+            if (in_array($value, $haystack, self::COMPARE_STRICT == $this->strict)) {
                 return true;
             }
         }

@@ -203,7 +203,7 @@ class Gmp implements AdapterInterface
     public function intToBin($int, $twoc = false)
     {
         $nb         = chr(0);
-        $isNegative = (strpos($int, '-') === 0) ? true : false;
+        $isNegative = (strpos($int, '-') === 0);
         $int        = ltrim($int, '+-0');
 
         if (empty($int)) {

@@ -385,6 +385,16 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($md5, md5($response->getBody()));
     }
 
+    public function testOverrideReasonPraseByStatusCode()
+    {
+        $response = new Response();
+        $response->setStatusCode(200);
+        $response->setReasonPhrase('Custom reason phrase');
+        $this->assertEquals('Custom reason phrase', $response->getReasonPhrase());
+        $response->setStatusCode(400);
+        $this->assertEquals('Bad Request', $response->getReasonPhrase());
+    }
+
     /**
      * Helper function: read test response from file
      *

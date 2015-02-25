@@ -52,13 +52,13 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Horizontal position of the barcode in the rendering resource
-     * @var int
+     * @var string
      */
     protected $horizontalPosition = 'left';
 
     /**
      * Vertical position of the barcode in the rendering resource
-     * @var int
+     * @var string
      */
     protected $verticalPosition = 'top';
 
@@ -501,7 +501,7 @@ abstract class AbstractRenderer implements RendererInterface
      * @param string $font
      * @param int $color
      * @param string $alignment
-     * @param float $orientation
+     * @param float|int $orientation
      */
     abstract protected function drawText(
         $text,

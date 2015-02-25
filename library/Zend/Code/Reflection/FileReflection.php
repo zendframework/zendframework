@@ -34,17 +34,17 @@ class FileReflection implements ReflectionInterface
     protected $endLine = null;
 
     /**
-     * @var string
+     * @var string[]
      */
     protected $namespaces = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $uses = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $requiredFiles = array();
 
@@ -161,7 +161,7 @@ class FileReflection implements ReflectionInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getNamespaces()
     {

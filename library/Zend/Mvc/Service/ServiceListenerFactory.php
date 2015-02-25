@@ -57,6 +57,7 @@ class ServiceListenerFactory implements FactoryInterface
             'FormAnnotationBuilder'          => 'Zend\Mvc\Service\FormAnnotationBuilderFactory',
             'FormElementManager'             => 'Zend\Mvc\Service\FormElementManagerFactory',
             'HttpRouter'                     => 'Zend\Mvc\Service\RouterFactory',
+            'HttpMethodListener'             => 'Zend\Mvc\Service\HttpMethodListenerFactory',
             'HttpViewManager'                => 'Zend\Mvc\Service\HttpViewManagerFactory',
             'HydratorManager'                => 'Zend\Mvc\Service\HydratorManagerFactory',
             'InjectTemplateListener'         => 'Zend\Mvc\Service\InjectTemplateListenerFactory',

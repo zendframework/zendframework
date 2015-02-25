@@ -46,63 +46,19 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setResource($id, $resource);
 
-        $expected = array($id => array('initialized' => true, 'resource' => $resource));
-
-        $this->assertAttributeSame($expected, 'resources', $this->object);
+        $this->assertSame($resource, $this->object->getResource($id));
     }
 
     public function testSetResourceArray()
     {
         $this->assertAttributeEmpty('resources', $this->object);
 
-        $id = 'foo';
-        $array = array('foo' => 'bar');
+        $id     = 'foo';
+        $server = 'mongodb://test:1234';
 
-        $this->object->setResource($id, $array);
+        $this->object->setResource($id, array('server' => $server));
 
-        $expected = array(
-            $id => array(
-                'collection' => 'cache',
-                'database' => 'zend',
-                'driverOptions' => array(),
-                'foo' => 'bar',
-                'initialized' => false,
-                'options' => array(
-                    'fsync' => false,
-                    'journal' => true,
-                ),
-                'server' => 'mongodb://localhost:27017',
-            )
-        );
-
-        $this->assertAttributeEquals($expected, 'resources', $this->object);
-    }
-
-    public function testSetResourceTraversible()
-    {
-        $this->assertAttributeEmpty('resources', $this->object);
-
-        $id = 'foo';
-        $config = new Config(array('foo' => 'bar'));
-
-        $this->object->setResource($id, $config);
-
-        $expected = array(
-            $id => array(
-                'collection' => 'cache',
-                'database' => 'zend',
-                'driverOptions' => array(),
-                'foo' => 'bar',
-                'initialized' => false,
-                'options' => array(
-                    'fsync' => false,
-                    'journal' => true,
-                ),
-                'server' => 'mongodb://localhost:27017',
-            )
-        );
-
-        $this->assertAttributeEquals($expected, 'resources', $this->object);
+        $this->assertSame($server, $this->object->getServer($id));
     }
 
     public function testSetResourceThrowsException()
@@ -110,14 +66,8 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
         $id = 'foo';
         $resource = new \stdClass();
 
-        try {
-            $this->object->setResource($id, $resource);
-        } catch (Exception\InvalidArgumentException $e) {
-            $this->addToAssertionCount(1);
-            return;
-        }
-
-        $this->fail('Exception not thrown');
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->object->setResource($id, $resource);
     }
 
     public function testHasResourceEmpty()
@@ -130,9 +80,8 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
     public function testHasResourceSet()
     {
         $id = 'foo';
-        $config = new \Zend\Config\Config(array('foo' => 'bar'));
 
-        $this->object->setResource($id, $config);
+        $this->object->setResource($id, array('foo' => 'bar'));
 
         $this->assertTrue($this->object->hasResource($id));
     }
@@ -143,14 +92,8 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->object->hasResource($id));
 
-        try {
-            $this->object->getResource($id);
-        } catch (Exception\RuntimeException $e) {
-            $this->addToAssertionCount(1);
-            return;
-        }
-
-        $this->fail('Exception not thrown');
+        $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
+        $this->object->getResource($id);
     }
 
     public function testGetResourceInitialized()
@@ -168,81 +111,34 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetResourceNewResource()
     {
-        $id = 'foo';
-        $resource = array();
+        $id                = 'foo';
+        $server            = TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING;
+        $connectionOptions = array('connectTimeoutMS' => 5);
+        $database          = TESTS_ZEND_CACHE_MONGODB_DATABASE;
+        $collection        = TESTS_ZEND_CACHE_MONGODB_COLLECTION;
 
-        $this->object->setResource($id, $resource);
+        $this->object->setServer($id, $server);
+        $this->object->setConnectionOptions($id, $connectionOptions);
+        $this->object->setDatabase($id, $database);
+        $this->object->setCollection($id, $collection);
 
         $this->assertInstanceOf('\MongoCollection', $this->object->getResource($id));
     }
 
-    public function testGetResourceNewResourceThrowsException()
+    public function testGetResourceUnknownServerThrowsException()
     {
-        $id = 'foo';
-        $resource = array('server' => 'mongodb://example.com', 'options' => array('connectTimeoutMS' => 5));
+        $id                = 'foo';
+        $server            = 'mongodb://unknown.unknown';
+        $connectionOptions = array('connectTimeoutMS' => 5);
+        $database          = TESTS_ZEND_CACHE_MONGODB_DATABASE;
+        $collection        = TESTS_ZEND_CACHE_MONGODB_COLLECTION;
 
-        $this->object->setResource($id, $resource);
+        $this->object->setServer($id, $server);
+        $this->object->setConnectionOptions($id, $connectionOptions);
+        $this->object->setDatabase($id, $database);
+        $this->object->setCollection($id, $collection);
 
-        try {
-            $this->object->getResource($id);
-        } catch (Exception\RuntimeException $e) {
-            $this->addToAssertionCount(1);
-            return;
-        }
-
-        $this->fail('Exception not thrown');
-    }
-
-    public function testSetLibOptionsNoResource()
-    {
-        $this->assertAttributeEmpty('resources', $this->object);
-
-        $id = 'foo';
-        $libOptions = array(
-            'server' => 'bar'
-        );
-
-        $this->object->setLibOptions($id, $libOptions);
-
-        $expected = array(
-            $id => array(
-                'collection' => 'cache',
-                'database' => 'zend',
-                'driverOptions' => array(),
-                'initialized' => false,
-                'options' => array(
-                    'fsync' => false,
-                    'journal' => true,
-                ),
-                'server' => 'bar',
-            )
-        );
-
-        $this->assertAttributeEquals($expected, 'resources', $this->object);
-    }
-
-    public function testSetLibOptionsResourceExists()
-    {
-        $id = 'foo';
-        $clientClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? '\Mongo' : '\MongoClient';
-        $client = new $clientClass(TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING);
-        $resource = $client->selectCollection(TESTS_ZEND_CACHE_MONGODB_DATABASE, TESTS_ZEND_CACHE_MONGODB_COLLECTION);
-
-        $this->object->setResource($id, $resource);
-
-        $libOptions = array(
-            'server' => 'bar'
-        );
-
-        $this->object->setLibOptions($id, $libOptions);
-
-        $expected = array(
-            $id => array(
-                'initialized' => false,
-                'server' => 'bar',
-            )
-        );
-
-        $this->assertAttributeEquals($expected, 'resources', $this->object);
+        $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
+        $this->object->getResource($id);
     }
 }

@@ -26,6 +26,11 @@ class Smtp implements TransportInterface
      * @var SmtpOptions
      */
     protected $options;
+    
+    /**
+     * @var Envelope|null
+     */
+    protected $envelope;
 
     /**
      * @var Protocol\Smtp
@@ -75,6 +80,28 @@ class Smtp implements TransportInterface
     public function getOptions()
     {
         return $this->options;
+    }
+    
+    /**
+     * Set options
+     *
+     * @param  Envelope $envelope
+     * @return Smtp
+     */
+    public function setEnvelope(Envelope $envelope)
+    {
+        $this->envelope = $envelope;
+        return $this;
+    }
+    
+    /**
+     * Get envelope
+     *
+     * @return Envelope|null
+     */
+    public function getEnvelope()
+    {
+        return $this->envelope;
     }
 
     /**
@@ -244,6 +271,10 @@ class Smtp implements TransportInterface
      */
     protected function prepareFromAddress(Message $message)
     {
+        if ($this->getEnvelope() && $this->getEnvelope()->getFrom()) {
+            return $this->getEnvelope()->getFrom();
+        }
+
         $sender = $message->getSender();
         if ($sender instanceof Address\AddressInterface) {
             return $sender->getEmail();
@@ -269,7 +300,11 @@ class Smtp implements TransportInterface
      * @return array
      */
     protected function prepareRecipients(Message $message)
-    {
+    {      
+        if ($this->getEnvelope() && $this->getEnvelope()->getTo()) {
+            return (array) $this->getEnvelope()->getTo();
+        }
+
         $recipients = array();
         foreach ($message->getTo() as $address) {
             $recipients[] = $address->getEmail();
@@ -280,6 +315,7 @@ class Smtp implements TransportInterface
         foreach ($message->getBcc() as $address) {
             $recipients[] = $address->getEmail();
         }
+
         $recipients = array_unique($recipients);
         return $recipients;
     }

@@ -54,11 +54,11 @@ class SmtpProtocolSpy extends Smtp
     public function mail($from)
     {
         parent::mail($from);
-        $this->mail = $from;
     }
 
     public function rcpt($to)
     {
+        parent::rcpt($to);
         $this->rcpt = true;
         $this->rcptTest[] = $to;
     }

@@ -219,4 +219,31 @@ class ArrayInputTest extends InputTest
         $this->assertEmpty($this->input->getMessages());
         $this->assertSame($fallbackValue, $this->input->getValue());
     }
+
+    public function emptyValuesProvider()
+    {
+        return array(
+            array(array(null)),
+            array(array('')),
+            array(array(array())),
+        );
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->input->setValue(array('nonempty'))
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
+                        return '';
+                    }));
+        $this->assertFalse($this->input->isValid());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->input->setValue(array(''))
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
+                        return 'nonempty';
+                    }));
+        $this->assertTrue($this->input->isValid());
+    }
 }

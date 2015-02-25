@@ -31,13 +31,6 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $allowModifications;
 
     /**
-     * Number of elements in configuration data.
-     *
-     * @var int
-     */
-    protected $count;
-
-    /**
      * Data within the configuration.
      *
      * @var array
@@ -71,8 +64,6 @@ class Config implements Countable, Iterator, ArrayAccess
             } else {
                 $this->data[$key] = $value;
             }
-
-            $this->count++;
         }
     }
 
@@ -126,8 +117,6 @@ class Config implements Countable, Iterator, ArrayAccess
             } else {
                 $this->data[$name] = $value;
             }
-
-            $this->count++;
         } else {
             throw new Exception\RuntimeException('Config is read only');
         }
@@ -200,7 +189,6 @@ class Config implements Countable, Iterator, ArrayAccess
             throw new Exception\InvalidArgumentException('Config is read only');
         } elseif (isset($this->data[$name])) {
             unset($this->data[$name]);
-            $this->count--;
             $this->skipNextIteration = true;
         }
     }
@@ -213,7 +201,7 @@ class Config implements Countable, Iterator, ArrayAccess
      */
     public function count()
     {
-        return $this->count;
+        return count($this->data);
     }
 
     /**
@@ -360,8 +348,6 @@ class Config implements Countable, Iterator, ArrayAccess
                 } else {
                     $this->data[$key] = $value;
                 }
-
-                $this->count++;
             }
         }
 

@@ -47,14 +47,6 @@ class Oracle extends AbstractPlatform
     /**
      * {@inheritDoc}
      */
-    public function getQuoteValueSymbol()
-    {
-        return '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function quoteValue($value)
     {
         trigger_error(
@@ -70,13 +62,5 @@ class Oracle extends AbstractPlatform
     public function quoteTrustedValue($value)
     {
         return '\'' . addcslashes(str_replace('\'', '\'\'', $value), "\x00\n\r\"\x1a") . '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdentifierSeparator()
-    {
-        return '.';
     }
 }

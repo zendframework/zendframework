@@ -12,11 +12,6 @@ namespace Zend\Db\Adapter\Platform;
 class IbmDb2 extends AbstractPlatform
 {
     /**
-     * @var bool
-     */
-    protected $quoteValueAllowed = false;
-
-    /**
      * @var string
      */
     protected $identifierSeparator = '.';
@@ -59,14 +54,6 @@ class IbmDb2 extends AbstractPlatform
             $identifierChain = implode('"' . $this->identifierSeparator . '"', $identifierChain);
         }
         return '"' . $identifierChain . '"';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getQuoteValueSymbol()
-    {
-        return '\'';
     }
 
     /**

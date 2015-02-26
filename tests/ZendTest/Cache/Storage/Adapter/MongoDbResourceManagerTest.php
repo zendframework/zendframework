@@ -11,7 +11,6 @@ namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\Adapter\MongoDbResourceManager;
-use Zend\Config\Config;
 
 /**
  * @group      Zend_Cache

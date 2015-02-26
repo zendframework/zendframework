@@ -761,7 +761,7 @@ class Imap
     {
         return $this->requestAndResponse('SUBSCRIBE', array($this->escapeString($folder)), true);
     }
-    
+
     /**
      * permanently remove messages
      *

@@ -220,7 +220,7 @@ class DateStep extends Date
         $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
 
         // check if this is a special case where time is added or lost
-        if ($this->isSpaningSpecialCase($baseDate, $valueDate)) {
+        if ($this->isSpanningSpecialCase($baseDate, $valueDate)) {
             return $this->fallbackIncrementalIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
         }
 
@@ -389,7 +389,7 @@ class DateStep extends Date
      *
      * @return bool
      */
-    private function isSpaningSpecialCase($baseDate, $valueDate)
+    private function isSpanningSpecialCase($baseDate, $valueDate)
     {
         // Check for missing hour in Europe/Moscow time
         if ($this->getTimezone() == new \DateTimeZone("Europe/Moscow")) {

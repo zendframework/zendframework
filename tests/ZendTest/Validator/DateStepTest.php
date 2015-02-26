@@ -12,6 +12,7 @@ namespace ZendTest\Validator;
 use Zend\Validator;
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
 /**
  * @group      Zend_Validator
@@ -144,7 +145,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             'format' => 'd-m-Y',
             'baseValue' => date('d-m-Y', 0),
             'step' => new DateInterval("P1D"),
-            'timezone' => new \DateTimeZone('Europe/Moscow')
+            'timezone' => new DateTimeZone('Europe/Moscow')
         ));
 
         $this->assertTrue($validator->isValid($dateToValidate));

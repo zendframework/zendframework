@@ -13,8 +13,8 @@ install:
   - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' && $TRAVIS_PHP_VERSION != '7' ]]; then phpenv config-rm xdebug.ini;  fi
   - IS_HHVM=`echo $TRAVIS_PHP_VERSION | grep "hhvm" | wc -l`
   - sudo apt-get install parallel libpcre3-dev
-  - test $IS_HHVM == "1" || echo "" | pecl install apcu-beta
-  - test $IS_HHVM == "1" || phpenv config-add tests/travis.php.ini
+  - if [[ $IS_HHVM != '1' && $TRAVIS_PHP_VERSION != '7' ]]; then pecl install apcu-beta
+  - if [[ $IS_HHVM != '1' && $TRAVIS_PHP_VERSION != '7' ]]; then phpenv config-add tests/travis.php.ini
   - composer install --no-interaction --prefer-source
 
 before_script:

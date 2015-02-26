@@ -219,6 +219,11 @@ class DateStep extends Date
         $timeDiff  = $valueDate->diff($baseDate, true);
         $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
 
+        // check if this is a special case where time is added or lost
+        if ($this->isSpaningSpecialCase($baseDate, $valueDate)) {
+            return $this->fallbackIncrementalIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
+        }
+
         if (5 === $partCounts["0"]) {
             // Find the unit with the non-zero interval
             $intervalUnit = null;
@@ -373,6 +378,25 @@ class DateStep extends Date
         $this->error(self::NOT_STEP);
 
         return false;
+    }
+
+    /**
+     * Returns true if the interval spans a special case time,
+     * such as days in Europe/Moscow time 26-03-2011
+     *
+     * @param DateTime     $baseDate
+     * @param DateTime     $valueDate
+     *
+     * @return bool
+     */
+    private function isSpaningSpecialCase($baseDate, $valueDate) {
+        // Check for missing hour in Europe/Moscow time
+        if ($this->getTimezone() == new \DateTimeZone("Europe/Moscow")) {
+            if ($baseDate < new DateTime("26-03-2011", $this->getTimezone()) and
+                $valueDate > new DateTime("27-03-2011", $this->getTimezone())) {
+                return true;
+            }
+        }
     }
 
     /**

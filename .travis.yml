@@ -10,7 +10,7 @@ php:
   - hhvm-nightly
 
 install:
-  - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' ]]; then phpenv config-rm xdebug.ini;  fi
+  - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' && $TRAVIS_PHP_VERSION != '7' ]]; then phpenv config-rm xdebug.ini;  fi
   - IS_HHVM=`echo $TRAVIS_PHP_VERSION | grep "hhvm" | wc -l`
   - sudo apt-get install parallel libpcre3-dev
   - test $IS_HHVM == "1" || echo "" | pecl install apcu-beta

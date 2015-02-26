@@ -137,19 +137,19 @@ class MongoDbOptions extends AdapterOptions
         $this->getResourceManager()->setConnectionOptions($this->getResourceId(), $connectionOptions);
         return $this;
     }
-    
+
     public function setDriverOptions(array $driverOptions)
     {
         $this->getResourceManager()->setDriverOptions($this->getResourceId(), $driverOptions);
         return $this;
     }
-    
+
     public function setDatabase($database)
     {
         $this->getResourceManager()->setDatabase($this->getResourceId(), $database);
         return $this;
     }
-    
+
     public function setCollection($collection)
     {
         $this->getResourceManager()->setCollection($this->getResourceId(), $collection);

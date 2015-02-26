@@ -544,7 +544,7 @@ class Reader implements ReaderImportInterface
     public static function getExtensionManager()
     {
         if (!isset(static::$extensionManager)) {
-            static::setExtensionManager(new ExtensionManager());
+            static::setExtensionManager(new StandaloneExtensionManager());
         }
         return static::$extensionManager;
     }

@@ -48,7 +48,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, substr_count($text, '0) [X] foo'));
         $this->assertSame(1, substr_count($text, '0) [ ] foo'));
         $this->assertSame(2, substr_count($text, '1) [ ] bar'));
-        $this->assertEquals(['0' => 'foo'], $response);
+        $this->assertEquals(array('0' => 'foo'), $response);
     }
 
     public function testCanUncheckOneOption()
@@ -66,7 +66,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, substr_count($text, '0) [X] foo'));
         $this->assertSame(2, substr_count($text, '0) [ ] foo'));
         $this->assertSame(3, substr_count($text, '1) [ ] bar'));
-        $this->assertEquals([], $response);
+        $this->assertEquals(array(), $response);
     }
 
     public function testCanCheckTwoOption()
@@ -85,7 +85,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, substr_count($text, '1) [X] bar'));
         $this->assertSame(1, substr_count($text, '0) [ ] foo'));
         $this->assertSame(2, substr_count($text, '1) [ ] bar'));
-        $this->assertEquals(['0' => 'foo', '1' => 'bar'], $response);
+        $this->assertEquals(array('0' => 'foo', '1' => 'bar'), $response);
     }
 
     public function testCanCheckOptionWithCustomIndex()
@@ -102,6 +102,6 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, substr_count($text, '2) [X] foo'));
         $this->assertSame(1, substr_count($text, '2) [ ] foo'));
         $this->assertSame(2, substr_count($text, '6) [ ] bar'));
-        $this->assertEquals(['0' => 'foo'], $response);
+        $this->assertEquals(array('0' => 'foo'), $response);
     }
 }

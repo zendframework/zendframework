@@ -182,7 +182,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadingScalarJSONResponseShouldThrowException($json)
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\RuntimeException');
+        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
         $this->response->loadJson($json);
     }
 

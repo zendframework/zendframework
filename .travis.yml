@@ -12,16 +12,12 @@ php:
 install:
   - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' && $TRAVIS_PHP_VERSION != '7' ]]; then phpenv config-rm xdebug.ini;  fi
   - sudo apt-get install parallel libpcre3-dev
-  - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' && $TRAVIS_PHP_VERSION != '7' ]]; then pecl install apcu-beta; fi
-  - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' && $TRAVIS_PHP_VERSION != '7' ]]; then phpenv config-add tests/travis.php.ini;fi
   - composer install --no-interaction --prefer-source
 
 before_script:
   - php --version
-  - sudo /etc/init.d/memcached start
-  - sudo start redis-server
-  - mkdir -p build/coverage
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then mkdir -p build/coverage; fi
 
 script:
   # Run tests for the various components in parallel

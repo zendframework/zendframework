@@ -389,7 +389,8 @@ class DateStep extends Date
      *
      * @return bool
      */
-    private function isSpaningSpecialCase ($baseDate, $valueDate) {
+    private function isSpaningSpecialCase($baseDate, $valueDate)
+    {
         // Check for missing hour in Europe/Moscow time
         if ($this->getTimezone() == new \DateTimeZone("Europe/Moscow")) {
             if ($baseDate < new DateTime("26-03-2011", $this->getTimezone()) and

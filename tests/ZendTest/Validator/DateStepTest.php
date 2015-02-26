@@ -135,10 +135,10 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /** 
+    /**
      * @dataProvider moscowWinterTimeDataProvider
      */
-    public function testMoscowWinterTime ($dateToValidate)
+    public function testMoscowWinterTime($dateToValidate)
     {
         $validator = new \Zend\Validator\DateStep(array(
             'format' => 'd-m-Y',

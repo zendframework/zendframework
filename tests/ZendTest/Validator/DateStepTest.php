@@ -86,7 +86,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         return $data;
     }
 
-    /** 
+    /**
      * @dataProvider stepTestsDataProvider
      */
     public function testDateStepValidation($interval, $format, $baseValue, $value, $isValid)

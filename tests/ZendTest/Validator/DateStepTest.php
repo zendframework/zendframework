@@ -124,7 +124,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('2012-02-23'));
     }
 
-    public function moscowWinterTimeDataProvider () 
+    public function moscowWinterTimeDataProvider()
     {
         // dates before during and after Moscow's wintertime
         return array (

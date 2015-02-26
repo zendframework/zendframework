@@ -18,7 +18,6 @@ use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Form\Exception;
 use Zend\Form\Factory;
 use Zend\Form\FormFactoryAwareInterface;

@@ -219,7 +219,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 (en) Plural 1', $pl1);
         $this->assertEquals('Message 5 (en) Plural 2', $pl2);
     }
-    
+
     public function testTranslateNoPlurals()
     {
         // Some languages such as Japanese and Chinese does not have plural forms
@@ -230,11 +230,11 @@ class TranslatorTest extends TestCase
             'default',
             'ja_JP'
         );
-        
+
         $pl0 = $this->translator->translatePlural('Message 9', 'Message 9 Plural', 1);
         $pl1 = $this->translator->translatePlural('Message 9', 'Message 9 Plural', 2);
         $pl2 = $this->translator->translatePlural('Message 9', 'Message 9 Plural', 10);
-        
+
         $this->assertEquals('Message 9 (ja)', $pl0);
         $this->assertEquals('Message 9 (ja)', $pl1);
         $this->assertEquals('Message 9 (ja)', $pl2);

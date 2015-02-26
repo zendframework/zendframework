@@ -11,9 +11,7 @@ namespace Zend\Cache\Storage\Adapter;
 
 use MongoCollection;
 use MongoException;
-use Traversable;
 use Zend\Cache\Exception;
-use Zend\Stdlib\ArrayUtils;
 
 class MongoDbResourceManager
 {
@@ -167,7 +165,7 @@ class MongoDbResourceManager
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
-        
+
         return isset($this->resources[$id]['driver_options']) ? $this->resources[$id]['driver_options'] : array();
     }
 
@@ -184,7 +182,7 @@ class MongoDbResourceManager
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
-        
+
         return isset($this->resources[$id]['db']) ? $this->resources[$id]['db'] : '';
     }
 
@@ -200,7 +198,7 @@ class MongoDbResourceManager
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
-        
+
         return isset($this->resources[$id]['collection']) ? $this->resources[$id]['collection'] : '';
     }
 }

@@ -123,7 +123,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->send($message);
 
         $this->assertEquals($to, $this->connection->getRecipients());
-       
+
         $data = $this->connection->getLog();
         $this->assertContains('MAIL FROM:<mailer@lists.zend.com>', $data);
         $this->assertContains('RCPT TO:<users@lists.zend.com>', $data);

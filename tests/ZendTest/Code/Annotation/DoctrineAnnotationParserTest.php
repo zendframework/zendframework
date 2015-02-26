@@ -58,7 +58,7 @@ class DoctrineAnnotationParserTest extends TestCase
         $event = $this->getEvent();
         $this->assertFalse($this->parser->onCreateAnnotation($event));
     }
-    
+
     public function testReturnsFalseClassNotSet()
     {
         $this->assertFalse($this->parser->onCreateAnnotation(new Event()));

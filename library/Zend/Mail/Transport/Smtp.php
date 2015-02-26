@@ -26,7 +26,7 @@ class Smtp implements TransportInterface
      * @var SmtpOptions
      */
     protected $options;
-    
+
     /**
      * @var Envelope|null
      */
@@ -81,7 +81,7 @@ class Smtp implements TransportInterface
     {
         return $this->options;
     }
-    
+
     /**
      * Set options
      *
@@ -91,7 +91,7 @@ class Smtp implements TransportInterface
     {
         $this->envelope = $envelope;
     }
-    
+
     /**
      * Get envelope
      *

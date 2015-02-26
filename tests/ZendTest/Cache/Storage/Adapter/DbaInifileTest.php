@@ -9,11 +9,20 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Cache\Storage\Adapter\Dba;
 
 /**
  * @group      Zend_Cache
  */
-class DbaInifileTest extends AbstractDbaTest
+class DbaInifileTest extends TestCase
 {
-    protected $handler = 'inifile';
+    public function testSpecifyingInifileHandlerRaisesException()
+    {
+        $this->setExpectedException('Zend\Cache\Exception\ExtensionNotLoadedException', 'inifile');
+        $cache = new Dba(array(
+            'pathname' => sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('zfcache_dba_') . '.inifile',
+            'handler'  => 'inifile',
+        ));
+    }
 }

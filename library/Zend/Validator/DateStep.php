@@ -215,14 +215,12 @@ class DateStep extends Date
         $unitKeys = array('years', 'months', 'days', 'hours', 'minutes', 'seconds');
         $intervalParts = array_combine($unitKeys, $intervalParts);
 
-        // Get absolute time difference
-        $timeDiff  = $valueDate->diff($baseDate, true);
-        $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
+        // Get absolute time difference to avoid special cases of missing/added time
+        $absoluteValueDate = new DateTime($valueDate->format('Y-m-d H:i:s'), new DateTimeZone("UTC"));
+        $absoluteBaseDate = new DateTime($baseDate->format('Y-m-d H:i:s'), new DateTimeZone("UTC"));
 
-        // check if this is a special case where time is added or lost
-        if ($this->isSpanningSpecialCase($baseDate, $valueDate)) {
-            return $this->fallbackIncrementalIterationLogic($baseDate, $valueDate, $intervalParts, $diffParts, $step);
-        }
+        $timeDiff  = $absoluteValueDate->diff($absoluteBaseDate, true);
+        $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
 
         if (5 === $partCounts["0"]) {
             // Find the unit with the non-zero interval

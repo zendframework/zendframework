@@ -379,26 +379,6 @@ class DateStep extends Date
     }
 
     /**
-     * Returns true if the interval spans a special case time,
-     * such as days in Europe/Moscow time 26-03-2011
-     *
-     * @param DateTime     $baseDate
-     * @param DateTime     $valueDate
-     *
-     * @return bool
-     */
-    private function isSpanningSpecialCase($baseDate, $valueDate)
-    {
-        // Check for missing hour in Europe/Moscow time
-        if ($this->getTimezone() == new \DateTimeZone("Europe/Moscow")) {
-            if ($baseDate < new DateTime("26-03-2011", $this->getTimezone()) and
-                $valueDate > new DateTime("27-03-2011", $this->getTimezone())) {
-                return true;
-            }
-        }
-    }
-
-    /**
      * Computes minimum interval to use for iterations while checking steps
      *
      * @param int[] $intervalParts

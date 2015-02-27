@@ -35,17 +35,14 @@ abstract class AbstractPlatform implements PlatformInterface
             return $identifier;
         }
 
-        $safeRegex    = '';
         $safeWordsInt = array('*' => true, ' ' => true, '.' => true, 'as' => true);
 
         foreach ($safeWords as $sWord) {
             $safeWordsInt[strtolower($sWord)] = true;
-
-            $safeRegex .= '|' . preg_quote($sWord);
         }
 
         $parts = preg_split(
-            '/([\.\s]' . $safeRegex . ')/i',
+            '/([^0-9,a-z,A-Z$_:])/i',
             $identifier,
             -1,
             PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY

@@ -1293,6 +1293,19 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $internalTests51 = array();
 
         /**
+         * @author Andrzej Lewandowski
+         * @link https://github.com/zendframework/zf2/issues/7222
+         */
+        $select52 = new Select;
+        $select52->from('foo')->join('zac', '(catalog_category_website.category_id = catalog_category.category_id)');
+        $sqlPrep52 = // same
+        $sqlStr52 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON ("catalog_category_website"."category_id" = "catalog_category"."category_id")';
+        $internalTests52 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
+            'processJoins'  => array(array(array('INNER', '"zac"', '("catalog_category_website"."category_id" = "catalog_category"."category_id")')))
+        );
+
+        /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
          * $params = the param container contents result of preparation
@@ -1354,6 +1367,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
             array($select50, $sqlPrep50, array(),    $sqlStr50, $internalTests50),
             array($select51, $sqlPrep51, array(),    $sqlStr51, $internalTests51),
+            array($select52, $sqlPrep52, array(),    $sqlStr52, $internalTests52),
         );
     }
 }

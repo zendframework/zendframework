@@ -37,6 +37,11 @@ abstract class AbstractDateDropdown extends AbstractFilter
     protected $format = '';
 
     /**
+     * @var int
+     */
+    protected $expectedInputs;
+
+    /**
      * @param boolean $nullOnAllEmpty
      * @return $this
      */
@@ -98,10 +103,31 @@ abstract class AbstractDateDropdown extends AbstractFilter
                 return null;
             }
 
+            $this->filterable($value);
+
             ksort($value);
             $value = vsprintf($this->format, $value);
         }
 
         return $value;
+    }
+
+    /**
+     * Ensures there are enough inputs in the array to properly format the date.
+     *
+     * @param $value
+     * @throws Exception\RuntimeException
+     */
+    protected function filterable($value)
+    {
+        if (count($value) !== $this->expectedInputs) {
+            throw new Exception\RuntimeException(
+                sprintf(
+                    'There are not enough values in the array to filter this date (Required: %d, Received: %d)',
+                    $this->expectedInputs,
+                    count($value)
+                )
+            );
+        }
     }
 }

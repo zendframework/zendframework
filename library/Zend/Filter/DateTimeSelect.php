@@ -23,7 +23,13 @@ class DateTimeSelect extends AbstractDateDropdown
     protected $format = '%6$s-%4$s-%1$s %2$s:%3$s:%5$s';
 
     /**
+     * @var int
+     */
+    protected $expectedInputs = 6;
+
+    /**
      * @param mixed $value
+     * @throws Exception\RuntimeException
      * @return array|mixed|null|string
      */
     public function filter($value)
@@ -57,6 +63,8 @@ class DateTimeSelect extends AbstractDateDropdown
             if (!isset($value['second'])) {
                 $value['second'] = '00';
             }
+
+            $this->filterable($value);
 
             ksort($value);
 

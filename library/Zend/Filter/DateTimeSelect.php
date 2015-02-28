@@ -44,7 +44,7 @@ class DateTimeSelect extends AbstractDateDropdown
                     (isset($value['second']) && empty($value['second']))
                 )
             ) {
-                return null;
+                return;
             }
 
             if ($this->nullOnAllEmpty() && (
@@ -57,7 +57,7 @@ class DateTimeSelect extends AbstractDateDropdown
 
                 )
             ) {
-                return null;
+                return;
             }
 
             if (!isset($value['second'])) {

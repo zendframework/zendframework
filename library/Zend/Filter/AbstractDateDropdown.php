@@ -93,14 +93,14 @@ abstract class AbstractDateDropdown extends AbstractFilter
                 $this->nullOnEmpty() &&
                 array_reduce($value, function ($soFar, $value) { return $soFar | empty($value); }, false)
             ) {
-                return null;
+                return;
             }
 
             if (
                 $this->nullOnAllEmpty() &&
                 array_reduce($value, function ($soFar, $value) { return $soFar & empty($value); }, true)
             ) {
-                return null;
+                return;
             }
 
             $this->filterable($value);

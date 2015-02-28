@@ -18,17 +18,29 @@ class FormAnnotationBuilderFactoryTest extends TestCase
     public function testCreateService()
     {
         $mockElementManager = $this->getMock('Zend\Form\FormElementManager');
-        $mockValidatorManager = $this->getMock('Zend\Validator\ValidatorPluginManager');
-        $mockFilterManager = $this->getMock('Zend\Filter\FilterPluginManager');
 
         $serviceLocator = new ServiceManager();
         $serviceLocator->setService('FormElementManager', $mockElementManager);
-        $serviceLocator->setService('ValidatorManager', $mockValidatorManager);
-        $serviceLocator->setService('FilterManager', $mockFilterManager);
         $serviceLocator->setService('Config', array());
 
         $sut = new FormAnnotationBuilderFactory();
 
         $this->assertInstanceOf('\Zend\Form\Annotation\AnnotationBuilder', $sut->createService($serviceLocator));
+    }
+
+    public function testCreateServiceSetsPreserveDefinedOrder()
+    {
+        $mockElementManager = $this->getMock('Zend\Form\FormElementManager');
+
+        $serviceLocator = new ServiceManager();
+        $serviceLocator->setService('FormElementManager', $mockElementManager);
+        $config = array('form_annotation_builder' => array('preserve_defined_order' => true));
+        $serviceLocator->setService('Config', $config);
+
+        $sut = new FormAnnotationBuilderFactory();
+
+        $service = $sut->createService($serviceLocator);
+
+        $this->assertTrue($service->preserveDefinedOrder(), 'Preserve defined order was not set correctly');
     }
 }

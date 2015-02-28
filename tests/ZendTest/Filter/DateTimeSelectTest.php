@@ -49,4 +49,13 @@ class DateTimeSelectTest extends \PHPUnit_Framework_TestCase
             ),
         );
     }
+
+    /**
+     * @expectedException \Zend\Filter\Exception\RuntimeException
+     */
+    public function testInvalidInput()
+    {
+        $sut = new DateTimeSelectFilter();
+        $sut->filter(array('year' => '2120', 'month' => '10', 'day' => '26', 'hour' => '12'));
+    }
 }

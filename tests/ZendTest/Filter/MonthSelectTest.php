@@ -37,4 +37,13 @@ class MonthSelectTest extends \PHPUnit_Framework_TestCase
             array(array('nullOnAllEmpty' => true), array('year' => null, 'month' => null), null),
         );
     }
+
+    /**
+     * @expectedException \Zend\Filter\Exception\RuntimeException
+     */
+    public function testInvalidInput()
+    {
+        $sut = new MonthSelectFilter();
+        $sut->filter(array('year' => '2120'));
+    }
 }

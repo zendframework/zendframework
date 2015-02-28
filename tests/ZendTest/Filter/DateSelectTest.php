@@ -37,4 +37,13 @@ class DateSelectTest extends \PHPUnit_Framework_TestCase
             array(array('nullOnAllEmpty' => true), array('year' => null, 'month' => null, 'day' => null), null),
         );
     }
+
+    /**
+     * @expectedException \Zend\Filter\Exception\RuntimeException
+     */
+    public function testInvalidInput()
+    {
+        $sut = new DateSelectFilter();
+        $sut->filter(array('year' => '2120', 'month' => '07'));
+    }
 }

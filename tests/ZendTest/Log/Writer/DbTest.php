@@ -10,6 +10,7 @@
 namespace ZendTest\Log\Writer;
 
 use DateTime;
+use ReflectionMethod;
 use ZendTest\Log\TestAsset\MockDbAdapter;
 use Zend\Log\Writer\Db as DbWriter;
 use Zend\Log\Formatter\FormatterInterface;
@@ -330,9 +331,43 @@ class DbTest extends \PHPUnit_Framework_TestCase
                 'trace' => 'new-trace',
         ));
 
-        $method = new \ReflectionMethod($this->writer, 'mapEventIntoColumn');
+        $method = new ReflectionMethod($this->writer, 'mapEventIntoColumn');
         $method->setAccessible(true);
         $data = $method->invoke($this->writer, $event, $columnMap);
+
+        foreach ($data as $field => $value) {
+            $this->assertTrue(is_scalar($value), sprintf(
+                'Value of column "%s" should be scalar, %s given',
+                $field,
+                gettype($value)
+            ));
+        }
+    }
+
+    public function testEventIntoColumnMustReturnScalarValues()
+    {
+        $event = array(
+            'priority' => 2,
+            'message'  => 'message-to-log',
+            'extra'    => array(
+                'file'  => 'test.php',
+                'line'  => 1,
+                'trace' => array(
+                    array(
+                        'function' => 'Bar',
+                        'class'    => 'Foo',
+                        'type'     => '->',
+                        'args'     => array(
+                            'baz',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $method = new ReflectionMethod($this->writer, 'eventIntoColumn');
+        $method->setAccessible(true);
+        $data = $method->invoke($this->writer, $event);
 
         foreach ($data as $field => $value) {
             $this->assertTrue(is_scalar($value), sprintf(

@@ -88,7 +88,6 @@ abstract class AbstractDateDropdown extends AbstractFilter
     {
         // Convert the date to a specific format
         if (is_array($value)) {
-
             if (
                 $this->nullOnEmpty() &&
                 array_reduce($value, function ($soFar, $value) { return $soFar | empty($value); }, false)

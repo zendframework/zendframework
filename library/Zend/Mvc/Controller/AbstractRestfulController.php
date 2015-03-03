@@ -116,7 +116,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @return mixed
      */
-    public function deleteList()
+    public function deleteList($data)
     {
         $this->response->setStatusCode(405);
 
@@ -347,6 +347,8 @@ abstract class AbstractRestfulController extends AbstractController
             // DELETE
             case 'delete':
                 $id = $this->getIdentifier($routeMatch, $request);
+                $data = $this->processBodyContent($request);
+
                 if ($id !== false) {
                     $action = 'delete';
                     $return = $this->delete($id);
@@ -354,7 +356,7 @@ abstract class AbstractRestfulController extends AbstractController
                 }
 
                 $action = 'deleteList';
-                $return = $this->deleteList();
+                $return = $this->deleteList($data);
                 break;
             // GET
             case 'get':

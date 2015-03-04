@@ -10,7 +10,6 @@
 namespace Zend\Mail;
 
 use Traversable;
-use Zend\Mail\Message;
 
 class MessageFactory
 {
@@ -20,7 +19,7 @@ class MessageFactory
      */
     public static function getInstance($options = array())
     {
-       if (!is_array($options) && !$options instanceof Traversable) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '"%s" expects an array or Traversable; received "%s"',
                 __METHOD__,

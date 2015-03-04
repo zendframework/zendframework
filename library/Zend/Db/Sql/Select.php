@@ -739,7 +739,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             } else {
                 $joinName = $join['name'];
             }
-            if ($joinName instanceof ExpressionInterface) {
+            if ($joinName instanceof Expression) {
                 $joinName = $joinName->getExpression();
             } elseif ($joinName instanceof TableIdentifier) {
                 $joinName = $joinName->getTableAndSchema();

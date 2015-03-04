@@ -50,15 +50,9 @@ class MappingHydrator implements HydratorInterface
      *
      * @param  object                             $object
      * @return HydratorInterface
-     * @throws Exception\InvalidArgumentException
      */
     protected function getHydrator($object)
     {
-        $class = get_class($object);
-        if (!$this->hydrators->has($class)) {
-            throw new Exception\InvalidArgumentException(sprintf('Hydrator service does not exists for class %s', $class));
-        }
-
-        return $this->hydrators->get($class);
+        return $this->hydrators->get(get_class($object));
     }
 }

@@ -44,17 +44,6 @@ class MappingHydratorTest extends \PHPUnit_Framework_TestCase
         $this->object = new ArrayObject;
     }
 
-    public function testGetExceptionWhenHydratorServiceDoesNotExist()
-    {
-        $this->hydrators->expects($this->any())
-            ->method('has')
-            ->with('ArrayObject')
-            ->will($this->returnValue(false));
-
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
-        $this->hydrator->extract(new ArrayObject);
-    }
-
     public function testExtract()
     {
         $this->hydrators->expects($this->any())

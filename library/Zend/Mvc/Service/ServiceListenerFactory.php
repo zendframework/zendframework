@@ -60,7 +60,7 @@ class ServiceListenerFactory implements FactoryInterface
             'HttpViewManager'                => 'Zend\Mvc\Service\HttpViewManagerFactory',
             'HydratorManager'                => 'Zend\Mvc\Service\HydratorManagerFactory',
             'InjectTemplateListener'         => 'Zend\Mvc\Service\InjectTemplateListenerFactory',
-            'MappingHydrator'                => 'Zend\Mvc\Service\MappingHydratorFactory',
+            'MappingHydrator'                => 'Zend\Stdlib\Hydrator\MappingHydratorFactory',
             'InputFilterManager'             => 'Zend\Mvc\Service\InputFilterManagerFactory',
             'LogProcessorManager'            => 'Zend\Mvc\Service\LogProcessorManagerFactory',
             'LogWriterManager'               => 'Zend\Mvc\Service\LogWriterManagerFactory',

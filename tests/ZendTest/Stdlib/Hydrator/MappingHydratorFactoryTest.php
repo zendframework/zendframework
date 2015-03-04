@@ -7,9 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Mvc\Service;
+namespace ZendTest\Stdlib\Hydrator;
 
-use Zend\Mvc\Service\MappingHydratorFactory;
+use Zend\Stdlib\Hydrator\MappingHydratorFactory;
 
 class MappingHydratorFactoryTest extends \PHPUnit_Framework_TestCase
 {

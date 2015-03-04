@@ -7,16 +7,15 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Mvc\Service;
+namespace Zend\Stdlib\Hydrator;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Hydrator\MappingHydrator;
 
 class MappingHydratorFactory implements FactoryInterface
 {
     /**
-     * Creates StandardHydrator
+     * Creates MappingHydrator
      *
      * @param  ServiceLocatorInterface $serviceLocator
      * @return MappingHydrator

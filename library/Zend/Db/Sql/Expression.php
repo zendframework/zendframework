@@ -38,7 +38,7 @@ class Expression implements ExpressionInterface
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {
-        if ($expression) {
+        if ($expression !== '') {
             $this->setExpression($expression);
         }
         if ($parameters) {

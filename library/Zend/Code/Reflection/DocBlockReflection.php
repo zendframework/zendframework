@@ -247,7 +247,7 @@ class DocBlockReflection implements ReflectionInterface
             return;
         }
 
-        $docComment = $this->docComment; // localize variable
+        $docComment = preg_replace('#[ ]{0,1}\*/$#', '', $this->docComment);
 
         // create a clean docComment
         $this->cleanDocComment = preg_replace("#[ \t]*(?:/\*\*|\*/|\*)[ ]{0,1}(.*)?#", '$1', $docComment);

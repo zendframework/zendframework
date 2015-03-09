@@ -222,4 +222,15 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
         $this->seedMessages();
         $this->assertEquals(2, count($this->helper));
     }
+
+    public function testAddMessageWithLoops()
+    {
+        $helper  = new FlashMessenger();
+        $helper->addMessage('foo');
+        $helper->addMessage('bar', 2);
+        $helper->addMessage('baz', 5);
+        $this->assertEquals('3', count($helper->getCurrentMessages()));
+        $helper->clearCurrentMessages();
+        $this->assertEquals('0', count($helper->getCurrentMessages()));
+    }
 }

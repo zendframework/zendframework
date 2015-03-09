@@ -9,6 +9,9 @@
 
 namespace ZendTest\Di;
 
+use BadMethodCallException;
+use Exception;
+use PHPUnit_Framework_Error;
 use Zend\Di\Config;
 use Zend\Di\Di;
 
@@ -53,13 +56,30 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
      *
      * error: Missing argument 1 for $class::__construct()
      * @dataProvider providesClassWithConstructionParameters
-     * @expectedException PHPUnit_Framework_Error
      * @param string $class
      */
     public function testRaiseErrorMissingConstructorRequiredParameter($class)
     {
-        $bareObject = new $class;
-        $this->assertInstanceOf($class, $bareObject, 'Test instantiate simple');
+        $phpunit = $this;
+        $caught  = false;
+        set_error_handler(function ($errno, $errstr) use ($phpunit, &$caught) {
+            if ($errno === E_WARNING && 0 !== strpos($errstr, 'Missing argument')) {
+                $phpunit->fail('Unexpected error caught during instantiation');
+                return false;
+            }
+
+            throw new BadMethodCallException('TRAPPED');
+        }, E_WARNING|E_RECOVERABLE_ERROR);
+        try {
+            $bareObject = new $class;
+        } catch (Exception $e) {
+            if ($e instanceof PHPUnit_Framework_Error
+                || ($e instanceof BadMethodCallException && $e->getMessage() === 'TRAPPED')
+            ) {
+                $caught = true;
+            }
+        }
+        $this->assertTrue($caught);
     }
 
     /**

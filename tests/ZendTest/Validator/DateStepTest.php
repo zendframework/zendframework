@@ -128,11 +128,11 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
     public function moscowWinterTimeDataProvider()
     {
         // dates before during and after Moscow's wintertime
-        return array (
+        return array(
             array('26-03-1999'),
             array('26-03-2011'),
             array('27-03-2011'),
-            array('26-03-2015')
+            array('26-03-2015'),
         );
     }
 
@@ -141,11 +141,11 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
      */
     public function testMoscowWinterTime($dateToValidate)
     {
-        $validator = new \Zend\Validator\DateStep(array(
+        $validator = new Validator\DateStep(array(
             'format' => 'd-m-Y',
             'baseValue' => date('d-m-Y', 0),
             'step' => new DateInterval("P1D"),
-            'timezone' => new DateTimeZone('Europe/Moscow')
+            'timezone' => new DateTimeZone('Europe/Moscow'),
         ));
 
         $this->assertTrue($validator->isValid($dateToValidate));

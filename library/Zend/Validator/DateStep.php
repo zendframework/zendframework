@@ -216,8 +216,8 @@ class DateStep extends Date
         $intervalParts = array_combine($unitKeys, $intervalParts);
 
         // Get absolute time difference to avoid special cases of missing/added time
-        $absoluteValueDate = new DateTime($valueDate->format('Y-m-d H:i:s'), new DateTimeZone("UTC"));
-        $absoluteBaseDate = new DateTime($baseDate->format('Y-m-d H:i:s'), new DateTimeZone("UTC"));
+        $absoluteValueDate = new DateTime($valueDate->format('Y-m-d H:i:s'), new DateTimeZone('UTC'));
+        $absoluteBaseDate = new DateTime($baseDate->format('Y-m-d H:i:s'), new DateTimeZone('UTC'));
 
         $timeDiff  = $absoluteValueDate->diff($absoluteBaseDate, true);
         $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));

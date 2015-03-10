@@ -11,6 +11,7 @@ namespace ZendTest\Log;
 
 use Exception;
 use ErrorException;
+use PHPUnit_Framework_Exception;
 use Zend\Log\Logger;
 use Zend\Log\Processor\Backtrace;
 use Zend\Log\Writer\Mock as MockWriter;
@@ -369,7 +370,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Logger::registerExceptionHandler($this->logger));
 
         // get the internal exception handler
-        $exceptionHandler = set_exception_handler(function ($e) {});
+        $exceptionHandler = set_exception_handler(function ($e) {
+        });
         set_exception_handler($exceptionHandler);
 
         // reset the exception handler
@@ -443,6 +445,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterFatalShutdownFunction()
     {
+        if (version_compare(PHP_VERSION, '7', 'ge')) {
+            $this->markTestSkipped('PHP7: cannot test as code now raises E_ERROR');
+        }
+
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
 
@@ -453,14 +459,14 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Logger::registerFatalErrorShutdownFunction($this->logger));
 
         $self = $this;
-        register_shutdown_function(function () use ($writer, $self) {
+        register_shutdown_function(function () use ($writer, $self, &$caught) {
             $self->assertEquals(
                 'Call to undefined method ZendTest\Log\LoggerTest::callToNonExistingMethod()',
                 $writer->events[0]['message']
             );
         });
 
-        // Temporary hide errors, because we don't want the fatal error to fail the test
+        // Temporarily hide errors, because we don't want the fatal error to fail the test
         @$this->callToNonExistingMethod();
     }
 
@@ -471,6 +477,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterFatalErrorShutdownFunctionHandlesCompileTimeErrors()
     {
+        if (version_compare(PHP_VERSION, '7', 'ge')) {
+            $this->markTestSkipped('PHP7: cannot test as code now raises E_ERROR');
+        }
+
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
 
@@ -481,14 +491,14 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Logger::registerFatalErrorShutdownFunction($this->logger));
 
         $self = $this;
-        register_shutdown_function(function () use ($writer, $self) {
+        register_shutdown_function(function () use ($writer, $self, &$caught) {
             $self->assertStringMatchesFormat(
                 'syntax error%A',
                 $writer->events[0]['message']
             );
         });
 
-        // Temporary hide errors, because we don't want the fatal error to fail the test
+        // Temporarily hide errors, because we don't want the fatal error to fail the test
         @eval('this::code::is::invalid {}');
     }
 
@@ -497,8 +507,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNotValidPriority()
     {
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException',
-                                    '$priority must be an integer >= 0 and < 8; received -1');
+        $this->setExpectedException(
+            'Zend\Log\Exception\InvalidArgumentException',
+            '$priority must be an integer >= 0 and < 8; received -1'
+        );
         $writer = new MockWriter();
         $this->logger->addWriter($writer);
         $this->logger->log(-1, 'Foo');

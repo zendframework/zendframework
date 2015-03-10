@@ -22,7 +22,8 @@ class DelegatingHydratorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $hydratorManager = $serviceLocator->get('HydratorManager');
-        return new DelegatingHydrator($hydratorManager);
+        // Assume that this factory is registered with the HydratorManager,
+        // and just pass it directly on.
+        return new DelegatingHydrator($serviceLocator);
     }
 }

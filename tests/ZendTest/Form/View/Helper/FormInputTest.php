@@ -503,4 +503,16 @@ class FormInputTest extends CommonTestCase
 
         $this->assertContains('title="translated&#x20;string"', $markup);
     }
+
+    /**
+     * @group 7166
+     */
+    public function testPasswordValueShouldNotBeRendered()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('type', 'password');
+
+        $markup  = $this->helper->__invoke($element);
+        $this->assertContains('value=""', $markup);
+    }
 }

@@ -43,7 +43,7 @@ class DateSelect extends MonthSelect
      * - day_attributes: HTML attributes to be rendered with the day element
      *
      * @param array|\Traversable $options
-     * @return DateSelect
+     * @return self
      */
     public function setOptions($options)
     {
@@ -78,7 +78,7 @@ class DateSelect extends MonthSelect
      * Set the day attributes
      *
      * @param  array $dayAttributes
-     * @return DateSelect
+     * @return self
      */
     public function setDayAttributes(array $dayAttributes)
     {
@@ -115,7 +115,7 @@ class DateSelect extends MonthSelect
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m'),
-                'day'   => $value->format('d')
+                'day'   => $value->format('d'),
             );
         }
 

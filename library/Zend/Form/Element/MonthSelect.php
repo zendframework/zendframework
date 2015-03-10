@@ -10,10 +10,12 @@
 namespace Zend\Form\Element;
 
 use DateTime as PhpDateTime;
+use Traversable;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -86,18 +88,25 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * Accepted options for DateSelect:
+     * Set element options.
+     *
+     * Accepted options for MonthSelect:
+     *
      * - month_attributes: HTML attributes to be rendered with the month element
      * - year_attributes: HTML attributes to be rendered with the month element
      * - min_year: min year to use in the year select
      * - max_year: max year to use in the year select
      *
-     * @param array|\Traversable $options
-     * @return MonthSelect
+     * @param array|Traversable $options
+     * @return self
      */
     public function setOptions($options)
     {
         parent::setOptions($options);
+
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
 
         if (isset($options['month_attributes'])) {
             $this->setMonthAttributes($options['month_attributes']);
@@ -156,7 +165,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      * Set the month attributes
      *
      * @param  array $monthAttributes
-     * @return MonthSelect
+     * @return self
      */
     public function setMonthAttributes(array $monthAttributes)
     {
@@ -178,7 +187,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      * Set the year attributes
      *
      * @param  array $yearAttributes
-     * @return MonthSelect
+     * @return self
      */
     public function setYearAttributes(array $yearAttributes)
     {
@@ -198,7 +207,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  int $minYear
-     * @return MonthSelect
+     * @return self
      */
     public function setMinYear($minYear)
     {
@@ -216,7 +225,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  int $maxYear
-     * @return MonthSelect
+     * @return self
      */
     public function setMaxYear($maxYear)
     {
@@ -234,7 +243,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  bool $createEmptyOption
-     * @return MonthSelect
+     * @return self
      */
     public function setShouldCreateEmptyOption($createEmptyOption)
     {
@@ -252,7 +261,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param  bool $renderDelimiters
-     * @return MonthSelect
+     * @return self
      */
     public function setShouldRenderDelimiters($renderDelimiters)
     {
@@ -270,7 +279,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
     /**
      * @param mixed $value
-     * @return void|\Zend\Form\Element
+     * @return self
      */
     public function setValue($value)
     {
@@ -283,10 +292,11 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
         $this->yearElement->setValue($value['year']);
         $this->monthElement->setValue($value['month']);
+        return $this;
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getValue()
     {
@@ -301,7 +311,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      * Prepare the form element (mostly used for rendering purposes)
      *
      * @param  FormInterface $form
-     * @return mixed
+     * @return void
      */
     public function prepareElement(FormInterface $form)
     {
@@ -332,13 +342,11 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
             'name' => $this->getName(),
             'required' => false,
             'filters' => array(
-                array(
-                    'name'    => 'MonthSelect',
-                )
+                array('name' => 'MonthSelect'),
             ),
             'validators' => array(
                 $this->getValidator(),
-            )
+            ),
         );
     }
 

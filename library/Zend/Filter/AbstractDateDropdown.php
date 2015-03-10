@@ -9,10 +9,8 @@
 
 namespace Zend\Filter;
 
-/**
- * Class AbstractDateDropdown
- * @package Zend\Filter
- */
+use Traversable;
+
 abstract class AbstractDateDropdown extends AbstractFilter
 {
     /**
@@ -42,8 +40,19 @@ abstract class AbstractDateDropdown extends AbstractFilter
     protected $expectedInputs;
 
     /**
-     * @param boolean $nullOnAllEmpty
-     * @return $this
+     * @param mixed $options If array or Traversable, passes value to
+     *     setOptions().
+     */
+    public function __construct($options = null)
+    {
+        if (is_array($options) || $options instanceof Traversable) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * @param bool $nullOnAllEmpty
+     * @return self
      */
     public function setNullOnAllEmpty($nullOnAllEmpty)
     {
@@ -52,16 +61,16 @@ abstract class AbstractDateDropdown extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function nullOnAllEmpty()
+    public function isNullOnAllEmpty()
     {
         return $this->nullOnAllEmpty;
     }
 
     /**
-     * @param boolean $nullOnEmpty
-     * @return $this
+     * @param bool $nullOnEmpty
+     * @return self
      */
     public function setNullOnEmpty($nullOnEmpty)
     {
@@ -70,43 +79,45 @@ abstract class AbstractDateDropdown extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function nullOnEmpty()
+    public function isNullOnEmpty()
     {
         return $this->nullOnEmpty;
     }
 
     /**
-     * Returns the result of filtering $value
+     * Attempts to filter an array of date/time information to a formatted
+     * string.
      *
      * @param  mixed $value
-     * @throws Exception\RuntimeException If filtering $value is impossible
      * @return mixed
+     * @throws Exception\RuntimeException If filtering $value is impossible
      */
     public function filter($value)
     {
-        // Convert the date to a specific format
-        if (is_array($value)) {
-            if (
-                $this->nullOnEmpty() &&
-                array_reduce($value, function ($soFar, $value) { return $soFar | empty($value); }, false)
-            ) {
-                return;
-            }
-
-            if (
-                $this->nullOnAllEmpty() &&
-                array_reduce($value, function ($soFar, $value) { return $soFar & empty($value); }, true)
-            ) {
-                return;
-            }
-
-            $this->filterable($value);
-
-            ksort($value);
-            $value = vsprintf($this->format, $value);
+        if (! is_array($value)) {
+            // nothing to do
+            return $value;
         }
+
+        // Convert the date to a specific format
+        if ($this->isNullOnEmpty()
+            && array_reduce($value, __CLASS__ . '::reduce', false)
+        ) {
+            return;
+        }
+
+        if ($this->isNullOnAllEmpty()
+            && array_reduce($value, __CLASS__ . '::reduce', true)
+        ) {
+            return;
+        }
+
+        $this->filterable($value);
+
+        ksort($value);
+        $value = vsprintf($this->format, $value);
 
         return $value;
     }
@@ -128,5 +139,17 @@ abstract class AbstractDateDropdown extends AbstractFilter
                 )
             );
         }
+    }
+
+    /**
+     * Reduce to a single value
+     *
+     * @param string $soFar
+     * @param string $value
+     * @return bool
+     */
+    public static function reduce($soFar, $value)
+    {
+        return $soFar || empty($value);
     }
 }

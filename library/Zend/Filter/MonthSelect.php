@@ -9,10 +9,6 @@
 
 namespace Zend\Filter;
 
-/**
- * Class MonthSelect
- * @package Zend\Filter
- */
 class MonthSelect extends AbstractDateDropdown
 {
     /**

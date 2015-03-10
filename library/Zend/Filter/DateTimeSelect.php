@@ -9,10 +9,6 @@
 
 namespace Zend\Filter;
 
-/**
- * Class DateTimeSelect
- * @package Zend\Filter
- */
 class DateTimeSelect extends AbstractDateDropdown
 {
     /**
@@ -29,47 +25,52 @@ class DateTimeSelect extends AbstractDateDropdown
 
     /**
      * @param mixed $value
-     * @throws Exception\RuntimeException
      * @return array|mixed|null|string
+     * @throws Exception\RuntimeException
      */
     public function filter($value)
     {
-        if (is_array($value)) {
-            if ($this->nullOnEmpty() && (
-                    empty($value['year']) ||
-                    empty($value['month']) ||
-                    empty($value['day']) ||
-                    empty($value['hour']) ||
-                    empty($value['minute']) ||
-                    (isset($value['second']) && empty($value['second']))
-                )
-            ) {
-                return;
-            }
-
-            if ($this->nullOnAllEmpty() && (
-                    empty($value['year']) &&
-                    empty($value['month']) &&
-                    empty($value['day']) &&
-                    empty($value['hour']) &&
-                    empty($value['minute']) &&
-                    (!isset($value['second']) || empty($value['second']))
-
-                )
-            ) {
-                return;
-            }
-
-            if (!isset($value['second'])) {
-                $value['second'] = '00';
-            }
-
-            $this->filterable($value);
-
-            ksort($value);
-
-            $value = vsprintf($this->format, $value);
+        if (! is_array($value)) {
+            // nothing to do
+            return $value;
         }
+
+        if ($this->isNullOnEmpty()
+            && (
+                empty($value['year'])
+                || empty($value['month'])
+                || empty($value['day'])
+                || empty($value['hour'])
+                || empty($value['minute'])
+                || (isset($value['second']) && empty($value['second']))
+            )
+        ) {
+            return;
+        }
+
+        if ($this->isNullOnAllEmpty()
+            && (
+                empty($value['year'])
+                && empty($value['month'])
+                && empty($value['day'])
+                && empty($value['hour'])
+                && empty($value['minute'])
+                && (!isset($value['second']) || empty($value['second']))
+            )
+        ) {
+            // Cannot handle this value
+            return;
+        }
+
+        if (! isset($value['second'])) {
+            $value['second'] = '00';
+        }
+
+        $this->filterable($value);
+
+        ksort($value);
+
+        $value = vsprintf($this->format, $value);
 
         return $value;
     }

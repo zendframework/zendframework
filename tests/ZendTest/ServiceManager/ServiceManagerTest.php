@@ -1189,13 +1189,6 @@ class ServiceManagerTest extends TestCase
         $this->serviceManager->isShared('foobarbazbat');
     }
 
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::loopPeeringServiceManagers
-     * @covers Zend\ServiceManager\ServiceManager::setServiceManagerCaller
-     * @uses Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     * @uses Zend\ServiceManager\ServiceManager::addPeeringServiceManager
-     * @uses Zend\ServiceManager\ServiceManager::get
-     */
     public function testPeeringServiceManagersInBothDirectionsDontRunIntoInfiniteLoop()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
@@ -1204,13 +1197,6 @@ class ServiceManagerTest extends TestCase
         $this->serviceManager->get('foobarbazbat');
     }
 
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::loopPeeringServiceManagers
-     * @covers Zend\ServiceManager\ServiceManager::setServiceManagerCaller
-     * @covers Zend\ServiceManager\ServiceManager::has
-     * @uses Zend\ServiceManager\ServiceManager::addPeeringServiceManager
-     * @uses Zend\ServiceManager\ServiceManager::get
-     */
     public function testServiceCanBeFoundFromPeeringServicesManagers()
     {
         $peeredServiceManager = new ServiceManager();

@@ -723,17 +723,21 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($usePeeringServiceManagers) {
-
             $caller = $this->serviceManagerCaller;
             foreach ($this->peeringServiceManagers as $peeringServiceManager) {
                 // ignore peering service manager if they are the same instance
-                if ($caller !== $peeringServiceManager) {
-                    $peeringServiceManager->serviceManagerCaller = $this;
-                    if ($peeringServiceManager->has($name)) {
-                        return true;
-                    }
-                    $peeringServiceManager->serviceManagerCaller = null;
+                if ($caller === $peeringServiceManager) {
+                    continue;
                 }
+
+                $peeringServiceManager->serviceManagerCaller = $this;
+
+                if ($peeringServiceManager->has($name)) {
+                    $peeringServiceManager->serviceManagerCaller = null;
+                    return true;
+                }
+
+                $peeringServiceManager->serviceManagerCaller = null;
             }
         }
 
@@ -1030,15 +1034,21 @@ class ServiceManager implements ServiceLocatorInterface
 
         foreach ($this->peeringServiceManagers as $peeringServiceManager) {
             // ignore peering service manager if they are the same instance
-            if ($caller !== $peeringServiceManager) {
-                // pass this instance to peering service manager
-                $peeringServiceManager->serviceManagerCaller = $this;
-                if ($peeringServiceManager->has($name)) {
-                    $this->shared[$name] = $peeringServiceManager->isShared($name);
-                    return $peeringServiceManager->get($name);
-                }
-                $peeringServiceManager->serviceManagerCaller = null;
+            if ($caller === $peeringServiceManager) {
+                continue;
             }
+
+            // pass this instance to peering service manager
+            $peeringServiceManager->serviceManagerCaller = $this;
+
+            if ($peeringServiceManager->has($name)) {
+                $this->shared[$name] = $peeringServiceManager->isShared($name);
+                $instance = $peeringServiceManager->get($name);
+                $peeringServiceManager->serviceManagerCaller = null;
+                return $instance;
+            }
+
+            $peeringServiceManager->serviceManagerCaller = null;
         }
 
         return;

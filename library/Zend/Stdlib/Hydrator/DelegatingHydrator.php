@@ -10,7 +10,6 @@
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Exception;
 
 class DelegatingHydrator implements HydratorInterface
 {

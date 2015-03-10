@@ -543,5 +543,4 @@ class EmailAddress extends AbstractValidator
         }
         return $email;
     }
-
 }

@@ -12,7 +12,7 @@ namespace Zend\Stdlib\Hydrator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Exception;
 
-class MappingHydrator implements HydratorInterface
+class DelegatingHydrator implements HydratorInterface
 {
     /**
      * @var ServiceLocatorInterface
@@ -48,7 +48,7 @@ class MappingHydrator implements HydratorInterface
     /**
      * Gets hydrator of an object
      *
-     * @param  object                             $object
+     * @param  object $object
      * @return HydratorInterface
      */
     protected function getHydrator($object)

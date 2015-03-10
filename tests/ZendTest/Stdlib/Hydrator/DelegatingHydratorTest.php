@@ -3,24 +3,24 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Stdlib\Hydrator;
 
-use Zend\Stdlib\Hydrator\MappingHydrator;
+use Zend\Stdlib\Hydrator\DelegatingHydrator;
 use ArrayObject;
 
 /**
- * Unit tests for {@see \Zend\Stdlib\Hydrator\MappingHydrator}
+ * Unit tests for {@see \Zend\Stdlib\Hydrator\DelegatingHydrator}
  *
- * @covers \Zend\Stdlib\Hydrator\MappingHydrator
+ * @covers \Zend\Stdlib\Hydrator\DelegatingHydrator
  */
-class MappingHydratorTest extends \PHPUnit_Framework_TestCase
+class DelegatingHydratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var MappingHydrator
+     * @var DelegatingHydrator
      */
     protected $hydrator;
 
@@ -40,7 +40,7 @@ class MappingHydratorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->hydrators = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->hydrator = new MappingHydrator($this->hydrators);
+        $this->hydrator = new DelegatingHydrator($this->hydrators);
         $this->object = new ArrayObject;
     }
 

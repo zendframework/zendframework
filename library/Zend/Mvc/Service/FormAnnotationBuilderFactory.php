@@ -50,6 +50,10 @@ class FormAnnotationBuilderFactory implements FactoryInterface
                     $listener->attach($annotationBuilder->getEventManager());
                 }
             }
+
+            if (isset($config['preserve_defined_order'])) {
+                $annotationBuilder->setPreserveDefinedOrder($config['preserve_defined_order']);
+            }
         }
 
         return $annotationBuilder;

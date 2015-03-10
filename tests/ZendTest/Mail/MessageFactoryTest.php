@@ -36,9 +36,9 @@ class MessageFactoryTest extends \PHPUnit_Framework_TestCase
         $message = MessageFactory::getInstance($options);
 
         $this->assertInstanceOf('Zend\Mail\Message', $message);
-        $this->assertEquals('UTF-8',   $message->getEncoding());
+        $this->assertEquals('UTF-8', $message->getEncoding());
         $this->assertEquals('subject', $message->getSubject());
-        $this->assertEquals('body',    $message->getBody());
+        $this->assertEquals('body', $message->getBody());
         $this->assertInstanceOf('Zend\Mail\Address', $message->getSender());
         $this->assertEquals($options['sender'], $message->getSender()->getEmail());
 
@@ -58,7 +58,7 @@ class MessageFactoryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testConstructMessageWithArrayValue()
+    public function testCanCreateMessageWithMultipleRecipientsViaArrayValue()
     {
         $options = array(
             'from' => array('matthew@example.com' => 'Matthew'),
@@ -83,7 +83,7 @@ class MessageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($to->has('zf-contributors@example.com'));
     }
 
-    public function testUnreconizeOption()
+    public function testIgnoresUnreconizedOptions()
     {
         $options = array(
             'foo' => 'bar',
@@ -99,9 +99,27 @@ class MessageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Mail\Message', $mail);
     }
 
-    public function testExceptionForOptionsNotArrayOrTraversable()
+    public function invalidMessageOptions()
+    {
+        return array(
+            'null' => array(null),
+            'bool' => array(true),
+            'int' => array(1),
+            'float' => array(1.1),
+            'string' => array('not-an-array'),
+            'plain-object' => array((object) array(
+                'from' => 'matthew@example.com',
+                'to'   => 'foo@example.com',
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider invalidMessageOptions
+     */
+    public function testExceptionForOptionsNotArrayOrTraversable($options)
     {
         $this->setExpectedException('Zend\Mail\Exception\InvalidArgumentException');
-        MessageFactory::getInstance('not-an-array');
+        MessageFactory::getInstance($options);
     }
 }

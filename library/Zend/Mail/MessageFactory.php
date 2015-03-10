@@ -15,11 +15,11 @@ class MessageFactory
 {
     /**
      * @param array|Traversable $options
-     * @return Zend\Mail\Message
+     * @return Message
      */
     public static function getInstance($options = array())
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
+        if (! is_array($options) && ! $options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '"%s" expects an array or Traversable; received "%s"',
                 __METHOD__,
@@ -27,14 +27,39 @@ class MessageFactory
             ));
         }
 
-        $mail = new Message();
+        $message = new Message();
+
         foreach ($options as $key => $value) {
-            $setter = 'set' . str_replace(' ',  '', ucwords(strtr($key, array('-' => ' ', '_' => ' '))));
-            if (method_exists($mail, $setter)) {
-                $mail->{$setter}($value);
+            $setter = self::getSetterMethod($key);
+            if (method_exists($message, $setter)) {
+                $message->{$setter}($value);
             }
         }
 
-        return $mail;
+        return $message;
+    }
+
+    /**
+     * Generate a setter method name based on a provided key.
+     *
+     * @param string $key
+     * @return string
+     */
+    private static function getSetterMethod($key)
+    {
+        return 'set'
+            . str_replace(
+                ' ',
+                '',
+                ucwords(
+                    strtr(
+                        $key,
+                        array(
+                            '-' => ' ',
+                            '_' => ' ',
+                        )
+                    )
+                )
+            );
     }
 }

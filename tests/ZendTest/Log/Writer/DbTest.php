@@ -258,7 +258,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
             'priority' => 'new-priority-field',
-            'message'  => 'new-message-field' ,
+            'message'  => 'new-message-field',
             'extra'    => array(
                 'file'  => 'new-file',
                 'line'  => 'new-line',

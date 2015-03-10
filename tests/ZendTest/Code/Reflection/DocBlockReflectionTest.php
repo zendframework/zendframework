@@ -59,6 +59,20 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('mixed', $returnTag->getType());
     }
 
+    public function testShortDocBlocks()
+    {
+        $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass13');
+        $this->assertEquals(0, count($classReflection->getDocBlock()->getTags()));
+
+        $this->assertSame('Short Method Description', $classReflection->getMethod('doSomething')->getDocBlock()->getShortDescription());
+        $this->assertSame('Short Class Description', $classReflection->getDocBlock()->getShortDescription());
+
+        $returnTag = $classReflection->getMethod('returnSomething')->getDocBlock()->getTag('return');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
+        $this->assertEquals('Something', $returnTag->getType());
+        $this->assertEquals('This describes something', $returnTag->getDescription());
+    }
+
     public function testTabbedDocBlockTags()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass10');
@@ -85,8 +99,6 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testDocBlockLines()
     {
-        //$this->markTestIncomplete('Line numbers incomplete');
-
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $classDocBlock = $classReflection->getDocBlock();

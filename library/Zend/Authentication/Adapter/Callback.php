@@ -20,6 +20,9 @@ use Zend\Authentication\Result;
  */
 class Callback extends AbstractAdapter
 {
+    /**
+     * @var callable
+     */
     protected $callback;
 
     /**

@@ -19,9 +19,9 @@ use Zend\Authentication\Adapter;
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Database table authentication adapter
+     * Callback authentication adapter
      *
-     * @var \Zend\Authentication\Adapter\DbTable
+     * @var \Zend\Authentication\Adapter\Callback
      */
     protected $_adapter = null;
 
@@ -89,15 +89,16 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateProvidesCallbackWithIdentityAndCredentials()
     {
-        $adapter = $this->_adapter;
         $this->_adapter->setIdentity('testIdentity');
         $this->_adapter->setCredential('testCredential');
-        $callback = function ($identity, $credential) use ($adapter) {
-            $this->assertEquals($identity, $adapter->getIdentity());
-            $this->assertEquals($credential, $adapter->getCredential());
+        $that = $this;
+        $callback = function ($identity, $credential) use ($that) {
+            $adapter = $that->_adapter;
+            $that->assertEquals($identity, $adapter->getIdentity());
+            $that->assertEquals($credential, $adapter->getCredential());
         };
-        $adapter->setCallback($callback);
-        $adapter->authenticate();
+        $this->_adapter->setCallback($callback);
+        $this->_adapter->authenticate();
     }
 
     /**
@@ -122,17 +123,18 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateResultIfCallbackReturnsFalsy()
     {
-        $adapter = $this->_adapter;
+        $that = $this;
         $falsyValues = array(false, null, '', '0', array(), 0, 0.0);
-        array_map(function ($falsy) use ($adapter) {
+        array_map(function ($falsy) use ($that) {
             $callback = function () use ($falsy) {
                 return $falsy;
             };
+            $adapter = $that->_adapter;
             $adapter->setCallback($callback);
             $result = $adapter->authenticate();
-            $this->assertFalse($result->isValid());
-            $this->assertEquals(Authentication\Result::FAILURE, $result->getCode());
-            $this->assertEquals(array('Authentication failure'), $result->getMessages());
+            $that->assertFalse($result->isValid());
+            $that->assertEquals(Authentication\Result::FAILURE, $result->getCode());
+            $that->assertEquals(array('Authentication failure'), $result->getMessages());
         }, $falsyValues);
     }
 

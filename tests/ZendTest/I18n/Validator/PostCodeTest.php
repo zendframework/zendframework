@@ -44,7 +44,6 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
 	public function testUKBasic($postCode, $expected)
 	{
 		$uk_validator = new PostCodeValidator(array('locale' => 'en_GB'));
-
 		$this->assertEquals($expected, $uk_validator->isValid($postCode));
 	}
 

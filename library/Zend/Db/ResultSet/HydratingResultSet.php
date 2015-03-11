@@ -56,7 +56,7 @@ class HydratingResultSet extends AbstractResultSet
     }
 
     /**
-     * Set the row object prototype
+     * Get the row object prototype
      *
      * @return object
      */

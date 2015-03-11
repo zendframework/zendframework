@@ -89,11 +89,11 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateProvidesCallbackWithIdentityAndCredentials()
     {
-        $this->_adapter->setIdentity('testIdentity');
-        $this->_adapter->setCredential('testCredential');
+        $adapter = $this->_adapter;
+        $adapter->setIdentity('testIdentity');
+        $adapter->setCredential('testCredential');
         $that = $this;
-        $callback = function ($identity, $credential) use ($that) {
-            $adapter = $that->_adapter;
+        $callback = function ($identity, $credential) use ($that, $adapter) {
             $that->assertEquals($identity, $adapter->getIdentity());
             $that->assertEquals($credential, $adapter->getCredential());
         };
@@ -123,13 +123,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateResultIfCallbackReturnsFalsy()
     {
-        $that = $this;
+        $that    = $this;
+        $adapter = $this->_adapter;
         $falsyValues = array(false, null, '', '0', array(), 0, 0.0);
-        array_map(function ($falsy) use ($that) {
+        array_map(function ($falsy) use ($that, $adapter) {
             $callback = function () use ($falsy) {
                 return $falsy;
             };
-            $adapter = $that->_adapter;
             $adapter->setCallback($callback);
             $result = $adapter->authenticate();
             $that->assertFalse($result->isValid());

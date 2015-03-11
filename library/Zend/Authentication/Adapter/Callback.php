@@ -40,6 +40,7 @@ class Callback extends AbstractAdapter
     /**
      * Authenticate
      * @return \Zend\Authentication\Result the authentication result
+     * @throws RuntimeException
      */
     public function authenticate()
     {

@@ -121,7 +121,10 @@ class Csrf extends AbstractValidator
         $tokenId = $this->getTokenIdFromHash($value);
         $hash = $this->getValidationToken($tokenId);
 
-        if ($this->getTokenFromHash($value) !== $this->getTokenFromHash($hash)) {
+        $tokenFromValue = $this->getTokenFromHash($value);
+        $tokenFromHash = $this->getTokenFromHash($hash);
+
+        if (!$tokenFromValue || !$tokenFromHash || ($tokenFromValue !== $tokenFromHash)) {
             $this->error(self::NOT_SAME);
             return false;
         }
@@ -331,7 +334,7 @@ class Csrf extends AbstractValidator
             return $this->formatHash($session->tokenList[$tokenId], $tokenId);
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -363,7 +366,7 @@ class Csrf extends AbstractValidator
         $data = explode('-', $hash);
 
         if (! isset($data[1])) {
-            return null;
+            return;
         }
 
         return $data[1];

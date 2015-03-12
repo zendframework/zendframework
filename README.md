@@ -19,6 +19,9 @@ DD MMM YYYY
 
 ### UPDATES IN 2.3.7
 
+- This release reverts [#7255](https://github.com/zendframework/zf2/pull/7255),
+  as it introduced a BC break against `Zend\Mvc\Controller\AbstractRestfulController`.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

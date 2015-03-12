@@ -7,7 +7,6 @@ Zend\Loader\AutoloaderFactory::factory(array(
     )
 ));
 
-use Zend\Dom\Query as DomQuery;
 use Zend\Http\ClientStatic;
 use Zend\Validator\Hostname;
 

@@ -11,6 +11,7 @@ namespace Zend\Crypt\Password;
 
 use Traversable;
 use Zend\Math\Rand;
+use Zend\Crypt\Utils;
 
 /**
  * Apache password authentication
@@ -126,7 +127,7 @@ class Apache implements PasswordInterface
     {
         if (substr($hash, 0, 5) === '{SHA}') {
             $hash2 = '{SHA}' . base64_encode(sha1($password, true));
-            return ($hash === $hash2);
+            return Utils::compareStrings($hash, $hash2);
         }
         if (substr($hash, 0, 6) === '$apr1$') {
             $token = explode('$', $hash);
@@ -136,7 +137,7 @@ class Apache implements PasswordInterface
                 );
             }
             $hash2 = $this->apr1Md5($password, $token[2]);
-            return ($hash === $hash2);
+            return Utils::compareStrings($hash, $hash2);
         }
         if (strlen($hash) > 13) { // digest
             if (empty($this->userName) || empty($this->authName)) {
@@ -145,9 +146,9 @@ class Apache implements PasswordInterface
                 );
             }
             $hash2 = md5($this->userName . ':' . $this->authName . ':' .$password);
-            return ($hash === $hash2);
+            return Utils::compareStrings($hash, $hash2);
         }
-        return (crypt($password, $hash) === $hash);
+        return Utils::compareStrings($hash, crypt($password, $hash));
     }
 
     /**

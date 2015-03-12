@@ -9,9 +9,6 @@
 
 namespace Zend\Crypt\Password;
 
-use Traversable;
-use Zend\Math\Rand;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Crypt\Hash;
 
 /**
@@ -45,5 +42,4 @@ class BcryptSha extends Bcrypt
     {
         return parent::verify(Hash::compute('sha256', $password), $hash);
     }
-
 }

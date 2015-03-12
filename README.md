@@ -11,13 +11,16 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.7dev*
+*Zend Framework 2.3.7*
 
 This is the seventh maintenance release for the version 2.3 series.
 
-DD MMM YYYY
+12 Mar 2015
 
 ### UPDATES IN 2.3.7
+
+- This release reverts [#7255](https://github.com/zendframework/zf2/pull/7255),
+  as it introduced a BC break against `Zend\Mvc\Controller\AbstractRestfulController`.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

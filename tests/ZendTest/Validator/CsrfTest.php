@@ -260,4 +260,27 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->validator->isValid($bareToken));
     }
+
+    public function fakeValuesDataProvider()
+    {
+        return array(
+            array(''),
+            array('-fakeTokenId'),
+            array('fakeTokenId-fakeTokenId'),
+            array('fakeTokenId-'),
+            array('fakeTokenId'),
+            array(md5(uniqid()) . '-'),
+            array(md5(uniqid()) . '-' . md5(uniqid())),
+            array('-' . md5(uniqid()))
+        );
+    }
+
+    /**
+     * @dataProvider fakeValuesDataProvider
+     */
+    public function testWithFakeValues($value)
+    {
+        $validator = new Csrf();
+        $this->assertFalse($validator->isValid($value));
+    }
 }

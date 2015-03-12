@@ -11,7 +11,7 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.6dev*
+*Zend Framework 2.3.6*
 
 This is the sixth maintenance release for the version 2.3 series.
 

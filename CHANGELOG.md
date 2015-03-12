@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.3.7 (2015-03-12)
+
+- [7255: Revert BC break against AbstractRestfulController](https://github.com/zendframework/zf2/pull/7255)
+
 ## 2.3.6 (2015-03-12)
 
 ### SECURITY UPDATES

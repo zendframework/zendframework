@@ -136,4 +136,10 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
             $expression->getExpressionData()
         );
     }
+    
+    public function testConstructorWithLiteralZero()
+    {
+        $expression = new Expression('0');
+        $this->assertSame('0', $expression->getExpression());
+    }
 }

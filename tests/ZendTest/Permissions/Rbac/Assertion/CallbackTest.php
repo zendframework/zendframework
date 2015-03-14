@@ -38,6 +38,22 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures assert method provides callback with rbac as argument
+     */
+    public function testAssertMethodPassRbacToCallback()
+    {
+        $rbac   = new Rbac\Rbac();
+        $that   = $this;
+        $assert = new Rbac\Assertion\Callback(function ($rbacArg) use ($that, $rbac) {
+            $that->assertEquals($rbacArg, $rbac);
+            return false;
+        });
+        $foo  = new Rbac\Role('foo');
+        $foo->addPermission('can.foo');
+        $rbac->isGranted($foo, 'can.foo', $assert);
+    }
+
+    /**
      * Ensures assert method returns callback's function value
      */
     public function testAssertMethod()

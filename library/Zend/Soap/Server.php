@@ -785,7 +785,7 @@ class Server implements ZendServerServer
      */
     public function setReturnResponse($flag = true)
     {
-        $this->returnResponse = ($flag) ? true : false;
+        $this->returnResponse = (bool) $flag;
         return $this;
     }
 

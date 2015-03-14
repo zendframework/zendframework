@@ -254,7 +254,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 if ($providerContext) {
                     $return[] = array($cValue);
                 } else {
-                    $return[strtolower($cValue)] = ($trueMethod == $cValue) ? true : false;
+                    $return[strtolower($cValue)] = ($trueMethod == $cValue);
                 }
             }
         }

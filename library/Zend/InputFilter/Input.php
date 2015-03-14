@@ -319,14 +319,21 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function isValid($context = null)
     {
+        $value     = $this->getValue();
+        $empty     = ($value === null || $value === '' || $value === array());
+
+        if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
+            return true;
+        }
+
         // Empty value needs further validation if continueIfEmpty is set
         // so don't inject NotEmpty validator which would always
         // mark that as false
-        if (!$this->continueIfEmpty()) {
+        if (!$this->continueIfEmpty() && !$this->allowEmpty()) {
             $this->injectNotEmptyValidator();
         }
         $validator = $this->getValidatorChain();
-        $value     = $this->getValue();
+
         $result    = $validator->isValid($value, $context);
         if (!$result && $this->hasFallback()) {
             $this->setValue($this->getFallbackValue());
@@ -372,7 +379,14 @@ class Input implements InputInterface, EmptyContextInterface
             }
         }
 
-        $chain->prependByName('NotEmpty', array(), true);
         $this->notEmptyValidator = true;
+
+        if (class_exists('Zend\ServiceManager\AbstractPluginManager')) {
+            $chain->prependByName('NotEmpty', array(), true);
+
+            return;
+        }
+
+        $chain->prependValidator(new NotEmpty(), true);
     }
 }

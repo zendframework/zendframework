@@ -61,6 +61,13 @@ class PredicateSet implements PredicateInterface, Countable
         return $this;
     }
 
+    /**
+     * Add predicates to set
+     *
+     * @param PredicateInterface|\Closure|string|array $predicates
+     * @param string $combination
+     * @return PredicateSet
+     */
     public function addPredicates($predicates, $combination = self::OP_AND)
     {
         if ($predicates === null) {

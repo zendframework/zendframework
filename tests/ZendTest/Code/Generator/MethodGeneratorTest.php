@@ -100,6 +100,31 @@ EOS;
         $this->assertEquals($target, (string) $methodGenerator);
     }
 
+
+    public function testMethodFromReflectionMultiLinesIndention()
+    {
+        $ref = new MethodReflection('ZendTest\Code\Generator\TestAsset\TestSampleSingleClassMultiLines', 'someMethod');
+
+        $methodGenerator = MethodGenerator::fromReflection($ref);
+        $target = <<<EOS
+    /**
+     * Enter description here...
+     *
+     * @return bool
+     */
+    public function someMethod()
+    {
+        /* test test */
+
+        /* test test */
+
+        /* test test */
+    }
+
+EOS;
+        $this->assertEquals($target, (string) $methodGenerator);
+    }
+
     /**
      * @group ZF-6444
      */

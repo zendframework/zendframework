@@ -121,7 +121,10 @@ class Csrf extends AbstractValidator
         $tokenId = $this->getTokenIdFromHash($value);
         $hash = $this->getValidationToken($tokenId);
 
-        if ($this->getTokenFromHash($value) !== $this->getTokenFromHash($hash)) {
+        $tokenFromValue = $this->getTokenFromHash($value);
+        $tokenFromHash = $this->getTokenFromHash($hash);
+
+        if (!$tokenFromValue || !$tokenFromHash || ($tokenFromValue !== $tokenFromHash)) {
             $this->error(self::NOT_SAME);
             return false;
         }

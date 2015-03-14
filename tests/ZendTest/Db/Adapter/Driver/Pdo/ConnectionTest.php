@@ -55,4 +55,29 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($dsn, $responseString);
     }
+
+    /**
+     * @group 2622
+     */
+    public function testArrayOfConnectionParametersCreatesCorrectDsn()
+    {
+        $this->connection->setConnectionParameters(array(
+            'driver'  => 'pdo_mysql',
+            'host'    => '127.0.0.1',
+            'charset' => 'utf8',
+            'dbname'  => 'foo',
+            'port'    => '3306',
+        ));
+        try {
+            $this->connection->connect();
+        } catch (\Exception $e) {
+        }
+        $responseString = $this->connection->getDsn();
+
+        $this->assertStringStartsWith('mysql:', $responseString);
+        $this->assertContains('host=127.0.0.1', $responseString);
+        $this->assertContains('charset=utf8', $responseString);
+        $this->assertContains('dbname=foo', $responseString);
+        $this->assertContains('port=3306', $responseString);
+    }
 }

@@ -17,6 +17,7 @@ class SampleEntity
      * @Annotation\ErrorMessage("Invalid or missing sampleinput")
      * @Annotation\Required(true)
      * @Annotation\AllowEmpty(true)
+     * @Annotation\ContinueIfEmpty(true)
      */
     public $sampleinput;
 

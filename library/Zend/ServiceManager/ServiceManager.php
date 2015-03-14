@@ -115,6 +115,11 @@ class ServiceManager implements ServiceLocatorInterface
     protected $canonicalNamesReplacements = array('-' => '', '_' => '', ' ' => '', '\\' => '', '/' => '');
 
     /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceManagerCaller;
+
+    /**
      * Constructor
      *
      * @param ConfigInterface $config
@@ -718,10 +723,21 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($usePeeringServiceManagers) {
+            $caller = $this->serviceManagerCaller;
             foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                // ignore peering service manager if they are the same instance
+                if ($caller === $peeringServiceManager) {
+                    continue;
+                }
+
+                $peeringServiceManager->serviceManagerCaller = $this;
+
                 if ($peeringServiceManager->has($name)) {
+                    $peeringServiceManager->serviceManagerCaller = null;
                     return true;
                 }
+
+                $peeringServiceManager->serviceManagerCaller = null;
             }
         }
 
@@ -987,11 +1003,8 @@ class ServiceManager implements ServiceLocatorInterface
      */
     protected function retrieveFromPeeringManager($name)
     {
-        foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-            if ($peeringServiceManager->has($name)) {
-                $this->shared[$name] = $peeringServiceManager->isShared($name);
-                return $peeringServiceManager->get($name);
-            }
+        if (null !== ($service = $this->loopPeeringServiceManagers($name))) {
+            return $service;
         }
 
         $name = $this->canonicalizeName($name);
@@ -1002,11 +1015,40 @@ class ServiceManager implements ServiceLocatorInterface
             } while ($this->hasAlias($name));
         }
 
+        if (null !== ($service = $this->loopPeeringServiceManagers($name))) {
+            return $service;
+        }
+
+        return null;
+    }
+
+    /**
+     * Loop over peering service managers.
+     *
+     * @param string $name
+     * @return mixed
+     */
+    protected function loopPeeringServiceManagers($name)
+    {
+        $caller = $this->serviceManagerCaller;
+
         foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+            // ignore peering service manager if they are the same instance
+            if ($caller === $peeringServiceManager) {
+                continue;
+            }
+
+            // pass this instance to peering service manager
+            $peeringServiceManager->serviceManagerCaller = $this;
+
             if ($peeringServiceManager->has($name)) {
                 $this->shared[$name] = $peeringServiceManager->isShared($name);
-                return $peeringServiceManager->get($name);
+                $instance = $peeringServiceManager->get($name);
+                $peeringServiceManager->serviceManagerCaller = null;
+                return $instance;
             }
+
+            $peeringServiceManager->serviceManagerCaller = null;
         }
 
         return;

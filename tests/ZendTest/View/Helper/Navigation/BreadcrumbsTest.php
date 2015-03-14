@@ -173,6 +173,10 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testTranslationUsingZendTranslateAndCustomTextDomain()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->_helper->setTranslator($this->_getTranslatorWithTextDomain());
 
         $expected = $this->_getExpected('bc/textdomain.html');

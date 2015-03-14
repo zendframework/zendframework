@@ -43,7 +43,7 @@ class DateSelect extends MonthSelect
      * - day_attributes: HTML attributes to be rendered with the day element
      *
      * @param array|\Traversable $options
-     * @return DateSelect
+     * @return self
      */
     public function setOptions($options)
     {
@@ -78,7 +78,7 @@ class DateSelect extends MonthSelect
      * Set the day attributes
      *
      * @param  array $dayAttributes
-     * @return DateSelect
+     * @return self
      */
     public function setDayAttributes(array $dayAttributes)
     {
@@ -115,7 +115,7 @@ class DateSelect extends MonthSelect
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m'),
-                'day'   => $value->format('d')
+                'day'   => $value->format('d'),
             );
         }
 
@@ -179,19 +179,7 @@ class DateSelect extends MonthSelect
             'name' => $this->getName(),
             'required' => false,
             'filters' => array(
-                array(
-                    'name'    => 'Callback',
-                    'options' => array(
-                        'callback' => function ($date) {
-                            // Convert the date to a specific format
-                            if (is_array($date)) {
-                                $date = $date['year'] . '-' . $date['month'] . '-' . $date['day'];
-                            }
-
-                            return $date;
-                        }
-                    )
-                )
+                array('name' => 'DateSelect')
             ),
             'validators' => array(
                 $this->getValidator(),

@@ -156,11 +156,13 @@ class Chain extends TreeRouteStack implements RouteInterface
 
         $this->assembledParams = array();
 
-        end($this->routes);
-        $lastRouteKey = key($this->routes);
+        $routes = ArrayUtils::iteratorToArray($this->routes);
+
+        end($routes);
+        $lastRouteKey = key($routes);
         $path         = '';
 
-        foreach ($this->routes as $key => $route) {
+        foreach ($routes as $key => $route) {
             $chainOptions = $options;
             $hasChild     = isset($options['has_child']) ? $options['has_child'] : false;
 

@@ -433,7 +433,7 @@ class Filesystem extends AbstractAdapter implements
      * Get available space in bytes
      *
      * @throws Exception\RuntimeException
-     * @return int|float
+     * @return float
      */
     public function getAvailableSpace()
     {
@@ -508,8 +508,9 @@ class Filesystem extends AbstractAdapter implements
      * @param  string  $normalizedKey
      * @param  bool $success
      * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @return null|mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
+     * @throws BaseException
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {

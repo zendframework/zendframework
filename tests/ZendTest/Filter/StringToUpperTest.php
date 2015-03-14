@@ -175,4 +175,16 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($input, $this->_filter->filter($input));
     }
+
+    /**
+     * @group 7147
+     */
+    public function testFilterUsesGetEncodingMethod()
+    {
+        $filterMock = $this->getMock('Zend\Filter\StringToUpper', array('getEncoding'));
+        $filterMock->expects($this->once())
+                   ->method('getEncoding')
+                   ->with();
+        $filterMock->filter('foo');
+    }
 }

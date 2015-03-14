@@ -87,14 +87,14 @@ class FormButton extends FormInput
                     )
                 );
             }
-
-            if (null !== ($translator = $this->getTranslator())) {
-                $buttonContent = $translator->translate(
-                    $buttonContent,
-                    $this->getTranslatorTextDomain()
-                );
-            }
         }
+
+        if (null !== ($translator = $this->getTranslator())) {
+            $buttonContent = $translator->translate(
+                $buttonContent, $this->getTranslatorTextDomain()
+            );
+        }
+
 
         if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
             $escapeHtmlHelper = $this->getEscapeHtmlHelper();

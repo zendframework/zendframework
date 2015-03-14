@@ -36,7 +36,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testClassDocBlockAccessors()
     {
-        $this->markTestIncomplete();
+        $docBlockGenerator = new DocBlockGenerator();
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setDocBlock($docBlockGenerator);
+        $this->assertSame($docBlockGenerator, $classGenerator->getDocBlock());
     }
 
     public function testAbstractAccessors()

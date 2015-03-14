@@ -90,7 +90,7 @@ class FormDateTimeSelectTest extends CommonTestCase
         $markup = $this->helper->__invoke($element, \IntlDateFormatter::LONG, \IntlDateFormatter::LONG, 'pt_BR');
 
         // pattern === "d 'de' MMMM 'de' y HH'h'mm'min'ss's'"
-        $this->assertStringMatchesFormat('%a de %a de %a %ah%amin%as', $markup);
+        $this->assertStringMatchesFormat('%a de %a de %a %ah%amin%as%a', $markup);
     }
 
     public function testInvokeProxiesToRender()

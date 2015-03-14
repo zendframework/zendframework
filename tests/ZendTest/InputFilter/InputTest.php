@@ -227,6 +227,87 @@ class InputTest extends TestCase
         $this->assertEquals($notEmptyMock, $validators[0]['instance']);
     }
 
+    public function emptyValuesProvider()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(array()),
+        );
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorSkippedIfValueIsEmptyAndAllowedAndNotContinue($emptyValue)
+    {
+        $this->input->setAllowEmpty(true)
+                    ->setContinueIfEmpty(false)
+                    ->setValue($emptyValue)
+                    ->getValidatorChain()->attach(new Validator\Callback(function () {
+                        return false;
+                    }));
+        $this->assertTrue($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionSet($emptyValue)
+    {
+        $this->input->setAllowEmpty(true);
+        $this->input->setValue($emptyValue);
+        $this->assertTrue($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionNotSet($emptyValue)
+    {
+        $this->input->setAllowEmpty(false);
+        $this->input->setValue($emptyValue);
+        $this->assertFalse($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
+    {
+        $message = 'failure by explicit validator';
+        $validator = new Validator\Callback(function ($value) {
+            return false;
+        });
+        $validator->setMessage($message);
+        $this->input->setAllowEmpty(true)
+                    ->setContinueIfEmpty(true)
+                    ->setValue($emptyValue)
+                    ->getValidatorChain()->attach($validator);
+        $this->assertFalse($this->input->isValid());
+        // Test reason for validation failure; ensures that failure was not
+        // caused by accidentally injected NotEmpty validator
+        $this->assertEquals(array('callbackValue' => $message), $this->input->getMessages());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->input->setValue('nonempty')
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
+                        return '';
+                    }));
+        $this->assertFalse($this->input->isValid());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->input->setValue('')
+                    ->getFilterChain()->attach(new Filter\Callback(function () {
+                        return 'nonempty';
+                    }));
+        $this->assertTrue($this->input->isValid());
+    }
+
     public function testMerge()
     {
         $input = new Input('foo');

@@ -229,6 +229,38 @@ class TreeRouteStackTest extends TestCase
         $this->assertEquals('/?foo=bar', $stack->assemble(array(), array('name' => 'index', 'query' => array('foo' => 'bar'))));
     }
 
+    public function testAssembleWithEncodedPath()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addRoute(
+            'index',
+            array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/this%2Fthat',
+                ),
+            )
+        );
+
+        $this->assertEquals('/this%2Fthat', $stack->assemble(array(), array('name' => 'index')));
+    }
+
+    public function testAssembleWithEncodedPathAndQueryParams()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addRoute(
+            'index',
+            array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/this%2Fthat',
+                ),
+            )
+        );
+
+        $this->assertEquals('/this%2Fthat?foo=bar', $stack->assemble(array(), array('name' => 'index', 'query' => array('foo' => 'bar'), 'normalize_path' => false)));
+    }
+
     public function testAssembleWithScheme()
     {
         $uri   = new HttpUri();

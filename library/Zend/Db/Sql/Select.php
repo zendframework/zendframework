@@ -41,6 +41,8 @@ class Select extends AbstractPreparableSql
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
     const JOIN_RIGHT = 'right';
+    const JOIN_OUTER_RIGHT = 'outer right';
+    const JOIN_OUTER_LEFT  = 'outer left';
     const SQL_STAR = '*';
     const ORDER_ASCENDING = 'ASC';
     const ORDER_DESCENDING = 'DESC';

@@ -15,7 +15,7 @@ use Zend\Stdlib\AbstractOptions;
 class FileOptions extends AbstractOptions
 {
     /**
-     * @var string Local client hostname
+     * @var string Path to stored mail files
      */
     protected $path;
 

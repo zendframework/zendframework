@@ -82,14 +82,11 @@ class Curl implements HttpAdapter, StreamInterface
             CURLOPT_HEADER,
             CURLOPT_RETURNTRANSFER,
             CURLOPT_HTTPHEADER,
-            CURLOPT_POSTFIELDS,
             CURLOPT_INFILE,
             CURLOPT_INFILESIZE,
             CURLOPT_PORT,
             CURLOPT_MAXREDIRS,
             CURLOPT_CONNECTTIMEOUT,
-            CURL_HTTP_VERSION_1_1,
-            CURL_HTTP_VERSION_1_0,
         );
     }
 
@@ -120,6 +117,11 @@ class Curl implements HttpAdapter, StreamInterface
         if (isset($options['proxyuser']) && isset($options['proxypass'])) {
             $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'] . ":" . $options['proxypass']);
             unset($options['proxyuser'], $options['proxypass']);
+        }
+
+        if (isset($options['sslverifypeer'])) {
+            $this->setCurlOption(CURLOPT_SSL_VERIFYPEER, $options['sslverifypeer']);
+            unset($options['sslverifypeer']);
         }
 
         foreach ($options as $k => $v) {

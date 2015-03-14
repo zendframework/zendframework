@@ -31,7 +31,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (null === static::$_unicodeEnabled) {
-            static::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+            static::$_unicodeEnabled = (bool) @preg_match('/\pL/u', 'a');
         }
     }
 

@@ -40,4 +40,33 @@ class GlobTest extends TestCase
         $path = '/' . str_repeat('a', 10000);
         Glob::glob($path);
     }
+
+    /**
+     * @param string $pattern
+     *
+     * @dataProvider patternsProvider
+     */
+    public function testPatterns($pattern, $expectedSequence)
+    {
+        $result = Glob::glob(__DIR__ . '/_files/' . $pattern, Glob::GLOB_BRACE);
+
+        $this->assertCount(count($expectedSequence), $result);
+
+        foreach ($expectedSequence as $i => $expectedFileName) {
+            $this->assertStringEndsWith($expectedFileName, $result[$i]);
+        }
+    }
+
+    public function patternsProvider()
+    {
+        return array(
+            array(
+                "{{,*.}alph,{,*.}bet}a",
+                array(
+                    'alpha', 'eta.alpha', 'zeta.alpha', 'beta', 'eta.beta',
+                    'zeta.beta'
+                )
+            )
+        );
+    }
 }

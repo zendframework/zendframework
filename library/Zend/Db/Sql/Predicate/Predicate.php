@@ -383,6 +383,27 @@ class Predicate extends PredicateSet
     }
 
     /**
+     * Use given predicate directly
+     *
+     * Contrary to {@link addPredicate()} this method respects formerly set
+     * AND / OR combination operator, thus allowing generic predicates to be
+     * used fluently within where chains as any other concrete predicate.
+     *
+     * @param  PredicateInterface $predicate
+     * @return Predicate
+     */
+    public function predicate(PredicateInterface $predicate)
+    {
+        $this->addPredicate(
+            $predicate,
+            $this->nextPredicateCombineOperator ?: $this->defaultCombination
+        );
+        $this->nextPredicateCombineOperator = null;
+
+        return $this;
+    }
+
+    /**
      * Overloading
      *
      * Overloads "or", "and", "nest", and "unnest"

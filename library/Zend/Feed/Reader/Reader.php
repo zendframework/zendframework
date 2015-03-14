@@ -17,7 +17,7 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
 */
-class Reader
+class Reader implements ReaderImportInterface
 {
     /**
      * Namespace constants
@@ -544,7 +544,7 @@ class Reader
     public static function getExtensionManager()
     {
         if (!isset(static::$extensionManager)) {
-            static::setExtensionManager(new ExtensionManager());
+            static::setExtensionManager(new StandaloneExtensionManager());
         }
         return static::$extensionManager;
     }

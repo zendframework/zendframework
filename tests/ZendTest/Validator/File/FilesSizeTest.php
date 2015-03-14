@@ -202,4 +202,52 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid($filesArray));
         $this->assertArrayHasKey(File\FilesSize::NOT_READABLE, $validator->getMessages());
     }
+
+    public function testFilesFormat()
+    {
+        $validator = new File\FilesSize(array('min' => 0, 'max' => 2000));
+
+        $this->assertTrue(
+            $validator->isValid($this->createFileInfo(__DIR__ . '/_files/testsize.mo'))
+        );
+        $this->assertTrue(
+            $validator->isValid($this->createFileInfo(__DIR__ . '/_files/testsize2.mo'))
+        );
+        $this->assertFalse(
+            $validator->isValid($this->createFileInfo(__DIR__ . '/_files/testsize3.mo'))
+        );
+
+        $validator = new File\FilesSize(array('min' => 0, 'max' => 500000));
+
+        $this->assertTrue($validator->isValid(array(
+            $this->createFileInfo(__DIR__ . '/_files/testsize.mo'),
+            $this->createFileInfo(__DIR__ . '/_files/testsize.mo'),
+            $this->createFileInfo(__DIR__ . '/_files/testsize2.mo'),
+        )));
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIllegalFilesFormat()
+    {
+        $validator = new File\FilesSize(array('min' => 0, 'max' => 2000));
+
+        $validator->isValid(array(
+            array(
+                'error' => 0
+            ),
+        ));
+    }
+
+    private function createFileInfo($file)
+    {
+        return array(
+            'tmp_name' => $file,
+            'name'     => basename($file),
+            'error'    => 0,
+            'type'     => '',
+            'size'     => filesize($file),
+        );
+    }
 }

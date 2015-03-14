@@ -115,6 +115,10 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->method('hasClass')
             ->with($this->equalTo(__NAMESPACE__ . '\Other\Non\Existing'))
             ->will($this->returnValue(true));
+        $classDefinition
+            ->expects($this->any())
+            ->method('getClasses')
+            ->will($this->returnValue(array(__NAMESPACE__ . '\Other\Non\Existing')));
         $def->addDefinition($classDefinition);
         $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Other\Non\Existing', __NAMESPACE__ . '\Other\Non\Existing'));
     }

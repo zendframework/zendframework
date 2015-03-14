@@ -37,14 +37,15 @@ class Callback implements AssertionInterface
     /**
      * Returns true if and only if the assertion conditions are met
      *
-     * This method is passed the ACL, Role, Resource, and privilege to which the authorization query applies. If the
-     * $role, $resource, or $privilege parameters are null, it means that the query applies to all Roles, Resources, or
-     * privileges, respectively.
+     * This method is passed the ACL, Role, Resource, and privilege to which the
+     * authorization query applies. If the
+     * $role, $resource, or $privilege parameters are null, it means that the
+     * query applies to all Roles, Resources, or privileges, respectively.
      *
-     * @param  Acl  $acl
-     * @param  RoleInterface         $role
+     * @param  Acl               $acl
+     * @param  RoleInterface     $role
      * @param  ResourceInterface $resource
-     * @param  string                         $privilege
+     * @param  string            $privilege
      * @return bool
      */
     public function assert(

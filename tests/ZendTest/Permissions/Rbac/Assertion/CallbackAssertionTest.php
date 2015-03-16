@@ -10,7 +10,7 @@ namespace ZendTest\Permissions\Rbac\Assertion;
 
 use Zend\Permissions\Rbac;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

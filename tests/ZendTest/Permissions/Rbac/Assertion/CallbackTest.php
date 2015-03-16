@@ -22,7 +22,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'Zend\Permissions\Rbac\Exception\InvalidArgumentException',
             'Invalid callback provided; not callable'
         );
-        new Rbac\Assertion\Callback('I\'m not callable!');
+        new Rbac\Assertion\CallbackAssertion('I\'m not callable!');
     }
 
     /**
@@ -31,10 +31,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCallbackIsSet()
     {
         $callback   = function () {};
-        $assert     = new Rbac\Assertion\Callback($callback);
-        $reflection = new \ReflectionProperty(get_class($assert), 'callback');
-        $reflection->setAccessible(true);
-        $this->assertEquals($callback, $reflection->getValue($assert));
+        $assert     = new Rbac\Assertion\CallbackAssertion($callback);
+        $this->assertAttributeSame($callback, 'callback', $assert);
     }
 
     /**
@@ -44,13 +42,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $rbac   = new Rbac\Rbac();
         $that   = $this;
-        $assert = new Rbac\Assertion\Callback(function ($rbacArg) use ($that, $rbac) {
-            $that->assertEquals($rbacArg, $rbac);
+        $assert = new Rbac\Assertion\CallbackAssertion(function ($rbacArg) use ($that, $rbac) {
+            $that->assertSame($rbacArg, $rbac);
             return false;
         });
         $foo  = new Rbac\Role('foo');
         $foo->addPermission('can.foo');
-        $rbac->isGranted($foo, 'can.foo', $assert);
+        $this->assertFalse($rbac->isGranted($foo, 'can.foo', $assert));
     }
 
     /**
@@ -68,8 +66,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             };
         };
 
-        $roleNoMatch = new Rbac\Assertion\Callback($assertRoleMatch($bar));
-        $roleMatch   = new Rbac\Assertion\Callback($assertRoleMatch($foo));
+        $roleNoMatch = new Rbac\Assertion\CallbackAssertion($assertRoleMatch($bar));
+        $roleMatch   = new Rbac\Assertion\CallbackAssertion($assertRoleMatch($foo));
 
         $foo->addPermission('can.foo');
         $bar->addPermission('can.bar');
@@ -77,9 +75,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $rbac->addRole($foo);
         $rbac->addRole($bar);
 
-        $this->assertEquals(false, $rbac->isGranted($bar, 'can.bar', $roleNoMatch));
-        $this->assertEquals(false, $rbac->isGranted($bar, 'can.foo', $roleNoMatch));
-
-        $this->assertEquals(true, $rbac->isGranted($foo, 'can.foo', $roleMatch));
+        $this->assertFalse($rbac->isGranted($bar, 'can.bar', $roleNoMatch));
+        $this->assertFalse($rbac->isGranted($bar, 'can.foo', $roleNoMatch));
+        $this->assertTrue($rbac->isGranted($foo, 'can.foo', $roleMatch));
     }
 }

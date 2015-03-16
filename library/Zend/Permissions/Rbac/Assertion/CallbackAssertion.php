@@ -13,7 +13,7 @@ use Zend\Permissions\Rbac\AssertionInterface;
 use Zend\Permissions\Rbac\Exception\InvalidArgumentException;
 use Zend\Permissions\Rbac\Rbac;
 
-class Callback implements AssertionInterface
+class CallbackAssertion implements AssertionInterface
 {
     /**
      * @var callable

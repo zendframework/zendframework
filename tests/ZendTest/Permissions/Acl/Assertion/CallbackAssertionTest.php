@@ -10,7 +10,7 @@ namespace ZendTest\Permissions\Acl\Assertion;
 
 use Zend\Permissions\Acl;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Ensures constructor throws InvalidArgumentException if not callable is provided
@@ -21,7 +21,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'Zend\Permissions\Acl\Exception\InvalidArgumentException',
             'Invalid callback provided; not callable'
         );
-        new Acl\Assertion\Callback('I\'m not callable!');
+        new Acl\Assertion\CallbackAssertion('I\'m not callable!');
     }
 
     /**
@@ -30,10 +30,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCallbackIsSet()
     {
         $callback   = function () {};
-        $assert     = new Acl\Assertion\Callback($callback);
-        $reflection = new \ReflectionProperty(get_class($assert), 'callback');
-        $reflection->setAccessible(true);
-        $this->assertEquals($callback, $reflection->getValue($assert));
+        $assert     = new Acl\Assertion\CallbackAssertion($callback);
+        $this->assertAttributeSame($callback, 'callback', $assert);
     }
 
     /**
@@ -43,9 +41,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $acl       = new Acl\Acl();
         $that      = $this;
-        $assert    = new Acl\Assertion\Callback(
+        $assert    = new Acl\Assertion\CallbackAssertion(
             function ($aclArg, $roleArg, $resourceArg, $privilegeArg) use ($that, $acl) {
-                $that->assertEquals($acl, $aclArg);
+                $that->assertSame($acl, $aclArg);
                 $that->assertInstanceOf('Zend\Permissions\Acl\Role\RoleInterface', $roleArg);
                 $that->assertEquals('guest', $roleArg->getRoleId());
                 $that->assertInstanceOf('Zend\Permissions\Acl\Resource\ResourceInterface', $resourceArg);
@@ -58,7 +56,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $acl->addRole('guest');
         $acl->addResource('area1');
         $acl->allow(null, null, null, $assert);
-        $acl->isAllowed('guest', 'area1', 'somePrivilege');
+        $this->assertFalse($acl->isAllowed('guest', 'area1', 'somePrivilege'));
     }
 
     /**
@@ -74,9 +72,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             };
         };
         $acl->addRole($roleGuest);
-        $acl->allow($roleGuest, null, 'somePrivilege', new Acl\Assertion\Callback($assertMock(true)));
+        $acl->allow($roleGuest, null, 'somePrivilege', new Acl\Assertion\CallbackAssertion($assertMock(true)));
         $this->assertTrue($acl->isAllowed($roleGuest, null, 'somePrivilege'));
-        $acl->allow($roleGuest, null, 'somePrivilege', new Acl\Assertion\Callback($assertMock(false)));
+        $acl->allow($roleGuest, null, 'somePrivilege', new Acl\Assertion\CallbackAssertion($assertMock(false)));
         $this->assertFalse($acl->isAllowed($roleGuest, null, 'somePrivilege'));
     }
 }

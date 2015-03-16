@@ -14,7 +14,7 @@ use Zend\Permissions\Acl\Exception\InvalidArgumentException;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 use Zend\Permissions\Acl\Role\RoleInterface;
 
-class Callback implements AssertionInterface
+class CallbackAssertion implements AssertionInterface
 {
     /**
      * @var callable

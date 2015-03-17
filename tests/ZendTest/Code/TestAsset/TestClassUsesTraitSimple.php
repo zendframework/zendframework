@@ -9,16 +9,9 @@
 
 namespace ZendTest\Code\TestAsset;
 
-trait FooTrait
+use ZendTest\Code\TestAsset\FooTrait;
+
+class TestClassUsesTraitSimple
 {
-    use BarTrait;
-
-    public function fooBarBaz()
-    {
-    }
-
-    public function foo()
-    {
-        
-    }
+    use \ZendTest\Code\TestAsset\BarTrait, FooTrait;
 }

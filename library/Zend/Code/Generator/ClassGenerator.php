@@ -13,6 +13,8 @@ use Zend\Code\Reflection\ClassReflection;
 
 class ClassGenerator extends AbstractGenerator
 {
+    const OBJECT_TYPE = "class";
+
     const FLAG_ABSTRACT = 0x01;
     const FLAG_FINAL    = 0x02;
 
@@ -67,9 +69,9 @@ class ClassGenerator extends AbstractGenerator
     protected $methods = array();
 
     /**
-     * @var array Array of string names
+     * @var TraitUsageGenerator Object to encapsulate trait usage logic
      */
-    protected $uses = array();
+    protected $traitUsageGenerator;
 
     /**
      * Build a Code Generation Php Object from a Class Reflection
@@ -229,6 +231,8 @@ class ClassGenerator extends AbstractGenerator
         $methods = array(),
         $docBlock = null
     ) {
+        $this->traitUsageGenerator = new TraitUsageGenerator($this);
+
         if ($name !== null) {
             $this->setName($name);
         }
@@ -584,8 +588,9 @@ class ClassGenerator extends AbstractGenerator
     {
         if (!is_string($name)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects string for name',
-                __METHOD__
+                '%s::%s expects string for name',
+                get_class($this),
+                __FUNCTION__
             ));
         }
 
@@ -627,23 +632,6 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * Add a class to "use" classes
-     *
-     * @param  string $use
-     * @param  string|null $useAlias
-     * @return ClassGenerator
-     */
-    public function addUse($use, $useAlias = null)
-    {
-        if (!empty($useAlias)) {
-            $use .= ' as ' . $useAlias;
-        }
-
-        $this->uses[$use] = $use;
-        return $this;
-    }
-
-    /**
      * @return PropertyGenerator[]
      */
     public function getProperties()
@@ -667,13 +655,26 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * Add a class to "use" classes
+     *
+     * @param  string $use
+     * @param  string|null $useAlias
+     * @return ClassGenerator
+     */
+    public function addUse($use, $useAlias = null)
+    {
+        $this->traitUsageGenerator->addUse($use, $useAlias);
+        return $this;
+    }
+
+    /**
      * Returns the "use" classes
      *
      * @return array
      */
     public function getUses()
     {
-        return array_values($this->uses);
+        return $this->traitUsageGenerator->getUses();
     }
 
     /**
@@ -726,8 +727,9 @@ class ClassGenerator extends AbstractGenerator
     ) {
         if (!is_string($name)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects string for name',
-                __METHOD__
+                '%s::%s expects string for name',
+                get_class($this),
+                __FUNCTION__
             ));
         }
 
@@ -796,6 +798,92 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function addTrait($trait)
+    {
+        $this->traitUsageGenerator->addTrait($trait);
+        return $this;
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function addTraits(array $traits)
+    {
+        $this->traitUsageGenerator->addTraits($traits);
+        return $this;
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function hasTrait($traitName)
+    {
+        return $this->traitUsageGenerator->hasTrait($traitName);
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function getTraits()
+    {
+        return $this->traitUsageGenerator->getTraits();
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function removeTrait($traitName)
+    {
+        return $this->traitUsageGenerator->removeTrait($traitName);
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function addTraitAlias($method, $alias, $visibility = null)
+    {
+        $this->traitUsageGenerator->addTraitAlias($method, $alias, $visibility);
+        return $this;
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function getTraitAliases()
+    {
+        return $this->traitUsageGenerator->getTraitAliases();
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function addTraitOverride($method, $traitsToReplace)
+    {
+        $this->traitUsageGenerator->addTraitOverride($method, $traitsToReplace);
+        return $this;
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function removeTraitOverride($method, $overridesToRemove = null)
+    {
+        $this->traitUsageGenerator->removeTraitOverride($method, $overridesToRemove);
+
+        return $this;
+    }
+
+    /**
+     * @inherit Zend\Code\Generator\TraitUsageInterface
+     */
+    public function getTraitOverrides()
+    {
+        return $this->traitUsageGenerator->getTraitOverrides();
+    }
+
+    /**
      * @return bool
      */
     public function isSourceDirty()
@@ -820,7 +908,7 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * @return string
+     * @inherit Zend\Code\Generator\GeneratorInterface
      */
     public function generate()
     {
@@ -831,6 +919,7 @@ class ClassGenerator extends AbstractGenerator
             }
         }
 
+        $indent = $this->getIndentation();
         $output = '';
 
         if (null !== ($namespace = $this->getNamespaceName())) {
@@ -856,7 +945,7 @@ class ClassGenerator extends AbstractGenerator
             $output .= 'abstract ';
         }
 
-        $output .= 'class ' . $this->getName();
+        $output .= static::OBJECT_TYPE . ' ' . $this->getName();
 
         if (!empty($this->extendedClass)) {
             $output .= ' extends ' . $this->extendedClass;
@@ -869,6 +958,7 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;
+        $output .= $this->traitUsageGenerator->generate();
 
         $constants = $this->getConstants();
 

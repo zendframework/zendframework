@@ -9,16 +9,15 @@
 
 namespace ZendTest\Code\TestAsset;
 
-trait FooTrait
+trait TraitWithSameMethods
 {
-    use BarTrait;
-
-    public function fooBarBaz()
+    public function bar()
     {
+        echo "bar";        
     }
 
     public function foo()
     {
-        
+        echo "foo";
     }
 }

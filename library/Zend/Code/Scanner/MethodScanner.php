@@ -252,6 +252,55 @@ class MethodScanner implements ScannerInterface
     }
 
     /**
+     * Override the given name for a method, this is necessary to
+     * support traits.
+     *
+     * @param $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Visibility must be of T_PUBLIC, T_PRIVATE or T_PROTECTED
+     * Needed to support traits
+     *
+     * @param $visibility   T_PUBLIC | T_PRIVATE | T_PROTECTED
+     * @return self
+     * @throws \Zend\Code\Exception
+     */
+    public function setVisibility($visibility)
+    {
+        switch (strtolower($visibility)) {
+            case T_PUBLIC:
+                $this->isPublic = true;
+                $this->isPrivate = false;
+                $this->isProtected = false;
+                break;
+
+            case T_PRIVATE:
+                $this->isPublic = false;
+                $this->isPrivate = true;
+                $this->isProtected = false;
+                break;
+
+            case T_PROTECTED:
+                $this->isPublic = false;
+                $this->isPrivate = false;
+                $this->isProtected = true;
+                break;
+
+            default:
+                throw new Exception("Invalid visibility argument passed to setVisibility.");
+        }
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getNumberOfParameters()
@@ -372,7 +421,14 @@ class MethodScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE = function () use (
+            &$tokens,
+            &$tokenIndex,
+            &$token,
+            &$tokenType,
+            &$tokenContent,
+            &$tokenLine
+        ) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -452,14 +508,12 @@ class MethodScanner implements ScannerInterface
                 //goto (no break needed);
 
             case T_PROTECTED:
-                $this->isProtected = true;
-                $this->isPublic    = false;
+                $this->setVisibility(T_PROTECTED);
                 goto SCANNER_CONTINUE_SIGNATURE;
                 //goto (no break needed);
 
             case T_PRIVATE:
-                $this->isPrivate = true;
-                $this->isPublic  = false;
+                $this->setVisibility(T_PRIVATE);
                 goto SCANNER_CONTINUE_SIGNATURE;
                 //goto (no break needed);
 

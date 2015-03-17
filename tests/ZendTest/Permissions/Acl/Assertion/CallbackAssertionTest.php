@@ -21,7 +21,7 @@ class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
             'Zend\Permissions\Acl\Exception\InvalidArgumentException',
             'Invalid callback provided; not callable'
         );
-        new Acl\Assertion\CallbackAssertion('I\'m not callable!');
+        new Acl\Assertion\CallbackAssertion('I am not callable!');
     }
 
     /**
@@ -29,7 +29,8 @@ class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
      */
     public function testCallbackIsSet()
     {
-        $callback   = function () {};
+        $callback   = function () {
+        };
         $assert     = new Acl\Assertion\CallbackAssertion($callback);
         $this->assertAttributeSame($callback, 'callback', $assert);
     }

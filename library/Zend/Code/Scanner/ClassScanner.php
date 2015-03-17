@@ -9,6 +9,7 @@
 
 namespace Zend\Code\Scanner;
 
+use ReflectionClass;
 use Zend\Code\Annotation;
 use Zend\Code\Exception;
 use Zend\Code\NameInformation;
@@ -509,19 +510,20 @@ class ClassScanner implements ScannerInterface
     public function getTraits()
     {
         if(empty($this->traits)) {
-            //get list of traitNames
+            // get list of trait names
             $traitNames = $this->getTraitNames();
-            foreach($traitNames as $traitName) {
-                /*
-                 * @todo test if this works when trait is included or required instead of autoloaded?
-                 */
-                $fileName = str_replace("\\", "/", $traitName) .".php";
-                if(file_exists($fileName)) {
-                    $file = new FileScanner($fileName);
-                    $this->traits[] = $file->getClass($traitName);
-                } else {
-                    throw new Exception\RuntimeException('Unable to locate trait file at '. $fileName);
+            foreach ($traitNames as $traitName) {
+                $r = new ReflectionClass($traitName);
+                if (! $r->isTrait()) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Non-trait class detected as a trait: %s',
+                        $traitName
+                    ));
                 }
+                $fileName = $r->getFileName();
+                
+                $file = new FileScanner($fileName);
+                $this->traits[] = $file->getClass($traitName);
             }
         }
 

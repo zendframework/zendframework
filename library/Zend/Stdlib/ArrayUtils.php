@@ -301,8 +301,11 @@ abstract class ArrayUtils
      */
     public static function filter(array $data, $callback, $flag = null)
     {
-        if (!is_callable($callback)) {
-            throw new Exception\InvalidArgumentException('Second parameter of ' . __METHOD__ . 'must be callable');
+        if (! is_callable($callback)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Second parameter of %s must be callable',
+                __METHOD__
+            ));
         }
 
         if (version_compare(PHP_VERSION, '5.6.0') >= 0) {

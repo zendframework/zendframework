@@ -352,6 +352,18 @@ CONTENTS;
         $this->setExpectedException('ReflectionException');
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', '__prototype');
         $reflectionMethod->getBody();
+    }
 
+    /**
+     * @group 6620
+     */
+    public function testCanParseClassBodyWhenUsingTrait()
+    {
+        require_once __DIR__ .'/TestAsset/TestTraitClass1.php';
+        require_once __DIR__. '/TestAsset/TestTraitClass2.php';
+        // $method = new \Zend\Code\Reflection\ClassReflection('\FooClass');
+        // $traits = current($method->getTraits());
+        $method = new \Zend\Code\Reflection\MethodReflection('FooClass', 'getDummy');
+        $this->assertEquals(trim($method->getBody()), 'return $this->dummy;');
     }
 }

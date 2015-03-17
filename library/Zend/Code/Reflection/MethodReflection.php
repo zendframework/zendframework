@@ -213,7 +213,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     protected function extractMethodContents($bodyOnly = false)
     {
-        $fileName = $this->getDeclaringClass()->getFileName();
+        $fileName = $this->getFileName();
 
         if ((class_exists($this->class) && false === $fileName) || ! file_exists($fileName)) {
             return '';

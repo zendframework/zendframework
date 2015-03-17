@@ -5,37 +5,40 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace ZendTest\Authentication\Adapter;
 
-use Zend\Authentication;
-use Zend\Authentication\Adapter;
+use Exception;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Authentication\Adapter\Callback;
+use Zend\Authentication\Result;
 
-/**
- * @group Zend_Auth
- */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     /**
      * Callback authentication adapter
      *
-     * @var \Zend\Authentication\Adapter\Callback
+     * @var Callback
      */
-    protected $_adapter = null;
+    protected $adapter = null;
 
     /**
      * Set up test configuration
      */
     public function setUp()
     {
-        $this->_setupAuthAdapter();
+        $this->setupAuthAdapter();
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
+    }
+
+    protected function setupAuthAdapter()
+    {
+        $this->adapter = new Callback();
     }
 
     /**
@@ -47,7 +50,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'Zend\Authentication\Exception\InvalidArgumentException',
             'Invalid callback provided'
         );
-        $this->_adapter->setCallback('This is not a valid callback');
+        $this->adapter->setCallback('This is not a valid callback');
     }
 
     /**
@@ -57,8 +60,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $callback = function () {
         };
-        $this->_adapter->setCallback($callback);
-        $this->assertEquals($callback, $this->_adapter->getCallback());
+        $this->adapter->setCallback($callback);
+        $this->assertEquals($callback, $this->adapter->getCallback());
     }
 
     /**
@@ -68,7 +71,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $callback = function () {
         };
-        $adapter  = new Adapter\Callback($callback);
+        $adapter  = new Callback($callback);
         $this->assertEquals($callback, $adapter->getCallback());
     }
 
@@ -81,7 +84,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'Zend\Authentication\Exception\RuntimeException',
             'No callback provided'
         );
-        $this->_adapter->authenticate();
+        $this->adapter->authenticate();
     }
 
     /**
@@ -89,7 +92,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateProvidesCallbackWithIdentityAndCredentials()
     {
-        $adapter = $this->_adapter;
+        $adapter = $this->adapter;
         $adapter->setIdentity('testIdentity');
         $adapter->setCredential('testCredential');
         $that = $this;
@@ -97,8 +100,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             $that->assertEquals($identity, $adapter->getIdentity());
             $that->assertEquals($credential, $adapter->getCredential());
         };
-        $this->_adapter->setCallback($callback);
-        $this->_adapter->authenticate();
+        $this->adapter->setCallback($callback);
+        $this->adapter->authenticate();
     }
 
     /**
@@ -106,15 +109,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateResultIfCallbackThrows()
     {
-        $adapter   = $this->_adapter;
-        $exception = new \Exception('Callback Exception');
+        $adapter   = $this->adapter;
+        $exception = new Exception('Callback Exception');
         $callback  = function () use ($exception) {
             throw $exception;
         };
         $adapter->setCallback($callback);
         $result = $adapter->authenticate();
         $this->assertFalse($result->isValid());
-        $this->assertEquals(Authentication\Result::FAILURE_UNCATEGORIZED, $result->getCode());
+        $this->assertEquals(Result::FAILURE_UNCATEGORIZED, $result->getCode());
         $this->assertEquals(array($exception->getMessage()), $result->getMessages());
     }
 
@@ -124,7 +127,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticateResultIfCallbackReturnsFalsy()
     {
         $that    = $this;
-        $adapter = $this->_adapter;
+        $adapter = $this->adapter;
         $falsyValues = array(false, null, '', '0', array(), 0, 0.0);
         array_map(function ($falsy) use ($that, $adapter) {
             $callback = function () use ($falsy) {
@@ -133,7 +136,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             $adapter->setCallback($callback);
             $result = $adapter->authenticate();
             $that->assertFalse($result->isValid());
-            $that->assertEquals(Authentication\Result::FAILURE, $result->getCode());
+            $that->assertEquals(Result::FAILURE, $result->getCode());
             $that->assertEquals(array('Authentication failure'), $result->getMessages());
         }, $falsyValues);
     }
@@ -143,20 +146,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateResultIfCallbackReturnsIdentity()
     {
-        $adapter  = $this->_adapter;
+        $adapter  = $this->adapter;
         $callback = function () {
             return 'identity';
         };
         $adapter->setCallback($callback);
         $result = $adapter->authenticate();
         $this->assertTrue($result->isValid());
-        $this->assertEquals(Authentication\Result::SUCCESS, $result->getCode());
+        $this->assertEquals(Result::SUCCESS, $result->getCode());
         $this->assertEquals('identity', $result->getIdentity());
         $this->assertEquals(array('Authentication success'), $result->getMessages());
-    }
-
-    protected function _setupAuthAdapter()
-    {
-        $this->_adapter = new Adapter\Callback();
     }
 }

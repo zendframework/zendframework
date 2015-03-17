@@ -98,7 +98,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $elementSpec = $e->getParam('elementSpec');
         if (isset($elementSpec['spec']['attributes'])) {
-            $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+            $elementSpec['spec']['attributes'] = array_merge(
+                $elementSpec['spec']['attributes'],
+                $annotation->getAttributes()
+            );
             return;
         }
 

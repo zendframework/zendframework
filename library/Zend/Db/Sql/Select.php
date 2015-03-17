@@ -616,20 +616,25 @@ class Select extends AbstractPreparableSql
             } else {
                 $joinName = $join['name'];
             }
-            if ($joinName instanceof ExpressionInterface) {
+
+            if ($joinName instanceof Expression) {
                 $joinName = $joinName->getExpression();
             } elseif ($joinName instanceof TableIdentifier) {
                 $joinName = $joinName->getTableAndSchema();
                 $joinName = ($joinName[1] ? $platform->quoteIdentifier($joinName[1]) . $platform->getIdentifierSeparator() : '') . $platform->quoteIdentifier($joinName[0]);
             } elseif ($joinName instanceof Select) {
                 $joinName = '(' . $this->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';
-            } else {
+            } elseif (is_string($joinName) || (is_object($joinName) && is_callable(array($joinName, '__toString')))) {
                 $joinName = $platform->quoteIdentifier($joinName);
+            } else {
+                throw new Exception\InvalidArgumentException(sprintf('Join name expected to be Expression|TableIdentifier|Select|string, "%s" given', gettype($joinName)));
             }
+
             $joinSpecArgArray[$j] = array(
                 strtoupper($join['type']),
                 $this->renderTable($joinName, $joinAs),
             );
+
             // on expression
             // note: for Expression objects, pass them to processExpression with a prefix specific to each join (used for named parameters)
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)

@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Sql;
 
+use ReflectionObject;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Where;
@@ -148,6 +149,31 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', "expects 'foo' as");
         $select->join(array('foo'), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+    }
+
+    /**
+     * @testdox unit test: Test processJoins() exception with bad join name
+     * @covers Zend\Db\Sql\Select::processJoins
+     */
+    public function testBadJoinName()
+    {
+        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), array('bar'));
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $parameterContainer = new ParameterContainer();
+
+        $select = new Select;
+        $select->join(array('foo' => $mockExpression), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+
+        $sr = new ReflectionObject($select);
+
+        $mr = $sr->getMethod('processJoins');
+
+        $mr->setAccessible(true);
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
     }
 
     /**
@@ -376,7 +402,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $select = new Select;
         $select->order(new Expression('RAND()'));
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
         $method = $sr->getMethod('processOrder');
         $method->setAccessible(true);
         $this->assertEquals(
@@ -388,7 +414,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->order(
             $this->getMock('Zend\Db\Sql\Predicate\Operator', null, array('rating', '<', '10'))
         );
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
         $method = $sr->getMethod('processOrder');
         $method->setAccessible(true);
         $this->assertEquals(
@@ -632,7 +658,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     {
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(
-            function ($name) use ($useNamedParameters) { return (($useNamedParameters) ? ':' . $name : '?'); }
+            function ($name) use ($useNamedParameters) {
+                return (($useNamedParameters) ? ':' . $name : '?');
+            }
         ));
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
@@ -675,7 +703,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test __get() returns expected objects magically
      * @covers Zend\Db\Sql\Select::__get
      */
-    public function test__get()
+    public function testMagicAccessor()
     {
         $select = new Select;
         $this->assertInstanceOf('Zend\Db\Sql\Where', $select->where);
@@ -685,7 +713,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test __clone() will clone the where object so that this select can be used in multiple contexts
      * @covers Zend\Db\Sql\Select::__clone
      */
-    public function test__clone()
+    public function testCloning()
     {
         $select = new Select;
         $select1 = clone $select;
@@ -722,7 +750,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $parameterContainer = new ParameterContainer();
 
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
 
         foreach ($internalTests as $method => $expected) {
             $mr = $sr->getMethod($method);

@@ -141,7 +141,7 @@ class Apache implements PasswordInterface
             return Utils::compareStrings($hash, $hash2);
         }
 
-        $bcryptPattern = '/\$2[ay]?\$[0-9]{2}\$[' . addcslashes(static::BASE64, '+/') . ']{53}/';
+        $bcryptPattern = '/\$2[ay]?\$[0-9]{2}\$[' . addcslashes(static::BASE64, '+/') . '\.]{53}/';
 
         if (strlen($hash) > 13 && ! preg_match($bcryptPattern, $hash)) { // digest
             if (empty($this->userName) || empty($this->authName)) {

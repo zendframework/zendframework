@@ -3,7 +3,6 @@
  * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
@@ -21,13 +20,11 @@ class CallbackAssertion implements AssertionInterface
     protected $callback;
 
     /**
-     * Class constructor.
-     *
-     * @param callable $callback the autentication callback
+     * @param callable $callback The assertion callback
      */
     public function __construct($callback)
     {
-        if (!is_callable($callback)) {
+        if (! is_callable($callback)) {
             throw new InvalidArgumentException('Invalid callback provided; not callable');
         }
         $this->callback = $callback;
@@ -35,10 +32,10 @@ class CallbackAssertion implements AssertionInterface
 
     /**
      * Assertion method - must return a boolean.
-     * Returns the result of callback.
+     *
+     * Returns the result of the composed callback.
      *
      * @param Rbac $rbac
-     *
      * @return bool
      */
     public function assert(Rbac $rbac)

@@ -12,7 +12,6 @@ use Zend\Permissions\Rbac;
 
 class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Ensures constructor throws InvalidArgumentException if not callable is provided
      */
@@ -22,7 +21,7 @@ class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
             'Zend\Permissions\Rbac\Exception\InvalidArgumentException',
             'Invalid callback provided; not callable'
         );
-        new Rbac\Assertion\CallbackAssertion('I\'m not callable!');
+        new Rbac\Assertion\CallbackAssertion('I am not callable!');
     }
 
     /**
@@ -30,7 +29,8 @@ class CallbackAssertionTest extends \PHPUnit_Framework_TestCase
      */
     public function testCallbackIsSet()
     {
-        $callback   = function () {};
+        $callback   = function () {
+        };
         $assert     = new Rbac\Assertion\CallbackAssertion($callback);
         $this->assertAttributeSame($callback, 'callback', $assert);
     }

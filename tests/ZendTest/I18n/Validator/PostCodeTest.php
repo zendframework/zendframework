@@ -35,6 +35,33 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $this->validator = new PostCodeValidator(array('locale' => 'de_AT'));
     }
 
+    /**
+     * Ensures that the validator is fixed for issue #7250
+     *
+     * @dataProvider UKPostCodesDataProvider
+     * @return void
+     */
+    public function testUKBasic($postCode, $expected)
+    {
+        $uk_validator = new PostCodeValidator(array('locale' => 'en_GB'));
+        $this->assertEquals($expected, $uk_validator->isValid($postCode));
+    }
+
+    public function UKPostCodesDataProvider()
+    {
+        return array (
+            array ('CA3 5JQ', true),
+            array ('GL15 2GB', true),
+            array ('GL152GB', true),
+            array ('ECA32 6JQ', false),
+            array ('se5 0eg', false),
+            array ('SE5 0EG', true),
+            array ('ECA3 5JQ', false),
+            array ('WC2H 7LTa', false),
+            array ('WC2H 7LTA', false),
+        );
+    }
+
     public function postCodesDataProvider()
     {
         return array(

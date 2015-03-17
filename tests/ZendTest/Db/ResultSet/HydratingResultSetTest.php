@@ -24,6 +24,15 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\ResultSet\HydratingResultSet::getObjectPrototype
+     */
+    public function testGetObjectPrototype()
+    {
+        $hydratingRs = new HydratingResultSet;
+        $this->assertInstanceOf('ArrayObject', $hydratingRs->getObjectPrototype($prototype));
+    }
+
+    /**
      * @covers Zend\Db\ResultSet\HydratingResultSet::setHydrator
      */
     public function testSetHydrator()

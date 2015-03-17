@@ -16,55 +16,55 @@ interface InputInterface
 {
     /**
      * @param bool $allowEmpty
-     * @return InputInterface
+     * @return self
      */
     public function setAllowEmpty($allowEmpty);
 
     /**
      * @param bool $breakOnFailure
-     * @return InputInterface
+     * @return self
      */
     public function setBreakOnFailure($breakOnFailure);
 
     /**
      * @param string|null $errorMessage
-     * @return InputInterface
+     * @return self
      */
     public function setErrorMessage($errorMessage);
 
     /**
      * @param FilterChain $filterChain
-     * @return InputInterface
+     * @return self
      */
     public function setFilterChain(FilterChain $filterChain);
 
     /**
      * @param string $name
-     * @return InputInterface
+     * @return self
      */
     public function setName($name);
 
     /**
      * @param bool $required
-     * @return InputInterface
+     * @return self
      */
     public function setRequired($required);
 
     /**
      * @param ValidatorChain $validatorChain
-     * @return InputInterface
+     * @return self
      */
     public function setValidatorChain(ValidatorChain $validatorChain);
 
     /**
      * @param mixed $value
-     * @return InputInterface
+     * @return self
      */
     public function setValue($value);
 
     /**
      * @param InputInterface $input
-     * @return InputInterface
+     * @return self
      */
     public function merge(InputInterface $input);
 

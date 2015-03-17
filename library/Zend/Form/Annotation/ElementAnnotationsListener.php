@@ -98,7 +98,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $elementSpec = $e->getParam('elementSpec');
         if (isset($elementSpec['spec']['attributes'])) {
-            $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+            $elementSpec['spec']['attributes'] = array_merge(
+                $elementSpec['spec']['attributes'],
+                $annotation->getAttributes()
+            );
             return;
         }
 
@@ -161,6 +164,11 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             // Compose specification as a fieldset into parent form/fieldset
             if (!isset($specification['type'])) {
                 $specification['type'] = 'Zend\Form\Fieldset';
+            }
+
+            if (isset($elementSpec['spec']['options'])) {
+                $specification['options'] = isset($specification['options']) ? $specification['options'] : array();
+                $specification['options'] = array_merge($elementSpec['spec']['options'], $specification['options']);
             }
 
             // Add element spec:

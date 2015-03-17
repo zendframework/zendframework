@@ -29,4 +29,18 @@ class EntityUsingComposedObjectAndOptions
      * @Annotation\Options({"label": "My label"})
      */
     public $childTheSecond;
+
+    /**
+     * @Annotation\Name("childTheThird")
+     * @Annotation\ComposedObject("ZendTest\Form\TestAsset\Annotation\Entity")
+     * @Annotation\Options({"label": "My label"})
+     */
+    public $childTheThird;
+
+    /**
+     * @Annotation\Name("childTheFourth")
+     * @Annotation\Options({"label": "My label"})
+     * @Annotation\ComposedObject("ZendTest\Form\TestAsset\Annotation\Entity")
+     */
+    public $childTheFourth;
 }

@@ -11,6 +11,7 @@ namespace ZendTest\Form\Annotation;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Annotation;
+use Zend\Form\Element\Collection;
 use ZendTest\Form\TestAsset;
 
 class AnnotationBuilderTest extends TestCase
@@ -237,6 +238,34 @@ class AnnotationBuilderTest extends TestCase
     public function provideOptionsAnnotationAndComposedObjectAnnotation()
     {
         return array(array('child'), array('childTheSecond'));
+    }
+
+    /**
+     * @dataProvider provideOptionsAnnotationAndComposedObjectAnnotationNoneCollection
+     * @param string $childName
+     *
+     * @group 7108
+     */
+    public function testOptionsAnnotationAndComposedObjectAnnotationNoneCollection($childName)
+    {
+        $entity  = new TestAsset\Annotation\EntityUsingComposedObjectAndOptions();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $child = $form->get($childName);
+
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $child);
+        $this->assertEquals('My label', $child->getLabel());
+    }
+
+    /**
+     * Data provider
+     *
+     * @return string[][]
+     */
+    public function provideOptionsAnnotationAndComposedObjectAnnotationNoneCollection()
+    {
+        return array(array('childTheThird'), array('childTheFourth'));
     }
 
     public function testCanHandleOptionsAnnotation()

@@ -48,16 +48,16 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
 
     public function UKPostCodesDataProvider()
     {
-        return array (
-            array ('CA3 5JQ', true),
-            array ('GL15 2GB', true),
-            array ('GL152GB', true),
-            array ('ECA32 6JQ', false),
-            array ('se5 0eg', false),
-            array ('SE5 0EG', true),
-            array ('ECA3 5JQ', false),
-            array ('WC2H 7LTa', false),
-            array ('WC2H 7LTA', false),
+        return array(
+            array('CA3 5JQ', true),
+            array('GL15 2GB', true),
+            array('GL152GB', true),
+            array('ECA32 6JQ', false),
+            array('se5 0eg', false),
+            array('SE5 0EG', true),
+            array('ECA3 5JQ', false),
+            array('WC2H 7LTa', false),
+            array('WC2H 7LTA', false),
         );
     }
 

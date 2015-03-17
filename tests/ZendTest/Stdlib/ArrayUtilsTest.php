@@ -488,7 +488,7 @@ class ArrayUtilsTest extends TestCase
         return array(
             array(
                 array('foo' => 'bar', 'fiz' => 'buz'),
-                function($value) {
+                function ($value) {
                     if ($value == 'bar') {
                         return false;
                     }
@@ -499,7 +499,7 @@ class ArrayUtilsTest extends TestCase
             ),
             array(
                 array('foo' => 'bar', 'fiz' => 'buz'),
-                function($value, $key) {
+                function ($value, $key) {
                     if ($value == 'buz') {
                         return false;
                     }
@@ -515,7 +515,7 @@ class ArrayUtilsTest extends TestCase
             ),
             array(
                 array('foo' => 'bar', 'fiz' => 'buz'),
-                function($key) {
+                function ($key) {
                     if ($key == 'foo') {
                         return false;
                     }

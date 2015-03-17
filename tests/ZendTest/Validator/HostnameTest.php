@@ -492,7 +492,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check UTF-8 TLD matching
         $valuesExpected = array(
-            array(true, array('test123.δοκιμή', 'тест.рф', 'туршилтын.мон')),
+            array(true, array('test123.онлайн', 'тест.рф', 'туршилтын.мон')),
             array(false, array('சோதனை3.இலங்கை', 'رات.мон'))
         );
         foreach ($valuesExpected as $element) {

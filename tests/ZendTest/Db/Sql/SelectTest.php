@@ -151,6 +151,31 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test processJoins() exception with bad join name
+     * @covers Zend\Db\Sql\Select::processJoins
+     */
+    public function testBadJoinName()
+    {
+        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), array('bar'));
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $parameterContainer = new ParameterContainer();
+
+        $select = new Select;
+        $select->join(array('foo' => $mockExpression), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+
+        $sr = new \ReflectionObject($select);
+
+        $mr = $sr->getMethod('processJoins');
+
+        $mr->setAccessible(true);
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via join()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testJoin

@@ -39,6 +39,11 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     protected $_badPath;
 
     /**
+     * @var Apache
+     */
+    protected $_apache;
+
+    /**
      * Sets the paths to files used in this test, and creates a shared resolver instance
      * having a valid path.
      *
@@ -104,7 +109,8 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
             array( $path . '/htbasic.plaintext' ),
             array( $path . '/htbasic.md5' ),
             array( $path . '/htbasic.sha1' ),
-            array( $path . '/htbasic.crypt' )
+            array( $path . '/htbasic.crypt' ),
+            array( $path . '/htbasic.bcrypt' ),
         );
     }
 

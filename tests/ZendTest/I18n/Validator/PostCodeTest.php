@@ -36,15 +36,14 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator is fixed for issue #7250
-     *
      * @dataProvider UKPostCodesDataProvider
-     * @return void
+     * @group #7250
+     * @group #7264
      */
     public function testUKBasic($postCode, $expected)
     {
         $uk_validator = new PostCodeValidator(array('locale' => 'en_GB'));
-        $this->assertEquals($expected, $uk_validator->isValid($postCode));
+        $this->assertSame($expected, $uk_validator->isValid($postCode));
     }
 
     public function UKPostCodesDataProvider()

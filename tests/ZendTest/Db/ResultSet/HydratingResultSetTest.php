@@ -29,7 +29,7 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
     public function testGetObjectPrototype()
     {
         $hydratingRs = new HydratingResultSet;
-        $this->assertInstanceOf('ArrayObject', $hydratingRs->getObjectPrototype($prototype));
+        $this->assertInstanceOf('ArrayObject', $hydratingRs->getObjectPrototype());
     }
 
     /**

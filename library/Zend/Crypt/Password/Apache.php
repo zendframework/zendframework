@@ -129,6 +129,7 @@ class Apache implements PasswordInterface
             $hash2 = '{SHA}' . base64_encode(sha1($password, true));
             return Utils::compareStrings($hash, $hash2);
         }
+
         if (substr($hash, 0, 6) === '$apr1$') {
             $token = explode('$', $hash);
             if (empty($token[2])) {
@@ -139,7 +140,10 @@ class Apache implements PasswordInterface
             $hash2 = $this->apr1Md5($password, $token[2]);
             return Utils::compareStrings($hash, $hash2);
         }
-        if (strlen($hash) > 13) { // digest
+
+        $bcryptPattern = '/\$2[ay]?\$[0-9]{2}\$[' . addcslashes(static::BASE64, '+/') . '\.]{53}/';
+
+        if (strlen($hash) > 13 && ! preg_match($bcryptPattern, $hash)) { // digest
             if (empty($this->userName) || empty($this->authName)) {
                 throw new Exception\RuntimeException(
                     'You must specify UserName and AuthName (realm) to verify the digest'
@@ -148,6 +152,7 @@ class Apache implements PasswordInterface
             $hash2 = md5($this->userName . ':' . $this->authName . ':' .$password);
             return Utils::compareStrings($hash, $hash2);
         }
+
         return Utils::compareStrings($hash, crypt($password, $hash));
     }
 

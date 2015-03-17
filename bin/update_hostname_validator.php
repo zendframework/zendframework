@@ -1,107 +1,130 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
-include __DIR__ . '/../library//Zend/Loader/AutoloaderFactory.php';
-Zend\Loader\AutoloaderFactory::factory(array(
-    'Zend\Loader\StandardAutoloader' => array(
-        'autoregister_zf' => true
-    )
-));
-
-use Zend\Http\ClientStatic;
+use Zend\Http\Client;
 use Zend\Validator\Hostname;
 
-define('IANA_URL', 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt', true);
-define('ZF2_HOSTNAME_VALIDATOR_FILE', __DIR__.'/../library/Zend/Validator/Hostname.php', true);
+require __DIR__ . '/../vendor/autoload.php';
 
-if (!file_exists(ZF2_HOSTNAME_VALIDATOR_FILE) || !is_readable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
-    printf('Error: cannont read file "%s"'.PHP_EOL, ZF2_HOSTNAME_VALIDATOR_FILE);
+define('IANA_URL', 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt');
+define('ZF2_HOSTNAME_VALIDATOR_FILE', __DIR__.'/../library/Zend/Validator/Hostname.php');
+
+if (! file_exists(ZF2_HOSTNAME_VALIDATOR_FILE) || ! is_readable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
+    printf("Error: cannont read file '%s'%s", ZF2_HOSTNAME_VALIDATOR_FILE, PHP_EOL);
     exit(1);
 }
 
-if (!is_writable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
-    printf('Error: Cannot update file "%s"'.PHP_EOL, ZF2_HOSTNAME_VALIDATOR_FILE);
+if (! is_writable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
+    printf("Error: Cannot update file '%s'%s", ZF2_HOSTNAME_VALIDATOR_FILE, PHP_EOL);
     exit(1);
 }
 
-/** get online page of official TLDs **/
-$response = ClientStatic::get(IANA_URL);
-if (!$response->isSuccess()) {
-    printf('Error: cannot get "%s"'.PHP_EOL, IANA_URL);
+// get current list of official TLDs
+$client = new Client();
+$client->setOptions(array(
+    'adapter' => 'Zend\Http\Client\Adapter\Curl',
+));
+$client->setUri(IANA_URL);
+$client->setMethod('GET');
+$response = $client->send();
+if (! $response->isSuccess()) {
+    printf("Error: cannot get '%s'%s", IANA_URL, PHP_EOL);
     exit(1);
 }
+
+$decodePunycode = getPunycodeDecoder();
+
+// Get new TLDs from the list previously fetched
+$newValidTlds = array();
+foreach (preg_grep('/^[^#]/', preg_split("#\r?\n#", $response->getBody())) as $line) {
+    $newValidTlds []= sprintf(
+        "%s'%s',\n",
+        str_repeat(' ', 8),
+        $decodePunycode(strtolower($line))
+    );
+}
+
+$newFileContent = array();  // new file content
+$insertDone     = false;    // becomes 'true' when we find start of $validTlds declaration
+$insertFinish   = false;    // becomes 'true' when we find end of $validTlds declaration
+foreach (file(ZF2_HOSTNAME_VALIDATOR_FILE) as $line) {
+    if ($insertDone === $insertFinish) {
+        // Outside of $validTlds definition; keep line as-is
+        $newFileContent []= $line;
+    }
+
+    if ($insertFinish) {
+        continue;
+    }
+
+    if ($insertDone) {
+        // Detect where the $validTlds declaration ends
+        if (preg_match('/^\s+\);\s*$/', $line)) {
+            $newFileContent []= $line;
+            $insertFinish = true;
+        }
+
+        continue;
+    }
+
+    // Detect where the $validTlds declaration begins
+    if (preg_match('/^\s+protected\s+\$validTlds\s+=\s+array\(\s*$/', $line)) {
+        $newFileContent = array_merge($newFileContent, $newValidTlds);
+        $insertDone = true;
+    }
+}
+
+if (! $insertDone) {
+    printf("Error: cannot find line with 'protected \$validTlds'%s", PHP_EOL);
+    exit(1);
+}
+
+if (!$insertFinish) {
+    printf("Error: cannot find end of \$validTlds declaration%s", PHP_EOL);
+    exit(1);
+}
+
+if (false === @file_put_contents(ZF2_HOSTNAME_VALIDATOR_FILE, $newFileContent)) {
+    printf("Error: cannot write info file '%s'%s", ZF2_HOSTNAME_VALIDATOR_FILE, PHP_EOL);
+    exit(1);
+}
+
+printf("Validator TLD file updated.%s", PHP_EOL);
+exit(0);
 
 /**
- * TLDs are puny encoded. We need a decodePunycode function to
- * translate TLDs ot UTF-8 :
+ * Retrieve and return a punycode decoder.
+ *
+ * TLDs are puny encoded.
+ *
+ * We need a decodePunycode function to translate TLDs to UTF-8:
+ *
  * - use idn_to_utf8 if available
- * - otherwise, use Zend\Validator\Hostname::decodePunycode()
+ * - otherwise, use Hostname::decodePunycode()
+ *
+ * @return callable
  */
-$decodePunycode = null;
-if (function_exists('idn_to_utf8')) {
-    $decodePunycode = 'idn_to_utf8';
-}
-if ($decodePunycode == null) {
+function getPunycodeDecoder()
+{
+    if (function_exists('idn_to_utf8')) {
+        return 'idn_to_utf8';
+    }
+
     $hostnameValidator = new Hostname();
-    $reflection = new \ReflectionClass(get_class($hostnameValidator));
+    $reflection = new ReflectionClass(get_class($hostnameValidator));
     $method = $reflection->getMethod('decodePunycode');
     $method->setAccessible(true);
 
-    $decodePunycode = function ($encode) use ($hostnameValidator, $method) {
+    return function ($encode) use ($hostnameValidator, $method) {
         if (strpos($encode, 'xn--') === 0) {
             return $method->invokeArgs($hostnameValidator, array(substr($encode, 4)));
         }
         return $encode;
     };
 }
-
-/** Get new TLDs from the fetched page **/
-$newValidTlds = array();
-foreach (preg_grep('/^[^#]/', explode(PHP_EOL, $response->getBody())) as $line) {
-    $newValidTlds []= str_repeat(' ', 8) ."'". call_user_func($decodePunycode, strtolower($line)) ."',".PHP_EOL;
-}
-
-/** Get file content **/
-$fileLines = file(ZF2_HOSTNAME_VALIDATOR_FILE);
-
-$newFileContent = array();  /** new file content **/
-$insertDone = false;        /** become 'true' when we found $validTlds declaration **/
-$insertFinish = false;      /** become 'true' when we found end of $validTlds declaration **/
-foreach ($fileLines as $line) {
-    /** outside of $validTlds definition, keep file lines **/
-    if ($insertDone === $insertFinish) {
-        $newFileContent []= $line;
-    }
-    if (!$insertFinish) {
-        /** Find the line where $validTlds is initialized **/
-        if (!$insertDone) {
-            if (preg_match('/^\s+protected\s+\$validTlds\s+=\s+array\(\s*$/', $line)) {
-                $newFileContent = array_merge($newFileContent, $newValidTlds);
-                $insertDone = true;
-            }
-        } else {
-            /** find end of $validTlds declaration **/
-            if (preg_match('/^\s+\);\s*$/', $line)) {
-                $newFileContent []= $line;
-                $insertFinish = true;
-            }
-        }
-    }
-}
-
-if (!$insertDone) {
-    echo 'Error: cannot find line with "protected $validTlds"'.PHP_EOL;
-    exit(1);
-}
-
-if (!$insertFinish) {
-    echo 'Error: cannot find end of $validTlds declaration'.PHP_EOL;
-    exit(1);
-}
-
-if (false === @file_put_contents(ZF2_HOSTNAME_VALIDATOR_FILE, $newFileContent)) {
-    sprintf('Error: cannot write info file "%s"'.PHP_EOL, ZF2_HOSTNAME_VALIDATOR_FILE);
-    exit(1);
-}
-
-echo 'Nice work done :-)'.PHP_EOL;
-exit(0);

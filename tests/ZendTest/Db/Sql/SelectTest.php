@@ -173,7 +173,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
 
         $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
-
     }
 
     /**

@@ -15,7 +15,7 @@ use Zend\Code\NameInformation;
 
 class MethodScanner implements ScannerInterface
 {
-   /**
+    /**
      * @var bool
      */
     protected $isScanned    = false;
@@ -256,12 +256,11 @@ class MethodScanner implements ScannerInterface
      * support traits.
      *
      * @param $name
-     * @return $this
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -270,7 +269,7 @@ class MethodScanner implements ScannerInterface
      * Needed to support traits
      *
      * @param $visibility   T_PUBLIC | T_PRIVATE | T_PROTECTED
-     * @return $this
+     * @return self
      * @throws \Zend\Code\Exception
      */
     public function setVisibility($visibility)
@@ -422,7 +421,14 @@ class MethodScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE = function () use (
+            &$tokens,
+            &$tokenIndex,
+            &$token,
+            &$tokenType,
+            &$tokenContent,
+            &$tokenLine
+        ) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -502,15 +508,11 @@ class MethodScanner implements ScannerInterface
                 //goto (no break needed);
 
             case T_PROTECTED:
-//                $this->isProtected = true;
-//                $this->isPublic    = false;
                 $this->setVisibility(T_PROTECTED);
                 goto SCANNER_CONTINUE_SIGNATURE;
                 //goto (no break needed);
 
             case T_PRIVATE:
-//                $this->isPrivate = true;
-//                $this->isPublic  = false;
                 $this->setVisibility(T_PRIVATE);
                 goto SCANNER_CONTINUE_SIGNATURE;
                 //goto (no break needed);

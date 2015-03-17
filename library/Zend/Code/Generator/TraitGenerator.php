@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,13 +13,13 @@ use Zend\Code\Reflection\ClassReflection;
 
 class TraitGenerator extends ClassGenerator
 {
-    const OBJECT_TYPE = "trait";
+    const OBJECT_TYPE = 'trait';
 
     /**
      * Build a Code Generation Php Object from a Class Reflection
      *
      * @param  ClassReflection $classReflection
-     * @return ClassGenerator
+     * @return TraitGenerator
      */
     public static function fromReflection(ClassReflection $classReflection)
     {
@@ -48,7 +48,9 @@ class TraitGenerator extends ClassGenerator
 
         $methods = array();
         foreach ($classReflection->getMethods() as $reflectionMethod) {
-            $className = ($cg->getNamespaceName())? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+            $className = ($cg->getNamespaceName())
+                ? $cg->getNamespaceName() . '\\' . $cg->getName()
+                : $cg->getName();
             if ($reflectionMethod->getDeclaringClass()->getName() == $className) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
@@ -70,11 +72,11 @@ class TraitGenerator extends ClassGenerator
      *
      * @throws Exception\InvalidArgumentException
      * @param  array $array
-     * @return ClassGenerator
+     * @return TraitGenerator
      */
     public static function fromArray(array $array)
     {
-        if (!isset($array['name'])) {
+        if (! isset($array['name'])) {
             throw new Exception\InvalidArgumentException(
                 'Class generator requires that a name is provided for this object'
             );
@@ -108,7 +110,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  array|string $flags
-     * @return ClassGenerator
+     * @return self
      */
     public function setFlags($flags)
     {
@@ -117,7 +119,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  string $flag
-     * @return ClassGenerator
+     * @return self
      */
     public function addFlag($flag)
     {
@@ -126,7 +128,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  string $flag
-     * @return ClassGenerator
+     * @return self
      */
     public function removeFlag($flag)
     {
@@ -135,7 +137,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  bool $isFinal
-     * @return ClassGenerator
+     * @return self
      */
     public function setFinal($isFinal)
     {
@@ -144,7 +146,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  string $extendedClass
-     * @return ClassGenerator
+     * @return self
      */
     public function setExtendedClass($extendedClass)
     {
@@ -153,7 +155,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  array $implementedInterfaces
-     * @return ClassGenerator
+     * @return self
      */
     public function setImplementedInterfaces(array $implementedInterfaces)
     {
@@ -162,7 +164,7 @@ class TraitGenerator extends ClassGenerator
 
     /**
      * @param  bool $isAbstract
-     * @return ClassGenerator
+     * @return self
      */
     public function setAbstract($isAbstract)
     {

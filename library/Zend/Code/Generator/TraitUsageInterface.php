@@ -10,13 +10,12 @@ namespace Zend\Code\Generator;
 
 interface TraitUsageInterface
 {
-
     /**
      * Add a class to "use" classes
      *
      * @param  string $use
      * @param  string|null $useAlias
-     * @return ClassGenerator
+     * @return self
      */
     public function addUse($use, $useAlias = null);
 
@@ -43,7 +42,7 @@ interface TraitUsageInterface
      *      key: traitToReplace value: @see self::addTraitOverride
      *
      * @param mixed $trait String | Array
-     * @return ClassGenerator
+     * @return self
      */
     public function addTrait($trait);
 
@@ -52,7 +51,7 @@ interface TraitUsageInterface
      * configurations
      *
      * @param array $traitName Array of string names or configurations (@see addTrait)
-     * @return ClassGenerator
+     * @return self
      */
     public function addTraits(array $traits);
 
@@ -116,7 +115,7 @@ interface TraitUsageInterface
      * key: traitName value: trait name
      * key: method value: method name
      *
-     * $traitToReplace
+     * $traitToReplace:
      * The name of the trait that you wish to supersede.
      *
      * This method provides 2 ways for defining the trait method.
@@ -138,7 +137,7 @@ interface TraitUsageInterface
      * key: traitName value: trait name
      * key: method value: method name
      *
-     * $overridesToRemove
+     * $overridesToRemove:
      * The name of the trait that you wish to remove.
      *
      * This method provides 2 ways for defining the trait method.

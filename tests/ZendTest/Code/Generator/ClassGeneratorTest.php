@@ -786,7 +786,7 @@ CODE;
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'Invalid trait: Trait does not exists on this class.'
+            'Invalid trait: Trait does not exists on this class'
         );
 
         $classGenerator->addTrait('myTrait');
@@ -877,7 +877,7 @@ CODE;
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'Invalid trait: Trait does not exists on this class.'
+            'Invalid trait: Trait does not exists on this class'
         );
 
         $classGenerator->addTrait('myTrait');
@@ -903,7 +903,7 @@ CODE;
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'Invalid Argument: $traitToReplace must be a string or array of strings.'
+            'Invalid Argument: $traitToReplace must be a string or array of strings'
         );
 
         $classGenerator->addTrait('myTrait');

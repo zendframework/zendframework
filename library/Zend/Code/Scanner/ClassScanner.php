@@ -370,7 +370,9 @@ class ClassScanner implements ScannerInterface
                 return false;
             }
         } else {
-            throw new Exception\InvalidArgumentException('Invalid constant name of info index type.  Must be of type int or string');
+            throw new Exception\InvalidArgumentException(
+                'Invalid constant name of info index type.  Must be of type int or string'
+            );
         }
         if (!isset($info)) {
             return false;
@@ -473,7 +475,9 @@ class ClassScanner implements ScannerInterface
                 return false;
             }
         } else {
-            throw new Exception\InvalidArgumentException('Invalid property name of info index type.  Must be of type int or string');
+            throw new Exception\InvalidArgumentException(
+                'Invalid property name of info index type.  Must be of type int or string'
+            );
         }
         if (!isset($info)) {
             return false;
@@ -506,42 +510,53 @@ class ClassScanner implements ScannerInterface
         return false;
     }
 
-
+    /**
+     * Retrieve any traits used by the class.
+     *
+     * @return ClassScanner[]
+     */
     public function getTraits()
     {
-        if(empty($this->traits)) {
-            // get list of trait names
-            $traitNames = $this->getTraitNames();
-            foreach ($traitNames as $traitName) {
-                $r = new ReflectionClass($traitName);
-                if (! $r->isTrait()) {
-                    throw new Exception\RuntimeException(sprintf(
-                        'Non-trait class detected as a trait: %s',
-                        $traitName
-                    ));
-                }
-                $fileName = $r->getFileName();
-                
-                $file = new FileScanner($fileName);
-                $this->traits[] = $file->getClass($traitName);
+        if (! empty($this->traits)) {
+            return $this->traits;
+        }
+
+        // get list of trait names
+        $traitNames = $this->getTraitNames();
+        foreach ($traitNames as $traitName) {
+            $r = new ReflectionClass($traitName);
+            if (! $r->isTrait()) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Non-trait class detected as a trait: %s',
+                    $traitName
+                ));
             }
+            $fileName = $r->getFileName();
+            
+            $file = new FileScanner($fileName);
+            $this->traits[] = $file->getClass($traitName);
         }
 
         return $this->traits;
     }
 
+    /**
+     * Retrieve a list of trait names used by this class.
+     *
+     * @return array
+     */
     public function getTraitNames()
     {
         $return = array();
         foreach ($this->infos as $info) {
-            if ($info['type'] != 'use') {
+            if ($info['type'] !== 'use') {
                 continue;
             }
 
-            if(is_array($info['use_statements'])) {
-                foreach($info['use_statements'] as $trait) {
+            if (is_array($info['use_statements'])) {
+                foreach ($info['use_statements'] as $trait) {
                     $traitName = $trait;
-                    if($this->nameInformation instanceof NameInformation) {
+                    if ($this->nameInformation instanceof NameInformation) {
                         $traitName = $this->nameInformation->resolveName($traitName);
                     }
                     $return[] = $traitName;
@@ -553,27 +568,34 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Retrieve a list of aliased traits used by the class.
+     *
+     * @return array
+     */
     public function getTraitAliases()
     {
         $return = array();
         foreach ($this->infos as $info) {
-            if ($info['type'] != 'use') {
+            if ($info['type'] !== 'use') {
                 continue;
             }
 
-            if(is_array($info['aliases'])) {
-                foreach($info['aliases'] as $alias) {
-                    if(is_null($alias) || (!empty($alias['type']) && $alias['type'] !== "as")) {
+            if (is_array($info['aliases'])) {
+                foreach ($info['aliases'] as $alias) {
+                    if (null === $alias
+                        || (! empty($alias['type']) && $alias['type'] !== 'as')
+                    ) {
                         continue;
                     }
 
                     // attempt to get fqcn
-                    list($trait, $method) = explode("::", $alias['original']);
-                    if($this->nameInformation instanceof NameInformation) {
+                    list($trait, $method) = explode('::', $alias['original']);
+                    if ($this->nameInformation instanceof NameInformation) {
                         $trait = $this->nameInformation->resolveName($trait);
                     }
 
-                    $return[$alias['alias']] = $trait . "::". $method;
+                    $return[$alias['alias']] = $trait . '::' . $method;
                 }
             }
             break;
@@ -582,21 +604,29 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Retrieve visibility for a given alias.
+     *
+     * @param mixed $aliasName
+     * @return string
+     */
     protected function getVisibilityForAlias($aliasName)
     {
         $return = null;
         foreach ($this->infos as $info) {
-            if ($info['type'] != 'use') {
+            if ($info['type'] !== 'use') {
                 continue;
             }
 
-            if(is_array($info['aliases'])) {
-                foreach($info['aliases'] as $alias) {
-                    if(is_null($alias) && (!empty($alias['type']) && $alias['type'] !== "as")) {
+            if (is_array($info['aliases'])) {
+                foreach ($info['aliases'] as $alias) {
+                    if (null === $alias
+                        && (! empty($alias['type']) && $alias['type'] !== 'as')
+                    ) {
                         continue;
                     }
 
-                    if($alias['alias'] == $aliasName) {
+                    if ($alias['alias'] === $aliasName) {
                         $return = $alias['visibility'];
                         break 2;
                     }
@@ -609,32 +639,33 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * Return an array of
-     * key = trait to keep
-     * value = trait::method to ignore
+     * Return an array of key = trait to keep, value = trait::method to ignore
+     *
      * @return array
      */
     protected function getBlockedTraitMethods()
     {
         $return = array();
         foreach ($this->infos as $info) {
-            if ($info['type'] != 'use') {
+            if ($info['type'] !== 'use') {
                 continue;
             }
 
-            if(is_array($info['aliases'])) {
-                foreach($info['aliases'] as $alias) {
-                    if(is_null($alias) || (!empty($alias['type']) && $alias['type'] !== "insteadof")) {
+            if (is_array($info['aliases'])) {
+                foreach ($info['aliases'] as $alias) {
+                    if (null === $alias
+                        || (! empty($alias['type']) && $alias['type'] !== 'insteadof')
+                    ) {
                         continue;
                     }
 
                     // attempt to get fqcn
-                    list($trait, $method) = explode("::", $alias['original']);
-                    if($this->nameInformation instanceof NameInformation) {
+                    list($trait, $method) = explode('::', $alias['original']);
+                    if ($this->nameInformation instanceof NameInformation) {
                         $trait = $this->nameInformation->resolveName($alias['alias']);
                     }
 
-                    $return[] = $trait . "::". $method;
+                    $return[] = $trait . '::' . $method;
                 }
             }
             break;
@@ -670,70 +701,79 @@ class ClassScanner implements ScannerInterface
     {
         $this->scan();
 
-        if(empty($this->methods)) {
-            foreach ($this->infos as $info) {
-                if ($info['type'] != 'method' && $info['type'] != 'use') {
-                    continue;
-                }
+        if (! empty($this->methods)) {
+            return $this->methods;
+        }
 
-                // Merge in trait methods
-                if($info['type'] == "use") {
+        foreach ($this->infos as $info) {
+            if ($info['type'] !== 'method' && $info['type'] !== 'use') {
+                continue;
+            }
 
-                    $traitMethods = array();
-                    $traits = $this->getTraits();
-                    $insteadof = $this->getBlockedTraitMethods();
+            // Merge in trait methods
+            if ($info['type'] === "use") {
+                $traitMethods = array();
+                $traits       = $this->getTraits();
+                $insteadof    = $this->getBlockedTraitMethods();
+                $aliases      = $this->getTraitAliases();
 
-                    $aliases   = $this->getTraitAliases();
-                    foreach($traits as $trait) {
-                        $tempMethods = $trait->getMethods();
-                        foreach($tempMethods as $tempMethod) {
-                            $methodFullName = $trait->getName() ."::". $tempMethod->getName();
-                            $methodAlias = array_search($methodFullName, $aliases);
+                foreach ($traits as $trait) {
+                    $tempMethods = $trait->getMethods();
+                    foreach ($tempMethods as $tempMethod) {
+                        $methodFullName = $trait->getName() . '::' . $tempMethod->getName();
+                        $methodAlias = array_search($methodFullName, $aliases);
 
-                            if (false !== $methodAlias) {
-                                // trait::method is aliased
-                                // clone the tempMethod as we need to change
-                                // the name and possibly the visibility of the
-                                // scanned method.
-                                //
-                                // @todo setName and setVisibility were added to
-                                // MethodScanner to accomplish this, may not be the
-                                // best option, could use ReflectionClass instead?
-                                $newMethod = clone $tempMethod;
-                                $newMethod->setName($methodAlias);
+                        if (false !== $methodAlias) {
+                            // trait::method is aliased
+                            // clone the tempMethod as we need to change
+                            // the name and possibly the visibility of the
+                            // scanned method.
+                            //
+                            // @todo setName and setVisibility were added to
+                            // MethodScanner to accomplish this, may not be the
+                            // best option, could use ReflectionClass instead?
+                            $newMethod = clone $tempMethod;
+                            $newMethod->setName($methodAlias);
 
-                                // if visibility exists, change it on the MethodScanner
-                                $visibility = $this->getVisibilityForAlias($methodAlias);
-                                if(!is_null($visibility)) {
-                                    $newMethod->setVisibility($visibility);
-                                }
-                                $traitMethods[$methodAlias] = $newMethod;
-                            } elseif (in_array($methodFullName, $insteadof)) {
-                                // ignore overridden methods
-                                continue;
-                            } else {
-                                if(array_key_exists($tempMethod->getName(), $traitMethods)) {
-                                    throw new Exception\RuntimeException(sprintf("Trait method %s has not been applied because there are collisions with other trait methods see: (insteadof OR as).", $tempMethod->getName()));
-                                }
-
-                                $traitMethods[$tempMethod->getName()] = $tempMethod;
+                            // if visibility exists, change it on the MethodScanner
+                            $visibility = $this->getVisibilityForAlias($methodAlias);
+                            if (null !== $visibility) {
+                                $newMethod->setVisibility($visibility);
                             }
+                            $traitMethods[$methodAlias] = $newMethod;
+                        } elseif (in_array($methodFullName, $insteadof)) {
+                            // ignore overridden methods
+                            continue;
+                        } else {
+                            if (array_key_exists($tempMethod->getName(), $traitMethods)) {
+                                throw new Exception\RuntimeException(sprintf(
+                                    'Trait method %s has not been applied because there are'
+                                    . ' collisions with other trait methods see: (insteadof OR as)',
+                                    $tempMethod->getName()
+                                ));
+                            }
+
+                            $traitMethods[$tempMethod->getName()] = $tempMethod;
                         }
                     }
-
-                    $this->methods = array_merge($this->methods, array_values($traitMethods));
-                    continue;
                 }
 
-                $m = new MethodScanner(
-                    array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-                    $this->nameInformation
-                );
-                $m->setClass($this->name);
-                $m->setScannerClass($this);
-
-                $this->methods[] = $m;
+                $this->methods = array_merge($this->methods, array_values($traitMethods));
+                continue;
             }
+
+            $m = new MethodScanner(
+                array_slice(
+                    $this->tokens,
+                    $info['tokenStart'],
+                    $info['tokenEnd'] - $info['tokenStart'] + 1
+                ),
+                $this->nameInformation
+            );
+            $m->setClass($this->name);
+            $m->setScannerClass($this);
+
+            $this->methods[] = $m;
         }
 
         return $this->methods;
@@ -760,8 +800,8 @@ class ClassScanner implements ScannerInterface
 
         $returnMethod = false;
         $methods = $this->getMethods();
-        foreach($methods as $method) {
-            if($method->getName() == $methodNameOrInfoIndex) {
+        foreach ($methods as $method) {
+            if ($method->getName() === $methodNameOrInfoIndex) {
                 $returnMethod = $method;
                 break;
             }
@@ -827,7 +867,14 @@ class ClassScanner implements ScannerInterface
         /*
          * MACRO creation
          */
-        $MACRO_TOKEN_ADVANCE = function () use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+        $MACRO_TOKEN_ADVANCE = function () use (
+            &$tokens,
+            &$tokenIndex,
+            &$token,
+            &$tokenType,
+            &$tokenContent,
+            &$tokenLine
+        ) {
             static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             if (!isset($tokens[$tokenIndex])) {
@@ -903,12 +950,12 @@ class ClassScanner implements ScannerInterface
                     case T_FINAL:
                         $this->isFinal = true;
                         goto SCANNER_CLASS_INFO_CONTINUE;
-                        //goto no break needed
+                        // goto no break needed
 
                     case T_ABSTRACT:
                         $this->isAbstract = true;
                         goto SCANNER_CLASS_INFO_CONTINUE;
-                        //goto no break needed
+                        // goto no break needed
 
                     case T_TRAIT:
                         $this->isTrait = true;
@@ -1025,35 +1072,35 @@ class ClassScanner implements ScannerInterface
 
                     $MACRO_INFO_ADVANCE();
                     goto SCANNER_CLASS_BODY_CONTINUE;
-                    //goto no break needed
-
+                    // goto no break needed
+                    
                 case T_USE:
                     // ensure php backwards compatibility
-                    if(!defined('T_INSTEADOF')) {
+                    if (! defined('T_INSTEADOF')) {
                         define('T_INSTEADOF', 24000);
                     }
 
                     $infos[$infoIndex] = array(
-                        'type'       => 'use',
-                        'tokenStart' => $tokenIndex,
-                        'tokenEnd'   => null,
-                        'lineStart'  => $tokens[$tokenIndex][2],
-                        'lineEnd'    => null,
-                        'name'  => $namespace,
+                        'type'           => 'use',
+                        'tokenStart'     => $tokenIndex,
+                        'tokenEnd'       => null,
+                        'lineStart'      => $tokens[$tokenIndex][2],
+                        'lineEnd'        => null,
+                        'name'           => $namespace,
                         'use_statements' => array(0 => null),
-                        'aliases' => array(0 => null),
+                        'aliases'        => array(0 => null),
                     );
 
                     $isOriginalName = array(T_STRING, T_DOUBLE_COLON);
-                    $isAlias = array(T_STRING);
-                    $isVisibility = array(T_PRIVATE, T_PROTECTED, T_PUBLIC, T_STATIC);
-                    $isAliasType = array(T_AS, T_INSTEADOF);
-                    $isValidAlias = array_merge($isOriginalName, $isAlias, $isVisibility, $isAliasType);
+                    $isAlias        = array(T_STRING);
+                    $isVisibility   = array(T_PRIVATE, T_PROTECTED, T_PUBLIC, T_STATIC);
+                    $isAliasType    = array(T_AS, T_INSTEADOF);
+                    $isValidAlias   = array_merge($isOriginalName, $isAlias, $isVisibility, $isAliasType);
 
-                    $useStatementIndex = 0;
+                    $useStatementIndex   = 0;
                     $aliasStatementIndex = 0;
-                    $useAliasContext   = false;
-                    $useAsContext      = false;
+                    $useAliasContext     = false;
+                    $useAsContext        = false;
 
                     // start processing with next token
                     if ($MACRO_TOKEN_ADVANCE() === false) {
@@ -1065,18 +1112,23 @@ class ClassScanner implements ScannerInterface
                     if ($tokenType === null) {
                         if ($tokenContent === "{") {
                             $useStatementIndex = 0;
-                            $useAliasContext = true;
-                            $infos[$infoIndex]['aliases'][$useStatementIndex] = array('original' => null, 'alias' => null, 'visibility' => null, 'type' => 'as');
+                            $useAliasContext   = true;
+                            $infos[$infoIndex]['aliases'][$useStatementIndex] = array(
+                                'original'   => null,
+                                'alias'      => null,
+                                'visibility' => null,
+                                'type'       => 'as'
+                            );
                         } elseif ($tokenContent === "}") {
                             $useAliasContext = false;
                             goto SCANNER_USE_END;
                         } elseif ($tokenContent === ';') {
-                            if($useAliasContext === true) {
+                            if ($useAliasContext === true) {
                                 $useStatementIndex++;
                                 $useAsContext = false;
                             }
                             // only end if we aren't inside braces
-                            if(false === $useAliasContext) {
+                            if (false === $useAliasContext) {
                                 goto SCANNER_USE_END;
                             }
                         } elseif ($tokenContent === ',') {
@@ -1088,23 +1140,27 @@ class ClassScanner implements ScannerInterface
                     // ANALYZE
                     if ($tokenType !== null) {
                         // use context
-                        if(false === $useAliasContext) {
+                        if (false === $useAliasContext) {
                             if ($tokenType == T_NS_SEPARATOR || $tokenType == T_STRING) {
                                 $infos[$infoIndex]['use_statements'][$useStatementIndex] .= $tokenContent;
                             }
                         } else {
-                            if(in_array($tokenType, $isValidAlias) && empty($infos[$infoIndex]['aliases'][$useStatementIndex])) {
+                            if (in_array($tokenType, $isValidAlias)
+                                && empty($infos[$infoIndex]['aliases'][$useStatementIndex])
+                            ) {
                                 $infos[$infoIndex]['aliases'][$useStatementIndex] = array(
-                                    'original' => null,
+                                    'original'   => null,
                                     'visibility' => null,
-                                    'alias' => null,
-                                    'type' => null
+                                    'alias'      => null,
+                                    'type'       => null
                                 );
                             }
 
-                            if ($tokenType == T_AS || $tokenType == T_INSTEADOF ) {
+                            if ($tokenType == T_AS || $tokenType == T_INSTEADOF) {
                                 $useAsContext = true;
-                                $infos[$infoIndex]['aliases'][$useStatementIndex]['type'] = ($tokenType == T_INSTEADOF) ? 'insteadof' : 'as';
+                                $infos[$infoIndex]['aliases'][$useStatementIndex]['type'] = ($tokenType == T_INSTEADOF)
+                                    ? 'insteadof'
+                                    : 'as';
                                 goto SCANNER_USE_CONTINUE;
                             }
 
@@ -1161,7 +1217,7 @@ class ClassScanner implements ScannerInterface
                                 $methodBodyStarted = true;
                                 $braceCount++;
                                 goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
-                                //goto no break needed
+                                // goto no break needed
                             case '}':
                                 $braceCount--;
                                 goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
@@ -1197,20 +1253,20 @@ class ClassScanner implements ScannerInterface
                                 $infos[$infoIndex]['name'] = ltrim($tokenContent, '$');
                             }
                             goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
-                            //goto no break needed
+                            // goto no break needed
 
                         case T_FUNCTION:
                             $memberContext             = 'method';
                             $infos[$infoIndex]['type'] = 'method';
                             goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
-                            //goto no break needed
+                            // goto no break needed
 
                         case T_STRING:
                             if ($memberContext === 'method' && null === $infos[$infoIndex]['name']) {
                                 $infos[$infoIndex]['name'] = $tokenContent;
                             }
                             goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
-                            //goto no break needed
+                            // goto no break needed
                     }
 
                     SCANNER_CLASS_BODY_MEMBER_CONTINUE:
@@ -1225,7 +1281,7 @@ class ClassScanner implements ScannerInterface
                     $memberContext = null;
                     $MACRO_INFO_ADVANCE();
                     goto SCANNER_CLASS_BODY_CONTINUE;
-                    //goto no break needed
+                    // goto no break needed
 
                 case null: // no type, is a string
 
@@ -1233,7 +1289,8 @@ class ClassScanner implements ScannerInterface
                         case '{':
                             $braceCount++;
                             goto SCANNER_CLASS_BODY_CONTINUE;
-                            //fall-through
+                            // goto no break needed
+
                         case '}':
                             $braceCount--;
                             goto SCANNER_CLASS_BODY_CONTINUE;

@@ -664,7 +664,6 @@ class ClassGenerator extends AbstractGenerator
     public function addUse($use, $useAlias = null)
     {
         $this->traitUsageGenerator->addUse($use, $useAlias);
-
         return $this;
     }
 
@@ -804,7 +803,6 @@ class ClassGenerator extends AbstractGenerator
     public function addTrait($trait)
     {
         $this->traitUsageGenerator->addTrait($trait);
-
         return $this;
     }
 
@@ -814,7 +812,6 @@ class ClassGenerator extends AbstractGenerator
     public function addTraits(array $traits)
     {
         $this->traitUsageGenerator->addTraits($traits);
-
         return $this;
     }
 
@@ -848,7 +845,6 @@ class ClassGenerator extends AbstractGenerator
     public function addTraitAlias($method, $alias, $visibility = null)
     {
         $this->traitUsageGenerator->addTraitAlias($method, $alias, $visibility);
-
         return $this;
     }
 
@@ -866,7 +862,6 @@ class ClassGenerator extends AbstractGenerator
     public function addTraitOverride($method, $traitsToReplace)
     {
         $this->traitUsageGenerator->addTraitOverride($method, $traitsToReplace);
-
         return $this;
     }
 

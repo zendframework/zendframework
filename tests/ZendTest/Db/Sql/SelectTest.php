@@ -156,7 +156,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testBadJoinName()
     {
-        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), 'bar');
+        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), array('bar'));
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $parameterContainer = new ParameterContainer();

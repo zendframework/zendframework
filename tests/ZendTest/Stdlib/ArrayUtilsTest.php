@@ -482,4 +482,64 @@ class ArrayUtilsTest extends TestCase
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
         $this->assertFalse(ArrayUtils::iteratorToArray($test));
     }
+
+    public function filterArrays()
+    {
+        return array(
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($value) {
+                    if ($value == 'bar') {
+                        return false;
+                    }
+                    return true;
+                },
+                null,
+                array('fiz' => 'buz')
+            ),
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($value, $key) {
+                    if ($value == 'buz') {
+                        return false;
+                    }
+
+                    if ($key == 'foo') {
+                        return false;
+                    }
+
+                    return true;
+                },
+                ArrayUtils::ARRAY_FILTER_USE_BOTH,
+                array()
+            ),
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($key) {
+                    if ($key == 'foo') {
+                        return false;
+                    }
+                    return true;
+                },
+                ArrayUtils::ARRAY_FILTER_USE_KEY,
+                array('fiz' => 'buz')
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider filterArrays
+     */
+    public function testFiltersArray($data, $callback, $flag, $result)
+    {
+        $this->assertEquals($result, ArrayUtils::filter($data, $callback, $flag));
+    }
+
+    /**
+     * @expectedException \Zend\Stdlib\Exception\InvalidArgumentException
+     */
+    public function testInvalidCallableRaiseInvalidArgumentException()
+    {
+        ArrayUtils::filter(array(), "INVALID");
+    }
 }

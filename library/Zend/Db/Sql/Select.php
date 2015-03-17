@@ -739,18 +739,20 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             } else {
                 $joinName = $join['name'];
             }
+
             if ($joinName instanceof Expression) {
                 $joinName = $joinName->getExpression();
             } elseif ($joinName instanceof TableIdentifier) {
                 $joinName = $joinName->getTableAndSchema();
                 $joinName = ($joinName[1] ? $platform->quoteIdentifier($joinName[1]) . $platform->getIdentifierSeparator() : '') . $platform->quoteIdentifier($joinName[0]);
+            } elseif ($joinName instanceof Select) {
+                $joinName = '(' . $this->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';
+            } elseif (is_string($joinName) || (is_object($joinName) && method_exists($joinName, '__toString'))) {
+                $joinName = $platform->quoteIdentifier($joinName);
             } else {
-                if ($joinName instanceof Select) {
-                    $joinName = '(' . $this->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';
-                } else {
-                    $joinName = $platform->quoteIdentifier($joinName);
-                }
+                throw new Exception\InvalidArgumentException(sprintf('Join name expected to be Expression|TableIdentifier|Select|string, "%s" given', gettype($joinName)));
             }
+
             $joinSpecArgArray[$j][] = (isset($joinAs)) ? $joinName . ' AS ' . $joinAs : $joinName;
 
             // on expression

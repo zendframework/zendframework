@@ -151,6 +151,32 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test processJoins() exception with bad join name
+     * @covers Zend\Db\Sql\Select::processJoins
+     */
+    public function testBadJoinName()
+    {
+        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), 'bar');
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $parameterContainer = new ParameterContainer();
+
+        $select = new Select;
+        $select->join(array('foo' => $mockExpression), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+
+        $sr = new \ReflectionObject($select);
+
+        $mr = $sr->getMethod('processJoins');
+
+        $mr->setAccessible(true);
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
+
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via join()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testJoin
@@ -1326,6 +1352,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select47, $sqlPrep47, $params47,  $sqlStr47, $internalTests47),
             array($select48, $sqlPrep48, array(),    $sqlStr48, $internalTests48),
             array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
+//            array($select50, $sqlPrep50, array(),    $sqlStr50, $internalTests50),
         );
     }
 }

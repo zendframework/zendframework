@@ -21,6 +21,16 @@ use Zend\Stdlib\ArrayUtils\MergeReplaceKeyInterface;
 abstract class ArrayUtils
 {
     /**
+     * Compatibility Flag for ArrayUtils::filter
+     */
+    const ARRAY_FILTER_USE_BOTH = 1;
+
+    /**
+     * Compatibility Flag for ArrayUtils::filter
+     */
+    const ARRAY_FILTER_USE_KEY  = 2;
+
+    /**
      * Test whether an array contains one or more string keys
      *
      * @param  mixed $value
@@ -279,5 +289,44 @@ abstract class ArrayUtils
         }
 
         return $a;
+    }
+
+    /**
+     * Compatibility Method for array_filter on <5.6 systems
+     *
+     * @param array $data
+     * @param callable $callback
+     * @param null|int $flag
+     * @return array
+     */
+    public static function filter(array $data, $callback, $flag = null)
+    {
+        if (!is_callable($callback)) {
+            throw new Exception\InvalidArgumentException('Second parameter of ' . __METHOD__ . 'must be callable');
+        }
+
+        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
+            return array_filter($data, $callback, $flag);
+        }
+
+        $output = array();
+        foreach ($data as $key => $value) {
+            $params = array($value);
+
+            if ($flag === static::ARRAY_FILTER_USE_BOTH) {
+                $params[] = $key;
+            }
+
+            if ($flag === static::ARRAY_FILTER_USE_KEY) {
+                $params = array($key);
+            }
+
+            $response = call_user_func_array($callback, $params);
+            if ($response) {
+                $output[$key] = $value;
+            }
+        }
+
+        return $output;
     }
 }

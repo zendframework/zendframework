@@ -57,7 +57,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
         $stub
             ->expects($this->any())
             ->method('fetch')
-            ->will($this->returnCallback(function () {return uniqid();}));
+            ->will($this->returnCallback(function () {return new \stdClass;}));
 
         $result = new Result();
         $result->initialize($stub, null);

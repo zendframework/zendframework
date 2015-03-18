@@ -426,23 +426,23 @@ class Curl implements HttpAdapter, StreamInterface
         if (isset($this->config['curloptions'][CURLOPT_ENCODING])
             && '' == $this->config['curloptions'][CURLOPT_ENCODING]
         ) {
-            $responseHeaders = preg_replace("/Content-Encoding:\s*gzip\\r\\n/", "", $responseHeaders);
+            $responseHeaders = preg_replace("/Content-Encoding:\s*gzip\\r\\n/", '', $responseHeaders);
         }
 
         // cURL automatically handles Proxy rewrites, remove the "HTTP/1.0 200 Connection established" string:
-        $responseHeaders = preg_replace("/HTTP\/1.0\s*200\s*Connection\s*established\\r\\n\\r\\n/", "", $responseHeaders);
+        $responseHeaders = preg_replace("/HTTP\/1.0\s*200\s*Connection\s*established\\r\\n\\r\\n/", '', $responseHeaders);
 
         // replace old header with new, cleaned up, header
         $this->response = substr_replace($this->response, $responseHeaders, 0, $responseHeaderSize);
 
         // Eliminate multiple HTTP responses.
         do {
-            $parts  = preg_split('|(?:\r?\n){2}|m', $this->response, 2);
-            $again  = false;
+            $parts = preg_split('|(?:\r?\n){2}|m', $this->response, 2);
+            $again = false;
 
             if (isset($parts[1]) && preg_match("|^HTTP/1\.[01](.*?)\r\n|mi", $parts[1])) {
-                $this->response    = $parts[1];
-                $again              = true;
+                $this->response = $parts[1];
+                $again          = true;
             }
         } while ($again);
 

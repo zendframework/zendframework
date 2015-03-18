@@ -76,14 +76,6 @@ class Postgresql extends AbstractPlatform
     /**
      * {@inheritDoc}
      */
-    public function getQuoteValueSymbol()
-    {
-        return '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function quoteValue($value)
     {
         if ($this->resource instanceof DriverInterface) {
@@ -95,11 +87,7 @@ class Postgresql extends AbstractPlatform
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
-        );
-        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return 'E' . parent::quoteValue($value);
     }
 
     /**
@@ -116,14 +104,6 @@ class Postgresql extends AbstractPlatform
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return 'E\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdentifierSeparator()
-    {
-        return '.';
+        return 'E' . parent::quoteTrustedValue($value);
     }
 }

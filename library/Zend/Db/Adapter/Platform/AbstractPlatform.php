@@ -78,6 +78,14 @@ abstract class AbstractPlatform implements PlatformInterface
     /**
      * {@inheritDoc}
      */
+    public function quoteIdentifierChain($identifierChain)
+    {
+        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getQuoteIdentifierSymbol()
     {
         return $this->quoteIdentifier[0];
@@ -86,8 +94,44 @@ abstract class AbstractPlatform implements PlatformInterface
     /**
      * {@inheritDoc}
      */
+    public function getQuoteValueSymbol()
+    {
+        return '\'';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function quoteValue($value)
+    {
+        trigger_error(
+            'Attempting to quote a value in ' . get_class($this) .
+            ' without extension/driver support can introduce security vulnerabilities in a production environment'
+        );
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function quoteTrustedValue($value)
+    {
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function quoteValueList($valueList)
     {
         return implode(', ', array_map(array($this, 'quoteValue'), (array) $valueList));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdentifierSeparator()
+    {
+        return '.';
     }
 }

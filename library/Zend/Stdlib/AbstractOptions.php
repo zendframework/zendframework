@@ -147,7 +147,9 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __isset($key)
     {
-        return null !== $this->__get($key);
+        $getter = 'get' . str_replace('_', '', $key);
+
+        return method_exists($this, $getter) && null !== $this->__get($key);
     }
 
     /**

@@ -10,9 +10,10 @@
 namespace ZendTest\Stdlib;
 
 use ArrayObject;
+use Zend\Stdlib\Exception;
 use ZendTest\Stdlib\TestAsset\TestOptions;
 use ZendTest\Stdlib\TestAsset\TestOptionsNoStrict;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use ZendTest\Stdlib\TestAsset\TestOptionsWithoutGetter;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -57,7 +58,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $options = new TestOptions(null);
-        } catch (InvalidArgumentException $e) {
+        } catch (Exception\InvalidArgumentException $e) {
             $this->fail("Unexpected InvalidArgumentException raised");
         }
     }
@@ -111,5 +112,41 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         new TestOptions(array(
             'foo bar' => 'baz',
         ));
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetReturnsFalseWhenMatchingGetterDoesNotExist()
+    {
+        $options = new TestOptionsWithoutGetter(array(
+            'foo' => 'bar',
+        ));
+        $this->assertFalse(isset($options->foo));
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetDoesNotThrowExceptionWhenMatchingGetterDoesNotExist()
+    {
+        $options   = new TestOptionsWithoutGetter();
+
+        try {
+            isset($options->foo);
+        } catch (Exception\BadMethodCallException $exception) {
+            $this->fail("Unexpected BadMethodCallException raised");
+        }
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetReturnsTrueWithValidDataWhenMatchingGetterDoesNotExist()
+    {
+        $options = new TestOptions(array(
+            'test_field' => 1,
+        ));
+        $this->assertTrue(isset($options->testField));
     }
 }

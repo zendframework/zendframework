@@ -86,14 +86,6 @@ class SqlServer extends AbstractPlatform
     /**
      * {@inheritDoc}
      */
-    public function getQuoteValueSymbol()
-    {
-        return '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function quoteValue($value)
     {
         if ($this->resource instanceof DriverInterface) {
@@ -122,13 +114,5 @@ class SqlServer extends AbstractPlatform
             return $this->resource->quote($value);
         }
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdentifierSeparator()
-    {
-        return '.';
     }
 }

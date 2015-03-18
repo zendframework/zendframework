@@ -376,6 +376,28 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('Content-Length', $headers);
     }
 
+    public function testPrepareHeadersCurlDigestAuthentication()
+    {
+        $body = json_encode(array('foofoo'=>'barbar'));
+
+        $client = new Client();
+        $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
+        $prepareHeadersReflection->setAccessible(true);
+
+        $request = new Request();
+        $request->getHeaders()->addHeaderLine('Authorization: Digest');
+        $request->getHeaders()->addHeaderLine('content-type','application/json');
+        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $client->setRequest($request);
+
+        $this->assertSame($client->getRequest(), $request);
+
+        $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
+
+        $this->assertContains('Authorization: Digest', $headers);
+
+    }
+
     /**
      * @group 6301
      */

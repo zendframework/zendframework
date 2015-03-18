@@ -1140,8 +1140,9 @@ class Client implements Stdlib\DispatchableInterface
                     }
                     break;
                 case self::AUTH_DIGEST :
-                    if(!$this->adapter instanceof Client\Adapter\Curl)
+                    if (!$this->adapter instanceof Client\Adapter\Curl) {
                         throw new Exception\RuntimeException("The digest authentication is only available for curl adapters (Zend\\Http\\Client\\Adapter\\Curl)");
+                    }
 
                     $this->adapter->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
                     $this->adapter->setCurlOption(CURLOPT_USERPWD, $this->auth['user'] . ':' . $this->auth['password']);

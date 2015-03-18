@@ -72,7 +72,9 @@ class Curl implements HttpAdapter, StreamInterface
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            throw new AdapterException\InitializationException('cURL extension has to be loaded to use this Zend\Http\Client adapter');
+            throw new AdapterException\InitializationException(
+                'cURL extension has to be loaded to use this Zend\Http\Client adapter'
+            );
         }
         $this->invalidOverwritableCurlOptions = array(
             CURLOPT_HTTPGET,
@@ -146,14 +148,14 @@ class Curl implements HttpAdapter, StreamInterface
     }
 
     /**
-      * Retrieve the array of all configuration options
-      *
-      * @return array
-      */
-     public function getConfig()
-     {
-         return $this->config;
-     }
+     * Retrieve the array of all configuration options
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
 
     /**
      * Direct setter for cURL adapter related options.
@@ -241,7 +243,9 @@ class Curl implements HttpAdapter, StreamInterface
      * @param  array         $headers
      * @param  string        $body
      * @return string        $request
-     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\RuntimeException If connection fails, connected
+     *     to wrong host, no PUT file defined, unsupported method, or unsupported
+     *     cURL option.
      * @throws AdapterException\InvalidArgumentException if $method is currently not supported
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
@@ -261,15 +265,15 @@ class Curl implements HttpAdapter, StreamInterface
         // ensure correct curl call
         $curlValue = true;
         switch ($method) {
-            case 'GET' :
+            case 'GET':
                 $curlMethod = CURLOPT_HTTPGET;
                 break;
 
-            case 'POST' :
+            case 'POST':
                 $curlMethod = CURLOPT_POST;
                 break;
 
-            case 'PUT' :
+            case 'PUT':
                 // There are two different types of PUT request, either a Raw Data string has been set
                 // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
                 if (is_resource($body)) {
@@ -281,7 +285,10 @@ class Curl implements HttpAdapter, StreamInterface
                     if (!isset($headers['Content-Length'])
                         && !isset($this->config['curloptions'][CURLOPT_INFILESIZE])
                     ) {
-                        throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
+                        throw new AdapterException\RuntimeException(
+                            'Cannot set a file-handle for cURL option CURLOPT_INFILE'
+                            . ' without also setting its size in CURLOPT_INFILESIZE.'
+                        );
                     }
 
                     if (isset($headers['Content-Length'])) {
@@ -300,27 +307,27 @@ class Curl implements HttpAdapter, StreamInterface
                 }
                 break;
 
-            case 'PATCH' :
+            case 'PATCH':
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "PATCH";
                 break;
 
-            case 'DELETE' :
+            case 'DELETE':
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";
                 break;
 
-            case 'OPTIONS' :
+            case 'OPTIONS':
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "OPTIONS";
                 break;
 
-            case 'TRACE' :
+            case 'TRACE':
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "TRACE";
                 break;
 
-            case 'HEAD' :
+            case 'HEAD':
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "HEAD";
                 break;
@@ -394,7 +401,10 @@ class Curl implements HttpAdapter, StreamInterface
             foreach ((array) $this->config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->curl, $k, $v) == false) {
-                        throw new AdapterException\RuntimeException(sprintf("Unknown or erroreous cURL option '%s' set", $k));
+                        throw new AdapterException\RuntimeException(sprintf(
+                            'Unknown or erroreous cURL option "%s" set',
+                            $k
+                        ));
                     }
                 }
             }
@@ -419,7 +429,8 @@ class Curl implements HttpAdapter, StreamInterface
         $responseHeaderSize = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
         $responseHeaders = substr($this->response, 0, $responseHeaderSize);
 
-        // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again
+        // cURL automatically decodes chunked-messages, this means we have to
+        // disallow the Zend\Http\Response to do it again.
         $responseHeaders = preg_replace("/Transfer-Encoding:\s*chunked\\r\\n/", "", $responseHeaders);
 
         // cURL can automatically handle content encoding; prevent double-decoding from occurring
@@ -430,7 +441,11 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // cURL automatically handles Proxy rewrites, remove the "HTTP/1.0 200 Connection established" string:
-        $responseHeaders = preg_replace("/HTTP\/1.0\s*200\s*Connection\s*established\\r\\n\\r\\n/", '', $responseHeaders);
+        $responseHeaders = preg_replace(
+            "/HTTP\/1.0\s*200\s*Connection\s*established\\r\\n\\r\\n/",
+            '',
+            $responseHeaders
+        );
 
         // replace old header with new, cleaned up, header
         $this->response = substr_replace($this->response, $responseHeaders, 0, $responseHeaderSize);

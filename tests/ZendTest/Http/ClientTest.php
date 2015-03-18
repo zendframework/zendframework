@@ -393,7 +393,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
 
-        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertContains('Authorization: Digest', $headers);
 
     }
 

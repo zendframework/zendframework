@@ -20,7 +20,6 @@ use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
 use ZendTest\Http\TestAsset\ExtendedClient;
 
-
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfCookiesAreSticky()
@@ -386,16 +385,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $request = new Request();
         $request->getHeaders()->addHeaderLine('Authorization: Digest');
-        $request->getHeaders()->addHeaderLine('content-type','application/json');
-        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $request->getHeaders()->addHeaderLine('content-type', 'application/json');
+        $request->getHeaders()->addHeaderLine('content-length', strlen($body));
         $client->setRequest($request);
 
         $this->assertSame($client->getRequest(), $request);
 
         $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
 
-        $this->assertContains('Authorization: Digest', $headers);
-
+        $this->assertInternalType('array', $headers);
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertContains('Digest', $headers['Authorization']);
     }
 
     /**

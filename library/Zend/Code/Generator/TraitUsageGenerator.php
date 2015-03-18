@@ -299,7 +299,7 @@ class TraitUsageGenerator extends AbstractGenerator
             return $output;
         }
 
-        $output .= $indent . 'use ' . join(', ', $traits);
+        $output .= $indent . 'use ' . implode(', ', $traits);
 
         $aliases   = $this->getTraitAliases();
         $overrides = $this->getTraitOverrides();
@@ -344,7 +344,6 @@ class TraitUsageGenerator extends AbstractGenerator
                     . ';'
                     . self::LINE_FEED;
             }
-
         }
 
         $output .= self::LINE_FEED . $indent . '}' . self::LINE_FEED . self::LINE_FEED;

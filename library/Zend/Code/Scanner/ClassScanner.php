@@ -532,7 +532,7 @@ class ClassScanner implements ScannerInterface
                 ));
             }
             $fileName = $r->getFileName();
-            
+
             $file = new FileScanner($fileName);
             $this->traits[] = $file->getClass($traitName);
         }
@@ -1073,7 +1073,7 @@ class ClassScanner implements ScannerInterface
                     $MACRO_INFO_ADVANCE();
                     goto SCANNER_CLASS_BODY_CONTINUE;
                     // goto no break needed
-                    
+
                 case T_USE:
                     // ensure php backwards compatibility
                     if (! defined('T_INSTEADOF')) {

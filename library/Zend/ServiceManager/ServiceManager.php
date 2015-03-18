@@ -1019,7 +1019,7 @@ class ServiceManager implements ServiceLocatorInterface
             return $service;
         }
 
-        return null;
+        return;
     }
 
     /**

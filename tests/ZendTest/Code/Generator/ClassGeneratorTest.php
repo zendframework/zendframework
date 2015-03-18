@@ -9,6 +9,7 @@
 
 namespace ZendTest\Code\Generator;
 
+use ReflectionMethod;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\PropertyGenerator;
@@ -710,6 +711,10 @@ CODE;
 
     public function testCanAddTraitWithString()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTrait('myTrait');
         $this->assertTrue($classGenerator->hasTrait('myTrait'));
@@ -717,6 +722,10 @@ CODE;
 
     public function testCanAddTraitWithArray()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTrait(array('traitName' => 'myTrait'));
         $this->assertTrue($classGenerator->hasTrait('myTrait'));
@@ -724,6 +733,10 @@ CODE;
 
     public function testCanRemoveTrait()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTrait(array('traitName' => 'myTrait'));
         $this->assertTrue($classGenerator->hasTrait('myTrait'));
@@ -733,6 +746,10 @@ CODE;
 
     public function testCanGetTraitsMethod()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTraits(array('myTrait', 'hisTrait'));
 
@@ -743,32 +760,47 @@ CODE;
 
     public function testCanAddTraitAliasWithString()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $classGenerator->addTrait('myTrait');
-        $classGenerator->addTraitAlias('myTrait::method', 'useMe', \ReflectionMethod::IS_PRIVATE);
+        $classGenerator->addTraitAlias('myTrait::method', 'useMe', ReflectionMethod::IS_PRIVATE);
 
         $aliases = $classGenerator->getTraitAliases();
         $this->assertTrue(array_key_exists('myTrait::method', $aliases));
         $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
-        $this->assertEquals($aliases['myTrait::method']['visibility'], \ReflectionMethod::IS_PRIVATE);
+        $this->assertEquals($aliases['myTrait::method']['visibility'], ReflectionMethod::IS_PRIVATE);
     }
 
     public function testCanAddTraitAliasWithArray()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $classGenerator->addTrait('myTrait');
-        $classGenerator->addTraitAlias(array('traitName' => 'myTrait', 'method' => 'method'), 'useMe', \ReflectionMethod::IS_PRIVATE);
+        $classGenerator->addTraitAlias(array(
+            'traitName' => 'myTrait',
+            'method'    => 'method',
+        ), 'useMe', ReflectionMethod::IS_PRIVATE);
 
         $aliases = $classGenerator->getTraitAliases();
         $this->assertTrue(array_key_exists('myTrait::method', $aliases));
         $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
-        $this->assertEquals($aliases['myTrait::method']['visibility'], \ReflectionMethod::IS_PRIVATE);
+        $this->assertEquals($aliases['myTrait::method']['visibility'], ReflectionMethod::IS_PRIVATE);
     }
 
     public function testAddTraitAliasExceptionInvalidMethodFormat()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -782,6 +814,10 @@ CODE;
 
     public function testAddTraitAliasExceptionInvalidMethodTraitDoesNotExist()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -795,6 +831,10 @@ CODE;
 
     public function testAddTraitAliasExceptionMethodAlreadyExists()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -809,11 +849,16 @@ CODE;
 
     public function testAddTraitAliasExceptionInvalidVisibilityValue()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'Invalid Type: $visibility must of ReflectionMethod::IS_PUBLIC, ReflectionMethod::IS_PRIVATE or ReflectionMethod::IS_PROTECTED'
+            'Invalid Type: $visibility must of ReflectionMethod::IS_PUBLIC,'
+            . ' ReflectionMethod::IS_PRIVATE or ReflectionMethod::IS_PROTECTED'
         );
 
         $classGenerator->addTrait('myTrait');
@@ -822,6 +867,10 @@ CODE;
 
     public function testAddTraitAliasExceptionInvalidAliasArgument()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -835,6 +884,10 @@ CODE;
 
     public function testCanAddTraitOverride()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTraits(array('myTrait', 'histTrait'));
         $classGenerator->addTraitOverride('myTrait::foo', 'hisTrait');
@@ -847,9 +900,11 @@ CODE;
 
     public function testCanAddMultipleTraitOverrides()
     {
-                $classGenerator = new ClassGenerator();
-        $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
-        $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));$classGenerator = new ClassGenerator();
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
+        $classGenerator = new ClassGenerator();
         $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
         $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
 
@@ -860,6 +915,10 @@ CODE;
 
     public function testAddTraitOverrideExceptionInvalidMethodFormat()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -873,6 +932,10 @@ CODE;
 
     public function testAddTraitOverrideExceptionInvalidMethodTraitDoesNotExist()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -886,6 +949,10 @@ CODE;
 
     public function testAddTraitOverrideExceptionInvalidTraitName()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -899,6 +966,10 @@ CODE;
 
     public function testAddTraitOverrideExceptionInvalidTraitToReplaceArgument()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -912,6 +983,10 @@ CODE;
 
     public function testAddTraitOverrideExceptionInvalidMethodArgInArray()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
@@ -925,6 +1000,10 @@ CODE;
 
     public function testCanRemoveTraitOverride()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
         $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
@@ -941,6 +1020,10 @@ CODE;
 
     public function testCanRemoveAllTraitOverrides()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
         $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
@@ -959,6 +1042,10 @@ CODE;
      */
     public function testUseTraitGeneration()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->setName('myClass');
         $classGenerator->addTrait('myTrait');
@@ -983,12 +1070,16 @@ CODE;
      */
     public function testTraitGenerationWithAliasesAndOverrides()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         $classGenerator = new ClassGenerator();
         $classGenerator->setName('myClass');
         $classGenerator->addTrait('myTrait');
         $classGenerator->addTrait('hisTrait');
         $classGenerator->addTrait('thatTrait');
-        $classGenerator->addTraitAlias("hisTrait::foo", "test", \ReflectionMethod::IS_PUBLIC);
+        $classGenerator->addTraitAlias("hisTrait::foo", "test", ReflectionMethod::IS_PUBLIC);
         $classGenerator->addTraitOverride('myTrait::bar', array('hisTrait', 'thatTrait'));
 
         $output = <<<'CODE'
@@ -1007,6 +1098,5 @@ class myClass
 
 CODE;
         $this->assertEquals($classGenerator->generate(), $output);
-
     }
 }

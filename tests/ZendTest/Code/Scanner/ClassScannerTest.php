@@ -264,7 +264,7 @@ class ClassScannerTest extends TestCase
 
         $this->assertEquals($class->getMethodNames(), array_keys($testMethods));
 
-        foreach($testMethods as $methodName => $testMethod) {
+        foreach ($testMethods as $methodName => $testMethod) {
             $this->assertTrue($class->hasMethod($methodName), "Cannot find method $methodName");
 
             $method = $class->getMethod($methodName);
@@ -273,7 +273,7 @@ class ClassScannerTest extends TestCase
             $this->assertTrue($method->$testMethod());
 
             // test that we got the right ::bar method based on declaration
-            if($testMethod === "bar") {
+            if ($testMethod === "bar") {
                 $this->assertEquals(trim($method->getBody), 'echo "foo";');
             }
         }

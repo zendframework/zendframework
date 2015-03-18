@@ -22,6 +22,12 @@ use Zend\Code\Reflection\ClassReflection;
  */
 class TraitGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+    }
 
     public function testConstruction()
     {
@@ -446,8 +452,6 @@ CODE;
         $this->assertNotContains('publicClassProperty', $code);
         $this->assertNotContains('protectedClassProperty', $code);
         $this->assertNotContains('privateClassProperty', $code);
-
-
     }
 
     public function testHasMethodInsensitive()

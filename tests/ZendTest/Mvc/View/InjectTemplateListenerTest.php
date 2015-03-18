@@ -331,4 +331,19 @@ class InjectTemplateListenerTest extends TestCase
         $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
     }
+
+    public function testPrefersRouteMatchController()
+    {
+        $this->assertFalse($this->listener->isPreferRouteMatchController());
+        $this->listener->setPreferRouteMatchController(true);
+        $this->routeMatch->setParam('controller', 'Some\Other\Service\Namespace\Controller\Sample');
+        $myViewModel  = new ViewModel();
+        $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
+
+        $this->event->setTarget($myController);
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('some/sample', $myViewModel->getTemplate());
+    }
 }

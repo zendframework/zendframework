@@ -1098,6 +1098,5 @@ class myClass
 
 CODE;
         $this->assertEquals($classGenerator->generate(), $output);
-
     }
 }

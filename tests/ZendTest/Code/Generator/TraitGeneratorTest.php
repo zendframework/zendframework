@@ -452,8 +452,6 @@ CODE;
         $this->assertNotContains('publicClassProperty', $code);
         $this->assertNotContains('protectedClassProperty', $code);
         $this->assertNotContains('privateClassProperty', $code);
-
-
     }
 
     public function testHasMethodInsensitive()

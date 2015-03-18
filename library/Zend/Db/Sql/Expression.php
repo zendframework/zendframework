@@ -38,7 +38,7 @@ class Expression extends AbstractExpression
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {
-        if ($expression) {
+        if ($expression !== '') {
             $this->setExpression($expression);
         }
 

@@ -133,7 +133,7 @@ class Date extends AbstractValidator
         }
 
         $type = gettype($param);
-        if (!in_array($type, array('string', 'integer', 'array'))) {
+        if (!in_array($type, array('string', 'integer', 'double', 'array'))) {
             if ($addErrors) {
                 $this->error(self::INVALID);
             }
@@ -153,6 +153,17 @@ class Date extends AbstractValidator
     protected function convertInteger($value)
     {
         return date_create("@$value");
+    }
+
+    /**
+     * Attempts to convert an double into a DateTime object
+     *
+     * @param  double $value
+     * @return bool|DateTime
+     */
+    protected function convertDouble($value)
+    {
+        return DateTime::createFromFormat('U', $value);
     }
 
     /**

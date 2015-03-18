@@ -71,8 +71,10 @@ class DateTest extends \PHPUnit_Framework_TestCase
             // int
             array(0,                         null,              true),
             array(1340677235,                null,              true),
-            // Commenting out, as value appears to vary based on OS
-            // array(999999999999,              null,              true),
+            // 32bit version of php will convert this to double
+            array(999999999999,              null,              true),
+            // double
+            array(12.12,                     null,              false),
             // array
             array(array('2012', '06', '25'), null,              true),
             // 0012-06-25 is a valid date, if you want 2012, use 'y' instead of 'Y'

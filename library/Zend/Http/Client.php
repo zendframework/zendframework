@@ -25,7 +25,7 @@ class Client implements Stdlib\DispatchableInterface
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
-    const AUTH_DIGEST = 'digest';  // not implemented yet
+    const AUTH_DIGEST = 'digest';
 
     /**
      * @const string POST data encoding methods
@@ -1140,7 +1140,12 @@ class Client implements Stdlib\DispatchableInterface
                     }
                     break;
                 case self::AUTH_DIGEST :
-                    throw new Exception\RuntimeException("The digest authentication is not implemented yet");
+                    if (!$this->adapter instanceof Client\Adapter\Curl) {
+                        throw new Exception\RuntimeException("The digest authentication is only available for curl adapters (Zend\\Http\\Client\\Adapter\\Curl)");
+                    }
+
+                    $this->adapter->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+                    $this->adapter->setCurlOption(CURLOPT_USERPWD, $this->auth['user'] . ':' . $this->auth['password']);
             }
         }
 

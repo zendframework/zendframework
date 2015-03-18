@@ -20,7 +20,6 @@ use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
 use ZendTest\Http\TestAsset\ExtendedClient;
 
-
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfCookiesAreSticky()
@@ -374,6 +373,29 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayNotHasKey('content-length', $headers);
         $this->assertArrayHasKey('Content-Length', $headers);
+    }
+
+    public function testPrepareHeadersCurlDigestAuthentication()
+    {
+        $body = json_encode(array('foofoo'=>'barbar'));
+
+        $client = new Client();
+        $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
+        $prepareHeadersReflection->setAccessible(true);
+
+        $request = new Request();
+        $request->getHeaders()->addHeaderLine('Authorization: Digest');
+        $request->getHeaders()->addHeaderLine('content-type', 'application/json');
+        $request->getHeaders()->addHeaderLine('content-length', strlen($body));
+        $client->setRequest($request);
+
+        $this->assertSame($client->getRequest(), $request);
+
+        $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
+
+        $this->assertInternalType('array', $headers);
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertContains('Digest', $headers['Authorization']);
     }
 
     /**

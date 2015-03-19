@@ -119,11 +119,15 @@ class FeedRendererTest extends TestCase
         $this->renderer->setFeedType('foobar');
     }
     
-    public function testSettingReturnsInstance()
+    public function testReturnsSameRendererInstanceWhenResolverIsSet()
     {
-        $setResolverReturnValue = $this->renderer->setResolver(null);
-        $this->assertEquals($setResolverReturnValue, $this->renderer);
-        $setFeedTypeReturnValue = $this->renderer->setFeedType('rss');
-        $this->assertEquals($setFeedTypeReturnValue, $this->renderer);
+        $returnValue = $this->renderer->setResolver(null);
+        $this->assertSame($returnValue, $this->renderer);
+    }
+    
+    public function testReturnsSameRendererInstanceWhenFieldTypeIsSet()
+    {
+        $returnValue = $this->renderer->setFeedType('rss');
+        $this->assertSame($returnValue, $this->renderer);
     }
 }

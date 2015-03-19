@@ -176,4 +176,37 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
     }
+	
+		/**
+     * Post codes are provided by French government official post code database
+     * https://www.data.gouv.fr/fr/datasets/base-officielle-des-codes-postaux/
+     */
+    public function testFrPostCodes()
+    {
+        $validator = $this->validator;
+        $validator->setLocale('fr_FR');
+        
+        $this->assertTrue($validator->isValid('13100')); // AIX EN PROVENCE
+        $this->assertTrue($validator->isValid('97439')); // STE ROSE
+        $this->assertTrue($validator->isValid('98790')); // MAHETIKA
+        $this->assertFalse($validator->isValid('00000')); // Post codes starting with 00 don't exist
+        $this->assertFalse($validator->isValid('96000')); // Post codes starting with 96 don't exist
+        $this->assertFalse($validator->isValid('99000')); // Post codes starting with 99 don't exist
+
+    }
+
+	/**
+     * Post codes are provided by Norway Mail database
+     * http://www.bring.no/hele-bring/produkter-og-tjenester/brev-og-postreklame/andre-tjenester/postnummertabeller
+     */
+    public function testNoPostCodes()
+    {
+        $validator = $this->validator;
+        $validator->setLocale('en_NO');
+        
+        $this->assertTrue($validator->isValid('0301')); // OSLO
+        $this->assertTrue($validator->isValid('9910')); // BJØRNEVATN
+        $this->assertFalse($validator->isValid('0000')); // Postal code 0000
+		
+    }
 }

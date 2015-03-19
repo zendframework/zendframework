@@ -177,7 +177,7 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
                                      'messageTemplates', $validator);
     }
 	
-		/**
+	/**
      * Post codes are provided by French government official post code database
      * https://www.data.gouv.fr/fr/datasets/base-officielle-des-codes-postaux/
      */

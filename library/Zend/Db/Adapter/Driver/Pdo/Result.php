@@ -31,7 +31,7 @@ class Result implements Iterator, ResultInterface
     protected $fetchMode = \PDO::FETCH_ASSOC;
 
     /**
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $resource = null;
 
@@ -103,11 +103,14 @@ class Result implements Iterator, ResultInterface
 
     /**
      * @param int $fetchMode
+     * @throws Exception\InvalidArgumentException on invalid fetch mode
      */
     public function setFetchMode($fetchMode)
     {
         if ($fetchMode < 1 || $fetchMode > 10) {
-            throw new Exception\InvalidArgumentException('The fetch mode must be one of the PDO::FETCH_* constants.');
+            throw new Exception\InvalidArgumentException(
+                'The fetch mode must be one of the PDO::FETCH_* constants.'
+            );
         }
 
         $this->fetchMode = (int) $fetchMode;

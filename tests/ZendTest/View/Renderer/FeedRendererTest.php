@@ -118,4 +118,12 @@ class FeedRendererTest extends TestCase
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException', 'expects a string of either "rss" or "atom"');
         $this->renderer->setFeedType('foobar');
     }
+    
+    public function testSettingReturnsInstance()
+    {
+        $setResolverReturnValue = $this->renderer->setResolver(null);
+        $this->assertEquals($setResolverReturnValue, $this->renderer);
+        $setFeedTypeReturnValue = $this->renderer->setFeedType('rss');
+        $this->assertEquals($setFeedTypeReturnValue, $this->renderer);
+    }
 }

@@ -11,7 +11,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 use Zend\InputFilter\InputProviderInterface;
 
 class File extends Element implements InputProviderInterface, ElementPrepareAwareInterface
@@ -28,10 +28,10 @@ class File extends Element implements InputProviderInterface, ElementPrepareAwar
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         // Ensure the form is using correct enctype
         $form->setAttribute('enctype', 'multipart/form-data');

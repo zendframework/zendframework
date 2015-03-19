@@ -11,7 +11,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 
 class Password extends Element implements ElementPrepareAwareInterface
 {
@@ -27,10 +27,10 @@ class Password extends Element implements ElementPrepareAwareInterface
     /**
      * Remove the password before rendering if the form fails in order to avoid any security issue
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         $this->setValue('');
     }

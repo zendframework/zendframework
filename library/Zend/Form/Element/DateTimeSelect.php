@@ -12,7 +12,7 @@ namespace Zend\Form\Element;
 use DateTime as PhpDateTime;
 use Exception;
 use Traversable;
-use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\ValidatorInterface;
@@ -277,10 +277,10 @@ class DateTimeSelect extends DateSelect
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return void
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         parent::prepareElement($form);
 

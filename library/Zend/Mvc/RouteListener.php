@@ -9,16 +9,11 @@
 
 namespace Zend\Mvc;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 
-class RouteListener implements ListenerAggregateInterface
+class RouteListener extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Attach to an event manager
      *
@@ -28,21 +23,6 @@ class RouteListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'onRoute'));
-    }
-
-    /**
-     * Detach all our listeners from the event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**

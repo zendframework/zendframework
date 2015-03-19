@@ -164,8 +164,8 @@ class Console
         foreach ($definition->getMethods($class) as $methodName => $methodIsRequired) {
             foreach ($definition->getMethodParameters($class, $methodName) as $fqName => $pData) {
                 echo '      ' . $pData[0] . ' [type: ';
-                echo ($pData[1]) ? $pData[1] : 'scalar';
-                echo ($pData[2] === true && $methodIsRequired) ? ', required' : ', not required';
+                echo($pData[1]) ? $pData[1] : 'scalar';
+                echo($pData[2] === true && $methodIsRequired) ? ', required' : ', not required';
                 echo ', injection-method: ' . $methodName;
                 echo ' fq-name: ' . $fqName;
                 echo ']' . PHP_EOL;

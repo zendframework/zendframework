@@ -9,13 +9,8 @@
 
 namespace Zend\Db\Adapter\Platform;
 
-class Oracle implements PlatformInterface
+class Oracle extends AbstractPlatform
 {
-    /**
-     * @var bool
-     */
-    protected $quoteIdentifiers = true;
-
     /**
      * @param array $options
      */
@@ -30,9 +25,7 @@ class Oracle implements PlatformInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -40,62 +33,19 @@ class Oracle implements PlatformInterface
     }
 
     /**
-     * Get quote identifier symbol
-     *
-     * @return string
-     */
-    public function getQuoteIdentifierSymbol()
-    {
-        return '"';
-    }
-
-    /**
-     * Quote identifier
-     *
-     * @param  string $identifier
-     * @return string
-     */
-    public function quoteIdentifier($identifier)
-    {
-        if ($this->quoteIdentifiers === false) {
-            return $identifier;
-        }
-        return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
-    }
-
-    /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
         if ($this->quoteIdentifiers === false) {
-            return (is_array($identifierChain)) ? implode('.', $identifierChain) : $identifierChain;
+            return implode('.', (array) $identifierChain);
         }
-        $identifierChain = str_replace('"', '\\"', $identifierChain);
-        if (is_array($identifierChain)) {
-            $identifierChain = implode('"."', $identifierChain);
-        }
-        return '"' . $identifierChain . '"';
+
+        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
-     */
-    public function getQuoteValueSymbol()
-    {
-        return '\'';
-    }
-
-    /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -103,85 +53,14 @@ class Oracle implements PlatformInterface
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
                 . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\'' . addcslashes(str_replace('\'', '\'\'', $value), "\x00\n\r\"\x1a") . '\'';
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
-    }
-
-    /**
-     * Quote value list
-     *
-     * @param string|string[] $valueList
-     * @return string
-     */
-    public function quoteValueList($valueList)
-    {
-        if (!is_array($valueList)) {
-            return $this->quoteValue($valueList);
-        }
-
-        $value = reset($valueList);
-        do {
-            $valueList[key($valueList)] = $this->quoteValue($value);
-        } while ($value = next($valueList));
-        return implode(', ', $valueList);
-    }
-
-    /**
-     * Get identifier separator
-     *
-     * @return string
-     */
-    public function getIdentifierSeparator()
-    {
-        return '.';
-    }
-
-    /**
-     * Quote identifier in fragment
-     *
-     * @param  string $identifier
-     * @param  array $safeWords
-     * @return string
-     */
-    public function quoteIdentifierInFragment($identifier, array $safeWords = array())
-    {
-        if ($this->quoteIdentifiers === false) {
-            return $identifier;
-        }
-        $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-        if ($safeWords) {
-            $safeWords = array_flip($safeWords);
-            $safeWords = array_change_key_case($safeWords, CASE_LOWER);
-        }
-        foreach ($parts as $i => $part) {
-            if ($safeWords && isset($safeWords[strtolower($part)])) {
-                continue;
-            }
-            switch ($part) {
-                case ' ':
-                case '.':
-                case '*':
-                case 'AS':
-                case 'As':
-                case 'aS':
-                case 'as':
-                    break;
-                default:
-                    $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
-            }
-        }
-        return implode('', $parts);
+        return '\'' . addcslashes(str_replace('\'', '\'\'', $value), "\x00\n\r\"\x1a") . '\'';
     }
 }

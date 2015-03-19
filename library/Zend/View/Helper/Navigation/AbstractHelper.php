@@ -803,7 +803,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     public function getTranslator()
     {
         if (! $this->isTranslatorEnabled()) {
-            return null;
+            return;
         }
 
         return $this->translator;

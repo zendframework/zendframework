@@ -83,7 +83,7 @@ class Literal implements RouteInterface
     public function match(Request $request, $pathOffset = null)
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
@@ -96,14 +96,14 @@ class Literal implements RouteInterface
                 }
             }
 
-            return null;
+            return;
         }
 
         if ($path === $this->route) {
             return new RouteMatch($this->defaults, strlen($this->route));
         }
 
-        return null;
+        return;
     }
 
     /**

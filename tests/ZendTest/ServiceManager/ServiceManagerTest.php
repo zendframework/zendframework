@@ -17,7 +17,6 @@ use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
-
 use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
 use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 
@@ -1066,7 +1065,7 @@ class ServiceManagerTest extends TestCase
             return $delegator;
         };
 
-        $this->serviceManager->setFactory('foo-service', function () use ($realService) { return $realService; } );
+        $this->serviceManager->setFactory('foo-service', function () use ($realService) { return $realService; });
         $this->serviceManager->addDelegator('foo-service', $delegatorFactoryCallback);
 
         $service = $this->serviceManager->create('foo-service');
@@ -1188,5 +1187,40 @@ class ServiceManagerTest extends TestCase
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->serviceManager->isShared('foobarbazbat');
+    }
+
+    public function testPeeringServiceManagersInBothDirectionsDontRunIntoInfiniteLoop()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $peeredServiceManager = $this->serviceManager->createScopedServiceManager(ServiceManager::SCOPE_CHILD);
+        $peeredServiceManager->addPeeringServiceManager($this->serviceManager);
+        $this->serviceManager->get('foobarbazbat');
+    }
+
+    public function testServiceCanBeFoundFromPeeringServicesManagers()
+    {
+        $peeredServiceManager = new ServiceManager();
+        $peeredServiceManager->addPeeringServiceManager($this->serviceManager);
+        $this->serviceManager->addPeeringServiceManager($peeredServiceManager);
+
+        $secondParentServiceManager = new ServiceManager();
+        $secondParentServiceManager->addPeeringServiceManager($peeredServiceManager);
+        $peeredServiceManager->addPeeringServiceManager($secondParentServiceManager);
+
+        $expectedService = new \stdClass();
+        $secondParentServiceManager->setService('peered_service', $expectedService);
+
+        // check if service is direct child of secong parent service manager
+        $this->assertFalse($this->serviceManager->has('peered_service', true, false));
+        $this->assertFalse($peeredServiceManager->has('peered_service', true, false));
+        $this->assertTrue($secondParentServiceManager->has('peered_service', true, false));
+
+        // check if we can receive service from peered service managers
+        $this->assertTrue($this->serviceManager->has('peered_service'));
+        $this->assertTrue($peeredServiceManager->has('peered_service'));
+        $this->assertTrue($secondParentServiceManager->has('peered_service'));
+        $this->assertSame($expectedService, $this->serviceManager->get('peered_service'));
+        $this->assertSame($expectedService, $peeredServiceManager->get('peered_service'));
+        $this->assertSame($expectedService, $secondParentServiceManager->get('peered_service'));
     }
 }

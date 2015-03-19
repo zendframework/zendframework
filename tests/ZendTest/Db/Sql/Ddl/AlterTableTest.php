@@ -96,14 +96,17 @@ class AlterTableTest extends \PHPUnit_Framework_TestCase
         $at->dropConstraint('my_index');
         $expected =<<<EOS
 ALTER TABLE "foo"
-ADD COLUMN "another" VARCHAR(255) NOT NULL ,
-CHANGE COLUMN "name" "new_name" VARCHAR(50) NOT NULL ,
-DROP COLUMN "foo",
-ADD CONSTRAINT "my_fk" FOREIGN KEY ("other_id") REFERENCES "other_table" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-DROP CONSTRAINT "my_index"
+ ADD COLUMN "another" VARCHAR(255) NOT NULL,
+ CHANGE COLUMN "name" "new_name" VARCHAR(50) NOT NULL,
+ DROP COLUMN "foo",
+ ADD CONSTRAINT "my_fk" FOREIGN KEY ("other_id") REFERENCES "other_table" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+ DROP CONSTRAINT "my_index"
 EOS;
 
-        $expected = str_replace("\r\n", "\n", $expected);
-        $this->assertEquals($expected, $at->getSqlString());
+        $actual = $at->getSqlString();
+        $this->assertEquals(
+            str_replace(array("\r", "\n"), "", $expected),
+            str_replace(array("\r", "\n"), "", $actual)
+        );
     }
 }

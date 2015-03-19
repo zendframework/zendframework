@@ -585,14 +585,14 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
     public function testNewInstanceWillThrowAnClassNotFoundExceptionWhenClassIsAnInterface()
     {
-        $definitionArray = array (
+        $definitionArray = array(
             'ZendTest\Di\TestAsset\ConstructorInjection\D' => array(
                 'supertypes' => array(),
                 'instantiator' => '__construct',
                 'methods' => array('__construct' => 3),
                 'parameters' => array(
                     '__construct' =>
-                    array (
+                    array(
                         'ZendTest\Di\TestAsset\ConstructorInjection\D::__construct:0' => array(
                             0 => 'd',
                             1 => 'ZendTest\Di\TestAsset\DummyInterface',
@@ -969,13 +969,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $retrievedInstanceClass = 'ZendTest\Di\TestAsset\ConstructorInjection\C';
 
         // Provide definitions for $retrievedInstanceClass, but not for $sharedInstanceClass.
-        $arrayDefinition = array($retrievedInstanceClass => array (
-            'supertypes' => array ( ),
+        $arrayDefinition = array($retrievedInstanceClass => array(
+            'supertypes' => array( ),
             'instantiator' => '__construct',
-            'methods' => array ('__construct' => true),
-            'parameters' => array ( '__construct' => array (
-                "$retrievedInstanceClass::__construct:0" => array ('a', $sharedInstanceClass, true, NULL),
-                "$retrievedInstanceClass::__construct:1" => array ('params', NULL, false, array()),
+            'methods' => array('__construct' => true),
+            'parameters' => array( '__construct' => array(
+                "$retrievedInstanceClass::__construct:0" => array('a', $sharedInstanceClass, true, NULL),
+                "$retrievedInstanceClass::__construct:1" => array('params', NULL, false, array()),
             )),
         ));
 

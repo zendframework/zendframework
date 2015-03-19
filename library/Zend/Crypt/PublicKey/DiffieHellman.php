@@ -414,14 +414,11 @@ class DiffieHellman
         switch ($outputFormat) {
             case self::FORMAT_BINARY:
                 return $this->math->intToBin($number);
-                break;
             case self::FORMAT_BTWOC:
                 return $this->math->intToBin($number, true);
-                break;
             case self::FORMAT_NUMBER:
             default:
                 return $number;
-                break;
         }
     }
 

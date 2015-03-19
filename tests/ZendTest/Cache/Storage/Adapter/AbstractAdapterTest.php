@@ -279,7 +279,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
                         return $items[$k];
                     } else {
                         $success = false;
-                        return null;
+                        return;
                     }
                 }));
         }
@@ -353,6 +353,135 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $rs = $this->_storage->getMetadata($key);
         $this->assertSame($result, $rs);
+    }
+
+    public function testGetItemReturnsNullIfFailed()
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
+
+        $key    = 'key1';
+
+        // Do not throw exceptions outside the adapter
+        $pluginOptions = new Cache\Storage\Plugin\PluginOptions(
+            array('throw_exceptions' => false)
+        );
+        $plugin = new Cache\Storage\Plugin\ExceptionHandler();
+        $plugin->setOptions($pluginOptions);
+        $this->_storage->addPlugin($plugin);
+
+        // Simulate internalGetItem() throwing an exception
+        $this->_storage
+            ->expects($this->once())
+            ->method('internalGetItem')
+            ->with($this->equalTo($key))
+            ->will($this->throwException(new \Exception('internalGet failed')));
+
+        $result = $this->_storage->getItem($key, $success);
+        $this->assertNull($result, 'GetItem should return null the item cannot be retrieved');
+        $this->assertFalse($success, '$success should be false if the item cannot be retrieved');
+    }
+
+    public function simpleEventHandlingMethodDefinitions()
+    {
+        return array(
+            //    name, internalName, args, internalName, returnValue
+            array('hasItem', 'internalGetItem', array('k'), 'v'),
+            array('hasItems', 'internalHasItems', array(array('k1', 'k2')), array('v1', 'v2')),
+
+            array('getItem', 'internalGetItem', array('k'), 'v'),
+            array('getItems', 'internalGetItems', array(array('k1', 'k2')), array('k1' => 'v1', 'k2' => 'v2')),
+
+            array('getMetadata', 'internalGetMetadata', array('k'), array()),
+            array('getMetadatas', 'internalGetMetadatas', array(array('k1', 'k2')), array('k1' => array(), 'k2' => array())),
+
+            array('setItem', 'internalSetItem', array('k', 'v'), true),
+            array('setItems', 'internalSetItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('replaceItem', 'internalReplaceItem', array('k', 'v'), true),
+            array('replaceItems', 'internalReplaceItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('addItem', 'internalAddItem', array('k', 'v'), true),
+            array('addItems', 'internalAddItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('checkAndSetItem', 'internalCheckAndSetItem', array(123, 'k', 'v'), true),
+
+            array('touchItem', 'internalTouchItem', array('k'), true),
+            array('touchItems', 'internalTouchItems', array(array('k1', 'k2')), array()),
+
+            array('removeItem', 'internalRemoveItem', array('k'), true),
+            array('removeItems', 'internalRemoveItems', array(array('k1', 'k2')), array()),
+
+            array('incrementItem', 'internalIncrementItem', array('k', 1), true),
+            array('incrementItems', 'internalIncrementItems', array(array('k1' => 1, 'k2' => 2)), array()),
+
+            array('decrementItem', 'internalDecrementItem', array('k', 1), true),
+            array('decrementItems', 'internalDecrementItems', array(array('k1' => 1, 'k2' => 2)), array()),
+        );
+    }
+
+    /**
+     * @dataProvider simpleEventHandlingMethodDefinitions
+     */
+    public function testEventHandlingSimple($methodName, $internalMethodName, $methodArgs, $retVal)
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
+
+        $eventList    = array();
+        $eventHandler = function ($event) use (&$eventList) {
+            $eventList[] = $event->getName();
+        };
+        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+
+        $mock = $this->_storage
+            ->expects($this->once())
+            ->method($internalMethodName);
+        $mock = call_user_func_array(array($mock, 'with'), array_map(array($this, 'equalTo'), $methodArgs));
+        $mock->will($this->returnValue($retVal));
+
+        call_user_func_array(array($this->_storage, $methodName), $methodArgs);
+
+        $expectedEventList = array(
+            $methodName . '.pre',
+            $methodName . '.post'
+        );
+        $this->assertSame($expectedEventList, $eventList);
+    }
+
+    /**
+     * @dataProvider simpleEventHandlingMethodDefinitions
+     */
+    public function testEventHandlingStopInPre($methodName, $internalMethodName, $methodArgs, $retVal)
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
+
+        $eventList    = array();
+        $eventHandler = function ($event) use (&$eventList) {
+            $eventList[] = $event->getName();
+        };
+        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+
+        $this->_storage->getEventManager()->attach($methodName . '.pre', function ($event) use ($retVal) {
+            $event->stopPropagation();
+            return $retVal;
+        });
+
+        // the internal method should never be called
+        $this->_storage->expects($this->never())->method($internalMethodName);
+
+        // the return vaue should be available by pre-event
+        $result = call_user_func_array(array($this->_storage, $methodName), $methodArgs);
+        $this->assertSame($retVal, $result);
+
+        // after the triggered pre-event the post-event should be triggered as well
+        $expectedEventList = array(
+            $methodName . '.pre',
+            $methodName . '.post',
+        );
+        $this->assertSame($expectedEventList, $eventList);
     }
 
 /*

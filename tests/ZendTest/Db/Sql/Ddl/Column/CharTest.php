@@ -20,7 +20,7 @@ class CharTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Char('foo', 20);
         $this->assertEquals(
-            array(array('%s CHAR(%s) %s %s', array('foo', 20, 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'CHAR(20)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

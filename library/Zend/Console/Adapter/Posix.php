@@ -402,6 +402,6 @@ class Posix extends AbstractAdapter
             return static::$ansiColorMap[$type][$color];
         }
 
-        return null;
+        return;
     }
 }

@@ -9,7 +9,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Mvc\Exception;
 
 /**
@@ -18,12 +18,12 @@ use Zend\Mvc\Exception;
 class Identity extends AbstractPlugin
 {
     /**
-     * @var AuthenticationService
+     * @var AuthenticationServiceInterface
      */
     protected $authenticationService;
 
     /**
-     * @return AuthenticationService
+     * @return AuthenticationServiceInterface
      */
     public function getAuthenticationService()
     {
@@ -31,9 +31,9 @@ class Identity extends AbstractPlugin
     }
 
     /**
-     * @param AuthenticationService $authenticationService
+     * @param AuthenticationServiceInterface $authenticationService
      */
-    public function setAuthenticationService(AuthenticationService $authenticationService)
+    public function setAuthenticationService(AuthenticationServiceInterface $authenticationService)
     {
         $this->authenticationService = $authenticationService;
     }
@@ -48,11 +48,11 @@ class Identity extends AbstractPlugin
      */
     public function __invoke()
     {
-        if (!$this->authenticationService instanceof AuthenticationService) {
-            throw new Exception\RuntimeException('No AuthenticationService instance provided');
+        if (!$this->authenticationService instanceof AuthenticationServiceInterface) {
+            throw new Exception\RuntimeException('No AuthenticationServiceInterface instance provided');
         }
         if (!$this->authenticationService->hasIdentity()) {
-            return null;
+            return;
         }
         return $this->authenticationService->getIdentity();
     }

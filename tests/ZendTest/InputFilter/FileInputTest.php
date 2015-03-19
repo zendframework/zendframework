@@ -344,4 +344,107 @@ class FileInputTest extends InputTest
     {
         $this->markTestSkipped('Not use fallback value');
     }
+
+    public function testIsEmptyFileNotArray()
+    {
+        $rawValue = 'file';
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileUploadNoFile()
+    {
+        $rawValue = array(
+            'tmp_name' => '',
+            'error' => \UPLOAD_ERR_NO_FILE,
+        );
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileOk()
+    {
+        $rawValue = array(
+            'tmp_name' => 'name',
+            'error' => \UPLOAD_ERR_OK,
+        );
+        $this->assertFalse($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyMultiFileUploadNoFile()
+    {
+        $rawValue = array(array(
+            'tmp_name' => 'foo',
+            'error'    => \UPLOAD_ERR_NO_FILE
+        ));
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileMultiFileOk()
+    {
+        $rawValue = array(
+            array(
+                'tmp_name' => 'foo',
+                'error'    => \UPLOAD_ERR_OK
+            ),
+            array(
+                'tmp_name' => 'bar',
+                'error'    => \UPLOAD_ERR_OK
+            ),
+        );
+        $this->assertFalse($this->input->isEmptyFile($rawValue));
+    }
+
+    public function emptyValuesProvider()
+    {
+        // Provide empty values specific for file input
+        return array(
+            array('file'),
+            array(array(
+                'tmp_name' => '',
+                'error' => \UPLOAD_ERR_NO_FILE,
+            )),
+            array(array(array(
+                'tmp_name' => 'foo',
+                'error'    => \UPLOAD_ERR_NO_FILE
+            ))),
+        );
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionSet($emptyValue)
+    {
+        // UploadFile validator is disabled, pretend one
+        $validator = new Validator\Callback(function () {
+            return false; // This should never be called
+        });
+        $this->input->getValidatorChain()->attach($validator);
+        parent::testAllowEmptyOptionSet($emptyValue);
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionNotSet($emptyValue)
+    {
+        // UploadFile validator is disabled, pretend one
+        $message = 'pretend failing UploadFile validator';
+        $validator = new Validator\Callback(function () {
+            return false;
+        });
+        $validator->setMessage($message);
+        $this->input->getValidatorChain()->attach($validator);
+        parent::testAllowEmptyOptionNotSet($emptyValue);
+        $this->assertEquals(array('callbackValue' => $message), $this->input->getMessages());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->markTestSkipped('does not apply to FileInput');
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->markTestSkipped('does not apply to FileInput');
+    }
 }

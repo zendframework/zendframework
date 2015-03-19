@@ -169,8 +169,8 @@ class CurlTest extends CommonHttpTests
         $this->client->setUri($this->baseuri . 'testRedirections.php');
 
         //  Set some parameters
-        $this->client->setParameterGet(array ('swallow' => 'african'));
-        $this->client->setParameterPost(array ('Camelot' => 'A silly place'));
+        $this->client->setParameterGet(array('swallow' => 'african'));
+        $this->client->setParameterPost(array('Camelot' => 'A silly place'));
         $this->client->setMethod('POST');
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',
@@ -296,6 +296,24 @@ class CurlTest extends CommonHttpTests
         );
     }
 
+    public function testSslVerifyPeerCanSetOverOption()
+    {
+        $adapter = new Adapter\Curl();
+        $adapter->setOptions(array(
+            'sslverifypeer' => true
+        ));
+
+        $expected = array(
+            'curloptions' => array(
+                CURLOPT_SSL_VERIFYPEER => true
+            ),
+        );
+
+        $this->assertEquals(
+            $expected, $this->readAttribute($adapter, 'config')
+        );
+    }
+
     /**
      * @group ZF-7040
      */
@@ -359,5 +377,20 @@ class CurlTest extends CommonHttpTests
         $this->client->setMethod('GET');
         $this->client->send();
         $this->assertEquals('Success', $this->client->getResponse()->getBody());
+    }
+
+    public function testSetCurlOptPostFields()
+    {
+        $this->client->setUri($this->baseuri . 'testRawPostData.php');
+        $adapter = new Adapter\Curl();
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                CURLOPT_POSTFIELDS => 'foo=bar',
+            ),
+        ));
+        $this->client->setAdapter($adapter);
+        $this->client->setMethod('POST');
+        $this->client->send();
+        $this->assertEquals('foo=bar', $this->client->getResponse()->getBody());
     }
 }

@@ -235,7 +235,7 @@ class TreeRouteStack extends SimpleRouteStack
             return $this->prototypes[$name];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -250,7 +250,7 @@ class TreeRouteStack extends SimpleRouteStack
     public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
@@ -291,7 +291,7 @@ class TreeRouteStack extends SimpleRouteStack
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -371,9 +371,21 @@ class TreeRouteStack extends SimpleRouteStack
                 $uri->setScheme($this->requestUri->getScheme());
             }
 
-            return $uri->setPath($path)->normalize()->toString();
+            $uri->setPath($path);
+
+            if (!isset($options['normalize_path']) || $options['normalize_path']) {
+                $uri->normalize();
+            }
+
+            return $uri->toString();
         } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
-            return $uri->setPath($path)->normalize()->toString();
+            $uri->setPath($path);
+
+            if (!isset($options['normalize_path']) || $options['normalize_path']) {
+                $uri->normalize();
+            }
+
+            return $uri->toString();
         }
 
         return $path;

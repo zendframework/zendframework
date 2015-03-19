@@ -21,14 +21,28 @@ class ViewResolverFactory implements FactoryInterface
      * Creates a Zend\View\Resolver\AggregateResolver and attaches the template
      * map resolver and path stack resolver
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface        $serviceLocator
      * @return ViewResolver\AggregateResolver
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $resolver = new ViewResolver\AggregateResolver();
-        $resolver->attach($serviceLocator->get('ViewTemplateMapResolver'));
-        $resolver->attach($serviceLocator->get('ViewTemplatePathStack'));
+
+        /* @var $mapResolver \Zend\View\Resolver\ResolverInterface */
+        $mapResolver             = $serviceLocator->get('ViewTemplateMapResolver');
+        /* @var $pathResolver \Zend\View\Resolver\ResolverInterface */
+        $pathResolver            = $serviceLocator->get('ViewTemplatePathStack');
+        /* @var $prefixPathStackResolver \Zend\View\Resolver\ResolverInterface */
+        $prefixPathStackResolver = $serviceLocator->get('ViewPrefixPathStackResolver');
+
+        $resolver
+            ->attach($mapResolver)
+            ->attach($pathResolver)
+            ->attach($prefixPathStackResolver)
+            ->attach(new ViewResolver\RelativeFallbackResolver($mapResolver))
+            ->attach(new ViewResolver\RelativeFallbackResolver($pathResolver))
+            ->attach(new ViewResolver\RelativeFallbackResolver($prefixPathStackResolver));
+
         return $resolver;
     }
 }

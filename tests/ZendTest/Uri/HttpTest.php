@@ -253,4 +253,97 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://zf2_app.local');
         $this->assertTrue($uri->isValid());
     }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetUserAndPasswordWithUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+
+        $uri->setUserInfo('user:pass');
+
+        $this->assertSame('user', $uri->getUser());
+        $this->assertSame('pass', $uri->getPassword());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetUserWithUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUserInfo('user');
+
+        $this->assertSame('user', $uri->getUser());
+        $this->assertNull($uri->getPassword());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetUserInfoWithUserAndPassword()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUser('user');
+        $uri->setPassword('pass');
+
+        $this->assertSame('user', $uri->getUser());
+        $this->assertSame('pass', $uri->getPassword());
+        $this->assertSame('user:pass', $uri->getUserInfo());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetUserInfoWithUser()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUser('user');
+        $this->assertSame('user', $uri->getUserInfo());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetNullUser()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+
+        $uri->setUserInfo('user:password');
+        $uri->setUser(null);
+
+        $this->assertNull($uri->getUser());
+        $this->assertSame('password', $uri->getPassword());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetNullPassword()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+
+        $uri->setUserInfo('user:password');
+        $uri->setPassword(null);
+
+        $this->assertSame('user', $uri->getUser());
+        $this->assertNull($uri->getPassword());
+        $this->assertSame('user', $uri->getUserInfo());
+    }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetNullUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+
+        $uri->setUserInfo('user:password');
+        $uri->setUserInfo(null);
+
+        $this->assertNull($uri->getUser());
+        $this->assertNull($uri->getPassword());
+        $this->assertNull($uri->getUserInfo());
+    }
 }

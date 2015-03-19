@@ -133,7 +133,7 @@ class Simple implements RouteInterface
     public function match(Request $request, $pathOffset = null)
     {
         if (!$request instanceof ConsoleRequest) {
-            return null;
+            return;
         }
 
         $params  = $request->getParams()->toArray();
@@ -142,7 +142,7 @@ class Simple implements RouteInterface
         if (null !== $matches) {
             return new RouteMatch($matches);
         }
-        return null;
+        return;
     }
 
     /**

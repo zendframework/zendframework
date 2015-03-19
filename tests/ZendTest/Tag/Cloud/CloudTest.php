@@ -166,11 +166,11 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $list  = $cloud->getItemList();
 
         $cloud->setTags(array(
-            new Tag\Item( array(
+            new Tag\Item(array(
                 'title'  => 'foo',
                 'weight' => 1,
             )),
-            new Tag\Item( array(
+            new Tag\Item(array(
                 'title'  => 'bar',
                 'weight' => 2,
             )),
@@ -225,7 +225,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithConfig()
     {
-        $cloud = $this->_getCloud( new \Zend\Config\Config(array(
+        $cloud = $this->_getCloud(new \Zend\Config\Config(array(
             'tags' => array(
                 array(
                     'title'  => 'foo',

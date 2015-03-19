@@ -92,4 +92,17 @@ class FormCheckboxTest extends CommonTestCase
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $markup = $this->helper->render($element);
     }
+
+    /**
+     * @group 7286
+     */
+    public function testDisabledOptionIssetOnHiddenElement()
+    {
+        $element = new Element\Checkbox('foo');
+        $element->setUseHiddenElement(true);
+        $element->setAttribute('disabled', true);
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertRegexp('#type="hidden"[^>]?disabled="disabled"#', $markup);
+    }
 }

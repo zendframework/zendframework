@@ -88,7 +88,7 @@ class StringLength extends AbstractValidator
     {
         if (null !== $this->getMax() && $min > $this->getMax()) {
             throw new Exception\InvalidArgumentException(
-                "The minimum must be less than or equal to the maximum length, but $min >" . " " . $this->getMax()
+                "The minimum must be less than or equal to the maximum length, but {$min} > {$this->getMax()}"
             );
         }
 
@@ -119,7 +119,7 @@ class StringLength extends AbstractValidator
             $this->options['max'] = null;
         } elseif ($max < $this->getMin()) {
             throw new Exception\InvalidArgumentException(
-                "The maximum must be greater than or equal to the minimum length, but $max < " . $this->getMin()
+                "The maximum must be greater than or equal to the minimum length, but {$max} < {$this->getMin()}"
             );
         } else {
             $this->options['max'] = (int) $max;

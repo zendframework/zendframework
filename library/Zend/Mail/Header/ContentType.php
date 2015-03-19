@@ -43,6 +43,8 @@ class ContentType implements HeaderInterface
         $header = new static();
         $header->setType($type);
 
+        $values = array_filter($values);
+
         if (count($values)) {
             foreach ($values as $keyValuePair) {
                 list($key, $value) = explode('=', $keyValuePair, 2);
@@ -156,7 +158,7 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters[$name])) {
             return $this->parameters[$name];
         }
-        return null;
+        return;
     }
 
     /**

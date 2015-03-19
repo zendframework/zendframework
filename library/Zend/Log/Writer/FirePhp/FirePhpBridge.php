@@ -53,34 +53,37 @@ class FirePhpBridge implements FirePhpInterface
     /**
      * Log an error message
      *
-     * @param  string $line
+     * @param  string      $line
+     * @param  string|null $label
      * @return void
      */
-    public function error($line)
+    public function error($line, $label = null)
     {
-        return $this->firephp->error($line);
+        return $this->firephp->error($line, $label);
     }
 
     /**
      * Log a warning
      *
-     * @param  string $line
+     * @param  string      $line
+     * @param  string|null $label
      * @return void
      */
-    public function warn($line)
+    public function warn($line, $label = null)
     {
-        return $this->firephp->warn($line);
+        return $this->firephp->warn($line, $label);
     }
 
     /**
      * Log informational message
      *
-     * @param  string $line
+     * @param  string      $line
+     * @param  string|null $label
      * @return void
      */
-    public function info($line)
+    public function info($line, $label = null)
     {
-        return $this->firephp->info($line);
+        return $this->firephp->info($line, $label);
     }
 
     /**
@@ -97,11 +100,12 @@ class FirePhpBridge implements FirePhpInterface
     /**
      * Log a message
      *
-     * @param  string $line
+     * @param  string      $line
+     * @param  string|null $label
      * @return void
      */
-    public function log($line)
+    public function log($line, $label = null)
     {
-        return $this->firephp->trace($line);
+        return $this->firephp->trace($line, $label);
     }
 }

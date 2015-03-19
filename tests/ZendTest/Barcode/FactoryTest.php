@@ -116,7 +116,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithZendConfigAndObjectOptions()
     {
         $this->checkGDRequirement();
-        $config = new Config(array('barcode'       => 'code25' ,
+        $config = new Config(array('barcode'       => 'code25',
                                    'barcodeParams' => array(
                                    'barHeight'     => 123)));
         $renderer = Barcode\Barcode::factory($config);
@@ -128,7 +128,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithZendConfigAndRendererOptions()
     {
         $this->checkGDRequirement();
-        $config = new Config(array('barcode'        => 'code25' ,
+        $config = new Config(array('barcode'        => 'code25',
                                    'rendererParams' => array(
                                    'imageType'      => 'gif')));
         $renderer = Barcode\Barcode::factory($config);
@@ -195,7 +195,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfig()
     {
-        $config = new Config(array('barcode' => 'code25' ,
+        $config = new Config(array('barcode' => 'code25',
                                    'barcodeParams' => array(
                                    'barHeight' => 123)));
         $barcode = Barcode\Barcode::makeBarcode($config);
@@ -286,7 +286,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfig()
     {
         $this->checkGDRequirement();
-        $config = new Config(array('renderer'       => 'image' ,
+        $config = new Config(array('renderer'       => 'image',
                                    'rendererParams' => array('imageType' => 'gif')));
         $renderer = Barcode\Barcode::makeRenderer($config);
         $this->assertTrue($renderer instanceof Renderer\Image);

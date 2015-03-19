@@ -66,7 +66,7 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
     public function getType()
     {
         if (empty($this->types)) {
-            return null;
+            return;
         }
 
         return $this->types[0];

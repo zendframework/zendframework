@@ -9,7 +9,6 @@
 
 namespace ZendTest\View\Helper\Placeholder;
 
-
 /**
  * Test class for Zend\View\Helper\Placeholder\Container.
  *
@@ -124,13 +123,13 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrependImplementsFluentInterface()
     {
-        $result = $this->container->prepend( 'test' );
+        $result = $this->container->prepend('test');
         $this->assertSame($this->container, $result);
     }
 
     public function testAppendImplementsFluentInterface()
     {
-        $result = $this->container->append( 'test' );
+        $result = $this->container->append('test');
         $this->assertSame($this->container, $result);
     }
 
@@ -139,7 +138,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetImplementsFluentInterface()
     {
-        $result = $this->container->set( 'test' );
+        $result = $this->container->set('test');
         $this->assertSame($this->container, $result);
     }
 
@@ -428,7 +427,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $lis = substr_count($string, "\n        <li>");
         $this->assertEquals(3, $lis);
-        $this->assertTrue((strstr($string, "    <ul>\n")) ? true : false, $string);
-        $this->assertTrue((strstr($string, "\n    </ul>")) ? true : false);
+        $this->assertTrue((bool) strstr($string, "    <ul>\n"), $string);
+        $this->assertTrue((bool) strstr($string, "\n    </ul>"));
     }
 }

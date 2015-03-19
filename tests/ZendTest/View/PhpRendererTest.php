@@ -421,4 +421,25 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render($model);
         $this->assertContains('BAR-BAZ-BAT', $test);
     }
+
+    /**
+     * @group ZF2-4221
+     */
+    public function testSharedInstanceHelper()
+    {
+        $helpers = $this->renderer->getHelperPluginManager();
+        $helpers->setInvokableClass('sharedinstance', 'ZendTest\View\TestAsset\SharedInstance');
+
+        $helpers->setShared('sharedinstance', false);
+        // new instance always created when shared = false
+        $this->assertEquals(1, $this->renderer->sharedinstance());
+        $this->assertEquals(1, $this->renderer->sharedinstance());
+        $this->assertEquals(1, $this->renderer->sharedinstance());
+
+        $helpers->setShared('sharedinstance', true);
+        // use shared instance when shared = true
+        $this->assertEquals(1, $this->renderer->sharedinstance());
+        $this->assertEquals(2, $this->renderer->sharedinstance());
+        $this->assertEquals(3, $this->renderer->sharedinstance());
+    }
 }

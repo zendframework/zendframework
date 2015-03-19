@@ -47,7 +47,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     public function populateValidatorChain()
     {
         $this->validator->attach(new NotEmpty());
-        $this->validator->attach(new Between());
+        $this->validator->attach(new Between(1, 5));
     }
 
     public function testValidatorChainIsEmptyByDefault()
@@ -158,6 +158,68 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
+    }
+
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+                        ->attach($this->getValidatorFalse(), true, 2000);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testPrependValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+            ->prependValidator($this->getValidatorFalse(), true);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testMergeValidatorChains()
+    {
+        $mergedValidatorChain = new ValidatorChain();
+
+        $mergedValidatorChain->attach($this->getValidatorTrue());
+        $this->validator->attach($this->getValidatorTrue());
+
+        $this->validator->merge($mergedValidatorChain);
+
+        $this->assertCount(2, $this->validator->getValidators());
+    }
+
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testValidatorChainIsCloneable()
+    {
+        $this->validator->attach(new NotEmpty());
+
+        $this->assertCount(1, $this->validator->getValidators());
+
+        $clonedValidatorChain = clone $this->validator;
+
+        $this->assertCount(1, $clonedValidatorChain->getValidators());
+
+        $clonedValidatorChain->attach(new NotEmpty());
+
+        $this->assertCount(1, $this->validator->getValidators());
+        $this->assertCount(2, $clonedValidatorChain->getValidators());
     }
 
     public function testCountGivesCountOfAttachedValidators()

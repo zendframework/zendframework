@@ -9,7 +9,6 @@
 
 namespace ZendTest\ProgressBar\Adapter;
 
-
 /**
  * @group      Zend_ProgressBar
  */

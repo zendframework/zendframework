@@ -205,7 +205,7 @@ class Doctype extends AbstractHelper
      */
     public function isXhtml()
     {
-        return (stristr($this->getDoctype(), 'xhtml') ? true : false);
+        return (bool) stristr($this->getDoctype(), 'xhtml');
     }
 
     /**
@@ -215,7 +215,7 @@ class Doctype extends AbstractHelper
      */
     public function isHtml5()
     {
-        return (stristr($this->__invoke(), '<!DOCTYPE html>') ? true : false);
+        return (bool) stristr($this->__invoke(), '<!DOCTYPE html>');
     }
 
     /**
@@ -225,6 +225,6 @@ class Doctype extends AbstractHelper
      */
     public function isRdfa()
     {
-        return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa') ? true : false);
+        return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa'));
     }
 }

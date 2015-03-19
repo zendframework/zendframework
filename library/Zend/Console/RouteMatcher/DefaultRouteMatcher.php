@@ -136,7 +136,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Optional literal param, i.e.
              *    [something]
              */
-            elseif (preg_match('/\G\[ *?(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[ *?(?P<name>[a-zA-Z][a-zA-Z0-9\_\-\:]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -175,7 +175,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Mandatory literal param, i.e.
              *   something
              */
-            elseif (preg_match('/\G(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G(?P<name>[a-zA-Z][a-zA-Z0-9\_\-\:]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -372,7 +372,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function (&$val, $key) {
+                array_walk($options, function (&$val) {
                     $val = ltrim($val, '-');
                 });
 
@@ -415,7 +415,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function (&$val, $key) {
+                array_walk($options, function (&$val) {
                     $val = ltrim($val, '-');
                 });
 
@@ -510,7 +510,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     $alternativeAliases[] = '(?:' . implode('|', $this->getAliases($alternative)) . ')';
                 }
 
-                $regex .= join('|', $alternativeAliases);
+                $regex .= implode('|', $alternativeAliases);
 
                 if ($part['hasValue']) {
                     $regex .= ')(?:\=(?P<value>.*?)$)?$/';
@@ -568,7 +568,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                  * Drop out if that was a mandatory param
                  */
                 if ($part['required']) {
-                    return null;
+                    return;
                 }
 
                 /*
@@ -599,7 +599,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     array_splice($params, $x, 1);
                 } else {
                     // there are no more params available
-                    return null;
+                    return;
                 }
             }
 
@@ -611,7 +611,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
-                    return null;
+                    return;
                 }
             }
 
@@ -653,7 +653,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
          */
         foreach ($params as $param) {
             if (preg_match('#^\-+#', $param)) {
-                return null; // there is an unrecognized flag
+                return; // there is an unrecognized flag
             }
         }
 
@@ -668,7 +668,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
             if (!isset($params[$argPos])) {
                 if ($part['required']) {
                     // cannot find required positional param
-                    return null;
+                    return;
                 } else {
                     // stop matching
                     break;
@@ -685,7 +685,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     (isset($part['alternatives']) && !in_array($value, $part['alternatives'])) ||
                     (!isset($part['alternatives']) && $value != $part['name'])
                 ) {
-                    return null;
+                    return;
                 }
             }
 
@@ -697,7 +697,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
-                    return null;
+                    return;
                 }
             }
 
@@ -734,7 +734,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
          * Check if we have consumed all positional parameters
          */
         if ($argPos < count($params)) {
-            return null; // there are extraneous params that were not consumed
+            return; // there are extraneous params that were not consumed
         }
 
         /*
@@ -772,7 +772,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         }
 
         if (!$valid) {
-            return null;
+            return;
         }
 
         return array_replace($this->defaults, $matches);

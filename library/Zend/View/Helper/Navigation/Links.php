@@ -338,7 +338,7 @@ class Links extends AbstractHelper
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -492,7 +492,7 @@ class Links extends AbstractHelper
 
         switch (count($found)) {
             case 0:
-                return null;
+                return;
             case 1:
                 return $found[0];
             default:
@@ -525,7 +525,7 @@ class Links extends AbstractHelper
 
         switch (count($found)) {
             case 0:
-                return null;
+                return;
             case 1:
                 return $found[0];
             default:
@@ -564,7 +564,7 @@ class Links extends AbstractHelper
 
         switch (count($found)) {
             case 0:
-                return null;
+                return;
             case 1:
                 return $found[0];
             default:
@@ -711,7 +711,7 @@ class Links extends AbstractHelper
         }
 
         // nothing found
-        return null;
+        return;
     }
 
     /**

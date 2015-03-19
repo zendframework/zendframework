@@ -54,6 +54,20 @@ class InTest extends TestCase
             array(In::TYPE_IDENTIFIER, In::TYPE_VALUE, In::TYPE_VALUE, In::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
+
+        $in->setIdentifier('foo.bar')
+            ->setValueSet(array(
+                array(1=>In::TYPE_LITERAL),
+                array(2=>In::TYPE_VALUE),
+                array(3=>In::TYPE_LITERAL),
+            ));
+        $expected = array(array(
+            '%s IN (%s, %s, %s)',
+            array('foo.bar', 1, 2, 3),
+            array(In::TYPE_IDENTIFIER, In::TYPE_LITERAL, In::TYPE_VALUE, In::TYPE_LITERAL),
+        ));
+        $qqq = $in->getExpressionData();
+        $this->assertEquals($expected, $in->getExpressionData());
     }
 
     public function testGetExpressionDataWithSubselect()

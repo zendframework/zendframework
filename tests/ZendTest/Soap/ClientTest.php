@@ -300,7 +300,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $count = 0;
         foreach ($typesArray as $element) {
-            if (strpos($element, 'struct AutoDiscoverTestClass1') === 0 OR strpos($element, 'AutoDiscoverTestClass1 ArrayOfAutoDiscoverTestClass1') === 0) {
+            if (strpos($element, 'struct AutoDiscoverTestClass1') === 0 or strpos($element, 'AutoDiscoverTestClass1 ArrayOfAutoDiscoverTestClass1') === 0) {
                 $count++;
             }
         }

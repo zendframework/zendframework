@@ -184,7 +184,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * Get method contents
      *
      * @param  bool $includeDocBlock
-     * @return string|bool
+     * @return string
      */
     public function getContents($includeDocBlock = true)
     {
@@ -198,7 +198,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method body
      *
-     * @return string|bool
+     * @return string
      */
     public function getBody()
     {
@@ -213,7 +213,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     protected function extractMethodContents($bodyOnly = false)
     {
-        $fileName = $this->getDeclaringClass()->getFileName();
+        $fileName = $this->getFileName();
 
         if ((class_exists($this->class) && false === $fileName) || ! file_exists($fileName)) {
             return '';
@@ -331,8 +331,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Take current position and find any whitespace
      *
-     * @param $haystack
-     * @param $position
+     * @param array $haystack
+     * @param int $position
      * @return string
      */
     protected function extractPrefixedWhitespace($haystack, $position)
@@ -361,8 +361,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Test for ending brace
      *
-     * @param $haystack
-     * @param $position
+     * @param array $haystack
+     * @param int $position
      * @return bool
      */
     protected function isEndingBrace($haystack, $position)
@@ -430,8 +430,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * Test to see if current position is valid function or
      * closure.  Returns true if it's a function and NOT a closure
      *
-     * @param $haystack
-     * @param $position
+     * @param array $haystack
+     * @param int $position
+     * @param string $functionName
      * @return bool
      */
     protected function isValidFunction($haystack, $position, $functionName = null)
@@ -460,11 +461,17 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         return $isValid;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return parent::__toString();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return parent::__toString();

@@ -11,7 +11,6 @@ namespace ZendTest\Mail\Header;
 
 use Zend\Mail\Address;
 use Zend\Mail\AddressList;
-use Zend\Mail\Header\AbstractAddressList;
 use Zend\Mail\Header\Bcc;
 use Zend\Mail\Header\Cc;
 use Zend\Mail\Header\From;
@@ -80,11 +79,12 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
         $list->add($address);
         $list->add('zf-contributors@lists.zend.com');
         $list->add('fw-announce@lists.zend.com', 'ZF Announce List');
+        $list->add('first@last.zend.com', 'Last, First');
     }
 
     public function getExpectedFieldValue()
     {
-        return "ZF DevTeam <zf-devteam@zend.com>,\r\n zf-contributors@lists.zend.com,\r\n ZF Announce List <fw-announce@lists.zend.com>";
+        return "ZF DevTeam <zf-devteam@zend.com>,\r\n zf-contributors@lists.zend.com,\r\n ZF Announce List <fw-announce@lists.zend.com>,\r\n \"Last, First\" <first@last.zend.com>";
     }
 
     /**
@@ -118,16 +118,19 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
         $header   = call_user_func($callback, $headerLine);
         $this->assertInstanceOf($class, $header);
         $list = $header->getAddressList();
-        $this->assertEquals(3, count($list));
+        $this->assertEquals(4, count($list));
         $this->assertTrue($list->has('zf-devteam@zend.com'));
         $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
         $this->assertTrue($list->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($list->has('first@last.zend.com'));
         $address = $list->get('zf-devteam@zend.com');
         $this->assertEquals('ZF DevTeam', $address->getName());
         $address = $list->get('zf-contributors@lists.zend.com');
         $this->assertNull($address->getName());
         $address = $list->get('fw-announce@lists.zend.com');
         $this->assertEquals('ZF Announce List', $address->getName());
+        $address = $list->get('first@last.zend.com');
+        $this->assertEquals('Last, First', $address->getName());
     }
 
     public function getStringHeadersWithNoWhitespaceSeparator()
@@ -152,15 +155,18 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
         $header   = call_user_func($callback, $headerLine);
         $this->assertInstanceOf($class, $header);
         $list = $header->getAddressList();
-        $this->assertEquals(3, count($list));
+        $this->assertEquals(4, count($list));
         $this->assertTrue($list->has('zf-devteam@zend.com'));
         $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
         $this->assertTrue($list->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($list->has('first@last.zend.com'));
         $address = $list->get('zf-devteam@zend.com');
         $this->assertEquals('ZF DevTeam', $address->getName());
         $address = $list->get('zf-contributors@lists.zend.com');
         $this->assertNull($address->getName());
         $address = $list->get('fw-announce@lists.zend.com');
         $this->assertEquals('ZF Announce List', $address->getName());
+        $address = $list->get('first@last.zend.com');
+        $this->assertEquals('Last, First', $address->getName());
     }
 }

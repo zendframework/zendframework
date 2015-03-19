@@ -47,6 +47,14 @@ class LikeTest extends \PHPUnit_Framework_TestCase
             ),
             $like->getExpressionData()
         );
+
+        $like = new Like(array('Foo%'=>$like::TYPE_VALUE), array('bar'=>$like::TYPE_IDENTIFIER));
+        $this->assertEquals(
+            array(
+                array('%1$s LIKE %2$s', array('Foo%', 'bar'), array($like::TYPE_VALUE, $like::TYPE_IDENTIFIER))
+            ),
+            $like->getExpressionData()
+        );
     }
 
     public function testInstanceOfPerSetters()

@@ -173,7 +173,7 @@ class StandardConfig implements ConfigInterface
             return $value;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -213,7 +213,7 @@ class StandardConfig implements ConfigInterface
      */
     public function getStorageOption($storageOption)
     {
-        return null;
+        return;
     }
 
     /**

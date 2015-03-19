@@ -9,11 +9,10 @@
 
 namespace Zend\Db\Adapter\Driver\Oci8;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\AbstractConnection;
 use Zend\Db\Adapter\Exception;
-use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+class Connection extends AbstractConnection
 {
     /**
      * @var Oci8
@@ -21,33 +20,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     protected $driver = null;
 
     /**
-     * @var Profiler\ProfilerInterface
-     */
-    protected $profiler = null;
-
-    /**
-     * Connection parameters
-     *
-     * @var array
-     */
-    protected $connectionParameters = array();
-
-    /**
-     * @var
-     */
-    protected $resource = null;
-
-    /**
-     * In transaction
-     *
-     * @var bool
-     */
-    protected $inTransaction = false;
-
-    /**
      * Constructor
      *
-     * @param array|resource|null $connectionInfo
+     * @param  array|resource|null                                 $connectionInfo
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo = null)
@@ -62,59 +37,18 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param Oci8 $driver
-     * @return Connection
+     * @param  Oci8 $driver
+     * @return self
      */
     public function setDriver(Oci8 $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
-     * @return Connection
-     */
-    public function setProfiler(Profiler\ProfilerInterface $profiler)
-    {
-        $this->profiler = $profiler;
-        return $this;
-    }
-
-    /**
-     * @return null|Profiler\ProfilerInterface
-     */
-    public function getProfiler()
-    {
-        return $this->profiler;
-    }
-
-    /**
-     * Set connection parameters
-     *
-     * @param  array $connectionParameters
-     * @return Connection
-     */
-    public function setConnectionParameters(array $connectionParameters)
-    {
-        $this->connectionParameters = $connectionParameters;
-        return $this;
-    }
-
-    /**
-     * Get connection parameters
-     *
-     * @return array
-     */
-    public function getConnectionParameters()
-    {
-        return $this->connectionParameters;
-    }
-
-    /**
-     * Get current schema
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getCurrentSchema()
     {
@@ -126,6 +60,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $stmt = oci_parse($this->resource, $query);
         oci_execute($stmt);
         $dbNameArray = oci_fetch_array($stmt, OCI_ASSOC);
+
         return $dbNameArray['current_schema'];
     }
 
@@ -133,7 +68,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Set resource
      *
      * @param  resource $resource
-     * @return Connection
+     * @return self
      */
     public function setResource($resource)
     {
@@ -141,24 +76,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('A resource of type "oci8 connection" was expected');
         }
         $this->resource = $resource;
+
         return $this;
     }
 
     /**
-     * Get resource
-     *
-     * @return \oci8
-     */
-    public function getResource()
-    {
-        $this->connect();
-        return $this->resource;
-    }
-
-    /**
-     * Connect
-     *
-     * @return Connection
+     * {@inheritDoc}
      */
     public function connect()
     {
@@ -176,7 +99,8 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     return $p[$name];
                 }
             }
-            return null;
+
+            return;
         };
 
         // http://www.php.net/manual/en/function.oci-connect.php
@@ -211,9 +135,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Is connected
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -221,7 +143,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Disconnect
+     * {@inheritDoc}
      */
     public function disconnect()
     {
@@ -231,7 +153,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Begin transaction
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
@@ -241,48 +163,42 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         // A transaction begins when the first SQL statement that changes data is executed with oci_execute() using the OCI_NO_AUTO_COMMIT flag.
         $this->inTransaction = true;
+
+        return $this;
     }
 
     /**
-     * In transaction
-     *
-     * @return bool
-     */
-    public function inTransaction()
-    {
-        return $this->inTransaction;
-    }
-
-    /**
-     * Commit
+     * {@inheritDoc}
      */
     public function commit()
     {
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             $this->connect();
         }
 
-        if ($this->inTransaction) {
+        if ($this->inTransaction()) {
             $valid = oci_commit($this->resource);
             if ($valid === false) {
                 $e = oci_error($this->resource);
                 throw new Exception\InvalidQueryException($e['message'], $e['code']);
             }
+
+            $this->inTransaction = false;
         }
+
+        return $this;
     }
 
     /**
-     * Rollback
-     *
-     * @return Connection
+     * {@inheritDoc}
      */
     public function rollback()
     {
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             throw new Exception\RuntimeException('Must be connected before you can rollback.');
         }
 
-        if (!$this->inTransaction) {
+        if (!$this->inTransaction()) {
             throw new Exception\RuntimeException('Must call commit() before you can rollback.');
         }
 
@@ -292,14 +208,13 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidQueryException($e['message'], $e['code']);
         }
 
+        $this->inTransaction = false;
+
         return $this;
     }
 
     /**
-     * Execute
-     *
-     * @param  string $sql
-     * @return Result
+     * {@inheritDoc}
      */
     public function execute($sql)
     {
@@ -329,18 +244,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $resultPrototype = $this->driver->createResult($ociStmt);
+
         return $resultPrototype;
     }
 
     /**
-     * Get last generated id
-     *
-     * @param  null $name Ignored
-     * @return int
+     * {@inheritDoc}
      */
     public function getLastGeneratedValue($name = null)
     {
         // @todo Get Last Generated Value in Connection (this might not apply)
-        return null;
+        return;
     }
 }

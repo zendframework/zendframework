@@ -138,7 +138,7 @@ class Variables extends ArrayObject
                     $key
                 ), E_USER_NOTICE);
             }
-            return null;
+            return;
         }
 
         $return = parent::offsetGet($key);

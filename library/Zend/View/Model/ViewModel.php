@@ -106,7 +106,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function __get($name)
     {
         if (!$this->__isset($name)) {
-            return null;
+            return;
         }
 
         $variables = $this->getVariables();
@@ -134,7 +134,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function __unset($name)
     {
         if (!$this->__isset($name)) {
-            return null;
+            return;
         }
 
         unset($this->variables[$name]);

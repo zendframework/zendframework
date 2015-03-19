@@ -303,7 +303,7 @@ class SimpleRouteStack implements RouteStackInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**

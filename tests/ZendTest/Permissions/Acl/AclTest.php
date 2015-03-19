@@ -1190,7 +1190,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $acl->addRole(new Role\GenericRole('test2'));
         $acl->addResource(new Resource\GenericResource('Test'));
 
-        $acl->allow(null,'Test','xxx');
+        $acl->allow(null, 'Test', 'xxx');
 
         // error test
         $acl->removeRole('test0');
@@ -1217,13 +1217,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testRoleObjectImplementsToString()
     {
         $role = new Role\GenericRole('_fooBar_');
-        $this->assertEquals('_fooBar_',(string) $role);
+        $this->assertEquals('_fooBar_', (string) $role);
     }
 
     public function testResourceObjectImplementsToString()
     {
         $resource = new Resource\GenericResource('_fooBar_');
-        $this->assertEquals('_fooBar_',(string) $resource);
+        $this->assertEquals('_fooBar_', (string) $resource);
     }
 
     /**
@@ -1237,7 +1237,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $acl->addRole('role');
         $acl->addResource('resource');
         $acl->allow('role', null, null, $assertion);
-        $allowed = $acl->isAllowed('role','resource','privilege', $assertion);
+        $allowed = $acl->isAllowed('role', 'resource', 'privilege', $assertion);
 
         $this->assertTrue($allowed);
     }

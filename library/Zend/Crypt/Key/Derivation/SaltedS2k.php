@@ -14,7 +14,7 @@ namespace Zend\Crypt\Key\Derivation;
  */
 class SaltedS2k
 {
-    protected static $supportedMhashAlgos = array (
+    protected static $supportedMhashAlgos = array(
         'adler32'    => MHASH_ADLER32,
         'md2'        => MHASH_MD2,
         'md4'        => MHASH_MD4,

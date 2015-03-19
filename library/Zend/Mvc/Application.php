@@ -66,6 +66,7 @@ class Application implements
     protected $defaultListeners = array(
         'RouteListener',
         'DispatchListener',
+        'HttpMethodListener',
         'ViewManager',
         'SendResponseListener',
     );

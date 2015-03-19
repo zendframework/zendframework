@@ -831,12 +831,12 @@ class Figlet
         if ($this->previousCharWidth < 2 || $this->currentCharWidth < 2) {
             // Disallows overlapping if the previous character or the current
             // character has a width of one or zero.
-            return null;
+            return;
         }
 
         if (($this->smushMode & self::SM_SMUSH) === 0) {
             // Kerning
-            return null;
+            return;
         }
 
         if (($this->smushMode & 63) === 0) {
@@ -864,7 +864,7 @@ class Figlet
         }
 
         if ($leftChar === $this->hardBlank && $rightChar === $this->hardBlank) {
-            return null;
+            return;
         }
 
         if (($this->smushMode & self::SM_EQUAL) > 0) {
@@ -931,7 +931,7 @@ class Figlet
             }
         }
 
-        return null;
+        return;
     }
 
     /**

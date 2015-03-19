@@ -114,14 +114,27 @@ class Json
             $valueToEncode = static::_recursiveJsonExprFinder($valueToEncode, $javascriptExpressions);
         }
 
+        $prettyPrint = (isset($options['prettyPrint']) && ($options['prettyPrint'] == true));
+
         // Encoding
         if (function_exists('json_encode') && static::$useBuiltinEncoderDecoder !== true) {
+            $encodeOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+            if ($prettyPrint && defined('JSON_PRETTY_PRINT')) {
+                $encodeOptions |= JSON_PRETTY_PRINT;
+                $prettyPrint = false;
+            }
+
             $encodedResult = json_encode(
                 $valueToEncode,
-                JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP
+                $encodeOptions
             );
         } else {
             $encodedResult = Encoder::encode($valueToEncode, $cycleCheck, $options);
+        }
+
+        if ($prettyPrint) {
+            $encodedResult = self::prettyPrint($encodedResult, array("intent" => "    "));
         }
 
         //only do post-processing to revert back the Zend\Json\Expr if any.
@@ -322,8 +335,6 @@ class Json
             throw new RuntimeException('Function fromXml was called with an invalid XML formatted string.');
         } // End of if ($simpleXmlElementObject == null)
 
-        $resultArray = null;
-
         // Call the recursive function to convert the XML into a PHP array.
         $resultArray = static::_processXml($simpleXmlElementObject, $ignoreXmlAttributes);
 
@@ -348,15 +359,20 @@ class Json
         $result = "";
         $indent = 0;
 
-        $ind = "\t";
+        $ind = "    ";
         if (isset($options['indent'])) {
             $ind = $options['indent'];
         }
 
         $inLiteral = false;
         foreach ($tokens as $token) {
+            $token = trim($token);
             if ($token == "") {
                 continue;
+            }
+
+            if (preg_match('/^("(?:.*)"):[ ]?(.*)$/', $token, $matches)) {
+                $token = $matches[1] . ': ' . $matches[2];
             }
 
             $prefix = str_repeat($ind, $indent);

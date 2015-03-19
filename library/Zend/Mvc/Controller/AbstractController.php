@@ -29,8 +29,8 @@ use Zend\Stdlib\ResponseInterface as Response;
  * Convenience methods for pre-built plugins (@see __call):
  *
  * @method \Zend\View\Model\ModelInterface acceptableViewModelSelector(array $matchAgainst = null, bool $returnDefault = true, \Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart $resultReference = null)
- * @method bool|array|\Zend\Http\Response fileprg(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
- * @method bool|array|\Zend\Http\Response filePostRedirectGet(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
+ * @method bool|array|\Zend\Http\Response fileprg(\Zend\Form\FormInterface $form, $redirect = null, $redirectToUrl = false)
+ * @method bool|array|\Zend\Http\Response filePostRedirectGet(\Zend\Form\FormInterface $form, $redirect = null, $redirectToUrl = false)
  * @method \Zend\Mvc\Controller\Plugin\FlashMessenger flashMessenger()
  * @method \Zend\Mvc\Controller\Plugin\Forward forward()
  * @method mixed|null identity()
@@ -40,6 +40,8 @@ use Zend\Stdlib\ResponseInterface as Response;
  * @method \Zend\Http\Response|array postRedirectGet(string $redirect = null, bool $redirectToUrl = false)
  * @method \Zend\Mvc\Controller\Plugin\Redirect redirect()
  * @method \Zend\Mvc\Controller\Plugin\Url url()
+ * @method \Zend\View\Model\ConsoleModel createConsoleNotFoundModel()
+ * @method \Zend\View\Model\ViewModel createHttpNotFoundModel()
  */
 abstract class AbstractController implements
     Dispatchable,
@@ -78,7 +80,7 @@ abstract class AbstractController implements
     protected $serviceLocator;
 
     /**
-     * @var string
+     * @var null|string|string[]
      */
     protected $eventIdentifier;
 
@@ -158,13 +160,18 @@ abstract class AbstractController implements
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(
-            'Zend\Stdlib\DispatchableInterface',
-            __CLASS__,
-            get_class($this),
-            $this->eventIdentifier,
-            substr(get_class($this), 0, strpos(get_class($this), '\\'))
+        $className = get_class($this);
+
+        $events->setIdentifiers(array_merge(
+            array(
+                __CLASS__,
+                $className,
+                substr($className, 0, strpos($className, '\\'))
+            ),
+            array_values(class_implements($className)),
+            (array) $this->eventIdentifier
         ));
+
         $this->events = $events;
         $this->attachDefaultListeners();
 

@@ -240,4 +240,13 @@ class HostnameTest extends TestCase
             )
         );
     }
+
+    /**
+     * @group zf5656
+     */
+    public function testFailedHostnameSegmentMatchDoesNotEmitErrors()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException');
+        $route = new Hostname(':subdomain.with_underscore.com');
+    }
 }

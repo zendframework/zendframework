@@ -223,14 +223,14 @@ class Form extends Fieldset implements FormInterface
      * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
      * name clashes if the same fieldset is used multiple times
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed|void
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         $name = $this->getName();
 
-        foreach ($this->byName as $elementOrFieldset) {
+        foreach ($this->iterator as $elementOrFieldset) {
             if ($form->wrapElements()) {
                 $elementOrFieldset->setName($name . '[' . $elementOrFieldset->getName() . ']');
             }
@@ -620,11 +620,11 @@ class Form extends Fieldset implements FormInterface
                 continue;
             }
 
-            $fieldset = $formOrFieldset->byName[$key];
+            $fieldset = $formOrFieldset->iterator->get($key);
 
             if ($fieldset instanceof Collection) {
                 if (!isset($data[$key]) && $fieldset->getCount() == 0) {
-                    unset ($validationGroup[$key]);
+                    unset($validationGroup[$key]);
                     continue;
                 }
 
@@ -764,9 +764,7 @@ class Form extends Fieldset implements FormInterface
         }
 
         if (!$fieldset instanceof Collection || !$fieldset->getTargetElement() instanceof FieldsetInterface || $inputFilter instanceof CollectionInputFilter) {
-            foreach ($elements as $element) {
-                $name = $element->getName();
-
+            foreach ($elements as $name => $element) {
                 if ($this->preferFormInputFilter && $inputFilter->has($name)) {
                     continue;
                 }
@@ -801,9 +799,7 @@ class Form extends Fieldset implements FormInterface
             }
         }
 
-        foreach ($fieldset->getFieldsets() as $childFieldset) {
-            $name = $childFieldset->getName();
-
+        foreach ($fieldset->getFieldsets() as $name => $childFieldset) {
             if (!$childFieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
                     // Add a new empty input filter if it does not exist (or the fieldset's object input filter),

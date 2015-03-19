@@ -303,7 +303,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -502,7 +502,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             return $this->pages[$hash];
         }
 
-        return null;
+        return;
     }
 
     // Countable interface:

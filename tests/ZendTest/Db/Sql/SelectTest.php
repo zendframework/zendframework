@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Sql;
 
+use ReflectionObject;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Where;
@@ -148,6 +149,31 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', "expects 'foo' as");
         $select->join(array('foo'), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+    }
+
+    /**
+     * @testdox unit test: Test processJoins() exception with bad join name
+     * @covers Zend\Db\Sql\Select::processJoins
+     */
+    public function testBadJoinName()
+    {
+        $mockExpression = $this->getMock('Zend\Db\Sql\ExpressionInterface', array(), array('bar'));
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $parameterContainer = new ParameterContainer();
+
+        $select = new Select;
+        $select->join(array('foo' => $mockExpression), 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
+
+        $sr = new ReflectionObject($select);
+
+        $mr = $sr->getMethod('processJoins');
+
+        $mr->setAccessible(true);
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
     }
 
     /**
@@ -376,7 +402,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $select = new Select;
         $select->order(new Expression('RAND()'));
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
         $method = $sr->getMethod('processOrder');
         $method->setAccessible(true);
         $this->assertEquals(
@@ -388,7 +414,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->order(
             $this->getMock('Zend\Db\Sql\Predicate\Operator', null, array('rating', '<', '10'))
         );
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
         $method = $sr->getMethod('processOrder');
         $method->setAccessible(true);
         $this->assertEquals(
@@ -632,7 +658,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     {
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(
-            function ($name) use ($useNamedParameters) { return (($useNamedParameters) ? ':' . $name : '?'); }
+            function ($name) use ($useNamedParameters) {
+                return (($useNamedParameters) ? ':' . $name : '?');
+            }
         ));
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
@@ -675,7 +703,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test __get() returns expected objects magically
      * @covers Zend\Db\Sql\Select::__get
      */
-    public function test__get()
+    public function testMagicAccessor()
     {
         $select = new Select;
         $this->assertInstanceOf('Zend\Db\Sql\Where', $select->where);
@@ -685,7 +713,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test __clone() will clone the where object so that this select can be used in multiple contexts
      * @covers Zend\Db\Sql\Select::__clone
      */
-    public function test__clone()
+    public function testCloning()
     {
         $select = new Select;
         $select1 = clone $select;
@@ -722,7 +750,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $parameterContainer = new ParameterContainer();
 
-        $sr = new \ReflectionObject($select);
+        $sr = new ReflectionObject($select);
 
         foreach ($internalTests as $method => $expected) {
             $mr = $sr->getMethod($method);
@@ -1187,11 +1215,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         $select43 = new Select();
-        $select43->from(array('x' => 'foo'))->columns(array('bar'), false);
-        $sqlPrep43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
-        $sqlStr43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $select43->from(array('x' => 'foo'))->columns(array('bar' => 'foo.bar'), false);
+        $sqlPrep43 = 'SELECT "foo"."bar" AS "bar" FROM "foo" AS "x"';
+        $sqlStr43 = 'SELECT "foo"."bar" AS "bar" FROM "foo" AS "x"';
         $internalTests43 = array(
-            'processSelect' => array(array(array('"bar"', '"bar"')), '"foo" AS "x"')
+            'processSelect' => array(array(array('"foo"."bar"', '"bar"')), '"foo" AS "x"')
         );
 
         $select44 = new Select;
@@ -1266,6 +1294,45 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins' => array(array(array('INNER', 'psql_function_which_returns_table AS "bar"', '"foo"."id" = "bar"."fooid"')))
         );
 
+        // Test generic predicate is appended with AND
+        $select50 = new Select;
+        $select50->from(new TableIdentifier('foo'))
+            ->where
+            ->nest
+                ->isNull('bar')
+                ->and
+                ->predicate(new Predicate\Literal('1=1'))
+            ->unnest;
+        $sqlPrep50 = // same
+        $sqlStr50 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL AND 1=1)';
+        $internalTests50 = array();
+
+        // Test generic predicate is appended with OR
+        $select51 = new Select;
+        $select51->from(new TableIdentifier('foo'))
+            ->where
+            ->nest
+                ->isNull('bar')
+                ->or
+                ->predicate(new Predicate\Literal('1=1'))
+            ->unnest;
+        $sqlPrep51 = // same
+        $sqlStr51 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL OR 1=1)';
+        $internalTests51 = array();
+
+        /**
+         * @author Andrzej Lewandowski
+         * @link https://github.com/zendframework/zf2/issues/7222
+         */
+        $select52 = new Select;
+        $select52->from('foo')->join('zac', '(catalog_category_website.category_id = catalog_category.category_id)');
+        $sqlPrep52 = // same
+        $sqlStr52 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON ("catalog_category_website"."category_id" = "catalog_category"."category_id")';
+        $internalTests52 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
+            'processJoins'  => array(array(array('INNER', '"zac"', '("catalog_category_website"."category_id" = "catalog_category"."category_id")')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1326,6 +1393,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select47, $sqlPrep47, $params47,  $sqlStr47, $internalTests47),
             array($select48, $sqlPrep48, array(),    $sqlStr48, $internalTests48),
             array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
+            array($select50, $sqlPrep50, array(),    $sqlStr50, $internalTests50),
+            array($select51, $sqlPrep51, array(),    $sqlStr51, $internalTests51),
+            array($select52, $sqlPrep52, array(),    $sqlStr52, $internalTests52),
         );
     }
 }

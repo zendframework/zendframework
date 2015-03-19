@@ -13,6 +13,7 @@ use Traversable;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Mail\Message as MailMessage;
+use Zend\Mail\MessageFactory as MailMessageFactory;
 use Zend\Mail\Transport;
 use Zend\Mail\Transport\Exception as TransportException;
 
@@ -86,6 +87,9 @@ class Mail extends AbstractWriter
             }
             $transport = isset($mail['transport']) ? $mail['transport'] : null;
             $mail      = isset($mail['mail']) ? $mail['mail'] : null;
+            if (is_array($mail)) {
+                $mail = MailMessageFactory::getInstance($mail);
+            }
         }
 
         // Ensure we have a valid mail message

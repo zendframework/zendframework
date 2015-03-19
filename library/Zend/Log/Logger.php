@@ -49,6 +49,9 @@ class Logger implements LoggerInterface
         E_USER_ERROR        => self::ERR,
         E_CORE_ERROR        => self::ERR,
         E_RECOVERABLE_ERROR => self::ERR,
+        E_PARSE             => self::ERR,
+        E_COMPILE_ERROR     => self::ERR,
+        E_COMPILE_WARNING   => self::ERR,
         E_STRICT            => self::DEBUG,
         E_DEPRECATED        => self::DEBUG,
         E_USER_DEPRECATED   => self::DEBUG,
@@ -416,7 +419,7 @@ class Logger implements LoggerInterface
     {
         if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$priority must be an integer > 0 and < %d; received %s',
+                '$priority must be an integer >= 0 and < %d; received %s',
                 count($this->priorities),
                 var_export($priority, 1)
             ));
@@ -613,19 +616,35 @@ class Logger implements LoggerInterface
 
         register_shutdown_function(function () use ($logger, $errorPriorityMap) {
             $error = error_get_last();
-            if (null !== $error && $error['type'] === E_ERROR) {
-                $logger->log(
-                    $errorPriorityMap[E_ERROR],
-                    $error['message'],
+
+            if (null === $error
+                || ! in_array(
+                    $error['type'],
                     array(
-                        'file' => $error['file'],
-                        'line' => $error['line'],
-                    )
-                );
+                        E_ERROR,
+                        E_PARSE,
+                        E_CORE_ERROR,
+                        E_CORE_WARNING,
+                        E_COMPILE_ERROR,
+                        E_COMPILE_WARNING
+                    ),
+                    true
+                )
+            ) {
+                return;
             }
+
+            $logger->log($errorPriorityMap[$error['type']],
+                $error['message'],
+                array(
+                    'file' => $error['file'],
+                    'line' => $error['line'],
+                )
+            );
         });
 
         static::$registeredFatalErrorShutdownFunction = true;
+
         return true;
     }
 

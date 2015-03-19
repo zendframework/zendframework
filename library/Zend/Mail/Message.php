@@ -346,7 +346,7 @@ class Message
     {
         $headers = $this->getHeaders();
         if (!$headers->has('subject')) {
-            return null;
+            return;
         }
         $header = $headers->get('subject');
         return $header->getFieldValue();

@@ -10,7 +10,6 @@
 namespace ZendTest\Di\Definition;
 
 use PHPUnit_Framework_TestCase as TestCase;
-
 use Zend\Di\Definition\RuntimeDefinition;
 
 class RuntimeDefinitionTest extends TestCase
@@ -73,13 +72,13 @@ class RuntimeDefinitionTest extends TestCase
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:1' => Array (
+                'RecursiveIteratorIterator::__construct:1' => array(
                     'mode',
                     null,
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:2' => Array (
+                'RecursiveIteratorIterator::__construct:2' => array(
                     'flags',
                     null,
                     true,

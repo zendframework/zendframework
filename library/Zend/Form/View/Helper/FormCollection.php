@@ -184,7 +184,7 @@ class FormCollection extends AbstractHelper
         }
 
         return sprintf(
-            $this->templateWrapper,
+            $this->getTemplateWrapper(),
             $escapeHtmlAttribHelper($templateMarkup)
         );
     }

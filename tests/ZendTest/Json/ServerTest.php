@@ -330,19 +330,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams( array(
+                ->setParams(array(
                     'three' => 3,
                     'two'   => 2,
                     'one'   => 1
                 ))
-                ->setId( 'foo' );
+                ->setId('foo');
         $response = $this->server->handle();
         $result = $response->getResult();
 
-        $this->assertTrue( is_array( $result ) );
-        $this->assertEquals( 1, $result[0] );
-        $this->assertEquals( 2, $result[1] );
-        $this->assertEquals( 3, $result[2] );
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(1, $result[0]);
+        $this->assertEquals(2, $result[1]);
+        $this->assertEquals(3, $result[2]);
     }
 
     public function testHandleShouldAllowNamedParamsInAnyOrder2()
@@ -351,19 +351,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams( array(
+                ->setParams(array(
                     'three' => 3,
                     'one'   => 1,
                     'two'   => 2,
-                ) )
-                ->setId( 'foo' );
+                ))
+                ->setId('foo');
         $response = $this->server->handle();
         $result = $response->getResult();
 
-        $this->assertTrue( is_array( $result ) );
-        $this->assertEquals( 1, $result[0] );
-        $this->assertEquals( 2, $result[1] );
-        $this->assertEquals( 3, $result[2] );
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(1, $result[0]);
+        $this->assertEquals(2, $result[1]);
+        $this->assertEquals(3, $result[2]);
     }
 
     public function testHandleValidWithoutRequiredParamShouldReturnError()
@@ -372,11 +372,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams( array(
+                ->setParams(array(
                     'three' => 3,
                     'two'   => 2,
-                 ) )
-                ->setId( 'foo' );
+                 ))
+                ->setId('foo');
         $response = $this->server->handle();
 
         $this->assertTrue($response instanceof Response);
@@ -502,18 +502,18 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams( array(
+                ->setParams(array(
                     'two'   => 2,
                     'one'   => 1,
-                ) )
-                ->setId( 'foo' );
+                ))
+                ->setId('foo');
         $response = $this->server->handle();
         $result = $response->getResult();
 
-        $this->assertTrue( is_array( $result ) );
-        $this->assertEquals( 1, $result[0] );
-        $this->assertEquals( 2, $result[1] );
-        $this->assertEquals( null, $result[2] );
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(1, $result[0]);
+        $this->assertEquals(2, $result[1]);
+        $this->assertEquals(null, $result[2]);
     }
 
     /**
@@ -525,17 +525,17 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams( array(
+                ->setParams(array(
                     'three' => 3,
                     'one'   => 1,
-                ) )
-                ->setId( 'foo' );
+                ))
+                ->setId('foo');
         $response = $this->server->handle();
         $result = $response->getResult();
 
-        $this->assertTrue( is_array( $result ) );
-        $this->assertEquals( 1, $result[0] );
-        $this->assertEquals( 'two', $result[1] );
-        $this->assertEquals( 3, $result[2] );
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(1, $result[0]);
+        $this->assertEquals('two', $result[1]);
+        $this->assertEquals(3, $result[2]);
     }
 }

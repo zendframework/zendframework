@@ -189,6 +189,6 @@ class Item implements TaggableInterface
         if (isset($this->params[$name])) {
             return $this->params[$name];
         }
-        return null;
+        return;
     }
 }

@@ -152,7 +152,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  DocBlockGenerator|string $docBlock
+     * @param  DocBlockGenerator|array|string $docBlock
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */

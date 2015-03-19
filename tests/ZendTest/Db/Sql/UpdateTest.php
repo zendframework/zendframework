@@ -342,4 +342,9 @@ class UpdateIgnore extends Update
         self::SPECIFICATION_UPDATE => 'UPDATE IGNORE %1$s SET %2$s',
         self::SPECIFICATION_WHERE  => 'WHERE %1$s'
     );
+
+    protected function processupdateIgnore(\Zend\Db\Adapter\Platform\PlatformInterface $platform, \Zend\Db\Adapter\Driver\DriverInterface $driver = null, \Zend\Db\Adapter\ParameterContainer $parameterContainer = null)
+    {
+        return parent::processUpdate($platform, $driver, $parameterContainer);
+    }
 }

@@ -20,8 +20,24 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Boolean('foo');
         $this->assertEquals(
-            array(array('%s TINYINT NOT NULL', array('foo'), array($column::TYPE_IDENTIFIER))),
+            array(array('%s %s NOT NULL', array('foo', 'BOOLEAN'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Ddl\Column\Boolean
+     *
+     * @group 6257
+     */
+    public function testIsAlwaysNotNullable()
+    {
+        $column = new Boolean('foo', true);
+
+        $this->assertFalse($column->isNullable());
+
+        $column->setNullable(true);
+
+        $this->assertFalse($column->isNullable());
     }
 }

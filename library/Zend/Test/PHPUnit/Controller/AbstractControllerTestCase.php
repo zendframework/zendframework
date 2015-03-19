@@ -48,7 +48,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * Trace error when exception is throwed in application
      * @var bool
      */
-    protected $traceError = false;
+    protected $traceError = true;
 
     /**
      * Reset the application for isolation
@@ -230,14 +230,14 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             }
         } elseif ($method == HttpRequest::METHOD_GET) {
             $query = array_merge($query, $params);
-        } elseif ($method == HttpRequest::METHOD_PUT) {
+        } elseif ($method == HttpRequest::METHOD_PUT || $method == HttpRequest::METHOD_PATCH) {
             if (count($params) != 0) {
                 $content = http_build_query($params);
                 $request->setContent($content);
             }
         } elseif ($params) {
             trigger_error(
-                'Additional params is only supported by GET, POST and PUT HTTP method',
+                'Additional params is only supported by GET, POST, PUT and PATCH HTTP method',
                 E_USER_NOTICE
             );
         }

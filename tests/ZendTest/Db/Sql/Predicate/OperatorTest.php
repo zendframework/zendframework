@@ -38,6 +38,13 @@ class OperatorTest extends TestCase
         $this->assertEquals(Operator::TYPE_VALUE, $operator->getLeftType());
         $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getRightType());
 
+        $operator = new Operator(array('bar'=>Operator::TYPE_VALUE), '>=', array('foo.bar'=>Operator::TYPE_IDENTIFIER));
+        $this->assertEquals(Operator::OP_GTE, $operator->getOperator());
+        $this->assertEquals(array('bar'=>Operator::TYPE_VALUE), $operator->getLeft());
+        $this->assertEquals(array('foo.bar'=>Operator::TYPE_IDENTIFIER), $operator->getRight());
+        $this->assertEquals(Operator::TYPE_VALUE, $operator->getLeftType());
+        $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getRightType());
+
         $operator = new Operator('bar', '>=', 0);
         $this->assertEquals(0, $operator->getRight());
     }

@@ -85,7 +85,6 @@ class Request
         }
     }
 
-
     /**
      * Set encoding to use in request
      *

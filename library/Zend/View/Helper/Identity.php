@@ -9,7 +9,7 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\View\Exception;
 
 /**
@@ -20,7 +20,7 @@ class Identity extends AbstractHelper
     /**
      * AuthenticationService instance
      *
-     * @var AuthenticationService
+     * @var AuthenticationServiceInterface
      */
     protected $authenticationService;
 
@@ -34,12 +34,12 @@ class Identity extends AbstractHelper
      */
     public function __invoke()
     {
-        if (!$this->authenticationService instanceof AuthenticationService) {
-            throw new Exception\RuntimeException('No AuthenticationService instance provided');
+        if (!$this->authenticationService instanceof AuthenticationServiceInterface) {
+            throw new Exception\RuntimeException('No AuthenticationServiceInterface instance provided');
         }
 
         if (!$this->authenticationService->hasIdentity()) {
-            return null;
+            return;
         }
 
         return $this->authenticationService->getIdentity();
@@ -48,10 +48,10 @@ class Identity extends AbstractHelper
     /**
      * Set AuthenticationService instance
      *
-     * @param AuthenticationService $authenticationService
+     * @param AuthenticationServiceInterface $authenticationService
      * @return Identity
      */
-    public function setAuthenticationService(AuthenticationService $authenticationService)
+    public function setAuthenticationService(AuthenticationServiceInterface $authenticationService)
     {
         $this->authenticationService = $authenticationService;
         return $this;
@@ -60,7 +60,7 @@ class Identity extends AbstractHelper
     /**
      * Get AuthenticationService instance
      *
-     * @return AuthenticationService
+     * @return AuthenticationServiceInterface
      */
     public function getAuthenticationService()
     {

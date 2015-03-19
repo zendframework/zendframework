@@ -25,6 +25,7 @@ class File extends Part
      * - file     filename or open file handler with message content (required)
      * - startPos start position of message or part in file (default: current position)
      * - endPos   end position of message or part in file (default: end of file)
+     * - EOL      end of Line for messages
      *
      * @param   array $params  full message with or without headers
      * @throws Exception\RuntimeException
@@ -53,7 +54,11 @@ class File extends Part
             $header .= $line;
         }
 
-        $this->headers = Headers::fromString($header);
+        if (isset($params['EOL'])) {
+            $this->headers = Headers::fromString($header, $params['EOL']);
+        } else {
+            $this->headers = Headers::fromString($header);
+        }
 
         $this->contentPos[0] = ftell($this->fh);
         if ($endPos !== null) {

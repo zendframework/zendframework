@@ -18,6 +18,12 @@ class TestOptions extends AbstractOptions
 {
     protected $testField;
 
+    private $parentPrivate;
+
+    protected $parentProtected;
+
+    protected $parentPublic;
+
     public function setTestField($value)
     {
         $this->testField = $value;
@@ -26,5 +32,55 @@ class TestOptions extends AbstractOptions
     public function getTestField()
     {
         return $this->testField;
+    }
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    private function setParentPrivate($parentPrivate)
+    {
+        $this->parentPrivate = $parentPrivate;
+    }
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    private function getParentPrivate()
+    {
+        return $this->parentPrivate;
+    }
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    protected function setParentProtected($parentProtected)
+    {
+        $this->parentProtected = $parentProtected;
+    }
+
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    protected function getParentProtected()
+    {
+        return $this->parentProtected;
+    }
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    public function setParentPublic($parentPublic)
+    {
+        $this->parentPublic = $parentPublic;
+    }
+
+
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    public function getParentPublic()
+    {
+        return $this->parentPublic;
     }
 }

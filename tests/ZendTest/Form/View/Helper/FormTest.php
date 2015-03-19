@@ -10,11 +10,10 @@
 namespace ZendTest\Form\View\Helper;
 
 use Zend\Form\Element\Submit;
-
 use ZendTest\Form\TestAsset\CityFieldset;
-
 use Zend\Form\Form;
 use Zend\Form\View\Helper\Form as FormHelper;
+use Zend\View\Helper\Doctype;
 
 class FormTest extends CommonTestCase
 {
@@ -106,5 +105,37 @@ class FormTest extends CommonTestCase
 
         $this->assertContains('<form', $markup);
         $this->assertContains('</form>', $markup);
+    }
+
+    public function testHtml5DoesNotAddEmptyActionAttributeToFormTag()
+    {
+        $helper = new FormHelper();
+
+        $helper->setDoctype(Doctype::HTML4_LOOSE);
+        $html4Markup = $helper->openTag();
+        $helper->setDoctype(Doctype::HTML5);
+        $html5Markup = $helper->openTag();
+        $helper->setDoctype(Doctype::XHTML5);
+        $xhtml5Markup = $helper->openTag();
+
+        $this->assertContains('action=""', $html4Markup);
+        $this->assertNotContains('action=""', $html5Markup);
+        $this->assertNotContains('action=""', $xhtml5Markup);
+    }
+
+    public function testHtml5DoesNotSetDefaultMethodAttributeInFormTag()
+    {
+        $helper = new FormHelper();
+
+        $helper->setDoctype(Doctype::HTML4_LOOSE);
+        $html4Markup = $helper->openTag();
+        $helper->setDoctype(Doctype::HTML5);
+        $html5Markup = $helper->openTag();
+        $helper->setDoctype(Doctype::XHTML5);
+        $xhtml5Markup = $helper->openTag();
+
+        $this->assertContains('method="get"', $html4Markup);
+        $this->assertNotContains('method="get"', $html5Markup);
+        $this->assertNotContains('method="get"', $xhtml5Markup);
     }
 }

@@ -102,7 +102,7 @@ class Chain extends TreeRouteStack implements RouteInterface
     public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         if ($pathOffset === null) {
@@ -125,7 +125,7 @@ class Chain extends TreeRouteStack implements RouteInterface
             $subMatch = $route->match($request, $pathOffset, $options);
 
             if ($subMatch === null) {
-                return null;
+                return;
             }
 
             $match->merge($subMatch);
@@ -133,7 +133,7 @@ class Chain extends TreeRouteStack implements RouteInterface
         }
 
         if ($mustTerminate && $pathOffset !== $pathLength) {
-            return null;
+            return;
         }
 
         return $match;
@@ -156,11 +156,13 @@ class Chain extends TreeRouteStack implements RouteInterface
 
         $this->assembledParams = array();
 
-        end($this->routes);
-        $lastRouteKey = key($this->routes);
+        $routes = ArrayUtils::iteratorToArray($this->routes);
+
+        end($routes);
+        $lastRouteKey = key($routes);
         $path         = '';
 
-        foreach ($this->routes as $key => $route) {
+        foreach ($routes as $key => $route) {
             $chainOptions = $options;
             $hasChild     = isset($options['has_child']) ? $options['has_child'] : false;
 

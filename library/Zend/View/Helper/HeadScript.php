@@ -241,9 +241,9 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             : $this->getIndent();
 
         if ($this->view) {
-            $useCdata = $this->view->plugin('doctype')->isXhtml() ? true : false;
+            $useCdata = $this->view->plugin('doctype')->isXhtml();
         } else {
-            $useCdata = $this->useCdata ? true : false;
+            $useCdata = $this->useCdata;
         }
 
         $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';

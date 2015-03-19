@@ -9,11 +9,12 @@
 
 namespace ZendTest\Stdlib;
 
+use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use ArrayObject;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Config\Config;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ArrayUtils\MergeRemoveKey;
 
 class ArrayUtilsTest extends TestCase
 {
@@ -263,6 +264,56 @@ class ArrayUtilsTest extends TestCase
         );
     }
 
+    /**
+     * @group 6903
+     */
+    public function testMergeReplaceKey()
+    {
+        $expected = array(
+            'car' => array(
+                'met' => 'bet',
+            ),
+            'new' => array(
+                'foo' => 'get',
+            ),
+        );
+        $a = array(
+            'car' => array(
+                'boo' => 'foo',
+                'doo' => 'moo',
+            ),
+        );
+        $b = array(
+            'car' => new \Zend\Stdlib\ArrayUtils\MergeReplaceKey(array(
+                'met' => 'bet',
+            )),
+            'new' => new \Zend\Stdlib\ArrayUtils\MergeReplaceKey(array(
+                'foo' => 'get',
+            )),
+        );
+        $this->assertInstanceOf('Zend\Stdlib\ArrayUtils\MergeReplaceKeyInterface', $b['car']);
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
+    }
+
+    /**
+     * @group 6899
+     */
+    public function testAllowsRemovingKeys()
+    {
+        $a = array(
+            'foo' => 'bar',
+            'bar' => 'bat'
+        );
+        $b = array(
+            'foo' => new MergeRemoveKey(),
+            'baz' => new MergeRemoveKey(),
+        );
+        $expected = array(
+            'bar' => 'bat'
+        );
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
+    }
+
     public static function validIterators()
     {
         return array(
@@ -430,5 +481,65 @@ class ArrayUtilsTest extends TestCase
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
         $this->assertFalse(ArrayUtils::iteratorToArray($test));
+    }
+
+    public function filterArrays()
+    {
+        return array(
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($value) {
+                    if ($value == 'bar') {
+                        return false;
+                    }
+                    return true;
+                },
+                null,
+                array('fiz' => 'buz')
+            ),
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($value, $key) {
+                    if ($value == 'buz') {
+                        return false;
+                    }
+
+                    if ($key == 'foo') {
+                        return false;
+                    }
+
+                    return true;
+                },
+                ArrayUtils::ARRAY_FILTER_USE_BOTH,
+                array()
+            ),
+            array(
+                array('foo' => 'bar', 'fiz' => 'buz'),
+                function ($key) {
+                    if ($key == 'foo') {
+                        return false;
+                    }
+                    return true;
+                },
+                ArrayUtils::ARRAY_FILTER_USE_KEY,
+                array('fiz' => 'buz')
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider filterArrays
+     */
+    public function testFiltersArray($data, $callback, $flag, $result)
+    {
+        $this->assertEquals($result, ArrayUtils::filter($data, $callback, $flag));
+    }
+
+    /**
+     * @expectedException \Zend\Stdlib\Exception\InvalidArgumentException
+     */
+    public function testInvalidCallableRaiseInvalidArgumentException()
+    {
+        ArrayUtils::filter(array(), "INVALID");
     }
 }

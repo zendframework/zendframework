@@ -89,6 +89,9 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         return $this->annotations;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return $this->__toString();

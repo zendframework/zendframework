@@ -187,7 +187,7 @@ class FormElement extends BaseAbstractHelper
                 return $this->renderHelper($pluginName, $element);
             }
         }
-        return null;
+        return;
     }
 
     /**
@@ -203,6 +203,6 @@ class FormElement extends BaseAbstractHelper
         if (isset($this->typeMap[$type])) {
             return $this->renderHelper($this->typeMap[$type], $element);
         }
-        return null;
+        return;
     }
 }

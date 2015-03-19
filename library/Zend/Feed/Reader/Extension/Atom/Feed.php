@@ -32,7 +32,7 @@ class Feed extends Extension\AbstractFeed
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -471,7 +471,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if (empty($author)) {
-            return null;
+            return;
         }
         return $author;
     }

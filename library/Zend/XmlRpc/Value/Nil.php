@@ -28,6 +28,6 @@ class Nil extends AbstractScalar
      */
     public function getValue()
     {
-        return null;
+        return;
     }
 }

@@ -219,7 +219,7 @@ class FormInputTest extends CommonTestCase
             'accept'             => 'value',
             'accesskey'          => 'value',
             'alt'                => 'value',
-            'autocomplete'       => 'on',
+            'autocomplete'       => 'postal-code',
             'autofocus'          => 'autofocus',
             'checked'            => 'checked',
             'class'              => 'value',
@@ -336,10 +336,10 @@ class FormInputTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect  = sprintf(' %s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect  = sprintf(' %s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -390,10 +390,14 @@ class FormInputTest extends CommonTestCase
         $this->assertContains('/>', $markup);
     }
 
+    /**
+     * Data provider
+     *
+     * @return string[][]
+     */
     public function booleanAttributeTypes()
     {
         return array(
-            array('autocomplete', 'on', 'off'),
             array('autofocus', 'autofocus', ''),
             array('disabled', 'disabled', ''),
             array('multiple', 'multiple', ''),
@@ -498,5 +502,17 @@ class FormInputTest extends CommonTestCase
         $markup = $this->helper->__invoke($element);
 
         $this->assertContains('title="translated&#x20;string"', $markup);
+    }
+
+    /**
+     * @group 7166
+     */
+    public function testPasswordValueShouldNotBeRendered()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('type', 'password');
+
+        $markup  = $this->helper->__invoke($element);
+        $this->assertContains('value=""', $markup);
     }
 }

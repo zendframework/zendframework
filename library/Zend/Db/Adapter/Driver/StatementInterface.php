@@ -9,6 +9,7 @@
 
 namespace Zend\Db\Adapter\Driver;
 
+use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\StatementContainerInterface;
 
 interface StatementInterface extends StatementContainerInterface
@@ -37,7 +38,7 @@ interface StatementInterface extends StatementContainerInterface
     /**
      * Execute
      *
-     * @param null $parameters
+     * @param null|array|ParameterContainer $parameters
      * @return ResultInterface
      */
     public function execute($parameters = null);

@@ -65,7 +65,7 @@ class Encoder
      */
     public static function encode($value, $cycleCheck = false, $options = array())
     {
-        $encoder = new static(($cycleCheck) ? true : false, $options);
+        $encoder = new static($cycleCheck, $options);
 
         if ($value instanceof JsonSerializable) {
             $value = $value->jsonSerialize();

@@ -35,7 +35,6 @@ class InArray extends AbstractValidator
      */
     const COMPARE_NOT_STRICT = -1;
 
-
     /**
      * @var array
      */
@@ -111,7 +110,7 @@ class InArray extends AbstractValidator
 
     /**
      * Sets the strict option mode
-     * InArray::CHECK_STRICT | InArray::CHECK_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY | InArray::CHECK_NOT_STRICT
+     * InArray::COMPARE_STRICT | InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY | InArray::COMPARE_NOT_STRICT
      *
      * @param  int $strict
      * @return InArray Provides a fluent interface
@@ -218,7 +217,7 @@ class InArray extends AbstractValidator
                 }
             }
 
-            if (in_array($value, $haystack, $this->strict == self::COMPARE_STRICT ? true : false)) {
+            if (in_array($value, $haystack, self::COMPARE_STRICT == $this->strict)) {
                 return true;
             }
         }

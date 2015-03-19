@@ -10,9 +10,11 @@
 namespace ZendTest\Stdlib;
 
 use ArrayObject;
+use Zend\Stdlib\Exception;
 use ZendTest\Stdlib\TestAsset\TestOptions;
+use ZendTest\Stdlib\TestAsset\TestOptionsDerived;
 use ZendTest\Stdlib\TestAsset\TestOptionsNoStrict;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use ZendTest\Stdlib\TestAsset\TestOptionsWithoutGetter;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,25 +43,21 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     public function testInvalidFieldThrowsException()
     {
         $this->setExpectedException('BadMethodCallException');
-        $options = new TestOptions(array('foo' => 'bar'));
+
+        new TestOptions(array('foo' => 'bar'));
     }
 
     public function testNonStrictOptionsDoesNotThrowException()
     {
-        try {
-            $options = new TestOptionsNoStrict(array('foo' => 'bar'));
-        } catch (\Exception $e) {
-            $this->fail('Nonstrict options should not throw an exception');
-        }
+        $this->assertInstanceOf(
+            'ZendTest\Stdlib\TestAsset\TestOptionsNoStrict',
+            new TestOptionsNoStrict(array('foo' => 'bar'))
+        );
     }
 
     public function testConstructionWithNull()
     {
-        try {
-            $options = new TestOptions(null);
-        } catch (InvalidArgumentException $e) {
-            $this->fail("Unexpected InvalidArgumentException raised");
-        }
+        $this->assertInstanceOf('ZendTest\Stdlib\TestAsset\TestOptions', new TestOptions(null));
     }
 
     public function testUnsetting()
@@ -73,15 +71,19 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsetThrowsInvalidArgumentException()
     {
-        $this->setExpectedException('InvalidArgumentException');
         $options = new TestOptions;
+
+        $this->setExpectedException('InvalidArgumentException');
+
         unset($options->foobarField);
     }
 
     public function testGetThrowsBadMethodCallException()
     {
-        $this->setExpectedException('BadMethodCallException');
         $options = new TestOptions();
+
+        $this->setExpectedException('BadMethodCallException');
+
         $options->fieldFoobar;
     }
 
@@ -101,15 +103,102 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $options->setFromArray('asd');
     }
 
+    public function testParentPublicProperty()
+    {
+        $options = new TestOptionsDerived(array('parent_public' => 1));
+
+        $this->assertEquals(1, $options->parent_public);
+    }
+
+    public function testParentProtectedProperty()
+    {
+        $options = new TestOptionsDerived(array('parent_protected' => 1));
+
+        $this->assertEquals(1, $options->parent_protected);
+    }
+
+    public function testParentPrivateProperty()
+    {
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\BadMethodCallException',
+            'The option "parent_private" does not have a callable "setParentPrivate" ("setparentprivate")'
+            . ' setter method which must be defined'
+        );
+
+        new TestOptionsDerived(array('parent_private' => 1));
+    }
+
+    public function testDerivedPublicProperty()
+    {
+        $options = new TestOptionsDerived(array('derived_public' => 1));
+
+        $this->assertEquals(1, $options->derived_public);
+    }
+
+    public function testDerivedProtectedProperty()
+    {
+        $options = new TestOptionsDerived(array('derived_protected' => 1));
+
+        $this->assertEquals(1, $options->derived_protected);
+    }
+
+    public function testDerivedPrivateProperty()
+    {
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\BadMethodCallException',
+            'The option "derived_private" does not have a callable "setDerivedPrivate" ("setderivedprivate")'
+            .' setter method which must be defined'
+        );
+
+        new TestOptionsDerived(array('derived_private' => 1));
+    }
+
     public function testExceptionMessageContainsActualUsedSetter()
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'The option "foo bar" does not have a matching "setFooBar" ("setfoo bar") setter method which must be defined'
+            'The option "foo bar" does not have a callable "setFooBar" ("setfoo bar")'
+            . ' setter method which must be defined'
         );
 
         new TestOptions(array(
             'foo bar' => 'baz',
         ));
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetReturnsFalseWhenMatchingGetterDoesNotExist()
+    {
+        $options = new TestOptionsWithoutGetter(array(
+            'foo' => 'bar',
+        ));
+        $this->assertFalse(isset($options->foo));
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetDoesNotThrowExceptionWhenMatchingGetterDoesNotExist()
+    {
+        $options   = new TestOptionsWithoutGetter();
+
+        try {
+            isset($options->foo);
+        } catch (Exception\BadMethodCallException $exception) {
+            $this->fail("Unexpected BadMethodCallException raised");
+        }
+    }
+
+    /**
+     * @group 7287
+     */
+    public function testIssetReturnsTrueWithValidDataWhenMatchingGetterDoesNotExist()
+    {
+        $options = new TestOptions(array(
+            'test_field' => 1,
+        ));
+        $this->assertTrue(isset($options->testField));
     }
 }

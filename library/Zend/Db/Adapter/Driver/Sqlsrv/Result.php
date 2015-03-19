@@ -60,7 +60,7 @@ class Result implements Iterator, ResultInterface
      */
     public function buffer()
     {
-        return null;
+        return;
     }
 
     /**

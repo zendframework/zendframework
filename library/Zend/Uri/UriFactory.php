@@ -9,7 +9,6 @@
 
 namespace Zend\Uri;
 
-
 /**
  * URI Factory Class
  *
@@ -75,7 +74,7 @@ abstract class UriFactory
             return static::$schemeClasses[$scheme];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -111,11 +110,13 @@ abstract class UriFactory
             $class = static::$schemeClasses[$scheme];
             $uri = new $class($uri);
             if (! $uri instanceof UriInterface) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
-                    $class,
-                    $scheme
-                ));
+                throw new Exception\InvalidArgumentException(
+                    sprintf(
+                        'class "%s" registered for scheme "%s" does not implement Zend\Uri\UriInterface',
+                        $class,
+                        $scheme
+                    )
+                );
             }
         }
 

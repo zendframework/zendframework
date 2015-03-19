@@ -15,7 +15,6 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
-use Zend\Form\FormInterface;
 use Zend\Stdlib\ArrayUtils;
 
 class Collection extends Fieldset
@@ -209,7 +208,7 @@ class Collection extends Fieldset
         }
 
         // Check to see if elements have been replaced or removed
-        foreach ($this->byName as $name => $elementOrFieldset) {
+        foreach ($this->iterator as $name => $elementOrFieldset) {
             if (isset($data[$name])) {
                 continue;
             }
@@ -464,10 +463,10 @@ class Collection extends Fieldset
     /**
      * Prepare the collection by adding a dummy template element if the user want one
      *
-     * @param  FormInterface $form
+     * @param  FieldsetInterface $form
      * @return mixed|void
      */
-    public function prepareElement(FormInterface $form)
+    public function prepareElement(FieldsetInterface $form)
     {
         if (true === $this->shouldCreateChildrenOnPrepareElement) {
             if ($this->targetElement !== null && $this->count > 0) {
@@ -516,11 +515,11 @@ class Collection extends Fieldset
                 $values[$key] = $this->hydrator->extract($value);
                 continue;
             }
-            
+
             // If the target element is a fieldset that can accept the provided value
             // we should clone it, inject the value and extract the data
-            if ( $this->targetElement instanceof FieldsetInterface ) {
-                if ( ! $this->targetElement->allowObjectBinding($value) ) {
+            if ($this->targetElement instanceof FieldsetInterface) {
+                if (! $this->targetElement->allowObjectBinding($value)) {
                     continue;
                 }
                 $targetElement = clone $this->targetElement;
@@ -531,9 +530,9 @@ class Collection extends Fieldset
                 }
                 continue;
             }
-            
+
             // If the target element is a non-fieldset element, just use the value
-            if ( $this->targetElement instanceof ElementInterface ) {
+            if ($this->targetElement instanceof ElementInterface) {
                 $values[$key] = $value;
                 if (!$this->createNewObjects() && $this->has($key)) {
                     $this->get($key)->setValue($value);
@@ -590,7 +589,7 @@ class Collection extends Fieldset
     protected function createTemplateElement()
     {
         if (!$this->shouldCreateTemplate) {
-            return null;
+            return;
         }
 
         if ($this->templateElement) {

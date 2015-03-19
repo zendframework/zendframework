@@ -48,58 +48,48 @@ class Http extends Uri
     protected $password;
 
     /**
-     * Check if the URI is a valid HTTP URI
-     *
-     * This applies additional HTTP specific validation rules beyond the ones
-     * required by the generic URI syntax
-     *
-     * @return bool
-     * @see    Uri::isValid()
-     */
-    public function isValid()
-    {
-        return parent::isValid();
-    }
-
-    /**
      * Get the username part (before the ':') of the userInfo URI part
      *
-     * @return null|string
+     * @return string|null
      */
     public function getUser()
     {
-        if (null !== $this->user) {
-            return $this->user;
-        }
-
-        $this->parseUserInfo();
         return $this->user;
     }
 
     /**
      * Get the password part (after the ':') of the userInfo URI part
      *
-     * @return string
+     * @return string|null
      */
     public function getPassword()
     {
-        if (null !== $this->password) {
-            return $this->password;
-        }
-
-        $this->parseUserInfo();
         return $this->password;
+    }
+
+    /**
+     * Get the User-info (usually user:password) part
+     *
+     * @return string|null
+     */
+    public function getUserInfo()
+    {
+        return $this->userInfo;
     }
 
     /**
      * Set the username part (before the ':') of the userInfo URI part
      *
-     * @param  string $user
-     * @return Http
+     * @param string|null $user
+     *
+     * @return self
      */
     public function setUser($user)
     {
-        $this->user = $user;
+        $this->user = null === $user ? null : (string) $user;
+
+        $this->buildUserInfo();
+
         return $this;
     }
 
@@ -107,11 +97,33 @@ class Http extends Uri
      * Set the password part (after the ':') of the userInfo URI part
      *
      * @param  string $password
-     * @return Http
+     *
+     * @return self
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = null === $password ? null : (string) $password;
+
+        $this->buildUserInfo();
+
+        return $this;
+    }
+
+    /**
+     * Set the URI User-info part (usually user:password)
+     *
+     * @param  string|null $userInfo
+     *
+     * @return self
+     *
+     * @throws Exception\InvalidUriPartException If the schema definition does not have this part
+     */
+    public function setUserInfo($userInfo)
+    {
+        $this->userInfo = null === $userInfo ? null : (string) $userInfo;
+
+        $this->parseUserInfo();
+
         return $this;
     }
 
@@ -142,19 +154,37 @@ class Http extends Uri
     {
         // No user information? we're done
         if (null === $this->userInfo) {
+            $this->setUser(null);
+            $this->setPassword(null);
+
             return;
         }
 
         // If no ':' separator, we only have a username
         if (false === strpos($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
+            $this->setPassword(null);
             return;
         }
 
         // Split on the ':', and set both user and password
-        list($user, $password) = explode(':', $this->userInfo, 2);
-        $this->setUser($user);
-        $this->setPassword($password);
+        list($this->user, $this->password) = explode(':', $this->userInfo, 2);
+    }
+
+    /**
+     * Build the user info based on user and password
+     *
+     * Builds the user info based on the given user and password values
+     *
+     * @return void
+     */
+    protected function buildUserInfo()
+    {
+        if (null !== $this->password) {
+            $this->userInfo = $this->user . ':' . $this->password;
+        } else {
+            $this->userInfo = $this->user;
+        }
     }
 
     /**

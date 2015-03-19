@@ -85,7 +85,7 @@ class AcceptLanguage extends AbstractAccept
             $fieldValuePart = $type = trim(substr($fieldValuePart, 0, $pos));
         }
 
-        if ($pos = strpos($fieldValuePart, '-')) {
+        if (strpos($fieldValuePart, '-')) {
             $subtypeWhole = $format = $subtype = trim(substr($fieldValuePart, strpos($fieldValuePart, '-')+1));
         } else {
             $subtypeWhole = '';

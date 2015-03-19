@@ -45,7 +45,7 @@ class RowGatewayFeature extends AbstractFeature
         if (isset($args[0])) {
             if (is_string($args[0])) {
                 $primaryKey = $args[0];
-                $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
+                $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter);
                 $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
             } elseif ($args[0] instanceof RowGatewayInterface) {
                 $rowGatewayPrototype = $args[0];
@@ -60,7 +60,7 @@ class RowGatewayFeature extends AbstractFeature
                 );
             }
             $primaryKey = $metadata->sharedData['metadata']['primaryKey'];
-            $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
+            $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter);
             $resultSetPrototype->setArrayObjectPrototype($rowGatewayPrototype);
         }
     }

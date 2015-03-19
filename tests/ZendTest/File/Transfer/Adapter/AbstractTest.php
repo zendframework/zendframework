@@ -112,7 +112,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowPullingValidatorsByFile()
     {
-        $this->adapter->addValidator('Between', false, false, 'foo');
+        $this->adapter->addValidator('Between', false, array('min' => 1, 'max' => 5), 'foo');
         $validators = $this->adapter->getValidators('foo');
         $this->assertEquals(1, count($validators));
         $validator = array_shift($validators);
@@ -653,14 +653,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => true))
-            , $this->adapter->getOptions('foo'));
+                'detectInfos' => true)), $this->adapter->getOptions('foo'));
         $this->adapter->setOptions(array('detectInfos' => false));
         $this->assertEquals(array(
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => false))
-            , $this->adapter->getOptions('foo'));
+                'detectInfos' => false)), $this->adapter->getOptions('foo'));
     }
 }

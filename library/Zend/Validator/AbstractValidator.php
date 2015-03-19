@@ -279,7 +279,7 @@ abstract class AbstractValidator implements
     protected function createMessage($messageKey, $value)
     {
         if (!isset($this->abstractOptions['messageTemplates'][$messageKey])) {
-            return null;
+            return;
         }
 
         $message = $this->abstractOptions['messageTemplates'][$messageKey];
@@ -410,7 +410,7 @@ abstract class AbstractValidator implements
     public function getTranslator()
     {
         if (! $this->isTranslatorEnabled()) {
-            return null;
+            return;
         }
 
         if (null === $this->abstractOptions['translator']) {

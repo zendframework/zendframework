@@ -829,7 +829,7 @@ class Acl implements AclInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -868,7 +868,7 @@ class Acl implements AclInterface
             $dfs['stack'][] = $roleParent;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -908,7 +908,7 @@ class Acl implements AclInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -957,7 +957,7 @@ class Acl implements AclInterface
             $dfs['stack'][] = $roleParent;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -985,7 +985,7 @@ class Acl implements AclInterface
     {
         // get the rules for the $resource and $role
         if (null === ($rules = $this->getRules($resource, $role))) {
-            return null;
+            return;
         }
 
         // follow $privilege
@@ -993,10 +993,10 @@ class Acl implements AclInterface
             if (isset($rules['allPrivileges'])) {
                 $rule = $rules['allPrivileges'];
             } else {
-                return null;
+                return;
             }
         } elseif (!isset($rules['byPrivilegeId'][$privilege])) {
-            return null;
+            return;
         } else {
             $rule = $rules['byPrivilegeId'][$privilege];
         }
@@ -1015,7 +1015,7 @@ class Acl implements AclInterface
         if (null === $rule['assert'] || $assertionValue) {
             return $rule['type'];
         } elseif (null !== $resource || null !== $role || null !== $privilege) {
-            return null;
+            return;
         } elseif (self::TYPE_ALLOW === $rule['type']) {
             return self::TYPE_DENY;
         }

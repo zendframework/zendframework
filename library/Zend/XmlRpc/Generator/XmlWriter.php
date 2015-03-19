@@ -33,7 +33,6 @@ class XmlWriter extends AbstractGenerator
         $this->xmlWriter->startDocument('1.0', $this->encoding);
     }
 
-
     /**
      * Open a new XML element
      *

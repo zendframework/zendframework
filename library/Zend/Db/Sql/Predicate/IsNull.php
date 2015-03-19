@@ -9,7 +9,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class IsNull implements PredicateInterface
+use Zend\Db\Sql\AbstractExpression;
+
+class IsNull extends AbstractExpression implements PredicateInterface
 {
     /**
      * @var string
@@ -84,10 +86,11 @@ class IsNull implements PredicateInterface
      */
     public function getExpressionData()
     {
+        $identifier = $this->normalizeArgument($this->identifier, self::TYPE_IDENTIFIER);
         return array(array(
             $this->getSpecification(),
-            array($this->identifier),
-            array(self::TYPE_IDENTIFIER),
+            array($identifier[0]),
+            array($identifier[1]),
         ));
     }
 }

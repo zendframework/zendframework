@@ -192,7 +192,7 @@ class DefaultIterator implements Iterator, Countable
             $this->rewind();
         }
         if (!is_resource($this->current)) {
-            return null;
+            return;
         }
 
         $entry         = array('dn' => $this->key());
@@ -270,7 +270,7 @@ class DefaultIterator implements Iterator, Countable
 
             return $currentDn;
         } else {
-            return null;
+            return;
         }
     }
 

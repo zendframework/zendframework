@@ -217,4 +217,13 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertContains('<li>' . $value, $userdata);
     }
+
+    /**
+     * @group ZF2-6063
+     */
+    public function testEmptyItems()
+    {
+        $this->setExpectedException('Zend\View\Exception\InvalidArgumentException');
+        $this->helper->__invoke(array());
+    }
 }

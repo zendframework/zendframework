@@ -9,15 +9,20 @@
 
 namespace ZendTest\Paginator;
 
+use ArrayIterator;
+use ArrayObject;
 use ReflectionMethod;
 use stdClass;
+use Zend\Cache\Storage\StorageInterface;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Config;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter as DbAdapter;
 use Zend\Db\Sql;
 use Zend\Filter;
 use Zend\Paginator;
 use Zend\Paginator\Adapter;
+use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
@@ -37,6 +42,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected $testCollection = null;
 
+    /**
+     * @var StorageInterface
+     */
     protected $cache;
     protected $cacheDir;
 
@@ -423,6 +431,60 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($page1, $this->paginator->getItemsByPage(1));
     }
 
+    /**
+     * @group 6817
+     * @group 6812
+     */
+    public function testGetsItemsByPageHandleDbSelectAdapter()
+    {
+        $resultSet = new ResultSet;
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $resultSet->initialize(array(
+            new ArrayObject(array('foo' => 'bar')),
+            new ArrayObject(array('foo' => 'bar')),
+            new ArrayObject(array('foo' => 'bar')),
+        ));
+
+        $result
+            ->expects($this->once())
+            ->method('current')
+            ->will($this->returnValue(array(DbSelect::ROW_COUNT_COLUMN_NAME => 3)));
+        $result->expects($this->once())->method('current')->will($this->returnValue($resultSet->getDataSource()));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+        $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
+        $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
+        $mockAdapter = $this->getMockForAbstractClass(
+            'Zend\Db\Adapter\Adapter',
+            array($mockDriver, $mockPlatform)
+        );
+        $mockSql = $this->getMock(
+            'Zend\Db\Sql\Sql',
+            array('prepareStatementForSqlObject', 'execute'),
+            array($mockAdapter)
+        );
+        $mockSql->expects($this->any())
+            ->method('prepareStatementForSqlObject')
+            ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
+            ->will($this->returnValue($mockStatement));
+        $mockSelect = $this->getMock('Zend\Db\Sql\Select');
+
+        $dbSelect = new DbSelect($mockSelect, $mockSql);
+        $this->assertInstanceOf('ArrayIterator', $resultSet->getDataSource());
+
+        $paginator = new Paginator\Paginator($dbSelect);
+        $this->assertInstanceOf('ArrayIterator', $paginator->getItemsByPage(1));
+
+        $paginator = new Paginator\Paginator(new Paginator\Adapter\Iterator($resultSet->getDataSource()));
+
+        foreach ($paginator as $item) {
+            $this->assertInstanceOf('ArrayObject', $item);
+        }
+    }
+
     public function testGetsItemCount()
     {
         $this->assertEquals(101, $this->paginator->getItemCount(range(1, 101)));
@@ -515,6 +577,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setCurrentPageNumber(2)->getCurrentItems();
         $this->paginator->setCurrentPageNumber(3)->getCurrentItems();
 
+        // cache entry to check that paginator loads only own items
+        $this->cache->addItem('not_paginator_item', 42);
+
         $pageItems = $this->paginator->getPageItemCache();
         $expected = array(
            1 => new \ArrayIterator(range(1, 10)),
@@ -530,6 +595,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setCurrentPageNumber(2)->getCurrentItems();
         $this->paginator->setCurrentPageNumber(3)->getCurrentItems();
 
+        // cache entry to check that paginator deletes only own items
+        $this->cache->addItem('not_paginator_item', 42);
+
         // clear only page 2 items
         $this->paginator->clearPageItemCache(2);
         $pageItems = $this->paginator->getPageItemCache();
@@ -543,6 +611,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->paginator->clearPageItemCache();
         $pageItems = $this->paginator->getPageItemCache();
         $this->assertEquals(array(), $pageItems);
+
+        // assert that cache items not from paginator are not cleared
+        $this->assertEquals(42, $this->cache->getItem('not_paginator_item'));
     }
 
     public function testWithCacheDisabled()
@@ -790,5 +861,33 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $outputGetCacheInternalId = $reflectionGetCacheInternalId->invoke($paginator);
 
         $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
+    }
+
+    /**
+     * @group 6808
+     * @group 6809
+     */
+    public function testItemCountsForEmptyItemSet()
+    {
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array()));
+        $paginator->setCurrentPageNumber(1);
+
+        $expected = new stdClass();
+        $expected->pageCount        = 0;
+        $expected->itemCountPerPage = 10;
+        $expected->first            = 1;
+        $expected->current          = 1;
+        $expected->last             = 0;
+        $expected->pagesInRange     = array(1 => 1);
+        $expected->firstPageInRange = 1;
+        $expected->lastPageInRange  = 1;
+        $expected->currentItemCount = 0;
+        $expected->totalItemCount   = 0;
+        $expected->firstItemNumber  = 0;
+        $expected->lastItemNumber   = 0;
+
+        $actual = $paginator->getPages();
+
+        $this->assertEquals($expected, $actual);
     }
 }

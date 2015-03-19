@@ -81,15 +81,15 @@ class Attribute
             return $retArray;
         } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
-                return null;
+                return;
             } elseif ($index >= 0 && $index < count($data[$attribName])) {
                 return self::valueFromLdap($data[$attribName][$index]);
             } else {
-                return null;
+                return;
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -318,7 +318,7 @@ class Attribute
             return Converter\Converter::toLdapDateTime($value, $utc);
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -361,10 +361,10 @@ class Attribute
             try {
                 return Converter\Converter::fromLdapDateTime($value, false)->format('U');
             } catch (Converter\Exception\InvalidArgumentException $e) {
-                return null;
+                return;
             }
         }
 
-        return null;
+        return;
     }
 }

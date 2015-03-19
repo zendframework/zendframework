@@ -76,8 +76,6 @@ interface UriInterface
      */
     public function normalize();
 
-
-
     /**
      * Convert the link to a relative link by substracting a base URI
      *

@@ -19,6 +19,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 {
     protected $_mboxOriginalFile;
     protected $_mboxFile;
+    protected $_mboxFileUnix;
     protected $_tmpdir;
 
     public function setUp()
@@ -53,6 +54,10 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unlink($this->_mboxFile);
+
+        if ($this->_mboxFileUnix) {
+            unlink($this->_mboxFileUnix);
+        }
     }
 
     public function testLoadOk()
@@ -155,6 +160,17 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     }
 */
 
+    /**
+     * @group 6775
+     */
+    public function testFetchMessageHeaderUnix()
+    {
+        $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));
+
+        $subject = $mail->getMessage(1)->subject;
+        $this->assertEquals('Simple Message', $subject);
+    }
+
     public function testFetchMessageHeader()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
@@ -168,7 +184,19 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
         $content = $mail->getMessage(3)->getContent();
-        list($content, ) = explode("\n", $content, 2);
+        list($content) = explode("\n", $content, 2);
+        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+    }
+
+    /**
+     * @group 6775
+     */
+    public function testFetchMessageBodyUnix()
+    {
+        $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));
+
+        $content = $mail->getMessage(3)->getContent();
+        list($content) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 
@@ -294,5 +322,17 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mail->getMessage(1)->getContent(), '');
         $this->assertEquals($mail->getMessage(2)->subject, 'test2');
         $this->assertEquals($mail->getMessage(2)->getContent(), '');
+    }
+
+    /**
+     * @return string
+     */
+    private function getUnixMboxFile()
+    {
+        $this->_mboxFileUnix = $this->_tmpdir . 'INBOX.unix';
+
+        copy(__DIR__ . '/../_files/test.mbox/INBOX.unix', $this->_mboxFileUnix);
+
+        return $this->_mboxFileUnix;
     }
 }

@@ -82,7 +82,7 @@ class Result implements Iterator, ResultInterface
      */
     public function buffer()
     {
-        return null;
+        return;
     }
 
     /**
@@ -202,7 +202,7 @@ class Result implements Iterator, ResultInterface
     public function count()
     {
         // @todo OCI8 row count in Driver Result
-        return null;
+        return;
     }
 
     /**
@@ -219,6 +219,6 @@ class Result implements Iterator, ResultInterface
     public function getGeneratedValue()
     {
         // @todo OCI8 generated value in Driver Result
-        return null;
+        return;
     }
 }

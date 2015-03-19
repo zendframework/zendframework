@@ -33,7 +33,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public static function rmdir($dir)
     {
-        $files = array_diff(scandir($dir), array('.','..'));
+        $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
@@ -294,6 +294,26 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testPreserveContentOfPutRequest()
     {
         $this->getRequest()->setMethod('PUT');
+        $this->getRequest()->setContent('my content');
+        $this->dispatch('/tests');
+        $this->assertEquals('my content', $this->getRequest()->getContent());
+    }
+
+    /**
+     * @group 6399
+     */
+    public function testPatchRequestParams()
+    {
+        $this->dispatch('/tests', 'PATCH', array('a' => 1));
+        $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
+
+    /**
+     * @group 6399
+     */
+    public function testPreserveContentOfPatchRequest()
+    {
+        $this->getRequest()->setMethod('PATCH');
         $this->getRequest()->setContent('my content');
         $this->dispatch('/tests');
         $this->assertEquals('my content', $this->getRequest()->getContent());

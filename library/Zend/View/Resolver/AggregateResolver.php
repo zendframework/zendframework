@@ -99,14 +99,11 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
         foreach ($this->queue as $resolver) {
             $resource = $resolver->resolve($name, $renderer);
-            if (!$resource) {
-                // No resource found; try next resolver
-                continue;
+            if ($resource) {
+                // Resource found; return it
+                $this->lastSuccessfulResolver = $resolver;
+                return $resource;
             }
-
-            // Resource found; return it
-            $this->lastSuccessfulResolver = $resolver;
-            return $resource;
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;

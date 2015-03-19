@@ -16,7 +16,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
         $string = 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n";
-        $stream = fopen('php://temp','rb+');
+        $stream = fopen('php://temp', 'rb+');
         fwrite($stream, 'Bar Foo');
         rewind($stream);
 
@@ -32,7 +32,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testResponseFactoryFromEmptyStringCreatesValidResponse()
     {
-        $stream = fopen('php://temp','rb+');
+        $stream = fopen('php://temp', 'rb+');
         fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
         rewind($stream);
 
@@ -43,7 +43,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testGzipResponse()
     {
-        $stream = fopen(__DIR__ . '/../_files/response_gzip','rb');
+        $stream = fopen(__DIR__ . '/../_files/response_gzip', 'rb');
 
         $headers = '';
         while (false!== ($newLine = fgets($stream))) {

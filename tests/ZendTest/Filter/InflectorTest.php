@@ -427,7 +427,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(3, count($rules));
         $this->_context = 'StringToLower';
-        $this->inflector->setStaticRuleReference('context' , $this->_context);
+        $this->inflector->setStaticRuleReference('context', $this->_context);
         $this->inflector->addFilterRule('controller', array('Alpha', 'StringToLower'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(5, count($rules));

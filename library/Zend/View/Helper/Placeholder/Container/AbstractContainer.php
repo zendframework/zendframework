@@ -295,7 +295,7 @@ abstract class AbstractContainer extends ArrayObject
             return 0;
         }
 
-        return $nextIndex = max($keys) + 1;
+        return max($keys) + 1;
     }
 
     /**

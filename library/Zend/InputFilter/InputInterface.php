@@ -14,26 +14,112 @@ use Zend\Validator\ValidatorChain;
 
 interface InputInterface
 {
+    /**
+     * @param bool $allowEmpty
+     * @return self
+     */
     public function setAllowEmpty($allowEmpty);
+
+    /**
+     * @param bool $breakOnFailure
+     * @return self
+     */
     public function setBreakOnFailure($breakOnFailure);
+
+    /**
+     * @param string|null $errorMessage
+     * @return self
+     */
     public function setErrorMessage($errorMessage);
+
+    /**
+     * @param FilterChain $filterChain
+     * @return self
+     */
     public function setFilterChain(FilterChain $filterChain);
+
+    /**
+     * @param string $name
+     * @return self
+     */
     public function setName($name);
+
+    /**
+     * @param bool $required
+     * @return self
+     */
     public function setRequired($required);
+
+    /**
+     * @param ValidatorChain $validatorChain
+     * @return self
+     */
     public function setValidatorChain(ValidatorChain $validatorChain);
+
+    /**
+     * @param mixed $value
+     * @return self
+     */
     public function setValue($value);
+
+    /**
+     * @param InputInterface $input
+     * @return self
+     */
     public function merge(InputInterface $input);
 
+    /**
+     * @return bool
+     */
     public function allowEmpty();
+
+    /**
+     * @return bool
+     */
     public function breakOnFailure();
+
+    /**
+     * @return string|null
+     */
     public function getErrorMessage();
+
+    /**
+     * @return FilterChain
+     */
     public function getFilterChain();
+
+    /**
+     * @return string
+     */
     public function getName();
+
+    /**
+     * @return mixed
+     */
     public function getRawValue();
+
+    /**
+     * @return bool
+     */
     public function isRequired();
+
+    /**
+     * @return ValidatorChain
+     */
     public function getValidatorChain();
+
+    /**
+     * @return mixed
+     */
     public function getValue();
 
+    /**
+     * @return bool
+     */
     public function isValid();
+
+    /**
+     * @return array
+     */
     public function getMessages();
 }

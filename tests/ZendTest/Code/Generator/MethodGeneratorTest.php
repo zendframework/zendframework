@@ -36,6 +36,33 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
                           'Failed because $param was not instance of Zend\Code\Generator\ParameterGenerator');
     }
 
+    public function testMethodParameterMutator()
+    {
+        $methodGenerator = new MethodGenerator();
+
+        $methodGenerator->setParameter('foo');
+        $methodGenerator->setParameter(array('name' => 'bar', 'type' => 'array'));
+        $methodGenerator->setParameter(ParameterGenerator::fromArray(array('name' => 'baz', 'type' => '\stdClass')));
+
+        $params = $methodGenerator->getParameters();
+        $this->assertCount(3, $params);
+
+        /** @var $foo ParameterGenerator */
+        $foo = array_shift($params);
+        $this->assertInstanceOf('Zend\Code\Generator\ParameterGenerator', $foo);
+        $this->assertEquals('foo', $foo->getName());
+
+        $bar = array_shift($params);
+        $this->assertEquals(ParameterGenerator::fromArray(array('name' => 'bar', 'type' => 'array')), $bar);
+
+        /** @var $baz ParameterGenerator */
+        $baz = array_shift($params);
+        $this->assertEquals('baz', $baz->getName());
+
+        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException');
+        $methodGenerator->setParameter(new \stdClass());
+    }
+
     public function testMethodBodyGetterAndSetter()
     {
         $method = new MethodGenerator();
@@ -66,6 +93,31 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function someMethod()
     {
+        /* test test */
+    }
+
+EOS;
+        $this->assertEquals($target, (string) $methodGenerator);
+    }
+
+
+    public function testMethodFromReflectionMultiLinesIndention()
+    {
+        $ref = new MethodReflection('ZendTest\Code\Generator\TestAsset\TestSampleSingleClassMultiLines', 'someMethod');
+
+        $methodGenerator = MethodGenerator::fromReflection($ref);
+        $target = <<<EOS
+    /**
+     * Enter description here...
+     *
+     * @return bool
+     */
+    public function someMethod()
+    {
+        /* test test */
+
+        /* test test */
+
         /* test test */
     }
 

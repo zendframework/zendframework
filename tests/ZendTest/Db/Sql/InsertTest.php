@@ -37,11 +37,11 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function testInto()
     {
         $this->insert->into('table', 'schema');
-        $this->assertEquals('table', $this->readAttribute($this->insert, 'table'));
+        $this->assertEquals('table', $this->insert->getRawState('table'));
 
         $tableIdentifier = new TableIdentifier('table', 'schema');
         $this->insert->into($tableIdentifier);
-        $this->assertEquals($tableIdentifier, $this->readAttribute($this->insert, 'table'));
+        $this->assertEquals($tableIdentifier, $this->insert->getRawState('table'));
     }
 
     /**
@@ -50,7 +50,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function testColumns()
     {
         $this->insert->columns(array('foo', 'bar'));
-        $this->assertEquals(array('foo', 'bar'), $this->readAttribute($this->insert, 'columns'));
+        $this->assertEquals(array('foo', 'bar'), $this->insert->getRawState('columns'));
     }
 
     /**
@@ -59,18 +59,18 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function testValues()
     {
         $this->insert->values(array('foo' => 'bar'));
-        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('foo'), $this->insert->getRawState('columns'));
+        $this->assertEquals(array('bar'), $this->insert->getRawState('values'));
 
         // test will merge cols and values of previously set stuff
         $this->insert->values(array('foo' => 'bax'), Insert::VALUES_MERGE);
         $this->insert->values(array('boom' => 'bam'), Insert::VALUES_MERGE);
-        $this->assertEquals(array('foo', 'boom'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax', 'bam'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('foo', 'boom'), $this->insert->getRawState('columns'));
+        $this->assertEquals(array('bax', 'bam'), $this->insert->getRawState('values'));
 
         $this->insert->values(array('foo' => 'bax'));
-        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('foo'), $this->insert->getRawState('columns'));
+        $this->assertEquals(array('bax'), $this->insert->getRawState('values'));
     }
 
     /**
@@ -94,7 +94,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Db\Sql\Exception\InvalidArgumentException',
-            'A Zend\Db\Sql\Select instance cannot be provided with the merge flag when values already exist'
+            'A Zend\Db\Sql\Select instance cannot be provided with the merge flag'
         );
         $this->insert->values(new Select, Insert::VALUES_MERGE);
     }
@@ -177,16 +177,19 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
         $mockStatement = new \Zend\Db\Adapter\StatementContainer();
 
+        $select = new Select('bar');
         $this->insert
                 ->into('foo')
                 ->columns(array('col1'))
-                ->select(new Select('bar'))
+                ->select($select->where(array('x'=>5)))
                 ->prepareStatement($mockAdapter, $mockStatement);
 
         $this->assertEquals(
-            'INSERT INTO "foo" ("col1") SELECT "bar".* FROM "bar"',
+            'INSERT INTO "foo" ("col1") SELECT "bar".* FROM "bar" WHERE "x" = ?',
             $mockStatement->getSql()
         );
+        $parameters = $mockStatement->getParameterContainer()->getNamedArray();
+        $this->assertSame(array('subselect1where1'=>5), $parameters);
     }
 
     /**
@@ -210,10 +213,12 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert = new Insert;
         $select = new Select();
         $this->insert->into('foo')->select($select->from('bar'));
+
         $this->assertEquals('INSERT INTO "foo"  SELECT "bar".* FROM "bar"', $this->insert->getSqlString(new TrustingSql92Platform()));
 
         // with Select and columns
         $this->insert->columns(array('col1', 'col2'));
+
         $this->assertEquals('INSERT INTO "foo" ("col1", "col2") SELECT "bar".* FROM "bar"', $this->insert->getSqlString(new TrustingSql92Platform()));
     }
 
@@ -223,8 +228,8 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function test__set()
     {
         $this->insert->foo = 'bar';
-        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('foo'), $this->insert->getRawState('columns'));
+        $this->assertEquals(array('bar'), $this->insert->getRawState('values'));
     }
 
     /**
@@ -233,11 +238,11 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function test__unset()
     {
         $this->insert->foo = 'bar';
-        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('foo'), $this->insert->getRawState('columns'));
+        $this->assertEquals(array('bar'), $this->insert->getRawState('values'));
         unset($this->insert->foo);
-        $this->assertEquals(array(), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array(), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array(), $this->insert->getRawState('columns'));
+        $this->assertEquals(array(), $this->insert->getRawState('values'));
     }
 
     /**
@@ -341,6 +346,12 @@ class Replace extends Insert
     const SPECIFICATION_INSERT = 'replace';
 
     protected $specifications = array(
-        self::SPECIFICATION_INSERT => 'REPLACE INTO %1$s (%2$s) VALUES (%3$s)'
+        self::SPECIFICATION_INSERT => 'REPLACE INTO %1$s (%2$s) VALUES (%3$s)',
+        self::SPECIFICATION_SELECT => 'REPLACE INTO %1$s %2$s %3$s',
     );
+
+    protected function processreplace(\Zend\Db\Adapter\Platform\PlatformInterface $platform, \Zend\Db\Adapter\Driver\DriverInterface $driver = null, \Zend\Db\Adapter\ParameterContainer $parameterContainer = null)
+    {
+        return parent::processInsert($platform, $driver, $parameterContainer);
+    }
 }

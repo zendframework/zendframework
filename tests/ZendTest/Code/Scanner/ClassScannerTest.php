@@ -12,7 +12,10 @@ namespace ZendTest\Code\Scanner;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Code\Annotation;
 use Zend\Code\Scanner\FileScanner;
+use Zend\Code\Scanner\MethodScanner;
 use Zend\Stdlib\ErrorHandler;
+use ZendTest\Code\TestAsset\TraitWithSameMethods;
+use ZendTest\Code\TestAsset\TestClassWithTraitAliases;
 
 class ClassScannerTest extends TestCase
 {
@@ -173,5 +176,123 @@ class ClassScannerTest extends TestCase
         $this->assertEquals('first',  $annotations[0]->content);
         $this->assertEquals('second', $annotations[1]->content);
         $this->assertEquals('third',  $annotations[2]->content);
+    }
+
+    /**
+     * @group trait1
+     */
+    public function testClassScannerCanScanTraits()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
+        $file  = new FileScanner(__DIR__ . '/../TestAsset/BarTrait.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\BarTrait');
+
+        $this->assertTrue($class->isTrait());
+        $this->assertTrue($class->hasMethod('bar'));
+    }
+
+    /**
+     * @group trait2
+     */
+    public function testClassScannerCanScanClassThatUsesTraits()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
+        $file  = new FileScanner(__DIR__ . '/../TestAsset/TestClassUsesTraitSimple.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\TestClassUsesTraitSimple');
+
+        $this->assertFalse($class->isTrait());
+        $traitNames = $class->getTraitNames();
+        $class->getTraitAliases();
+        $this->assertTrue(in_array('ZendTest\Code\TestAsset\BarTrait', $traitNames));
+        $this->assertTrue(in_array('ZendTest\Code\TestAsset\FooTrait', $traitNames));
+    }
+
+    /**
+     * @group trait3
+     */
+    public function testClassScannerCanScanClassAndGetTraitsAliases()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
+        $file  = new FileScanner(__DIR__ . '/../TestAsset/TestClassWithTraitAliases.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\TestClassWithTraitAliases');
+
+        $this->assertFalse($class->isTrait());
+
+        $aliases = $class->getTraitAliases();
+
+        $this->assertEquals(count($aliases), 1);
+
+        $this->assertEquals(key($aliases), 'test');
+        $this->assertEquals(current($aliases), 'ZendTest\Code\TestAsset\TraitWithSameMethods::foo');
+    }
+
+    /**
+     * @group trait4
+     */
+    public function testClassScannerCanGetTraitMethodsInGetMethods()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
+        //load files or test may fail due to autoload issues
+        require_once(__DIR__ . '/../TestAsset/TraitWithSameMethods.php');
+        require_once(__DIR__ . '/../TestAsset/BarTrait.php');
+
+        $file  = new FileScanner(__DIR__ . '/../TestAsset/TestClassWithTraitAliases.php');
+
+        $class = $file->getClass('ZendTest\Code\TestAsset\TestClassWithTraitAliases');
+
+        $this->assertFalse($class->isTrait());
+
+        $testMethods = array(
+            'fooBarBaz' => 'isPublic',
+            'foo' => 'isPublic',
+            'bar' => 'isPublic',
+            'test' => 'isPrivate',
+            'bazFooBar' => 'isPublic',
+        );
+
+        $this->assertEquals($class->getMethodNames(), array_keys($testMethods));
+
+        foreach ($testMethods as $methodName => $testMethod) {
+            $this->assertTrue($class->hasMethod($methodName), "Cannot find method $methodName");
+
+            $method = $class->getMethod($methodName);
+            $this->assertTrue($method instanceof MethodScanner, $methodName . " not found.");
+
+            $this->assertTrue($method->$testMethod());
+
+            // test that we got the right ::bar method based on declaration
+            if ($testMethod === "bar") {
+                $this->assertEquals(trim($method->getBody), 'echo "foo";');
+            }
+        }
+    }
+
+    /**
+     * @group trait5
+     */
+    public function testGetMethodsThrowsExceptionOnDuplicateMethods()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
+        $this->setExpectedException('Zend\Code\Exception\RuntimeException');
+
+        $file  = new FileScanner(__DIR__ . '/TestAsset/TestClassWithAliasException.php');
+        $class = $file->getClass('ZendTest\Code\Scanner\TestAsset\TestClassWithAliasException');
+
+        $class->getMethods();
     }
 }

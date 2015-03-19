@@ -115,7 +115,7 @@ class FeedSet extends ArrayObject
     {
         if ($offset == 'feed' && !$this->offsetExists('feed')) {
             if (!$this->offsetExists('href')) {
-                return null;
+                return;
             }
             $feed = Reader::import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);

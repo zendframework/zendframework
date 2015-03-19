@@ -14,7 +14,9 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 interface SqlInterface
 {
     /**
-     * @param PlatformInterface $adapterPlatform
+     * Get SQL string for statement
+     *
+     * @param null|PlatformInterface $adapterPlatform
      *
      * @return string
      */

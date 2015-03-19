@@ -32,6 +32,11 @@ use Zend\Stdlib\ErrorHandler;
 abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \Zend\Cache\Storage\Adapter\AdapterOptions
+     */
+    protected $_options;
+
+    /**
      * The storage adapter
      *
      * @var StorageInterface
@@ -372,7 +377,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMetadatas()
     {
-        $capabilities = $this->_storage->getCapabilities();
+        $capabilities       = $this->_storage->getCapabilities();
         $supportedMetadatas = $capabilities->getSupportedMetadata();
 
         $items = array(
@@ -390,6 +395,16 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
                 $this->assertArrayHasKey($supportedMetadata, $metadata);
             }
         }
+    }
+
+    /**
+     * @group 7031
+     * @group 7032
+     */
+    public function testGetMetadatasWithEmptyNamespace()
+    {
+        $this->_options->setNamespace('');
+        $this->testGetMetadatas();
     }
 
     public function testGetMetadatasReturnsEmptyArrayIfNonReadable()
@@ -461,20 +476,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         // write "key" to default namespace
         $this->_options->setNamespace('defaultns1');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns1') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns1'));
 
         // write "key" to an other default namespace
         $this->_options->setNamespace('defaultns2');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns2') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns2'));
 
         // test value of defaultns2
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns2', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns2', $this->_storage->getItem('key'));
 
         // test value of defaultns1
         $this->_options->setNamespace('defaultns1');
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns1', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns1', $this->_storage->getItem('key'));
 
         // remove item of defaultns1
         $this->_options->setNamespace('defaultns1');

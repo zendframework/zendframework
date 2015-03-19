@@ -81,7 +81,7 @@ class Dba extends AbstractAdapter implements
      * Set options.
      *
      * @param  array|Traversable|DbaOptions $options
-     * @return Apc
+     * @return self
      * @see    getOptions()
      */
     public function setOptions($options)
@@ -153,7 +153,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Get available space in bytes
      *
-     * @return int|float
+     * @return float
      */
     public function getAvailableSpace()
     {
@@ -285,7 +285,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Get the storage iterator
      *
-     * @return ApcIterator
+     * @return DbaIterator
      */
     public function getIterator()
     {
@@ -335,7 +335,7 @@ class Dba extends AbstractAdapter implements
 
         if ($value === false) {
             $success = false;
-            return null;
+            return;
         }
 
         $success = true;

@@ -9,6 +9,8 @@
 
 namespace Zend\View\Helper;
 
+use Zend\View\Exception;
+
 /**
  * Helper for ordered and unordered lists
  */
@@ -21,10 +23,18 @@ class HtmlList extends AbstractHtmlElement
      * @param  bool  $ordered Specifies ordered/unordered list; default unordered
      * @param  array $attribs Attributes for the ol/ul tag.
      * @param  bool  $escape  Escape the items.
+     * @throws Exception\InvalidArgumentException
      * @return string The list XHTML.
      */
     public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)
     {
+        if (empty($items)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$items array can not be empty in %s',
+                __METHOD__
+            ));
+        }
+
         $list = '';
 
         foreach ($items as $item) {

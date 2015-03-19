@@ -1,6 +1,6 @@
 ![Logo](https://raw.githubusercontent.com/zendframework/zf2/234b554f2ca202095aea32e4fa557553f8849664/resources/ZendFramework-logo.png)
 
-# Welcome to the *Zend Framework 2.3* Release!
+# Welcome to the *Zend Framework 2.4* Release!
 
 Master:
 [![Build Status](https://secure.travis-ci.org/zendframework/zf2.svg?branch=master)](http://travis-ci.org/zendframework/zf2)
@@ -11,16 +11,20 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.7*
+*Zend Framework 2.4.0dev*
 
-This is the seventh maintenance release for the version 2.3 series.
+This is the fourth minor (feature) release for the version 2 series.
 
-12 Mar 2015
+DD MMM YYY
 
-### UPDATES IN 2.3.7
+### UPDATES IN 2.4.0
 
-- This release reverts [#7255](https://github.com/zendframework/zf2/pull/7255),
-  as it introduced a BC break against `Zend\Mvc\Controller\AbstractRestfulController`.
+- [#6154](https://github.com/zendframework/zf2/pull/6154) updates
+  `Zend\InputFilter\BaseInputFilter::isValid()` to accept an optional `$context`
+  parameter; if used, this value will be passed to all composed inputs as
+  context, instead of the value provided to `setData()`. For classes overriding
+  the `isValid()` method of an InputFilter, you will need to add
+  `$context = null` as an argument.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

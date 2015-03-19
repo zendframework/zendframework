@@ -12,21 +12,17 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Integer extends Column
 {
     /**
-     * @var int
+     * @return array
      */
-    protected $length;
-
-    /**
-     * @param null|string     $name
-     * @param bool            $nullable
-     * @param null|string|int $default
-     * @param array           $options
-     */
-    public function __construct($name, $nullable = false, $default = null, array $options = array())
+    public function getExpressionData()
     {
-        $this->setName($name);
-        $this->setNullable($nullable);
-        $this->setDefault($default);
-        $this->setOptions($options);
+        $data    = parent::getExpressionData();
+        $options = $this->getOptions();
+
+        if (isset($options['length'])) {
+            $data[0][1][1] .= '(' . $options['length'] . ')';
+        }
+
+        return $data;
     }
 }

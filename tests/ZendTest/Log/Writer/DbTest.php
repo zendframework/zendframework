@@ -10,6 +10,7 @@
 namespace ZendTest\Log\Writer;
 
 use DateTime;
+use ReflectionMethod;
 use ZendTest\Log\TestAsset\MockDbAdapter;
 use Zend\Log\Writer\Db as DbWriter;
 use Zend\Log\Formatter\FormatterInterface;
@@ -125,7 +126,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesOptionalCustomColumnNames()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field' ,
+            'message' => 'new-message-field',
             'priority' => 'new-priority-field'
         ));
 
@@ -152,7 +153,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesParamsWithArray()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field' ,
+            'message' => 'new-message-field',
             'priority' => 'new-priority-field',
             'events' => array(
                 'line' => 'new-line',
@@ -248,5 +249,132 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $registeredDb = self::readAttribute($writer, 'db');
         $this->assertSame($this->db, $registeredDb);
+    }
+
+    /**
+     * @group 2589
+     */
+    public function testMapEventIntoColumnDoesNotTriggerArrayToStringConversion()
+    {
+        $this->writer = new DbWriter($this->db, $this->tableName, array(
+            'priority' => 'new-priority-field',
+            'message'  => 'new-message-field',
+            'extra'    => array(
+                'file'  => 'new-file',
+                'line'  => 'new-line',
+                'trace' => 'new-trace',
+            )
+        ));
+
+        // log to the mock db adapter
+        $priority = 2;
+        $message  = 'message-to-log';
+        $extra    = array(
+            'file'  => 'test.php',
+            'line'  => 1,
+            'trace' => array(
+                array(
+                    'function' => 'Bar',
+                    'class'    => 'Foo',
+                    'type'     => '->',
+                    'args'     => array(
+                        'baz',
+                    ),
+                ),
+            ),
+        );
+        $this->writer->write(array(
+            'priority' => $priority,
+            'message'  => $message,
+            'extra'    => $extra,
+        ));
+
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        foreach ($this->db->calls['execute'][0][0] as $fieldName => $fieldValue) {
+            $this->assertInternalType('string', $fieldName);
+            $this->assertInternalType('string', (string) $fieldValue);
+        }
+    }
+
+    /**
+     * @group 2589
+     */
+    public function testMapEventIntoColumnMustReturnScalarValues()
+    {
+        $event = array(
+            'priority' => 2,
+            'message'  => 'message-to-log',
+            'extra'    => array(
+                'file'  => 'test.php',
+                'line'  => 1,
+                'trace' => array(
+                    array(
+                        'function' => 'Bar',
+                        'class'    => 'Foo',
+                        'type'     => '->',
+                        'args'     => array(
+                            'baz',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $columnMap = array(
+            'priority' => 'new-priority-field',
+            'message'  => 'new-message-field' ,
+            'extra'    => array(
+                'file'  => 'new-file',
+                'line'  => 'new-line',
+                'trace' => 'new-trace',
+        ));
+
+        $method = new ReflectionMethod($this->writer, 'mapEventIntoColumn');
+        $method->setAccessible(true);
+        $data = $method->invoke($this->writer, $event, $columnMap);
+
+        foreach ($data as $field => $value) {
+            $this->assertTrue(is_scalar($value), sprintf(
+                'Value of column "%s" should be scalar, %s given',
+                $field,
+                gettype($value)
+            ));
+        }
+    }
+
+    public function testEventIntoColumnMustReturnScalarValues()
+    {
+        $event = array(
+            'priority' => 2,
+            'message'  => 'message-to-log',
+            'extra'    => array(
+                'file'  => 'test.php',
+                'line'  => 1,
+                'trace' => array(
+                    array(
+                        'function' => 'Bar',
+                        'class'    => 'Foo',
+                        'type'     => '->',
+                        'args'     => array(
+                            'baz',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $method = new ReflectionMethod($this->writer, 'eventIntoColumn');
+        $method->setAccessible(true);
+        $data = $method->invoke($this->writer, $event);
+
+        foreach ($data as $field => $value) {
+            $this->assertTrue(is_scalar($value), sprintf(
+                'Value of column "%s" should be scalar, %s given',
+                $field,
+                gettype($value)
+            ));
+        }
     }
 }

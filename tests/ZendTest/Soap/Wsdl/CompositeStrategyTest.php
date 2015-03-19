@@ -36,8 +36,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $bookStrategy = $strategy->getStrategyOfType('Book');
         $cookieStrategy = $strategy->getStrategyOfType('Cookie');
 
-        $this->assertTrue( $bookStrategy instanceof ArrayOfTypeComplex );
-        $this->assertTrue( $cookieStrategy instanceof ArrayOfTypeSequence );
+        $this->assertTrue($bookStrategy instanceof ArrayOfTypeComplex);
+        $this->assertTrue($cookieStrategy instanceof ArrayOfTypeSequence);
     }
 
     public function testConstructorTypeMapSyntax()
@@ -51,8 +51,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $bookStrategy = $strategy->getStrategyOfType('Book');
         $cookieStrategy = $strategy->getStrategyOfType('Cookie');
 
-        $this->assertTrue( $bookStrategy instanceof ArrayOfTypeComplex );
-        $this->assertTrue( $cookieStrategy instanceof ArrayOfTypeSequence );
+        $this->assertTrue($bookStrategy instanceof ArrayOfTypeComplex);
+        $this->assertTrue($cookieStrategy instanceof ArrayOfTypeSequence);
     }
 
     public function testCompositeThrowsExceptionOnInvalidType()

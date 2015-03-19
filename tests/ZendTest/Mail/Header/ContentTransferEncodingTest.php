@@ -16,17 +16,41 @@ use Zend\Mail\Header\ContentTransferEncoding;
  */
 class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
 {
-    public function testContentTransferEncodingFromStringCreatesValidContentTransferEncodingHeader()
+    public function dataValidEncodings()
     {
-        $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: 7bit');
+        return array(
+            array('7bit'),
+            array('8bit'),
+            array('binary'),
+            array('quoted-printable'),
+        );
+    }
+
+    public function dataInvalidEncodings()
+    {
+        return array(
+            array('9bit'),
+            array('x-something'),
+        );
+    }
+
+    /**
+     * @dataProvider dataValidEncodings
+     */
+    public function testContentTransferEncodingFromStringCreatesValidContentTransferEncodingHeader($encoding)
+    {
+        $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: '.$encoding);
         $this->assertInstanceOf('Zend\Mail\Header\HeaderInterface', $contentTransferEncodingHeader);
         $this->assertInstanceOf('Zend\Mail\Header\ContentTransferEncoding', $contentTransferEncodingHeader);
     }
 
-    public function testContentTransferEncodingFromStringCreateExcaption()
+    /**
+     * @dataProvider dataInvalidEncodings
+     */
+    public function testContentTransferEncodingFromStringCreateExcaption($encoding)
     {
         $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
-        $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: 9bit');
+        $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: '.$encoding);
     }
 
     public function testContentTransferEncodingGetFieldNameReturnsHeaderName()
@@ -35,25 +59,34 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Content-Transfer-Encoding', $contentTransferEncodingHeader->getFieldName());
     }
 
-    public function testContentTransferEncodingGetFieldValueReturnsProperValue()
+    /**
+     * @dataProvider dataValidEncodings
+     */
+    public function testContentTransferEncodingGetFieldValueReturnsProperValue($encoding)
     {
         $contentTransferEncodingHeader = new ContentTransferEncoding();
-        $contentTransferEncodingHeader->setTransferEncoding('7bit');
-        $this->assertEquals('7bit', $contentTransferEncodingHeader->getFieldValue());
+        $contentTransferEncodingHeader->setTransferEncoding($encoding);
+        $this->assertEquals($encoding, $contentTransferEncodingHeader->getFieldValue());
     }
 
-    public function testContentTransferEncodingHandlesCaseInsensitivity()
+    /**
+     * @dataProvider dataValidEncodings
+     */
+    public function testContentTransferEncodingHandlesCaseInsensitivity($encoding)
     {
-        $encoding = new ContentTransferEncoding();
-        $encoding->setTransferEncoding('quOtED-printAble');
-        $this->assertEquals('quoted-printable', strtolower($encoding->getFieldValue()));
+        $header = new ContentTransferEncoding();
+        $header->setTransferEncoding(strtoupper(substr($encoding, 0, 4)).substr($encoding, 4));
+        $this->assertEquals(strtolower($encoding), strtolower($header->getFieldValue()));
     }
 
-    public function testContentTransferEncodingToStringReturnsHeaderFormattedString()
+    /**
+     * @dataProvider dataValidEncodings
+     */
+    public function testContentTransferEncodingToStringReturnsHeaderFormattedString($encoding)
     {
         $contentTransferEncodingHeader = new ContentTransferEncoding();
-        $contentTransferEncodingHeader->setTransferEncoding('8bit');
-        $this->assertEquals("Content-Transfer-Encoding: 8bit", $contentTransferEncodingHeader->toString());
+        $contentTransferEncodingHeader->setTransferEncoding($encoding);
+        $this->assertEquals("Content-Transfer-Encoding: ".$encoding, $contentTransferEncodingHeader->toString());
     }
 
     public function testProvidingParametersIntroducesHeaderFolding()

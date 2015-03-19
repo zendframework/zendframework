@@ -253,15 +253,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testAddOwner()
     {
         $feed = new Writer\Feed;
-        $feed->addItunesOwner(array('name'=>'joe','email'=>'joe@example.com'));
-        $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
+        $feed->addItunesOwner(array('name'=>'joe', 'email'=>'joe@example.com'));
+        $this->assertEquals(array(array('name'=>'joe', 'email'=>'joe@example.com')), $feed->getItunesOwners());
     }
 
     public function testAddOwners()
     {
         $feed = new Writer\Feed;
-        $feed->addItunesOwners(array(array('name'=>'joe','email'=>'joe@example.com')));
-        $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
+        $feed->addItunesOwners(array(array('name'=>'joe', 'email'=>'joe@example.com')));
+        $this->assertEquals(array(array('name'=>'joe', 'email'=>'joe@example.com')), $feed->getItunesOwners());
     }
 
     public function testSetSubtitle()
@@ -293,6 +293,6 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetSummaryThrowsExceptionWhenValueExceeds4000Chars()
     {
         $feed = new Writer\Feed;
-        $feed->setItunesSummary(str_repeat('a',4001));
+        $feed->setItunesSummary(str_repeat('a', 4001));
     }
 }

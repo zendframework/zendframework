@@ -14,17 +14,21 @@ namespace Zend\Http;
  */
 class ClientStatic
 {
+    /**
+     * @var Client
+     */
     protected static $client;
 
     /**
      * Get the static HTTP client
      *
+     * @param array|Traversable $options
      * @return Client
      */
-    protected static function getStaticClient()
+    protected static function getStaticClient($options = null)
     {
-        if (!isset(static::$client)) {
-            static::$client = new Client();
+        if (!isset(static::$client) || $options !== null) {
+            static::$client = new Client(null, $options);
         }
         return static::$client;
     }
@@ -36,9 +40,10 @@ class ClientStatic
      * @param  array $query
      * @param  array $headers
      * @param  mixed $body
+     * @param  array|Traversable $clientOptions
      * @return Response|bool
      */
-    public static function get($url, $query = array(), $headers = array(), $body = null)
+    public static function get($url, $query = array(), $headers = array(), $body = null, $clientOptions = null)
     {
         if (empty($url)) {
             return false;
@@ -60,7 +65,7 @@ class ClientStatic
             $request->setContent($body);
         }
 
-        return static::getStaticClient()->send($request);
+        return static::getStaticClient($clientOptions)->send($request);
     }
 
     /**
@@ -70,10 +75,11 @@ class ClientStatic
      * @param  array $params
      * @param  array $headers
      * @param  mixed $body
+     * @param  array|Traversable $clientOptions
      * @throws Exception\InvalidArgumentException
      * @return Response|bool
      */
-    public static function post($url, $params, $headers = array(), $body = null)
+    public static function post($url, $params, $headers = array(), $body = null, $clientOptions = null)
     {
         if (empty($url)) {
             return false;
@@ -90,7 +96,7 @@ class ClientStatic
         }
 
         if (!isset($headers['Content-Type'])) {
-            $headers['Content-Type']= Client::ENC_URLENCODED;
+            $headers['Content-Type'] = Client::ENC_URLENCODED;
         }
 
         if (!empty($headers) && is_array($headers)) {
@@ -101,6 +107,6 @@ class ClientStatic
             $request->setContent($body);
         }
 
-        return static::getStaticClient()->send($request);
+        return static::getStaticClient($clientOptions)->send($request);
     }
 }

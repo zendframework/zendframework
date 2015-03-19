@@ -65,7 +65,7 @@ class Xml implements ReaderInterface
         $this->directory = dirname($filename);
 
         set_error_handler(
-            function ($error, $message = '', $file = '', $line = 0) use ($filename) {
+            function ($error, $message = '') use ($filename) {
                 throw new Exception\RuntimeException(
                     sprintf('Error reading XML file "%s": %s', $filename, $message),
                     $error
@@ -100,7 +100,7 @@ class Xml implements ReaderInterface
         $this->directory = null;
 
         set_error_handler(
-            function ($error, $message = '', $file = '', $line = 0) {
+            function ($error, $message = '') {
                 throw new Exception\RuntimeException(
                     sprintf('Error reading XML string: %s', $message),
                     $error
@@ -155,7 +155,7 @@ class Xml implements ReaderInterface
                         $child = array('_' => $child);
                     }
 
-                    if (! is_array($child) ) {
+                    if (! is_array($child)) {
                         $child = array();
                     }
 

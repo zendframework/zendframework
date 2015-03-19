@@ -202,7 +202,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param mixed $parameters
+     * @param null|array|ParameterContainer $parameters
      * @throws Exception\InvalidQueryException
      * @return Result
      */

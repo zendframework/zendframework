@@ -80,6 +80,40 @@ class AddressList implements Countable, Iterator
     }
 
     /**
+     * Add an address to the list from any valid string format, such as
+     *  - "ZF Dev" <dev@zf.com>
+     *  - dev@zf.com
+     *
+     * @param string $address
+     * @throws Exception\InvalidArgumentException
+     * @return AddressList
+     */
+    public function addFromString($address)
+    {
+        if (!preg_match('/^((?P<name>.*?)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
+            throw new Exception\InvalidArgumentException('Invalid address format');
+        }
+
+        $name = null;
+        if (isset($matches['name'])) {
+            $name = trim($matches['name']);
+        }
+        if (empty($name)) {
+            $name = null;
+        }
+
+        if (isset($matches['namedEmail'])) {
+            $email = $matches['namedEmail'];
+        }
+        if (isset($matches['email'])) {
+            $email = $matches['email'];
+        }
+        $email = trim($email);
+
+        return $this->add($email, $name);
+    }
+
+    /**
      * Merge another address list into this one
      *
      * @param  AddressList $addressList

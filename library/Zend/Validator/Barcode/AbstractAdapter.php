@@ -53,10 +53,10 @@ abstract class AbstractAdapter implements AdapterInterface
             $found = true;
         } elseif ($length == 'even') {
             $count = $fixum % 2;
-            $found = ($count == 0) ? true : false;
+            $found = (0 == $count);
         } elseif ($length == 'odd') {
             $count = $fixum % 2;
-            $found = ($count == 1) ? true : false;
+            $found = (1 == $count);
         }
 
         return $found;

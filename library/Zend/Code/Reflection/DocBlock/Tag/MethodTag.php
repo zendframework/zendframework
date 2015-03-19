@@ -80,7 +80,7 @@ class MethodTag implements TagInterface, PhpDocTypedTagInterface
     public function getReturnType()
     {
         if (empty($this->types)) {
-            return null;
+            return;
         }
 
         return $this->types[0];

@@ -88,7 +88,7 @@ class Collection implements Iterator, Countable
             $this->rewind();
             return $this->current();
         }
-        return null;
+        return;
     }
 
     /**
@@ -128,13 +128,13 @@ class Collection implements Iterator, Countable
             if (!array_key_exists($this->current, $this->cache)) {
                 $current = $this->iterator->current();
                 if ($current === null) {
-                    return null;
+                    return;
                 }
                 $this->cache[$this->current] = $this->createEntry($current);
             }
             return $this->cache[$this->current];
         }
-        return null;
+        return;
     }
 
     /**
@@ -161,7 +161,7 @@ class Collection implements Iterator, Countable
             }
             return $this->iterator->key();
         }
-        return null;
+        return;
     }
 
     /**
@@ -178,7 +178,7 @@ class Collection implements Iterator, Countable
             }
             return $this->current;
         }
-        return null;
+        return;
     }
 
     /**

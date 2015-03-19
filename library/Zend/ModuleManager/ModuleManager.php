@@ -225,7 +225,7 @@ class ModuleManager implements ModuleManagerInterface
     public function getModule($moduleName)
     {
         if (!isset($this->loadedModules[$moduleName])) {
-            return null;
+            return;
         }
         return $this->loadedModules[$moduleName];
     }

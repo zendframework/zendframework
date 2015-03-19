@@ -44,6 +44,13 @@ class Mbox extends AbstractStorage
     protected $messageClass = '\Zend\Mail\Storage\Message\File';
 
     /**
+     * end of Line for messages
+     *
+     * @var string|null
+     */
+    protected $messageEOL;
+
+    /**
      * Count messages all messages in current box
      *
      * @return int number of messages
@@ -105,8 +112,18 @@ class Mbox extends AbstractStorage
             || is_subclass_of($this->messageClass, '\Zend\Mail\Storage\Message\File')) {
             // TODO top/body lines
             $messagePos = $this->getPos($id);
-            return new $this->messageClass(array('file' => $this->fh, 'startPos' => $messagePos['start'],
-                                                  'endPos' => $messagePos['end']));
+
+            $messageClassParams = array(
+                'file' => $this->fh,
+                'startPos' => $messagePos['start'],
+                'endPos' => $messagePos['end']
+            );
+
+            if (isset($this->messageEOL)) {
+                $messageClassParams['EOL'] = $this->messageEOL;
+            }
+
+            return new $this->messageClass($messageClassParams);
         }
 
         $bodyLines = 0; // TODO: need a way to change that
@@ -179,6 +196,10 @@ class Mbox extends AbstractStorage
 
         if (!isset($params->filename)) {
             throw new Exception\InvalidArgumentException('no valid filename given in params');
+        }
+
+        if (isset($params->messageEOL)) {
+            $this->messageEOL = (string) $params->messageEOL;
         }
 
         $this->openMboxFile($params->filename);

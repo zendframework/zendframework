@@ -20,7 +20,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Date('foo');
         $this->assertEquals(
-            array(array('%s DATE %s %s', array('foo', 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'DATE'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

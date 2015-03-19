@@ -11,8 +11,8 @@ namespace ZendTest\View\Helper;
 
 use Zend\Console\Console;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Config as ServiceManagerConfig;
-use Zend\View\Helper\Url as UrlHelper;
+use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\Mvc\Service\ServiceListenerFactory;
 
 /**
  * url() helper test -- tests integration with MVC
@@ -54,39 +54,15 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
         );
-        $serviceConfig = array(
-            'invokables' => array(
-                'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
-                'DispatchListener'   => 'Zend\Mvc\DispatchListener',
-                'RouteListener'      => 'Zend\Mvc\RouteListener',
-                'SendResponseListener' => 'Zend\Mvc\SendResponseListener'
-            ),
-            'factories' => array(
-                'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-                'ConsoleViewManager'      => 'Zend\Mvc\Service\ConsoleViewManagerFactory',
-                'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
-                'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-                'Request'                 => 'Zend\Mvc\Service\RequestFactory',
-                'Response'                => 'Zend\Mvc\Service\ResponseFactory',
-                'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-                'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
-                'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
-                'HttpViewManager'         => 'Zend\Mvc\Service\HttpViewManagerFactory',
-                'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
-                'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
-                'ViewResolver'            => 'Zend\Mvc\Service\ViewResolverFactory',
-                'ViewTemplateMapResolver' => 'Zend\Mvc\Service\ViewTemplateMapResolverFactory',
-                'ViewTemplatePathStack'   => 'Zend\Mvc\Service\ViewTemplatePathStackFactory',
-            ),
-            'shared' => array(
-                'EventManager' => false,
-            ),
-        );
-        $serviceConfig = new ServiceManagerConfig($serviceConfig);
 
-        $this->serviceManager = new ServiceManager($serviceConfig);
-        $this->serviceManager->setService('Config', $config);
-        $this->serviceManager->setAlias('Configuration', 'Config');
+        $serviceConfig = $this->readAttribute(new ServiceListenerFactory, 'defaultServiceConfig');
+
+        $this->serviceManager = new ServiceManager(new ServiceManagerConfig($serviceConfig));
+        $this->serviceManager
+            ->setAllowOverride(true)
+            ->setService('Config', $config)
+            ->setAlias('Configuration', 'Config')
+            ->setAllowOverride(false);
     }
 
     public function testUrlHelperWorksUnderNormalHttpParadigms()

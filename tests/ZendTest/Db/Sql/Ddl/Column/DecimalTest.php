@@ -18,9 +18,9 @@ class DecimalTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpressionData()
     {
-        $column = new Decimal('foo', 5, 10);
+        $column = new Decimal('foo', 10, 5);
         $this->assertEquals(
-            array(array('%s DECIMAL(%s) %s %s', array('foo', '5, 10', 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'DECIMAL(10,5)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

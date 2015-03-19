@@ -89,7 +89,7 @@ ECS;
     {
         $config = new Config(array(), true);
         $config->production = array(array('foo'), array('bar'));
-        
+
         $configString = $this->writer->toString($config);
 
         $expected = <<<ECS
@@ -100,7 +100,7 @@ ECS;
 </zend-config>
 
 ECS;
-        
+
         $this->assertEquals($expected, $configString);
     }
 }

@@ -299,7 +299,7 @@ class Windows extends Virtual
 
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                . '[int[]] $mask = ' . join(',', $asciiMask) . ';'
+                . '[int[]] $mask = ' . implode(',', $asciiMask) . ';'
                 . 'do {'
                     . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
                 . '} while ( !($mask -contains $key) );'

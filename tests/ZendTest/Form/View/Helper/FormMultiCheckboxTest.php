@@ -353,21 +353,21 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testGetDisableAttributeReturnTrue()
     {
         $element = new MultiCheckboxElement('foo');
-        $element->setAttribute('disabled', 'true' );
+        $element->setAttribute('disabled', 'true');
         $this->assertSame('true', $element->getAttribute('disabled'));
     }
 
     public function testGetSelectedAttributeReturnTrue()
     {
         $element = new MultiCheckboxElement('foo');
-        $element->setAttribute('selected', 'true' );
+        $element->setAttribute('selected', 'true');
         $this->assertSame('true', $element->getAttribute('selected'));
     }
 
     public function testGetDisableAttributeForGroupReturnTrue()
     {
         $element = new MultiCheckboxElement('foo');
-        $element->setAttribute('disabled', 'true' );
+        $element->setAttribute('disabled', 'true');
         $element->setValueOptions(array(
             array(
                 'label' => 'label1',
@@ -381,7 +381,7 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testGetSelectedAttributeForGroupReturnTrue()
     {
         $element = new MultiCheckboxElement('foo');
-        $element->setAttribute('selected', 'true' );
+        $element->setAttribute('selected', 'true');
         $element->setValueOptions(array(
             array(
                 'label' => 'label1',

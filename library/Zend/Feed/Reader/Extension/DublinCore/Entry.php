@@ -30,7 +30,7 @@ class Entry extends Extension\AbstractEntry
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -131,7 +131,6 @@ class Entry extends Extension\AbstractEntry
             return $this->data['description'];
         }
 
-        $description = null;
         $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
 
         if (!$description) {
@@ -158,7 +157,6 @@ class Entry extends Extension\AbstractEntry
             return $this->data['id'];
         }
 
-        $id = null;
         $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
 
         if (!$id) {
@@ -181,7 +179,6 @@ class Entry extends Extension\AbstractEntry
             return $this->data['title'];
         }
 
-        $title = null;
         $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
 
         if (!$title) {

@@ -140,6 +140,19 @@ class ActionControllerTest extends TestCase
         $this->assertSame($response, $result);
     }
 
+    public function testEventManagerListensOnInterfaceName()
+    {
+        $response = new Response();
+        $response->setContent('short circuited!');
+        $events = new SharedEventManager();
+        $events->attach('ZendTest\\Mvc\\Controller\\TestAsset\\SampleInterface', MvcEvent::EVENT_DISPATCH, function ($e) use ($response) {
+            return $response;
+        }, 10);
+        $this->controller->getEventManager()->setSharedManager($events);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertSame($response, $result);
+    }
+
     public function testDispatchInjectsEventIntoController()
     {
         $this->controller->dispatch($this->request, $this->response);

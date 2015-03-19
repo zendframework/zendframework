@@ -18,29 +18,38 @@ use Zend\Db\ResultSet\ResultSetInterface;
 
 class DbSelect implements AdapterInterface
 {
+    const ROW_COUNT_COLUMN_NAME = 'C';
+
     /**
      * @var Sql
      */
-    protected $sql = null;
+    protected $sql;
 
     /**
      * Database query
      *
      * @var Select
      */
-    protected $select = null;
+    protected $select;
+
+    /**
+     * Database count query
+     *
+     * @var Select|null
+     */
+    protected $countSelect;
 
     /**
      * @var ResultSet
      */
-    protected $resultSetPrototype = null;
+    protected $resultSetPrototype;
 
     /**
      * Total item count
      *
      * @var int
      */
-    protected $rowCount = null;
+    protected $rowCount;
 
     /**
      * Constructor.
@@ -48,11 +57,18 @@ class DbSelect implements AdapterInterface
      * @param Select $select The select query
      * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
      * @param null|ResultSetInterface $resultSetPrototype
+     * @param null|Select $countSelect
+     *
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(Select $select, $adapterOrSqlObject, ResultSetInterface $resultSetPrototype = null)
-    {
+    public function __construct(
+        Select $select,
+        $adapterOrSqlObject,
+        ResultSetInterface $resultSetPrototype = null,
+        Select $countSelect = null
+    ) {
         $this->select = $select;
+        $this->countSelect = $countSelect;
 
         if ($adapterOrSqlObject instanceof Adapter) {
             $adapterOrSqlObject = new Sql($adapterOrSqlObject);
@@ -87,7 +103,7 @@ class DbSelect implements AdapterInterface
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
 
-        return $resultSet;
+        return iterator_to_array($resultSet);
     }
 
     /**
@@ -101,21 +117,38 @@ class DbSelect implements AdapterInterface
             return $this->rowCount;
         }
 
+        $select = $this->getSelectCount();
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        $row       = $result->current();
+
+        $this->rowCount = (int) $row[self::ROW_COUNT_COLUMN_NAME];
+
+        return $this->rowCount;
+    }
+
+    /**
+     * Returns select query for count
+     *
+     * @return Select
+     */
+    protected function getSelectCount()
+    {
+        if ($this->countSelect) {
+            return $this->countSelect;
+        }
+
         $select = clone $this->select;
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
         $select->reset(Select::ORDER);
 
         $countSelect = new Select;
-        $countSelect->columns(array('c' => new Expression('COUNT(1)')));
+
+        $countSelect->columns(array(self::ROW_COUNT_COLUMN_NAME => new Expression('COUNT(1)')));
         $countSelect->from(array('original_select' => $select));
 
-        $statement = $this->sql->prepareStatementForSqlObject($countSelect);
-        $result    = $statement->execute();
-        $row       = $result->current();
-
-        $this->rowCount = $row['c'];
-
-        return $this->rowCount;
+        return $countSelect;
     }
 }

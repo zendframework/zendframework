@@ -18,7 +18,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     /**
      * @var CreateTable
      */
-    protected $createTable;
+    protected $subject;
 
     /**
      * @param CreateTable $subject
@@ -26,21 +26,8 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     public function setSubject($subject)
     {
-        $this->createTable = $subject;
+        $this->subject = $subject;
         return $this;
-    }
-
-    /**
-     * @param  null|PlatformInterface $platform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $platform = null)
-    {
-        // localize variables
-        foreach (get_object_vars($this->createTable) as $name => $value) {
-            $this->{$name} = $value;
-        }
-        return parent::getSqlString($platform);
     }
 
     /**
@@ -49,13 +36,10 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
-        $ret = array('');
-        if ($this->isTemporary) {
-            $table = '#';
-        } else {
-            $table = '';
-        }
-        $ret[] = $adapterPlatform->quoteIdentifier($table . ltrim($this->table, '#'));
-        return $ret;
+        $table = ($this->isTemporary ? '#' : '') . ltrim($this->table, '#');
+        return array(
+            '',
+            $adapterPlatform->quoteIdentifier($table),
+        );
     }
 }

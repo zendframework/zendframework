@@ -44,6 +44,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAllowEmptyAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAttributesAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleComposedObjectAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleContinueIfEmptyAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleErrorMessageAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
@@ -97,7 +98,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $elementSpec = $e->getParam('elementSpec');
         if (isset($elementSpec['spec']['attributes'])) {
-            $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+            $elementSpec['spec']['attributes'] = array_merge(
+                $elementSpec['spec']['attributes'],
+                $annotation->getAttributes()
+            );
             return;
         }
 
@@ -123,7 +127,6 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $name        = $e->getParam('name');
         $elementSpec = $e->getParam('elementSpec');
-        $filterSpec  = $e->getParam('filterSpec');
 
         if ($annotation->isCollection()) {
             // Compose specification as a fieldset into parent form/fieldset
@@ -163,11 +166,35 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
                 $specification['type'] = 'Zend\Form\Fieldset';
             }
 
+            if (isset($elementSpec['spec']['options'])) {
+                $specification['options'] = isset($specification['options']) ? $specification['options'] : array();
+                $specification['options'] = array_merge($elementSpec['spec']['options'], $specification['options']);
+            }
+
             // Add element spec:
             $elementSpec['spec'] = $specification;
             $elementSpec['spec']['name'] = $name;
             $elementSpec['spec']['options'] = new ArrayObject($this->mergeOptions($elementSpec, $annotation));
         }
+    }
+
+    /**
+     * Handle the ContinueIfEmpty annotation
+     *
+     * Sets the continue_if_empty flag on the input specification array.
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleContinueIfEmptyAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof ContinueIfEmpty) {
+            return;
+        }
+
+        $inputSpec = $e->getParam('inputSpec');
+        $inputSpec['continue_if_empty'] = true;
     }
 
     /**

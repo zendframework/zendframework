@@ -94,4 +94,21 @@ class FormMonthSelectTest extends CommonTestCase
         $this->helper->render($element);
         $this->assertEquals(12, count($element->getMonthElement()->getValueOptions()));
     }
+
+    /**
+     * @group 6656
+     */
+    public function testGetElements()
+    {
+        $element = new MonthSelect('foo');
+        $this->helper->render($element);
+        $elements = $element->getElements();
+        $this->assertEquals(2, count($elements));
+
+        foreach ($elements as $subElement) {
+            $this->assertInstanceOf('Zend\Form\Element\Select', $subElement);
+        }
+
+        $this->assertEquals(12, count($elements[0]->getValueOptions()));
+    }
 }

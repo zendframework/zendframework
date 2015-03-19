@@ -266,14 +266,12 @@ abstract class AbstractWriter implements WriterInterface
         } catch (\Exception $e) {
             if ($errorHandlerStarted) {
                 ErrorHandler::stop();
-                $errorHandlerStarted = false;
             }
             throw $e;
         }
 
         if ($errorHandlerStarted) {
             $error = ErrorHandler::stop();
-            $errorHandlerStarted = false;
             if ($error) {
                 throw new Exception\RuntimeException("Unable to write", 0, $error);
             }

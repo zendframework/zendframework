@@ -713,7 +713,7 @@ class Wsdl
             return $this->classMap[$type];
         }
 
-        $type = trim($type,'\\');
+        $type = trim($type, '\\');
 
         // remove namespace,
         $pos = strrpos($type, '\\');
@@ -795,11 +795,9 @@ class Wsdl
             case 'soapaction':
             case 'location':
                 return $this->sanitizeUri($value);
-                break;
 
             default:
                 return $value;
-                break;
         }
     }
 

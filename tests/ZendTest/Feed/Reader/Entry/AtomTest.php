@@ -218,7 +218,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'), $entry->getAuthor());
     }
 
     public function testGetsAuthorFromAtom10()
@@ -227,7 +227,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'), $entry->getAuthor());
     }
 
     /**
@@ -451,7 +451,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
-        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+        $this->assertEquals(array('topic1', 'Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
 
     public function testGetsCategoriesFromAtom03_Atom10Extension()
@@ -461,7 +461,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
-        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+        $this->assertEquals(array('topic1', 'Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
 
     // DC 1.0/1.1 for Atom 0.3
@@ -473,7 +473,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $this->assertEquals($this->expectedCatsDc, (array) $entry->getCategories());
-        $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+        $this->assertEquals(array('topic1', 'topic2'), array_values($entry->getCategories()->getValues()));
     }
 
     public function testGetsCategoriesFromAtom03_Dc11()
@@ -483,7 +483,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $this->assertEquals($this->expectedCatsDc, (array) $entry->getCategories());
-        $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+        $this->assertEquals(array('topic1', 'topic2'), array_values($entry->getCategories()->getValues()));
     }
 
     // No Categories In Entry

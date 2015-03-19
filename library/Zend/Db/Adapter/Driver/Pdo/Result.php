@@ -26,7 +26,12 @@ class Result implements Iterator, ResultInterface
     protected $statementMode = self::STATEMENT_MODE_FORWARD;
 
     /**
-     * @var \PDOStatement
+     * @var int
+     */
+    protected $fetchMode = \PDO::FETCH_ASSOC;
+
+    /**
+     * @var PDOStatement
      */
     protected $resource = null;
 
@@ -85,7 +90,7 @@ class Result implements Iterator, ResultInterface
      */
     public function buffer()
     {
-        return null;
+        return;
     }
 
     /**
@@ -94,6 +99,29 @@ class Result implements Iterator, ResultInterface
     public function isBuffered()
     {
         return false;
+    }
+
+    /**
+     * @param int $fetchMode
+     * @throws Exception\InvalidArgumentException on invalid fetch mode
+     */
+    public function setFetchMode($fetchMode)
+    {
+        if ($fetchMode < 1 || $fetchMode > 10) {
+            throw new Exception\InvalidArgumentException(
+                'The fetch mode must be one of the PDO::FETCH_* constants.'
+            );
+        }
+
+        $this->fetchMode = (int) $fetchMode;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFetchMode()
+    {
+        return $this->fetchMode;
     }
 
     /**
@@ -116,7 +144,7 @@ class Result implements Iterator, ResultInterface
             return $this->currentData;
         }
 
-        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch($this->fetchMode);
         $this->currentComplete = true;
         return $this->currentData;
     }
@@ -128,7 +156,7 @@ class Result implements Iterator, ResultInterface
      */
     public function next()
     {
-        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch($this->fetchMode);
         $this->currentComplete = true;
         $this->position++;
         return $this->currentData;
@@ -155,7 +183,7 @@ class Result implements Iterator, ResultInterface
                 'This result is a forward only result set, calling rewind() after moving forward is not supported'
             );
         }
-        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch($this->fetchMode);
         $this->currentComplete = true;
         $this->position = 0;
     }

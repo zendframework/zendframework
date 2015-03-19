@@ -22,5 +22,4 @@ class CtorlessPdo extends \Pdo
     {
         return $this->mockStatement;
     }
-
 }

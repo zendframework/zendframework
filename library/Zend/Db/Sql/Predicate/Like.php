@@ -9,7 +9,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class Like implements PredicateInterface
+use Zend\Db\Sql\AbstractExpression;
+
+class Like extends AbstractExpression implements PredicateInterface
 {
     /**
      * @var string
@@ -99,8 +101,14 @@ class Like implements PredicateInterface
      */
     public function getExpressionData()
     {
+        list($values[], $types[]) = $this->normalizeArgument($this->identifier, self::TYPE_IDENTIFIER);
+        list($values[], $types[]) = $this->normalizeArgument($this->like, self::TYPE_VALUE);
         return array(
-            array($this->specification, array($this->identifier, $this->like), array(self::TYPE_IDENTIFIER, self::TYPE_VALUE))
+            array(
+                $this->specification,
+                $values,
+                $types,
+            )
         );
     }
 }

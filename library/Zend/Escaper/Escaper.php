@@ -9,7 +9,6 @@
 
 namespace Zend\Escaper;
 
-
 /**
  * Context specific methods for use in secure output escaping
  */
@@ -321,9 +320,9 @@ class Escaper
         }
 
         if (!$this->isUtf8($result)) {
-            throw new Exception\RuntimeException(sprintf(
-                'String to be escaped was not valid UTF-8 or could not be converted: %s', $result
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('String to be escaped was not valid UTF-8 or could not be converted: %s', $result)
+            );
         }
 
         return $result;

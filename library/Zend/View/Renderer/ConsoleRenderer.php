@@ -52,7 +52,7 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
      *
      * Returns the object instance, as it is its own template engine
      *
-     * @return PhpRenderer
+     * @return ConsoleRenderer
      */
     public function getEngine()
     {

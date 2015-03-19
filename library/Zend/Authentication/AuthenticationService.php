@@ -144,7 +144,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         $storage = $this->getStorage();
 
         if ($storage->isEmpty()) {
-            return null;
+            return;
         }
 
         return $storage->read();

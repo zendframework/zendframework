@@ -1400,7 +1400,7 @@ class FormTest extends TestCase
     public function testResetPasswordValueIfFormIsNotValid()
     {
         $this->form->add(array(
-            'type' => 'Zend\Form\Element\Password' ,
+            'type' => 'Zend\Form\Element\Password',
             'name' => 'password'
         ));
 
@@ -1549,6 +1549,7 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->has('file_resource'));
         $this->assertNotEquals($form, $this->form);
 
+        $form->add($file)->remove('file_resource');
         $this->form->remove('file_resource');
         $this->assertEquals($form, $this->form);
     }

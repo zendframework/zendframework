@@ -58,7 +58,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain(array('identifier')));
-        $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema','identifier')));
+        $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema', 'identifier')));
     }
 
     /**
@@ -72,13 +72,24 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Adapter\Platform\Sql92::quoteValue
      */
-    public function testQuoteValue()
+    public function testQuoteValueRaisesNoticeWithoutPlatformSupport()
     {
         $this->setExpectedException(
-            'PHPUnit_Framework_Error',
+            'PHPUnit_Framework_Error_Notice',
             'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
         );
-        $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+        $this->platform->quoteValue('value');
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\Sql92::quoteValue
+     */
+    public function testQuoteValue()
+    {
+        $this->assertEquals("'value'", @$this->platform->quoteValue('value'));
+        $this->assertEquals("'Foo O\\'Bar'", @$this->platform->quoteValue("Foo O'Bar"));
+        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', @$this->platform->quoteValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", @$this->platform->quoteValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -129,6 +140,12 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '("foo"."bar" = "boo"."baz") AND ("foo"."baz" = "boo"."baz")',
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and'))
+        );
+
+        // case insensitive safe words in field
+        $this->assertEquals(
+            '("foo"."bar" = "boo".baz) AND ("foo".baz = "boo".baz)',
+            $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and', 'bAz'))
         );
     }
 }

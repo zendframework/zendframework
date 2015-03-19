@@ -40,7 +40,7 @@ class FilePostRedirectGetTest extends TestCase
     {
         $this->form = new Form();
 
-        $this->collection = new Collection('links',array(
+        $this->collection = new Collection('links', array(
                 'count' => 1,
                 'allow_add' => true,
                 'target_element' => array(
@@ -270,7 +270,7 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
+        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri(), 'redirect to the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 
@@ -311,7 +311,7 @@ class FilePostRedirectGetTest extends TestCase
         // GET
         $this->request = new Request();
         $form = new Form();
-        $collection = new Collection('links',array(
+        $collection = new Collection('links', array(
             'count' => 1,
             'allow_add' => true,
             'target_element' => array(
@@ -320,11 +320,11 @@ class FilePostRedirectGetTest extends TestCase
         ));
         $form->add($collection);
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult = $this->controller->fileprg( $form);
+        $prgResult = $this->controller->fileprg($form);
 
         $this->assertEquals($params, $prgResult);
         $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
-        $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
+        $this->assertCount(count($form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
     }
 
     public function testCollectionInputFilterIsInitializedBeforePluginRetrievesIt()
@@ -343,10 +343,10 @@ class FilePostRedirectGetTest extends TestCase
 
         $postData = array(
             'test_collection' => array(
-                array (
+                array(
                     'test_field' => 'foo'
                 ),
-                array (
+                array(
                     'test_field' => 'bar'
                 )
             )
@@ -443,7 +443,7 @@ class FilePostRedirectGetTest extends TestCase
                         'name' => 'test.jpg',
                         'type' => 'image/jpeg',
                         'size' => 20480,
-                        'tmp_name' => __DIR__ . '/TestAsset/testfile.jpg',
+                        'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'testfile.jpg',
                         'error' => 0
                     ),
                 ),

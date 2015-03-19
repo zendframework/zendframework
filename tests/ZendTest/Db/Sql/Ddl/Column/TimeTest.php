@@ -20,7 +20,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Time('foo');
         $this->assertEquals(
-            array(array('%s TIME %s %s', array('foo', 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'TIME'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

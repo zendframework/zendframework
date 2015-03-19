@@ -507,7 +507,6 @@ class Uri implements UriInterface
         return $this;
     }
 
-
     /**
      * Convert the link to a relative link by substracting a base URI
      *
@@ -1073,7 +1072,7 @@ class Uri implements UriInterface
             return $match[1];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -1265,7 +1264,7 @@ class Uri implements UriInterface
             && isset(static::$defaultPorts[$scheme])
             && ($port == static::$defaultPorts[$scheme])
         ) {
-            return null;
+            return;
         }
 
         return $port;

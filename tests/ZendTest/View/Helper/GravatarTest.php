@@ -40,7 +40,7 @@ class GravatarTest extends TestCase
         $this->helper->setView($this->view);
 
         if (isset($_SERVER['HTTPS'])) {
-            unset ($_SERVER['HTTPS']);
+            unset($_SERVER['HTTPS']);
         }
     }
 

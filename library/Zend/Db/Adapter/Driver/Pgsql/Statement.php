@@ -168,7 +168,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
         $pCount = 1;
         $sql = preg_replace_callback(
-            '#\$\##', function ($foo) use (&$pCount) {
+            '#\$\##', function () use (&$pCount) {
                 return '$' . $pCount++;
             },
             $sql
@@ -192,7 +192,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param  ParameterContainer|null $parameters
+     * @param null|array|ParameterContainer $parameters
      * @throws Exception\InvalidQueryException
      * @return Result
      */

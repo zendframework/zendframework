@@ -18,14 +18,14 @@ use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
-
+use ZendTest\Http\TestAsset\ExtendedClient;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfCookiesAreSticky()
     {
         $initialCookies = array(
-            new SetCookie('foo', 'far', null, '/', 'www.domain.com' ),
+            new SetCookie('foo', 'far', null, '/', 'www.domain.com'),
             new SetCookie('bar', 'biz', null, '/', 'www.domain.com')
         );
 
@@ -43,7 +43,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $cookies->addCookiesFromResponse($client->getResponse(), $client->getUri());
 
-        $client->addCookie( $cookies->getMatchingCookies($client->getUri()) );
+        $client->addCookie($cookies->getMatchingCookies($client->getUri()));
 
         $this->assertEquals(4, count($client->getCookies()));
     }
@@ -358,21 +358,64 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $prepareHeadersReflection->setAccessible(true);
 
         $request= new Request();
-        $request->getHeaders()->addHeaderLine('content-type','application/json');
-        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $request->getHeaders()->addHeaderLine('content-type', 'application/json');
+        $request->getHeaders()->addHeaderLine('content-length', strlen($body));
         $client->setRequest($request);
 
         $client->setEncType('application/json');
 
-        $this->assertSame($client->getRequest(),$request);
+        $this->assertSame($client->getRequest(), $request);
 
-        $headers = $prepareHeadersReflection->invoke($client,$body,new Http('http://localhost:5984'));
+        $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
 
         $this->assertArrayNotHasKey('content-type', $headers);
         $this->assertArrayHasKey('Content-Type', $headers);
 
         $this->assertArrayNotHasKey('content-length', $headers);
         $this->assertArrayHasKey('Content-Length', $headers);
+    }
+
+    public function testPrepareHeadersCurlDigestAuthentication()
+    {
+        $body = json_encode(array('foofoo'=>'barbar'));
+
+        $client = new Client();
+        $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
+        $prepareHeadersReflection->setAccessible(true);
+
+        $request = new Request();
+        $request->getHeaders()->addHeaderLine('Authorization: Digest');
+        $request->getHeaders()->addHeaderLine('content-type', 'application/json');
+        $request->getHeaders()->addHeaderLine('content-length', strlen($body));
+        $client->setRequest($request);
+
+        $this->assertSame($client->getRequest(), $request);
+
+        $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
+
+        $this->assertInternalType('array', $headers);
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertContains('Digest', $headers['Authorization']);
+    }
+
+    /**
+     * @group 6301
+     */
+    public function testCanSpecifyCustomAuthMethodsInExtendingClasses()
+    {
+        $client = new ExtendedClient();
+
+        $client->setAuth('username', 'password', ExtendedClient::AUTH_CUSTOM);
+
+        $this->assertAttributeEquals(
+            array(
+                'user'     => 'username',
+                'password' => 'password',
+                'type'     => ExtendedClient::AUTH_CUSTOM,
+            ),
+            'auth',
+            $client
+        );
     }
 
     /**

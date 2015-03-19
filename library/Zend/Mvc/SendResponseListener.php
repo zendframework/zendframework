@@ -9,10 +9,10 @@
 
 namespace Zend\Mvc;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\ResponseSender\ConsoleResponseSender;
 use Zend\Mvc\ResponseSender\HttpResponseSender;
 use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
@@ -20,15 +20,9 @@ use Zend\Mvc\ResponseSender\SendResponseEvent;
 use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 use Zend\Stdlib\ResponseInterface as Response;
 
-class SendResponseListener implements
-    EventManagerAwareInterface,
-    ListenerAggregateInterface
+class SendResponseListener extends AbstractListenerAggregate implements
+    EventManagerAwareInterface
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * @var SendResponseEvent
      */
@@ -80,21 +74,6 @@ class SendResponseListener implements
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**

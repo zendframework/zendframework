@@ -98,22 +98,16 @@ class InjectionMethod
                 case "require":
                 case "required":
                     return Di::METHOD_IS_REQUIRED;
-                    break;
                 case "aware":
                     return Di::METHOD_IS_AWARE;
-                    break;
                 case "optional":
                     return Di::METHOD_IS_OPTIONAL;
-                    break;
                 case "constructor":
                     return Di::METHOD_IS_CONSTRUCTOR;
-                    break;
                 case "instantiator":
                     return Di::METHOD_IS_INSTANTIATOR;
-                    break;
                 case "eager":
                     return Di::METHOD_IS_EAGER;
-                    break;
             }
         }
         return 0;

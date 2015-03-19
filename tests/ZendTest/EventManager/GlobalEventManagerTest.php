@@ -40,7 +40,7 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testProxiesAllStaticOperationsToEventCollectionInstance()
     {
-        $test    = new \stdClass();
+        $test     = new \stdClass();
         $listener = GlobalEventManager::attach('foo.bar', function ($e) use ($test) {
             $test->event  = $e->getName();
             $test->target = $e->getTarget();
@@ -54,9 +54,10 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo.bar', $test->event);
         $this->assertEquals(array('foo' => 'bar'), $test->params);
 
-        $results = GlobalEventManager::triggerUntil('foo.bar', $this, array('baz' => 'bat'), function ($r) {
+        $results = GlobalEventManager::trigger('foo.bar', $this, array('baz' => 'bat'), function ($r) {
             return is_array($r);
         });
+
         $this->assertTrue($results->stopped());
         $this->assertEquals(array('baz' => 'bat'), $test->params);
         $this->assertEquals(array('baz' => 'bat'), $results->last());
@@ -82,5 +83,18 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
         GlobalEventManager::clearListeners('foo.bar');
         $events = GlobalEventManager::getEvents();
         $this->assertEquals(array(), $events);
+    }
+
+    public function testTriggerUntilDeprecated()
+    {
+        $deprecated = null;
+        set_error_handler(function () use (&$deprecated) {
+            $deprecated = true;
+        }, E_USER_DEPRECATED);
+
+        GlobalEventManager::triggerUntil('foo.bar', $this, array('foo' => 'bar'), function () {});
+        restore_error_handler();
+
+        $this->assertTrue($deprecated, 'GlobalEventManager::triggerUntil not marked as E_USER_DEPRECATED');
     }
 }

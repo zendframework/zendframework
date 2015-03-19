@@ -22,7 +22,6 @@ class ArrayValue extends AbstractCollection
         parent::__construct($value);
     }
 
-
     /**
      * Generate the XML code that represent an array native MXL-RPC value
      *

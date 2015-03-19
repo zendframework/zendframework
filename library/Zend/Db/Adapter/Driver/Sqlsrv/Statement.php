@@ -231,7 +231,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param  array|ParameterContainer $parameters
+     * @param null|array|ParameterContainer $parameters
      * @throws Exception\RuntimeException
      * @return Result
      */

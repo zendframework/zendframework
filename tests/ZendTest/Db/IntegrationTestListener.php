@@ -10,7 +10,6 @@
 namespace ZendTest\Db;
 
 use Exception;
-
 use PHPUnit_Framework_AssertionFailedError;
 use PHPUnit_Framework_Test;
 use PHPUnit_Framework_TestListener;

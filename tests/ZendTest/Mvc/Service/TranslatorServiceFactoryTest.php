@@ -21,6 +21,10 @@ class TranslatorServiceFactoryTest extends TestCase
     {
         $this->factory = new TranslatorServiceFactory();
         $this->services = new ServiceManager();
+        $this->services->setService(
+            'TranslatorPluginManager',
+            $this->getMock('Zend\I18n\Translator\LoaderPluginManager')
+        );
     }
 
     public function testReturnsMvcTranslatorWithTranslatorInterfaceServiceComposedWhenPresent()
@@ -69,6 +73,53 @@ class TranslatorServiceFactoryTest extends TestCase
         return array(
             'translator' => $translator->getTranslator(),
             'services'   => $this->services,
+        );
+    }
+
+    /**
+     * In this test, we check to make sure that the TranslatorServiceFactory
+     * correctly passes the LoaderPluginManager from the service locator into
+     * the new Translator. This functionality is required so modules can add
+     * their own translation loaders via config.
+     *
+     * @group 6244
+     */
+    public function testSetsPluginManagerFromServiceLocatorBasedOnConfiguration()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
+        //minimum bootstrap
+        $applicationConfig = array(
+            'module_listener_options' => array(),
+            'modules' => array(),
+        );
+        $serviceLocator = new ServiceManager(new ServiceManagerConfig());
+        $serviceLocator->setService('ApplicationConfig', $applicationConfig);
+        $serviceLocator->get('ModuleManager')->loadModules();
+        $serviceLocator->get('Application')->bootstrap();
+
+        //enable to re-write Config
+        $ref = new \ReflectionObject($serviceLocator);
+        $prop = $ref->getProperty('allowOverride');
+        $prop->setAccessible(true);
+        $prop->setValue($serviceLocator, true);
+
+        $config = array(
+            'di' => array(),
+            'translator' => array(
+                'locale' => 'en_US',
+            ),
+        );
+
+        $serviceLocator->setService('Config', $config);
+
+        $translator = $this->factory->createService($serviceLocator);
+
+        $this->assertEquals(
+            $serviceLocator->get('TranslatorPluginManager'),
+            $translator->getPluginManager()
         );
     }
 

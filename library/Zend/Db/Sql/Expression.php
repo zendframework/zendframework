@@ -9,7 +9,7 @@
 
 namespace Zend\Db\Sql;
 
-class Expression implements ExpressionInterface
+class Expression extends AbstractExpression
 {
     /**
      * @const
@@ -34,18 +34,30 @@ class Expression implements ExpressionInterface
     /**
      * @param string $expression
      * @param string|array $parameters
-     * @param array $types
+     * @param array $types @deprecated will be dropped in version 3.0.0
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {
-        if ($expression) {
+        if ($expression !== '') {
             $this->setExpression($expression);
         }
+
+        if ($types) { // should be deprecated and removed version 3.0.0
+            if (is_array($parameters)) {
+                foreach ($parameters as $i=>$parameter) {
+                    $parameters[$i] = array(
+                        $parameter => isset($types[$i]) ? $types[$i] : self::TYPE_VALUE,
+                    );
+                }
+            } elseif (is_scalar($parameters)) {
+                $parameters = array(
+                    $parameters => $types[0],
+                );
+            }
+        }
+
         if ($parameters) {
             $this->setParameters($parameters);
-        }
-        if ($types) {
-            $this->setTypes($types);
         }
     }
 
@@ -94,6 +106,7 @@ class Expression implements ExpressionInterface
     }
 
     /**
+     * @deprecated
      * @param array $types
      * @return Expression
      */
@@ -104,6 +117,7 @@ class Expression implements ExpressionInterface
     }
 
     /**
+     * @deprecated
      * @return array
      */
     public function getTypes()
@@ -118,35 +132,26 @@ class Expression implements ExpressionInterface
     public function getExpressionData()
     {
         $parameters = (is_scalar($this->parameters)) ? array($this->parameters) : $this->parameters;
-
-        $types = array();
         $parametersCount = count($parameters);
+        $expression = str_replace('%', '%%', $this->expression);
 
-        if ($parametersCount == 0 && strpos($this->expression, self::PLACEHOLDER) !== false) {
-            // if there are no parameters, but there is a placeholder
-            $parametersCount = substr_count($this->expression, self::PLACEHOLDER);
-            $parameters = array_fill(0, $parametersCount, null);
-        }
-
-        for ($i = 0; $i < $parametersCount; $i++) {
-            $types[$i] = (isset($this->types[$i]) && ($this->types[$i] == self::TYPE_IDENTIFIER || $this->types[$i] == self::TYPE_LITERAL))
-                ? $this->types[$i] : self::TYPE_VALUE;
+        if ($parametersCount == 0) {
+            return array(
+                str_ireplace(self::PLACEHOLDER, '', $expression)
+            );
         }
 
         // assign locally, escaping % signs
-        $expression = str_replace('%', '%%', $this->expression);
-
-        if ($parametersCount > 0) {
-            $count = 0;
-            $expression = str_replace(self::PLACEHOLDER, '%s', $expression, $count);
-            if ($count !== $parametersCount) {
-                throw new Exception\RuntimeException('The number of replacements in the expression does not match the number of parameters');
-            }
+        $expression = str_replace(self::PLACEHOLDER, '%s', $expression, $count);
+        if ($count !== $parametersCount) {
+            throw new Exception\RuntimeException('The number of replacements in the expression does not match the number of parameters');
         }
-
+        foreach ($parameters as $parameter) {
+            list($values[], $types[]) = $this->normalizeArgument($parameter, self::TYPE_VALUE);
+        }
         return array(array(
             $expression,
-            $parameters,
+            $values,
             $types
         ));
     }

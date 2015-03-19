@@ -116,9 +116,11 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         $filter = new DecryptFilter();
         $filter->setAdapter('Openssl');
         $this->assertEquals('Openssl', $filter->getAdapter());
+        $this->assertInstanceOf('Zend\Filter\Encrypt\EncryptionAlgorithmInterface', $filter->getAdapterInstance());
 
         $filter->setAdapter('BlockCipher');
         $this->assertEquals('BlockCipher', $filter->getAdapter());
+        $this->assertInstanceOf('Zend\Filter\Encrypt\EncryptionAlgorithmInterface', $filter->getAdapterInstance());
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
         $filter->setAdapter('\\ZendTest\\Filter\\TestAdapter');

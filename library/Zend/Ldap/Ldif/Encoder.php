@@ -87,7 +87,6 @@ class Encoder
                 } elseif (count($item) > 0 && $name === 'dn') {
                     $items[] = $item;
                     $item    = array();
-                    $last    = null;
                 }
                 $last = array($name, $type, $value);
             } elseif (trim($line) === '') {
@@ -156,7 +155,7 @@ class Encoder
             return $value->toLdif($this->options);
         }
 
-        return null;
+        return;
     }
 
     /**

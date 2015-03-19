@@ -22,7 +22,6 @@ class Struct extends AbstractCollection
         parent::__construct($value);
     }
 
-
     /**
      * Generate the XML code that represent struct native MXL-RPC value
      *

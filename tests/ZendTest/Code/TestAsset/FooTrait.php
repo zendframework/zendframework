@@ -16,4 +16,9 @@ trait FooTrait
     public function fooBarBaz()
     {
     }
+
+    public function foo()
+    {
+        
+    }
 }

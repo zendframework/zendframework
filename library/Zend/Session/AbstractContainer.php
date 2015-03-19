@@ -425,7 +425,7 @@ abstract class AbstractContainer extends ArrayObject
     public function offsetGet($key)
     {
         if (!$this->offsetExists($key)) {
-            return null;
+            return;
         }
         $storage = $this->getStorage();
         $name = $this->getName();
@@ -528,7 +528,7 @@ abstract class AbstractContainer extends ArrayObject
 
             // Map item keys => timestamp
             $expires   = array_flip($expires);
-            $expires   = array_map(function ($value) use ($ts) {
+            $expires   = array_map(function () use ($ts) {
                 return $ts;
             }, $expires);
 
@@ -579,7 +579,7 @@ abstract class AbstractContainer extends ArrayObject
 
             // Map item keys => timestamp
             $expires   = array_flip($expires);
-            $expires   = array_map(function ($value) use ($hops, $ts) {
+            $expires   = array_map(function () use ($hops, $ts) {
                 return array('hops' => $hops, 'ts' => $ts);
             }, $expires);
 

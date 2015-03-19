@@ -104,7 +104,7 @@ class ReflectionClass
             return $this->config[$key];
         }
 
-        return null;
+        return;
     }
 
     /**

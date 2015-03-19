@@ -8,8 +8,8 @@
  */
 
 namespace ZendTest\Soap;
-use Zend\Soap\Wsdl;
 
+use Zend\Soap\Wsdl;
 use Zend\Uri\Uri;
 
 /**
@@ -220,7 +220,7 @@ class WsdlTest extends WsdlTestHelper
         $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
         $this->assertGreaterThan(0, $operationNodes->length);
 
-        if (empty($inputRequest) AND empty($outputResponse) AND empty($fail)) {
+        if (empty($inputRequest) and empty($outputResponse) and empty($fail)) {
             $this->assertFalse($operationNodes->item(0)->hasChildNodes());
         } else {
             $this->assertTrue($operationNodes->item(0)->hasChildNodes());
@@ -291,17 +291,17 @@ class WsdlTest extends WsdlTestHelper
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
         $inputArray = array();
-        if (!empty($input) AND !empty($inputEncoding)) {
+        if (!empty($input) and !empty($inputEncoding)) {
             $inputArray = array('use' => $input,     'encodingStyle' => $inputEncoding);
         }
 
         $outputArray = array();
-        if (!empty($output) AND !empty($outputEncoding)) {
+        if (!empty($output) and !empty($outputEncoding)) {
             $outputArray = array('use' => $output, 'encodingStyle' => $outputEncoding);
         }
 
         $faultArray = array();
-        if (!empty($fault) AND !empty($faultEncoding) AND !empty($faultName)) {
+        if (!empty($fault) and !empty($faultEncoding) and !empty($faultName)) {
             $faultArray = array('use' => $fault,     'encodingStyle' => $faultEncoding,     'name'=>$faultName);
         }
 
@@ -324,7 +324,7 @@ class WsdlTest extends WsdlTestHelper
         $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $bindingNodes->item(0));
         $this->assertEquals(1, $operationNodes->length, 'Missing operation node in definition.');
 
-        if (empty($inputArray) AND empty($outputArray) AND empty($faultArray)) {
+        if (empty($inputArray) and empty($outputArray) and empty($faultArray)) {
             $this->assertFalse($operationNodes->item(0)->hasChildNodes());
         }
 
@@ -455,7 +455,7 @@ class WsdlTest extends WsdlTestHelper
             'operation1',
             array('use' => 'encoded', 'encodingStyle' => $actualUrl),
             array('use' => 'encoded', 'encodingStyle' => $actualUrl),
-            array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => $actualUrl)
+            array('name' => 'MyFault', 'use' => 'encoded', 'encodingStyle' => $actualUrl)
         );
 
         $nodes = $this->xpath->query('//wsdl:binding[@type="myPortType" and @name="MyServiceBinding"]/wsdl:operation[@name="operation1"]/wsdl:input/soap:body');

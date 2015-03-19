@@ -12,6 +12,7 @@ namespace ZendTest\Validator;
 use Zend\Validator;
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
 /**
  * @group      Zend_Validator
@@ -48,6 +49,9 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             // days
             array('P1D',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1973-01-01T00:00:00Z', true ),
             array('P1D',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1973-01-01T00:00:30Z', false),
+
+            array('P1D',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '2014-08-12T00:00:00Z', true),
+
             array('P2D',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-01-02T00:00:00Z', false),
             array('P2D',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-01-15T00:00:00Z', true ),
             array('P2D',  DateTime::ISO8601, '1971-01-01T00:00:00Z', '1973-01-01T00:00:00Z', false),
@@ -119,5 +123,31 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertFalse($validator->isValid('2012-02-23'));
+    }
+
+    public function moscowWinterTimeDataProvider()
+    {
+        // dates before during and after Moscow's wintertime
+        return array(
+            array('26-03-1999'),
+            array('26-03-2011'),
+            array('27-03-2011'),
+            array('26-03-2015'),
+        );
+    }
+
+    /**
+     * @dataProvider moscowWinterTimeDataProvider
+     */
+    public function testMoscowWinterTime($dateToValidate)
+    {
+        $validator = new Validator\DateStep(array(
+            'format' => 'd-m-Y',
+            'baseValue' => date('d-m-Y', 0),
+            'step' => new DateInterval("P1D"),
+            'timezone' => new DateTimeZone('Europe/Moscow'),
+        ));
+
+        $this->assertTrue($validator->isValid($dateToValidate));
     }
 }

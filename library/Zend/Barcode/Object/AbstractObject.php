@@ -874,7 +874,7 @@ abstract class AbstractObject implements ObjectInterface
      * @param string $font
      * @param int    $color
      * @param string $alignment
-     * @param float  $orientation
+     * @param float|int $orientation
      */
     protected function addText(
         $text,

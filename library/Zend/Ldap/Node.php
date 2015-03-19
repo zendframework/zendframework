@@ -221,7 +221,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
             $this->originalData = array();
         }
         $this->children = null;
-        $this->markAsNew(($fromDataSource === true) ? false : true);
+        $this->markAsNew($fromDataSource !== true);
         $this->markAsToBeDeleted(false);
     }
 
@@ -268,7 +268,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
         }
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if ($data === null) {
-            return null;
+            return;
         }
         $entry = new static($dn, $data, true, $ldap);
 
@@ -295,7 +295,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
         } else {
             throw new Exception\LdapException(null, '\'dn\' key is of a wrong data type.');
         }
-        $fromDataSource = ($fromDataSource === true) ? true : false;
+        $fromDataSource = ($fromDataSource === true);
         $new            = new static($dn, $data, $fromDataSource, null);
         $new->ensureRdnAttributeValues();
 
@@ -328,7 +328,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      */
     protected function markAsNew($new)
     {
-        $this->new = ($new === false) ? false : true;
+        $this->new = (bool) $new;
     }
 
     /**
@@ -353,7 +353,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      */
     protected function markAsToBeDeleted($delete)
     {
-        $this->delete = ($delete === true) ? true : false;
+        $this->delete = (bool) $delete;
     }
 
 

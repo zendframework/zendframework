@@ -256,7 +256,7 @@ class FilePostRedirectGet extends AbstractPlugin
                         return $value;
                     }
                 }
-                return null;
+                return;
             }
         );
     }
@@ -277,13 +277,13 @@ class FilePostRedirectGet extends AbstractPlugin
                 $messages = $input->getMessages();
                 if (is_array($value) && $input instanceof FileInput && empty($messages)) {
                     $rawValue = $input->getRawValue();
-                    if (   (isset($rawValue['error'])    && $rawValue['error']    === UPLOAD_ERR_NO_FILE)
+                    if ((isset($rawValue['error'])    && $rawValue['error']    === UPLOAD_ERR_NO_FILE)
                         || (isset($rawValue[0]['error']) && $rawValue[0]['error'] === UPLOAD_ERR_NO_FILE)
                     ) {
                         return $value;
                     }
                 }
-                return null;
+                return;
             }
         );
     }

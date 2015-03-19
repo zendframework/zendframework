@@ -190,20 +190,20 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $sx = new \SimpleXMLElement($xml);
 
-        $this->assertTrue($sx->fault ? true : false, $xml);
-        $this->assertTrue($sx->fault->value ? true : false, $xml);
-        $this->assertTrue($sx->fault->value->struct ? true : false, $xml);
+        $this->assertTrue((bool) $sx->fault, $xml);
+        $this->assertTrue((bool) $sx->fault->value, $xml);
+        $this->assertTrue((bool) $sx->fault->value->struct, $xml);
         $count = 0;
         foreach ($sx->fault->value->struct->member as $member) {
             $count++;
-            $this->assertTrue($member->name ? true : false, $xml);
-            $this->assertTrue($member->value ? true : false, $xml);
+            $this->assertTrue((bool) $member->name, $xml);
+            $this->assertTrue((bool) $member->value, $xml);
             if ('faultCode' == (string) $member->name) {
-                $this->assertTrue($member->value->int ? true : false, $xml);
+                $this->assertTrue((bool) $member->value->int, $xml);
                 $this->assertEquals(1000, (int) $member->value->int, $xml);
             }
             if ('faultString' == (string) $member->name) {
-                $this->assertTrue($member->value->string ? true : false, $xml);
+                $this->assertTrue((bool) $member->value->string, $xml);
                 $this->assertEquals('Fault message', (string) $member->value->string, $xml);
             }
         }
@@ -249,7 +249,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $fault = new XmlRpc\Fault(1234);
         $this->assertSame(1234, $fault->getCode());
-        $this->assertSame('Unknown error', $fault->getMessage());
+        $this->assertSame('Unknown Error', $fault->getMessage());
     }
 
     public function testFaultStringWithoutStringTypeDeclaration()

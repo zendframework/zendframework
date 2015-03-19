@@ -15,7 +15,7 @@ use Zend\Stdlib\AbstractOptions;
 class FileOptions extends AbstractOptions
 {
     /**
-     * @var string Local client hostname
+     * @var string Path to stored mail files
      */
     protected $path;
 
@@ -87,7 +87,7 @@ class FileOptions extends AbstractOptions
     public function getCallback()
     {
         if (null === $this->callback) {
-            $this->setCallback(function ($transport) {
+            $this->setCallback(function () {
                 return 'ZendMail_' . time() . '_' . mt_rand() . '.eml';
             });
         }

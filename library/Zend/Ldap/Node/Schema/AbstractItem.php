@@ -70,7 +70,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
             return $this->data[$name];
         }
 
-        return null;
+        return;
     }
 
     /**

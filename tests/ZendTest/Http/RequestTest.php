@@ -67,7 +67,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $request->getFiles('foo'));
 
         $headers = new Headers();
-        $h = new GenericHeader('foo','bar');
+        $h = new GenericHeader('foo', 'bar');
         $headers->addHeader($h);
 
         $request->setHeaders($headers);
@@ -254,10 +254,56 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 if ($providerContext) {
                     $return[] = array($cValue);
                 } else {
-                    $return[strtolower($cValue)] = ($trueMethod == $cValue) ? true : false;
+                    $return[strtolower($cValue)] = ($trueMethod == $cValue);
                 }
             }
         }
         return $return;
+    }
+
+    public function testCustomMethods()
+    {
+        $request = new Request();
+        $this->assertTrue($request->getAllowCustomMethods());
+        $request->setMethod('xcustom');
+
+        $this->assertEquals('XCUSTOM', $request->getMethod());
+    }
+
+    public function testDisallowCustomMethods()
+    {
+        $request = new Request();
+        $request->setAllowCustomMethods(false);
+
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Invalid HTTP method passed'
+        );
+
+        $request->setMethod('xcustom');
+    }
+
+    public function testCustomMethodsFromString()
+    {
+        $request = Request::fromString('X-CUS_TOM someurl');
+        $this->assertTrue($request->getAllowCustomMethods());
+
+        $this->assertEquals('X-CUS_TOM', $request->getMethod());
+    }
+
+    public function testDisallowCustomMethodsFromString()
+    {
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'A valid request line was not found in the provided string'
+        );
+
+        $request = Request::fromString('X-CUS_TOM someurl', false);
+    }
+
+    public function testAllowCustomMethodsFlagIsSetByFromString()
+    {
+        $request = Request::fromString('GET someurl', false);
+        $this->assertFalse($request->getAllowCustomMethods());
     }
 }

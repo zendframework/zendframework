@@ -75,6 +75,12 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($params, array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
     }
 
+    public function testExtractsExtraInformationWithoutBeingConfusedByTrailingSemicolon()
+    {
+        $header = ContentType::fromString('Content-Type: application/pdf;name="foo.pdf";');
+        $this->assertEquals($header->getParameters(), array('name' => 'foo.pdf'));
+    }
+
     /**
      * @group #2728
      *

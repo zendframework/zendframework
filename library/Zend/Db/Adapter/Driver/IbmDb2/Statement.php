@@ -194,7 +194,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param null $parameters
+     * @param null|array|ParameterContainer $parameters
      * @return Result
      */
     public function execute($parameters = null)

@@ -124,9 +124,6 @@ class Test implements AdapterInterface
      */
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
-        $host = $uri->getHost();
-        $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
-
         // Build request headers
         $path = $uri->getPath();
         if (empty($path)) {

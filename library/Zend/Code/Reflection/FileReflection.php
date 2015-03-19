@@ -34,17 +34,17 @@ class FileReflection implements ReflectionInterface
     protected $endLine = null;
 
     /**
-     * @var string
+     * @var string[]
      */
     protected $namespaces = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $uses = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $requiredFiles = array();
 
@@ -105,7 +105,7 @@ class FileReflection implements ReflectionInterface
      */
     public static function export()
     {
-        return null;
+        return;
     }
 
     /**
@@ -115,8 +115,7 @@ class FileReflection implements ReflectionInterface
      */
     public function getFileName()
     {
-        // @todo get file name from path
-        return $this->filePath;
+        return basename($this->filePath);
     }
 
     /**
@@ -162,7 +161,7 @@ class FileReflection implements ReflectionInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getNamespaces()
     {
@@ -175,7 +174,7 @@ class FileReflection implements ReflectionInterface
     public function getNamespace()
     {
         if (count($this->namespaces) == 0) {
-            return null;
+            return;
         }
 
         return $this->namespaces[0];

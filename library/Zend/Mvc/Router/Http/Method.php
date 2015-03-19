@@ -82,7 +82,7 @@ class Method implements RouteInterface
     public function match(Request $request)
     {
         if (!method_exists($request, 'getMethod')) {
-            return null;
+            return;
         }
 
         $requestVerb = strtoupper($request->getMethod());
@@ -93,7 +93,7 @@ class Method implements RouteInterface
             return new RouteMatch($this->defaults);
         }
 
-        return null;
+        return;
     }
 
     /**

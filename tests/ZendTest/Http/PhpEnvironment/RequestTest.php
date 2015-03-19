@@ -473,7 +473,7 @@ class RequestTest extends TestCase
             // single file
             array(
                 array(
-                    'file' => array (
+                    'file' => array(
                         'name' => 'test1.txt',
                         'type' => 'text/plain',
                         'tmp_name' => '/tmp/phpXXX',
@@ -482,7 +482,7 @@ class RequestTest extends TestCase
                     ),
                 ),
                 array(
-                    'file' => array (
+                    'file' => array(
                         'name' => 'test1.txt',
                         'type' => 'text/plain',
                         'tmp_name' => '/tmp/phpXXX',
@@ -496,31 +496,31 @@ class RequestTest extends TestCase
             // file[], file[]
             array(
                 array(
-                    'file' => array (
-                        'name' => array (
+                    'file' => array(
+                        'name' => array(
                             0 => 'test1.txt',
                             1 => 'test2.txt',
                         ),
-                        'type' => array (
+                        'type' => array(
                             0 => 'text/plain',
                             1 => 'text/plain',
                         ),
-                        'tmp_name' => array (
+                        'tmp_name' => array(
                             0 => '/tmp/phpXXX',
                             1 => '/tmp/phpXXX',
                         ),
-                        'error' => array (
+                        'error' => array(
                             0 => 0,
                             1 => 0,
                         ),
-                        'size' => array (
+                        'size' => array(
                             0 => 1,
                             1 => 1,
                         ),
                     ),
                 ),
                 array(
-                    'file' => array (
+                    'file' => array(
                         0 => array(
                             'name' => 'test1.txt',
                             'type' => 'text/plain',
@@ -543,31 +543,31 @@ class RequestTest extends TestCase
             // file[one], file[two]
             array(
                 array(
-                    'file' => array (
-                        'name' => array (
+                    'file' => array(
+                        'name' => array(
                             'one' => 'test1.txt',
                             'two' => 'test2.txt',
                         ),
-                        'type' => array (
+                        'type' => array(
                             'one' => 'text/plain',
                             'two' => 'text/plain',
                         ),
-                        'tmp_name' => array (
+                        'tmp_name' => array(
                             'one' => '/tmp/phpXXX',
                             'two' => '/tmp/phpXXX',
                         ),
-                        'error' => array (
+                        'error' => array(
                             'one' => 0,
                             'two' => 0,
                         ),
-                        'size' => array (
+                        'size' => array(
                             'one' => 1,
                             'two' => 1,
                         ),
                       ),
                 ),
                 array(
-                    'file' => array (
+                    'file' => array(
                         'one' => array(
                             'name' => 'test1.txt',
                             'type' => 'text/plain',
@@ -589,14 +589,14 @@ class RequestTest extends TestCase
             // multilevel file name
             // file[], file[][], file[][][]
             array(
-                array (
-                    'file' => array (
-                        'name' => array (
+                array(
+                    'file' => array(
+                        'name' => array(
                             0 => 'test_0.txt',
-                            1 => array (
+                            1 => array(
                                 0 => 'test_10.txt',
                             ),
-                            2 => array (
+                            2 => array(
                                 0 => array(
                                     0 => 'test_200.txt',
                                 ),
@@ -613,12 +613,12 @@ class RequestTest extends TestCase
                                 ),
                             ),
                         ),
-                        'tmp_name' => array (
+                        'tmp_name' => array(
                             0 => '/tmp/phpXXX',
                             1 => array(
                                 0 => '/tmp/phpXXX',
                             ),
-                            2 => array (
+                            2 => array(
                                 0 => array(
                                     0 => '/tmp/phpXXX',
                                 ),
@@ -629,7 +629,7 @@ class RequestTest extends TestCase
                             1 => array(
                                 0 => 0,
                             ),
-                            2 => array (
+                            2 => array(
                                 0 => array(
                                     0 => 0,
                                 ),
@@ -736,7 +736,7 @@ class RequestTest extends TestCase
         $this->assertSame('bar', $request->getEnv('foo'));
 
         $headers = new Headers();
-        $h = new GenericHeader('foo','bar');
+        $h = new GenericHeader('foo', 'bar');
         $headers->addHeader($h);
 
         $request->setHeaders($headers);
@@ -759,6 +759,18 @@ class RequestTest extends TestCase
         $server->set('SCRIPT_FILENAME', null);
 
         $this->assertEquals('', $request->getBaseUrl());
+    }
+
+    public function testAllowCustomMethodsFlagCanBeSetWithConstructor()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'xcustomx';
+
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Invalid HTTP method passed'
+        );
+
+        $request = new Request(false);
     }
 
     /**

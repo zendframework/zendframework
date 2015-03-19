@@ -57,7 +57,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('file' => $this->_file));
 
-        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $message->from);
+        $this->assertEquals('Peter Müller <peter-mueller@example.com>', $message->from);
     }
 
     public function testGetHeaderAsArray()
@@ -292,10 +292,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('headers' => array('subject' => 'foo')));
 
-        $this->assertTrue( $message->getHeaders()->has('subject'));
-        $this->assertTrue( isset($message->subject) );
-        $this->assertTrue( $message->getHeaders()->has('SuBject'));
-        $this->assertTrue( isset($message->suBjeCt) );
+        $this->assertTrue($message->getHeaders()->has('subject'));
+        $this->assertTrue(isset($message->subject));
+        $this->assertTrue($message->getHeaders()->has('SuBject'));
+        $this->assertTrue(isset($message->suBjeCt));
         $this->assertFalse($message->getHeaders()->has('From'));
     }
 

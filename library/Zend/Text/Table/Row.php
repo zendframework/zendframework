@@ -78,7 +78,7 @@ class Row
     public function getColumn($index)
     {
         if (!isset($this->columns[$index])) {
-            return null;
+            return;
         }
 
         return $this->columns[$index];

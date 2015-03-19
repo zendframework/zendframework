@@ -183,14 +183,73 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $formatter = new XmlFormatter;
         $d = new DateTime('2001-01-01T12:00:00-06:00');
         $event = array(
-            'timestamp'    =>  $d,
+            'timestamp'    => $d,
             'message'      => 'test',
             'priority'     => 1,
             'priorityName' => 'CRIT',
-            'extra' => array()
+            'extra'        => array()
         );
         $expected = '<logEntry><timestamp>2001-01-01T12:00:00-06:00</timestamp><message>test</message><priority>1</priority><priorityName>CRIT</priorityName></logEntry>';
-        $expected .= PHP_EOL . PHP_EOL;
+        $expected .= "\n" . PHP_EOL;
+        $this->assertEquals($expected, $formatter->format($event));
+    }
+
+    public function testFormatWillAcceptSimpleArrayFromExtra()
+    {
+        $formatter = new XmlFormatter;
+        $d = new DateTime('2001-01-01T12:00:00-06:00');
+        $event = array(
+            'timestamp'    => $d,
+            'message'      => 'test',
+            'priority'     => 1,
+            'priorityName' => 'CRIT',
+            'extra'        => array(
+                'test' => 'one',
+                'bar'  => 'foo',
+                'wrong message' => 'dasdasd'
+            )
+        );
+
+        $expected = '<logEntry><timestamp>2001-01-01T12:00:00-06:00</timestamp><message>test</message><priority>1</priority><priorityName>CRIT</priorityName><extra><test>one</test><bar>foo</bar></extra></logEntry>';
+        $expected .= "\n" . PHP_EOL;
+        $this->assertEquals($expected, $formatter->format($event));
+    }
+
+    public function testFormatWillAcceptNestedArrayFromExtraEvent()
+    {
+        $formatter = new XmlFormatter;
+
+        $d = new DateTime('2001-01-01T12:00:00-06:00');
+
+        $event = array(
+            'timestamp'    => $d,
+            'message'      => 'test',
+            'priority'     => 1,
+            'priorityName' => 'CRIT',
+            'extra'        => array(
+                'test'  => array(
+                    'one',
+                    'two' => array(
+                        'three' => array(
+                            'four' => 'four'
+                        ),
+                        'five'  => array('')
+                    )
+                ),
+                '1111'                => '2222',
+                'test_null'           => null,
+                'test_int'            => 14,
+                'test_object'         => new \stdClass(),
+                new SerializableObject(),
+                'serializable_object' => new SerializableObject(),
+                null,
+                'test_empty_array'    => array(),
+                'bar'                 => 'foo',
+                'foobar'
+            )
+        );
+        $expected = '<logEntry><timestamp>2001-01-01T12:00:00-06:00</timestamp><message>test</message><priority>1</priority><priorityName>CRIT</priorityName><extra><test><one/><two><three><four>four</four></three><five/></two></test><test_null/><test_int>14</test_int><test_object>"Object" of type stdClass does not support __toString() method</test_object><serializable_object>ZendTest\Log\TestAsset\SerializableObject</serializable_object><test_empty_array/><bar>foo</bar><foobar/></extra></logEntry>';
+        $expected .= "\n" . PHP_EOL;
         $this->assertEquals($expected, $formatter->format($event));
     }
 }

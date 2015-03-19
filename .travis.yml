@@ -6,26 +6,35 @@ php:
   - 5.5
   - 5.6
   - hhvm
+  - hhvm-nightly
 
 install:
-  - sudo apt-get install parallel
-  - composer install --dev --prefer-source
+  - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' ]]; then phpenv config-rm xdebug.ini;  fi
+  - IS_HHVM=`echo $TRAVIS_PHP_VERSION | grep "hhvm" | wc -l`
+  - sudo apt-get install parallel libpcre3-dev
+  - test $IS_HHVM == "1" || echo "" | pecl install apcu-beta
+  - test $IS_HHVM == "1" || phpenv config-add tests/travis.php.ini
+  - composer install --no-interaction --prefer-source
 
 before_script:
+  - php --version
+  - sudo /etc/init.d/memcached start
+  - sudo start redis-server
   - mkdir -p build/coverage
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
 
 script:
   # Run tests for the various components in parallel
-  - ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php -d zend.enable_gc=0 ./vendor/bin/phpunit -c tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1; fi
+  - if [[ $TRAVIS_PHP_VERSION != '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist {};' || exit 1; fi
 
   # Run coding standard checks in parallel
-  - ls -d library/Zend/* tests/ZendTest/* bin | parallel --gnu -P 0 'echo "Running {} CS checks"; php -d zend.enable_gc=0 ./vendor/bin/php-cs-fixer fix {} -v --dry-run --config-file=.php_cs;' || exit 1
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then ls -d library/Zend/* tests/ZendTest/* bin | parallel --gnu -P 0 'echo "Running {} CS checks"; php ./vendor/bin/php-cs-fixer fix {} -v --diff --dry-run --config-file=.php_cs;' || exit 1; fi
 
 after_script:
   # Merges the individual clover reports of each component into a single clover.xml
-  - php vendor/bin/phpcov.php --merge --clover build/logs/clover.xml --whitelist library build/coverage
-  - php vendor/bin/coveralls
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then php vendor/bin/phpcov merge --clover build/logs/clover.xml build/coverage; fi
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then php vendor/bin/coveralls; fi
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
@@ -35,3 +44,4 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: hhvm
+    - php: hhvm-nightly

@@ -50,7 +50,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
     /**
      * Set the data source for the result set
      *
-     * @param  Iterator|IteratorAggregate|ResultInterface $dataSource
+     * @param  array|Iterator|IteratorAggregate|ResultInterface $dataSource
      * @return ResultSet
      * @throws Exception\InvalidArgumentException
      */

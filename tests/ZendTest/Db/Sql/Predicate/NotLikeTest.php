@@ -9,7 +9,6 @@
 
 namespace ZendTest\Db\Sql\Predicate;
 
-
 use Zend\Db\Sql\Predicate\NotLike;
 
 class NotLikeTest extends \PHPUnit_Framework_TestCase

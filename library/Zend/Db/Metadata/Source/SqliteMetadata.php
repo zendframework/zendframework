@@ -271,7 +271,7 @@ class SqliteMetadata extends AbstractSource
         }
 
         if (!preg_match($re, $sql, $matches)) {
-            return null;
+            return;
         }
         return array(
             'view_definition' => $matches['view_definition'],
@@ -291,7 +291,7 @@ class SqliteMetadata extends AbstractSource
                 'TRIGGER',
                 array('IF', 'NOT', 'EXISTS'),
                 $identifierChain,
-                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)',),
+                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)', ),
                 '(?<event_manipulation>DELETE|INSERT|UPDATE)',
                 array('OF', '(?<column_usage>' . $identifierList . ')'),
                 'ON',
@@ -306,7 +306,7 @@ class SqliteMetadata extends AbstractSource
         }
 
         if (!preg_match($re, $sql, $matches)) {
-            return null;
+            return;
         }
         $data = array();
 

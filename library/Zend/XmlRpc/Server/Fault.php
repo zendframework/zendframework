@@ -134,10 +134,7 @@ class Fault extends \Zend\XmlRpc\Fault
      */
     public static function attachObserver($class)
     {
-        if (!is_string($class)
-            || !class_exists($class)
-            || !is_callable(array($class, 'observe'))
-        ) {
+        if (!is_string($class) || !class_exists($class) || !is_callable(array($class, 'observe'))) {
             return false;
         }
 

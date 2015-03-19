@@ -9,9 +9,9 @@
 
 namespace ZendTest\Stdlib;
 
-use Zend\Stdlib\Hydrator\Filter\HasFilter,
-    Zend\Stdlib\Hydrator\Filter\IsFilter,
-    Zend\Stdlib\Hydrator\Filter\GetFilter;
+use Zend\Stdlib\Hydrator\Filter\HasFilter;
+use Zend\Stdlib\Hydrator\Filter\IsFilter;
+use Zend\Stdlib\Hydrator\Filter\GetFilter;
 
 class FilterTest extends \PHPUnit_Framework_TestCase
 {

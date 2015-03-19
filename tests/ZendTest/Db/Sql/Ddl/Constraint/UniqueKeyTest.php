@@ -21,7 +21,7 @@ class UniqueKeyTest extends \PHPUnit_Framework_TestCase
         $uk = new UniqueKey('foo', 'my_uk');
         $this->assertEquals(
             array(array(
-                'CONSTRAINT UNIQUE KEY %s(%s)',
+                'CONSTRAINT %s UNIQUE (%s)',
                 array('my_uk', 'foo'),
                 array($uk::TYPE_IDENTIFIER, $uk::TYPE_IDENTIFIER)
             )),

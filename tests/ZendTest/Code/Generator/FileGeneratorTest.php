@@ -307,7 +307,7 @@ EOS;
     {
         $g = new \Zend\Code\Generator\FileGenerator();
         $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
-        $g->setFilename('/tmp/result_class.php');
+        $g->setFilename(sys_get_temp_dir() . '/result_class.php');
         $g->getClass()->addMethod('added');
         $g->write();
 
@@ -341,7 +341,7 @@ class ClassWithUses
 
 
 CODE;
-        $actual = file_get_contents('/tmp/result_class.php');
+        $actual = file_get_contents(sys_get_temp_dir() . '/result_class.php');
         $this->assertEquals($expected, $actual);
     }
 
@@ -352,7 +352,7 @@ CODE;
     {
         $g = new \Zend\Code\Generator\FileGenerator();
         $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
-        $g->setFilename('/tmp/result_class.php');
+        $g->setFilename(sys_get_temp_dir() . '/result_class.php');
         $g->getClass()->addMethod('added');
         $g->setBody("\$foo->bar();");
         $g->write();
@@ -388,7 +388,7 @@ class ClassWithUses
 
 $foo->bar();
 CODE;
-        $actual = file_get_contents('/tmp/result_class.php');
+        $actual = file_get_contents(sys_get_temp_dir() . '/result_class.php');
         $this->assertEquals($expected, $actual);
     }
 }

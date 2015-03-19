@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\View;
+namespace ZendTest\View\Resolver;
 
 use Zend\View\Resolver\TemplatePathStack;
 
@@ -16,28 +16,44 @@ use Zend\View\Resolver\TemplatePathStack;
  */
 class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var TemplatePathStack
+     */
+    private $stack;
+
+    /**
+     * @var string[]
+     */
+    private $paths;
+
+    /**
+     * @var string
+     */
+    private $baseDir;
+
     public function setUp()
     {
-        $this->stack = new TemplatePathStack();
-        $this->paths = array(
-            TemplatePathStack::normalizePath(__DIR__),
-            TemplatePathStack::normalizePath(__DIR__ . '/_templates'),
+        $this->baseDir = realpath(__DIR__ . '/..');
+        $this->stack   = new TemplatePathStack();
+        $this->paths   = array(
+            TemplatePathStack::normalizePath($this->baseDir),
+            TemplatePathStack::normalizePath($this->baseDir . '/_templates'),
         );
     }
 
     public function testAddPathAddsPathToStack()
     {
-        $this->stack->addPath(__DIR__);
+        $this->stack->addPath($this->baseDir);
         $paths = $this->stack->getPaths();
         $this->assertEquals(1, count($paths));
-        $this->assertEquals(TemplatePathStack::normalizePath(__DIR__), $paths->pop());
+        $this->assertEquals(TemplatePathStack::normalizePath($this->baseDir), $paths->pop());
     }
 
     public function testPathsAreProcessedAsStack()
     {
         $paths = array(
-            TemplatePathStack::normalizePath(__DIR__),
-            TemplatePathStack::normalizePath(__DIR__ . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir),
+            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
         );
         foreach ($paths as $path) {
             $this->stack->addPath($path);
@@ -48,22 +64,22 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAddPathsAddsPathsToStack()
     {
-        $this->stack->addPath(__DIR__ . '/Helper');
+        $this->stack->addPath($this->baseDir . '/Helper');
         $paths = array(
-            TemplatePathStack::normalizePath(__DIR__),
-            TemplatePathStack::normalizePath(__DIR__ . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir),
+            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
         );
         $this->stack->addPaths($paths);
-        array_unshift($paths, TemplatePathStack::normalizePath(__DIR__ . '/Helper'));
+        array_unshift($paths, TemplatePathStack::normalizePath($this->baseDir . '/Helper'));
         $this->assertEquals(array_reverse($paths), $this->stack->getPaths()->toArray());
     }
 
     public function testSetPathsOverwritesStack()
     {
-        $this->stack->addPath(__DIR__ . '/Helper');
+        $this->stack->addPath($this->baseDir . '/Helper');
         $paths = array(
-            TemplatePathStack::normalizePath(__DIR__),
-            TemplatePathStack::normalizePath(__DIR__ . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir),
+            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
         );
         $this->stack->setPaths($paths);
         $this->assertEquals(array_reverse($paths), $this->stack->getPaths()->toArray());
@@ -72,8 +88,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     public function testClearPathsClearsStack()
     {
         $paths = array(
-            __DIR__,
-            __DIR__ . '/_files',
+            $this->baseDir,
+            $this->baseDir . '/_files',
         );
         $this->stack->setPaths($paths);
         $this->stack->clearPaths();
@@ -108,16 +124,16 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testDoesNotAllowParentDirectoryTraversalByDefault()
     {
-        $this->stack->addPath(__DIR__ . '/_templates');
+        $this->stack->addPath($this->baseDir . '/_templates');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'parent directory traversal');
-        $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
+        $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
     }
 
     public function testDisablingLfiProtectionAllowsParentDirectoryTraversal()
     {
         $this->stack->setLfiProtection(false)
-                    ->addPath(__DIR__ . '/_templates');
+                    ->addPath($this->baseDir . '/_templates');
 
         $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
         $this->assertContains('LfiProtectionCheck.phtml', $test);
@@ -131,15 +147,15 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsFalseWhenUnableToResolveScriptToPath()
     {
-        $this->stack->addPath(__DIR__ . '/_templates');
+        $this->stack->addPath($this->baseDir . '/_templates');
         $this->assertFalse($this->stack->resolve('bogus-script.txt'));
         $this->assertEquals(TemplatePathStack::FAILURE_NOT_FOUND, $this->stack->getLastLookupFailure());
     }
 
     public function testReturnsFullPathNameWhenAbleToResolveScriptPath()
     {
-        $this->stack->addPath(__DIR__ . '/_templates');
-        $expected = realpath(__DIR__ . '/_templates/test.phtml');
+        $this->stack->addPath($this->baseDir . '/_templates');
+        $expected = realpath($this->baseDir . '/_templates/test.phtml');
         $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
@@ -151,8 +167,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Short tags are disabled; cannot test');
         }
         $this->stack->setUseStreamWrapper(true)
-                    ->addPath(__DIR__ . '/_templates');
-        $expected = 'zend.view://' . realpath(__DIR__ . '/_templates/test.phtml');
+                    ->addPath($this->baseDir . '/_templates');
+        $expected = 'zend.view://' . realpath($this->baseDir . '/_templates/test.phtml');
         $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
@@ -169,14 +185,19 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param mixed $options
+     *
      * @dataProvider invalidOptions
      */
-    public function testSettingOptionsWithInvalidArgumentRaisesException($arg)
+    public function testSettingOptionsWithInvalidArgumentRaisesException($options)
     {
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
-        $this->stack->setOptions($arg);
+        $this->stack->setOptions($options);
     }
 
+    /**
+     * @return mixed[][]
+     */
     public function validOptions()
     {
         $options = array(
@@ -191,29 +212,33 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param array|\ArrayObject $options
+     *
      * @dataProvider validOptions
      */
-    public function testAllowsSettingOptions($arg)
+    public function testAllowsSettingOptions($options)
     {
-        $arg['script_paths'] = $this->paths;
-        $this->stack->setOptions($arg);
+        $options['script_paths'] = $this->paths;
+        $this->stack->setOptions($options);
         $this->assertFalse($this->stack->isLfiProtectionOn());
 
         $expected = (bool) ini_get('short_open_tag');
         $this->assertSame($expected, $this->stack->useStreamWrapper());
 
-        $this->assertSame($arg['default_suffix'], $this->stack->getDefaultSuffix());
+        $this->assertSame($options['default_suffix'], $this->stack->getDefaultSuffix());
 
         $this->assertEquals(array_reverse($this->paths), $this->stack->getPaths()->toArray());
     }
 
     /**
+     * @param array $options
+     *
      * @dataProvider validOptions
      */
-    public function testAllowsPassingOptionsToConstructor($arg)
+    public function testAllowsPassingOptionsToConstructor($options)
     {
-        $arg['script_paths'] = $this->paths;
-        $stack = new TemplatePathStack($arg);
+        $options['script_paths'] = $this->paths;
+        $stack = new TemplatePathStack($options);
         $this->assertFalse($stack->isLfiProtectionOn());
 
         $expected = (bool) ini_get('short_open_tag');
@@ -224,7 +249,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsRelativePharPath()
     {
-        $path = 'phar://' . __DIR__
+        $path = 'phar://' . $this->baseDir
             . DIRECTORY_SEPARATOR . '_templates'
             . DIRECTORY_SEPARATOR . 'view.phar'
             . DIRECTORY_SEPARATOR . 'start'

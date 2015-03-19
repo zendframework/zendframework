@@ -299,7 +299,7 @@ class Imap
         } elseif ($tokens[0] == 'NO') {
             return false;
         }
-        return null;
+        return;
     }
 
     /**
@@ -658,7 +658,7 @@ class Imap
         $result = $this->requestAndResponse('STORE', array($set, $item, $flags), $silent);
 
         if ($silent) {
-            return $result ? true : false;
+            return (bool) $result;
         }
 
         $tokens = $result;
@@ -749,6 +749,17 @@ class Imap
     public function delete($folder)
     {
         return $this->requestAndResponse('DELETE', array($this->escapeString($folder)), true);
+    }
+
+    /**
+     * subscribe to a folder
+     *
+     * @param string $folder folder name
+     * @return bool success
+     */
+    public function subscribe($folder)
+    {
+        return $this->requestAndResponse('SUBSCRIBE', array($this->escapeString($folder)), true);
     }
 
     /**

@@ -204,7 +204,7 @@ class Proxy extends Socket
     protected function connectHandshake($host, $port = 443, $httpVer = '1.1', array &$headers = array())
     {
         $request = "CONNECT $host:$port HTTP/$httpVer\r\n" .
-                   "Host: " . $this->config['proxy_host'] . "\r\n";
+                   "Host: " . $host . "\r\n";
 
         // Add the user-agent header
         if (isset($this->config['useragent'])) {

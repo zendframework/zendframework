@@ -14,6 +14,7 @@ use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\FeedModel;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Resolver\PrefixPathStackResolver;
 
 class FeedRendererTest extends TestCase
 {
@@ -121,7 +122,8 @@ class FeedRendererTest extends TestCase
     
     public function testReturnsSameRendererInstanceWhenResolverIsSet()
     {
-        $returnValue = $this->renderer->setResolver(null);
+        $resolver = new PrefixPathStackResolver();
+        $returnValue = $this->renderer->setResolver($resolver);
         $this->assertSame($returnValue, $this->renderer);
     }
     

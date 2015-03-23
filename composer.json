@@ -14,8 +14,7 @@
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",
-        "ircmaxell/random-lib": "dev-master",
-        "ircmaxell/security-lib": "dev-master",
+        "ircmaxell/random-lib": ">=1.1",
         "mikey179/vfsStream": "1.2.*",
         "fabpot/php-cs-fixer": "1.*",
         "phpunit/PHPUnit": "~4.0",

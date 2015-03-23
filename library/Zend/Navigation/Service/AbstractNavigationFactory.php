@@ -73,6 +73,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     /**
      * @param ServiceLocatorInterface $serviceLocator
      * @param array|\Zend\Config\Config $pages
+     * @return null|array
      * @throws \Zend\Navigation\Exception\InvalidArgumentException
      */
     protected function preparePages(ServiceLocatorInterface $serviceLocator, $pages)
@@ -122,10 +123,14 @@ abstract class AbstractNavigationFactory implements FactoryInterface
      * @param RouteMatch $routeMatch
      * @param Router $router
      * @param null|Request $request
-     * @return mixed
+     * @return array
      */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, $request = null)
-    {
+    protected function injectComponents(
+        array $pages,
+        RouteMatch $routeMatch = null,
+        Router $router = null,
+        $request = null
+    ) {
         foreach ($pages as &$page) {
             $hasUri = isset($page['uri']);
             $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);

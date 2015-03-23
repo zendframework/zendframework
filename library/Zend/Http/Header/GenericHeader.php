@@ -99,7 +99,7 @@ class GenericHeader implements HeaderInterface
          */
         if (!preg_match('/^[!#$%&\'*+\-\.\^_`|~0-9a-zA-Z]+$/', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must be a valid RFC 2616 (section 4.2) field-name.'
+                'Header name must be a valid RFC 7230 (section 3.2) field-name.'
             );
         }
 

@@ -26,7 +26,7 @@ class GenericHeaderTest extends TestCase
         } catch (InvalidArgumentException $e) {
             $this->assertEquals(
                 $e->getMessage(),
-                'Header name must be a valid RFC 2616 (section 4.2) field-name.'
+                'Header name must be a valid RFC 7230 (section 3.2) field-name.'
             );
             $this->fail('Allowed char rejected: ' . ord($name)); // For easy debug
         }
@@ -44,7 +44,7 @@ class GenericHeaderTest extends TestCase
         } catch (InvalidArgumentException $e) {
             $this->assertEquals(
                 $e->getMessage(),
-                'Header name must be a valid RFC 2616 (section 4.2) field-name.'
+                'Header name must be a valid RFC 7230 (section 3.2) field-name.'
             );
         }
     }

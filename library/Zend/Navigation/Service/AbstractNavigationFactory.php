@@ -73,6 +73,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     /**
      * @param ServiceLocatorInterface $serviceLocator
      * @param array|\Zend\Config\Config $pages
+     * @return mixed
      * @throws \Zend\Navigation\Exception\InvalidArgumentException
      */
     protected function preparePages(ServiceLocatorInterface $serviceLocator, $pages)

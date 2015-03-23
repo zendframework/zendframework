@@ -216,8 +216,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected function executeSelect(Select $select)
     {
         $selectState = $select->getRawState();
-        if ($selectState['table'] != $this->table && (is_array($selectState['table']) && end($selectState['table']) != $this->table)) {
-            throw new Exception\RuntimeException('The table name of the provided select object must match that of the table');
+        if ($selectState['table'] != $this->table
+            && (is_array($selectState['table'])
+                && end($selectState['table']) != $this->table)
+        ) {
+            throw new Exception\RuntimeException(
+                'The table name of the provided select object must match that of the table'
+            );
         }
 
         if ($selectState['columns'] == array(Select::SQL_STAR)
@@ -281,11 +286,22 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     {
         $insertState = $insert->getRawState();
         if ($insertState['table'] != $this->table) {
-            throw new Exception\RuntimeException('The table name of the provided Insert object must match that of the table');
+            throw new Exception\RuntimeException(
+                'The table name of the provided Insert object must match that of the table'
+            );
         }
 
         // apply preInsert features
         $this->featureSet->apply(EventFeature::EVENT_PRE_INSERT, array($insert));
+
+        // Most RDBMS solutions do not allow using table aliases in INSERTs
+        // See https://github.com/zendframework/zf2/issues/7311
+        $unaliasedTable = false;
+        if (is_array($insertState['table'])) {
+            $tableData      = array_values($insertState['table']);
+            $unaliasedTable = array_shift($tableData);
+            $insert->into($unaliasedTable);
+        }
 
         $statement = $this->sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
@@ -294,7 +310,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         // apply postInsert features
         $this->featureSet->apply(EventFeature::EVENT_POST_INSERT, array($statement, $result));
 
-        return $result->getAffectedRows();
+        // Reset original table information in Insert instance, if necessary
+        if ($unaliasedTable) {
+            $insert->into($insertState['table']);
+        }
+
+        $return = $result->getAffectedRows();
+        return $return;
     }
 
     /**
@@ -341,7 +363,9 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     {
         $updateState = $update->getRawState();
         if ($updateState['table'] != $this->table) {
-            throw new Exception\RuntimeException('The table name of the provided Update object must match that of the table');
+            throw new Exception\RuntimeException(
+                'The table name of the provided Update object must match that of the table'
+            );
         }
 
         // apply preUpdate features
@@ -397,7 +421,9 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     {
         $deleteState = $delete->getRawState();
         if ($deleteState['table'] != $this->table) {
-            throw new Exception\RuntimeException('The table name of the provided Update object must match that of the table');
+            throw new Exception\RuntimeException(
+                'The table name of the provided Update object must match that of the table'
+            );
         }
 
         // pre delete update
@@ -470,7 +496,11 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($this->featureSet->canCallMagicCall($method)) {
             return $this->featureSet->callMagicCall($method, $arguments);
         }
-        throw new Exception\InvalidArgumentException('Invalid method (' . $method . ') called, caught by ' . __CLASS__ . '::__call()');
+        throw new Exception\InvalidArgumentException(sprintf(
+            'Invalid method (%s) called, caught by %s::__call()',
+            $method,
+            __CLASS__
+        ));
     }
 
     /**

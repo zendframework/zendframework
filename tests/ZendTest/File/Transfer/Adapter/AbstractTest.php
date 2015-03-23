@@ -12,7 +12,6 @@ namespace ZendTest\File\Transfer\Adapter;
 use Zend\File;
 use Zend\Filter;
 use Zend\Filter\Word;
-use Zend\Loader;
 use Zend\Validator;
 use Zend\Validator\File as FileValidator;
 

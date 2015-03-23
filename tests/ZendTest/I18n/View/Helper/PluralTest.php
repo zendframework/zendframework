@@ -9,7 +9,6 @@
 
 namespace ZendTest\I18n\View\Helper;
 
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\I18n\View\Helper\Plural as PluralHelper;
 
 /**

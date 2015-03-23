@@ -561,6 +561,17 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail->setFlags(1, array(Storage::FLAG_RECENT));
     }
 
+    /**
+     * @group 7353
+     */
+    public function testCanMarkMessageUnseen()
+    {
+        $mail = new Storage\Imap($this->_params);
+        $mail->setFlags(1, array(Storage::FLAG_UNSEEN));
+        $message = $mail->getMessage(1);
+        $this->assertTrue($message->hasFlag(Storage::FLAG_UNSEEN));
+    }
+
     public function testCapability()
     {
         $protocol = new Protocol\Imap($this->_params['host']);

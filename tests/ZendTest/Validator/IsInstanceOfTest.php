@@ -99,4 +99,12 @@ class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid(null));
         $this->assertFalse($validator->isValid($this));
     }
+
+    public function testPassOptionsWithoutClassNameKey()
+    {
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Missing option "className"');
+
+        $options   = array('NotClassNameKey' => 'DateTime');
+        $validator = new Validator\IsInstanceOf($options);
+    }
 }

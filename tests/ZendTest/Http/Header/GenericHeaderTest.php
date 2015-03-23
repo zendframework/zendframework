@@ -25,8 +25,8 @@ class GenericHeaderTest extends TestCase
             new GenericHeader($name);
         } catch (InvalidArgumentException $e) {
             $this->assertEquals(
-                 $e->getMessage(),
-                     'Header name must be a valid RFC 2616 (section 4.2) field-name.'
+                $e->getMessage(),
+                'Header name must be a valid RFC 7230 (section 3.2) field-name.'
             );
             $this->fail('Allowed char rejected: ' . ord($name)); // For easy debug
         }
@@ -43,10 +43,19 @@ class GenericHeaderTest extends TestCase
             $this->fail('Invalid char allowed: ' . ord($name)); // For easy debug
         } catch (InvalidArgumentException $e) {
             $this->assertEquals(
-                 $e->getMessage(),
-                     'Header name must be a valid RFC 2616 (section 4.2) field-name.'
+                $e->getMessage(),
+                'Header name must be a valid RFC 7230 (section 3.2) field-name.'
             );
         }
+    }
+
+    /**
+     * @group 7295
+     */
+    public function testDoesNotReplaceUnderscoresWithDashes()
+    {
+        $header = new GenericHeader('X_Foo_Bar');
+        $this->assertEquals('X_Foo_Bar', $header->getFieldName());
     }
 
     /**

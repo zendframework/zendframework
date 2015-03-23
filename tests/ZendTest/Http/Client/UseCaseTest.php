@@ -11,7 +11,6 @@ namespace ZendTest\Http\Client;
 
 use Zend\Http\Client as HTTPClient;
 use Zend\Http\Client\Adapter;
-use Zend\Http\Response;
 use Zend\Http\Request;
 
 

@@ -11,7 +11,6 @@ namespace ZendTest\Authentication\Validator;
 
 use Zend\Authentication\Validator\Authentication as AuthenticationValidator;
 use Zend\Authentication\AuthenticationService;
-use Zend\Authentication as Auth;
 use ZendTest\Authentication as AuthTest;
 
 /**

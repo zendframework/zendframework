@@ -465,4 +465,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(Client::ENC_URLENCODED, $client->getEncType());
     }
+
+    /**
+     * @group 7332
+     */
+    public function testAllowsClearingEncType()
+    {
+        $client = new Client();
+        $client->setEncType('application/x-www-form-urlencoded');
+
+        $this->assertEquals('application/x-www-form-urlencoded', $client->getEncType());
+
+        $client->setEncType(null);
+        $this->assertNull($client->getEncType());
+    }
 }

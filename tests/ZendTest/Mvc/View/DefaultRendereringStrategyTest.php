@@ -18,7 +18,6 @@ use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\DefaultRenderingStrategy;
 use Zend\ServiceManager\ServiceManager;
-use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\View;
 use Zend\View\Model\ViewModel;

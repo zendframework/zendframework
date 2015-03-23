@@ -159,10 +159,11 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
      * Returns true if all values validate true
      *
      * @param  mixed $value
+     * @param  mixed $context Extra "context" to provide the composed validator
      * @return bool
      * @throws Exception\RuntimeException
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
         $this->setValue($value);
 
@@ -195,7 +196,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
         }
 
         foreach ($values as $value) {
-            if (!$validator->isValid($value)) {
+            if (!$validator->isValid($value, $context)) {
                 $this->abstractOptions['messages'][] = $validator->getMessages();
 
                 if ($this->isBreakOnFirstFailure()) {

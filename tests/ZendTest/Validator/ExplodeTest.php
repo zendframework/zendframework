@@ -11,6 +11,7 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Explode;
 use Zend\Validator\Regex;
+use Zend\Validator\Callback;
 
 /**
  * @group      Zend_Validator
@@ -152,5 +153,24 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($validator->isValid('zf-devteam@zend.com,abc,defghij'));
         $this->assertEquals($messages, $validator->getMessages());
+    }
+
+    /**
+     * Assert context is passed to composed validator
+     */
+    public function testIsValidPassContext()
+    {
+        $context       = 'context';
+        $contextSame   = false;
+        $validator = new Explode(array(
+            'validator'           => new Callback(function ($v, $c) use ($context, &$contextSame) {
+                $contextSame = ($context === $c);
+                return true;
+            }),
+            'valueDelimiter'      => ',',
+            'breakOnFirstFailure' => false,
+        ));
+        $this->assertTrue($validator->isValid('a,b,c', $context));
+        $this->assertTrue($contextSame);
     }
 }

@@ -13,6 +13,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Model\FeedModel;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Resolver\PrefixPathStackResolver;
 
 class FeedRendererTest extends TestCase
 {
@@ -116,5 +117,18 @@ class FeedRendererTest extends TestCase
     {
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException', 'expects a string of either "rss" or "atom"');
         $this->renderer->setFeedType('foobar');
+    }
+    
+    public function testReturnsSameRendererInstanceWhenResolverIsSet()
+    {
+        $resolver = new PrefixPathStackResolver();
+        $returnValue = $this->renderer->setResolver($resolver);
+        $this->assertSame($returnValue, $this->renderer);
+    }
+    
+    public function testReturnsSameRendererInstanceWhenFieldTypeIsSet()
+    {
+        $returnValue = $this->renderer->setFeedType('rss');
+        $this->assertSame($returnValue, $this->renderer);
     }
 }

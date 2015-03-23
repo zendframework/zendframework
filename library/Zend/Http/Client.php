@@ -412,13 +412,16 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setEncType($encType, $boundary = null)
     {
-        if (!empty($encType)) {
-            if (!empty($boundary)) {
-                $this->encType = $encType . "; boundary={$boundary}";
-            } else {
-                $this->encType = $encType;
-            }
+        if (null === $encType || empty($encType)) {
+            $this->encType = null;
+            return $this;
         }
+
+        if (! empty($boundary)) {
+            $encType .= sprintf('; boundary=%s', $boundary);
+        }
+
+        $this->encType = $encType;
         return $this;
     }
 

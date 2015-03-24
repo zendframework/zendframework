@@ -9,12 +9,12 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Int as IntFilter;
+use Zend\Filter\ToInt as ToIntFilter;
 
 /**
  * @group      Zend_Filter
  */
-class IntTest extends \PHPUnit_Framework_TestCase
+class ToIntTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Ensures that the filter follows expected behavior
@@ -23,7 +23,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $filter = new IntFilter();
+        $filter = new ToIntFilter();
 
         $valuesExpected = array(
             'string' => 0,
@@ -57,7 +57,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnUnfiltered($input)
     {
-        $filter = new IntFilter();
+        $filter = new ToIntFilter();
 
         $this->assertEquals($input, $filter($input));
     }

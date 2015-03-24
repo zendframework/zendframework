@@ -20,6 +20,10 @@ use Zend\ServiceManager\AbstractPluginManager;
  */
 class FilterPluginManager extends AbstractPluginManager
 {
+    protected $aliases = array(
+        'Zend\I18n\Filter\Int'       => 'Zend\I18n\Filter\ToInt',
+    );
+
     /**
      * Default set of plugins factories
      *
@@ -68,7 +72,7 @@ class FilterPluginManager extends AbstractPluginManager
         'fileuppercase'              => 'Zend\Filter\File\UpperCase',
         'htmlentities'               => 'Zend\Filter\HtmlEntities',
         'inflector'                  => 'Zend\Filter\Inflector',
-        'int'                        => 'Zend\Filter\Int',
+        'int'                        => 'Zend\Filter\ToInt',
         'monthselect'                => 'Zend\Filter\MonthSelect',
         'null'                       => 'Zend\Filter\Null',
         'numberformat'               => 'Zend\I18n\Filter\NumberFormat',
@@ -80,6 +84,7 @@ class FilterPluginManager extends AbstractPluginManager
         'stringtrim'                 => 'Zend\Filter\StringTrim',
         'stripnewlines'              => 'Zend\Filter\StripNewlines',
         'striptags'                  => 'Zend\Filter\StripTags',
+        'toint'                      => 'Zend\Filter\ToInt',
         'urinormalize'               => 'Zend\Filter\UriNormalize',
         'whitelist'                  => 'Zend\Filter\Whitelist',
         'wordcamelcasetodash'        => 'Zend\Filter\Word\CamelCaseToDash',

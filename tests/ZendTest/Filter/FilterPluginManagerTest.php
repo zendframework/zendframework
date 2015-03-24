@@ -24,7 +24,7 @@ class FilterPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testFilterSuccessfullyRetrieved()
     {
         $filter = $this->filters->get('int');
-        $this->assertInstanceOf('Zend\Filter\Int', $filter);
+        $this->assertInstanceOf('Zend\Filter\ToInt', $filter);
     }
 
     public function testRegisteringInvalidFilterRaisesException()

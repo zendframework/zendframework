@@ -9,7 +9,7 @@
 
 namespace Zend\Filter;
 
-class Int extends AbstractFilter
+class ToInt extends AbstractFilter
 {
     /**
      * Defined by Zend\Filter\FilterInterface

@@ -13,10 +13,10 @@
         "zendframework/zendxml": "~1.0-dev"
     },
     "require-dev": {
-        "doctrine/annotations": ">=1.0",
-        "ircmaxell/random-lib": ">=1.1",
-        "mikey179/vfsStream": "1.2.*",
-        "fabpot/php-cs-fixer": "1.*",
+        "doctrine/annotations": "^1.0",
+        "ircmaxell/random-lib": "^1.1",
+        "mikey179/vfsStream": "~1.2",
+        "fabpot/php-cs-fixer": "~1.0",
         "phpunit/PHPUnit": "~4.0",
         "satooshi/php-coveralls": "dev-master",
         "phpunit/phpcov": "~2.0"

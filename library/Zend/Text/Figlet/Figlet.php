@@ -1057,7 +1057,13 @@ class Figlet
         // At the end fetch all extended characters
         while (!feof($fp)) {
             // Get the Unicode
-            list($uniCode) = explode(' ', fgets($fp, 2048));
+            $uniCode = fgets($fp, 2048);
+
+            if (false === $uniCode) {
+                continue;
+            }
+
+            list($uniCode) = explode(' ', $uniCode);
 
             if (empty($uniCode)) {
                 continue;

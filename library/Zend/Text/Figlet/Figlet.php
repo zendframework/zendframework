@@ -978,8 +978,9 @@ class Figlet
         $magic = $this->_readMagic($fp);
 
         // Get the header
+        $line = fgets($fp, 1000) ?: '';
         $numsRead = sscanf(
-            fgets($fp, 1000),
+            $line,
             '%*c%c %d %*d %d %d %d %d %d',
             $this->hardBlank,
             $this->charHeight,

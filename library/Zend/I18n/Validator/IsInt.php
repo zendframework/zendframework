@@ -18,8 +18,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
-
-class Int extends AbstractValidator
+class IsInt extends AbstractValidator
 {
     const INVALID = 'intInvalid';
     const NOT_INT = 'notInt';

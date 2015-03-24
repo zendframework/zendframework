@@ -15,6 +15,15 @@ use Zend\ServiceManager\ConfigInterface;
 class ValidatorPluginManager extends AbstractPluginManager
 {
     /**
+     * Default aliases
+     *
+     * @var array
+     */
+    protected $aliases = array(
+        'Zend\I18n\Validator\Int'  => 'Zend\I18n\Validator\IsInt',
+    );
+
+    /**
      * Default set of validators
      *
      * @var array
@@ -89,10 +98,12 @@ class ValidatorPluginManager extends AbstractPluginManager
         'iban'                     => 'Zend\Validator\Iban',
         'identical'                => 'Zend\Validator\Identical',
         'inarray'                  => 'Zend\Validator\InArray',
-        'int'                      => 'Zend\I18n\Validator\Int',
+        'int'                      => 'Zend\I18n\Validator\IsInt',
         'ip'                       => 'Zend\Validator\Ip',
         'isbn'                     => 'Zend\Validator\Isbn',
         'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
+        'isint'                    => 'Zend\I18n\Validator\IsInt',
+        'ip'                       => 'Zend\Validator\Ip',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
         'phonenumber'              => 'Zend\I18n\Validator\PhoneNumber',

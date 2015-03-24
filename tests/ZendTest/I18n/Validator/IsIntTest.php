@@ -9,13 +9,13 @@
 
 namespace ZendTest\I18n\Validator;
 
-use Zend\I18n\Validator\Int as IntValidator;
+use Zend\I18n\Validator\IsInt as IsIntValidator;
 use Locale;
 
 /**
  * @group      Zend_Validator
  */
-class IntTest extends \PHPUnit_Framework_TestCase
+class IsIntTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Int
@@ -34,7 +34,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->locale    = Locale::getDefault();
-        $this->validator = new IntValidator();
+        $this->validator = new IsIntValidator();
     }
 
     public function tearDown()
@@ -107,7 +107,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testUsingApplicationLocale()
     {
         Locale::setDefault('de');
-        $valid = new IntValidator();
+        $valid = new IsIntValidator();
         $this->assertTrue($valid->isValid('10.000'));
     }
 
@@ -117,7 +117,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
     {
         Locale::setDefault('de');
-        $valid = new IntValidator();
+        $valid = new IsIntValidator();
         $this->assertTrue($valid->isValid(1200));
         $this->assertFalse($valid->isValid('1,200'));
     }
@@ -125,7 +125,10 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals(
+            $validator->getOption('messageTemplates'),
+            'messageTemplates',
+            $validator
+        );
     }
 }

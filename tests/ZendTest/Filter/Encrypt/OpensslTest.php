@@ -226,16 +226,11 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
      */
     public function testMultipleOptionsAtInitiation()
     {
-        $passphrase = 'zPUp9mCzIrM7xQOEnPJZiDkBwPBV9UlITY0Xd3v4bfIwzJ12yPQCAkcR5BsePGVw
-RK6GS5RwXSLrJu9Qj8+fk0wPj6IPY5HvA9Dgwh+dptPlXppeBm3JZJ+92l0DqR2M
-ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
-tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
-Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
-bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
+        $passphrase = 'test';
         $filter = new OpensslEncryption(array(
-            'public' => __DIR__ . '/../_files/publickey.pem',
+            'public' => __DIR__ . '/../_files/publickey_pass.pem',
             'passphrase' => $passphrase,
-            'private' => __DIR__ . '/../_files/privatekey.pem'));
+            'private' => __DIR__ . '/../_files/privatekey_pass.pem'));
         $public = $filter->getPublicKey();
         $this->assertFalse(empty($public));
         $this->assertEquals($passphrase, $filter->getPassphrase());
@@ -249,18 +244,13 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
     public function testEncryptionWithDecryptionWithPackagedKeys()
     {
         $filter = new OpensslEncryption();
-        $filter->setPublicKey(__DIR__ . '/../_files/publickey.pem');
+        $filter->setPublicKey(__DIR__ . '/../_files/publickey_pass.pem');
         $filter->setPackage(true);
         $output = $filter->encrypt('teststring');
         $this->assertNotEquals('teststring', $output);
 
-        $phrase = 'zPUp9mCzIrM7xQOEnPJZiDkBwPBV9UlITY0Xd3v4bfIwzJ12yPQCAkcR5BsePGVw
-RK6GS5RwXSLrJu9Qj8+fk0wPj6IPY5HvA9Dgwh+dptPlXppeBm3JZJ+92l0DqR2M
-ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
-tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
-Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
-bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
-        $filter->setPrivateKey(__DIR__ . '/../_files/privatekey.pem', $phrase);
+        $phrase = 'test';
+        $filter->setPrivateKey(__DIR__ . '/../_files/privatekey_pass.pem', $phrase);
         $input = $filter->decrypt($output);
         $this->assertEquals('teststring', trim($input));
     }
@@ -277,19 +267,14 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
         }
 
         $filter = new OpensslEncryption();
-        $filter->setPublicKey(__DIR__ . '/../_files/publickey.pem');
+        $filter->setPublicKey(__DIR__ . '/../_files/publickey_pass.pem');
         $filter->setPackage(true);
         $filter->setCompression('bz2');
         $output = $filter->encrypt('teststring');
         $this->assertNotEquals('teststring', $output);
 
-        $phrase = 'zPUp9mCzIrM7xQOEnPJZiDkBwPBV9UlITY0Xd3v4bfIwzJ12yPQCAkcR5BsePGVw
-RK6GS5RwXSLrJu9Qj8+fk0wPj6IPY5HvA9Dgwh+dptPlXppeBm3JZJ+92l0DqR2M
-ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
-tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
-Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
-bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
-        $filter->setPrivateKey(__DIR__ . '/../_files/privatekey.pem', $phrase);
+        $phrase = 'test';
+        $filter->setPrivateKey(__DIR__ . '/../_files/privatekey_pass.pem', $phrase);
         $input = $filter->decrypt($output);
         $this->assertEquals('teststring', trim($input));
     }

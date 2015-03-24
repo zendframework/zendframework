@@ -231,7 +231,7 @@ class Mbox extends AbstractStorage
 
         $result = false;
 
-        $line = fgets($file);
+        $line = fgets($file) ?: '';
         if (strpos($line, 'From ') === 0) {
             $result = true;
         }

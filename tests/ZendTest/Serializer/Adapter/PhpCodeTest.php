@@ -126,6 +126,9 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeInvalid()
     {
+        if (version_compare(PHP_VERSION, '7', 'ge')) {
+            $this->markTestSkipped('Cannot catch parse errors in PHP 7+');
+        }
         $value = 'not a serialized string';
 
         $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'syntax error');

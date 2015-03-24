@@ -168,7 +168,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
             if (extension_loaded('Scrypt') && ($size < 16)) {
                 $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException');
             }
-            $result = Scrypt::calc('test', 'salt', 16, 1, 1, $size);
+            $result = Scrypt::calc('test', 'salt', 16, 1, 1, $size) ?: '';
             $this->assertEquals($size, strlen($result));
         }
     }

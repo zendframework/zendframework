@@ -243,8 +243,8 @@ class Image extends AbstractRenderer
             $this->resource,
             $this->leftOffset,
             $this->topOffset,
-            $this->leftOffset + $barcodeWidth - 1,
-            $this->topOffset + $barcodeHeight - 1,
+            (int) ($this->leftOffset + $barcodeWidth - 1),
+            (int) ($this->topOffset + $barcodeHeight - 1),
             $this->imageBackgroundColor
         );
     }

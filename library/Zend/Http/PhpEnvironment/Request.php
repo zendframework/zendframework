@@ -59,6 +59,8 @@ class Request extends HttpRequest
     /**
      * Construct
      * Instantiates request.
+     *
+     * @param bool $allowCustomMethods
      */
     public function __construct($allowCustomMethods = true)
     {

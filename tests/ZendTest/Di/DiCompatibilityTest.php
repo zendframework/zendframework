@@ -60,6 +60,10 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
      */
     public function testRaiseErrorMissingConstructorRequiredParameter($class)
     {
+        if (version_compare(PHP_VERSION, '7', '>=')) {
+            $this->markTestSkipped('Errors have changed to E_FATAL, no longer allowing test to run');
+        }
+
         $phpunit = $this;
         $caught  = false;
         set_error_handler(function ($errno, $errstr) use ($phpunit, &$caught) {

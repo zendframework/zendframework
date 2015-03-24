@@ -38,7 +38,10 @@ class CacheControl implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cache-control') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid header line for Cache-Control string: ""',
+                $name
+            ));
         }
 
         $directives = static::parseValue($value);
@@ -179,6 +182,7 @@ class CacheControl implements HeaderInterface
             case 0:
                 $directive = $lastMatch;
                 goto state_value;
+                // intentional fall-through
 
             default:
                 throw new Exception\InvalidArgumentException('expected DIRECTIVE');
@@ -189,10 +193,12 @@ class CacheControl implements HeaderInterface
             case 0:
                 $directives[$directive] = substr($lastMatch, 2, -1);
                 goto state_separator;
+                // intentional fall-through
 
             case 1:
                 $directives[$directive] = rtrim(substr($lastMatch, 1));
                 goto state_separator;
+                // intentional fall-through
 
             default:
                 $directives[$directive] = true;
@@ -203,6 +209,7 @@ class CacheControl implements HeaderInterface
         switch (static::match(array('\s*,\s*', '$'), $value, $lastMatch)) {
             case 0:
                 goto state_directive;
+                // intentional fall-through
 
             case 1:
                 return $directives;
@@ -223,10 +230,13 @@ class CacheControl implements HeaderInterface
      */
     protected static function match($tokens, &$string, &$lastMatch)
     {
+        // Ensure we have a string
+        $value = (string) $string;
+
         foreach ($tokens as $i => $token) {
-            if (preg_match('/^' . $token . '/', $string, $matches)) {
+            if (preg_match('/^' . $token . '/', $value, $matches)) {
                 $lastMatch = $matches[0];
-                $string = substr($string, strlen($matches[0]));
+                $string = substr($value, strlen($matches[0]));
                 return $i;
             }
         }

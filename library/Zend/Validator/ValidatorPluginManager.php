@@ -20,6 +20,7 @@ class ValidatorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $aliases = array(
+        'Zend\I18n\Validator\Float'=> 'Zend\I18n\Validator\IsFloat',
         'Zend\I18n\Validator\Int'  => 'Zend\I18n\Validator\IsInt',
     );
 
@@ -91,7 +92,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'fileupload'               => 'Zend\Validator\File\Upload',
         'fileuploadfile'           => 'Zend\Validator\File\UploadFile',
         'filewordcount'            => 'Zend\Validator\File\WordCount',
-        'float'                    => 'Zend\I18n\Validator\Float',
+        'float'                    => 'Zend\I18n\Validator\IsFloat',
         'greaterthan'              => 'Zend\Validator\GreaterThan',
         'hex'                      => 'Zend\Validator\Hex',
         'hostname'                 => 'Zend\Validator\Hostname',
@@ -101,6 +102,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'int'                      => 'Zend\I18n\Validator\IsInt',
         'ip'                       => 'Zend\Validator\Ip',
         'isbn'                     => 'Zend\Validator\Isbn',
+        'isfloat'                  => 'Zend\I18n\Validator\IsFloat',
         'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
         'isint'                    => 'Zend\I18n\Validator\IsInt',
         'ip'                       => 'Zend\Validator\Ip',

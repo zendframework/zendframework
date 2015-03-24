@@ -20,7 +20,7 @@ use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
-class Float extends AbstractValidator
+class IsFloat extends AbstractValidator
 {
     const INVALID   = 'floatInvalid';
     const NOT_FLOAT = 'notFloat';
@@ -153,7 +153,8 @@ class Float extends AbstractValidator
         //NO-BREAK SPACE and ARABIC THOUSANDS SEPARATOR
         if ($groupSeparator == "\xC2\xA0") {
             $value = str_replace(' ', $groupSeparator, $value);
-        } elseif ($groupSeparator == "\xD9\xAC") {  //NumberFormatter doesn't have grouping at all for Arabic-Indic
+        } elseif ($groupSeparator == "\xD9\xAC") {
+            //NumberFormatter doesn't have grouping at all for Arabic-Indic
             $value = str_replace(array('\'', $groupSeparator), '', $value);
         }
 
@@ -217,7 +218,8 @@ class Float extends AbstractValidator
          */
 
         $lnum    = '[' . $numberRange . ']+';
-        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
+        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|('
+            . $lnum . $decimal . '[' . $numberRange . ']*))';
         $expDnum = '((' . $prefix . '((' . $lnum . '|' . $dnum . ')' . $exp . $prefix . $lnum . ')' . $suffix . ')|'
             . '(' . $suffix . '(' . $lnum . $prefix . $exp . '(' . $dnum . '|' . $lnum . '))' . $prefix . '))';
 

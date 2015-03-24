@@ -9,17 +9,17 @@
 
 namespace ZendTest\I18n\Validator;
 
-use Zend\I18n\Validator\Float as FloatValidator;
+use Zend\I18n\Validator\IsFloat as IsFloatValidator;
 use Locale;
 use NumberFormatter;
 
 /**
  * @group      Zend_Validator
  */
-class FloatTest extends \PHPUnit_Framework_TestCase
+class IsFloatTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FloatValidator
+     * @var IsFloatValidator
      */
     protected $validator;
 
@@ -35,7 +35,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->locale    = Locale::getDefault();
-        $this->validator = new FloatValidator(array('locale' => 'en'));
+        $this->validator = new IsFloatValidator(array('locale' => 'en'));
     }
 
     public function tearDown()
@@ -211,7 +211,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     public function testUsingApplicationLocale()
     {
         Locale::setDefault('de');
-        $valid = new FloatValidator();
+        $valid = new IsFloatValidator();
         $this->assertEquals('de', $valid->getLocale());
     }
 

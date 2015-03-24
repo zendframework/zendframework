@@ -85,7 +85,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $renderer->setRootElement($this->dom->documentElement);
             $renderer->render();
             $element = $renderer->getElement();
-            $imported = $this->dom->importNode($element, true);
+            $deep = version_compare(PHP_VERSION, '7', 'ge') ? 1 : true;
+            $imported = $this->dom->importNode($element, $deep);
             $channel->appendChild($imported);
         }
         return $this;
@@ -195,8 +196,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if (!$this->getDataContainer()->getGenerator()) {
-            $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
-                Version::VERSION, 'http://framework.zend.com');
+            $this->getDataContainer()->setGenerator(
+                'Zend_Feed_Writer',
+                Version::VERSION,
+                'http://framework.zend.com'
+            );
         }
 
         $gdata = $this->getDataContainer()->getGenerator();

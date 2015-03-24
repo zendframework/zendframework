@@ -103,20 +103,21 @@ class Entry extends Extension\AbstractEntry
                 case 'html':
                 case 'text/html':
                     $content = $el->nodeValue;
-                break;
+                    break;
                 case 'xhtml':
                     $this->getXpath()->registerNamespace('xhtml', 'http://www.w3.org/1999/xhtml');
                     $xhtml = $this->getXpath()->query(
                         $this->getXpathPrefix() . '/atom:content/xhtml:div'
                     )->item(0);
                     $d = new DOMDocument('1.0', $this->getEncoding());
-                    $xhtmls = $d->importNode($xhtml, true);
+                    $deep = version_compare(PHP_VERSION, '7', 'ge') ? 1 : true;
+                    $xhtmls = $d->importNode($xhtml, $deep);
                     $d->appendChild($xhtmls);
                     $content = $this->collectXhtml(
                         $d->saveXML(),
                         $d->lookupPrefix('http://www.w3.org/1999/xhtml')
                     );
-                break;
+                    break;
             }
         }
 
@@ -296,9 +297,12 @@ class Entry extends Extension\AbstractEntry
             return $this->data['baseUrl'];
         }
 
-        $baseUrl = $this->getXpath()->evaluate('string('
-            . $this->getXpathPrefix() . '/@xml:base[1]'
-        . ')');
+        $baseUrl = $this->getXpath()->evaluate(
+            'string('
+            . $this->getXpathPrefix()
+            . '/@xml:base[1]'
+            . ')'
+        );
 
         if (!$baseUrl) {
             $baseUrl = $this->getXpath()->evaluate('string(//@xml:base[1])');

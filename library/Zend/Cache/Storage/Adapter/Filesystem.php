@@ -1498,6 +1498,11 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function putFileContent($file, $data, $nonBlocking = false, & $wouldblock = null)
     {
+        if (! is_string($data)) {
+            // Ensure we have a string
+            $data = (string) $data;
+        }
+
         $options     = $this->getOptions();
         $locking     = $options->getFileLocking();
         $nonBlocking = $locking && $nonBlocking;

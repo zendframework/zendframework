@@ -1157,6 +1157,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function waitForFullSecond()
     {
-        usleep((microtime(true)-time()) * 1000000);
+        $interval = (microtime(true)-time()) * 1000000;
+        usleep((int) $interval);
     }
 }

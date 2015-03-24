@@ -82,6 +82,26 @@ class MongoDBOptions extends AbstractOptions
     }
 
     /**
+     * Override AbstractOptions::__set
+     *
+     * Validates value if save options are being set.
+     * 
+     * @param string $key 
+     * @param mixed $value 
+     */
+    public function __set($key, $value)
+    {
+        if (strtolower($key) !== 'saveoptions') {
+            return parent::__set($key, $value);
+        }
+
+        if (! is_array($value)) {
+            throw new InvalidArgumentException('Expected array for save options');
+        }
+        $this->setSaveOptions($value);
+    }
+
+    /**
      * Set database name
      *
      * @param string $database

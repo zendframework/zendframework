@@ -108,7 +108,7 @@ abstract class AbstractPlatform implements PlatformInterface
             'Attempting to quote a value in ' . get_class($this) .
             ' without extension/driver support can introduce security vulnerabilities in a production environment'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\'' . addcslashes((string) $value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function quoteTrustedValue($value)
     {
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\'' . addcslashes((string) $value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**

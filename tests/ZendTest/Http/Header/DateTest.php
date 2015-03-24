@@ -37,7 +37,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
 
         $date     = new \DateTime(null, new \DateTimeZone('GMT'));
-        $interval = $dateHeader->date()->diff($date, true);
+        $interval = $dateHeader->date()->diff($date, 1);
 
         $this->assertSame('+12 hours 00 minutes 00 seconds', $interval->format('%R%H hours %I minutes %S seconds'));
     }
@@ -50,7 +50,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
 
         $date     = new \DateTime(null, new \DateTimeZone('GMT'));
-        $interval = $dateHeader->date()->diff($date, true);
+        $interval = $dateHeader->date()->diff($date, 1);
 
         $this->assertSame('+12 hours 00 minutes 00 seconds', $interval->format('%R%H hours %I minutes %S seconds'));
     }

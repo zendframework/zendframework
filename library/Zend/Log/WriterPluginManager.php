@@ -17,7 +17,7 @@ class WriterPluginManager extends AbstractPluginManager
         'null'                 => 'noop',
         'Zend\Log\Writer\Null' => 'noop',
     );
-    
+
     /**
      * Default set of writers
      *

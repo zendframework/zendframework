@@ -9,8 +9,6 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Message;
-
 /**
  * Stub class for backwards compatibility.
  *

@@ -15,7 +15,7 @@ use Zend\Paginator;
 /**
  * @group      Zend_Paginator
  */
-class NullTest extends \PHPUnit_Framework_TestCase
+class NullFillTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Zend\Paginator\Adapter\Array
@@ -28,7 +28,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->adapter = new Adapter\Null(101);
+        $this->adapter = new Adapter\NullFill(101);
     }
     /**
      * Cleans up the environment after running a test.
@@ -55,7 +55,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterReturnsCorrectValues()
     {
-        $paginator = new Paginator\Paginator(new Adapter\Null(2));
+        $paginator = new Paginator\Paginator(new Adapter\NullFill(2));
         $paginator->setCurrentPageNumber(1);
         $paginator->setItemCountPerPage(5);
 
@@ -64,7 +64,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $pages->currentItemCount);
         $this->assertEquals(2, $pages->lastItemNumber);
 
-        $paginator = new Paginator\Paginator(new Adapter\Null(19));
+        $paginator = new Paginator\Paginator(new Adapter\NullFill(19));
         $paginator->setCurrentPageNumber(4);
         $paginator->setItemCountPerPage(5);
 
@@ -79,7 +79,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptySet()
     {
-        $this->adapter = new Adapter\Null(0);
+        $this->adapter = new Adapter\NullFill(0);
         $actual = $this->adapter->getItems(0, 10);
         $this->assertEquals(array(), $actual);
     }
@@ -89,7 +89,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOfOne()
     {
-        $this->adapter = new Adapter\Null(1);
+        $this->adapter = new Adapter\NullFill(1);
         $actual = $this->adapter->getItems(0, 10);
         $this->assertEquals(array_fill(0, 1, null), $actual);
     }

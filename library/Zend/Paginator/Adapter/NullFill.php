@@ -9,7 +9,7 @@
 
 namespace Zend\Paginator\Adapter;
 
-class Null implements AdapterInterface
+class NullFill implements AdapterInterface
 {
     /**
      * Item count

@@ -1323,7 +1323,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'filters-single' => array(
                 '<number>',
                 array(
-                    'number' => new \Zend\Filter\Int()
+                    'number' => new \Zend\Filter\ToInt()
                 ),
                 array('123four'),
                 array(
@@ -1333,7 +1333,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'filters-multiple' => array(
                 '<number> <strtolower>',
                 array(
-                    'number' => new \Zend\Filter\Int(),
+                    'number' => new \Zend\Filter\ToInt(),
                     'strtolower' => new \Zend\Filter\StringToLower(),
                 ),
                 array('nan', 'FOOBAR'),

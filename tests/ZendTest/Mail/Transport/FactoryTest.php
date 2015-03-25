@@ -47,9 +47,14 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCanCreateClassUsingTypeKey($type)
     {
+        set_error_handler(function ($code, $message) {
+            // skip deprecation notices
+            return;
+        }, E_USER_DEPRECATED);
         $transport = Factory::create(array(
             'type' => $type,
         ));
+        restore_error_handler();
 
         $this->assertInstanceOf($type, $transport);
     }

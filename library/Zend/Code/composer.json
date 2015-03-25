@@ -8,11 +8,10 @@
     ],
     "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Zend\\Code\\": ""
         }
     },
-    "target-dir": "Zend/Code",
     "require": {
         "php": ">=5.3.23",
         "zendframework/zend-eventmanager": "self.version"

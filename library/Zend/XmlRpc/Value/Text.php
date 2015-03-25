@@ -9,7 +9,7 @@
 
 namespace Zend\XmlRpc\Value;
 
-class String extends AbstractScalar
+class Text extends AbstractScalar
 {
     /**
      * Set the value of a string native type

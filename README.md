@@ -11,11 +11,12 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.4.0dev*
+*Zend Framework 2.4.0rc3*
 
-This is the fourth minor (feature) release for the version 2 series.
+This is a RELEASE CANDIDATE for the fourth minor (feature) release of
+the version 2 series.
 
-DD MMM YYY
+25 March 2015
 
 ### UPDATES IN 2.4.0
 
@@ -26,7 +27,8 @@ DD MMM YYY
   the `isValid()` method of an InputFilter, you will need to add
   `$context = null` as an argument.
 
-Please see [CHANGELOG.md](CHANGELOG.md).
+More release notes will be provided with the stable release; this release is
+intended for testing purposes only.
 
 ### SYSTEM REQUIREMENTS
 

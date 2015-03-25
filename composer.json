@@ -30,11 +30,12 @@
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },
     "autoload": {
-        "psr-0": {
-            "Zend\\": "library/"
+        "psr-4": {
+            "Zend\\": "library/Zend/"
         }
     },
     "autoload-dev": {
+        "psr-0": "using PSR-0 for tests, as we have test assets with underscores",
         "psr-0": {
             "ZendTest\\": "tests/"
         }

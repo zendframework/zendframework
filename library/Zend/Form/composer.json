@@ -8,11 +8,10 @@
     ],
     "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Zend\\Form\\": ""
         }
     },
-    "target-dir": "Zend/Form",
     "require": {
         "php": ">=5.3.23",
         "zendframework/zend-inputfilter": "self.version",

@@ -148,7 +148,7 @@ class CallbackCacheTest extends CommonPatternTest
         $firstCounter = TestCallbackCache::$fooCounter + 1;
 
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
         $return = $this->_pattern->call($callback, $args);
         $data = ob_get_clean();
 
@@ -157,7 +157,7 @@ class CallbackCacheTest extends CommonPatternTest
 
         // second call - cached
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
         $return = $this->_pattern->call($callback, $args);
         $data = ob_get_clean();
 

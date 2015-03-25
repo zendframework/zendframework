@@ -20,6 +20,11 @@ use Zend\ServiceManager\AbstractPluginManager;
  */
 class FilterPluginManager extends AbstractPluginManager
 {
+    protected $aliases = array(
+        'Zend\Filter\Int'            => 'Zend\Filter\ToInt',
+        'Zend\Filter\Null'           => 'Zend\Filter\ToNull',
+    );
+
     /**
      * Default set of plugins factories
      *
@@ -68,9 +73,9 @@ class FilterPluginManager extends AbstractPluginManager
         'fileuppercase'              => 'Zend\Filter\File\UpperCase',
         'htmlentities'               => 'Zend\Filter\HtmlEntities',
         'inflector'                  => 'Zend\Filter\Inflector',
-        'int'                        => 'Zend\Filter\Int',
+        'int'                        => 'Zend\Filter\ToInt',
         'monthselect'                => 'Zend\Filter\MonthSelect',
-        'null'                       => 'Zend\Filter\Null',
+        'null'                       => 'Zend\Filter\ToNull',
         'numberformat'               => 'Zend\I18n\Filter\NumberFormat',
         'numberparse'                => 'Zend\I18n\Filter\NumberParse',
         'pregreplace'                => 'Zend\Filter\PregReplace',
@@ -80,6 +85,8 @@ class FilterPluginManager extends AbstractPluginManager
         'stringtrim'                 => 'Zend\Filter\StringTrim',
         'stripnewlines'              => 'Zend\Filter\StripNewlines',
         'striptags'                  => 'Zend\Filter\StripTags',
+        'toint'                      => 'Zend\Filter\ToInt',
+        'tonull'                     => 'Zend\Filter\ToNull',
         'urinormalize'               => 'Zend\Filter\UriNormalize',
         'whitelist'                  => 'Zend\Filter\Whitelist',
         'wordcamelcasetodash'        => 'Zend\Filter\Word\CamelCaseToDash',

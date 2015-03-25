@@ -116,6 +116,10 @@ class CurlTest extends CommonHttpTests
      */
     public function testSettingInvalidCurlOption()
     {
+        if (version_compare(PHP_VERSION, 7, 'gte')) {
+            $this->markTestSkipped('Test is invalid for PHP version 7');
+        }
+
         $config = array(
             'adapter'     => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),

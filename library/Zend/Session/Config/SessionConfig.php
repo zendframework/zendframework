@@ -85,7 +85,7 @@ class SessionConfig extends StandardConfig
                 break;
         }
 
-        $result = ini_set($key, $storageValue);
+        $result = ini_set($key, (string) $storageValue);
         if (false === $result) {
             throw new Exception\InvalidArgumentException(
                 "'{$key}' is not a valid sessions-related ini setting."

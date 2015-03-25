@@ -9,19 +9,20 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Float;
+use Zend\Db\Sql\Ddl\Column\Float as FloatColumn;
 
 class FloatTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers Zend\Db\Sql\Ddl\Column\Float::getExpressionData
-     */
-    public function testGetExpressionData()
+    public function setUp()
     {
-        $column = new Float('foo', 10, 5);
-        $this->assertEquals(
-            array(array('%s %s NOT NULL', array('foo', 'FLOAT(10,5)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
-            $column->getExpressionData()
-        );
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            $this->markTestSkipped('Cannot test Float column under PHP 7; reserved keyword');
+        }
+    }
+
+    public function testRaisesDeprecationNoticeOnInstantiation()
+    {
+        $this->setExpectedException('PHPUnit_Framework_Error_Deprecated');
+        new FloatColumn('foo', 10, 5);
     }
 }

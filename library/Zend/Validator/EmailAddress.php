@@ -457,9 +457,12 @@ class EmailAddress extends AbstractValidator
      */
     protected function splitEmailParts($value)
     {
+        $value = is_string($value) ? $value : '';
+
         // Split email address up and disallow '..'
-        if ((strpos($value, '..') !== false) or
-            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+        if (strpos($value, '..') !== false
+            || ! preg_match('/^(.+)@([^@]+)$/', $value, $matches)
+        ) {
             return false;
         }
 
@@ -526,7 +529,7 @@ class EmailAddress extends AbstractValidator
     protected function idnToAscii($email)
     {
         if (extension_loaded('intl')) {
-            return idn_to_ascii($email);
+            return (idn_to_ascii($email) ?: $email);
         }
         return $email;
     }

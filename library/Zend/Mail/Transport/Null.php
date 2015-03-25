@@ -9,38 +9,27 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Message;
-
 /**
- * File transport
+ * Stub class for backwards compatibility.
  *
- * The null transport will just store the message in memory.  It is helpful
- * when unit testing.
+ * Since PHP 7 adds "null" as a reserved keyword, we can no longer have a class
+ * named that and retain PHP 7 compatibility. The original class has been
+ * renamed to "InMemory", and this class is now an extension of it. It raises an
+ * E_USER_DEPRECATED to warn users to migrate.
+ *
+ * @deprecated
  */
-class Null implements TransportInterface
+class Null extends InMemory
 {
-    /**
-     * @var Message
-     */
-    protected $lastMessage;
-
-    /**
-     * Takes the last message and Saves it for testing
-     *
-     * @param Message $message
-     */
-    public function send(Message $message)
+    public function __construct()
     {
-        $this->lastMessage = $message;
-    }
-
-    /**
-     * Get the last message sent
-     *
-     * @return Message
-     */
-    public function getLastMessage()
-    {
-        return $this->lastMessage;
+        trigger_error(
+            sprintf(
+                'The class %s has been deprecated; please use %s\\InMemory',
+                __CLASS__,
+                __NAMESPACE__
+            ),
+            E_USER_DEPRECATED
+        );
     }
 }

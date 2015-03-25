@@ -47,7 +47,7 @@ class ConsoleAdapter extends AbstractAdapter
         if ($this->autoRewind) {
             rewind($this->stream);
         }
-        $line = stream_get_line($this->stream, $maxLength, PHP_EOL);
+        $line = stream_get_line($this->stream, $maxLength, PHP_EOL) ?: '';
         return rtrim($line, PHP_EOL);
     }
 

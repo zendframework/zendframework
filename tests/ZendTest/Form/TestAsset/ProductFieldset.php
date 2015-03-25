@@ -81,7 +81,7 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'Float'
+                        'name' => 'IsFloat'
                     )
                 )
             ),

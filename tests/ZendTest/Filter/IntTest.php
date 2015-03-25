@@ -16,49 +16,16 @@ use Zend\Filter\Int as IntFilter;
  */
 class IntTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Ensures that the filter follows expected behavior
-     *
-     * @return void
-     */
-    public function testBasic()
+    public function setUp()
     {
-        $filter = new IntFilter();
-
-        $valuesExpected = array(
-            'string' => 0,
-            '1'      => 1,
-            '-1'     => -1,
-            '1.1'    => 1,
-            '-1.1'   => -1,
-            '0.9'    => 0,
-            '-0.9'   => 0
-            );
-        foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals($output, $filter($input));
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            $this->markTestSkipped('Cannot test Int filter under PHP 7; reserved keyword');
         }
     }
 
-    public function returnUnfilteredDataProvider()
+    public function testRaisesNoticeOnInstantiation()
     {
-        return array(
-            array(null),
-            array(new \stdClass()),
-            array(array(
-                '1',
-                -1
-            ))
-        );
-    }
-
-    /**
-     * @dataProvider returnUnfilteredDataProvider
-     * @return void
-     */
-    public function testReturnUnfiltered($input)
-    {
-        $filter = new IntFilter();
-
-        $this->assertEquals($input, $filter($input));
+        $this->setExpectedException('PHPUnit_Framework_Error_Deprecated');
+        new IntFilter();
     }
 }

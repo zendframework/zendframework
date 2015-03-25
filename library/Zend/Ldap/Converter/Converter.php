@@ -163,7 +163,7 @@ class Converter
         if (!is_scalar($value)) {
             return $return;
         }
-        if (true === $value || 'true' === strtolower($value) || 1 === $value) {
+        if (true === $value || (is_string($value) && 'true' === strtolower($value)) || 1 === $value) {
             $return = 'TRUE';
         }
         return $return;
@@ -321,7 +321,9 @@ class Converter
                 if (isset($off[3])) {
                     $offsetMinutes = substr($off[3], 0, 2);
                     if ($offsetMinutes < 0 || $offsetMinutes > 59) {
-                        throw new Exception\InvalidArgumentException('Invalid date format found (invalid offset minute)');
+                        throw new Exception\InvalidArgumentException(
+                            'Invalid date format found (invalid offset minute)'
+                        );
                     }
                     $time['offsetminutes'] = $offsetMinutes;
                 }

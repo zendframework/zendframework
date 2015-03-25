@@ -41,7 +41,10 @@ class AnnotationBuilderTest extends TestCase
         $password = $form->get('password');
         $this->assertInstanceOf('Zend\Form\Element', $password);
         $attributes = $password->getAttributes();
-        $this->assertEquals(array('type' => 'password', 'label' => 'Enter your password', 'name' => 'password'), $attributes);
+        $this->assertEquals(
+            array('type' => 'password', 'label' => 'Enter your password', 'name' => 'password'),
+            $attributes
+        );
         $this->assertNull($password->getAttribute('required'));
 
         $filter = $form->getInputFilter();
@@ -341,7 +344,32 @@ class AnnotationBuilderTest extends TestCase
 
     public function testObjectElementAnnotation()
     {
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            $this->markTestSkipped('Cannot test Object annotation in PHP 7; object is a reserved keyword');
+        }
+
         $entity = new TestAsset\Annotation\EntityUsingObjectProperty();
+        $builder = new Annotation\AnnotationBuilder();
+
+        $phpunit = $this;
+        set_error_handler(function ($code, $message) use ($phpunit) {
+            $phpunit->assertEquals(E_USER_DEPRECATED, $code);
+        }, E_USER_DEPRECATED);
+        $form = $builder->createForm($entity);
+        restore_error_handler();
+
+        $fieldset = $form->get('object');
+        /* @var $fieldset Zend\Form\Fieldset */
+
+        $this->assertInstanceOf('Zend\Form\Fieldset', $fieldset);
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Entity', $fieldset->getObject());
+        $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods", $fieldset->getHydrator());
+        $this->assertFalse($fieldset->getHydrator()->getUnderscoreSeparatedKeys());
+    }
+
+    public function testInstanceElementAnnotation()
+    {
+        $entity = new TestAsset\Annotation\EntityUsingInstanceProperty();
         $builder = new Annotation\AnnotationBuilder();
         $form = $builder->createForm($entity);
 
@@ -362,10 +390,11 @@ class AnnotationBuilderTest extends TestCase
         $inputFilter = $form->getInputFilter();
 
         $this->assertTrue($inputFilter->has('input'));
-        foreach (
-            array('Zend\InputFilter\InputInterface', 'ZendTest\Form\TestAsset\Annotation\InputFilterInput') as
-            $expectedInstance
-        ) {
+        $expected = array(
+            'Zend\InputFilter\InputInterface',
+            'ZendTest\Form\TestAsset\Annotation\InputFilterInput',
+        );
+        foreach ($expected as $expectedInstance) {
             $this->assertInstanceOf($expectedInstance, $inputFilter->get('input'));
         }
     }

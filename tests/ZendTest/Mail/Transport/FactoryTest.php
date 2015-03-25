@@ -47,21 +47,32 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCanCreateClassUsingTypeKey($type)
     {
+        set_error_handler(function ($code, $message) {
+            // skip deprecation notices
+            return;
+        }, E_USER_DEPRECATED);
         $transport = Factory::create(array(
             'type' => $type,
         ));
+        restore_error_handler();
 
         $this->assertInstanceOf($type, $transport);
     }
 
     public function typeProvider()
     {
-        return array(
+        $types = array(
             array('Zend\Mail\Transport\File'),
-            array('Zend\Mail\Transport\Null'),
+            array('Zend\Mail\Transport\InMemory'),
             array('Zend\Mail\Transport\Sendmail'),
             array('Zend\Mail\Transport\Smtp'),
         );
+
+        if (version_compare(PHP_VERSION, '7.0', '<')) {
+            $types[] = array('Zend\Mail\Transport\Null');
+        }
+
+        return $types;
     }
 
     /**
@@ -82,12 +93,15 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array('file', 'Zend\Mail\Transport\File'),
-            array('null', 'Zend\Mail\Transport\Null'),
+            array('null', 'Zend\Mail\Transport\InMemory'),
+            array('memory', 'Zend\Mail\Transport\InMemory'),
+            array('inmemory', 'Zend\Mail\Transport\InMemory'),
+            array('InMemory', 'Zend\Mail\Transport\InMemory'),
             array('sendmail', 'Zend\Mail\Transport\Sendmail'),
             array('smtp', 'Zend\Mail\Transport\Smtp'),
             array('File', 'Zend\Mail\Transport\File'),
-            array('Null', 'Zend\Mail\Transport\Null'),
-            array('NULL', 'Zend\Mail\Transport\Null'),
+            array('Null', 'Zend\Mail\Transport\InMemory'),
+            array('NULL', 'Zend\Mail\Transport\InMemory'),
             array('Sendmail', 'Zend\Mail\Transport\Sendmail'),
             array('SendMail', 'Zend\Mail\Transport\Sendmail'),
             array('Smtp', 'Zend\Mail\Transport\Smtp'),
@@ -106,7 +120,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
 
         $transport = Factory::create($spec);
 
-        $this->assertInstanceOf('Zend\Mail\Transport\Null', $transport);
+        $this->assertInstanceOf('Zend\Mail\Transport\InMemory', $transport);
     }
 
     /**

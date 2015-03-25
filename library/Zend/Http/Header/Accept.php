@@ -80,7 +80,7 @@ class Accept extends AbstractAccept
         if ($pos = strpos($fieldValuePart, '/')) {
             $type = trim(substr($fieldValuePart, 0, $pos));
         } else {
-            $type = trim(substr($fieldValuePart, 0));
+            $type = trim($fieldValuePart);
         }
 
         $params = $this->getParametersFromFieldValuePart($fieldValuePart);

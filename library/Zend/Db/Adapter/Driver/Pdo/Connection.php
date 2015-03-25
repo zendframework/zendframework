@@ -42,7 +42,9 @@ class Connection extends AbstractConnection
         } elseif ($connectionParameters instanceof \PDO) {
             $this->setResource($connectionParameters);
         } elseif (null !== $connectionParameters) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
+            throw new Exception\InvalidArgumentException(
+                '$connection must be an array of parameters, a PDO object or null'
+            );
         }
     }
 
@@ -66,7 +68,9 @@ class Connection extends AbstractConnection
     {
         $this->connectionParameters = $connectionParameters;
         if (isset($connectionParameters['dsn'])) {
-            $this->driverName = substr($connectionParameters['dsn'], 0,
+            $this->driverName = substr(
+                $connectionParameters['dsn'],
+                0,
                 strpos($connectionParameters['dsn'], ':')
             );
         } elseif (isset($connectionParameters['pdodriver'])) {
@@ -87,7 +91,9 @@ class Connection extends AbstractConnection
     public function getDsn()
     {
         if (!$this->dsn) {
-            throw new Exception\RunTimeException("The DSN has not been set or constructed from parameters in connect() for this Connection");
+            throw new Exception\RunTimeException(
+                'The DSN has not been set or constructed from parameters in connect() for this Connection'
+            );
         }
 
         return $this->dsn;
@@ -161,9 +167,11 @@ class Connection extends AbstractConnection
                     $dsn = $value;
                     break;
                 case 'driver':
-                    $value = strtolower($value);
+                    $value = strtolower((string) $value);
                     if (strpos($value, 'pdo') === 0) {
-                        $pdoDriver = strtolower(substr(str_replace(array('-', '_', ' '), '', $value), 3));
+                        $pdoDriver = str_replace(array('-', '_', ' '), '', $value);
+                        $pdoDriver = substr($pdoDriver, 3) ?: '';
+                        $pdoDriver = strtolower($pdoDriver);
                     }
                     break;
                 case 'pdodriver':

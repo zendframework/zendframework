@@ -23,7 +23,8 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testValidationAdd()
     {
         $this->assertTrue($this->filterComposite->filter("foo"));
-        $this->filterComposite->addFilter("has",
+        $this->filterComposite->addFilter(
+            'has',
             function ($property) {
                 return false;
             }
@@ -33,7 +34,8 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationRemove()
     {
-        $this->filterComposite->addFilter("has",
+        $this->filterComposite->addFilter(
+            'has',
             function ($property) {
                 return false;
             }
@@ -45,7 +47,8 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationHas()
     {
-        $this->filterComposite->addFilter("has",
+        $this->filterComposite->addFilter(
+            'has',
             function ($property) {
                 return false;
             }
@@ -60,16 +63,19 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
         $this->filterComposite->addFilter("get", new \Zend\Stdlib\Hydrator\Filter\GetFilter());
         $this->filterComposite->addFilter("is", new \Zend\Stdlib\Hydrator\Filter\IsFilter());
 
-        $this->filterComposite->addFilter("exclude",
+        $this->filterComposite->addFilter(
+            'exclude',
             function ($property) {
-                $method = substr($property, strpos($property, '::'));
+                $separatorPos = strpos($property, '::') ?: 0;
+                $method = substr($property, $separatorPos);
 
                 if ($method === 'getServiceLocator') {
                     return false;
                 }
 
                 return true;
-            }, FilterComposite::CONDITION_AND
+            },
+            FilterComposite::CONDITION_AND
         );
 
         $this->assertTrue($this->filterComposite->filter('getFooBar'));
@@ -109,11 +115,11 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FilterComposite();
         $filter->addFilter("foobarbaz", function ($property) {
-                return true;
-            }, FilterComposite::CONDITION_AND);
+            return true;
+        }, FilterComposite::CONDITION_AND);
         $filter->addFilter("foobar", function ($property) {
-                return true;
-            }, FilterComposite::CONDITION_AND);
+            return true;
+        }, FilterComposite::CONDITION_AND);
         $this->assertTrue($filter->filter("foo"));
     }
 
@@ -121,11 +127,11 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FilterComposite();
         $filter->addFilter("foobarbaz", function ($property) {
-                return true;
-            });
+            return true;
+        });
         $filter->addFilter("foobar", function ($property) {
-                return false;
-            });
+            return false;
+        });
         $this->assertTrue($filter->filter("foo"));
     }
 
@@ -133,24 +139,26 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     {
         $filter1 = new FilterComposite();
         $filter1->addFilter("foobarbaz", function ($property) {
-                return true;
-            });
+            return true;
+        });
         $filter1->addFilter("foobar", function ($property) {
-                return false;
-            });
+            return false;
+        });
         $filter2 = new FilterComposite();
         $filter2->addFilter("bar", function ($property) {
-                return true;
-            }, FilterComposite::CONDITION_AND);
+            return true;
+        }, FilterComposite::CONDITION_AND);
         $filter2->addFilter("barblubb", function ($property) {
-                return true;
-            }, FilterComposite::CONDITION_AND);
+            return true;
+        }, FilterComposite::CONDITION_AND);
         $this->assertTrue($filter1->filter("foo"));
         $this->assertTrue($filter2->filter("foo"));
         $filter1->addFilter("bar", $filter2);
         $this->assertTrue($filter1->filter("blubb"));
 
-        $filter1->addFilter("blubb", function ($property) { return false; }, FilterComposite::CONDITION_AND);
+        $filter1->addFilter("blubb", function ($property) {
+            return false;
+        }, FilterComposite::CONDITION_AND);
         $this->assertFalse($filter1->filter("test"));
     }
 

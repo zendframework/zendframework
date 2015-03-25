@@ -22,14 +22,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      * \Zend\XmlRpc\Request object
      * @var \Zend\XmlRpc\Request
      */
-    protected $_request;
+    protected $request;
 
     /**
      * Setup environment
      */
     public function setUp()
     {
-        $this->_request = new Request();
+        $this->request = new Request();
     }
 
     /**
@@ -37,7 +37,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->_request);
+        unset($this->request);
     }
 
     /**
@@ -45,15 +45,15 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod()
     {
-        $this->assertTrue($this->_request->setMethod('testMethod'));
-        $this->assertTrue($this->_request->setMethod('testMethod9'));
-        $this->assertTrue($this->_request->setMethod('test.Method'));
-        $this->assertTrue($this->_request->setMethod('test_method'));
-        $this->assertTrue($this->_request->setMethod('test:method'));
-        $this->assertTrue($this->_request->setMethod('test/method'));
-        $this->assertFalse($this->_request->setMethod('testMethod-bogus'));
+        $this->assertTrue($this->request->setMethod('testMethod'));
+        $this->assertTrue($this->request->setMethod('testMethod9'));
+        $this->assertTrue($this->request->setMethod('test.Method'));
+        $this->assertTrue($this->request->setMethod('test_method'));
+        $this->assertTrue($this->request->setMethod('test:method'));
+        $this->assertTrue($this->request->setMethod('test/method'));
+        $this->assertFalse($this->request->setMethod('testMethod-bogus'));
 
-        $this->assertEquals('test/method', $this->_request->getMethod());
+        $this->assertEquals('test/method', $this->request->getMethod());
     }
 
 
@@ -79,19 +79,19 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddParam()
     {
-        $this->_request->addParam('string1');
-        $params = $this->_request->getParams();
+        $this->request->addParam('string1');
+        $params = $this->request->getParams();
         $this->assertEquals(1, count($params));
         $this->assertEquals('string1', $params[0]);
 
-        $this->_request->addParam('string2');
-        $params = $this->_request->getParams();
+        $this->request->addParam('string2');
+        $params = $this->request->getParams();
         $this->assertSame(2, count($params));
         $this->assertSame('string1', $params[0]);
         $this->assertSame('string2', $params[1]);
 
-        $this->_request->addParam(new Value\String('foo'));
-        $params = $this->_request->getParams();
+        $this->request->addParam(new Value\Text('foo'));
+        $params = $this->request->getParams();
         $this->assertSame(3, count($params));
         $this->assertSame('string1', $params[0]);
         $this->assertSame('string2', $params[1]);
@@ -101,9 +101,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testAddDateParamGeneratesCorrectXml()
     {
         $time = time();
-        $this->_request->addParam($time, AbstractValue::XMLRPC_TYPE_DATETIME);
-        $this->_request->setMethod('foo.bar');
-        $xml = $this->_request->saveXml();
+        $this->request->addParam($time, AbstractValue::XMLRPC_TYPE_DATETIME);
+        $this->request->setMethod('foo.bar');
+        $xml = $this->request->saveXml();
         $sxl = new \SimpleXMLElement($xml);
         $param = $sxl->params->param->value;
         $type  = 'dateTime.iso8601';
@@ -121,29 +121,29 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             true,
             array('one', 'two')
         );
-        $this->_request->setParams($params);
-        $returned = $this->_request->getParams();
+        $this->request->setParams($params);
+        $returned = $this->request->getParams();
         $this->assertSame($params, $returned);
 
         $params = array(
             'string2',
             array('two', 'one')
         );
-        $this->_request->setParams($params);
-        $returned = $this->_request->getParams();
+        $this->request->setParams($params);
+        $returned = $this->request->getParams();
         $this->assertSame($params, $returned);
 
         $params = array(array('value' => 'foobar'));
-        $this->_request->setParams($params);
-        $this->assertSame(array('foobar'), $this->_request->getParams());
-        $this->assertSame(array('string'), $this->_request->getTypes());
+        $this->request->setParams($params);
+        $this->assertSame(array('foobar'), $this->request->getParams());
+        $this->assertSame(array('string'), $this->request->getTypes());
 
         $null = new Value\Nil();
-        $this->_request->setParams('foo', 1, $null);
-        $this->assertSame(array('foo', 1, $null), $this->_request->getParams());
-        $this->assertSame(array('string', 'int', 'nil'), $this->_request->getTypes());
+        $this->request->setParams('foo', 1, $null);
+        $this->assertSame(array('foo', 1, $null), $this->request->getParams());
+        $this->assertSame(array('string', 'int', 'nil'), $this->request->getTypes());
 
-        $this->assertNull($this->_request->setParams(), 'Call without argument returns null');
+        $this->assertNull($this->request->setParams(), 'Call without argument returns null');
     }
 
     /**
@@ -167,61 +167,67 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $xml = $dom->saveXml();
 
 
-        $parsed = $this->_request->loadXml($xml);
+        $parsed = $this->request->loadXml($xml);
         $this->assertTrue($parsed, $xml);
 
-        $this->assertEquals('do.Something', $this->_request->getMethod());
+        $this->assertEquals('do.Something', $this->request->getMethod());
         $test = array('string1', true);
-        $params = $this->_request->getParams();
+        $params = $this->request->getParams();
         $this->assertSame($test, $params);
 
-        $parsed = $this->_request->loadXml('foo');
+        $parsed = $this->request->loadXml('foo');
         $this->assertFalse($parsed, 'Parsed non-XML string?');
     }
 
     public function testPassingInvalidTypeToLoadXml()
     {
-        $this->assertFalse($this->_request->loadXml(new \stdClass()));
-        $this->assertTrue($this->_request->isFault());
-        $this->assertSame(635, $this->_request->getFault()->getCode());
-        $this->assertSame('Invalid XML provided to request', $this->_request->getFault()->getMessage());
+        $this->assertFalse($this->request->loadXml(new \stdClass()));
+        $this->assertTrue($this->request->isFault());
+        $this->assertSame(635, $this->request->getFault()->getCode());
+        $this->assertSame('Invalid XML provided to request', $this->request->getFault()->getMessage());
     }
 
     public function testLoadingXmlWithoutMethodNameElement()
     {
-        $this->assertFalse($this->_request->loadXml('<empty/>'));
-        $this->assertTrue($this->_request->isFault());
-        $this->assertSame(632, $this->_request->getFault()->getCode());
-        $this->assertSame("Invalid request, no method passed; request must contain a 'methodName' tag",
-            $this->_request->getFault()->getMessage());
+        $this->assertFalse($this->request->loadXml('<empty/>'));
+        $this->assertTrue($this->request->isFault());
+        $this->assertSame(632, $this->request->getFault()->getCode());
+        $this->assertSame(
+            "Invalid request, no method passed; request must contain a 'methodName' tag",
+            $this->request->getFault()->getMessage()
+        );
     }
 
     public function testLoadingXmlWithInvalidParams()
     {
-        $this->assertFalse($this->_request->loadXml(
+        $this->assertFalse($this->request->loadXml(
             '<methodCall>'
-          . '<methodName>foo</methodName>'
-          . '<params><param/><param/><param><foo/></param></params>'
-          . '</methodCall>'));
-        $this->assertTrue($this->_request->isFault());
-        $this->assertSame(633, $this->_request->getFault()->getCode());
+            . '<methodName>foo</methodName>'
+            . '<params><param/><param/><param><foo/></param></params>'
+            . '</methodCall>'
+        ));
+        $this->assertTrue($this->request->isFault());
+        $this->assertSame(633, $this->request->getFault()->getCode());
         $this->assertSame(
             'Param must contain a value',
-            $this->_request->getFault()->getMessage());
+            $this->request->getFault()->getMessage()
+        );
     }
 
     public function testExceptionWhileLoadingXmlParamValueIsHandled()
     {
-        $this->assertFalse($this->_request->loadXml(
+        $this->assertFalse($this->request->loadXml(
             '<methodCall>'
-          . '<methodName>foo</methodName>'
-          . '<params><param><value><foo/></value></param></params>'
-          . '</methodCall>'));
-        $this->assertTrue($this->_request->isFault());
-        $this->assertSame(636, $this->_request->getFault()->getCode());
+            . '<methodName>foo</methodName>'
+            . '<params><param><value><foo/></value></param></params>'
+            . '</methodCall>'
+        ));
+        $this->assertTrue($this->request->isFault());
+        $this->assertSame(636, $this->request->getFault()->getCode());
         $this->assertSame(
             'Error creating xmlrpc value',
-            $this->_request->getFault()->getMessage());
+            $this->request->getFault()->getMessage()
+        );
     }
 
     /**
@@ -229,9 +235,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsFault()
     {
-        $this->assertFalse($this->_request->isFault());
-        $this->_request->loadXml('foo');
-        $this->assertTrue($this->_request->isFault());
+        $this->assertFalse($this->request->isFault());
+        $this->request->loadXml('foo');
+        $this->assertTrue($this->request->isFault());
     }
 
     /**
@@ -239,10 +245,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFault()
     {
-        $fault = $this->_request->getFault();
+        $fault = $this->request->getFault();
         $this->assertTrue(null === $fault);
-        $this->_request->loadXml('foo');
-        $fault = $this->_request->getFault();
+        $this->request->loadXml('foo');
+        $fault = $this->request->getFault();
         $this->assertTrue($fault instanceof \Zend\XmlRpc\Fault);
     }
 
@@ -252,7 +258,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      * @param string $xml
      * @return void
      */
-    protected function _testXmlRequest($xml, $argv)
+    protected function assertXmlRequest($xml, $argv)
     {
         $sx = new \SimpleXMLElement($xml);
 
@@ -286,22 +292,22 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testSaveXML()
     {
         $argv = array('string', true);
-        $this->_request->setMethod('do.Something');
-        $this->_request->setParams($argv);
-        $xml = $this->_request->saveXml();
-        $this->_testXmlRequest($xml, $argv);
+        $this->request->setMethod('do.Something');
+        $this->request->setParams($argv);
+        $xml = $this->request->saveXml();
+        $this->assertXmlRequest($xml, $argv);
     }
 
     /**
      * __toString() test
      */
-    public function test__toString()
+    public function testCastToString()
     {
         $argv = array('string', true);
-        $this->_request->setMethod('do.Something');
-        $this->_request->setParams($argv);
-        $xml = $this->_request->__toString();
-        $this->_testXmlRequest($xml, $argv);
+        $this->request->setMethod('do.Something');
+        $this->request->setParams($argv);
+        $xml = $this->request->__toString();
+        $this->assertXmlRequest($xml, $argv);
     }
 
     /**
@@ -309,10 +315,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetEncoding()
     {
-        $this->assertEquals('UTF-8', $this->_request->getEncoding());
+        $this->assertEquals('UTF-8', $this->request->getEncoding());
         $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
-        $this->assertSame($this->_request, $this->_request->setEncoding('ISO-8859-1'));
-        $this->assertEquals('ISO-8859-1', $this->_request->getEncoding());
+        $this->assertSame($this->request, $this->request->setEncoding('ISO-8859-1'));
+        $this->assertEquals('ISO-8859-1', $this->request->getEncoding());
         $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
@@ -326,8 +332,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-request.xml');
         $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
-        $this->_request->loadXml($payload);
-        $method = $this->_request->getMethod();
+        $this->request->loadXml($payload);
+        $method = $this->request->getMethod();
         $this->assertTrue(empty($method));
         if (is_string($method)) {
             $this->assertNotContains('Local file inclusion', $method);
@@ -338,6 +344,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-request.xml');
         $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
-        $this->assertFalse($this->_request->loadXml($payload));
+        $this->assertFalse($this->request->loadXml($payload));
     }
 }

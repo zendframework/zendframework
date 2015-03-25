@@ -35,7 +35,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($params->toArray(), array('foo' => 'baz', 'bar'));
         $this->assertEquals($request->getParam('foo'), 'baz');
         $this->assertEquals($request->getScriptName(), 'foo.php');
-        $this->assertEquals(1, count($request->env()));
+        $this->assertGreaterThanOrEqual(1, count($request->env()));
         $this->assertEquals($request->env()->get('FOO_VAR'), 'bar');
         $this->assertEquals($request->getEnv('FOO_VAR'), 'bar');
     }

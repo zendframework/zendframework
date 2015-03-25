@@ -265,12 +265,14 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
 
         if (!$this->getDataContainer()->getId()) {
             $this->getDataContainer()->setId(
-                $this->getDataContainer()->getLink());
+                $this->getDataContainer()->getLink()
+            );
         }
         if (!Uri::factory($this->getDataContainer()->getId())->isValid()
             && !preg_match(
                 "#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
-                $this->getDataContainer()->getId())
+                $this->getDataContainer()->getId()
+            )
             && !$this->_validateTagUri($this->getDataContainer()->getId())
         ) {
             throw new Writer\Exception\InvalidArgumentException('Atom 1.0 IDs must be a valid URI/IRI');
@@ -289,7 +291,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _validateTagUri($id)
     {
-        if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
+        if (preg_match(
+            '/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/',
+            $id,
+            $matches
+        )) {
             $dvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
@@ -341,7 +347,8 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
         $element = $dom->createElement('content');
         $element->setAttribute('type', 'xhtml');
         $xhtmlElement = $this->_loadXhtml($content);
-        $xhtml = $dom->importNode($xhtmlElement, true);
+        $deep = version_compare(PHP_VERSION, '7', 'ge') ? 1 : true;
+        $xhtml = $dom->importNode($xhtmlElement, $deep);
         $element->appendChild($xhtml);
         $root->appendChild($element);
     }
@@ -369,8 +376,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
             "/(<[\/]?)([a-zA-Z]+)/"
         ), '$1xhtml:$2', $xhtml);
         $dom = new DOMDocument('1.0', $this->getEncoding());
-        $dom->loadXML('<xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">'
-            . $xhtml . '</xhtml:div>');
+        $dom->loadXML(
+            '<xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+            . $xhtml
+            . '</xhtml:div>'
+        );
         return $dom->documentElement;
     }
 

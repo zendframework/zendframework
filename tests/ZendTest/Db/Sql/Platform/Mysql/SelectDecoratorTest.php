@@ -58,7 +58,7 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
      * @dataProvider dataProvider
      */
-    public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)
+    public function testGetSqlString(Select $select, $ignore, $alsoIgnore, $expectedSql)
     {
         $parameterContainer = new ParameterContainer;
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');

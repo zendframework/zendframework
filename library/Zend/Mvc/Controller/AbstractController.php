@@ -162,11 +162,12 @@ abstract class AbstractController implements
     {
         $className = get_class($this);
 
+        $nsPos = strpos($className, '\\') ?: 0;
         $events->setIdentifiers(array_merge(
             array(
                 __CLASS__,
                 $className,
-                substr($className, 0, strpos($className, '\\'))
+                substr($className, 0, $nsPos)
             ),
             array_values(class_implements($className)),
             (array) $this->eventIdentifier

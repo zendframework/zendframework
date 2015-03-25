@@ -264,7 +264,8 @@ class Dba extends AbstractAdapter implements
 
         $this->_open();
 
-        do { // Workaround for PHP-Bug #62491 & #62492
+        // Workaround for PHP-Bug #62491 & #62492
+        do {
             $recheck     = false;
             $internalKey = dba_firstkey($this->handle);
             while ($internalKey !== false && $internalKey !== null) {
@@ -377,8 +378,10 @@ class Dba extends AbstractAdapter implements
         $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
+        $cacheableValue = (string) $value; // dba_replace requires a string
+
         $this->_open();
-        if (!dba_replace($internalKey, $value, $this->handle)) {
+        if (!dba_replace($internalKey, $cacheableValue, $this->handle)) {
             throw new Exception\RuntimeException("dba_replace('{$internalKey}', ...) failed");
         }
 

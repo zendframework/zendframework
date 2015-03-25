@@ -188,7 +188,7 @@ class Mime
         while (strlen($str) > 0) {
             $currentLine = max(count($lines)-1, 0);
             $token       = static::getNextQuotedPrintableToken($str);
-            $str         = substr($str, strlen($token));
+            $str         = substr($str, strlen($token)) ?: '';
 
             $tmp .= $token;
             if ($token == '=20') {

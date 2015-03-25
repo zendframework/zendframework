@@ -12,12 +12,13 @@ namespace Zend\Mail\Transport;
 use Zend\Mail\Message;
 
 /**
- * File transport
+ * InMemory transport
  *
- * The null transport will just store the message in memory.  It is helpful
- * when unit testing.
+ * This transport will just store the message in memory.  It is helpful
+ * when unit testing, or to prevent sending email when in development or
+ * testing.
  */
-class Null implements TransportInterface
+class InMemory implements TransportInterface
 {
     /**
      * @var Message
@@ -25,7 +26,7 @@ class Null implements TransportInterface
     protected $lastMessage;
 
     /**
-     * Takes the last message and Saves it for testing
+     * Takes the last message and saves it for testing.
      *
      * @param Message $message
      */
@@ -35,7 +36,7 @@ class Null implements TransportInterface
     }
 
     /**
-     * Get the last message sent
+     * Get the last message sent.
      *
      * @return Message
      */

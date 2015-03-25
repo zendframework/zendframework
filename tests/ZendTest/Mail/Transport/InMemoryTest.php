@@ -10,12 +10,12 @@
 namespace ZendTest\Mail\Transport;
 
 use Zend\Mail\Message;
-use Zend\Mail\Transport\Null;
+use Zend\Mail\Transport\InMemory;
 
 /**
  * @group      Zend_Mail
  */
-class NullTest extends \PHPUnit_Framework_TestCase
+class InMemoryTest extends \PHPUnit_Framework_TestCase
 {
     public function getMessage()
     {
@@ -39,7 +39,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     public function testReceivesMailArtifacts()
     {
         $message = $this->getMessage();
-        $transport = new Null();
+        $transport = new InMemory();
 
         $transport->send($message);
 

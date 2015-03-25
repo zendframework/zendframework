@@ -105,7 +105,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writers = $this->logger->getWriters();
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
     }
@@ -120,7 +120,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
     }
@@ -137,7 +137,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
     }
 
     public function testLogging()

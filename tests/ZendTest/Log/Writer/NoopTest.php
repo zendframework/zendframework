@@ -9,16 +9,16 @@
 
 namespace ZendTest\Log\Writer;
 
-use Zend\Log\Writer\Null as NullWriter;
+use Zend\Log\Writer\Noop as NoopWriter;
 
 /**
  * @group      Zend_Log
  */
-class NullTest extends \PHPUnit_Framework_TestCase
+class NoopTest extends \PHPUnit_Framework_TestCase
 {
     public function testWrite()
     {
-        $writer = new NullWriter();
+        $writer = new NoopWriter();
         $writer->write(array('message' => 'foo', 'priority' => 42));
     }
 }

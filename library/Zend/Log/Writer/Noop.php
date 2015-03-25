@@ -9,7 +9,7 @@
 
 namespace Zend\Log\Writer;
 
-class Null extends AbstractWriter
+class Noop extends AbstractWriter
 {
     /**
      * Write a message to the log.

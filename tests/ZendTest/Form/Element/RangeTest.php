@@ -17,7 +17,7 @@ class RangeTest extends TestCase
     public function testProvidesInputSpecificationWithDefaultAttributes()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -28,7 +28,7 @@ class RangeTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\I18n\Validator\Float',
+            'Zend\I18n\Validator\IsFloat',
             'Zend\Validator\GreaterThan',
             'Zend\Validator\LessThan',
             'Zend\Validator\Step',
@@ -57,7 +57,7 @@ class RangeTest extends TestCase
     public function testProvidesInputSpecificationThatIncludesValidator()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -74,7 +74,7 @@ class RangeTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\I18n\Validator\Float',
+            'Zend\I18n\Validator\IsFloat',
             'Zend\Validator\GreaterThan',
             'Zend\Validator\LessThan',
             'Zend\Validator\Step',

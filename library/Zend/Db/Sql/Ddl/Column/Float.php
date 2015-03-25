@@ -42,7 +42,7 @@ class Float extends Floating
             ),
             E_USER_DEPRECATED
         );
-        
+
         parent::__construct($name, $digits, $decimal, $nullable, $default, $options);
     }
 }

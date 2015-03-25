@@ -11,7 +11,6 @@ namespace ZendTest\Log;
 
 use Exception;
 use ErrorException;
-use PHPUnit_Framework_Exception;
 use Zend\Log\Logger;
 use Zend\Log\Processor\Backtrace;
 use Zend\Log\Writer\Mock as MockWriter;

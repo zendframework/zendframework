@@ -44,7 +44,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
         return array(
             array('Zend\Di\Di'),
             array('Zend\EventManager\EventManager'),
-            array('Zend\Filter\Null'),
+            array('Zend\Filter\ToNull'),
             array('Zend\Form\Form'),
             array('Zend\Log\Logger'),
             array('Zend\Stdlib\SplStack'),

@@ -28,7 +28,7 @@ class Null extends ToNull
     {
         trigger_error(
             sprintf(
-                'The class %s has been deprecated; please use %s\\ToInt',
+                'The class %s has been deprecated; please use %s\\ToNull',
                 __CLASS__,
                 __NAMESPACE__
             ),

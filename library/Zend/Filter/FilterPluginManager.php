@@ -21,7 +21,8 @@ use Zend\ServiceManager\AbstractPluginManager;
 class FilterPluginManager extends AbstractPluginManager
 {
     protected $aliases = array(
-        'Zend\I18n\Filter\Int'       => 'Zend\I18n\Filter\ToInt',
+        'Zend\Filter\Int'            => 'Zend\Filter\ToInt',
+        'Zend\Filter\Null'           => 'Zend\Filter\ToNull',
     );
 
     /**
@@ -74,7 +75,7 @@ class FilterPluginManager extends AbstractPluginManager
         'inflector'                  => 'Zend\Filter\Inflector',
         'int'                        => 'Zend\Filter\ToInt',
         'monthselect'                => 'Zend\Filter\MonthSelect',
-        'null'                       => 'Zend\Filter\Null',
+        'null'                       => 'Zend\Filter\ToNull',
         'numberformat'               => 'Zend\I18n\Filter\NumberFormat',
         'numberparse'                => 'Zend\I18n\Filter\NumberParse',
         'pregreplace'                => 'Zend\Filter\PregReplace',
@@ -85,6 +86,7 @@ class FilterPluginManager extends AbstractPluginManager
         'stripnewlines'              => 'Zend\Filter\StripNewlines',
         'striptags'                  => 'Zend\Filter\StripTags',
         'toint'                      => 'Zend\Filter\ToInt',
+        'tonull'                     => 'Zend\Filter\ToNull',
         'urinormalize'               => 'Zend\Filter\UriNormalize',
         'whitelist'                  => 'Zend\Filter\Whitelist',
         'wordcamelcasetodash'        => 'Zend\Filter\Word\CamelCaseToDash',

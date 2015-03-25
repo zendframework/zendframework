@@ -9,27 +9,27 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Null as NullFilter;
+use Zend\Filter\ToNull as ToNullFilter;
 
 /**
  * @group      Zend_Filter
  */
-class NullTest extends \PHPUnit_Framework_TestCase
+class ToNullTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorOptions()
     {
-        $filter = new NullFilter(array(
-            'type' => NullFilter::TYPE_INTEGER,
+        $filter = new ToNullFilter(array(
+            'type' => ToNullFilter::TYPE_INTEGER,
         ));
 
-        $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
+        $this->assertEquals(ToNullFilter::TYPE_INTEGER, $filter->getType());
     }
 
     public function testConstructorParams()
     {
-        $filter = new NullFilter(NullFilter::TYPE_INTEGER);
+        $filter = new ToNullFilter(ToNullFilter::TYPE_INTEGER);
 
-        $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
+        $this->assertEquals(ToNullFilter::TYPE_INTEGER, $filter->getType());
     }
 
     /**
@@ -39,7 +39,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefault($value, $expected)
     {
-        $filter = new NullFilter();
+        $filter = new ToNullFilter();
         $this->assertSame($expected, $filter->filter($value));
     }
 
@@ -50,7 +50,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testTypes($type, $testData)
     {
-        $filter = new NullFilter($type);
+        $filter = new ToNullFilter($type);
         foreach ($testData as $data) {
             list($value, $expected) = $data;
             $message = sprintf(
@@ -72,7 +72,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     public function testCombinedTypes($typeData, $testData)
     {
         foreach ($typeData as $type) {
-            $filter = new NullFilter(array('type' => $type));
+            $filter = new ToNullFilter(array('type' => $type));
             foreach ($testData as $data) {
                 list($value, $expected) = $data;
                 $message = sprintf(
@@ -89,14 +89,14 @@ class NullTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingFalseType()
     {
-        $filter = new NullFilter();
+        $filter = new ToNullFilter();
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown type value');
         $filter->setType(true);
     }
 
     public function testGettingDefaultType()
     {
-        $filter = new NullFilter();
+        $filter = new ToNullFilter();
         $this->assertEquals(63, $filter->getType());
     }
 
@@ -123,7 +123,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                NullFilter::TYPE_BOOLEAN,
+                ToNullFilter::TYPE_BOOLEAN,
                 array(
                     array(null, null),
                     array(false, null),
@@ -141,7 +141,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_INTEGER,
+                ToNullFilter::TYPE_INTEGER,
                 array(
                     array(null, null),
                     array(false, false),
@@ -159,7 +159,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_EMPTY_ARRAY,
+                ToNullFilter::TYPE_EMPTY_ARRAY,
                 array(
                     array(null, null),
                     array(false, false),
@@ -177,7 +177,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_STRING,
+                ToNullFilter::TYPE_STRING,
                 array(
                     array(null, null),
                     array(false, false),
@@ -195,7 +195,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_ZERO_STRING,
+                ToNullFilter::TYPE_ZERO_STRING,
                 array(
                     array(null, null),
                     array(false, false),
@@ -213,7 +213,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_FLOAT,
+                ToNullFilter::TYPE_FLOAT,
                 array(
                     array(null, null),
                     array(false, false),
@@ -231,7 +231,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                NullFilter::TYPE_ALL,
+                ToNullFilter::TYPE_ALL,
                 array(
                     array(null, null),
                     array(false, null),
@@ -257,17 +257,17 @@ class NullTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     array(
-                        NullFilter::TYPE_ZERO_STRING,
-                        NullFilter::TYPE_STRING,
-                        NullFilter::TYPE_BOOLEAN,
+                        ToNullFilter::TYPE_ZERO_STRING,
+                        ToNullFilter::TYPE_STRING,
+                        ToNullFilter::TYPE_BOOLEAN,
                     ),
                     array(
                         'zero',
                         'string',
                         'boolean',
                     ),
-                    NullFilter::TYPE_ZERO_STRING | NullFilter::TYPE_STRING | NullFilter::TYPE_BOOLEAN,
-                    NullFilter::TYPE_ZERO_STRING + NullFilter::TYPE_STRING + NullFilter::TYPE_BOOLEAN,
+                    ToNullFilter::TYPE_ZERO_STRING | ToNullFilter::TYPE_STRING | ToNullFilter::TYPE_BOOLEAN,
+                    ToNullFilter::TYPE_ZERO_STRING + ToNullFilter::TYPE_STRING + ToNullFilter::TYPE_BOOLEAN,
                 ),
                 array(
                     array(null, null),

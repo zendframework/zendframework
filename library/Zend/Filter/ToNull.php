@@ -11,7 +11,7 @@ namespace Zend\Filter;
 
 use Traversable;
 
-class Null extends AbstractFilter
+class ToNull extends AbstractFilter
 {
     const TYPE_BOOLEAN      = 1;
     const TYPE_INTEGER      = 2;

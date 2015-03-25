@@ -204,6 +204,11 @@ class Image extends AbstractRenderer
                 $height = $this->userHeight;
             }
 
+            // Cast width and height to ensure they are correct type for image
+            // operations
+            $width  = (int) $width;
+            $height = (int) $height;
+
             $this->resource = imagecreatetruecolor($width, $height);
 
             $white = imagecolorallocate($this->resource, 255, 255, 255);
@@ -238,8 +243,8 @@ class Image extends AbstractRenderer
             $this->resource,
             $this->leftOffset,
             $this->topOffset,
-            $this->leftOffset + $barcodeWidth - 1,
-            $this->topOffset + $barcodeHeight - 1,
+            (int) ($this->leftOffset + $barcodeWidth - 1),
+            (int) ($this->topOffset + $barcodeHeight - 1),
             $this->imageBackgroundColor
         );
     }

@@ -259,7 +259,7 @@ class Token implements ProcessorInterface
 
         if (!is_string($value) && (is_bool($value) || is_numeric($value))) {
             $stringVal  = (string) $value;
-            $changedVal = strtr($value, $this->map);
+            $changedVal = strtr($stringVal, $this->map);
 
             // replace the value only if a string replacement occurred
             if ($changedVal !== $stringVal) {

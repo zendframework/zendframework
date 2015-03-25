@@ -9,40 +9,23 @@
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Message;
-use Zend\Mail\Transport\Null;
+use Zend\Mail\Transport\Null as NullTransport;
 
 /**
  * @group      Zend_Mail
  */
 class NullTest extends \PHPUnit_Framework_TestCase
 {
-    public function getMessage()
+    public function setUp()
     {
-        $message = new Message();
-        $message->addTo('zf-devteam@zend.com', 'ZF DevTeam')
-                ->addCc('matthew@zend.com')
-                ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
-                ->addFrom(array(
-                    'zf-devteam@zend.com',
-                    'Matthew' => 'matthew@zend.com',
-                ))
-                ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
-                ->setSubject('Testing Zend\Mail\Transport\Sendmail')
-                ->setBody('This is only a test.');
-        $message->getHeaders()->addHeaders(array(
-            'X-Foo-Bar' => 'Matthew',
-        ));
-        return $message;
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            $this->markTestSkipped('Cannot test Null transport under PHP 7; reserved keyword');
+        }
     }
 
-    public function testReceivesMailArtifacts()
+    public function testRaisesNoticeOnInstantiation()
     {
-        $message = $this->getMessage();
-        $transport = new Null();
-
-        $transport->send($message);
-
-        $this->assertSame($message, $transport->getLastMessage());
+        $this->setExpectedException('PHPUnit_Framework_Error_Deprecated');
+        new NullTransport();
     }
 }

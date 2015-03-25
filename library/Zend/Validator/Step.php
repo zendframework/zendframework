@@ -146,7 +146,9 @@ class Step extends AbstractValidator
         }
 
         //find the maximum precision from both input params to give accurate results
-        $precision = strlen(substr($x, strpos($x, '.')+1)) + strlen(substr($y, strpos($y, '.')+1));
+        $xFloatSegment = substr($x, strpos($x, '.') + 1) ?: '';
+        $yFloatSegment = substr($y, strpos($y, '.') + 1) ?: '';
+        $precision = strlen($xFloatSegment) + strlen($yFloatSegment);
 
         return round($x - $y * floor($x / $y), $precision);
     }

@@ -37,8 +37,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalBooleanFromNative()
     {
         $native = true;
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_BOOLEAN);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_BOOLEAN
+        );
 
         $this->assertXmlRpcType('boolean', $val);
         $this->assertSame($native, $val->getValue());
@@ -51,8 +53,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         AbstractValue::setGenerator($generator);
         $xml = '<value><boolean>1</boolean></value>';
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('boolean', $val);
         $this->assertEquals('boolean', $val->getType());
@@ -93,8 +97,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
                       "<value><i4>$native</i4></value>");
 
         foreach ($xmls as $xml) {
-            $val = AbstractValue::getXmlRpcValue($xml,
-                                        AbstractValue::XML_STRING);
+            $val = AbstractValue::getXmlRpcValue(
+                $xml,
+                AbstractValue::XML_STRING
+            );
             $this->assertXmlRpcType('integer', $val);
             $this->assertEquals('int', $val->getType());
             $this->assertSame($native, $val->getValue());
@@ -132,8 +138,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalDoubleFromNative()
     {
         $native = 1.1;
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_DOUBLE);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_DOUBLE
+        );
 
         $this->assertXmlRpcType('double', $val);
         $this->assertSame($native, $val->getValue());
@@ -147,8 +155,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         AbstractValue::setGenerator($generator);
         $native = 1.1;
         $xml = "<value><double>$native</double></value>";
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('double', $val);
         $this->assertEquals('double', $val->getType());
@@ -203,8 +213,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalStringFromNative()
     {
         $native = 'foo';
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_STRING
+        );
 
         $this->assertXmlRpcType('string', $val);
         $this->assertSame($native, $val->getValue());
@@ -212,11 +224,13 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryAutodetectsStringAndSetsValueInArray()
     {
-        $val = AbstractValue::getXmlRpcValue('<value><array><data>'.
-            '<value><i4>8</i4></value>'.
-            '<value>a</value>'.
-            '<value>false</value>'.
-            '</data></array></value>', AbstractValue::XML_STRING
+        $val = AbstractValue::getXmlRpcValue(
+            '<value><array><data>'
+            . '<value><i4>8</i4></value>'
+            . '<value>a</value>'
+            . '<value>false</value>'
+            . '</data></array></value>',
+            AbstractValue::XML_STRING
         );
         $this->assertXmlRpcType('array', $val);
         $a = $val->getValue();
@@ -233,8 +247,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         AbstractValue::setGenerator($generator);
         $native = 'foo<>';
         $xml = "<value><string>foo&lt;&gt;</string></value>";
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('string', $val);
         $this->assertEquals('string', $val->getType());
@@ -250,8 +266,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         AbstractValue::setGenerator($generator);
         $native = 'foo<br/>bar';
         $xml = "<string>foo&lt;br/&gt;bar</string>";
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('string', $val);
         $this->assertEquals('string', $val->getType());
@@ -263,13 +281,13 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryAutodetectsNil()
     {
-        $val = AbstractValue::getXmlRpcValue(NULL);
+        $val = AbstractValue::getXmlRpcValue(null);
         $this->assertXmlRpcType('nil', $val);
     }
 
     public function testMarshalNilFromNative()
     {
-        $native = NULL;
+        $native = null;
         $types = array(AbstractValue::XMLRPC_TYPE_NIL,
                        AbstractValue::XMLRPC_TYPE_APACHENIL);
         foreach ($types as $type) {
@@ -290,11 +308,13 @@ class ValueTest extends \PHPUnit_Framework_TestCase
                      '<value><ex:nil xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions"/></value>');
 
         foreach ($xmls as $xml) {
-            $val = AbstractValue::getXmlRpcValue($xml,
-                                        AbstractValue::XML_STRING);
+            $val = AbstractValue::getXmlRpcValue(
+                $xml,
+                AbstractValue::XML_STRING
+            );
             $this->assertXmlRpcType('nil', $val);
             $this->assertEquals('nil', $val->getType());
-            $this->assertSame(NULL, $val->getValue());
+            $this->assertSame(null, $val->getValue());
             $this->assertEquals($this->wrapXml($xml), $val->saveXml());
         }
     }
@@ -310,8 +330,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalArrayFromNative()
     {
         $native = array(0,1);
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_ARRAY);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_ARRAY
+        );
 
         $this->assertXmlRpcType('array', $val);
         $this->assertSame($native, $val->getValue());
@@ -327,8 +349,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $xml = '<value><array><data><value><int>0</int></value>'
              . '<value><int>1</int></value></data></array></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('array', $val);
         $this->assertEquals('array', $val->getType());
@@ -345,8 +369,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $native = array();
         $xml    = '<value><array><data/></array></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('array', $val);
         $this->assertEquals('array', $val->getType());
@@ -367,9 +393,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $native = array();
         $xml    = '<value><array/></value>';
 
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException',
+        $this->setExpectedException(
+            'Zend\XmlRpc\Exception\ValueException',
             'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag'
-            );
+        );
         $val = AbstractValue::getXmlRpcValue($xml, AbstractValue::XML_STRING);
     }
 
@@ -412,8 +439,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalStructFromNative()
     {
         $native = array('foo' => 0);
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_STRUCT);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_STRUCT
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertSame($native, $val->getValue());
@@ -430,8 +459,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
              . '</value></member><member><name>bar</name><value><string>'
              . 'foo&lt;&gt;bar</string></value></member></struct></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertEquals('struct', $val->getType());
@@ -474,8 +505,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
              . '<member><name>bar</name><value><int>1</int></value></member>'
              . '</struct></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertEquals('struct', $val->getType());
@@ -496,8 +529,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
              . '<member><name>bar</name><value><int>1</int></value></member>'
              . '</struct></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertEquals('struct', $val->getType());
@@ -532,8 +567,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $xml = '<value><struct><member><name>foo</name>'
              . '<value><string/></value></member></struct></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertEquals('struct', $val->getType());
@@ -551,8 +588,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $xmlDecl = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml = '<value><struct><member><name>foo</name><value><string>ß</string></value></member></struct></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xmlDecl . $xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xmlDecl . $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('struct', $val);
         $this->assertEquals('struct', $val->getType());
@@ -569,8 +608,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalDateTimeFromNativeString()
     {
         $native = '1997-07-16T19:20+01:00';
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_DATETIME);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_DATETIME
+        );
 
         $this->assertXmlRpcType('dateTime', $val);
 
@@ -581,8 +622,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalDateTimeFromNativeStringProducesIsoOutput()
     {
         $native = '1997-07-16T19:20+01:00';
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_DATETIME);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_DATETIME
+        );
 
         $this->assertXmlRpcType('dateTime', $val);
 
@@ -593,16 +636,20 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testMarshalDateTimeFromInvalidString()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException',
-                                    "The timezone could not be found in the database");
+        $this->setExpectedException(
+            'Zend\XmlRpc\Exception\ValueException',
+            'The timezone could not be found in the database'
+        );
         AbstractValue::getXmlRpcValue('foobarbaz', AbstractValue::XMLRPC_TYPE_DATETIME);
     }
 
     public function testMarshalDateTimeFromNativeInteger()
     {
         $native = strtotime('1997-07-16T19:20+01:00');
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_DATETIME);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_DATETIME
+        );
 
         $this->assertXmlRpcType('dateTime', $val);
         $this->assertSame($native, strtotime($val->getValue()));
@@ -628,8 +675,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $iso8601 = '1997-07-16T19:20+01:00';
         $xml = "<value><dateTime.iso8601>$iso8601</dateTime.iso8601></value>";
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('dateTime', $val);
         $this->assertEquals('dateTime.iso8601', $val->getType());
@@ -696,8 +745,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testMarshalBase64FromString()
     {
         $native = 'foo';
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_BASE64);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_BASE64
+        );
 
         $this->assertXmlRpcType('base64', $val);
         $this->assertSame($native, $val->getValue());
@@ -712,8 +763,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $native = 'foo';
         $xml = '<value><base64>' .base64_encode($native). '</base64></value>';
 
-        $val = AbstractValue::getXmlRpcValue($xml,
-                                    AbstractValue::XML_STRING);
+        $val = AbstractValue::getXmlRpcValue(
+            $xml,
+            AbstractValue::XML_STRING
+        );
 
         $this->assertXmlRpcType('base64', $val);
         $this->assertEquals('base64', $val->getType());
@@ -724,8 +777,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testXmlRpcValueBase64GeneratedXmlContainsBase64EncodedText()
     {
         $native = 'foo';
-        $val = AbstractValue::getXmlRpcValue($native,
-                                    AbstractValue::XMLRPC_TYPE_BASE64);
+        $val = AbstractValue::getXmlRpcValue(
+            $native,
+            AbstractValue::XMLRPC_TYPE_BASE64
+        );
 
         $this->assertXmlRpcType('base64', $val);
         $xml = $val->saveXml();
@@ -741,8 +796,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $o = new SerializableTestClass();
         $o->setProperty('foobar');
         $serialized = serialize($o);
-        $val = AbstractValue::getXmlRpcValue($serialized,
-                                    AbstractValue::XMLRPC_TYPE_BASE64);
+        $val = AbstractValue::getXmlRpcValue(
+            $serialized,
+            AbstractValue::XMLRPC_TYPE_BASE64
+        );
 
         $this->assertXmlRpcType('base64', $val);
         $o2 = unserialize($val->getValue());
@@ -766,13 +823,16 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsWhenInvalidTypeSpecified()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Given type is not a Zend\XmlRpc\AbstractValue constant');
+        $this->setExpectedException(
+            'Zend\XmlRpc\Exception\ValueException',
+            'Given type is not a Zend\XmlRpc\AbstractValue constant'
+        );
         AbstractValue::getXmlRpcValue('', 'bad type here');
     }
 
     public function testPassingXmlRpcObjectReturnsTheSameObject()
     {
-        $xmlRpcValue = new Value\String('foo');
+        $xmlRpcValue = new Value\Text('foo');
         $this->assertSame($xmlRpcValue, AbstractValue::getXmlRpcValue($xmlRpcValue));
     }
 
@@ -853,8 +913,16 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function assertXmlRpcType($type, $object)
     {
-        if ($type == 'array') {
-            $type = 'arrayValue';
+        switch ($type) {
+            case 'array':
+                $type = 'arrayValue';
+                break;
+            case 'string':
+                $type = 'text';
+                break;
+            default:
+                // nothing to do
+                break;
         }
         $type = 'Zend\\XmlRpc\\Value\\' . ucfirst($type);
         $this->assertInstanceOf($type, $object);
@@ -868,14 +936,14 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
 class SerializableTestClass
 {
-    protected $_property;
+    protected $property;
     public function setProperty($property)
     {
-        $this->_property = $property;
+        $this->property = $property;
     }
 
     public function getProperty()
     {
-        return $this->_property;
+        return $this->property;
     }
 }

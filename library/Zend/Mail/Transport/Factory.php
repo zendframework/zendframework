@@ -19,7 +19,9 @@ abstract class Factory
      */
     protected static $classMap = array(
         'file'      => 'Zend\Mail\Transport\File',
-        'null'      => 'Zend\Mail\Transport\Null',
+        'inmemory'  => 'Zend\Mail\Transport\InMemory',
+        'memory'    => 'Zend\Mail\Transport\InMemory',
+        'null'      => 'Zend\Mail\Transport\InMemory',
         'sendmail'  => 'Zend\Mail\Transport\Sendmail',
         'smtp'      => 'Zend\Mail\Transport\Smtp',
     );
@@ -64,7 +66,8 @@ abstract class Factory
 
         if (! $transport instanceof TransportInterface) {
             throw new Exception\DomainException(sprintf(
-                '%s expects the "type" attribute to resolve to a valid Zend\Mail\Transport\TransportInterface instance; received "%s"',
+                '%s expects the "type" attribute to resolve to a valid'
+                . ' Zend\Mail\Transport\TransportInterface instance; received "%s"',
                 __METHOD__,
                 $type
             ));

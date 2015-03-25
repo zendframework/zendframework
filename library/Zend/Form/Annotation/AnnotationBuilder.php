@@ -24,8 +24,8 @@ use Zend\Form\FormFactoryAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Parses a class' properties for annotations in order to create a form and
- * input filter definition.
+ * Parses the properties of a class for annotations in order to create a form
+ * and input filter definition.
  */
 class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareInterface
 {
@@ -69,6 +69,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'Hydrator',
         'Input',
         'InputFilter',
+        'Instance',
         'Name',
         'Object',
         'Options',

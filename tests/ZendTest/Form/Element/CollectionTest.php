@@ -356,7 +356,9 @@ class CollectionTest extends TestCase
         $this->productFieldset->setUseAsBaseFieldset(true);
         $form->add($this->productFieldset);
 
-        $originalObjectHash = spl_object_hash($this->productFieldset->get("categories")->getTargetElement()->getObject());
+        $originalObjectHash = spl_object_hash(
+            $this->productFieldset->get("categories")->getTargetElement()->getObject()
+        );
 
         $product = new Product();
         $product->setName("foo");
@@ -383,7 +385,9 @@ class CollectionTest extends TestCase
             )
         );
 
-        $objectAfterExtractHash = spl_object_hash($this->productFieldset->get("categories")->getTargetElement()->getObject());
+        $objectAfterExtractHash = spl_object_hash(
+            $this->productFieldset->get("categories")->getTargetElement()->getObject()
+        );
 
         $this->assertSame($originalObjectHash, $objectAfterExtractHash);
     }
@@ -391,7 +395,7 @@ class CollectionTest extends TestCase
     public function testDoesNotCreateNewObjects()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -434,7 +438,7 @@ class CollectionTest extends TestCase
     public function testCreatesNewObjectsIfSpecified()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -574,7 +578,10 @@ class CollectionTest extends TestCase
         $form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
 
         $product = new Product();
-        $categories = array(new \ZendTest\Form\TestAsset\Entity\Category(), new \ZendTest\Form\TestAsset\Entity\Category());
+        $categories = array(
+            new \ZendTest\Form\TestAsset\Entity\Category(),
+            new \ZendTest\Form\TestAsset\Entity\Category(),
+        );
         $product->setCategories($categories);
 
         $market = new \StdClass();
@@ -784,8 +791,14 @@ class CollectionTest extends TestCase
             $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_productFieldset->getObject());
 
             // test for collection -> fieldset -> fieldset
-            $this->assertInstanceOf('ZendTest\Form\TestAsset\CountryFieldset', $_productFieldset->get('made_in_country'));
-            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Country', $_productFieldset->get('made_in_country')->getObject());
+            $this->assertInstanceOf(
+                'ZendTest\Form\TestAsset\CountryFieldset',
+                $_productFieldset->get('made_in_country')
+            );
+            $this->assertInstanceOf(
+                'ZendTest\Form\TestAsset\Entity\Country',
+                $_productFieldset->get('made_in_country')->getObject()
+            );
 
             // test for collection -> fieldset -> collection
             $_productCategories = $_productFieldset->get('categories');
@@ -1059,7 +1072,10 @@ class CollectionTest extends TestCase
                         break;
                     case 'phones':
                         foreach ($_childFieldset->getFieldsets() as $_phoneFieldset) {
-                            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Phone', $_phoneFieldset->getObject());
+                            $this->assertInstanceOf(
+                                'ZendTest\Form\TestAsset\Entity\Phone',
+                                $_phoneFieldset->getObject()
+                            );
                         }
                         break;
                 }

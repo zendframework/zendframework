@@ -252,7 +252,8 @@ class Request extends HttpRequest
 
         // URI scheme
         if ((!empty($this->serverParams['HTTPS']) && strtolower($this->serverParams['HTTPS']) !== 'off')
-            || (!empty($this->serverParams['HTTP_X_FORWARDED_PROTO']) && $this->serverParams['HTTP_X_FORWARDED_PROTO'] == 'https')
+            || (!empty($this->serverParams['HTTP_X_FORWARDED_PROTO'])
+                 && $this->serverParams['HTTP_X_FORWARDED_PROTO'] == 'https')
         ) {
             $scheme = 'https';
         } else {
@@ -362,7 +363,7 @@ class Request extends HttpRequest
      * Return the parameter container responsible for env parameters or a single parameter value.
      *
      * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-     * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
     public function getEnv($name = null, $default = null)
@@ -507,7 +508,8 @@ class Request extends HttpRequest
             $basename = basename($filename);
             if ($basename) {
                 $path     = ($phpSelf ? trim($phpSelf, '/') : '');
-                $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
+                $basePos  = strpos($path, $basename) ?: 0;
+                $baseUrl .= substr($path, 0, $basePos) . $basename;
             }
         }
 

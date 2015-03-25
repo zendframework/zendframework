@@ -21,6 +21,19 @@ use Zend\ServiceManager\AbstractPluginManager;
 class AdapterPluginManager extends AbstractPluginManager
 {
     /**
+     * Default aliases
+     *
+     * Primarily for ensuring previously defined adapters select their
+     * current counterparts.
+     *
+     * @var array
+     */
+    protected $aliases = array(
+        'null'                        => 'nullfill',
+        'Zend\Paginator\Adapter\Null' => 'nullfill',
+    );
+
+    /**
      * Default set of adapters
      *
      * @var array
@@ -28,7 +41,7 @@ class AdapterPluginManager extends AbstractPluginManager
     protected $invokableClasses = array(
         'array'         => 'Zend\Paginator\Adapter\ArrayAdapter',
         'iterator'      => 'Zend\Paginator\Adapter\Iterator',
-        'null'          => 'Zend\Paginator\Adapter\Null',
+        'nullfill'      => 'Zend\Paginator\Adapter\NullFill',
     );
 
     /**

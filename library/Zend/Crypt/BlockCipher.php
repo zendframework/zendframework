@@ -461,7 +461,7 @@ class BlockCipher
         }
         $hmacSize   = Hmac::getOutputSize($this->hash);
         $hmac       = substr($data, 0, $hmacSize);
-        $ciphertext = substr($data, $hmacSize);
+        $ciphertext = substr($data, $hmacSize) ?: '';
         if (!$this->binaryOutput) {
             $ciphertext = base64_decode($ciphertext);
         }

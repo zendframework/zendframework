@@ -22,7 +22,8 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new MongoDBOptions();
         $this->assertNull($options->getDatabase());
         $this->assertNull($options->getCollection());
-        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => true) : array('w' => 1);
+        $mongoVersion = phpversion('mongo') ?: '0.0.0';
+        $defaultSaveOptions = version_compare($mongoVersion, '1.3.0', '<') ? array('safe' => true) : array('w' => 1);
         $this->assertEquals($defaultSaveOptions, $options->getSaveOptions());
         $this->assertEquals('name', $options->getNameField());
         $this->assertEquals('data', $options->getDataField());
@@ -92,7 +93,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error
+     * @expectedException Zend\Session\Exception\InvalidArgumentException
      */
     public function testInvalidSaveOptions()
     {

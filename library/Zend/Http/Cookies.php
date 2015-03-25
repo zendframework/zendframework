@@ -219,7 +219,8 @@ class Cookies extends Headers
 
         // Get correct cookie path
         $path = $uri->getPath();
-        $path = substr($path, 0, strrpos($path, '/'));
+        $lastSlashPos = strrpos($path, '/') ?: 0;
+        $path = substr($path, 0, $lastSlashPos);
         if (! $path) {
             $path = '/';
         }

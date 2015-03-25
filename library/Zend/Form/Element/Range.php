@@ -10,7 +10,7 @@
 namespace Zend\Form\Element;
 
 use Zend\Form\Element\Number as NumberElement;
-use Zend\I18n\Validator\Float as NumberValidator;
+use Zend\I18n\Validator\IsFloat as NumberValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
 use Zend\Validator\Step as StepValidator;

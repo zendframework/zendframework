@@ -20,6 +20,12 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
 {
     protected function getMagicMime()
     {
+        // PHP 7 uses yet another version of libmagic, and thus a new magic
+        // database format.
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            return __DIR__ . '/_files/magic.7.mime';
+        }
+
         // As of PHP >= 5.3.11 and >= 5.4.1 the magic database format has changed.
         // http://doc.php.net/downloads/pdf/split/de/File-Information.pdf (page 11)
         if (version_compare(PHP_VERSION, '5.4', '>=')

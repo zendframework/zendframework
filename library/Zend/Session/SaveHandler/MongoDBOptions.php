@@ -76,9 +76,30 @@ class MongoDBOptions extends AbstractOptions
     {
         parent::__construct($options);
 
-        if ($this->saveOptions === array('w' => 1) && version_compare(phpversion('mongo'), '1.3.0', '<')) {
+        $mongoVersion = phpversion('mongo') ?: '0.0.0';
+        if ($this->saveOptions === array('w' => 1) && version_compare($mongoVersion, '1.3.0', '<')) {
             $this->saveOptions = array('safe' => true);
         }
+    }
+
+    /**
+     * Override AbstractOptions::__set
+     *
+     * Validates value if save options are being set.
+     *
+     * @param string $key
+     * @param mixed $value
+     */
+    public function __set($key, $value)
+    {
+        if (strtolower($key) !== 'saveoptions') {
+            return parent::__set($key, $value);
+        }
+
+        if (! is_array($value)) {
+            throw new InvalidArgumentException('Expected array for save options');
+        }
+        $this->setSaveOptions($value);
     }
 
     /**

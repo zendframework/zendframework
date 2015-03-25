@@ -139,7 +139,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid()
+    public function testUnserializeInvalid()
     {
         $value = "\0\1\r\n";
         $this->setExpectedException(

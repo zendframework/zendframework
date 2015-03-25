@@ -106,7 +106,7 @@ class ClassCacheTest extends CommonPatternTest
         $firstCounter = TestClassCache::$fooCounter + 1;
 
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
         $return = call_user_func_array(array($this->_pattern, $method), $args);
         $data = ob_get_clean();
 
@@ -115,7 +115,7 @@ class ClassCacheTest extends CommonPatternTest
 
         // second call - cached
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
         $return = call_user_func_array(array($this->_pattern, $method), $args);
         $data = ob_get_clean();
 

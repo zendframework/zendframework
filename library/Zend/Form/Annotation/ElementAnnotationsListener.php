@@ -25,7 +25,7 @@ use Zend\Stdlib\ArrayObject;
  * - Flags
  * - Input
  * - Hydrator
- * - Object
+ * - Object and Instance (the latter is preferred starting in 2.4)
  * - Required
  * - Type
  * - Validator
@@ -313,7 +313,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     }
 
     /**
-     * Handle the Object annotation
+     * Handle the Object and Instance annotations
      *
      * Sets the object to bind to the form or fieldset
      *
@@ -323,7 +323,9 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     public function handleObjectAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
-        if (!$annotation instanceof Object) {
+
+        // Only need to typehint on Instance, as Object extends it
+        if (! $annotation instanceof Instance) {
             return;
         }
 

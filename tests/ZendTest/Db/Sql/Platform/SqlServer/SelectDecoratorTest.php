@@ -56,7 +56,7 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
      * @dataProvider dataProvider
      */
-    public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)
+    public function testGetSqlString(Select $select, $ignored, $alsoIgnored, $expectedSql)
     {
         $parameterContainer = new ParameterContainer;
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');

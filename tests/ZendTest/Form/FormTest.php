@@ -209,7 +209,7 @@ class FormTest extends TestCase
     public function testHasValidatedFlag()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -253,7 +253,7 @@ class FormTest extends TestCase
     public function testSpecifyingValidationGroupForcesPartialValidation()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -275,7 +275,7 @@ class FormTest extends TestCase
     public function testSpecifyingValidationGroupForNestedFieldsetsForcesPartialValidation()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -954,8 +954,10 @@ class FormTest extends TestCase
         $this->assertEquals('basic_fieldset[field]', $basicFieldset->get('field')->getName());
 
         $nestedFieldset = $basicFieldset->get('nested_fieldset');
-        $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
-            ->getName());
+        $this->assertEquals(
+            'basic_fieldset[nested_fieldset][anotherField]',
+            $nestedFieldset->get('anotherField')->getName()
+        );
     }
 
     public function testCanCorrectlyExtractDataFromComposedEntities()
@@ -1001,7 +1003,7 @@ class FormTest extends TestCase
     public function testCanCorrectlyExtractDataFromOneToManyRelationship()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -1493,7 +1495,7 @@ class FormTest extends TestCase
     public function testPreserveEntitiesBoundToCollectionAfterValidation()
     {
         if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
+            // Required by \Zend\I18n\Validator\IsFloat
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -1662,8 +1664,9 @@ class FormTest extends TestCase
         $factory = new Factory();
         $this->form = $factory->createForm($spec);
         $this->form->setPreferFormInputFilter(true);
-        $this->assertFalse($this->form->getInputFilter()->get('element')
-            ->isRequired());
+        $this->assertFalse(
+            $this->form->getInputFilter()->get('element')->isRequired()
+        );
     }
 
     /**

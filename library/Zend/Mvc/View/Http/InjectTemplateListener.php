@@ -131,6 +131,10 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     public function mapController($controller)
     {
+        if (! is_string($controller)) {
+            return false;
+        }
+
         foreach ($this->controllerMap as $namespace => $replacement) {
             if (
                 // Allow disabling rule by setting value to false since config
@@ -146,7 +150,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             // Map namespace to $replacement if its value is string
             if (is_string($replacement)) {
                 $map = rtrim($replacement, '/') . '/';
-                $controller = substr($controller, strlen($namespace) + 1);
+                $controller = substr($controller, strlen($namespace) + 1) ?: '';
             }
 
             //strip Controller namespace(s) (but not classname)

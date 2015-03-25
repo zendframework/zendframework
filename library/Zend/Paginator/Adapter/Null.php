@@ -9,51 +9,22 @@
 
 namespace Zend\Paginator\Adapter;
 
-class Null implements AdapterInterface
+class Null extends NullFill
 {
     /**
-     * Item count
-     *
-     * @var int
-     */
-    protected $count = null;
-
-    /**
-     * Constructor.
-     *
-     * @param int $count Total item count (Optional)
+     * {@inheritdoc}
      */
     public function __construct($count = 0)
     {
-        $this->count = $count;
-    }
+        trigger_error(
+            sprintf(
+                'The class %s has been deprecated; please use %s\\NullFill',
+                __CLASS__,
+                __NAMESPACE__
+            ),
+            E_USER_DEPRECATED
+        );
 
-    /**
-     * Returns an array of items for a page.
-     *
-     * @param  int $offset Page offset
-     * @param  int $itemCountPerPage Number of items per page
-     * @return array
-     */
-    public function getItems($offset, $itemCountPerPage)
-    {
-        if ($offset >= $this->count()) {
-            return array();
-        }
-
-        $remainItemCount  = $this->count() - $offset;
-        $currentItemCount = $remainItemCount > $itemCountPerPage ? $itemCountPerPage : $remainItemCount;
-
-        return array_fill(0, $currentItemCount, null);
-    }
-
-    /**
-     * Returns the total number of rows in the array.
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return $this->count;
+        parent::__construct($count);
     }
 }

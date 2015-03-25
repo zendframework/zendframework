@@ -219,7 +219,7 @@ class DateStep extends Date
         $absoluteValueDate = new DateTime($valueDate->format('Y-m-d H:i:s'), new DateTimeZone('UTC'));
         $absoluteBaseDate = new DateTime($baseDate->format('Y-m-d H:i:s'), new DateTimeZone('UTC'));
 
-        $timeDiff  = $absoluteValueDate->diff($absoluteBaseDate, true);
+        $timeDiff  = $absoluteValueDate->diff($absoluteBaseDate, 1);
         $diffParts = array_combine($unitKeys, explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s')));
 
         if (5 === $partCounts["0"]) {

@@ -9,7 +9,13 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Float extends AbstractPrecisionColumn
+/**
+ * Column representing a FLOAT type.
+ *
+ * Cannot name a class "float" starting in PHP 7, as it's a reserved keyword;
+ * hence, "floating", with a type of "FLOAT".
+ */
+class Floating extends AbstractPrecisionColumn
 {
     /**
      * @var string

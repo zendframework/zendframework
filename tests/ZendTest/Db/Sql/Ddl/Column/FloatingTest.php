@@ -9,18 +9,22 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Float;
+use Zend\Db\Sql\Ddl\Column\Floating;
 
-class FloatTest extends \PHPUnit_Framework_TestCase
+class FloatingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Float::getExpressionData
+     * @covers Zend\Db\Sql\Ddl\Column\Floating::getExpressionData
      */
     public function testGetExpressionData()
     {
-        $column = new Float('foo', 10, 5);
+        $column = new Floating('foo', 10, 5);
         $this->assertEquals(
-            array(array('%s %s NOT NULL', array('foo', 'FLOAT(10,5)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array(
+                '%s %s NOT NULL',
+                array('foo', 'FLOAT(10,5)'),
+                array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL)
+            )),
             $column->getExpressionData()
         );
     }

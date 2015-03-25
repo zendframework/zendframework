@@ -56,7 +56,7 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $plugin = $this->adapaterPluginManager->get('dbselect', array($this->mockSelect, $this->mockAdapter));
         $this->assertInstanceOf('Zend\Paginator\Adapter\DbSelect', $plugin);
         $plugin = $this->adapaterPluginManager->get('null', 101);
-        $this->assertInstanceOf('Zend\Paginator\Adapter\Null', $plugin);
+        $this->assertInstanceOf('Zend\Paginator\Adapter\NullFill', $plugin);
 
         //test dbtablegateway
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -79,7 +79,10 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $order  = "foo";
         $group  = "foo";
         $having = "count(foo)>0";
-        $plugin = $this->adapaterPluginManager->get('dbtablegateway', array($mockTableGateway, $where, $order, $group, $having));
+        $plugin = $this->adapaterPluginManager->get(
+            'dbtablegateway',
+            array($mockTableGateway, $where, $order, $group, $having)
+        );
         $this->assertInstanceOf('Zend\Paginator\Adapter\DbTableGateway', $plugin);
 
         //test callback

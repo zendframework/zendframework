@@ -110,8 +110,8 @@ return array(
     "File '%value%' does not exist" => "O arquivo '%value%' não existe",
 
     // Zend_Validator_File_Extension
-	"File has an incorrect extension" => "O arquivo possui uma extensão incorreta",
-	"File is not readable or does not exist" => "O arquivo não pode ser lido ou não existe",
+    "File has an incorrect extension" => "O arquivo possui uma extensão incorreta",
+    "File is not readable or does not exist" => "O arquivo não pode ser lido ou não existe",
 
     // Zend_Validator_File_FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Todos os arquivos devem ter um tamanho máximo de '%max%', mas um tamanho de '%size%' foi detectado",

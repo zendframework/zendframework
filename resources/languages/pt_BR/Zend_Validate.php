@@ -110,8 +110,8 @@ return array(
     "File '%value%' does not exist" => "O arquivo '%value%' não existe",
 
     // Zend_Validator_File_Extension
-    "File '%value%' has a false extension" => "O arquivo '%value%' possui uma extensão incorreta",
-    "File '%value%' is not readable or does not exist" => "O arquivo '%value%' não pode ser lido ou não existe",
+    "File has an incorrect extension" => "O arquivo possui uma extensão incorreta",
+    "File is not readable or does not exist" => "O arquivo não pode ser lido ou não existe",
 
     // Zend_Validator_File_FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Todos os arquivos devem ter um tamanho máximo de '%max%', mas um tamanho de '%size%' foi detectado",
@@ -159,10 +159,10 @@ return array(
     "A sha1 hash could not be evaluated for the given file" => "Não foi possível avaliar uma hash sha1 para o arquivo fornecido",
     "File '%value%' is not readable or does not exist" => "O arquivo '%value%' não pode ser lido ou não existe",
 
-    // Zend_Validator_File_Size
-    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "O tamanho máximo permitido para o arquivo '%value%' é '%max%', mas '%size%' foi detectado",
-    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "O tamanho mínimo esperado para o arquivo '%value%' é '%min%', mas '%size%' foi detectado",
-    "File '%value%' is not readable or does not exist" => "O arquivo '%value%' não pode ser lido ou não existe",
+   // Zend_Validator_File_Size
+    "Maximum allowed size for file is '%max%' but '%size%' detected" => "O tamanho máximo permitido para o arquivo é '%max%', mas '%size%' foi detectado",
+    "Minimum expected size for file is '%min%' but '%size%' detected" => "O tamanho mínimo esperado para o arquivo é '%min%', mas '%size%' foi detectado",
+    "File is not readable or does not exist" => "O arquivo não pode ser lido ou não existe",
 
     // Zend_Validator_File_Upload
     "File '%value%' exceeds the defined ini size" => "O arquivo '%value%' excede o tamanho definido na configuração",

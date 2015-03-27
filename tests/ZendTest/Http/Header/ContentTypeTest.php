@@ -117,4 +117,27 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $result = $header->match($criteria);
         $this->assertEquals('application/vnd.*+json', $result);
     }
+
+    public function contentTypeParameterExamples()
+    {
+        return array(
+            'no-quotes' => array('Content-Type: foo/bar; param=baz', 'baz'),
+            'with-quotes' => array('Content-Type: foo/bar; param="baz"', 'baz'),
+            'with-equals' => array('Content-Type: foo/bar; param=baz=bat', 'baz=bat'),
+            'with-equals-and-quotes' => array('Content-Type: foo/bar; param="baz=bat"', 'baz=bat'),
+        );
+    }
+
+    /**
+     * @dataProvider contentTypeParameterExamples
+     */
+    public function testContentTypeParsesParametersCorrectly($headerString, $expectedParameterValue)
+    {
+        $contentTypeHeader = ContentType::fromString($headerString);
+
+        $parameters = $contentTypeHeader->getParameters();
+
+        $this->assertArrayHasKey('param', $parameters);
+        $this->assertSame($expectedParameterValue, $parameters['param']);
+    }
 }

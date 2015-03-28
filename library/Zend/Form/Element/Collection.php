@@ -15,6 +15,7 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\FormInterface;
 use Zend\Stdlib\ArrayUtils;
 
 class Collection extends Fieldset
@@ -463,10 +464,10 @@ class Collection extends Fieldset
     /**
      * Prepare the collection by adding a dummy template element if the user want one
      *
-     * @param  FieldsetInterface $form
+     * @param  FormInterface $form
      * @return mixed|void
      */
-    public function prepareElement(FieldsetInterface $form)
+    public function prepareElement(FormInterface $form)
     {
         if (true === $this->shouldCreateChildrenOnPrepareElement) {
             if ($this->targetElement !== null && $this->count > 0) {

@@ -24,10 +24,29 @@ class BaseInputFilter implements
     InitializableInterface,
     ReplaceableInputInterface
 {
+    /**
+     * @var array
+     */
     protected $data;
+
+    /**
+     * @var InputInterface[]|InputFilterInterface[]
+     */
     protected $inputs = array();
+
+    /**
+     * @var InputInterface[]|InputFilterInterface[]
+     */
     protected $invalidInputs;
+
+    /**
+     * @var array
+     */
     protected $validationGroup;
+
+    /**
+     * @var InputInterface[]|InputFilterInterface[]
+     */
     protected $validInputs;
 
     /**
@@ -315,17 +334,14 @@ class BaseInputFilter implements
                 }
             }
 
-            if (!empty($inputs)) {
-                $this->validateValidationGroup($inputs);
-                $this->validationGroup = $inputs;
-            }
-
-            return $this;
+        } else {
+            $inputs = func_get_args();
         }
 
-        $inputs = func_get_args();
-        $this->validateValidationGroup($inputs);
-        $this->validationGroup = $inputs;
+        if (!empty($inputs)) {
+            $this->validateValidationGroup($inputs);
+            $this->validationGroup = $inputs;
+        }
 
         return $this;
     }
@@ -603,5 +619,7 @@ class BaseInputFilter implements
         foreach ($inputFilter->getInputs() as $name => $input) {
             $this->add($input, $name);
         }
+
+        return $this;
     }
 }

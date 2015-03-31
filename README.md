@@ -15,7 +15,7 @@ Develop:
 
 This is the fifth minor (feature) release for the version 2 series.
 
-DD MMM YYY
+DD MMM YYYY
 
 ### UPDATES IN 2.5.0
 

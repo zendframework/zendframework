@@ -15,7 +15,6 @@ install:
   - composer install --no-interaction --prefer-source
 
 before_script:
-  - php --version
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
   - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then mkdir -p build/coverage; fi
 

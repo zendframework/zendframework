@@ -96,9 +96,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         $type = PGSQL_CONNECT_FORCE_NEW;
         $this->connection->setType($type);
-        $reflectionProperty = new \ReflectionProperty($this->connection, 'type');
-        $reflectionProperty->setAccessible(true);
-        $this->assertEquals($type, $reflectionProperty->getValue($this->connection));
+        $this->assertEquals($type, self::readAttribute($this->connection, 'type'));
     }
 
 }

@@ -22,14 +22,17 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
     protected $factory;
 
     /**
-     * @param ServiceLocatorInterface $services
+     * @param ServiceLocatorInterface $inputFilters
      * @param string                  $cName
      * @param string                  $rName
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $services, $cName, $rName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $inputFilters, $cName, $rName)
     {
-        if (!$services->has('Config')) {
+        $services = $inputFilters->getServiceLocator();
+        if (! $services instanceof ServiceLocatorInterface
+            || ! $services->has('Config')
+        ) {
             return false;
         }
 
@@ -49,8 +52,9 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
      * @param string                  $rName
      * @return \Zend\InputFilter\InputFilterInterface
      */
-    public function createServiceWithName(ServiceLocatorInterface $services, $cName, $rName)
+    public function createServiceWithName(ServiceLocatorInterface $inputFilters, $cName, $rName)
     {
+        $services  = $inputFilters->getServiceLocator();
         $allConfig = $services->get('Config');
         $config    = $allConfig['input_filter_specs'][$rName];
 

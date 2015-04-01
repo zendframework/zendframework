@@ -94,6 +94,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConnectionType()
     {
+        if (! extension_loaded('pgsql')) {
+            $this->markTestSkipped('pgsql extension not loaded');
+        }
         $type = PGSQL_CONNECT_FORCE_NEW;
         $this->connection->setType($type);
         $this->assertEquals($type, self::readAttribute($this->connection, 'type'));

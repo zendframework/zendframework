@@ -80,4 +80,25 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
             $getConnectionString->invoke($this->connection)
         );
     }
+
+    /**
+     * @expectedException \Zend\Db\Adapter\Exception\InvalidArgumentException
+     */
+    public function testSetConnectionTypeException()
+    {
+        $this->connection->setType(3);
+    }
+
+    /**
+     * Test the connection type setter
+     */
+    public function testSetConnectionType()
+    {
+        $type = PGSQL_CONNECT_FORCE_NEW;
+        $this->connection->setType($type);
+        $reflectionProperty = new \ReflectionProperty($this->connection, 'type');
+        $reflectionProperty->setAccessible(true);
+        $this->assertEquals($type, $reflectionProperty->getValue($this->connection));
+    }
+
 }

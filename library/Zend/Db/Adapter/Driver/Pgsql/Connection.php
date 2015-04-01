@@ -20,6 +20,11 @@ class Connection extends AbstractConnection
     protected $driver = null;
 
     /**
+     * @var null|int PostgreSQL connection type
+     */
+    protected $type = null;
+
+    /**
      * Constructor
      *
      * @param resource|array|null $connectionInfo
@@ -43,6 +48,19 @@ class Connection extends AbstractConnection
     {
         $this->driver = $driver;
 
+        return $this;
+    }
+
+    /**
+     * @param int|null $type
+     * @return self
+     */
+    public function setType($type)
+    {
+        if($type !== PGSQL_CONNECT_FORCE_NEW && $type !== PGSQL_CONNECT_ASYNC) {
+            throw new Exception\InvalidArgumentException('Connection type is not valid. (See: http://php.net/manual/en/function.pg-connect.php)');
+        }
+        $this->type = $type;
         return $this;
     }
 

@@ -109,6 +109,7 @@ class Connection extends AbstractConnection
     public function disconnect()
     {
         pg_close($this->resource);
+        return $this;
     }
 
     /**

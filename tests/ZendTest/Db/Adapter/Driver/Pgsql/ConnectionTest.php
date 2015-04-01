@@ -52,6 +52,18 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test disconnect method to return instance of ConnectionInterface
+     * @TODO Exception was raised due to invalid resource. Add resource to make this test pass.
+     */
+    public function testDisconnect()
+    {
+        $this->markTestIncomplete(
+            'This test needs work.'
+        );
+        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\ConnectionInterface',$this->connection->disconnect());
+    }
+
+    /**
      * @group 6760
      * @group 6787
      */

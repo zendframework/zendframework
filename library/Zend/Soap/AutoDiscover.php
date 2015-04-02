@@ -150,7 +150,7 @@ class AutoDiscover
     /**
      * Set the class map of php to wsdl mappings.
      *
-     * @param  array $classmap
+     * @param  array $classMap
      * @return self
      * @throws Exception\InvalidArgumentException
      */

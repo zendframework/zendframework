@@ -943,7 +943,7 @@ class ClassGenerator extends AbstractGenerator
 
         if ($this->isAbstract()) {
             $output .= 'abstract ';
-        } else if ($this->isFinal()) {
+        } elseif ($this->isFinal()) {
             $output .= 'final ';
         }
 

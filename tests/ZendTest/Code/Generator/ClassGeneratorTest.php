@@ -1099,4 +1099,24 @@ class myClass
 CODE;
         $this->assertEquals($classGenerator->generate(), $output);
     }
+
+    public function testGenerateWithFinalFlag()
+    {
+        $classGenerator = ClassGenerator::fromArray(array(
+            'name' => 'SomeClass',
+            'flags' => ClassGenerator::FLAG_FINAL
+        ));
+
+        $expectedOutput = <<<EOS
+final class SomeClass
+{
+
+
+}
+
+EOS;
+
+        $output = $classGenerator->generate();
+        $this->assertEquals($expectedOutput, $output, $output);
+    }
 }

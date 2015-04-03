@@ -173,7 +173,7 @@ abstract class AbstractAdapter extends BaseAdapter
      */
     public function getDbSelect()
     {
-        if ($this->dbSelect == null) {
+        if ($this->dbSelect === null) {
             $this->dbSelect = new Sql\Select();
         }
         return $this->dbSelect;

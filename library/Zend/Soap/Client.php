@@ -326,7 +326,7 @@ class Client implements ServerClient
                     unset($options[$key]);
                 }
             } else {
-                if ($value == null) {
+                if ($value === null) {
                     unset($options[$key]);
                 }
             }
@@ -1003,7 +1003,7 @@ class Client implements ServerClient
         $wsdl = $this->getWSDL();
         $options = array_merge($this->getOptions(), array('trace' => true));
 
-        if ($wsdl == null) {
+        if ($wsdl === null) {
             if (!isset($options['location'])) {
                 throw new Exception\UnexpectedValueException('"location" parameter is required in non-WSDL mode.');
             }
@@ -1142,7 +1142,7 @@ class Client implements ServerClient
      */
     public function getFunctions()
     {
-        if ($this->getWSDL() == null) {
+        if ($this->getWSDL() === null) {
             throw new Exception\UnexpectedValueException(sprintf(
                 '%s method is available only in WSDL mode.',
                 __METHOD__
@@ -1161,7 +1161,7 @@ class Client implements ServerClient
      */
     public function getTypes()
     {
-        if ($this->getWSDL() == null) {
+        if ($this->getWSDL() === null) {
             throw new Exception\UnexpectedValueException(sprintf(
                 '%s method is available only in WSDL mode.',
                 __METHOD__
@@ -1191,7 +1191,7 @@ class Client implements ServerClient
      */
     public function getSoapClient()
     {
-        if ($this->soapClient == null) {
+        if ($this->soapClient === null) {
             $this->_initSoapClientObject();
         }
         return $this->soapClient;

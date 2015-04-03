@@ -40,7 +40,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     public function getClass()
     {
         $phpReflection = parent::getClass();
-        if ($phpReflection == null) {
+        if ($phpReflection === null) {
             return;
         }
 

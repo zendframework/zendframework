@@ -394,7 +394,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         $relativeItemNumber = $this->normalizeItemNumber($relativeItemNumber);
 
-        if ($pageNumber == null) {
+        if ($pageNumber === null) {
             $pageNumber = $this->getCurrentPageNumber();
         }
 
@@ -500,7 +500,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function getItem($itemNumber, $pageNumber = null)
     {
-        if ($pageNumber == null) {
+        if ($pageNumber === null) {
             $pageNumber = $this->getCurrentPageNumber();
         } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;

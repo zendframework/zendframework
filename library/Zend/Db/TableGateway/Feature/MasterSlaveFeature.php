@@ -62,7 +62,7 @@ class MasterSlaveFeature extends AbstractFeature
     public function postInitialize()
     {
         $this->masterSql = $this->tableGateway->sql;
-        if ($this->slaveSql == null) {
+        if ($this->slaveSql === null) {
             $this->slaveSql = new Sql(
                 $this->slaveAdapter,
                 $this->tableGateway->sql->getTable(),

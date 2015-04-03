@@ -233,7 +233,7 @@ class RuntimeDefinition implements DefinitionInterface
 
         $def['supertypes'] = array_keys(array_flip($supertypes));
 
-        if ($def['instantiator'] == null) {
+        if ($def['instantiator'] === null) {
             if ($rClass->isInstantiable()) {
                 $def['instantiator'] = '__construct';
             }

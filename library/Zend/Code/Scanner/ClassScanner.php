@@ -269,7 +269,7 @@ class ClassScanner implements ScannerInterface
     public function hasParentClass()
     {
         $this->scan();
-        return ($this->parentClass != null);
+        return ($this->parentClass !== null);
     }
 
     /**

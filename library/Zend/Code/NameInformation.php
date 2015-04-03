@@ -58,7 +58,7 @@ class NameInformation
      */
     public function hasNamespace()
     {
-        return ($this->namespace != null);
+        return ($this->namespace !== null);
     }
 
     /**

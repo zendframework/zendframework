@@ -204,7 +204,7 @@ class PropertyGenerator extends AbstractMemberGenerator
         }
 
         if ($this->isConst()) {
-            if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
+            if ($defaultValue !== null && !$defaultValue->isValidConstantType()) {
                 throw new Exception\RuntimeException(sprintf(
                     'The property %s is said to be '
                     . 'constant but does not have a valid constant value.',

@@ -124,6 +124,18 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group #7407
+     */
+    public function testProcessExpressionWorksWithExpressionObjectWithPercentageSigns()
+    {
+        $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';
+        $expression       = new Expression($expressionString);
+        $sqlString        = $this->invokeProcessExpressionMethod($expression);
+
+        $this->assertSame($expressionString, $sqlString);
+    }
+
+    /**
      * @param \Zend\Db\Sql\ExpressionInterface $expression
      * @param \Zend\Db\Adapter\Adapter|null $adapter
      * @return \Zend\Db\Adapter\StatementContainer

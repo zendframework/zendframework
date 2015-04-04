@@ -108,6 +108,13 @@ abstract class AbstractSql implements SqlInterface
         $expressionParamIndex = &$this->instanceParameterIndex[$namedParameterPrefix];
 
         foreach ($parts as $part) {
+            // #7407: use $expression->getExpression() to get the unescaped version of the expression
+            if (is_string($part) && $expression instanceof Expression) {
+                $sql .= $expression->getExpression();
+
+                continue;
+            }
+
             // if it is a string, simply tack it onto the return sql "specification" string
             if (is_string($part)) {
                 $sql .= $part;

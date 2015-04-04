@@ -139,8 +139,8 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
                 if ($insert) {
                     $j = isset($j) ? $j : 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
-                    $countInsertStart = count($insertStart);
-                    for (; $j < $countInsertStart; ++$j) {
+                    $insertStartCount = count($insertStart);
+                    for (; $j < $insertStartCount; ++$j) {
                         $insertStart[$j] += strlen($insert);
                     }
                 }

@@ -130,18 +130,18 @@ class Mvc extends AbstractPage
                     $reqParams['controller'] = $reqParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
                 }
 
-                $routeMatchParams   = $this->params;
+                $pageParams   = $this->params;
                 if (null !== $this->controller) {
-                    $routeMatchParams['controller'] = $this->controller;
+                    $pageParams['controller'] = $this->controller;
                 }
                 if (null !== $this->action) {
-                    $routeMatchParams['action'] = $this->action;
+                    $pageParams['action'] = $this->action;
                 }
 
                 if (null !== $this->getRoute()) {
                     if (
                         $this->routeMatch->getMatchedRouteName() === $this->getRoute()
-                        && (count(array_intersect_assoc($reqParams, $routeMatchParams)) == count($routeMatchParams))
+                        && (count(array_intersect_assoc($reqParams, $pageParams)) == count($pageParams))
                     ) {
                         $this->active = true;
                         return $this->active;
@@ -151,27 +151,27 @@ class Mvc extends AbstractPage
                 }
             }
 
-            $routeMatchParams = $this->params;
+            $pageParams = $this->params;
 
             if (null !== $this->controller) {
-                $routeMatchParams['controller'] = $this->controller;
+                $pageParams['controller'] = $this->controller;
             } else {
                 /**
                  * @todo In ZF1, this was configurable and pulled from the front controller
                  */
-                $routeMatchParams['controller'] = 'index';
+                $pageParams['controller'] = 'index';
             }
 
             if (null !== $this->action) {
-                $routeMatchParams['action'] = $this->action;
+                $pageParams['action'] = $this->action;
             } else {
                 /**
                  * @todo In ZF1, this was configurable and pulled from the front controller
                  */
-                $routeMatchParams['action'] = 'index';
+                $pageParams['action'] = 'index';
             }
 
-            if (count(array_intersect_assoc($reqParams, $routeMatchParams)) == count($routeMatchParams)) {
+            if (count(array_intersect_assoc($reqParams, $pageParams)) == count($pageParams)) {
                 $this->active = true;
                 return true;
             }

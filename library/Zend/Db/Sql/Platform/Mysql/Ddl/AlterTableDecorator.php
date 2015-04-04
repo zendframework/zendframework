@@ -135,7 +135,8 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                 if ($insert) {
                     $j = isset($j) ? $j : 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
-                    for (; $j < count($insertStart); ++$j) {
+                    $countInsertStart = count($insertStart);
+                    for (; $j < $countInsertStart; ++$j) {
                         $insertStart[$j] += strlen($insert);
                     }
                 }
@@ -199,7 +200,8 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                 if ($insert) {
                     $j = isset($j) ? $j : 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
-                    for (; $j < count($insertStart); ++$j) {
+                    $countInsertStart = count($insertStart);
+                    for (; $j < $countInsertStart; ++$j) {
                         $insertStart[$j] += strlen($insert);
                     }
                 }

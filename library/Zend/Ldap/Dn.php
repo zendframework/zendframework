@@ -553,9 +553,9 @@ class Dn implements ArrayAccess
         }
         $ret = array();
         for ($i = 0, $count = count($k); $i < $count; $i++) {
-            if (is_array($k[$i]) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
+            if (is_array($k[$i]) && is_array($v[$i]) && (($countKey = count($k[$i])) === count($v[$i]))) {
                 $multi = array();
-                for ($j = 0; $j < count($k[$i]); $j++) {
+                for ($j = 0; $j < $countKey; $j++) {
                     $key         = $k[$i][$j];
                     $val         = $v[$i][$j];
                     $multi[$key] = $val;

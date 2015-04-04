@@ -57,13 +57,13 @@ class HtmlObject extends AbstractHtmlElement
 
         // Content
         if (is_array($content)) {
-            $content = implode(self::EOL, $content);
+            $content = implode(PHP_EOL, $content);
         }
 
         // Object header
-        $xhtml = '<object' . $this->htmlAttribs($attribs) . '>' . self::EOL
-                 . implode(self::EOL, $paramHtml) . self::EOL
-                 . ($content ? $content . self::EOL : '')
+        $xhtml = '<object' . $this->htmlAttribs($attribs) . '>' . PHP_EOL
+                 . implode(PHP_EOL, $paramHtml) . PHP_EOL
+                 . ($content ? $content . PHP_EOL : '')
                  . '</object>';
 
         return $xhtml;

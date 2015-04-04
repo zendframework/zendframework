@@ -43,14 +43,14 @@ class HtmlList extends AbstractHtmlElement
                     $escaper = $this->getView()->plugin('escapeHtml');
                     $item    = $escaper($item);
                 }
-                $list .= '<li>' . $item . '</li>' . self::EOL;
+                $list .= '<li>' . $item . '</li>' . PHP_EOL;
             } else {
-                $itemLength = 5 + strlen(self::EOL);
+                $itemLength = 5 + strlen(PHP_EOL);
                 if ($itemLength < strlen($list)) {
                     $list = substr($list, 0, strlen($list) - $itemLength)
-                     . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                     . $this($item, $ordered, $attribs, $escape) . '</li>' . PHP_EOL;
                 } else {
-                    $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                    $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . PHP_EOL;
                 }
             }
         }
@@ -63,6 +63,6 @@ class HtmlList extends AbstractHtmlElement
 
         $tag = ($ordered) ? 'ol' : 'ul';
 
-        return '<' . $tag . $attribs . '>' . self::EOL . $list . '</' . $tag . '>' . self::EOL;
+        return '<' . $tag . $attribs . '>' . PHP_EOL . $list . '</' . $tag . '>' . PHP_EOL;
     }
 }

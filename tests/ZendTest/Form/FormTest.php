@@ -1874,6 +1874,29 @@ class FormTest extends TestCase
         $this->assertEquals($data, $this->form->getData());
     }
 
+    public function testFormWithCollectionsAndNestedFieldsetsWithInputFilterProviderInterface()
+    {
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'nested_fieldset_with_input_filter_provider',
+            'options' => array(
+                'label' => 'InputFilterProviderFieldset',
+                'count' => 1,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\InputFilterProviderFieldset'
+                )
+            ),
+        ));
+
+        $this->assertTrue(
+            $this->form->getInputFilter()
+                ->get('nested_fieldset_with_input_filter_provider')
+                ->getInputFilter()
+                ->get('foo')
+            instanceof \Zend\InputFilter\Input
+        );
+    }
+
     public function testFormElementValidatorsMergeIntoAppliedInputFilter()
     {
         $this->form->add(array(

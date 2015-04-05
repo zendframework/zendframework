@@ -807,8 +807,31 @@ class Form extends Fieldset implements FormInterface
                     if ($childFieldset->getObject() instanceof InputFilterAwareInterface) {
                         $inputFilter->add($childFieldset->getObject()->getInputFilter(), $name);
                     } else {
-                        if ($fieldset instanceof Collection && $inputFilter instanceof CollectionInputFilter) {
-                            continue;
+                        // Add input filter for collections via getInputFilterSpecification()
+                        if ($childFieldset instanceof Collection
+                            && $childFieldset->getTargetElement() instanceof InputFilterProviderInterface
+                            && $childFieldset->getTargetElement()->getInputFilterSpecification()
+                        ) {
+                            $collectionContainerFilter = new CollectionInputFilter();
+
+                            $spec = $childFieldset->getTargetElement()->getInputFilterSpecification();
+                            $filter = $inputFactory->createInputFilter($spec);
+
+                            $collectionContainerFilter->setInputFilter($filter);
+
+                            $inputFilter->add($collectionContainerFilter, $name);
+
+                            // We need to copy the inputs to the collection input filter
+                            if ($inputFilter instanceof CollectionInputFilter) {
+                                foreach ($inputFilter->getInputs() as $filterName => $input) {
+                                    if (!$inputFilter->getInputFilter()->has($filterName)) {
+                                        $inputFilter->getInputFilter()->add($input, $filterName);
+                                    }
+                                }
+                            }
+
+                            // Add child elements from target element
+                            $childFieldset = $childFieldset->getTargetElement();
                         } else {
                             $inputFilter->add(new InputFilter(), $name);
                         }
@@ -840,6 +863,15 @@ class Form extends Fieldset implements FormInterface
 
             // Recursively attach sub filters
             $this->attachInputFilterDefaults($filter, $childFieldset);
+
+            // We need to copy the inputs to the collection input filter to ensure that all sub filters are added
+            if ($inputFilter instanceof CollectionInputFilter) {
+                foreach ($inputFilter->getInputs() as $filterName => $input) {
+                    if (!$inputFilter->getInputFilter()->has($filterName)) {
+                        $inputFilter->getInputFilter()->add($input, $filterName);
+                    }
+                }
+            }
         }
     }
 

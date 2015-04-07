@@ -189,6 +189,10 @@ EOS;
 
     public function testGetTraits()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
         // PHP documentations mentions that getTraits() return NULL in case of error. I don't know how to cause such
         // error so I test just normal behaviour.
 

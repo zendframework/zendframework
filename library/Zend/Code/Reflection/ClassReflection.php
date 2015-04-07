@@ -187,7 +187,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         $vals = array();
         $traits = parent::getTraits();
         if ($traits === null) {
-            return null;
+            return;
         }
 
         foreach ($traits as $trait) {

@@ -8,7 +8,7 @@
  */
 
 /**
- * EN-Revision: 16.Jul.2013
+ * EN-Revision: 08.Apr.2015
  */
 return array(
     // Zend\I18n\Validator\Alnum
@@ -25,11 +25,11 @@ return array(
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "The input does not appear to be a valid datetime" => "The input does not appear to be a valid datetime",
 
-    // Zend\I18n\Validator\Float
+    // Zend\I18n\Validator\IsFloat
     "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
     "The input does not appear to be a float" => "The input does not appear to be a float",
 
-    // Zend\I18n\Validator\Int
+    // Zend\I18n\Validator\IsInt
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
     "The input does not appear to be an integer" => "The input does not appear to be an integer",
 
@@ -290,6 +290,11 @@ return array(
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "The input is less than %min% characters long" => "The input is less than %min% characters long",
     "The input is more than %max% characters long" => "The input is more than %max% characters long",
+
+    // Zend\Validator\Timezone
+    "Invalid timezone given." => "Invalid timezone given.",
+    "Invalid timezone location given." => "Invalid timezone location given.",
+    "Invalid timezone abbreviation given." => "Invalid timezone abbreviation given.",
 
     // Zend\Validator\Uri
     "Invalid type given. String expected" => "Invalid type given. String expected",

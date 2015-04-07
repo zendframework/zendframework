@@ -197,12 +197,14 @@ EOS;
         // error so I test just normal behaviour.
 
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestTraitClass4');
-        $this->assertTrue(is_array($reflectionClass->getTraits()));
-        $this->assertEquals(1, count($reflectionClass->getTraits()));
-        $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $reflectionClass->getTraits()[0]);
+        $traitsArray = $reflectionClass->getTraits();
+        $this->assertTrue(is_array($traitsArray));
+        $this->assertEquals(1, count($traitsArray));
+        $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $traitsArray[0]);
 
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass');
-        $this->assertTrue(is_array($reflectionClass->getTraits()));
-        $this->assertEquals(0, count($reflectionClass->getTraits()));
+        $traitsArray = $reflectionClass->getTraits();
+        $this->assertTrue(is_array($traitsArray));
+        $this->assertEquals(0, count($traitsArray));
     }
 }

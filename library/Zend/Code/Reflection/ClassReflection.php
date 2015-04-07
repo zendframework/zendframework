@@ -177,12 +177,17 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $methods;
     }
 
+    /**
+     * Returns an array of reflection classes of traits used by this class.
+     *
+     * @return array|null
+     */
     public function getTraits()
     {
         $vals = array();
         $traits = parent::getTraits();
-        if (! $traits) {
-            return;
+        if ($traits === null) {
+            return null;
         }
 
         foreach ($traits as $trait) {

@@ -186,4 +186,19 @@ EOS;
         $reflectionClass = new ClassReflection('ReflectionClass');
         $this->assertSame('', $reflectionClass->getContents());
     }
+
+    public function testGetTraits()
+    {
+        // PHP documentations mentions that getTraits() return NULL in case of error. I don't know how to cause such
+        // error so I test just normal behaviour.
+
+        $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestTraitClass4');
+        $this->assertTrue(is_array($reflectionClass->getTraits()));
+        $this->assertEquals(1, count($reflectionClass->getTraits()));
+        $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $reflectionClass->getTraits()[0]);
+
+        $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass');
+        $this->assertTrue(is_array($reflectionClass->getTraits()));
+        $this->assertEquals(0, count($reflectionClass->getTraits()));
+    }
 }

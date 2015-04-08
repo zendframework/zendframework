@@ -31,10 +31,16 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->abstractSql = $this->getMockForAbstractClass('Zend\Db\Sql\AbstractSql');
 
         $this->mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $this->mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
-        $this->mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
-            return ':' . $x;
-        }));
+        $this->mockDriver
+            ->expects($this->any())
+            ->method('getPrepareType')
+            ->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
+        $this->mockDriver
+            ->expects($this->any())
+            ->method('formatParameterName')
+            ->will($this->returnCallback(function ($x) {
+                return ':' . $x;
+            }));
     }
 
     /**
@@ -124,6 +130,18 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 7407
+     */
+    public function testProcessExpressionWorksWithExpressionObjectWithPercentageSigns()
+    {
+        $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';
+        $expression       = new Expression($expressionString);
+        $sqlString        = $this->invokeProcessExpressionMethod($expression);
+
+        $this->assertSame($expressionString, $sqlString);
+    }
+
+    /**
      * @param \Zend\Db\Sql\ExpressionInterface $expression
      * @param \Zend\Db\Adapter\Adapter|null $adapter
      * @return \Zend\Db\Adapter\StatementContainer
@@ -132,6 +150,12 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $this->mockDriver, $parameterContainer);
+        return $method->invoke(
+            $this->abstractSql,
+            $expression,
+            new TrustingSql92Platform,
+            $this->mockDriver,
+            $parameterContainer
+        );
     }
 }

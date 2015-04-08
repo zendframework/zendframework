@@ -155,4 +155,15 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression('0');
         $this->assertSame('0', $expression->getExpression());
     }
+
+    /**
+     * @group 7407
+     */
+    public function testGetExpressionPreservesPercentageSignInFromUnixtime()
+    {
+        $expressionString = 'FROM_UNIXTIME(date, "%Y-%m")';
+        $expression       = new Expression($expressionString);
+
+        $this->assertSame($expressionString, $expression->getExpression());
+    }
 }

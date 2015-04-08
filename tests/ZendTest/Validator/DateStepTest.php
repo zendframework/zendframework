@@ -77,13 +77,11 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             // long interval
             array('PT1M20S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '2020-09-13T12:26:40Z', true), // 20,000,000 steps
             array('PT1M20S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '2020-09-13T12:26:41Z', false),
+
+            array('P2W',  'Y-\WW',           '1970-W01',             '1973-W16',             true ),
+            array('P2W',  'Y-\WW',           '1970-W01',             '1973-W17',             false),
         );
 
-        // bug in DateTime fixed in 5.3.7
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W16',             true );
-            $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W17',             false);
-        }
         return $data;
     }
 

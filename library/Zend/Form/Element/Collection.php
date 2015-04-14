@@ -209,6 +209,7 @@ class Collection extends Fieldset
         }
 
         // Check to see if elements have been replaced or removed
+        $removed = [];
         foreach ($this->iterator as $name => $elementOrFieldset) {
             if (isset($data[$name])) {
                 continue;
@@ -221,6 +222,10 @@ class Collection extends Fieldset
                 ));
             }
 
+            $removed[] = $name;
+        }
+
+        foreach ($removed as $name) {
             $this->remove($name);
         }
 

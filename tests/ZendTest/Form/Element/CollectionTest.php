@@ -1246,4 +1246,24 @@ class CollectionTest extends TestCase
         $this->assertTrue(is_array($object['colors']));
         $this->assertCount(1, $object['colors']);
     }
+
+    public function testCanRemoveMultipleElements()
+    {
+        /**
+         * @var \Zend\Form\Element\Collection $collection
+         */
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $collection->setCount(0);
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+        $data[] = 'red';
+
+        $collection->populateValues($data);
+
+        $collection->populateValues(array('colors' => array('0' => 'blue')));
+        $this->assertEquals(1, count($collection->getElements()));
+    }
 }

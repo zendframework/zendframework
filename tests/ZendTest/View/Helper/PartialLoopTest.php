@@ -348,6 +348,36 @@ class PartialLoopTest extends TestCase
         }
     }
 
+    /**
+     * @group 7450
+     */
+    public function testNestedPartialLoopsNestedArray()
+    {
+        $data = array(
+            array(
+                'obj' => array(
+                    'helper' => $this->helper,
+                    'message' => 'foo1',
+                    'data' =>
+                        array(
+                            array(
+                                'message' => 'foo2'
+                            )
+                        ),
+                    )
+                )
+            );
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+
+        $result = $this->helper->__invoke('partialLoopParentObject.phtml', $data);
+        $this->assertContains('foo1', $result, $result);
+        $this->assertContains('foo2', $result, $result);
+
+    }
+
     public function testPartialLoopWithInvalidValuesWillRaiseException()
     {
         $this->setExpectedException(

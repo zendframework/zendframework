@@ -359,7 +359,7 @@ class PartialLoopTest extends TestCase
                 'message' => 'foo1',
                 'data' => array(array(
                     'message' => 'foo2'
-                )),
+                ))
             )
         ));
 

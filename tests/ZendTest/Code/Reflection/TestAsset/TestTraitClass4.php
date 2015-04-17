@@ -6,21 +6,5 @@ use ZendTest\Code\Reflection\TestAsset\TestTraitClass3 as TestTrait;
 //issue #7428
 class TestTraitClass4
 {
-	use TestTrait;
-
-	/**
-	* @var bool
-	*/
-	protected static $other = false;
-
-
-	/**
-	* Constructor
-	*
-	* @param bool $other
-	*/
-	public function __construct($other)
-	{
-		$this->other = $other;
-	}
+    use TestTrait;
 }

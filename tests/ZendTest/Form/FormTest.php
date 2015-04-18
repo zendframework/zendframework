@@ -1255,7 +1255,7 @@ class FormTest extends TestCase
         $this->form->setInputFilter($inputFilter);
 
         $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $this->form->getInputFilter()->get('items'));
-        $this->assertCount(1, $this->form->getInputFilter()->get('items')->getInputs());
+        $this->assertCount(1, $this->form->getInputFilter()->get('items')->getInputFilter()->getInputs());
     }
 
     public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()

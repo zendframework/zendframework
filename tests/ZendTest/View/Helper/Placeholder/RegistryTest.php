@@ -12,7 +12,6 @@ namespace ZendTest\View\Helper\Placeholder;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper\Placeholder\Container;
 
-
 /**
  * Test class for Zend\View\Helper\Placeholder\Registry.
  *

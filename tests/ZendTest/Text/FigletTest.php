@@ -11,7 +11,6 @@ namespace ZendTest\Text;
 
 use Zend\Text\Figlet;
 
-
 /**
  * @group      Zend_Text
  */

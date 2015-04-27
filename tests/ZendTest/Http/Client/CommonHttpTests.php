@@ -17,7 +17,6 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Stdlib\Parameters;
 
-
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
  * server to perform. It was designed to be extendable, so that several

@@ -11,7 +11,6 @@ namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\Accept;
 
-
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
     public function testInvalidHeaderLine()

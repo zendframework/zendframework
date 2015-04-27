@@ -11,7 +11,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator;
 
-
 /**
  * @group      Zend_Validator
  */

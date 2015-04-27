@@ -50,6 +50,7 @@ $config->fixers(
         'php_closing_tag',
         'psr0',
         'remove_lines_between_uses',
+        'single_line_after_imports',
         'short_tag',
         'standardize_not_equal',
         'trailing_spaces',

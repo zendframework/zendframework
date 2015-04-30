@@ -407,4 +407,32 @@ class InputTest extends TestCase
         $this->assertTrue($input2->isRequired());
         $this->assertTrue($input2->allowEmpty());
     }
+
+    /**
+     * @group 7445
+     */
+    public function testInputIsValidWhenUsingSetRequiredAtStart()
+    {
+        $input = new Input();
+        $input->setName('foo')
+              ->setRequired(false)
+              ->setAllowEmpty(false)
+              ->setContinueIfEmpty(false);
+
+        $this->assertTrue($input->isValid());
+    }
+
+    /**
+     * @group 7445
+     */
+    public function testInputIsValidWhenUsingSetRequiredAtEnd()
+    {
+        $input = new Input();
+        $input->setName('foo')
+              ->setAllowEmpty(false)
+              ->setContinueIfEmpty(false)
+              ->setRequired(false);
+
+        $this->assertTrue($input->isValid());
+    }
 }

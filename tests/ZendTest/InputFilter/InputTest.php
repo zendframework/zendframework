@@ -543,6 +543,110 @@ class InputTest extends TestCase
         $this->{$assertion}($input->isValid());
     }
 
+    public function whenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
+    {
+        $validator = new Validator\Callback(function ($value) {
+            throw new RuntimeException('Validator executed when it should not be');
+        });
+
+        $requiredFirst = new Input('foo');
+        $requiredFirst->setRequired(true)
+            ->setAllowEmpty(false)
+            ->setContinueIfEmpty(false)
+            ->getValidatorChain()->attach($validator);
+
+        $requiredLast = new Input('foo');
+        $requiredLast->setAllowEmpty(false)
+            ->setContinueIfEmpty(false)
+            ->setRequired(true)
+            ->getValidatorChain()->attach($validator);
+
+        return array(
+            'required-first-null'  => array($requiredFirst, null),
+            'required-last-null'   => array($requiredLast, null),
+            'required-first-empty' => array($requiredFirst, ''),
+            'required-last-empty'  => array($requiredLast, ''),
+            'required-first-array' => array($requiredFirst, array()),
+            'required-last-array'  => array($requiredLast, array()),
+        );
+    }
+
+    /**
+     * @group 7448
+     * @dataProvider whenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun
+     */
+    public function testWhenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun($input, $value)
+    {
+        $input->setValue($value);
+        $this->assertFalse($input->isValid());
+    }
+
+    public function whenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun()
+    {
+        $alwaysInvalid = new Validator\Callback(function ($value) {
+            if (! empty($value)) {
+                throw new RuntimeException('Unexpected non-empty value provided to validate');
+            }
+            return false;
+        });
+
+        $emptyIsValid = new Validator\Callback(function ($value) {
+            if (! empty($value)) {
+                throw new RuntimeException('Unexpected non-empty value provided to validate');
+            }
+            return true;
+        });
+
+        $requiredFirstInvalid = new Input('foo');
+        $requiredFirstValid   = new Input('foo');
+        foreach (array($requiredFirstValid, $requiredFirstInvalid) as $input) {
+            $input->setRequired(true)
+                ->setAllowEmpty(false)
+                ->setContinueIfEmpty(true);
+        }
+
+        $requiredLastInvalid = new Input('foo');
+        $requiredLastValid   = new Input('foo');
+        foreach (array($requiredLastValid, $requiredLastInvalid) as $input) {
+            $input->setAllowEmpty(false)
+                ->setContinueIfEmpty(true)
+                ->setRequired(true);
+        }
+
+        foreach (array($requiredFirstValid, $requiredLastValid) as $input) {
+            $input->getValidatorChain()->attach($emptyIsValid);
+        }
+
+        foreach (array($requiredFirstInvalid, $requiredLastInvalid) as $input) {
+            $input->getValidatorChain()->attach($alwaysInvalid);
+        }
+
+        return array(
+            'required-first-null-valid'    => array($requiredFirstValid, null, 'assertTrue'),
+            'required-first-null-invalid'  => array($requiredFirstInvalid, null, 'assertFalse'),
+            'required-last-null-valid'     => array($requiredLastValid, null, 'assertTrue'),
+            'required-last-null-invalid'   => array($requiredLastInvalid, null, 'assertFalse'),
+            'required-first-empty-valid'   => array($requiredFirstValid, '', 'assertTrue'),
+            'required-first-empty-invalid' => array($requiredFirstInvalid, '', 'assertFalse'),
+            'required-last-empty-valid'    => array($requiredLastValid, '', 'assertTrue'),
+            'required-last-empty-invalid'  => array($requiredLastInvalid, '', 'assertFalse'),
+            'required-first-array-valid'   => array($requiredFirstValid, array(), 'assertTrue'),
+            'required-first-array-invalid' => array($requiredFirstInvalid, array(), 'assertFalse'),
+            'required-last-array-valid'    => array($requiredLastValid, array(), 'assertTrue'),
+            'required-last-array-invalid'  => array($requiredLastInvalid, array(), 'assertFalse'),
+        );
+    }
+
+    /**
+     * @group 7448
+     * @dataProvider whenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun
+     */
+    public function testWhenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun($input, $value, $assertion)
+    {
+        $input->setValue($value);
+        $this->{$assertion}($input->isValid());
+    }
+
     public function whenNotRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
     {
         $validator = new Validator\Callback(function ($value) {

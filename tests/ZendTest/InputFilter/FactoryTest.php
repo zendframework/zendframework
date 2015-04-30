@@ -193,18 +193,6 @@ class FactoryTest extends TestCase
         }
     }
 
-    public function testFactoryWillCreateInputWithSuggestedRequiredFlagAndImpliesAllowEmptyFlag()
-    {
-        $factory = new Factory();
-        $input   = $factory->createInput(array(
-            'name'     => 'foo',
-            'required' => false,
-        ));
-        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
-        $this->assertFalse($input->isRequired());
-        $this->assertTrue($input->allowEmpty());
-    }
-
     public function testFactoryWillCreateInputWithSuggestedRequiredFlagAndAlternativeAllowEmptyFlag()
     {
         $factory = new Factory();

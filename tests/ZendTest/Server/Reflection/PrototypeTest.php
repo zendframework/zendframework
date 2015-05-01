@@ -128,6 +128,6 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $parameter);
         }
 
-        $this->assertTrue($p === $this->_parameters);
+        $this->assertEquals($this->_parameters, $p);
     }
 }

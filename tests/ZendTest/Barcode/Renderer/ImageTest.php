@@ -103,7 +103,7 @@ class ImageTest extends TestCommon
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
         $this->assertInternalType('resource', $resource, 'Image must be a resource');
-        $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+        $this->assertEquals('gd', get_resource_type($resource), 'Image must be a GD resource');
     }
 
     public function testDrawWithExistantResourceReturnResource()
@@ -115,7 +115,7 @@ class ImageTest extends TestCommon
         $this->renderer->setResource($imageResource);
         $resource = $this->renderer->draw();
         $this->assertInternalType('resource', $resource, 'Image must be a resource');
-        $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+        $this->assertEquals('gd', get_resource_type($resource), 'Image must be a GD resource');
         $this->assertSame($resource, $imageResource);
     }
 

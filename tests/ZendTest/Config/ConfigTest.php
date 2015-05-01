@@ -270,11 +270,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config($configArray);
         $this->assertEquals(count($configArray), count($config));
         foreach ($config as $key => $value) {
-            if ($key === 'false1') {
-                $this->assertTrue($value === false);
-            } else {
-                $this->assertTrue($value === 'someValue');
-            }
+            $this->assertEquals($configArray[$key], $value);
         }
     }
 
@@ -297,7 +293,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config($this->all);
         $value = $config->get('notthere', 'default');
-        $this->assertTrue($value === 'default');
+        $this->assertEquals('default', $value);
         $this->assertNull($config->notThere);
     }
 

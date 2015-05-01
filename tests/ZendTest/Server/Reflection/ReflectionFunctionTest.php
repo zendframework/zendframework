@@ -30,7 +30,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $argv = array('string1', 'string2');
         $r = new Reflection\ReflectionFunction($function, 'namespace', $argv);
         $this->assertInternalType('array', $r->getInvokeArguments());
-        $this->assertTrue($argv === $r->getInvokeArguments());
+        $this->assertEquals($argv, $r->getInvokeArguments());
 
         $prototypes = $r->getPrototypes();
         $this->assertInternalType('array', $prototypes);
@@ -106,9 +106,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $argv = array('string1', 'string2');
         $r = new Reflection\ReflectionFunction($function, null, $argv);
         $args = $r->getInvokeArguments();
-        $this->assertInternalType('array', $args);
-        $this->assertEquals(2, count($args));
-        $this->assertTrue($argv === $args);
+        $this->assertEquals($argv, $args);
     }
 
     public function test__wakeup()

@@ -36,7 +36,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     {
         $newPluginManager = new AdapterPluginManager();
         Serializer::setAdapterPluginManager($newPluginManager);
-        $this->assertTrue(Serializer::getAdapterPluginManager() === $newPluginManager);
+        $this->assertSame($newPluginManager, Serializer::getAdapterPluginManager());
     }
 
     public function testDefaultAdapter()
@@ -77,7 +77,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $newAdapter = new Adapter\PhpSerialize();
 
         Serializer::setDefaultAdapter($newAdapter);
-        $this->assertTrue($newAdapter === Serializer::getDefaultAdapter());
+        $this->assertSame($newAdapter, Serializer::getDefaultAdapter());
     }
 
     public function testFactoryPassesAdapterOptions()

@@ -336,7 +336,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         }
         $resource = Barcode\Barcode::draw('code25', 'image', array('text' => '012345'));
         $this->assertInternalType('resource', $resource, 'Image must be a resource');
-        $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+        $this->assertEquals('gd', get_resource_type($resource), 'Image must be a GD resource');
     }
 
     public function testProxyBarcodeRendererDrawAsImageAutomaticallyRenderImageIfException()
@@ -346,7 +346,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         }
         $resource = Barcode\Barcode::draw('code25', 'image');
         $this->assertInternalType('resource', $resource, 'Image must be a resource');
-        $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+        $this->assertEquals('gd', get_resource_type($resource), 'Image must be a GD resource');
     }
 
     public function testProxyBarcodeRendererDrawAsPdf()

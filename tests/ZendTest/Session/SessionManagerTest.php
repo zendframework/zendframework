@@ -172,7 +172,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $storage['foo'] = 'bar';
         $this->manager->writeClose();
-        $this->assertTrue(isset($storage['foo']) && $storage['foo'] == 'bar');
+        $this->assertArrayHasKey('foo', $storage);
+        $this->assertEquals('bar', $storage['foo']);
     }
 
     /**

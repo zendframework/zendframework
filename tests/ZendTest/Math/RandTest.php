@@ -162,7 +162,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getString($length, '0123456789abcdef');
             $this->assertEquals(strlen($rand), $length);
-            $this->assertTrue(preg_match('#^[0-9a-f]+$#', $rand) === 1);
+            $this->assertEquals(1, preg_match('#^[0-9a-f]+$#', $rand));
         }
     }
 
@@ -171,7 +171,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getString($length);
             $this->assertEquals(strlen($rand), $length);
-            $this->assertTrue(preg_match('#^[0-9a-zA-Z+/]+$#', $rand) === 1);
+            $this->assertEquals(1, preg_match('#^[0-9a-zA-Z+/]+$#', $rand));
         }
     }
 

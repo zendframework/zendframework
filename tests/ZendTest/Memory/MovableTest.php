@@ -84,8 +84,8 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memObject->touch();
 
         $this->assertTrue($memoryManager->processUpdatePassed);
-        $this->assertTrue($memoryManager->processedObject === $memObject);
-        $this->assertEquals($memoryManager->processedId, 10);
+        $this->assertEquals($memObject, $memoryManager->processedObject);
+        $this->assertEquals(10, $memoryManager->processedId);
     }
 
     /**
@@ -105,8 +105,8 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memObject->value[6] = '_';
 
         $this->assertTrue($memoryManager->processUpdatePassed);
-        $this->assertTrue($memoryManager->processedObject === $memObject);
-        $this->assertEquals($memoryManager->processedId, 10);
+        $this->assertEquals($memObject, $memoryManager->processedObject);
+        $this->assertEquals(10, $memoryManager->processedId);
     }
 
     public function testInvalidGetThrowException()

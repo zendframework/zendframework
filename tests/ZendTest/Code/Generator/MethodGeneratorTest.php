@@ -75,7 +75,7 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $method = new MethodGenerator();
         $method->setDocBlock($docblockGenerator);
-        $this->assertTrue($docblockGenerator === $method->getDocBlock());
+        $this->assertSame($docblockGenerator, $method->getDocBlock());
     }
 
 

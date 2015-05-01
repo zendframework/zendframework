@@ -66,7 +66,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $class = $r->getDeclaringClass();
 
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $class);
-        $this->assertTrue($this->_class === $class);
+        $this->assertEquals($this->_class, $class);
     }
 
     /**

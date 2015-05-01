@@ -1540,7 +1540,7 @@ class FormTest extends TestCase
 
         // Returned object has to be the same as when binding or properties
         // will be lost. (For example entity IDs.)
-        $this->assertTrue($hash1 == $hash2);
+        $this->assertEquals($hash1, $hash2);
     }
 
     public function testAddRemove()

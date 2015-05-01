@@ -1861,7 +1861,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
 
-        $this->assertTrue($edate == $entry->getDateModified());
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     public function dateModifiedProvider()

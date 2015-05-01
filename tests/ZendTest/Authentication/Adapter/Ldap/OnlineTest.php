@@ -88,7 +88,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid());
-        $this->assertTrue($result->getCode() == Authentication\Result::SUCCESS);
+        $this->assertEquals(Authentication\Result::SUCCESS, $result->getCode());
     }
 
     public function testCanonAuth()
@@ -109,8 +109,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
                 $result = $adapter->authenticate();
                 $this->assertInstanceOf('Zend\Authentication\Result', $result);
                 $this->assertTrue($result->isValid());
-                $this->assertTrue($result->getCode() == Authentication\Result::SUCCESS);
-                $this->assertTrue($result->getIdentity() === $formName);
+                $this->assertEquals(Authentication\Result::SUCCESS, $result->getCode());
+                $this->assertEquals($formName, $result->getIdentity());
             }
         }
     }
@@ -126,7 +126,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $result = $adapter->authenticate();
         $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid() === false);
-        $this->assertTrue($result->getCode() == Authentication\Result::FAILURE_CREDENTIAL_INVALID);
+        $this->assertEquals(Authentication\Result::FAILURE_CREDENTIAL_INVALID, $result->getCode());
     }
 
     public function testInvalidUserAuth()

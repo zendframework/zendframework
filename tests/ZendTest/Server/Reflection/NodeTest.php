@@ -33,12 +33,12 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $child = new Node('array', $node);
         $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
         $this->assertEquals('array', $child->getValue());
-        $this->assertTrue($node === $child->getParent());
+        $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
         $this->assertEmpty($children);
 
         $children = $node->getChildren();
-        $this->assertTrue($child === $children[0]);
+        $this->assertEquals($child, $children[0]);
     }
 
     /**
@@ -51,7 +51,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
         $child->setParent($parent);
 
-        $this->assertTrue($parent === $child->getParent());
+        $this->assertEquals($parent, $child->getParent());
     }
 
     /**
@@ -63,9 +63,9 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $child = $parent->createChild('array');
 
         $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
-        $this->assertTrue($parent === $child->getParent());
+        $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
-        $this->assertTrue($child === $children[0]);
+        $this->assertEquals($child, $children[0]);
     }
 
     /**
@@ -77,9 +77,9 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $child  = new Node('array');
 
         $parent->attachChild($child);
-        $this->assertTrue($parent === $child->getParent());
+        $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
-        $this->assertTrue($child === $children[0]);
+        $this->assertEquals($child, $children[0]);
     }
 
     /**
@@ -97,7 +97,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertInternalType('array', $children);
         $this->assertEquals(1, count($children), var_export($types, 1));
-        $this->assertTrue($child === $children[0]);
+        $this->assertEquals($child, $children[0]);
     }
 
     /**
@@ -121,7 +121,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $child = $parent->createChild('array');
 
         $this->assertNull($parent->getParent());
-        $this->assertTrue($parent === $child->getParent());
+        $this->assertEquals($parent, $child->getParent());
     }
 
     /**
@@ -173,6 +173,6 @@ class NodeTest extends \PHPUnit_Framework_TestCase
             'child2grand2great2'
         );
 
-        $this->assertTrue($test === $endPointsArray, 'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']');
+        $this->assertEquals($test, $endPointsArray, 'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']');
     }
 }

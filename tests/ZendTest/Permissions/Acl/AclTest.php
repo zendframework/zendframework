@@ -46,9 +46,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
         $role = $this->_acl->addRole($roleGuest)
                           ->getRole($roleGuest->getRoleId());
-        $this->assertTrue($roleGuest === $role);
+        $this->assertEquals($roleGuest, $role);
         $role = $this->_acl->getRole($roleGuest);
-        $this->assertTrue($roleGuest === $role);
+        $this->assertEquals($roleGuest, $role);
     }
 
     /**
@@ -279,9 +279,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $resourceArea = new Resource\GenericResource('area');
         $resource = $this->_acl->addResource($resourceArea)
                           ->getResource($resourceArea->getResourceId());
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
         $resource = $this->_acl->getResource($resourceArea);
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
     }
 
     /**
@@ -305,9 +305,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $resourceArea = new Resource\GenericResource('area');
         $resource = $this->_acl->addResource($resourceArea)
                                ->getResource($resourceArea->getResourceId());
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
         $resource = $this->_acl->getResource($resourceArea);
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
     }
 
     /**

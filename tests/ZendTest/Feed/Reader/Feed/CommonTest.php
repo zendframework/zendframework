@@ -49,7 +49,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue($feed->getXpathPrefix() == '/atom:feed');
+        $this->assertEquals('/atom:feed', $feed->getXpathPrefix());
     }
 
     public function testGetsDomElementObject()

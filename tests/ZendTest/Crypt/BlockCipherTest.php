@@ -190,6 +190,6 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         // tamper the encrypted data
         $encrypted = substr($encrypted, -1);
         $decrypted = $this->blockCipher->decrypt($encrypted);
-        $this->assertTrue($decrypted === false);
+        $this->assertFalse($decrypted);
     }
 }

@@ -125,7 +125,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $result = $adapter->authenticate();
         $this->assertInstanceOf('Zend\Authentication\Result', $result);
-        $this->assertTrue($result->isValid() === false);
+        $this->assertFalse($result->isValid());
         $this->assertEquals(Authentication\Result::FAILURE_CREDENTIAL_INVALID, $result->getCode());
     }
 
@@ -139,7 +139,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $result = $adapter->authenticate();
         $this->assertInstanceOf('Zend\Authentication\Result', $result);
-        $this->assertTrue($result->isValid() === false);
+        $this->assertFalse($result->isValid());
         $this->assertTrue(
             $result->getCode() == Authentication\Result::FAILURE_IDENTITY_NOT_FOUND ||
             $result->getCode() == Authentication\Result::FAILURE_CREDENTIAL_INVALID

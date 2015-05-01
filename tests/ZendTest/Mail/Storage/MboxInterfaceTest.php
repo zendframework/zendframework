@@ -139,7 +139,7 @@ class MboxInterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
         $headers = $list[1]->getHeaders();
-        $this->assertTrue(count($headers) > 0);
+        $this->assertNotEmpty($headers);
     }
 
     public function testWrongHeader()

@@ -209,7 +209,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
         $result = $this->_filter->filter($string);
         restore_error_handler();
 
-        $this->assertTrue(strlen($result) > 0);
+        $this->assertGreaterThan(0, strlen($result));
     }
 
     /**

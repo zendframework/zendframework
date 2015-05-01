@@ -67,7 +67,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->server->setClass('Zend\Json\Server\Server');
         $test = $this->server->getFunctions();
-        $this->assertTrue(0 < count($test));
+        $this->assertNotEmpty($test);
     }
 
     public function testBindingClassToServerShouldRegisterAllPublicMethods()
@@ -88,7 +88,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $object = new Server\Server();
         $this->server->setClass($object);
         $test = $this->server->getFunctions();
-        $this->assertTrue(0 < count($test));
+        $this->assertNotEmpty($test);
     }
 
     public function testBindingObjectToServerShouldRegisterAllPublicMethods()
@@ -224,7 +224,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $services = $smd->getServices();
         $this->assertInternalType('array', $services);
-        $this->assertTrue(0 < count($services));
+        $this->assertNotEmpty($services);
         $this->assertArrayHasKey('strtolower', $services);
         $methods = get_class_methods('Zend\Json\Server\Server');
         foreach ($methods as $method) {

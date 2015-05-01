@@ -73,7 +73,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
         foreach (array('foo', 'bar') as $event) {
             $listeners = $this->events->getListeners($event);
-            $this->assertTrue(count($listeners) > 0);
+            $this->assertNotEmpty($listeners);
             foreach ($listeners as $listener) {
                 $this->assertSame($callback, $listener->getCallback());
             }

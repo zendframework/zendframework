@@ -34,7 +34,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 
         $prototypes = $r->getPrototypes();
         $this->assertInternalType('array', $prototypes);
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertNotEmpty($prototypes);
     }
 
     public function test__getSet()
@@ -86,7 +86,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 
         $prototypes = $r->getPrototypes();
         $this->assertInternalType('array', $prototypes);
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertNotEmpty($prototypes);
         $this->assertEquals(1, count($prototypes));
 
         foreach ($prototypes as $p) {
@@ -128,7 +128,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 
         $prototypes = $r->getPrototypes();
         $this->assertInternalType('array', $prototypes);
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertNotEmpty($prototypes);
         $this->assertEquals(1, count($prototypes));
 
         $proto = $prototypes[0];

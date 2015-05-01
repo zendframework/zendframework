@@ -246,7 +246,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testGetFault()
     {
         $fault = $this->request->getFault();
-        $this->assertTrue(null === $fault);
+        $this->assertNull($fault);
         $this->request->loadXml('foo');
         $fault = $this->request->getFault();
         $this->assertTrue($fault instanceof \Zend\XmlRpc\Fault);

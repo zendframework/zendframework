@@ -178,7 +178,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->clearCookies();
         $cookies = $this->_client->getCookies();
 
-        $this->assertTrue(empty($cookies), 'Cookies is expected to be null but it is not');
+        $this->assertEquals(array(), $cookies, 'Cookies are expected to be an empty array but it is not');
     }
 
     /**

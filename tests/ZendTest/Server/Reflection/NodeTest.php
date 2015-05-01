@@ -26,7 +26,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $node = new Node('string');
         $this->assertTrue($node instanceof Node);
         $this->assertEquals('string', $node->getValue());
-        $this->assertTrue(null === $node->getParent());
+        $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertTrue(empty($children));
 
@@ -120,7 +120,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertTrue(null === $parent->getParent());
+        $this->assertNull($parent->getParent());
         $this->assertTrue($parent === $child->getParent());
     }
 

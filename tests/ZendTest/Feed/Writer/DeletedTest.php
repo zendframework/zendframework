@@ -38,7 +38,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     public function testGetReferenceReturnsNullIfNotSet()
     {
         $entry = new Writer\Deleted;
-        $this->assertTrue(null === $entry->getReference());
+        $this->assertNull($entry->getReference());
     }
 
     public function testSetWhenDefaultsToCurrentTime()
@@ -100,7 +100,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     public function testGetWhenReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Deleted;
-        $this->assertTrue(null === $entry->getWhen());
+        $this->assertNull($entry->getWhen());
     }
 
     public function testAddsByNameFromArray()

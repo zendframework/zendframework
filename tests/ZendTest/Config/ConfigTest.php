@@ -301,7 +301,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config($this->all);
         $value = $config->get('notthere', 'default');
         $this->assertTrue($value === 'default');
-        $this->assertTrue($config->notThere === null);
+        $this->assertNull($config->notThere);
     }
 
     public function testUnsetException()

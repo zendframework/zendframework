@@ -150,14 +150,14 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function validateArray($error)
     {
-        $this->assertTrue(is_array($error));
+        $this->assertInternalType('array', $error);
         $this->assertTrue(array_key_exists('code', $error));
         $this->assertTrue(array_key_exists('message', $error));
         $this->assertTrue(array_key_exists('data', $error));
 
-        $this->assertTrue(is_int($error['code']));
-        $this->assertTrue(is_string($error['message']));
-        $this->assertTrue(is_array($error['data']));
+        $this->assertInternalType('integer', $error['code']);
+        $this->assertInternalType('string', $error['message']);
+        $this->assertInternalType('array', $error['data']);
 
         $this->assertEquals($this->error->getCode(), $error['code']);
         $this->assertEquals($this->error->getMessage(), $error['message']);

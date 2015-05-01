@@ -349,7 +349,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->process($config);
 
         $tokens = $processor->getTokens();
-        $this->assertTrue(is_array($tokens));
+        $this->assertInternalType('array', $tokens);
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue(!$processor->getUserOnly());
 
@@ -370,7 +370,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $tokens = $processor->getTokens();
 
-        $this->assertTrue(is_array($tokens));
+        $this->assertInternalType('array', $tokens);
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue($processor->getUserOnly());
 

@@ -37,7 +37,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
-        $this->assertTrue(is_array($methods));
+        $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
             $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }
@@ -60,7 +60,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
     public function test__call()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
-        $this->assertTrue(is_string($r->getName()));
+        $this->assertInternalType('string', $r->getName());
         $this->assertEquals('Zend\Server\Reflection', $r->getName());
     }
 
@@ -86,7 +86,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
 
         $methods = $r->getMethods();
-        $this->assertTrue(is_array($methods));
+        $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
             $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }

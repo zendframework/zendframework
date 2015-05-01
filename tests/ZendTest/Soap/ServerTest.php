@@ -903,7 +903,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new \ZendTest\Soap\TestAsset\MockServer();
         $r = $server->handle(new \DOMDocument('1.0', 'UTF-8'));
-        $this->assertTrue(is_string($server->mockSoapServer->handle[0]));
+        $this->assertInternalType('string', $server->mockSoapServer->handle[0]);
     }
 
     /**

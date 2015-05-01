@@ -1243,7 +1243,7 @@ class CollectionTest extends TestCase
         $object = new \ArrayObject();
         $form->bind($object);
         $this->assertTrue($form->isValid());
-        $this->assertTrue(is_array($object['colors']));
+        $this->assertInternalType('array', $object['colors']);
         $this->assertCount(1, $object['colors']);
     }
 }

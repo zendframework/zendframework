@@ -41,7 +41,7 @@ class FigletTest extends CommonWordTest
     {
         $ttl = $this->captcha->getTimeout();
         $this->assertFalse(empty($ttl));
-        $this->assertTrue(is_int($ttl));
+        $this->assertInternalType('integer', $ttl);
     }
 
     public function testCanSetTimeout()
@@ -56,7 +56,7 @@ class FigletTest extends CommonWordTest
     {
         $id = $this->captcha->generate();
         $this->assertFalse(empty($id));
-        $this->assertTrue(is_string($id));
+        $this->assertInternalType('string', $id);
         $this->id = $id;
     }
 
@@ -65,7 +65,7 @@ class FigletTest extends CommonWordTest
         $this->captcha->generate();
         $word = $this->captcha->getWord();
         $this->assertFalse(empty($word));
-        $this->assertTrue(is_string($word));
+        $this->assertInternalType('string', $word);
         $this->assertTrue(strlen($word) == 8);
         $this->word = $word;
     }
@@ -75,7 +75,7 @@ class FigletTest extends CommonWordTest
         $this->captcha->setWordLen(4);
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertTrue(is_string($word));
+        $this->assertInternalType('string', $word);
         $this->assertTrue(strlen($word) == 4);
         $this->word = $word;
     }

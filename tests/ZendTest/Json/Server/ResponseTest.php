@@ -123,7 +123,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $json = $this->response->toJSON();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertTrue(array_key_exists('result', $test));
         $this->assertFalse(array_key_exists('error', $test), "'error' may not coexist with 'result'");
         $this->assertTrue(array_key_exists('id', $test));
@@ -145,7 +145,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $json = $this->response->toJSON();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertFalse(array_key_exists('result', $test), "'result' may not coexist with 'error'");
         $this->assertTrue(array_key_exists('error', $test));
         $this->assertTrue(array_key_exists('id', $test));
@@ -163,7 +163,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $json = $this->response->__toString();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertTrue(array_key_exists('result', $test));
         $this->assertFalse(array_key_exists('error', $test), "'error' may not coexist with 'result'");
         $this->assertTrue(array_key_exists('id', $test));

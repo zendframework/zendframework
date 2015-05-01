@@ -61,8 +61,8 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionParameter($this->_getParameter());
 
         // just test a few call proxies...
-        $this->assertTrue(is_bool($r->allowsNull()));
-        $this->assertTrue(is_bool($r->isOptional()));
+        $this->assertInternalType('bool', $r->allowsNull());
+        $this->assertInternalType('bool', $r->isOptional());
     }
 
     /**

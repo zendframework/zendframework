@@ -162,7 +162,7 @@ class SelectTest extends TestCase
     public function testOptionsHasArrayOnConstruct()
     {
         $element = new SelectElement();
-        $this->assertTrue(is_array($element->getValueOptions()));
+        $this->assertInternalType('array', $element->getValueOptions());
     }
 
     public function testDeprecateOptionsInAttributes()

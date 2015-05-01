@@ -43,7 +43,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testMethodsShouldBeEmptyArrayByDefault()
     {
         $methods = $this->definition->getMethods();
-        $this->assertTrue(is_array($methods));
+        $this->assertInternalType('array', $methods);
         $this->assertTrue(empty($methods));
     }
 

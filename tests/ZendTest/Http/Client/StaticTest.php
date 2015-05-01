@@ -70,7 +70,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri()->toString();
-        $this->assertTrue(is_string($uri), 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
+        $this->assertInternalType('string', $uri, 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
         $this->assertEquals($uri, $uristr, 'Returned string is not the expected URI');
     }
 

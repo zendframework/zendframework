@@ -52,7 +52,7 @@ class JsonTest extends TestCase
     public function testJsonHelperReturnsJsonEncodedString()
     {
         $data = $this->helper->__invoke('foobar');
-        $this->assertTrue(is_string($data));
+        $this->assertInternalType('string', $data);
         $this->assertEquals('foobar', JsonFormatter::decode($data));
     }
 }

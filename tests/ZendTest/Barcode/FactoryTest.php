@@ -335,7 +335,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('GD extension is required to run this test');
         }
         $resource = Barcode\Barcode::draw('code25', 'image', array('text' => '012345'));
-        $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
+        $this->assertInternalType('resource', $resource, 'Image must be a resource');
         $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
     }
 
@@ -345,7 +345,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('GD extension is required to run this test');
         }
         $resource = Barcode\Barcode::draw('code25', 'image');
-        $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
+        $this->assertInternalType('resource', $resource, 'Image must be a resource');
         $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
     }
 

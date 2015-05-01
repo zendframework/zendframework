@@ -210,7 +210,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Response);
         $this->assertSame($response->__toString(), $output);
         $return = $response->getReturnValue();
-        $this->assertTrue(is_array($return));
+        $this->assertInternalType('array', $return);
         $this->assertTrue(in_array('system.multicall', $return));
     }
 
@@ -232,7 +232,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response instanceof Response);
         $return = $response->getReturnValue();
-        $this->assertTrue(is_array($return));
+        $this->assertInternalType('array', $return);
         $this->assertTrue(in_array('system.multicall', $return));
     }
 
@@ -291,7 +291,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testListMethods()
     {
         $methods = $this->_server->listMethods();
-        $this->assertTrue(is_array($methods));
+        $this->assertInternalType('array', $methods);
         $this->assertTrue(in_array('system.listMethods', $methods));
         $this->assertTrue(in_array('system.methodHelp', $methods));
         $this->assertTrue(in_array('system.methodSignature', $methods));
@@ -330,7 +330,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testMethodSignature()
     {
         $sig = $this->_server->methodSignature('system.methodSignature');
-        $this->assertTrue(is_array($sig));
+        $this->assertInternalType('array', $sig);
         $this->assertEquals(1, count($sig), var_export($sig, 1));
 
         $this->setExpectedException('Zend\XmlRpc\Server\Exception\ExceptionInterface', 'Method "foo" does not exist');
@@ -366,10 +366,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
         $returns = $response->getReturnValue();
-        $this->assertTrue(is_array($returns));
+        $this->assertInternalType('array', $returns);
         $this->assertEquals(2, count($returns), var_export($returns, 1));
-        $this->assertTrue(is_array($returns[0]), var_export($returns[0], 1));
-        $this->assertTrue(is_string($returns[1]), var_export($returns[1], 1));
+        $this->assertInternalType('array', $returns[0], var_export($returns[0], 1));
+        $this->assertInternalType('string', $returns[1], var_export($returns[1], 1));
     }
 
     /**
@@ -394,9 +394,9 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
         $returns = $response->getReturnValue();
-        $this->assertTrue(is_array($returns));
+        $this->assertInternalType('array', $returns);
         $this->assertEquals(2, count($returns), var_export($returns, 1));
-        $this->assertTrue(is_array($returns[0]), var_export($returns[0], 1));
+        $this->assertInternalType('array', $returns[0], var_export($returns[0], 1));
         $this->assertSame(array(
             'faultCode' => 620, 'faultString' => 'Method "undefined" does not exist'),
             $returns[1], var_export($returns[1], 1));
@@ -568,31 +568,31 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             )
         );
         $returned = $this->_server->multicall($try);
-        $this->assertTrue(is_array($returned));
+        $this->assertInternalType('array', $returned);
         $this->assertEquals(5, count($returned));
 
         $response = $returned[0];
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertTrue(isset($response['faultCode']));
         $this->assertEquals(601, $response['faultCode']);
 
         $response = $returned[1];
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertTrue(isset($response['faultCode']));
         $this->assertEquals(602, $response['faultCode']);
 
         $response = $returned[2];
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertTrue(isset($response['faultCode']));
         $this->assertEquals(603, $response['faultCode']);
 
         $response = $returned[3];
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertTrue(isset($response['faultCode']));
         $this->assertEquals(604, $response['faultCode']);
 
         $response = $returned[4];
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertTrue(isset($response['faultCode']));
         $this->assertEquals(605, $response['faultCode']);
     }

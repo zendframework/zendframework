@@ -95,7 +95,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
-        $this->assertTrue(is_array($children));
+        $this->assertInternalType('array', $children);
         $this->assertEquals(1, count($children), var_export($types, 1));
         $this->assertTrue($child === $children[0]);
     }

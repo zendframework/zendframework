@@ -26,7 +26,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $msg = new Mime\Message();  // No Parts
         $p = $msg->getParts();
-        $this->assertTrue(is_array($p));
+        $this->assertInternalType('array', $p);
         $this->assertTrue(count($p) == 0);
 
         $p2 = array();
@@ -34,7 +34,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $p2[] = new Mime\Part('This is another test');
         $msg->setParts($p2);
         $p = $msg->getParts();
-        $this->assertTrue(is_array($p));
+        $this->assertInternalType('array', $p);
         $this->assertTrue(count($p) == 2);
     }
 

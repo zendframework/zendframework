@@ -253,7 +253,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'handleErrors'));
         $string = @$this->helper->toString();
         $this->assertEquals('', $string);
-        $this->assertTrue(is_string($this->error));
+        $this->assertInternalType('string', $this->error);
     }
 
     public function testHeadMetaHelperCreatesItemEntry()

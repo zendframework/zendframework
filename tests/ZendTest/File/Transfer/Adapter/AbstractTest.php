@@ -90,7 +90,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         );
         $this->adapter->addValidators($validators);
         $test = $this->adapter->getValidators();
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals(4, count($test), var_export($test, 1));
         $count = array_shift($test);
         $this->assertTrue($count instanceof FileValidator\Count);
@@ -148,7 +148,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $validators = $this->adapter->getValidators();
-        $this->assertTrue(is_array($validators));
+        $this->assertInternalType('array', $validators);
         $this->assertEquals(4, count($validators));
         foreach ($validators as $validator) {
             $this->assertTrue($validator instanceof Validator\ValidatorInterface);
@@ -187,7 +187,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $this->adapter->clearValidators();
         $validators = $this->adapter->getValidators();
-        $this->assertTrue(is_array($validators));
+        $this->assertInternalType('array', $validators);
         $this->assertEquals(0, count($validators));
     }
 
@@ -216,7 +216,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testErrorMessagesShouldBeEmptyByDefault()
     {
         $messages = $this->adapter->getMessages();
-        $this->assertTrue(is_array($messages));
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(0, count($messages));
     }
 
@@ -224,14 +224,14 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testValidationShouldReturnFalseForInvalidTransfer();
         $messages = $this->adapter->getMessages();
-        $this->assertTrue(is_array($messages));
+        $this->assertInternalType('array', $messages);
         $this->assertFalse(empty($messages));
     }
 
     public function testErrorCodesShouldBeNullByDefault()
     {
         $errors = $this->adapter->getErrors();
-        $this->assertTrue(is_array($errors));
+        $this->assertInternalType('array', $errors);
         $this->assertEquals(0, count($errors));
     }
 
@@ -239,7 +239,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testValidationShouldReturnFalseForInvalidTransfer();
         $errors = $this->adapter->getErrors();
-        $this->assertTrue(is_array($errors));
+        $this->assertInternalType('array', $errors);
         $this->assertFalse(empty($errors));
     }
 
@@ -283,7 +283,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         );
         $this->adapter->addFilters($filters);
         $test = $this->adapter->getFilters();
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals(3, count($test), var_export($test, 1));
         $count = array_shift($test);
         $this->assertTrue($count instanceof Word\SeparatorToCamelCase);
@@ -338,7 +338,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader();
         $filters = $this->adapter->getFilters();
-        $this->assertTrue(is_array($filters));
+        $this->assertInternalType('array', $filters);
         $this->assertEquals(3, count($filters));
         foreach ($filters as $filter) {
             $this->assertTrue($filter instanceof Filter\FilterInterface);
@@ -377,7 +377,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader();
         $this->adapter->clearFilters();
         $filters = $this->adapter->getFilters();
-        $this->assertTrue(is_array($filters));
+        $this->assertInternalType('array', $filters);
         $this->assertEquals(0, count($filters));
     }
 
@@ -386,7 +386,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $directory = __DIR__;
         $this->adapter->setDestination($directory);
         $destinations = $this->adapter->getDestination();
-        $this->assertTrue(is_array($destinations));
+        $this->assertInternalType('array', $destinations);
         foreach ($destinations as $file => $destination) {
             $this->assertEquals($directory, $destination);
         }
@@ -402,7 +402,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->setDestination(__DIR__);
         $destinations = $this->adapter->getDestination(array('bar', 'baz'));
-        $this->assertTrue(is_array($destinations));
+        $this->assertInternalType('array', $destinations);
         $directory = __DIR__;
         foreach ($destinations as $file => $destination) {
             $this->assertTrue(in_array($file, array('bar', 'baz')));
@@ -484,7 +484,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName();
-        $this->assertTrue(is_array($files));
+        $this->assertInternalType('array', $files);
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'bar.png', $files['bar']);
     }
 
@@ -494,7 +494,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName(null, false);
-        $this->assertTrue(is_array($files));
+        $this->assertInternalType('array', $files);
         $this->assertEquals('bar.png', $files['bar']);
     }
 
@@ -592,7 +592,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($directory, $this->adapter->getDestination('nonexisting'));
 
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'not find');
-        $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
+        $this->assertInternalType('string', $this->adapter->getDestination('reallynonexisting'));
     }
 
     /**

@@ -102,7 +102,7 @@ class ImageTest extends TestCommon
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
-        $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
+        $this->assertInternalType('resource', $resource, 'Image must be a resource');
         $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
     }
 
@@ -114,7 +114,7 @@ class ImageTest extends TestCommon
         $imageResource = imagecreatetruecolor(500, 500);
         $this->renderer->setResource($imageResource);
         $resource = $this->renderer->draw();
-        $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
+        $this->assertInternalType('resource', $resource, 'Image must be a resource');
         $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
         $this->assertSame($resource, $imageResource);
     }

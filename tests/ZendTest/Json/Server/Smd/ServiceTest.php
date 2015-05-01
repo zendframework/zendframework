@@ -129,7 +129,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->testTargetShouldBeNullInitially();
         $this->service->setTarget(123);
         $value = $this->service->getTarget();
-        $this->assertTrue(is_string($value));
+        $this->assertInternalType('string', $value);
         $this->assertEquals((string) 123, $value);
     }
 
@@ -175,7 +175,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $params = $this->service->getParams();
         $param  = array_shift($params);
         $test   = $param['type'];
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals($type, $test);
     }
 
@@ -297,7 +297,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $smd  = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(array_key_exists('foo', $smd));
-        $this->assertTrue(is_array($smd['foo']));
+        $this->assertInternalType('array', $smd['foo']);
 
         $this->validateSmdArray($smd['foo']);
     }

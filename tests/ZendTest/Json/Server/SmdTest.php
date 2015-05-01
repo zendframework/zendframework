@@ -161,7 +161,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
     public function testServicesShouldBeEmptyByDefault()
     {
         $services = $this->smd->getServices();
-        $this->assertTrue(is_array($services));
+        $this->assertInternalType('array', $services);
         $this->assertTrue(empty($services));
     }
 
@@ -286,7 +286,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->smd->setOptions($options);
         $smd = $this->smd->toDojoArray();
 
-        $this->assertTrue(is_array($smd));
+        $this->assertInternalType('array', $smd);
 
         $this->assertTrue(array_key_exists('SMDVersion', $smd));
         $this->assertTrue(array_key_exists('serviceType', $smd));
@@ -303,7 +303,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('parameters', $foo));
         $this->assertEquals('foo', $foo['name']);
         $this->assertEquals($this->smd->getTarget(), $foo['serviceURL']);
-        $this->assertTrue(is_array($foo['parameters']));
+        $this->assertInternalType('array', $foo['parameters']);
         $this->assertEquals(1, count($foo['parameters']));
 
         $bar = array_shift($methods);
@@ -312,7 +312,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('parameters', $bar));
         $this->assertEquals('bar', $bar['name']);
         $this->assertEquals($this->smd->getTarget(), $bar['serviceURL']);
-        $this->assertTrue(is_array($bar['parameters']));
+        $this->assertInternalType('array', $bar['parameters']);
         $this->assertEquals(1, count($bar['parameters']));
     }
 
@@ -360,7 +360,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
 
     public function validateServiceArray(array $smd, array $options)
     {
-        $this->assertTrue(is_array($smd));
+        $this->assertInternalType('array', $smd);
 
         $this->assertTrue(array_key_exists('SMDVersion', $smd));
         $this->assertTrue(array_key_exists('target', $smd));

@@ -88,13 +88,13 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
         $map = $this->loader->getAutoloadMap();
-        $this->assertTrue(is_array($map));
+        $this->assertInternalType('array', $map);
         $this->assertEquals(2, count($map));
         // Just to make sure nothing changes after loading the same map again
         // (loadMapFromFile should just return)
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
         $map = $this->loader->getAutoloadMap();
-        $this->assertTrue(is_array($map));
+        $this->assertInternalType('array', $map);
         $this->assertEquals(2, count($map));
     }
 
@@ -108,7 +108,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
 
         $test = $this->loader->getAutoloadMap();
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals(3, count($test));
         $this->assertNotEquals($map['ZendTest\Loader\StandardAutoloaderTest'], $test['ZendTest\Loader\StandardAutoloaderTest']);
     }
@@ -122,7 +122,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $maps = array($map, __DIR__ . '/_files/goodmap.php');
         $this->loader->registerAutoloadMaps($maps);
         $test = $this->loader->getAutoloadMap();
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals(3, count($test));
     }
 

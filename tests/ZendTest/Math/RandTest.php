@@ -38,7 +38,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getBoolean();
-            $this->assertTrue(is_bool($rand));
+            $this->assertInternalType('bool', $rand);
         }
     }
 
@@ -151,7 +151,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getFloat();
-            $this->assertTrue(is_float($rand));
+            $this->assertInternalType('float', $rand);
             $this->assertTrue(($rand >= 0 && $rand <= 1));
         }
     }

@@ -271,7 +271,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     public function testServerCapa()
     {
         $mail = new Protocol\Pop3($this->_params['host']);
-        $this->assertTrue(is_array($mail->capa()));
+        $this->assertInternalType('array', $mail->capa());
     }
 
     public function testServerUidl()

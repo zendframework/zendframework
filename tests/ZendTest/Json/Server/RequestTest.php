@@ -252,15 +252,15 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function validateJSON($json, array $options)
     {
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
-        $this->assertTrue(is_array($test), var_export($json, 1));
+        $this->assertInternalType('array', $test, var_export($json, 1));
 
         $this->assertTrue(array_key_exists('id', $test));
         $this->assertTrue(array_key_exists('method', $test));
         $this->assertTrue(array_key_exists('params', $test));
 
-        $this->assertTrue(is_string($test['id']));
-        $this->assertTrue(is_string($test['method']));
-        $this->assertTrue(is_array($test['params']));
+        $this->assertInternalType('string', $test['id']);
+        $this->assertInternalType('string', $test['method']);
+        $this->assertInternalType('array', $test['params']);
 
         $this->assertEquals($options['id'], $test['id']);
         $this->assertEquals($options['method'], $test['method']);

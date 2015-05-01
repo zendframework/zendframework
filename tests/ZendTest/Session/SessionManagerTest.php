@@ -202,7 +202,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(headers_sent());
         $this->manager->start();
         restore_error_handler();
-        $this->assertTrue(is_string($this->error));
+        $this->assertInternalType('string', $this->error);
         $this->assertContains('already sent', $this->error);
     }
 

@@ -901,7 +901,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $response = $this->client->send();
 
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $stream_name = $response->getStreamName();
 
@@ -928,7 +928,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $response = $this->client->send();
 
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $body = $response->getBody();
 
@@ -949,7 +949,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $response = $this->client->send();
 
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $this->assertEquals($outfile, $response->getStreamName());
 

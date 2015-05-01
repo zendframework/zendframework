@@ -579,7 +579,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Imap($this->params['host']);
         $protocol->login($this->params['user'], $this->params['password']);
         $capa = $protocol->capability();
-        $this->assertTrue(is_array($capa));
+        $this->assertInternalType('array', $capa);
         $this->assertEquals($capa[0], 'CAPABILITY');
     }
 
@@ -588,7 +588,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Imap($this->params['host']);
         $protocol->login($this->params['user'], $this->params['password']);
         $status = $protocol->select('INBOX');
-        $this->assertTrue(is_array($status['flags']));
+        $this->assertInternalType('array', $status['flags']);
         $this->assertEquals($status['exists'], 7);
     }
 
@@ -598,7 +598,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Imap($this->params['host']);
         $protocol->login($this->params['user'], $this->params['password']);
         $status = $protocol->examine('INBOX');
-        $this->assertTrue(is_array($status['flags']));
+        $this->assertInternalType('array', $status['flags']);
         $this->assertEquals($status['exists'], 7);
     }
 
@@ -635,12 +635,12 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($protocol->fetch('UID', 1, INF), $range);
         $this->assertEquals($protocol->fetch('UID', 1, 7), $range);
         $this->assertEquals($protocol->fetch('UID', range(1, 7)), $range);
-        $this->assertTrue(is_numeric($protocol->fetch('UID', 1)));
+        $this->assertInternalType('numeric', $protocol->fetch('UID', 1));
 
         $result = $protocol->fetch(array('UID', 'FLAGS'), 1, INF);
         foreach ($result as $k => $v) {
             $this->assertEquals($k, $v['UID']);
-            $this->assertTrue(is_array($v['FLAGS']));
+            $this->assertInternalType('array', $v['FLAGS']);
         }
 
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');

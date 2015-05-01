@@ -123,7 +123,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parameters);
         $p = $r->getParameters();
 
-        $this->assertTrue(is_array($p));
+        $this->assertInternalType('array', $p);
         foreach ($p as $parameter) {
             $this->assertTrue($parameter instanceof Reflection\ReflectionParameter);
         }

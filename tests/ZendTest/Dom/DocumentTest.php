@@ -245,7 +245,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->document = new Document($file);
         $result = Document\Query::execute('p', $this->document, Document\Query::TYPE_CSS);
         $errors = $this->document->getErrors();
-        $this->assertTrue(is_array($errors));
+        $this->assertInternalType('array', $errors);
         $this->assertTrue(0 < count($errors));
     }
 

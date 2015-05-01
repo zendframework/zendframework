@@ -225,13 +225,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $services = $smd->getServices();
         $this->assertInternalType('array', $services);
         $this->assertTrue(0 < count($services));
-        $this->assertTrue(array_key_exists('strtolower', $services));
+        $this->assertArrayHasKey('strtolower', $services);
         $methods = get_class_methods('Zend\Json\Server\Server');
         foreach ($methods as $method) {
             if ('_' == $method[0]) {
                 continue;
             }
-            $this->assertTrue(array_key_exists($method, $services));
+            $this->assertArrayHasKey($method, $services);
         }
     }
 
@@ -434,8 +434,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $decoded = Json\Json::decode($buffer, Json\Json::TYPE_ARRAY);
         $this->assertInternalType('array', $decoded);
-        $this->assertTrue(array_key_exists('result', $decoded));
-        $this->assertTrue(array_key_exists('id', $decoded));
+        $this->assertArrayHasKey('result', $decoded);
+        $this->assertArrayHasKey('id', $decoded);
 
         $response = $this->server->getResponse();
         $this->assertEquals($response->getResult(), $decoded['result']);
@@ -484,8 +484,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $decoded = Json\Json::decode($buffer, Json\Json::TYPE_ARRAY);
 
         $this->assertInternalType('array', $decoded);
-        $this->assertTrue(array_key_exists('result', $decoded));
-        $this->assertTrue(array_key_exists('id', $decoded));
+        $this->assertArrayHasKey('result', $decoded);
+        $this->assertArrayHasKey('id', $decoded);
         $this->assertContains('unique', $decoded['result']);
 
         $response = $this->server->getResponse();

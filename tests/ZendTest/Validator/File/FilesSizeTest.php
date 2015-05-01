@@ -63,7 +63,7 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
 
         $validator = new File\FilesSize(array('min' => 0, 'max' => 200));
         $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileFilesSizeNotReadable', $validator->getMessages()));
+        $this->assertArrayHasKey('fileFilesSizeNotReadable', $validator->getMessages());
 
         $validator = new File\FilesSize(array('min' => 0, 'max' => 500000));
         $this->assertEquals(true, $validator->isValid(array(

@@ -124,10 +124,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
         $this->assertInternalType('array', $test);
-        $this->assertTrue(array_key_exists('result', $test));
+        $this->assertArrayHasKey('result', $test);
         $this->assertFalse(array_key_exists('error', $test), "'error' may not coexist with 'result'");
-        $this->assertTrue(array_key_exists('id', $test));
-        $this->assertTrue(array_key_exists('jsonrpc', $test));
+        $this->assertArrayHasKey('id', $test);
+        $this->assertArrayHasKey('jsonrpc', $test);
 
         $this->assertTrue($test['result']);
         $this->assertEquals($this->response->getId(), $test['id']);
@@ -147,8 +147,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $test);
         $this->assertFalse(array_key_exists('result', $test), "'result' may not coexist with 'error'");
-        $this->assertTrue(array_key_exists('error', $test));
-        $this->assertTrue(array_key_exists('id', $test));
+        $this->assertArrayHasKey('error', $test);
+        $this->assertArrayHasKey('id', $test);
         $this->assertFalse(array_key_exists('jsonrpc', $test));
 
         $this->assertEquals($this->response->getId(), $test['id']);
@@ -164,9 +164,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
         $this->assertInternalType('array', $test);
-        $this->assertTrue(array_key_exists('result', $test));
+        $this->assertArrayHasKey('result', $test);
         $this->assertFalse(array_key_exists('error', $test), "'error' may not coexist with 'result'");
-        $this->assertTrue(array_key_exists('id', $test));
+        $this->assertArrayHasKey('id', $test);
         $this->assertFalse(array_key_exists('jsonrpc', $test));
 
         $this->assertTrue($test['result']);

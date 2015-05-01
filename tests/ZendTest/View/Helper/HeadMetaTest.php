@@ -213,9 +213,9 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertObjectHasAttribute('modifiers', $value);
         $modifiers = $value->modifiers;
-        $this->assertTrue(array_key_exists('lang', $modifiers));
+        $this->assertArrayHasKey('lang', $modifiers);
         $this->assertEquals('us_en', $modifiers['lang']);
-        $this->assertTrue(array_key_exists('scheme', $modifiers));
+        $this->assertArrayHasKey('scheme', $modifiers);
         $this->assertEquals('foo', $modifiers['scheme']);
     }
 
@@ -272,7 +272,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->helper->offsetSetName(100, 'keywords', 'foo');
         $values = $this->helper->getArrayCopy();
         $this->assertEquals(1, count($values));
-        $this->assertTrue(array_key_exists(100, $values));
+        $this->assertArrayHasKey(100, $values);
         $item = $values[100];
         $this->assertEquals('foo', $item->content);
         $this->assertEquals('name', $item->type);

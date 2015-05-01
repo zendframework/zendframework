@@ -170,7 +170,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $validator->enableHeaderCheck();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
         $error = $validator->getMessages();
-        $this->assertTrue(array_key_exists('fileIsImageFalseType', $error));
+        $this->assertArrayHasKey('fileIsImageFalseType', $error);
     }
 
     public function testOptionsAtConstructor()
@@ -207,7 +207,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\IsImage();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileIsImageNotReadable', $validator->getMessages()));
+        $this->assertArrayHasKey('fileIsImageNotReadable', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

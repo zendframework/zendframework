@@ -61,7 +61,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Extension($options);
         $this->assertEquals($expected, $validator->isValid($isValidParam));
         if (!$expected) {
-            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+            $this->assertArrayHasKey($messageKey, $validator->getMessages());
         }
     }
 
@@ -77,7 +77,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             $validator = new File\Extension($options);
             $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
             if (!$expected) {
-                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                $this->assertArrayHasKey($messageKey, $validator->getMessages());
             }
         }
     }
@@ -161,7 +161,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Extension('gif');
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileExtensionNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileExtensionNotFound', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

@@ -781,9 +781,9 @@ class BaseInputFilterTest extends TestCase
         $filter->setData($unknown);
         $unknown = $filter->getUnknown();
         $this->assertEquals(2, count($unknown));
-        $this->assertTrue(array_key_exists('gru', $unknown));
+        $this->assertArrayHasKey('gru', $unknown);
         $this->assertEquals(10, $unknown['gru']);
-        $this->assertTrue(array_key_exists('test', $unknown));
+        $this->assertArrayHasKey('test', $unknown);
         $this->assertEquals('ok', $unknown['test']);
 
         $filter = $this->getInputFilter();

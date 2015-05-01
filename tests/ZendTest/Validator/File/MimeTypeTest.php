@@ -183,7 +183,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'image/jpg',
             'headerCheck' => true));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
+        $this->assertArrayHasKey('fileMimeTypeNotReadable', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

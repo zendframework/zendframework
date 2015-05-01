@@ -133,7 +133,7 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\WordCount(array('min' => 1, 'max' => 10000));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileWordCountNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileWordCountNotFound', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

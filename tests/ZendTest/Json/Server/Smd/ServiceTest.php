@@ -296,7 +296,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $json = $this->service->toJSON();
         $smd  = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
 
-        $this->assertTrue(array_key_exists('foo', $smd));
+        $this->assertArrayHasKey('foo', $smd);
         $this->assertInternalType('array', $smd['foo']);
 
         $this->validateSmdArray($smd['foo']);
@@ -316,13 +316,13 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function validateSmdArray(array $smd)
     {
-        $this->assertTrue(array_key_exists('transport', $smd));
+        $this->assertArrayHasKey('transport', $smd);
         $this->assertEquals('POST', $smd['transport']);
 
-        $this->assertTrue(array_key_exists('envelope', $smd));
+        $this->assertArrayHasKey('envelope', $smd);
         $this->assertEquals(Server\Smd::ENV_JSONRPC_2, $smd['envelope']);
 
-        $this->assertTrue(array_key_exists('parameters', $smd));
+        $this->assertArrayHasKey('parameters', $smd);
         $params = $smd['parameters'];
         $this->assertEquals(3, count($params));
         $param = array_shift($params);
@@ -332,7 +332,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $param = array_shift($params);
         $this->assertEquals('object', $param['type']);
 
-        $this->assertTrue(array_key_exists('returns', $smd));
+        $this->assertArrayHasKey('returns', $smd);
         $this->assertEquals('boolean', $smd['returns']);
     }
 }

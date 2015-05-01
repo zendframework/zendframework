@@ -53,7 +53,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     {
         $this->testValidatingWhenTokenNullReturnsFalse();
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('missingToken', $messages));
+        $this->assertArrayHasKey('missingToken', $messages);
     }
 
     public function testValidatingAgainstTokenWithNonMatchingValueReturnsFalse()
@@ -66,7 +66,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     {
         $this->testValidatingAgainstTokenWithNonMatchingValueReturnsFalse();
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('notSame', $messages));
+        $this->assertArrayHasKey('notSame', $messages);
     }
 
     public function testValidatingAgainstTokenWithMatchingValueReturnsTrue()

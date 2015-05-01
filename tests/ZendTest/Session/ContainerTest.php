@@ -211,7 +211,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container->setExpirationSeconds(3600);
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata($this->container->getName());
-        $this->assertTrue(array_key_exists('EXPIRE', $metadata));
+        $this->assertArrayHasKey('EXPIRE', $metadata);
         $this->assertEquals($_SERVER['REQUEST_TIME'] + 3600, $metadata['EXPIRE']);
     }
 
@@ -221,8 +221,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container->setExpirationSeconds(3600, 'foo');
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata($this->container->getName());
-        $this->assertTrue(array_key_exists('EXPIRE_KEYS', $metadata));
-        $this->assertTrue(array_key_exists('foo', $metadata['EXPIRE_KEYS']));
+        $this->assertArrayHasKey('EXPIRE_KEYS', $metadata);
+        $this->assertArrayHasKey('foo', $metadata['EXPIRE_KEYS']);
         $this->assertEquals($_SERVER['REQUEST_TIME'] + 3600, $metadata['EXPIRE_KEYS']['foo']);
     }
 
@@ -321,7 +321,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container->setExpirationHops(2);
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata('Default');
-        $this->assertTrue(array_key_exists('EXPIRE_HOPS', $metadata));
+        $this->assertArrayHasKey('EXPIRE_HOPS', $metadata);
         $this->assertEquals(
             array('hops' => 2, 'ts' => $storage->getRequestAccessTime()),
             $metadata['EXPIRE_HOPS']
@@ -334,8 +334,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container->setExpirationHops(2, 'foo');
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata('Default');
-        $this->assertTrue(array_key_exists('EXPIRE_HOPS_KEYS', $metadata));
-        $this->assertTrue(array_key_exists('foo', $metadata['EXPIRE_HOPS_KEYS']));
+        $this->assertArrayHasKey('EXPIRE_HOPS_KEYS', $metadata);
+        $this->assertArrayHasKey('foo', $metadata['EXPIRE_HOPS_KEYS']);
         $this->assertEquals(
             array('hops' => 2, 'ts' => $storage->getRequestAccessTime()),
             $metadata['EXPIRE_HOPS_KEYS']['foo']
@@ -350,7 +350,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container->setExpirationHops(2, array('foo', 'baz'));
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata('Default');
-        $this->assertTrue(array_key_exists('EXPIRE_HOPS_KEYS', $metadata));
+        $this->assertArrayHasKey('EXPIRE_HOPS_KEYS', $metadata);
 
         $hops     = $metadata['EXPIRE_HOPS_KEYS'];
         $ts       = $storage->getRequestAccessTime();

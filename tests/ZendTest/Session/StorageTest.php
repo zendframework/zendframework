@@ -119,7 +119,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->lock('foo');
         $locks = $this->storage->getMetadata('_LOCKS');
         $this->assertInternalType('array', $locks);
-        $this->assertTrue(array_key_exists('foo', $locks));
+        $this->assertArrayHasKey('foo', $locks);
     }
 
     public function testUnlockShouldUnlockEntireObject()

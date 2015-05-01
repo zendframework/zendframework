@@ -770,7 +770,7 @@ CODE;
         $classGenerator->addTraitAlias('myTrait::method', 'useMe', ReflectionMethod::IS_PRIVATE);
 
         $aliases = $classGenerator->getTraitAliases();
-        $this->assertTrue(array_key_exists('myTrait::method', $aliases));
+        $this->assertArrayHasKey('myTrait::method', $aliases);
         $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
         $this->assertEquals($aliases['myTrait::method']['visibility'], ReflectionMethod::IS_PRIVATE);
     }
@@ -790,7 +790,7 @@ CODE;
         ), 'useMe', ReflectionMethod::IS_PRIVATE);
 
         $aliases = $classGenerator->getTraitAliases();
-        $this->assertTrue(array_key_exists('myTrait::method', $aliases));
+        $this->assertArrayHasKey('myTrait::method', $aliases);
         $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
         $this->assertEquals($aliases['myTrait::method']['visibility'], ReflectionMethod::IS_PRIVATE);
     }

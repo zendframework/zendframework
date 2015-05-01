@@ -61,7 +61,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         require_once __DIR__ . "/_files/MyBarcode1.php";
         $barcode = new Barcode('MyBarcode1');
         $this->assertFalse($barcode->isValid('0000000'));
-        $this->assertTrue(array_key_exists('barcodeFailed', $barcode->getMessages()));
+        $this->assertArrayHasKey('barcodeFailed', $barcode->getMessages());
         $this->assertFalse($barcode->getAdapter()->hasValidChecksum('0000000'));
     }
 
@@ -404,7 +404,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $barcode = new Barcode('ean8');
         $this->assertFalse($barcode->isValid('123'));
         $message = $barcode->getMessages();
-        $this->assertTrue(array_key_exists('barcodeInvalidLength', $message));
+        $this->assertArrayHasKey('barcodeInvalidLength', $message);
         $this->assertContains("length of 7/8 characters", $message['barcodeInvalidLength']);
     }
 

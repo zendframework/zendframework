@@ -58,7 +58,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->request->addParam('bar', 'foo');
         $params = $this->request->getParams();
         $this->assertEquals(1, count($params));
-        $this->assertTrue(array_key_exists('foo', $params));
+        $this->assertArrayHasKey('foo', $params);
         $this->assertEquals('bar', $params['foo']);
     }
 
@@ -108,8 +108,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->request->addParams($params);
         $test = $this->request->getParams();
         $this->assertEquals(array_values($params), array_values($test));
-        $this->assertTrue(array_key_exists('foo', $test));
-        $this->assertTrue(array_key_exists('baz', $test));
+        $this->assertArrayHasKey('foo', $test);
+        $this->assertArrayHasKey('baz', $test);
         $this->assertContains('baz', $test);
     }
 
@@ -254,9 +254,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->assertInternalType('array', $test, var_export($json, 1));
 
-        $this->assertTrue(array_key_exists('id', $test));
-        $this->assertTrue(array_key_exists('method', $test));
-        $this->assertTrue(array_key_exists('params', $test));
+        $this->assertArrayHasKey('id', $test);
+        $this->assertArrayHasKey('method', $test);
+        $this->assertArrayHasKey('params', $test);
 
         $this->assertInternalType('string', $test['id']);
         $this->assertInternalType('string', $test['method']);

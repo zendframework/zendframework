@@ -106,7 +106,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
 
-        $this->assertTrue(array_key_exists(Alpha::INVALID, $messages));
+        $this->assertArrayHasKey(Alpha::INVALID, $messages);
         $this->assertEquals('This is...', $messages[Alpha::INVALID]);
     }
 

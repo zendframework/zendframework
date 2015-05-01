@@ -92,7 +92,7 @@ class CaptureCacheTest extends CommonPatternTest
     public function testSetWithNormalPageId()
     {
         $this->_pattern->set('content', '/dir1/dir2/file');
-        $this->assertTrue(file_exists($this->_tmpCacheDir . '/dir1/dir2/file'));
+        $this->assertFileExists($this->_tmpCacheDir . '/dir1/dir2/file');
         $this->assertSame(file_get_contents($this->_tmpCacheDir . '/dir1/dir2/file'), 'content');
     }
 
@@ -101,7 +101,7 @@ class CaptureCacheTest extends CommonPatternTest
         $this->_options->setIndexFilename('test.html');
 
         $this->_pattern->set('content', '/dir1/dir2/');
-        $this->assertTrue(file_exists($this->_tmpCacheDir . '/dir1/dir2/test.html'));
+        $this->assertFileExists($this->_tmpCacheDir . '/dir1/dir2/test.html');
         $this->assertSame(file_get_contents($this->_tmpCacheDir . '/dir1/dir2/test.html'), 'content');
     }
 

@@ -265,11 +265,11 @@ class RarTest extends \PHPUnit_Framework_TestCase
 
         $base = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
               . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;
-        $this->assertTrue(file_exists($base));
-        $this->assertTrue(file_exists($base . 'zipextracted.txt'));
-        $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
-        $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR .
-                          'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
+        $this->assertFileExists($base);
+        $this->assertFileExists($base . 'zipextracted.txt');
+        $this->assertFileExists($base . 'First' . DIRECTORY_SEPARATOR . 'zipextracted.txt');
+        $this->assertFileExists($base . 'First' . DIRECTORY_SEPARATOR .
+                          'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt');
         $content = file_get_contents(dirname(__DIR__) . '/_files/Compress/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }

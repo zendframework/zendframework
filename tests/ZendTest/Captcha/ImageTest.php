@@ -99,7 +99,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testCaptchaCreatesImage()
     {
         $this->captcha->generate();
-        $this->assertTrue(file_exists($this->testDir . "/" . $this->captcha->getId() . ".png"));
+        $this->assertFileExists($this->testDir . "/" . $this->captcha->getId() . '.png');
     }
 
     public function testCaptchaSetExpiration()
@@ -113,7 +113,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->captcha->generate();
         $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertFileExists($filename);
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
@@ -134,19 +134,19 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         }
         $this->captcha->generate();
         $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertFileExists($filename);
 
         //Create other cache file
         $otherFile = $this->testDir . "/zf10006.cache";
         file_put_contents($otherFile, '');
-        $this->assertTrue(file_exists($otherFile));
+        $this->assertFileExists($otherFile);
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
         $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
-        $this->assertTrue(file_exists($otherFile), "File $otherFile was not found after GC");
+        $this->assertFileExists($otherFile, "File $otherFile was not found after GC");
     }
 
     public function testGenerateReturnsId()

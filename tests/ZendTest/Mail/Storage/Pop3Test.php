@@ -289,7 +289,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Pop3($this->_params);
 
-        $this->assertTrue(strpos($mail->getRawHeader(1), "\r\nSubject: Simple Message\r\n") > 0);
+        $this->assertContains("\r\nSubject: Simple Message\r\n", $mail->getRawHeader(1));
     }
 
     public function testUniqueId()

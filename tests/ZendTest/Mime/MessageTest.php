@@ -70,8 +70,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($p2 !== false);
         }
         // check if the two test messages appear:
-        $this->assertTrue(strpos($res, 'This is a test') !== false);
-        $this->assertTrue(strpos($res, 'This is another test') !== false);
+        $this->assertContains('This is a test', $res);
+        $this->assertContains('This is another test', $res);
         // ... more in ZMailTest
     }
 

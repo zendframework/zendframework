@@ -403,7 +403,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Imap($this->params);
 
-        $this->assertTrue(strpos($mail->getRawHeader(1), "\r\nSubject: Simple Message\r\n") > 0);
+        $this->assertContains("\r\nSubject: Simple Message\r\n", $mail->getRawHeader(1));
     }
 
     public function testUniqueId()

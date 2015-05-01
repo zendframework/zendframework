@@ -79,9 +79,9 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((bool) $memObject->isLocked());
+        $this->assertTrue($memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((bool) $memObject->isLocked());
+        $this->assertFalse($memObject->isLocked());
     }
 }

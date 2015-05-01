@@ -102,7 +102,7 @@ class Movable extends AbstractContainer
      */
     public function isLocked()
     {
-        return $this->state & self::LOCKED;
+        return (bool) ($this->state & self::LOCKED);
     }
 
     /**

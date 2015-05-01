@@ -225,7 +225,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->testValidationShouldReturnFalseForInvalidTransfer();
         $messages = $this->adapter->getMessages();
         $this->assertInternalType('array', $messages);
-        $this->assertFalse(empty($messages));
+        $this->assertNotEmpty($messages);
     }
 
     public function testErrorCodesShouldBeNullByDefault()
@@ -240,7 +240,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->testValidationShouldReturnFalseForInvalidTransfer();
         $errors = $this->adapter->getErrors();
         $this->assertInternalType('array', $errors);
-        $this->assertFalse(empty($errors));
+        $this->assertNotEmpty($errors);
     }
 
     public function testAdapterShouldLazyLoadFilterPluginManager()

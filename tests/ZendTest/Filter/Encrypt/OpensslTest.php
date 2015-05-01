@@ -232,7 +232,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
             'passphrase' => $passphrase,
             'private' => __DIR__ . '/../_files/privatekey_pass.pem'));
         $public = $filter->getPublicKey();
-        $this->assertFalse(empty($public));
+        $this->assertNotEmpty($public);
         $this->assertEquals($passphrase, $filter->getPassphrase());
     }
 

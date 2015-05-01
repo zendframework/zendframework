@@ -60,7 +60,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($events, var_export($events, 1));
         $listener = $this->events->attach('test', array($this, __METHOD__));
         $events = $this->events->getEvents();
-        $this->assertFalse(empty($events));
+        $this->assertNotEmpty($events);
         $this->assertContains('test', $events);
     }
 

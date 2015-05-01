@@ -152,7 +152,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testGenerateReturnsId()
     {
         $id = $this->captcha->generate();
-        $this->assertFalse(empty($id));
+        $this->assertNotEmpty($id);
         $this->assertInternalType('string', $id);
         $this->id = $id;
     }
@@ -161,7 +161,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertFalse(empty($word));
+        $this->assertNotEmpty($word);
         $this->assertInternalType('string', $word);
         $this->assertTrue(strlen($word) == 8);
         $this->word = $word;
@@ -184,8 +184,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $id2   = $this->captcha->generate();
         $word2 = $this->captcha->getWord();
 
-        $this->assertFalse(empty($id1));
-        $this->assertFalse(empty($id2));
+        $this->assertNotEmpty($id1);
+        $this->assertNotEmpty($id2);
         $this->assertFalse($id1 == $id2);
         $this->assertFalse($word1 == $word2);
     }

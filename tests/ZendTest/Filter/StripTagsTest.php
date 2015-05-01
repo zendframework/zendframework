@@ -441,7 +441,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $input    = 'äöü<!-- a comment -->äöü';
         $input    = iconv("UTF-8", "ISO-8859-1", $input);
         $output   = $filter($input);
-        $this->assertFalse(empty($output));
+        $this->assertNotEmpty($output);
     }
 
     /**
@@ -457,7 +457,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $input    = 'äöü<!-- a comment -->äöü';
         $input    = iconv("UTF-8", "ISO-8859-1", $input);
         $output   = $filter($input);
-        $this->assertFalse(empty($output));
+        $this->assertNotEmpty($output);
     }
 
     /**

@@ -37,6 +37,6 @@ abstract class CommonWordTest extends \PHPUnit_Framework_TestCase
         $wordAdapter = new $this->wordClass;
         $this->assertFalse($wordAdapter->isValid('foo'));
         $messages = $wordAdapter->getMessages();
-        $this->assertFalse(empty($messages));
+        $this->assertNotEmpty($messages);
     }
 }

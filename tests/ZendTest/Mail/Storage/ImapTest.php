@@ -396,7 +396,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
 
         $flags = $mail->getMessage(1)->getFlags();
         $this->assertTrue(isset($flags[Storage::FLAG_RECENT]));
-        $this->assertTrue(in_array(Storage::FLAG_RECENT, $flags));
+        $this->assertContains(Storage::FLAG_RECENT, $flags);
     }
 
     public function testRawHeader()
@@ -658,11 +658,11 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($protocol->store(array('\Flagged'), 1, null, '+'));
 
         $result = $protocol->store(array('\Flagged'), 1, null, '', false);
-        $this->assertTrue(in_array('\Flagged', $result[1]));
+        $this->assertContains('\Flagged', $result[1]);
         $result = $protocol->store(array('\Flagged'), 1, null, '-', false);
         $this->assertFalse(in_array('\Flagged', $result[1]));
         $result = $protocol->store(array('\Flagged'), 1, null, '+', false);
-        $this->assertTrue(in_array('\Flagged', $result[1]));
+        $this->assertContains('\Flagged', $result[1]);
     }
 
     public function testMove()

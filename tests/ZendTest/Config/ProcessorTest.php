@@ -350,7 +350,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $tokens = $processor->getTokens();
         $this->assertInternalType('array', $tokens);
-        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
+        $this->assertContains('SOME_USERLAND_CONSTANT', $tokens);
         $this->assertTrue(!$processor->getUserOnly());
 
         $this->assertEquals('some constant value', $config->simple);
@@ -371,7 +371,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $tokens = $processor->getTokens();
 
         $this->assertInternalType('array', $tokens);
-        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
+        $this->assertContains('SOME_USERLAND_CONSTANT', $tokens);
         $this->assertTrue($processor->getUserOnly());
 
         $this->assertEquals('some constant value', $config->simple);

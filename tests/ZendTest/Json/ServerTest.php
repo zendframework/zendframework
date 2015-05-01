@@ -486,7 +486,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $decoded);
         $this->assertTrue(array_key_exists('result', $decoded));
         $this->assertTrue(array_key_exists('id', $decoded));
-        $this->assertTrue(in_array('unique', $decoded['result']));
+        $this->assertContains('unique', $decoded['result']);
 
         $response = $this->server->getResponse();
         $this->assertEquals($response->getResult(), $decoded['result']);

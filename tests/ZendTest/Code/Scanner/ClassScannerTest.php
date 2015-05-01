@@ -209,8 +209,8 @@ class ClassScannerTest extends TestCase
         $this->assertFalse($class->isTrait());
         $traitNames = $class->getTraitNames();
         $class->getTraitAliases();
-        $this->assertTrue(in_array('ZendTest\Code\TestAsset\BarTrait', $traitNames));
-        $this->assertTrue(in_array('ZendTest\Code\TestAsset\FooTrait', $traitNames));
+        $this->assertContains('ZendTest\Code\TestAsset\BarTrait', $traitNames);
+        $this->assertContains('ZendTest\Code\TestAsset\FooTrait', $traitNames);
     }
 
     /**

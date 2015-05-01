@@ -110,7 +110,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array_values($params), array_values($test));
         $this->assertTrue(array_key_exists('foo', $test));
         $this->assertTrue(array_key_exists('baz', $test));
-        $this->assertTrue(in_array('baz', $test));
+        $this->assertContains('baz', $test);
     }
 
     public function testSetParamsShouldOverwriteParams()

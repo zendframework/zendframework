@@ -754,8 +754,8 @@ CODE;
         $classGenerator->addTraits(array('myTrait', 'hisTrait'));
 
         $traits = $classGenerator->getTraits();
-        $this->assertTrue(in_array('myTrait', $traits));
-        $this->assertTrue(in_array('hisTrait', $traits));
+        $this->assertContains('myTrait', $traits);
+        $this->assertContains('hisTrait', $traits);
     }
 
     public function testCanAddTraitAliasWithString()

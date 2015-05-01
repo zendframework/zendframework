@@ -405,7 +405,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $destinations);
         $directory = __DIR__;
         foreach ($destinations as $file => $destination) {
-            $this->assertTrue(in_array($file, array('bar', 'baz')));
+            $this->assertContains($file, array('bar', 'baz'));
             $this->assertEquals($directory, $destination);
         }
     }

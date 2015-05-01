@@ -487,7 +487,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         }
         $compare = $_SERVER['REQUEST_TIME'] + $ttl;
         $cookieTs = $ts->getTimestamp();
-        $this->assertTrue(in_array($cookieTs, range($compare, $compare + 10)), 'Session cookie: ' . var_export($headers, 1));
+        $this->assertContains($cookieTs, range($compare, $compare + 10), 'Session cookie: ' . var_export($headers, 1));
     }
 
     /**

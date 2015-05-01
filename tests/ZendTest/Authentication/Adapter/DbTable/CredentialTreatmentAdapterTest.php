@@ -292,8 +292,8 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setIdentity('my_username')
                        ->setCredential('my_password');
         $result = $this->_adapter->authenticate();
-        $this->assertTrue(in_array('More than one record matches the supplied identity.',
-                                   $result->getMessages()));
+        $this->assertContains('More than one record matches the supplied identity.',
+                                   $result->getMessages());
         $this->assertFalse($result->isValid());
     }
 

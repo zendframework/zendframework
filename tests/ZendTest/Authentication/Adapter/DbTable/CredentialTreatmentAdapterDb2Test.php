@@ -337,7 +337,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         // test if user 1 can authenticate
         $this->authAdapter->setIdentity('my_username')->setCredential('my_password');
         $result = $this->authAdapter->authenticate();
-        $this->assertTrue(in_array('More than one record matches the supplied identity.', $result->getMessages()));
+        $this->assertContains('More than one record matches the supplied identity.', $result->getMessages());
         $this->assertFalse($result->isValid());
     }
 

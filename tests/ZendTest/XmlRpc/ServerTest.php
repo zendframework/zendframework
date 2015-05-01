@@ -80,10 +80,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->addFunction('ZendTest\\XmlRpc\\testFunction', 'zsr');
 
         $methods = $this->_server->listMethods();
-        $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods), var_export($methods, 1));
+        $this->assertContains('zsr.ZendTest\\XmlRpc\\testFunction', $methods, var_export($methods, 1));
 
         $methods = $this->_server->listMethods();
-        $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods));
+        $this->assertContains('zsr.ZendTest\\XmlRpc\\testFunction', $methods);
         $this->assertFalse(in_array('zsr.ZendTest\\XmlRpc\\testFunction2', $methods), var_export($methods, 1));
     }
 
@@ -137,8 +137,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_server->setClass('ZendTest\\XmlRpc\\TestClass', 'test');
         $methods = $this->_server->listMethods();
-        $this->assertTrue(in_array('test.test1', $methods));
-        $this->assertTrue(in_array('test.test2', $methods));
+        $this->assertContains('test.test1', $methods);
+        $this->assertContains('test.test2', $methods);
         $this->assertFalse(in_array('test._test3', $methods));
         $this->assertFalse(in_array('test.__construct', $methods));
     }
@@ -211,7 +211,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($response->__toString(), $output);
         $return = $response->getReturnValue();
         $this->assertInternalType('array', $return);
-        $this->assertTrue(in_array('system.multicall', $return));
+        $this->assertContains('system.multicall', $return);
     }
 
     /**
@@ -233,7 +233,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Response);
         $return = $response->getReturnValue();
         $this->assertInternalType('array', $return);
-        $this->assertTrue(in_array('system.multicall', $return));
+        $this->assertContains('system.multicall', $return);
     }
 
     /**
@@ -292,10 +292,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $methods = $this->_server->listMethods();
         $this->assertInternalType('array', $methods);
-        $this->assertTrue(in_array('system.listMethods', $methods));
-        $this->assertTrue(in_array('system.methodHelp', $methods));
-        $this->assertTrue(in_array('system.methodSignature', $methods));
-        $this->assertTrue(in_array('system.multicall', $methods));
+        $this->assertContains('system.listMethods', $methods);
+        $this->assertContains('system.methodHelp', $methods);
+        $this->assertContains('system.methodSignature', $methods);
+        $this->assertContains('system.multicall', $methods);
     }
 
     /**

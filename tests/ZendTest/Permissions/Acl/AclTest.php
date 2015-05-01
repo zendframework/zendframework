@@ -159,7 +159,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $roleRegistry->add($roleGuest)
                      ->add($roleMember, $roleGuest->getRoleId())
                      ->add($roleEditor, $roleMember);
-        $this->assertTrue(0 === count($roleRegistry->getParents($roleGuest)));
+        $this->assertEmpty($roleRegistry->getParents($roleGuest));
         $roleMemberParents = $roleRegistry->getParents($roleMember);
         $this->assertTrue(1 === count($roleMemberParents));
         $this->assertTrue(isset($roleMemberParents['guest']));
@@ -173,7 +173,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($roleRegistry->inherits($roleMember, $roleEditor));
         $this->assertFalse($roleRegistry->inherits($roleGuest, $roleEditor));
         $roleRegistry->remove($roleMember);
-        $this->assertTrue(0 === count($roleRegistry->getParents($roleEditor)));
+        $this->assertEmpty($roleRegistry->getParents($roleEditor));
         $this->assertFalse($roleRegistry->inherits($roleEditor, $roleGuest));
     }
 

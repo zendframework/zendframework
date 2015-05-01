@@ -221,7 +221,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->toString();
         $doc  = new \DOMDocument;
         $dom  = $doc->loadHtml($html);
-        $this->assertTrue(($dom !== false));
+        $this->assertTrue($dom);
 
         $styles = substr_count($html, '<style type="text/css"');
         $this->assertEquals(3, $styles);

@@ -272,7 +272,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
         $doc = new \DOMDocument;
         $dom = $doc->loadHtml($string);
-        $this->assertTrue($dom !== false);
+        $this->assertTrue($dom);
     }
 
     public function testCapturingCapturesToObject()

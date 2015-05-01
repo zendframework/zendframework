@@ -98,7 +98,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testCreateWithRandomSalt()
     {
         $password = $this->bcrypt->create('test');
-        $this->assertTrue(!empty($password));
+        $this->assertNotEmpty($password);
         $this->assertTrue(strlen($password) === 60);
     }
 

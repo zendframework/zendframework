@@ -117,7 +117,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         Observer::clearObserved();
         Server\Fault::detachObserver('ZendTest\\XmlRpc\\Server\\Observer');
 
-        $this->assertTrue(!empty($observed));
+        $this->assertNotEmpty($observed);
         $f = array_shift($observed);
         $this->assertTrue($f instanceof Server\Fault);
         $this->assertEquals('Checking observers', $f->getMessage());

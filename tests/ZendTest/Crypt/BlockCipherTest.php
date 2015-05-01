@@ -135,7 +135,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
             $this->blockCipher->setCipherAlgorithm($algo);
             $encrypted = $this->blockCipher->encrypt($this->plaintext);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
         }
@@ -149,7 +149,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
             $this->blockCipher->setCipherAlgorithm($algo);
             $encrypted = $this->blockCipher->encrypt($this->plaintext);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
         }
@@ -175,7 +175,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $this->blockCipher->setCipherAlgorithm($algo);
 
             $encrypted = $this->blockCipher->encrypt($value);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($value, $decrypted);
         }
@@ -186,7 +186,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $this->blockCipher->setKey('test');
         $this->blockCipher->setKeyIteration(1000);
         $encrypted = $this->blockCipher->encrypt($this->plaintext);
-        $this->assertTrue(!empty($encrypted));
+        $this->assertNotEmpty($encrypted);
         // tamper the encrypted data
         $encrypted = substr($encrypted, -1);
         $decrypted = $this->blockCipher->decrypt($encrypted);

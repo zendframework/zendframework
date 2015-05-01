@@ -520,7 +520,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testTempDirectoryDetection()
     {
         $this->adapter->getTmpDir();
-        $this->assertTrue(!empty($this->adapter->tmpDir), "Temporary directory filled");
+        $this->assertNotEmpty($this->adapter->tmpDir, "Temporary directory filled");
     }
 
     public function testTemporaryDirectoryAccessDetection()

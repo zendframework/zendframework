@@ -31,7 +31,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
     public function testGetChromePhp()
     {
         $writer = new ChromePhp($this->chromephp);
-        $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\ChromePhp\ChromePhpInterface', $writer->getChromePhp());
     }
 
     public function testSetChromePhp()
@@ -40,7 +40,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         $chromephp2 = new MockChromePhp();
 
         $writer->setChromePhp($chromephp2);
-        $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\ChromePhp\ChromePhpInterface', $writer->getChromePhp());
         $this->assertEquals($chromephp2, $writer->getChromePhp());
     }
 
@@ -74,7 +74,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
             'formatter' => $formatter,
             'instance'  => $this->chromephp,
         ));
-        $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\ChromePhp\ChromePhpInterface', $writer->getChromePhp());
         $this->assertAttributeInstanceOf('Zend\Log\Formatter\ChromePhp', 'formatter', $writer);
 
         $filters = self::readAttribute($writer, 'filters');

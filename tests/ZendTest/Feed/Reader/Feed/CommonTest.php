@@ -33,7 +33,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue($feed->getDomDocument() instanceof \DOMDocument);
+        $this->assertInstanceOf('DOMDocument', $feed->getDomDocument());
     }
 
     public function testGetsDomXpathObject()
@@ -41,7 +41,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue($feed->getXpath() instanceof \DOMXPath);
+        $this->assertInstanceOf('DOMXPath', $feed->getXpath());
     }
 
     public function testGetsXpathPrefixString()
@@ -57,7 +57,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue($feed->getElement() instanceof \DOMElement);
+        $this->assertInstanceOf('DOMElement', $feed->getElement());
     }
 
     public function testSaveXmlOutputsXmlStringForFeed()
@@ -75,7 +75,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertTrue($feed->getExtension('Atom') instanceof Reader\Extension\Atom\Feed);
+        $this->assertInstanceOf('Zend\Feed\Reader\Extension\Atom\Feed', $feed->getExtension('Atom'));
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()

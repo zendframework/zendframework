@@ -633,7 +633,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testNotSetHostnameValidator()
     {
         $hostname = $this->validator->getHostnameValidator();
-        $this->assertTrue($hostname instanceof Hostname);
+        $this->assertInstanceOf('Zend\Validator\Hostname', $hostname);
     }
 
     /**

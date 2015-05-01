@@ -54,7 +54,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertTrue($this->_server instanceof Server);
+        $this->assertInstanceOf('Zend\XmlRpc\Server', $this->_server);
     }
 
     public function suppressNotFoundWarnings($errno, $errstr)
@@ -181,12 +181,12 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testFault()
     {
         $fault = $this->_server->fault('This is a fault', 411);
-        $this->assertTrue($fault instanceof Server\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Server\Fault', $fault);
         $this->assertEquals(411, $fault->getCode());
         $this->assertEquals('This is a fault', $fault->getMessage());
 
         $fault = $this->_server->fault(new Server\Exception\RuntimeException('Exception fault', 511));
-        $this->assertTrue($fault instanceof Server\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Server\Fault', $fault);
         $this->assertEquals(511, $fault->getCode());
         $this->assertEquals('Exception fault', $fault->getMessage());
     }
@@ -207,7 +207,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse(isset($response));
         $response = $this->_server->getResponse();
-        $this->assertTrue($response instanceof Response);
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $response);
         $this->assertSame($response->__toString(), $output);
         $return = $response->getReturnValue();
         $this->assertInternalType('array', $return);
@@ -230,7 +230,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('system.listMethods');
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response);
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $response);
         $return = $response->getReturnValue();
         $this->assertInternalType('array', $return);
         $this->assertContains('system.multicall', $return);
@@ -245,7 +245,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('system.methodHelp');
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof XmlRpc\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Fault', $response);
         $this->assertEquals(623, $response->getCode());
     }
 
@@ -277,8 +277,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('system.listMethods');
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response);
-        $this->assertTrue($response instanceof TestResponse);
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $response);
+        $this->assertInstanceOf('ZendTest\XmlRpc\TestResponse', $response);
     }
 
     /**
@@ -364,7 +364,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->addParam($struct);
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $response, $response->__toString() . "\n\n" . $request->__toString());
         $returns = $response->getReturnValue();
         $this->assertInternalType('array', $returns);
         $this->assertEquals(2, count($returns), var_export($returns, 1));
@@ -392,7 +392,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->addParam($struct);
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $response, $response->__toString() . "\n\n" . $request->__toString());
         $returns = $response->getReturnValue();
         $this->assertInternalType('array', $returns);
         $this->assertEquals(2, count($returns), var_export($returns, 1));
@@ -496,7 +496,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_server->setRequest('ZendTest\\XmlRpc\\TestRequest');
         $req = $this->_server->getRequest();
-        $this->assertTrue($req instanceof TestRequest);
+        $this->assertInstanceOf('ZendTest\XmlRpc\TestRequest', $req);
     }
 
     /**

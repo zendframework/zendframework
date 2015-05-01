@@ -48,7 +48,7 @@ class PdfTest extends TestCommon
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
-        $this->assertTrue($resource instanceof Pdf\PdfDocument);
+        $this->assertInstanceOf('ZendPdf\PdfDocument', $resource);
         Barcode\Barcode::setBarcodeFont('');
     }
 
@@ -60,7 +60,7 @@ class PdfTest extends TestCommon
         $pdfResource = new Pdf\PdfDocument();
         $this->renderer->setResource($pdfResource);
         $resource = $this->renderer->draw();
-        $this->assertTrue($resource instanceof Pdf\PdfDocument);
+        $this->assertInstanceOf('ZendPdf\PdfDocument', $resource);
         $this->assertSame($resource, $pdfResource);
         Barcode\Barcode::setBarcodeFont('');
     }

@@ -25,7 +25,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertTrue($memObject instanceof Container\Movable);
+        $this->assertInstanceOf('Zend\Memory\Container\Movable', $memObject);
     }
 
     /**
@@ -50,7 +50,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
+        $this->assertInstanceOf('Zend\Memory\Value', $memObject->value);
         $this->assertEquals((string) $memObject->value, 'another value');
     }
 

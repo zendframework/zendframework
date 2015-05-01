@@ -1081,14 +1081,16 @@ class FormTest extends TestCase
         $fieldsetBar = $fieldsets[1];
 
         $objectFoo = $fieldsetFoo->getObject();
-        $this->assertTrue(
-            $objectFoo instanceof Entity\Orphan,
+        $this->assertInstanceOf(
+            'ZendTest\Form\TestAsset\Entity\Orphan',
+            $objectFoo,
             'FormCollection with orphans does not bind objects from fieldsets'
         );
 
         $objectBar = $fieldsetBar->getObject();
-        $this->assertTrue(
-            $objectBar instanceof Entity\Orphan,
+        $this->assertInstanceOf(
+            'ZendTest\Form\TestAsset\Entity\Orphan',
+            $objectBar,
             'FormCollection with orphans does not bind objects from fieldsets'
         );
 

@@ -44,7 +44,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginManagerReturnsFilterManagerByDefault()
     {
         $broker = $this->inflector->getPluginManager();
-        $this->assertTrue($broker instanceof FilterPluginManager);
+        $this->assertInstanceOf('Zend\Filter\FilterPluginManager', $broker);
     }
 
     public function testSetPluginManagerAllowsSettingAlternatePluginManager()
@@ -91,7 +91,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(1, count($rules));
         $filter = $rules[0];
-        $this->assertTrue($filter instanceof \Zend\Filter\FilterInterface);
+        $this->assertInstanceOf('Zend\Filter\FilterInterface', $filter);
     }
 
     public function testSetFilterRuleWithFilterObjectCreatesRuleEntryWithFilterObject()
@@ -103,7 +103,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(1, count($rules));
         $received = $rules[0];
-        $this->assertTrue($received instanceof \Zend\Filter\FilterInterface);
+        $this->assertInstanceOf('Zend\Filter\FilterInterface', $received);
         $this->assertSame($filter, $received);
     }
 
@@ -118,8 +118,8 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $this->inflector->setFilterRule('controller', array('PregReplace', 'Alpha'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(2, count($rules));
-        $this->assertTrue($rules[0] instanceof \Zend\Filter\FilterInterface);
-        $this->assertTrue($rules[1] instanceof \Zend\Filter\FilterInterface);
+        $this->assertInstanceOf('Zend\Filter\FilterInterface', $rules[0]);
+        $this->assertInstanceOf('Zend\Filter\FilterInterface', $rules[1]);
     }
 
     public function testSetStaticRuleCreatesScalarRuleEntry()
@@ -200,7 +200,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->inflector->setFilterRule(':controller', array('Alpha', 'StringToLower'));
-        $this->assertTrue($this->inflector->getRule('controller', 1) instanceof \Zend\Filter\StringToLower);
+        $this->assertInstanceOf('Zend\Filter\StringToLower', $this->inflector->getRule('controller', 1));
         $this->assertFalse($this->inflector->getRule('controller', 2));
     }
 

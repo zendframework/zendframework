@@ -86,7 +86,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $result = $adapter->authenticate();
 
-        $this->assertTrue($result instanceof Authentication\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid());
         $this->assertTrue($result->getCode() == Authentication\Result::SUCCESS);
     }
@@ -107,7 +107,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
             foreach ($this->names as $username) {
                 $adapter->setUsername($username);
                 $result = $adapter->authenticate();
-                $this->assertTrue($result instanceof Authentication\Result);
+                $this->assertInstanceOf('Zend\Authentication\Result', $result);
                 $this->assertTrue($result->isValid());
                 $this->assertTrue($result->getCode() == Authentication\Result::SUCCESS);
                 $this->assertTrue($result->getIdentity() === $formName);
@@ -124,7 +124,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         );
 
         $result = $adapter->authenticate();
-        $this->assertTrue($result instanceof Authentication\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid() === false);
         $this->assertTrue($result->getCode() == Authentication\Result::FAILURE_CREDENTIAL_INVALID);
     }
@@ -138,7 +138,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         );
 
         $result = $adapter->authenticate();
-        $this->assertTrue($result instanceof Authentication\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid() === false);
         $this->assertTrue(
             $result->getCode() == Authentication\Result::FAILURE_IDENTITY_NOT_FOUND ||
@@ -155,7 +155,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         );
 
         $result = $adapter->authenticate();
-        $this->assertTrue($result instanceof Authentication\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertFalse($result->isValid());
         $this->assertThat($result->getCode(), $this->lessThanOrEqual(Authentication\Result::FAILURE));
         $messages = $result->getMessages();

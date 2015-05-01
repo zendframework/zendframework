@@ -45,7 +45,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $feed   = new Renderer\Feed\Atom($writer);
-        $this->assertTrue($feed->getDataContainer() instanceof Writer\Feed);
+        $this->assertInstanceOf('Zend\Feed\Writer\Feed', $feed->getDataContainer());
     }
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()

@@ -20,8 +20,8 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
-        $this->assertTrue($r instanceof Reflection\ReflectionFunction);
-        $this->assertTrue($r instanceof Reflection\AbstractFunction);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $r);
+        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
         $params = $r->getParameters();
 
         $r = new Reflection\ReflectionFunction($function, 'namespace');
@@ -75,7 +75,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Reflection\Prototype);
+            $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $p);
         }
     }
 
@@ -90,7 +90,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Reflection\Prototype);
+            $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $p);
         }
     }
 
@@ -117,7 +117,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
         $s = serialize($r);
         $u = unserialize($s);
-        $this->assertTrue($u instanceof Reflection\ReflectionFunction);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $u);
         $this->assertEquals('', $u->getNamespace());
     }
 

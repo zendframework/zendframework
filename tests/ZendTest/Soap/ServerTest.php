@@ -723,7 +723,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault('FaultMessage!');
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertContains('FaultMessage!', $fault->getMessage());
     }
 
@@ -732,7 +732,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault(new \Exception('MyException'));
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertContains('Unknown error', $fault->getMessage());
         $this->assertNotContains('MyException', $fault->getMessage());
     }
@@ -743,7 +743,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->registerFaultException('\Zend\Soap\Exception\RuntimeException');
         $server->registerFaultException('\Zend\Soap\Exception\InvalidArgumentException');
         $fault = $server->fault(new \Zend\Soap\Exception\RuntimeException('MyException'));
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertNotContains('Unknown error', $fault->getMessage());
         $this->assertContains('MyException', $fault->getMessage());
     }
@@ -764,7 +764,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault("FaultMessage!", 5000);
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
     }
 
     /**

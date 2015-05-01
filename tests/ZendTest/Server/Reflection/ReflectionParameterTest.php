@@ -42,7 +42,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $parameter = $this->_getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertTrue($reflection instanceof Reflection\ReflectionParameter);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
     }
 
     /**

@@ -30,8 +30,8 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testSessionStorageInheritsFromArrayStorage()
     {
-        $this->assertTrue($this->storage instanceof SessionStorage);
-        $this->assertTrue($this->storage instanceof ArrayStorage);
+        $this->assertInstanceOf('Zend\Session\Storage\SessionStorage', $this->storage);
+        $this->assertInstanceOf('Zend\Session\Storage\ArrayStorage', $this->storage);
     }
 
     public function testStorageWritesToSessionSuperglobal()

@@ -67,7 +67,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testHeadMetaReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadMeta);
+        $this->assertInstanceOf('Zend\View\Helper\HeadMeta', $placeholder);
     }
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonMetaValueProvided()

@@ -268,7 +268,7 @@ class ClassScannerTest extends TestCase
             $this->assertTrue($class->hasMethod($methodName), "Cannot find method $methodName");
 
             $method = $class->getMethod($methodName);
-            $this->assertTrue($method instanceof MethodScanner, $methodName . " not found.");
+            $this->assertInstanceOf('Zend\Code\Scanner\MethodScanner', $method, $methodName . ' not found.');
 
             $this->assertTrue($method->$testMethod());
 

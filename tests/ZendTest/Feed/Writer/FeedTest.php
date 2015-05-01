@@ -723,7 +723,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $entry  = $writer->createEntry();
-        $this->assertTrue($entry instanceof Writer\Entry);
+        $this->assertInstanceOf('Zend\Feed\Writer\Entry', $entry);
     }
 
     public function testAddsCategory()

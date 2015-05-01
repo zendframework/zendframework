@@ -33,13 +33,13 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
-        $this->assertTrue($r instanceof Reflection\ReflectionClass);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $r);
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
         $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
-            $this->assertTrue($m instanceof Reflection\ReflectionMethod);
+            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $m);
         }
 
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'), 'namespace');
@@ -88,7 +88,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
         $methods = $r->getMethods();
         $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
-            $this->assertTrue($m instanceof Reflection\ReflectionMethod);
+            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $m);
         }
     }
 
@@ -116,7 +116,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertTrue($u instanceof Reflection\ReflectionClass);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $u);
         $this->assertEquals('', $u->getNamespace());
         $this->assertEquals($r->getName(), $u->getName());
         $rMethods = $r->getMethods();

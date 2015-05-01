@@ -45,7 +45,6 @@ class BcryptShaTest extends \PHPUnit_Framework_TestCase
             'salt'       => $this->salt
         );
         $bcrypt  = new BcryptSha($options);
-        $this->assertTrue($bcrypt instanceof BcryptSha);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }
@@ -58,7 +57,6 @@ class BcryptShaTest extends \PHPUnit_Framework_TestCase
         );
         $config  = new Config($options);
         $bcrypt  = new BcryptSha($config);
-        $this->assertTrue($bcrypt instanceof BcryptSha);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }

@@ -60,7 +60,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionConfigByDefault()
     {
         $config = $this->manager->getConfig();
-        $this->assertTrue($config instanceof Session\Config\SessionConfig);
+        $this->assertInstanceOf('Zend\Session\Config\SessionConfig', $config);
     }
 
     public function testCanPassConfigurationToConstructor()
@@ -73,7 +73,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
+        $this->assertInstanceOf('Zend\Session\Storage\SessionArrayStorage', $storage);
     }
 
     public function testCanPassStorageToConstructor()

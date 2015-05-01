@@ -179,7 +179,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         );
         $this->smd->addService($service);
         $foo = $this->smd->getService('foo');
-        $this->assertTrue($foo instanceof Smd\Service);
+        $this->assertInstanceOf('Zend\Json\Server\Smd\Service', $foo);
         $this->assertEquals('foo', $foo->getName());
     }
 

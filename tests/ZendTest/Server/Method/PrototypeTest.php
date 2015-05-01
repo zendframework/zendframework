@@ -103,7 +103,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->prototype->addParameters(array('string', 'array'));
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertTrue($parameter instanceof Method\Parameter);
+            $this->assertInstanceOf('Zend\Server\Method\Parameter', $parameter);
         }
     }
 

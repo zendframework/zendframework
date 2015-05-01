@@ -128,7 +128,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     public function testArrayConstructAdapter()
     {
         $barcode = new Barcode(array('adapter' => 'Ean13', 'options' => 'unknown', 'useChecksum' => false));
-        $this->assertTrue($barcode->getAdapter() instanceof Barcode\Ean13);
+        $this->assertInstanceOf('Zend\Validator\Barcode\Ean13', $barcode->getAdapter());
         $this->assertFalse($barcode->useChecksum());
     }
 

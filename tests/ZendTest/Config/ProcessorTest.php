@@ -477,7 +477,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
 
-        $this->assertTrue($processor->getFilter() instanceof StringToLower);
+        $this->assertInstanceOf('Zend\Filter\StringToLower', $processor->getFilter());
         $processor->process($config);
 
         $this->assertEquals('some mixedcase value', $config->simple);

@@ -55,7 +55,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
     public function testDoctypeMethodReturnsObjectInstance()
     {
         $doctype = $this->helper->__invoke();
-        $this->assertTrue($doctype instanceof Helper\Doctype);
+        $this->assertInstanceOf('Zend\View\Helper\Doctype', $doctype);
     }
 
     public function testPassingDoctypeSetsDoctype()

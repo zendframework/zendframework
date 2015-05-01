@@ -622,18 +622,18 @@ class WsdlTest extends WsdlTestHelper
     public function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
         $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
-        $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\DefaultComplexType);
+        $this->assertInstanceOf('Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType', $this->wsdl->getComplexTypeStrategy());
     }
 
     public function testGetComplexTypeBasedOnStrategiesStringNames()
     {
         $this->wsdl = new Wsdl($this->defaultServiceName, 'http://localhost/MyService.php', new Wsdl\ComplexTypeStrategy\DefaultComplexType);
         $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
-        $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\DefaultComplexType);
+        $this->assertInstanceOf('Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType', $this->wsdl->getComplexTypeStrategy());
 
         $wsdl2 = new Wsdl($this->defaultServiceName, $this->defaultServiceUri, new Wsdl\ComplexTypeStrategy\AnyType);
         $this->assertEquals('xsd:anyType', $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
-        $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\AnyType);
+        $this->assertInstanceOf('Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType', $wsdl2->getComplexTypeStrategy());
     }
 
     public function testAddingSameComplexTypeMoreThanOnceIsIgnored()

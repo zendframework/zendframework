@@ -148,7 +148,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testDefaultManagerIsAlwaysPopulated()
     {
         $manager = Container::getDefaultManager();
-        $this->assertTrue($manager instanceof Manager);
+        $this->assertInstanceOf('Zend\Session\ManagerInterface', $manager);
     }
 
     public function testCanSetDefaultManager()
@@ -177,11 +177,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         $manager   = $container->getManager();
-        $this->assertTrue($manager instanceof Manager);
+        $this->assertInstanceOf('Zend\Session\ManagerInterface', $manager);
         $config  = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Config\SessionConfig);
+        $this->assertInstanceOf('Zend\Session\Config\SessionConfig', $config);
         $storage = $manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
+        $this->assertInstanceOf('Zend\Session\Storage\SessionArrayStorage', $storage);
     }
 
     public function testContainerAllowsInjectingManagerViaConstructor()

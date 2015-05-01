@@ -249,7 +249,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($fault);
         $this->request->loadXml('foo');
         $fault = $this->request->getFault();
-        $this->assertTrue($fault instanceof \Zend\XmlRpc\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Fault', $fault);
     }
 
     /**

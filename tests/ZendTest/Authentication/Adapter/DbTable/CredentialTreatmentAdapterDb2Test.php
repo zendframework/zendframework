@@ -11,7 +11,6 @@ namespace ZendTest\Authentication\Adapter\DbTable;
 use Zend\Authentication;
 use Zend\Authentication\Adapter;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use Zend\Db\Sql\Select as DBSelect;
 
 /**
  * @group Zend_Auth
@@ -208,7 +207,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterCanReturnDbSelectObject()
     {
-        $this->assertTrue($this->authAdapter->getDbSelect() instanceof DBSelect);
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $this->authAdapter->getDbSelect());
     }
 
     /**

@@ -24,14 +24,14 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         $node = new Node('string');
-        $this->assertTrue($node instanceof Node);
+        $this->assertInstanceOf('Zend\Server\Reflection\Node', $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertTrue($child instanceof Node);
+        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertTrue($node === $child->getParent());
         $children = $child->getChildren();
@@ -62,7 +62,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertTrue($child instanceof Node);
+        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
         $this->assertTrue($parent === $child->getParent());
         $children = $parent->getChildren();
         $this->assertTrue($child === $children[0]);

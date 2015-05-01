@@ -33,7 +33,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
     public function testGetFirePhp()
     {
         $writer = new FirePhp($this->firephp);
-        $this->assertTrue($writer->getFirePhp() instanceof FirePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\FirePhp\FirePhpInterface', $writer->getFirePhp());
     }
     /**
      * Test set firephp
@@ -44,7 +44,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $firephp2 = new MockFirePhp();
 
         $writer->setFirePhp($firephp2);
-        $this->assertTrue($writer->getFirePhp() instanceof FirePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\FirePhp\FirePhpInterface', $writer->getFirePhp());
         $this->assertEquals($firephp2, $writer->getFirePhp());
     }
     /**
@@ -82,7 +82,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
                 'formatter' => $formatter,
                 'instance'  => $this->firephp,
         ));
-        $this->assertTrue($writer->getFirePhp() instanceof FirePhpInterface);
+        $this->assertInstanceOf('Zend\Log\Writer\FirePhp\FirePhpInterface', $writer->getFirePhp());
         $this->assertAttributeInstanceOf('Zend\Log\Formatter\FirePhp', 'formatter', $writer);
 
         $filters = self::readAttribute($writer, 'filters');

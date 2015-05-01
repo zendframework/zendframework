@@ -74,12 +74,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCanSetHttpResponseObject()
     {
         $this->_callback->setHttpResponse(new HttpResponse);
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof HttpResponse);
+        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
     }
 
     public function testCanUsesDefaultHttpResponseObject()
     {
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof HttpResponse);
+        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
     }
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()

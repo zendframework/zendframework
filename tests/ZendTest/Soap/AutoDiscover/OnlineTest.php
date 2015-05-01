@@ -60,7 +60,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $client = new Client($wsdl);
         $ret = $client->request("test", "test");
 
-        $this->assertTrue(($ret instanceof \stdClass));
+        $this->assertInstanceOf('stdClass', $ret);
         $this->assertEquals("test", $ret->foo);
         $this->assertEquals("test", $ret->bar);
     }

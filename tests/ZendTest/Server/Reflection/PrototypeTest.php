@@ -78,7 +78,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWorks()
     {
-        $this->assertTrue($this->_r instanceof Reflection\Prototype);
+        $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $this->_r);
     }
 
     public function testConstructionThrowsExceptionOnInvalidParam()
@@ -108,7 +108,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReturnValue()
     {
-        $this->assertTrue($this->_r->getReturnValue() instanceof Reflection\ReflectionReturnValue);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $this->_r->getReturnValue());
     }
 
     /**
@@ -125,7 +125,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $p);
         foreach ($p as $parameter) {
-            $this->assertTrue($parameter instanceof Reflection\ReflectionParameter);
+            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $parameter);
         }
 
         $this->assertTrue($p === $this->_parameters);

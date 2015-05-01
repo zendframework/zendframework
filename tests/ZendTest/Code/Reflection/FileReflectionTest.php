@@ -138,7 +138,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionFile = new FileReflection($fileToReflect);
 
         $reflectionDocBlock = $reflectionFile->getDocBlock();
-        $this->assertTrue($reflectionDocBlock instanceof \Zend\Code\Reflection\DocBlockReflection);
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $reflectionDocBlock);
 
         $authorTag = $reflectionDocBlock->getTag('author');
         $this->assertEquals('Jeremiah Small', $authorTag->getAuthorName());
@@ -153,7 +153,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         include_once $fileToRequire;
         $reflectionFile = new FileReflection($fileToRequire);
         $funcs = $reflectionFile->getFunctions();
-        $this->assertTrue(current($funcs) instanceof \Zend\Code\Reflection\FunctionReflection);
+        $this->assertInstanceOf('Zend\Code\Reflection\FunctionReflection', current($funcs));
     }
 
     public function testFileCanReflectFileWithInterface()

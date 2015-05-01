@@ -29,7 +29,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultAdapterPluginManager()
     {
-        $this->assertTrue(Serializer::getAdapterPluginManager() instanceof AdapterPluginManager);
+        $this->assertInstanceOf('Zend\Serializer\AdapterPluginManager', Serializer::getAdapterPluginManager());
     }
 
     public function testChangeAdapterPluginManager()
@@ -42,13 +42,13 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testDefaultAdapter()
     {
         $adapter = Serializer::getDefaultAdapter();
-        $this->assertTrue($adapter instanceof Adapter\AdapterInterface);
+        $this->assertInstanceOf('Zend\Serializer\Adapter\AdapterInterface', $adapter);
     }
 
     public function testFactoryValidCall()
     {
         $serializer = Serializer::factory('PhpSerialize');
-        $this->assertTrue($serializer instanceof Adapter\PHPSerialize);
+        $this->assertInstanceOf('Zend\Serializer\Adapter\PHPSerialize', $serializer);
     }
 
     public function testFactoryUnknownAdapter()
@@ -69,7 +69,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testChangeDefaultAdapterWithString()
     {
         Serializer::setDefaultAdapter('Json');
-        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\Json);
+        $this->assertInstanceOf('Zend\Serializer\Adapter\Json', Serializer::getDefaultAdapter());
     }
 
     public function testChangeDefaultAdapterWithInstance()
@@ -85,7 +85,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $options = new Adapter\PythonPickleOptions(array('protocol' => 2));
         /** @var Adapter\PythonPickle $adapter  */
         $adapter = Serializer::factory('pythonpickle', $options);
-        $this->assertTrue($adapter instanceof Adapter\PythonPickle);
+        $this->assertInstanceOf('Zend\Serializer\Adapter\PythonPickle', $adapter);
         $this->assertEquals(2, $adapter->getOptions()->getProtocol());
     }
 

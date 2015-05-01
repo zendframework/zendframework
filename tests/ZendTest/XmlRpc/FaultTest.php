@@ -44,7 +44,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $this->assertTrue($this->_fault instanceof XmlRpc\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Fault', $this->_fault);
         $this->assertEquals(404, $this->_fault->getCode());
         $this->assertEquals('Unknown Error', $this->_fault->getMessage());
     }

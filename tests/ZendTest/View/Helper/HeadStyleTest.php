@@ -56,7 +56,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testHeadStyleReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadStyle);
+        $this->assertInstanceOf('Zend\View\Helper\HeadStyle', $placeholder);
     }
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonStyleValueProvided()
@@ -93,7 +93,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = $values[$i];
 
-            $this->assertTrue($item instanceof \stdClass);
+            $this->assertInstanceOf('stdClass', $item);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -110,7 +110,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = array_shift($values);
 
-            $this->assertTrue($item instanceof \stdClass);
+            $this->assertInstanceOf('stdClass', $item);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -129,7 +129,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
 
-        $this->assertTrue($item instanceof \stdClass);
+        $this->assertInstanceOf('stdClass', $item);
         $this->assertObjectHasAttribute('content', $item);
         $this->assertObjectHasAttribute('attributes', $item);
         $this->assertEquals($string, $item->content);

@@ -43,7 +43,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testAttachShouldReturnCallbackHandler()
     {
         $listener = $this->events->attach('test', array($this, __METHOD__));
-        $this->assertTrue($listener instanceof CallbackHandler);
+        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
     }
 
     public function testAttachShouldAddListenerToEvent()
@@ -144,7 +144,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return str_rot13($string);
         });
         $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertEquals(2, $responses->count());
         $this->assertEquals('foo', $responses->first());
         $this->assertEquals(\str_rot13(' foo '), $responses->last());
@@ -168,7 +168,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             array('string' => 'foo', 'search' => 'f'),
             array($this, 'evaluateStringCallback')
         );
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertSame(0, $responses->last());
     }
 
@@ -208,7 +208,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
         $this->assertEquals('found', $result);
@@ -224,7 +224,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
     }
@@ -238,7 +238,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'never found');
         });
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());
     }
@@ -375,7 +375,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function ($e) { return 'found'; }, 2);
         $this->events->attach('foo.bar', function ($e) { return 'zero'; }, 1);
         $responses = $this->events->trigger('foo.bar', $this, array());
-        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('nada', $responses->last());
         $this->assertTrue($responses->contains('bogus'));
@@ -629,7 +629,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
                 return true;
             }
         );
-        $this->assertTrue($callbackHandler instanceof CallbackHandler);
+        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $callbackHandler);
     }
 
     public function testDoesNotCreateStaticInstanceIfNonePresent()

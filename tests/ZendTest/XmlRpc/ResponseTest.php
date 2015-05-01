@@ -49,7 +49,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertTrue($this->_response instanceof Response);
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $this->_response);
     }
 
     /**

@@ -64,7 +64,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         );
         $this->adapter->setValidators($validators);
         $test = $this->adapter->getValidator('Upload');
-        $this->assertTrue($test instanceof FileValidator\Upload);
+        $this->assertInstanceOf('Zend\Validator\File\Upload', $test);
     }
 
     public function testSendingFiles()
@@ -237,7 +237,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('id', $status);
         $this->assertArrayHasKey('message', $status);
         $this->assertArrayHasKey('progress', $status);
-        $this->assertTrue($status['progress'] instanceof ProgressBar\ProgressBar);
+        $this->assertInstanceOf('Zend\ProgressBar\ProgressBar', $status['progress']);
 
         $this->adapter->switchApcToUP();
         $status = HttpTestMockAdapter::getProgress($status);
@@ -247,7 +247,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('id', $status);
         $this->assertArrayHasKey('message', $status);
         $this->assertArrayHasKey('progress', $status);
-        $this->assertTrue($status['progress'] instanceof ProgressBar\ProgressBar);
+        $this->assertInstanceOf('Zend\ProgressBar\ProgressBar', $status['progress']);
     }
 
     public function testValidationOfPhpExtendsFormError()

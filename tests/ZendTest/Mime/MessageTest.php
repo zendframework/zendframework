@@ -64,10 +64,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $boundary = $mime->boundary();
         $p1 = strpos($res, $boundary);
         // $boundary must appear once for every mime part
-        $this->assertTrue($p1 !== false);
+        $this->assertNotFalse($p1);
         if ($p1) {
             $p2 = strpos($res, $boundary, $p1 + strlen($boundary));
-            $this->assertTrue($p2 !== false);
+            $this->assertNotFalse($p2);
         }
         // check if the two test messages appear:
         $this->assertContains('This is a test', $res);

@@ -260,7 +260,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $previous = Logger::registerErrorHandler($this->logger);
         $this->assertNotNull($previous);
-        $this->assertTrue(false !== $previous);
+        $this->assertNotFalse($previous);
 
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));

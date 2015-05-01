@@ -168,7 +168,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
                 $encrypted = $this->mcrypt->encrypt($this->plaintext);
                 $this->assertNotEmpty($encrypted);
                 $decrypted = $this->mcrypt->decrypt($encrypted);
-                $this->assertTrue($decrypted !== false);
+                $this->assertNotFalse($decrypted);
                 $this->assertEquals($this->plaintext, $decrypted);
             }
         }

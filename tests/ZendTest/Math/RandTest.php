@@ -29,7 +29,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         for ($length = 1; $length < 4096; $length++) {
             $rand = Rand::getBytes($length);
-            $this->assertTrue($rand !== false);
+            $this->assertNotFalse($rand);
             $this->assertEquals($length, strlen($rand));
         }
     }

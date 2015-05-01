@@ -166,10 +166,10 @@ EOD;
     {
         $sx = new \SimpleXMLElement($xml);
 
-        $this->assertTrue((bool) $sx->params);
-        $this->assertTrue((bool) $sx->params->param);
-        $this->assertTrue((bool) $sx->params->param->value);
-        $this->assertTrue((bool) $sx->params->param->value->string);
+        $this->assertNotFalse($sx->params);
+        $this->assertNotFalse($sx->params->param);
+        $this->assertNotFalse($sx->params->param->value);
+        $this->assertNotFalse($sx->params->param->value->string);
         $this->assertEquals('return value', (string) $sx->params->param->value->string);
     }
 

@@ -144,7 +144,8 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $values += Rand::getInteger(0, PHP_INT_MAX);
         }
 
-        $this->assertGreaterThan(0, $values);
+        // It's not possible to test $values > 0 because $values may suffer a integer overflow
+        $this->assertNotEquals(0, $values);
     }
 
     public function testRandFloat()

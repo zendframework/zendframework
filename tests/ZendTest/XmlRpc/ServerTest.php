@@ -84,7 +84,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $methods = $this->_server->listMethods();
         $this->assertContains('zsr.ZendTest\\XmlRpc\\testFunction', $methods);
-        $this->assertFalse(in_array('zsr.ZendTest\\XmlRpc\\testFunction2', $methods), var_export($methods, 1));
+        $this->assertNotContains('zsr.ZendTest\\XmlRpc\\testFunction2', $methods, var_export($methods, 1));
     }
 
     public function testAddFunctionThrowsExceptionOnInvalidInput()
@@ -139,8 +139,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $methods = $this->_server->listMethods();
         $this->assertContains('test.test1', $methods);
         $this->assertContains('test.test2', $methods);
-        $this->assertFalse(in_array('test._test3', $methods));
-        $this->assertFalse(in_array('test.__construct', $methods));
+        $this->assertNotContains('test._test3', $methods);
+        $this->assertNotContains('test.__construct', $methods);
     }
 
     /**

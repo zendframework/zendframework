@@ -63,7 +63,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileConstructorFromAReflectedFilenameInIncludePath()
     {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
+        $this->assertNotContains(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files());
         $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
         try {

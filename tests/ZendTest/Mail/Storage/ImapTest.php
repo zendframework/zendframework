@@ -660,7 +660,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $result = $protocol->store(array('\Flagged'), 1, null, '', false);
         $this->assertContains('\Flagged', $result[1]);
         $result = $protocol->store(array('\Flagged'), 1, null, '-', false);
-        $this->assertFalse(in_array('\Flagged', $result[1]));
+        $this->assertNotContains('\Flagged', $result[1]);
         $result = $protocol->store(array('\Flagged'), 1, null, '+', false);
         $this->assertContains('\Flagged', $result[1]);
     }

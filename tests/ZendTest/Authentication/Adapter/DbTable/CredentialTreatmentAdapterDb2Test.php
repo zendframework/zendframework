@@ -358,7 +358,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             ->setCredential('my_password')
             ->setAmbiguityIdentity(true);
         $result = $this->authAdapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.', $result->getMessages()));
+        $this->assertNotContains('More than one record matches the supplied identity.', $result->getMessages());
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
 
@@ -370,7 +370,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             ->setCredential('my_otherpass')
             ->setAmbiguityIdentity(true);
         $result2 = $this->authAdapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.', $result->getMessages()));
+        $this->assertNotContains('More than one record matches the supplied identity.', $result->getMessages());
         $this->assertTrue($result2->isValid());
         $this->assertEquals('my_username', $result2->getIdentity());
     }

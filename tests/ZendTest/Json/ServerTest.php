@@ -112,8 +112,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $methods = $this->server->getFunctions();
         $zjsMethods = get_class_methods('Zend\Json\Server\Server');
         $zjMethods  = get_class_methods('Zend_JSON');
-        $this->assertTrue(count($zjsMethods) < count($methods));
-        $this->assertTrue(count($zjMethods) < count($methods));
+        $this->assertGreaterThan(count($zjsMethods), count($methods));
+        $this->assertGreaterThan(count($zjMethods), count($methods));
     }
 
     public function testNamingCollisionsShouldResolveToLastRegisteredMethod()

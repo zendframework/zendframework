@@ -144,7 +144,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $values += Rand::getInteger(0, PHP_INT_MAX);
         }
 
-        $this->assertFalse($values === 0);
+        $this->assertGreaterThan(0, $values);
     }
 
     public function testRandFloat()
@@ -152,7 +152,8 @@ class RandTest extends \PHPUnit_Framework_TestCase
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getFloat();
             $this->assertInternalType('float', $rand);
-            $this->assertTrue(($rand >= 0 && $rand <= 1));
+            $this->assertGreaterThanOrEqual(0, $rand);
+            $this->assertLessThanOrEqual(1, $rand);
         }
     }
 

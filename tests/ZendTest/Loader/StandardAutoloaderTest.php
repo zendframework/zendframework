@@ -161,7 +161,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $loader = new StandardAutoloader();
         $loader->register();
         $loaders = spl_autoload_functions();
-        $this->assertTrue(count($this->loaders) < count($loaders));
+        $this->assertGreaterThan(count($this->loaders), count($loaders));
         $test = array_pop($loaders);
         $this->assertEquals(array($loader, 'autoload'), $test);
     }

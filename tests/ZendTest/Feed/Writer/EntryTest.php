@@ -193,7 +193,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         $entry->setDateCreated();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $entry->getDateCreated());
+        $this->assertLessThanOrEqual($dateNow, $entry->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
@@ -239,7 +239,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         $entry->setDateModified();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $entry->getDateModified());
+        $this->assertLessThanOrEqual($dateNow, $entry->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()

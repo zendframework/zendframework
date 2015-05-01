@@ -130,7 +130,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setDateCreated();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $writer->getDateCreated());
+        $this->assertLessThanOrEqual($dateNow, $writer->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
@@ -176,7 +176,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setDateModified();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $writer->getDateModified());
+        $this->assertLessThanOrEqual($dateNow, $writer->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
@@ -254,7 +254,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setLastBuildDate();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $writer->getLastBuildDate());
+        $this->assertLessThanOrEqual($dateNow, $writer->getLastBuildDate());
     }
 
     public function testSetLastBuildDateUsesGivenUnixTimestamp()

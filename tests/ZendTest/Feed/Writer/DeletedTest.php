@@ -46,7 +46,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Deleted;
         $entry->setWhen();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $entry->getWhen());
+        $this->assertLessThanOrEqual($dateNow, $entry->getWhen());
     }
 
     public function testSetWhenUsesGivenUnixTimestamp()

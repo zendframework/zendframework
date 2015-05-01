@@ -327,7 +327,7 @@ class ImageTest extends TestCommon
         $this->renderer->setImageType('gif');
         $image = $this->renderer->draw();
         $index = imagecolortransparent($image);
-        $this->assertTrue($index !== -1);
+        $this->assertNotEquals(-1, $index);
     }
 
     /**
@@ -345,7 +345,7 @@ class ImageTest extends TestCommon
         $this->renderer->setImageType('png');
         $image = $this->renderer->draw();
         $index = imagecolortransparent($image);
-        $this->assertTrue($index !== -1);
+        $this->assertNotEquals(-1, $index);
     }
 
     protected function checkTTFRequirement()

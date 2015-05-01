@@ -119,7 +119,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
+        $this->assertFileNotExists($filename, "File $filename was found even after GC");
     }
 
     /**
@@ -145,7 +145,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
+        $this->assertFileNotExists($filename, "File $filename was found even after GC");
         $this->assertFileExists($otherFile, "File $otherFile was not found after GC");
     }
 

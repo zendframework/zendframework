@@ -463,7 +463,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $hydrator = new ClassMethods(false);
         $foo = new ClassMethodsFilterProviderInterface();
         $data = $hydrator->extract($foo);
-        $this->assertFalse(array_key_exists("filter", $data));
+        $this->assertArrayNotHasKey("filter", $data);
         $this->assertSame("bar", $data["foo"]);
         $this->assertSame("foo", $data["bar"]);
     }

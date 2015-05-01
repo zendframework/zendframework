@@ -39,7 +39,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->storage['foo'] = 'bar';
         $this->assertSame($_SESSION, $this->storage);
         unset($this->storage['foo']);
-        $this->assertFalse(array_key_exists('foo', $_SESSION));
+        $this->assertArrayNotHasKey('foo', $_SESSION);
     }
 
     public function testPassingArrayToConstructorOverwritesSessionSuperglobal()

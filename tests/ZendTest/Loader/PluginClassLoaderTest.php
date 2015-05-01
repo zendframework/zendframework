@@ -115,7 +115,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->unregisterPlugin('test');
 
         $test = $this->loader->getRegisteredPlugins();
-        $this->assertFalse(array_key_exists('test', $test));
+        $this->assertArrayNotHasKey('test', $test);
     }
 
     public function testIsLoadedReturnsFalseIfPluginIsNotInMap()

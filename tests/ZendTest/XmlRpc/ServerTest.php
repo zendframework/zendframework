@@ -521,7 +521,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('test1');
         $request->addParam('value');
         $response = $this->_server->handle($request);
-        $this->assertFalse($response instanceof XmlRpc\Fault);
+        $this->assertNotInstanceOf('Zend\XmlRpc\Fault', $response);
         $this->assertEquals('String: value', $response->getReturnValue());
     }
 
@@ -532,7 +532,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('test2');
         $request->addParam(array('value1', 'value2'));
         $response = $this->_server->handle($request);
-        $this->assertFalse($response instanceof XmlRpc\Fault);
+        $this->assertNotInstanceOf('Zend\XmlRpc\Fault', $response);
         $this->assertEquals('value1; value2', $response->getReturnValue());
     }
 
@@ -543,7 +543,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request->setMethod('ZendTest\\XmlRpc\\testFunction');
         $request->setParams(array(array('value1'), 'key'));
         $response = $this->_server->handle($request);
-        $this->assertFalse($response instanceof Fault);
+        $this->assertNotInstanceOf('Zend\XmlRpc\Fault', $response);
         $this->assertEquals('key: value1', $response->getReturnValue());
     }
 
@@ -608,7 +608,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $request = new Request('test.base64', array($param));
 
         $response = $this->_server->handle($request);
-        $this->assertFalse($response instanceof XmlRpc\Fault);
+        $this->assertNotInstanceOf('Zend\XmlRpc\Fault', $response);
         $this->assertEquals($data, $response->getReturnValue());
     }
 

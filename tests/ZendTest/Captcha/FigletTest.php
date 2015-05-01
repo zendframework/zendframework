@@ -89,8 +89,8 @@ class FigletTest extends CommonWordTest
 
         $this->assertNotEmpty($id1);
         $this->assertNotEmpty($id2);
-        $this->assertFalse($id1 == $id2);
-        $this->assertFalse($word1 == $word2);
+        $this->assertNotEquals($id1, $id2);
+        $this->assertNotEquals($word1, $word2);
     }
 
     public function testGenerateInitializesSessionData()

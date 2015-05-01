@@ -209,7 +209,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             return;
         }
-        $this->assertTrue(false, 'XPath PHPFunctions should be disabled by default');
+        $this->fail('XPath PHPFunctions should be disabled by default');
     }
 
     public function testXpathPhpFunctionsShouldBeEnabledWithoutParameter()
@@ -233,7 +233,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             // $e->getMessage() - Not allowed to call handler 'strtolower()
             return;
         }
-        $this->assertTrue(false, 'Not allowed to call handler strtolower()');
+        $this->fail('Not allowed to call handler strtolower()');
     }
 
     /**

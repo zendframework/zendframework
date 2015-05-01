@@ -268,17 +268,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'data3'  => 'someValue'
             );
         $config = new Config($configArray);
-        $this->assertTrue(count($config) === count($configArray));
-        $count = 0;
+        $this->assertEquals(count($configArray), count($config));
         foreach ($config as $key => $value) {
             if ($key === 'false1') {
                 $this->assertTrue($value === false);
             } else {
                 $this->assertTrue($value === 'someValue');
             }
-            $count++;
         }
-        $this->assertTrue($count === 4);
     }
 
     public function testZf1019_HandlingInvalidKeyNames()

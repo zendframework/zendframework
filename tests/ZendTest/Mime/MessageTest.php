@@ -35,7 +35,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $msg->setParts($p2);
         $p = $msg->getParts();
         $this->assertInternalType('array', $p);
-        $this->assertTrue(count($p) == 2);
+        $this->assertCount(2, $p);
     }
 
     public function testGetMime()

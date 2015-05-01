@@ -283,7 +283,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isError());
         $result = $response->getResult();
         $this->assertInternalType('array', $result);
-        $this->assertTrue(3 == count($result));
+        $this->assertCount(3, $result);
         $this->assertEquals('two', $result[1], var_export($result, 1));
         $this->assertNull($result[2]);
     }
@@ -301,7 +301,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isError());
         $result = $response->getResult();
         $this->assertInternalType('array', $result);
-        $this->assertTrue(3 == count($result));
+        $this->assertCount(3, $result);
         $this->assertEquals('two', $result[1], var_export($result, 1));
         $this->assertNull($result[2]);
     }
@@ -319,7 +319,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isError());
         $result = $response->getResult();
         $this->assertInternalType('array', $result);
-        $this->assertTrue(3 == count($result));
+        $this->assertCount(3, $result);
         $this->assertEquals('foo', $result[1]);
         $this->assertEquals('bar', $result[2]);
     }

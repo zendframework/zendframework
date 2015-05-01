@@ -66,7 +66,7 @@ class FigletTest extends CommonWordTest
         $word = $this->captcha->getWord();
         $this->assertNotEmpty($word);
         $this->assertInternalType('string', $word);
-        $this->assertTrue(strlen($word) == 8);
+        $this->assertEquals(8, strlen($word));
         $this->word = $word;
     }
 
@@ -76,7 +76,7 @@ class FigletTest extends CommonWordTest
         $this->captcha->generate();
         $word = $this->captcha->getWord();
         $this->assertInternalType('string', $word);
-        $this->assertTrue(strlen($word) == 4);
+        $this->assertEquals(4, strlen($word));
         $this->word = $word;
     }
 

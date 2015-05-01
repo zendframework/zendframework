@@ -163,7 +163,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $word = $this->captcha->getWord();
         $this->assertNotEmpty($word);
         $this->assertInternalType('string', $word);
-        $this->assertTrue(strlen($word) == 8);
+        $this->assertEquals(8, strlen($word));
         $this->word = $word;
     }
 
@@ -173,7 +173,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->captcha->generate();
         $word = $this->captcha->getWord();
         $this->assertInternalType('string', $word);
-        $this->assertTrue(strlen($word) == 4);
+        $this->assertEquals(4, strlen($word));
         $this->word = $word;
     }
 

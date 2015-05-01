@@ -98,7 +98,7 @@ class BcryptShaTest extends \PHPUnit_Framework_TestCase
     {
         $password = $this->bcrypt->create('test');
         $this->assertNotEmpty($password);
-        $this->assertTrue(strlen($password) === 60);
+        $this->assertEquals(60, strlen($password));
     }
 
     public function testCreateWithSalt()

@@ -282,7 +282,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         }
 
         $message = new Message(array());
-        $this->assertTrue($message->countParts() == 0);
+        $this->assertEquals(0, $message->countParts());
     }
 
     /**

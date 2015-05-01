@@ -295,7 +295,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
 
         $response = $this->_client->send();
-        $this->assertTrue(($response === $this->_client->getResponse()),
+        $this->assertSame($response, $this->_client->getResponse(),
             'Response is expected to be identical to the result of getResponse()');
     }
 

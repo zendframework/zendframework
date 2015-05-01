@@ -195,7 +195,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $roleChildParents);
         $i = 1;
         foreach ($roleChildParents as $roleParentId => $roleParent) {
-            $this->assertTrue("parent$i" === $roleParentId);
+            $this->assertEquals("parent$i", $roleParentId);
             $i++;
         }
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent1));
@@ -228,7 +228,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $roleChildParents);
         $i = 1;
         foreach ($roleChildParents as $roleParentId => $roleParent) {
-            $this->assertTrue("parent$i" === $roleParentId);
+            $this->assertEquals("parent$i", $roleParentId);
             $i++;
         }
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent1));

@@ -93,7 +93,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $line = $f->format(array('message' => '&key1=value1&key2=value2', 'priority' => 42));
 
         $this->assertContains("&amp;", $line);
-        $this->assertTrue(substr_count($line, "&amp;") == 2);
+        $this->assertEquals(2, substr_count($line, "&amp;"));
     }
 
     /**

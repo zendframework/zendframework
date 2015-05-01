@@ -183,7 +183,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         $source = new Math\Source\HashTiming;
         $rand = $source->generate(32);
-        $this->assertTrue(32 === strlen($rand));
+        $this->assertEquals(32, strlen($rand));
         $rand2 = $source->generate(32);
         $this->assertNotEquals($rand, $rand2);
     }
@@ -192,7 +192,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         $source = Math\Rand::getAlternativeGenerator();
         $rand = $source->generate(32);
-        $this->assertTrue(32 === strlen($rand));
+        $this->assertEquals(32, strlen($rand));
         $rand2 = $source->generate(32);
         $this->assertNotEquals($rand, $rand2);
     }

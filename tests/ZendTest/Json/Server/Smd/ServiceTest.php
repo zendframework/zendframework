@@ -156,7 +156,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     public function testShouldHaveNoParamsByDefault()
     {
         $params = $this->service->getParams();
-        $this->assertTrue(empty($params));
+        $this->assertEmpty($params);
     }
 
     public function testShouldBeAbleToAddParamsByTypeOnly()

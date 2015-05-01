@@ -55,7 +55,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
     {
         $params = $this->prototype->getParameters();
         $this->assertInternalType('array', $params);
-        $this->assertTrue(empty($params));
+        $this->assertEmpty($params);
     }
 
     public function testPrototypeShouldAllowAddingSingleParameters()

@@ -162,7 +162,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
     {
         $services = $this->smd->getServices();
         $this->assertInternalType('array', $services);
-        $this->assertTrue(empty($services));
+        $this->assertEmpty($services);
     }
 
     public function testShouldBeAbleToUseServiceObjectToAddService()

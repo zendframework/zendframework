@@ -314,7 +314,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->assertNotContains(serialize($params), $res->getBody(),
             "returned body contains GET or POST parameters (it shouldn't!)");
         $headerXFoo= $this->client->getHeader("X-Foo");
-        $this->assertTrue(empty($headerXFoo), "Header not preserved by reset");
+        $this->assertEmpty($headerXFoo, "Header not preserved by reset");
     }
 
     /**

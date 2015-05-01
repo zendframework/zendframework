@@ -452,7 +452,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->server->handle();
         $buffer = ob_get_clean();
 
-        $this->assertTrue(empty($buffer));
+        $this->assertEmpty($buffer);
     }
 
     public function testLoadFunctionsShouldLoadResultOfGetFunctions()

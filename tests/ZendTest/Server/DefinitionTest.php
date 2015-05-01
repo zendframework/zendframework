@@ -44,7 +44,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     {
         $methods = $this->definition->getMethods();
         $this->assertInternalType('array', $methods);
-        $this->assertTrue(empty($methods));
+        $this->assertEmpty($methods);
     }
 
     public function testDefinitionShouldAllowAddingSingleMethods()
@@ -106,7 +106,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $this->definition->clearMethods();
         $test = $this->definition->getMethods();
-        $this->assertTrue(empty($test));
+        $this->assertEmpty($test);
     }
 
     public function testDefinitionShouldSerializeToArray()

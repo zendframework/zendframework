@@ -70,7 +70,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
             'message' => 'my msg',
             'priority' => Logger::DEBUG
         ));
-        $this->assertTrue(empty($this->firephp->calls));
+        $this->assertEmpty($this->firephp->calls);
     }
 
     public function testConstructWithOptions()

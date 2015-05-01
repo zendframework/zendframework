@@ -140,7 +140,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $e = new Server\Exception\RuntimeException('Checking observers', 411);
         $fault = Server\Fault::getInstance($e);
         $observed = Observer::getObserved();
-        $this->assertTrue(empty($observed));
+        $this->assertEmpty($observed);
 
         $this->assertFalse(Server\Fault::detachObserver('foo'));
     }

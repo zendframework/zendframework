@@ -32,7 +32,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
     public function testPluginClassLoaderHasNoAssociationsByDefault()
     {
         $plugins = $this->loader->getRegisteredPlugins();
-        $this->assertTrue(empty($plugins));
+        $this->assertEmpty($plugins);
     }
 
     public function testRegisterPluginRegistersShortNameClassNameAssociation()

@@ -62,7 +62,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
             'message' => 'my msg',
             'priority' => Logger::DEBUG
         ));
-        $this->assertTrue(empty($this->chromephp->calls));
+        $this->assertEmpty($this->chromephp->calls);
     }
 
     public function testConstructWithOptions()

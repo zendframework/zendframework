@@ -57,7 +57,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testAttachShouldAddEventIfItDoesNotExist()
     {
         $events = $this->events->getEvents();
-        $this->assertTrue(empty($events), var_export($events, 1));
+        $this->assertEmpty($events, var_export($events, 1));
         $listener = $this->events->attach('test', array($this, __METHOD__));
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));

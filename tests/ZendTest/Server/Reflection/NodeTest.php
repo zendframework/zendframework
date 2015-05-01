@@ -28,14 +28,14 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
-        $this->assertTrue(empty($children));
+        $this->assertEmpty($children);
 
         $child = new Node('array', $node);
         $this->assertTrue($child instanceof Node);
         $this->assertEquals('array', $child->getValue());
         $this->assertTrue($node === $child->getParent());
         $children = $child->getChildren();
-        $this->assertTrue(empty($children));
+        $this->assertEmpty($children);
 
         $children = $node->getChildren();
         $this->assertTrue($child === $children[0]);

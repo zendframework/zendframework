@@ -41,7 +41,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testShouldHaveNoParamsByDefault()
     {
         $params = $this->request->getParams();
-        $this->assertTrue(empty($params));
+        $this->assertEmpty($params);
     }
 
     public function testShouldBeAbleToAddAParamAsValueOnly()

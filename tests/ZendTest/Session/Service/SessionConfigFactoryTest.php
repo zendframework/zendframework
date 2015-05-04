@@ -10,7 +10,6 @@
 namespace ZendTest\Session\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\Session\Service\SessionConfigFactory;
 
 /**
  * @group      Zend_Session

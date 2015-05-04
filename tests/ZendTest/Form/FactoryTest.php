@@ -14,7 +14,6 @@ use Zend\Filter;
 use Zend\Form;
 use Zend\Form\FormElementManager;
 use Zend\Form\Factory as FormFactory;
-use Zend\InputFilter;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Hydrator\HydratorPluginManager;
 

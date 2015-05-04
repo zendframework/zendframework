@@ -11,7 +11,6 @@ namespace ZendTest\Paginator\Adapter;
 
 use Zend\Paginator\Adapter;
 use Zend\Paginator\Paginator;
-use Zend\Paginator\Exception;
 
 /**
  * @group      Zend_Paginator

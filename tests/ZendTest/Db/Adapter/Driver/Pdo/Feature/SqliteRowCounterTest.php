@@ -11,7 +11,6 @@ namespace ZendTest\Db\Adapter\Driver\Pdo\Feature;
 
 use PHPUnit_Framework_TestCase;
 use Zend\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter;
-use Zend\Db\Adapter\Driver\Pdo\Statement;
 
 class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
 {

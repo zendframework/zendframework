@@ -11,7 +11,6 @@ namespace ZendTest\Feed\Writer;
 
 use DateTime;
 use Zend\Feed\Writer;
-use Zend\Feed\Writer\Feed;
 use Zend\Feed\Writer\Version;
 
 /**

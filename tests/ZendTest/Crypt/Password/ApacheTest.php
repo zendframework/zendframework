@@ -11,7 +11,6 @@ namespace ZendTest\Crypt\Password;
 
 use Zend\Crypt\Password\Apache;
 use Zend\Crypt\Password\Bcrypt;
-use Zend\Crypt\Password\Exception;
 
 /**
  * @group      Zend_Crypt

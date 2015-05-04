@@ -17,7 +17,6 @@ use Zend\Form\Element\Collection as Collection;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ArraySerializable;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\ArrayModel;
 use ZendTest\Form\TestAsset\CustomCollection;

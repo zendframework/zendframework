@@ -11,7 +11,6 @@ namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\MockChromePhp;
 use Zend\Log\Writer\ChromePhp;
-use Zend\Log\Writer\ChromePhp\ChromePhpInterface;
 use Zend\Log\Logger;
 
 /**

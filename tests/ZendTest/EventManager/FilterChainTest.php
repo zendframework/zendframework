@@ -10,7 +10,6 @@
 namespace ZendTest\EventManager;
 
 use Zend\EventManager\FilterChain;
-use Zend\Stdlib\CallbackHandler;
 
 /**
  * @group      Zend_Stdlib

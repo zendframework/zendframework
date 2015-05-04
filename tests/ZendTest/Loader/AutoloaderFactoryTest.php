@@ -59,7 +59,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         ));
         $loader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\ClassMapAutoloader');
         $map = $loader->getAutoloadMap();
-        $this->assertTrue(is_array($map));
+        $this->assertInternalType('array', $map);
         $this->assertEquals(2, count($map));
     }
 

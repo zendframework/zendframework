@@ -86,11 +86,11 @@ class FlashMessengerTest extends TestCase
 
         $this->seedMessages();
 
-        $this->assertTrue(count($helper('default')) > 0);
-        $this->assertTrue(count($helper('info')) > 0);
-        $this->assertTrue(count($helper('success')) > 0);
-        $this->assertTrue(count($helper('warning')) > 0);
-        $this->assertTrue(count($helper('error')) > 0);
+        $this->assertNotEmpty($helper('default'));
+        $this->assertNotEmpty($helper('info'));
+        $this->assertNotEmpty($helper('success'));
+        $this->assertNotEmpty($helper('warning'));
+        $this->assertNotEmpty($helper('error'));
 
         $this->assertTrue($this->plugin->hasMessages());
         $this->assertTrue($this->plugin->hasInfoMessages());
@@ -110,10 +110,10 @@ class FlashMessengerTest extends TestCase
 
         $this->seedCurrentMessages();
 
-        $this->assertTrue(count($helper('default')) > 0);
-        $this->assertTrue(count($helper('info')) > 0);
-        $this->assertTrue(count($helper('success')) > 0);
-        $this->assertTrue(count($helper('error')) > 0);
+        $this->assertNotEmpty($helper('default'));
+        $this->assertNotEmpty($helper('info'));
+        $this->assertNotEmpty($helper('success'));
+        $this->assertNotEmpty($helper('error'));
 
         $this->assertFalse($this->plugin->hasCurrentMessages());
         $this->assertFalse($this->plugin->hasCurrentInfoMessages());

@@ -96,7 +96,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->pluginManager->addAbstractFactory($abstractFactory);
         $instance = $this->pluginManager->get('classnoexists', $creationOptions);
-        $this->assertTrue(is_object($instance));
+        $this->assertInternalType('object', $instance);
     }
 
     public function testMutableMethodNeverCalledWithoutCreationOptions()

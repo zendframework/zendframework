@@ -26,7 +26,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function testTransformShouldReturnStringByDefault()
     {
         $test = Query::cssToXpath('');
-        $this->assertTrue(is_string($test));
+        $this->assertInternalType('string', $test);
     }
 
     /**
@@ -35,7 +35,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function testTransformShouldReturnMultiplePathsWhenExpressionContainsCommas()
     {
         $test = Query::cssToXpath('#foo, #bar');
-        $this->assertTrue(is_string($test));
+        $this->assertInternalType('string', $test);
         $this->assertContains('|', $test);
         $this->assertEquals(2, count(explode('|', $test)));
     }
@@ -77,7 +77,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function testMultipleComplexCssSpecificationShouldTransformToExpectedXpath()
     {
         $test = Query::cssToXpath('div#foo span.bar, #bar li.baz a');
-        $this->assertTrue(is_string($test));
+        $this->assertInternalType('string', $test);
         $this->assertContains('|', $test);
         $actual   = explode('|', $test);
         $expected = array(

@@ -94,7 +94,7 @@ CLASS;
                     $this->assertEquals('string', $valueType);
                     break;
                 case "status":
-                    $this->assertTrue("false" === $value);
+                    $this->assertEquals('false', $value);
                     $this->assertEquals('boolean', $valueType);
                     break;
             }

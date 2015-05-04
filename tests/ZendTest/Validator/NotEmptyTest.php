@@ -866,7 +866,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($valid->isValid(''));
         $messages = $valid->getMessages();
-        $this->assertTrue(array_key_exists('isEmpty', $messages));
+        $this->assertArrayHasKey('isEmpty', $messages);
         $this->assertContains("can't be empty", $messages['isEmpty']);
     }
 

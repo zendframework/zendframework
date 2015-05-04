@@ -245,9 +245,8 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $encoded = Json\Encoder::encode($value);
         $decoded = Json\Decoder::decode($encoded, Json\Json::TYPE_OBJECT);
-        $this->assertTrue(is_object($decoded), 'Not decoded as an object');
-        $this->assertTrue($decoded instanceof \stdClass, 'Not a stdClass object');
-        $this->assertTrue(isset($decoded->one), 'Expected property not set');
+        $this->assertInstanceOf('stdClass', $decoded);
+        $this->assertObjectHasAttribute('one', $decoded);
         $this->assertEquals($value->one, $decoded->one, 'Unexpected value');
     }
 

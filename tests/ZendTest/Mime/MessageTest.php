@@ -26,16 +26,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $msg = new Mime\Message();  // No Parts
         $p = $msg->getParts();
-        $this->assertTrue(is_array($p));
-        $this->assertTrue(count($p) == 0);
+        $this->assertInternalType('array', $p);
+        $this->assertEmpty($p);
 
         $p2 = array();
         $p2[] = new Mime\Part('This is a test');
         $p2[] = new Mime\Part('This is another test');
         $msg->setParts($p2);
         $p = $msg->getParts();
-        $this->assertTrue(is_array($p));
-        $this->assertTrue(count($p) == 2);
+        $this->assertInternalType('array', $p);
+        $this->assertCount(2, $p);
     }
 
     public function testGetMime()
@@ -64,14 +64,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $boundary = $mime->boundary();
         $p1 = strpos($res, $boundary);
         // $boundary must appear once for every mime part
-        $this->assertTrue($p1 !== false);
+        $this->assertNotFalse($p1);
         if ($p1) {
             $p2 = strpos($res, $boundary, $p1 + strlen($boundary));
-            $this->assertTrue($p2 !== false);
+            $this->assertNotFalse($p2);
         }
         // check if the two test messages appear:
-        $this->assertTrue(strpos($res, 'This is a test') !== false);
-        $this->assertTrue(strpos($res, 'This is another test') !== false);
+        $this->assertContains('This is a test', $res);
+        $this->assertContains('This is another test', $res);
         // ... more in ZMailTest
     }
 

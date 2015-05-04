@@ -43,7 +43,6 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
             'salt'       => $this->salt
         );
         $bcrypt  = new Bcrypt($options);
-        $this->assertTrue($bcrypt instanceof Bcrypt);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }
@@ -56,7 +55,6 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         );
         $config  = new Config($options);
         $bcrypt  = new Bcrypt($config);
-        $this->assertTrue($bcrypt instanceof Bcrypt);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }
@@ -97,8 +95,8 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testCreateWithRandomSalt()
     {
         $password = $this->bcrypt->create('test');
-        $this->assertTrue(!empty($password));
-        $this->assertTrue(strlen($password) === 60);
+        $this->assertNotEmpty($password);
+        $this->assertEquals(60, strlen($password));
     }
 
     public function testCreateWithSalt()

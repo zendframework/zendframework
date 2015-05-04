@@ -33,7 +33,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testSubscribeShouldReturnCallbackHandler()
     {
         $handle = $this->filterchain->attach(array( $this, __METHOD__ ));
-        $this->assertTrue($handle instanceof CallbackHandler);
+        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $handle);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()

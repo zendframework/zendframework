@@ -39,7 +39,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $memoryManager  = new Memory\MemoryManager($this->_cache);
         $memObject      = $memoryManager->create('012345678');
 
-        $this->assertTrue($memObject instanceof \Zend\Memory\Container\AccessController);
+        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject);
     }
 
     /**
@@ -64,7 +64,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
+        $this->assertInstanceOf('Zend\Memory\Value', $memObject->value);
         $this->assertEquals((string) $memObject->value, 'another value');
     }
 

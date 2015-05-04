@@ -232,7 +232,7 @@ class ViewModelTest extends TestCase
     {
         $model    = new ViewModel();
         $template = $model->getTemplate();
-        $this->assertTrue(empty($template));
+        $this->assertEmpty($template);
     }
 
     public function testTemplateIsMutable()

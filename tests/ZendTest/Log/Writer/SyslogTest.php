@@ -61,7 +61,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
         $instance = $writer->setFacility(LOG_USER)
                            ->setApplicationName('my_app');
 
-        $this->assertTrue($instance instanceof SyslogWriter);
+        $this->assertInstanceOf('Zend\Log\Writer\Syslog', $instance);
     }
 
     /**

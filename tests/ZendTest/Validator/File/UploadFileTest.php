@@ -60,7 +60,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\UploadFile();
         $this->assertFalse($validator->isValid($fileInfo));
-        $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+        $this->assertArrayHasKey($messageKey, $validator->getMessages());
     }
 
     /**
@@ -80,7 +80,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\UploadFile();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileUploadFileErrorFileNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadFileErrorFileNotFound', $validator->getMessages());
         $this->assertContains("not found", current($validator->getMessages()));
     }
 

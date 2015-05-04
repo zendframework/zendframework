@@ -57,13 +57,13 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $validator = new Isbn();
 
         $validator->setType(Isbn::AUTO);
-        $this->assertTrue($validator->getType() == Isbn::AUTO);
+        $this->assertEquals(Isbn::AUTO, $validator->getType());
 
         $validator->setType(Isbn::ISBN10);
-        $this->assertTrue($validator->getType() == Isbn::ISBN10);
+        $this->assertEquals(Isbn::ISBN10, $validator->getType());
 
         $validator->setType(Isbn::ISBN13);
-        $this->assertTrue($validator->getType() == Isbn::ISBN13);
+        $this->assertEquals(Isbn::ISBN13, $validator->getType());
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid ISBN type');
         $validator->setType('X');
@@ -79,13 +79,13 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $validator = new Isbn();
 
         $validator->setSeparator('-');
-        $this->assertTrue($validator->getSeparator() == '-');
+        $this->assertEquals('-', $validator->getSeparator());
 
         $validator->setSeparator(' ');
-        $this->assertTrue($validator->getSeparator() == ' ');
+        $this->assertEquals(' ', $validator->getSeparator());
 
         $validator->setSeparator('');
-        $this->assertTrue($validator->getSeparator() == '');
+        $this->assertEquals('', $validator->getSeparator());
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid ISBN separator');
         $validator->setSeparator('X');
@@ -102,20 +102,20 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $options = array('type'      => Isbn::AUTO,
                          'separator' => ' ');
         $validator = new Isbn($options);
-        $this->assertTrue($validator->getType() == Isbn::AUTO);
-        $this->assertTrue($validator->getSeparator() == ' ');
+        $this->assertEquals(Isbn::AUTO, $validator->getType());
+        $this->assertEquals(' ', $validator->getSeparator());
 
         $options = array('type'      => Isbn::ISBN10,
                          'separator' => '-');
         $validator = new Isbn($options);
-        $this->assertTrue($validator->getType() == Isbn::ISBN10);
-        $this->assertTrue($validator->getSeparator() == '-');
+        $this->assertEquals(Isbn::ISBN10, $validator->getType());
+        $this->assertEquals('-', $validator->getSeparator());
 
         $options = array('type'      => Isbn::ISBN13,
                          'separator' => '');
         $validator = new Isbn($options);
-        $this->assertTrue($validator->getType() == Isbn::ISBN13);
-        $this->assertTrue($validator->getSeparator() == '');
+        $this->assertEquals(Isbn::ISBN13, $validator->getType());
+        $this->assertEquals('', $validator->getSeparator());
     }
 
     /**

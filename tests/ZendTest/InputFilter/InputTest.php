@@ -102,7 +102,7 @@ class InputTest extends TestCase
         $input->isValid();
         $validators = $input->getValidatorChain()
                                 ->getValidators();
-        $this->assertTrue(0 == count($validators));
+        $this->assertEmpty($validators);
     }
 
     public function testValueIsNullByDefault()

@@ -34,7 +34,7 @@ class CheckboxTest extends TestCase
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertContains($class, $expectedClasses, $class);
             switch ($class) {
                 case 'Zend\Validator\InArray':
                     $this->assertEquals(array($element->getCheckedValue(), $element->getUncheckedValue()), $validator->getHaystack());

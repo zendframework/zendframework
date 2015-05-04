@@ -23,7 +23,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testCreation()
     {
         $valueObject = new Memory\Value('data data data ...', new DummyMovableContainer());
-        $this->assertTrue($valueObject instanceof Memory\Value);
+        $this->assertInstanceOf('Zend\Memory\Value', $valueObject);
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 

@@ -106,7 +106,7 @@ class SvgTest extends TestCommon
         $barcode = new Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
-        $this->assertTrue($resource instanceof \DOMDocument);
+        $this->assertInstanceOf('DOMDocument', $resource);
         Barcode\Barcode::setBarcodeFont('');
     }
 
@@ -124,7 +124,7 @@ class SvgTest extends TestCommon
         $svgResource->appendChild($rootElement);
         $this->renderer->setResource($svgResource);
         $resource = $this->renderer->draw();
-        $this->assertTrue($resource instanceof \DOMDocument);
+        $this->assertInstanceOf('DOMDocument', $resource);
         $this->assertSame($resource, $svgResource);
         Barcode\Barcode::setBarcodeFont('');
     }

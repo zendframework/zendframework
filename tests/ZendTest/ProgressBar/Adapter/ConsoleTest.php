@@ -44,7 +44,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new ConsoleStub();
 
-        $this->assertTrue(is_resource($adapter->getOutputStream()));
+        $this->assertInternalType('resource', $adapter->getOutputStream());
 
         $metaData = stream_get_meta_data($adapter->getOutputStream());
         $this->assertEquals('php://stdout', $metaData['uri']);
@@ -54,7 +54,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new ConsoleStub(array('outputStream' => 'php://stdout'));
 
-        $this->assertTrue(is_resource($adapter->getOutputStream()));
+        $this->assertInternalType('resource', $adapter->getOutputStream());
 
         $metaData = stream_get_meta_data($adapter->getOutputStream());
         $this->assertEquals('php://stdout', $metaData['uri']);
@@ -64,7 +64,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new ConsoleStub(array('outputStream' => 'php://stderr'));
 
-        $this->assertTrue(is_resource($adapter->getOutputStream()));
+        $this->assertInternalType('resource', $adapter->getOutputStream());
 
         $metaData = stream_get_meta_data($adapter->getOutputStream());
         $this->assertEquals('php://stderr', $metaData['uri']);
@@ -251,7 +251,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
         $resource = $adapter->getOutputStream();
-        $this->assertTrue(is_resource($resource));
+        $this->assertInternalType('resource', $resource);
     }
 
     public function testFinishEol()

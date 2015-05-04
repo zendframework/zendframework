@@ -55,7 +55,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
         $test = $service->getParams();
         $compare = array('ssl' => $options['ssl'], 'xhtml' => $options['xhtml']);
         foreach ($compare as $key => $value) {
-            $this->assertTrue(array_key_exists($key, $test));
+            $this->assertArrayHasKey($key, $test);
             $this->assertSame($value, $test[$key]);
         }
     }

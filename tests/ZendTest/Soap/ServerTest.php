@@ -33,7 +33,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->assertTrue($server->getOptions() == array('soap_version' => SOAP_1_2));
+        $this->assertEquals(array('soap_version' => SOAP_1_2), $server->getOptions());
 
         $options = array('soap_version' => SOAP_1_1,
                          'actor' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
@@ -44,7 +44,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                         );
         $server->setOptions($options);
 
-        $this->assertTrue($server->getOptions() == $options);
+        $this->assertEquals($options, $server->getOptions());
     }
 
     public function testSetOptionsViaSecondConstructorArgument()
@@ -61,7 +61,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         );
         $server = new Server(null, $options);
 
-        $this->assertTrue($server->getOptions() == $options);
+        $this->assertEquals($options, $server->getOptions());
     }
 
     /**
@@ -91,14 +91,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->assertTrue($server->getOptions() == array('soap_version' => SOAP_1_2));
+        $this->assertEquals(array('soap_version' => SOAP_1_2), $server->getOptions());
 
         $options = array('soap_version' => SOAP_1_1,
                          'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
                         );
         $server->setOptions($options);
 
-        $this->assertTrue($server->getOptions() == $options);
+        $this->assertEquals($options, $server->getOptions());
     }
 
     public function testEncoding()
@@ -186,7 +186,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
-        $this->assertTrue($classmap == $server->getClassmap());
+        $this->assertSame($classmap, $server->getClassmap());
     }
 
     public function testSetClassmapThrowsExceptionOnBogusStringParameter()
@@ -214,7 +214,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
-        $this->assertTrue($classmap == $server->getClassmap());
+        $this->assertSame($classmap, $server->getClassmap());
     }
 
     public function testSetWsdl()
@@ -423,7 +423,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             '\ZendTest\Soap\TestAsset\TestFunc5',
             '\ZendTest\Soap\TestAsset\TestFunc6'
         );
-        $this->assertTrue($server->getFunctions() == $allAddedFunctions);
+        $this->assertEquals($allAddedFunctions, $server->getFunctions());
     }
 
     public function testGetFunctionsWithClassAttached()
@@ -723,7 +723,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault('FaultMessage!');
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertContains('FaultMessage!', $fault->getMessage());
     }
 
@@ -732,7 +732,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault(new \Exception('MyException'));
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertContains('Unknown error', $fault->getMessage());
         $this->assertNotContains('MyException', $fault->getMessage());
     }
@@ -743,7 +743,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->registerFaultException('\Zend\Soap\Exception\RuntimeException');
         $server->registerFaultException('\Zend\Soap\Exception\InvalidArgumentException');
         $fault = $server->fault(new \Zend\Soap\Exception\RuntimeException('MyException'));
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
         $this->assertNotContains('Unknown error', $fault->getMessage());
         $this->assertContains('MyException', $fault->getMessage());
     }
@@ -764,7 +764,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
         $fault = $server->fault("FaultMessage!", 5000);
 
-        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertInstanceOf('SoapFault', $fault);
     }
 
     /**
@@ -903,7 +903,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new \ZendTest\Soap\TestAsset\MockServer();
         $r = $server->handle(new \DOMDocument('1.0', 'UTF-8'));
-        $this->assertTrue(is_string($server->mockSoapServer->handle[0]));
+        $this->assertInternalType('string', $server->mockSoapServer->handle[0]);
     }
 
     /**

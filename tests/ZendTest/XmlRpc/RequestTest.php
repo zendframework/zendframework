@@ -246,10 +246,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testGetFault()
     {
         $fault = $this->request->getFault();
-        $this->assertTrue(null === $fault);
+        $this->assertNull($fault);
         $this->request->loadXml('foo');
         $fault = $this->request->getFault();
-        $this->assertTrue($fault instanceof \Zend\XmlRpc\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Fault', $fault);
     }
 
     /**
@@ -334,7 +334,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
         $this->request->loadXml($payload);
         $method = $this->request->getMethod();
-        $this->assertTrue(empty($method));
+        $this->assertEmpty($method);
         if (is_string($method)) {
             $this->assertNotContains('Local file inclusion', $method);
         }

@@ -44,7 +44,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $this->assertTrue($this->_fault instanceof XmlRpc\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Fault', $this->_fault);
         $this->assertEquals(404, $this->_fault->getCode());
         $this->assertEquals('Unknown Error', $this->_fault->getMessage());
     }
@@ -190,20 +190,20 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $sx = new \SimpleXMLElement($xml);
 
-        $this->assertTrue((bool) $sx->fault, $xml);
-        $this->assertTrue((bool) $sx->fault->value, $xml);
-        $this->assertTrue((bool) $sx->fault->value->struct, $xml);
+        $this->assertNotFalse($sx->fault, $xml);
+        $this->assertNotFalse($sx->fault->value, $xml);
+        $this->assertNotFalse($sx->fault->value->struct, $xml);
         $count = 0;
         foreach ($sx->fault->value->struct->member as $member) {
             $count++;
-            $this->assertTrue((bool) $member->name, $xml);
-            $this->assertTrue((bool) $member->value, $xml);
+            $this->assertNotFalse($member->name, $xml);
+            $this->assertNotFalse($member->value, $xml);
             if ('faultCode' == (string) $member->name) {
-                $this->assertTrue((bool) $member->value->int, $xml);
+                $this->assertNotFalse($member->value->int, $xml);
                 $this->assertEquals(1000, (int) $member->value->int, $xml);
             }
             if ('faultString' == (string) $member->name) {
-                $this->assertTrue((bool) $member->value->string, $xml);
+                $this->assertNotFalse($member->value->string, $xml);
                 $this->assertEquals('Fault message', (string) $member->value->string, $xml);
             }
         }

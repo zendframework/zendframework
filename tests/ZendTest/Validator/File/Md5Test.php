@@ -80,7 +80,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
         $validator = new File\Md5($options);
         $this->assertEquals($expected, $validator->isValid($isValidParam));
         if (!$expected) {
-            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+            $this->assertArrayHasKey($messageKey, $validator->getMessages());
         }
     }
 
@@ -96,7 +96,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
             $validator = new File\Md5($options);
             $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
             if (!$expected) {
-                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                $this->assertArrayHasKey($messageKey, $validator->getMessages());
             }
         }
     }
@@ -196,7 +196,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Md5('12345');
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileMd5NotFound', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

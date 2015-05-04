@@ -20,8 +20,8 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
-        $this->assertTrue($r instanceof Reflection\ReflectionFunction);
-        $this->assertTrue($r instanceof Reflection\AbstractFunction);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $r);
+        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
         $params = $r->getParameters();
 
         $r = new Reflection\ReflectionFunction($function, 'namespace');
@@ -29,12 +29,12 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 
         $argv = array('string1', 'string2');
         $r = new Reflection\ReflectionFunction($function, 'namespace', $argv);
-        $this->assertTrue(is_array($r->getInvokeArguments()));
-        $this->assertTrue($argv === $r->getInvokeArguments());
+        $this->assertInternalType('array', $r->getInvokeArguments());
+        $this->assertEquals($argv, $r->getInvokeArguments());
 
         $prototypes = $r->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertInternalType('array', $prototypes);
+        $this->assertNotEmpty($prototypes);
     }
 
     public function test__getSet()
@@ -75,7 +75,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Reflection\Prototype);
+            $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $p);
         }
     }
 
@@ -85,12 +85,12 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertInternalType('array', $prototypes);
+        $this->assertNotEmpty($prototypes);
         $this->assertEquals(1, count($prototypes));
 
         foreach ($prototypes as $p) {
-            $this->assertTrue($p instanceof Reflection\Prototype);
+            $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $p);
         }
     }
 
@@ -100,15 +100,13 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $args = $r->getInvokeArguments();
-        $this->assertTrue(is_array($args));
+        $this->assertInternalType('array', $args);
         $this->assertEquals(0, count($args));
 
         $argv = array('string1', 'string2');
         $r = new Reflection\ReflectionFunction($function, null, $argv);
         $args = $r->getInvokeArguments();
-        $this->assertTrue(is_array($args));
-        $this->assertEquals(2, count($args));
-        $this->assertTrue($argv === $args);
+        $this->assertEquals($argv, $args);
     }
 
     public function test__wakeup()
@@ -117,7 +115,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
         $s = serialize($r);
         $u = unserialize($s);
-        $this->assertTrue($u instanceof Reflection\ReflectionFunction);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $u);
         $this->assertEquals('', $u->getNamespace());
     }
 
@@ -127,13 +125,13 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertInternalType('array', $prototypes);
+        $this->assertNotEmpty($prototypes);
         $this->assertEquals(1, count($prototypes));
 
         $proto = $prototypes[0];
         $params = $proto->getParameters();
-        $this->assertTrue(is_array($params));
+        $this->assertInternalType('array', $params);
         $this->assertEquals(1, count($params));
         $this->assertEquals('string', $params[0]->getType());
     }

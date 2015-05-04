@@ -336,10 +336,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $data = $method->invoke($this->writer, $event, $columnMap);
 
         foreach ($data as $field => $value) {
-            $this->assertTrue(is_scalar($value), sprintf(
-                'Value of column "%s" should be scalar, %s given',
-                $field,
-                gettype($value)
+            $this->assertInternalType('scalar', $value, sprintf(
+                'Value of column "%s" should be scalar',
+                $field
             ));
         }
     }
@@ -370,10 +369,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $data = $method->invoke($this->writer, $event);
 
         foreach ($data as $field => $value) {
-            $this->assertTrue(is_scalar($value), sprintf(
-                'Value of column "%s" should be scalar, %s given',
-                $field,
-                gettype($value)
+            $this->assertInternalType('scalar', $value, sprintf(
+                'Value of column "%s" should be scalar',
+                $field
             ));
         }
     }

@@ -45,7 +45,7 @@ class ColorTest extends TestCase
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertContains($class, $expectedClasses, $class);
             switch ($class) {
                 case 'Zend\Validator\Regex':
                     $this->assertEquals('/^#[0-9a-fA-F]{6}$/', $validator->getPattern());

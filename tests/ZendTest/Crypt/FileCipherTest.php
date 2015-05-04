@@ -182,7 +182,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
         file_put_contents($this->fileOut, $ciphertext);
 
         $this->assertFalse($this->fileCipher->decrypt($this->fileOut, $fileOut2, false));
-        $this->assertFalse(file_exists($fileOut2));
+        $this->assertFileNotExists($fileOut2);
     }
 
     public function testEncryptFileWithNoKey()

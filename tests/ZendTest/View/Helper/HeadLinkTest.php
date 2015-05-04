@@ -60,7 +60,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     public function testHeadLinkReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadLink);
+        $this->assertInstanceOf('Zend\View\Helper\HeadLink', $placeholder);
     }
 
     public function testPrependThrowsExceptionWithoutArrayArgument()

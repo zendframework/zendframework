@@ -213,7 +213,7 @@ class RedisTest extends CommonAdapterTest
         $this->_options->setLibOptions($options);
         $this->_storage->setItem($key, $value);
         //should not serialize array correctly
-        $this->assertFalse(is_array($this->_storage->getItem($key)), 'Redis should not serialize automatically anymore, lib options were not set correctly');
+        $this->assertNotInternalType('array', $this->_storage->getItem($key), 'Redis should not serialize automatically anymore, lib options were not set correctly');
     }
 
     public function testGetSetLibOptionsWithCleanRedisResourceInstance()
@@ -233,7 +233,7 @@ class RedisTest extends CommonAdapterTest
         $this->_options->setLibOptions($options);
         $redis->setItem($key, $value);
         //should not serialize array correctly
-        $this->assertFalse(is_array($redis->getItem($key)), 'Redis should not serialize automatically anymore, lib options were not set correctly');
+        $this->assertNotInternalType('array', $redis->getItem($key), 'Redis should not serialize automatically anymore, lib options were not set correctly');
     }
 
     /* RedisOptions */

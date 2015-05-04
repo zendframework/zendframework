@@ -240,7 +240,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testToplines()
     {
         $message = new Message(array('headers' => file_get_contents($this->_file)));
-        $this->assertTrue(strpos($message->getToplines(), 'multipart message') === 0);
+        $this->assertStringStartsWith('multipart message', $message->getToplines());
     }
 
     public function testNoContent()
@@ -282,7 +282,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         }
 
         $message = new Message(array());
-        $this->assertTrue($message->countParts() == 0);
+        $this->assertEquals(0, $message->countParts());
     }
 
     /**
@@ -323,7 +323,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($message->subject, 'multipart');
 
         $message = new Message(array('handler' => $mail, 'id' => 5));
-        $this->assertTrue(strpos($message->getContent(), 'multipart message') === 0);
+        $this->assertStringStartsWith('multipart message', $message->getContent());
     }
 
     public function testManualIterator()

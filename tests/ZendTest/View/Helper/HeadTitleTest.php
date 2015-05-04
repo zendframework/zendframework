@@ -56,7 +56,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testHeadTitleReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadTitle);
+        $this->assertInstanceOf('Zend\View\Helper\HeadTitle', $placeholder);
     }
 
     public function testCanSetTitleViaHeadTitle()
@@ -218,7 +218,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnTypeDefaultAttachOrder()
     {
-        $this->assertTrue($this->helper->setDefaultAttachOrder('PREPEND') instanceof Helper\HeadTitle);
+        $this->assertInstanceOf('Zend\View\Helper\HeadTitle', $this->helper->setDefaultAttachOrder('PREPEND'));
         $this->assertEquals('PREPEND', $this->helper->getDefaultAttachOrder());
     }
 }

@@ -35,7 +35,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
          *************************************************************/
         $client = new Client();
 
-        $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
+        $this->assertEquals(array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2), $client->getOptions());
 
         $ctx = stream_context_create();
 
@@ -83,14 +83,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
 
         $client->setOptions($nonWSDLOptions);
-        $this->assertTrue($client->getOptions() == $nonWSDLOptions);
+        $this->assertEquals($nonWSDLOptions, $client->getOptions());
 
         /*************************************************************
          * ------ Test non-WSDL mode options -----------------------------
          *************************************************************/
         $client1 = new Client();
 
-        $this->assertTrue($client1->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
+        $this->assertEquals(array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2), $client1->getOptions());
 
         $wsdlOptions = array('soap_version'   => SOAP_1_1,
                              'wsdl'           => __DIR__.'/TestAsset/wsdl_example.wsdl',
@@ -116,14 +116,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
 
         $client1->setOptions($wsdlOptions);
-        $this->assertTrue($client1->getOptions() == $wsdlOptions);
+        $this->assertEquals($wsdlOptions, $client1->getOptions());
     }
 
     public function testGetOptions()
     {
         $client = new Client();
 
-        $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
+        $this->assertEquals(array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2), $client->getOptions());
 
         $typeMap = array(
             array(
@@ -167,7 +167,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
 
         $client->setOptions($options);
-        $this->assertTrue($client->getOptions() == $options);
+        $this->assertEquals($options, $client->getOptions());
     }
 
     /**
@@ -270,10 +270,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
-        $this->assertTrue($client->getFunctions() == array('string testFunc()',
-                                                           'string testFunc2(string $who)',
-                                                           'string testFunc3(string $who, int $when)',
-                                                           'string testFunc4()'));
+        $expected = array('string testFunc()',
+            'string testFunc2(string $who)',
+            'string testFunc3(string $who, int $when)',
+            'string testFunc4()');
+        $this->assertEquals($expected, $client->getFunctions());
     }
 
     public function testGetTypes()

@@ -327,7 +327,7 @@ class CurlTest extends CommonHttpTests
         $adapter->setOptions(array('timeout' => 2, 'maxredirects' => 1));
         $adapter->connect("http://framework.zend.com");
 
-        $this->assertTrue(is_resource($adapter->getHandle()));
+        $this->assertInternalType('resource', $adapter->getHandle());
     }
 
     /**

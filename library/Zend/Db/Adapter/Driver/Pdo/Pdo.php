@@ -297,7 +297,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
      */
     public function formatParameterName($name, $type = null)
     {
-        if ($type == null && !is_numeric($name) || $type == self::PARAMETERIZATION_NAMED) {
+        if ($type === null && !is_numeric($name) || $type == self::PARAMETERIZATION_NAMED) {
             return ':' . $name;
         }
 

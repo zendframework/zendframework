@@ -27,7 +27,7 @@ class FileGeneratorRegistry
      */
     public static function registerFileCodeGenerator(FileGenerator $fileCodeGenerator, $fileName = null)
     {
-        if ($fileName == null) {
+        if ($fileName === null) {
             $fileName = $fileCodeGenerator->getFilename();
         }
 

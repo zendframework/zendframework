@@ -87,7 +87,7 @@ class SeparatorToSeparator extends AbstractFilter
             return $value;
         }
 
-        if ($this->searchSeparator == null) {
+        if ($this->searchSeparator === null) {
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 

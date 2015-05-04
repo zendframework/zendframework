@@ -203,7 +203,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function has($elementOrFieldset)
     {
-        return $this->iterator->get($elementOrFieldset) != null;
+        return $this->iterator->get($elementOrFieldset) !== null;
     }
 
     /**

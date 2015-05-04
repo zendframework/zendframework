@@ -302,7 +302,7 @@ class FileGenerator extends AbstractGenerator
      */
     public function getClass($name = null)
     {
-        if ($name == null) {
+        if ($name === null) {
             reset($this->classes);
 
             return current($this->classes);

@@ -441,7 +441,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      */
     public function getValidators($files = null)
     {
-        if ($files == null) {
+        if ($files === null) {
             return $this->validators;
         }
 

@@ -31,7 +31,7 @@ class HtmlObject extends AbstractHtmlElement
         array $params = array(),
         $content = null
     ) {
-        if ($data == null || $type == null) {
+        if ($data === null || $type === null) {
             throw new InvalidArgumentException(
                 'HTMLObject: missing argument. $data and $type are required in '
                 . 'htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)'

@@ -87,7 +87,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         $driver->checkEnvironment();
         $this->driver = $driver;
 
-        if ($platform == null) {
+        if ($platform === null) {
             $platform = $this->createPlatform($parameters);
         }
 
@@ -128,7 +128,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      */
     public function getDriver()
     {
-        if ($this->driver == null) {
+        if ($this->driver === null) {
             throw new Exception\RuntimeException('Driver has not been set or configured for this adapter.');
         }
         return $this->driver;
@@ -209,7 +209,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
     public function createStatement($initialSql = null, $initialParameters = null)
     {
         $statement = $this->driver->createStatement($initialSql);
-        if ($initialParameters == null || !$initialParameters instanceof ParameterContainer && is_array($initialParameters)) {
+        if ($initialParameters === null || !$initialParameters instanceof ParameterContainer && is_array($initialParameters)) {
             $initialParameters = new ParameterContainer((is_array($initialParameters) ? $initialParameters : array()));
         }
         $statement->setParameterContainer($initialParameters);

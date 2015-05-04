@@ -176,7 +176,7 @@ class Paginator implements Countable, IteratorAggregate
 
         $scrollingStyle = isset($config['scrolling_style']) ? $config['scrolling_style'] : null;
 
-        if ($scrollingStyle != null) {
+        if ($scrollingStyle !== null) {
             static::setDefaultScrollingStyle($scrollingStyle);
         }
     }
@@ -294,7 +294,7 @@ class Paginator implements Countable, IteratorAggregate
                 $key   = strtolower($setupMethod);
                 $value = isset($config[$key]) ? $config[$key] : null;
 
-                if ($value != null) {
+                if ($value !== null) {
                     $setupMethod = 'set' . $setupMethod;
                     $this->$setupMethod($value);
                 }
@@ -394,7 +394,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         $relativeItemNumber = $this->normalizeItemNumber($relativeItemNumber);
 
-        if ($pageNumber == null) {
+        if ($pageNumber === null) {
             $pageNumber = $this->getCurrentPageNumber();
         }
 
@@ -500,7 +500,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function getItem($itemNumber, $pageNumber = null)
     {
-        if ($pageNumber == null) {
+        if ($pageNumber === null) {
             $pageNumber = $this->getCurrentPageNumber();
         } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;

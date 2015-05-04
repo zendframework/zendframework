@@ -39,7 +39,7 @@ class MetadataFeature extends AbstractFeature
 
     public function postInitialize()
     {
-        if ($this->metadata == null) {
+        if ($this->metadata === null) {
             $this->metadata = new Metadata($this->tableGateway->adapter);
         }
 

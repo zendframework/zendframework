@@ -651,7 +651,7 @@ class Imap
 
         $flags = $this->escapeList($flags);
         $set = (int) $from;
-        if ($to != null) {
+        if ($to !== null) {
             $set .= ':' . ($to == INF ? '*' : (int) $to);
         }
 
@@ -710,7 +710,7 @@ class Imap
     public function copy($folder, $from, $to = null)
     {
         $set = (int) $from;
-        if ($to != null) {
+        if ($to !== null) {
             $set .= ':' . ($to == INF ? '*' : (int) $to);
         }
 

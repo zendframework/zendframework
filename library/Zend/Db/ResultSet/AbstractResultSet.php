@@ -90,7 +90,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             throw new Exception\InvalidArgumentException('DataSource provided is not an array, nor does it implement Iterator or IteratorAggregate');
         }
 
-        if ($this->count == null && $this->dataSource instanceof Countable) {
+        if ($this->count === null && $this->dataSource instanceof Countable) {
             $this->count = $this->dataSource->count();
         }
 

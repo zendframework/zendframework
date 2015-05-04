@@ -100,7 +100,7 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function addCodeScannerFile(FileScanner $fileScanner)
     {
-        if ($this->directoryScanner == null) {
+        if ($this->directoryScanner === null) {
             $this->directoryScanner = new DirectoryScanner();
         }
 
@@ -185,7 +185,7 @@ class CompilerDefinition implements DefinitionInterface
 
         $def['supertypes'] = $supertypes;
 
-        if ($def['instantiator'] == null) {
+        if ($def['instantiator'] === null) {
             if ($rClass->isInstantiable()) {
                 $def['instantiator'] = '__construct';
             }

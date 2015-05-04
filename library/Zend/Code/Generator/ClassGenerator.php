@@ -943,6 +943,8 @@ class ClassGenerator extends AbstractGenerator
 
         if ($this->isAbstract()) {
             $output .= 'abstract ';
+        } elseif ($this->isFinal()) {
+            $output .= 'final ';
         }
 
         $output .= static::OBJECT_TYPE . ' ' . $this->getName();

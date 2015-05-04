@@ -26,13 +26,6 @@ interface InputInterface
      */
     public function setBreakOnFailure($breakOnFailure);
 
-
-    /**
-     * @param bool $continueIfEmpty
-     * @return self
-     */
-    public function setContinueIfEmpty($continueIfEmpty);
-
     /**
      * @param string|null $errorMessage
      * @return self
@@ -70,12 +63,6 @@ interface InputInterface
     public function setValue($value);
 
     /**
-     * @param  mixed $value
-     * @return self
-     */
-    public function setFallbackValue($value);
-
-    /**
      * @param InputInterface $input
      * @return self
      */
@@ -90,11 +77,6 @@ interface InputInterface
      * @return bool
      */
     public function breakOnFailure();
-
-    /**
-     * @return bool
-     */
-    public function continueIfEmpty();
 
     /**
      * @return string|null

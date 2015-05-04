@@ -132,20 +132,20 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $html  = $this->getHtml();
         $document = new Document($html);
-        $this->assertTrue($document->getDomDocument() instanceof \DOMDocument);
+        $this->assertInstanceOf('DOMDocument', $document->getDomDocument());
     }
 
     public function testgetDomMethodShouldReturnDomDocumentWithStringDocumentSetFromMethod()
     {
         $this->loadHtml();
-        $this->assertTrue($this->document->getDomDocument() instanceof \DOMDocument);
+        $this->assertInstanceOf('DOMDocument', $this->document->getDomDocument());
     }
 
     public function testQueryShouldReturnResultObject()
     {
         $this->loadHtml();
         $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
-        $this->assertTrue($result instanceof Document\NodeList);
+        $this->assertInstanceOf('Zend\Dom\Document\NodeList', $result);
     }
 
     public function testResultShouldIndicateNumberOfFoundNodes()
@@ -161,7 +161,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
         $this->assertEquals(3, count($result));
         foreach ($result as $node) {
-            $this->assertTrue($node instanceof \DOMNode, var_export($result, 1));
+            $this->assertInstanceOf('DOMNode', $node, var_export($result, true));
         }
     }
 
@@ -208,7 +208,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             return;
         }
-        $this->assertTrue(false, 'XPath PHPFunctions should be disabled by default');
+        $this->fail('XPath PHPFunctions should be disabled by default');
     }
 
     public function testXpathPhpFunctionsShouldBeEnabledWithoutParameter()
@@ -232,7 +232,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             // $e->getMessage() - Not allowed to call handler 'strtolower()
             return;
         }
-        $this->assertTrue(false, 'Not allowed to call handler strtolower()');
+        $this->fail('Not allowed to call handler strtolower()');
     }
 
     /**
@@ -244,8 +244,8 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->document = new Document($file);
         $result = Document\Query::execute('p', $this->document, Document\Query::TYPE_CSS);
         $errors = $this->document->getErrors();
-        $this->assertTrue(is_array($errors));
-        $this->assertTrue(0 < count($errors));
+        $this->assertInternalType('array', $errors);
+        $this->assertNotEmpty($errors);
     }
 
     /**

@@ -2075,7 +2075,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/lastbuilddate/plain/rss20.xml')
         );
         $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
-        $this->assertTrue($edate == $feed->getLastBuildDate());
+        $this->assertEquals($edate, $feed->getLastBuildDate());
     }
 
     public function testGetsLastBuildDateFromRss20_None()
@@ -2096,7 +2096,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . $path)
         );
 
-        $this->assertTrue($edate == $feed->getDateModified());
+        $this->assertEquals($edate, $feed->getDateModified());
     }
 
     public function dateModifiedProvider()

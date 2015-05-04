@@ -178,7 +178,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
-        $this->assertTrue($links instanceof Reader\FeedSet);
+        $this->assertInstanceOf('Zend\Feed\Reader\FeedSet', $links);
         $this->assertEquals(array(
             'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
         ), (array) $links->getIterator()->current());
@@ -191,7 +191,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
         $link = $links->getIterator()->current();
-        $this->assertTrue($link['feed'] instanceof Reader\Feed\Rss);
+        $this->assertInstanceOf('Zend\Feed\Reader\Feed\Rss', $link['feed']);
     }
 
     public function testZeroCountFeedSetReturnedFromEmptyList()

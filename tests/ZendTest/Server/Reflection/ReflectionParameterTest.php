@@ -42,7 +42,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $parameter = $this->_getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertTrue($reflection instanceof Reflection\ReflectionParameter);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
     }
 
     /**
@@ -61,8 +61,8 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionParameter($this->_getParameter());
 
         // just test a few call proxies...
-        $this->assertTrue(is_bool($r->allowsNull()));
-        $this->assertTrue(is_bool($r->isOptional()));
+        $this->assertInternalType('bool', $r->allowsNull());
+        $this->assertInternalType('bool', $r->isOptional());
     }
 
     /**

@@ -32,8 +32,7 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
         $methodGenerator->setParameters(array('one'));
         $params = $methodGenerator->getParameters();
         $param = array_shift($params);
-        $this->assertTrue($param instanceof \Zend\Code\Generator\ParameterGenerator,
-                          'Failed because $param was not instance of Zend\Code\Generator\ParameterGenerator');
+        $this->assertInstanceOf('Zend\Code\Generator\ParameterGenerator', $param);
     }
 
     public function testMethodParameterMutator()
@@ -76,7 +75,7 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $method = new MethodGenerator();
         $method->setDocBlock($docblockGenerator);
-        $this->assertTrue($docblockGenerator === $method->getDocBlock());
+        $this->assertSame($docblockGenerator, $method->getDocBlock());
     }
 
 

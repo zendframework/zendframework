@@ -161,7 +161,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $loader = new StandardAutoloader();
         $loader->register();
         $loaders = spl_autoload_functions();
-        $this->assertTrue(count($this->loaders) < count($loaders));
+        $this->assertGreaterThan(count($this->loaders), count($loaders));
         $test = array_pop($loaders);
         $this->assertEquals(array($loader, 'autoload'), $test);
     }
@@ -199,7 +199,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent', __DIR__ . '/TestAsset/Parent');
         $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent\Child', __DIR__ . '/TestAsset/Child');
         $result = $loader->autoload('ZendTest\Loader\TestAsset\Parent\Child\Subclass');
-        $this->assertTrue($result !== false);
+        $this->assertNotFalse($result);
         $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\Parent\Child\Subclass', false));
     }
 }

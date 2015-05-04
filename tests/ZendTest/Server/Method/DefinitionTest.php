@@ -109,8 +109,8 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testInvokeArgumentsShouldBeEmptyArrayByDefault()
     {
         $args = $this->definition->getInvokeArguments();
-        $this->assertTrue(is_array($args));
-        $this->assertTrue(empty($args));
+        $this->assertInternalType('array', $args);
+        $this->assertEmpty($args);
     }
 
     public function testInvokeArgumentsShouldBeMutable()
@@ -124,8 +124,8 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testPrototypesShouldBeEmptyArrayByDefault()
     {
         $prototypes = $this->definition->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(empty($prototypes));
+        $this->assertInternalType('array', $prototypes);
+        $this->assertEmpty($prototypes);
     }
 
     public function testDefinitionShouldAllowAddingSinglePrototypes()

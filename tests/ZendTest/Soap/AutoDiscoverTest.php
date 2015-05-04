@@ -1305,8 +1305,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             '//wsdl:part[@name="test" and @type="tns:AutoDiscoverTestClass1"]',
             'AutoDiscoverTestClass1 appears once or more than once in the message parts section.'
         );
-        $this->assertTrue(
-            $nodes->length >= 1,
+        $this->assertGreaterThanOrEqual(
+            1,
+            $nodes->length,
             'AutoDiscoverTestClass1 appears once or more than once in the message parts section.'
         );
 

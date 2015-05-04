@@ -75,7 +75,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $tag->setWeight('10');
 
         $this->assertEquals(10.0, $tag->getWeight());
-        $this->assertTrue(is_float($tag->getWeight()));
+        $this->assertInternalType('float', $tag->getWeight());
     }
 
     public function testInvalidWeight()

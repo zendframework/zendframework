@@ -264,7 +264,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
     {
         $ldap = new Ldap\Ldap($this->options);
         $this->assertNotNull($ldap->getResource());
-        $this->assertTrue(is_resource($ldap->getResource()));
+        $this->assertInternalType('resource', $ldap->getResource());
         $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());
     }
 

@@ -39,9 +39,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $client = new Client($wsdl);
         $ret = $client->request($b);
 
-        $this->assertTrue(is_array($ret));
+        $this->assertInternalType('array', $ret);
         $this->assertEquals(1, count($ret));
-        $this->assertTrue(is_array($ret[0]->baz));
+        $this->assertInternalType('array', $ret[0]->baz);
         $this->assertEquals(3, count($ret[0]->baz));
 
         $baz = $ret[0]->baz;
@@ -60,7 +60,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $client = new Client($wsdl);
         $ret = $client->request("test", "test");
 
-        $this->assertTrue(($ret instanceof \stdClass));
+        $this->assertInstanceOf('stdClass', $ret);
         $this->assertEquals("test", $ret->foo);
         $this->assertEquals("test", $ret->bar);
     }

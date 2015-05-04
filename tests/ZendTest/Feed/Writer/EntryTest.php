@@ -193,7 +193,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         $entry->setDateCreated();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $entry->getDateCreated());
+        $this->assertLessThanOrEqual($dateNow, $entry->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
@@ -239,7 +239,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         $entry->setDateModified();
         $dateNow = new DateTime();
-        $this->assertTrue($dateNow >= $entry->getDateModified());
+        $this->assertLessThanOrEqual($dateNow, $entry->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
@@ -303,25 +303,25 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetDateCreatedReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getDateCreated());
+        $this->assertNull($entry->getDateCreated());
     }
 
     public function testGetDateModifiedReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getDateModified());
+        $this->assertNull($entry->getDateModified());
     }
 
     public function testGetCopyrightReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getCopyright());
+        $this->assertNull($entry->getCopyright());
     }
 
     public function testGetContentReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getContent());
+        $this->assertNull($entry->getContent());
     }
 
     public function testSetsDescription()
@@ -344,7 +344,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetDescriptionReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getDescription());
+        $this->assertNull($entry->getDescription());
     }
 
     public function testSetsId()
@@ -367,7 +367,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetIdReturnsNullIfNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getId());
+        $this->assertNull($entry->getId());
     }
 
     public function testSetsLink()
@@ -400,13 +400,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetLinkReturnsNullIfNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getLink());
+        $this->assertNull($entry->getLink());
     }
 
     public function testGetLinksReturnsNullIfNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getLinks());
+        $this->assertNull($entry->getLinks());
     }
 
     public function testSetsCommentLink()
@@ -439,7 +439,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommentLinkReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getCommentLink());
+        $this->assertNull($entry->getCommentLink());
     }
 
     public function testSetsCommentFeedLink()
@@ -489,7 +489,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommentFeedLinkReturnsNullIfNoneSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getCommentFeedLinks());
+        $this->assertNull($entry->getCommentFeedLinks());
     }
 
     public function testSetsTitle()
@@ -512,7 +512,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetTitleReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getTitle());
+        $this->assertNull($entry->getTitle());
     }
 
     public function testSetsCommentCount()
@@ -597,7 +597,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommentCountReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Entry;
-        $this->assertTrue(null === $entry->getCommentCount());
+        $this->assertNull($entry->getCommentCount());
     }
 
     /**

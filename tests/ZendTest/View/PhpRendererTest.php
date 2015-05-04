@@ -173,7 +173,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $vars = array('foo' => 'bar');
         $this->renderer->setVars($vars);
-        $this->assertTrue($this->renderer->vars() instanceof Variables);
+        $this->assertInstanceOf('Zend\View\Variables', $this->renderer->vars());
     }
 
     /**

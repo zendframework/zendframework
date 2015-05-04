@@ -58,7 +58,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $response = $number->show();
         $text = ob_get_clean();
-        $this->assertTrue((bool) preg_match('#a is not a number#', $text));
+        $this->assertContains('a is not a number', $text);
         $this->assertEquals('123', $response);
     }
 
@@ -74,7 +74,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $response = $number->show();
         $text = ob_get_clean();
-        $this->assertTrue((bool) preg_match('#Please enter a non-floating number#', $text));
+        $this->assertContains('Please enter a non-floating number', $text);
         $this->assertEquals('123', $response);
     }
 
@@ -108,8 +108,8 @@ class NumberTest extends \PHPUnit_Framework_TestCase
         $response = $number->show();
         $text = ob_get_clean();
 
-        $this->assertTrue((bool) preg_match('#Please enter a number not smaller than 5#', $text));
-        $this->assertTrue((bool) preg_match('#Please enter a number not greater than 10#', $text));
+        $this->assertContains('Please enter a number not smaller than 5', $text);
+        $this->assertContains('Please enter a number not greater than 10', $text);
         $this->assertEquals('6', $response);
     }
 }

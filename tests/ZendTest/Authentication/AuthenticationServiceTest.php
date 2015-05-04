@@ -10,7 +10,6 @@
 namespace ZendTest\Authentication;
 
 use Zend\Authentication\AuthenticationService;
-use Zend\Authentication as Auth;
 
 /**
  * @group      Zend_Auth
@@ -30,7 +29,7 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetStorage()
     {
         $storage = $this->auth->getStorage();
-        $this->assertTrue($storage instanceof Auth\Storage\Session);
+        $this->assertInstanceOf('Zend\Authentication\Storage\Session', $storage);
     }
 
     public function testAdapter()
@@ -50,7 +49,7 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticate()
     {
         $result = $this->authenticate();
-        $this->assertTrue($result instanceof Auth\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($this->auth->hasIdentity());
         $this->assertEquals('someIdentity', $this->auth->getIdentity());
     }
@@ -58,7 +57,7 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticateSetAdapter()
     {
         $result = $this->authenticate(new TestAsset\SuccessAdapter());
-        $this->assertTrue($result instanceof Auth\Result);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($this->auth->hasIdentity());
         $this->assertEquals('someIdentity', $this->auth->getIdentity());
     }

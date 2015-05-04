@@ -49,12 +49,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             'padding'   => 'pkcs7'
         );
         $mcrypt  = new Mcrypt($options);
-        $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
         $this->assertEquals($mcrypt->getKey(), substr($this->key, 0, $mcrypt->getKeySize()));
         $this->assertEquals($mcrypt->getSalt(), substr($this->salt, 0, $mcrypt->getSaltSize()));
-        $this->assertTrue($mcrypt->getPadding() instanceof PKCS7);
+        $this->assertInstanceOf('Zend\Crypt\Symmetric\Padding\PKCS7', $mcrypt->getPadding());
     }
 
     public function testConstructByConfig()
@@ -68,12 +67,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         );
         $config  = new Config($options);
         $mcrypt  = new Mcrypt($config);
-        $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
         $this->assertEquals($mcrypt->getKey(), substr($this->key, 0, $mcrypt->getKeySize()));
         $this->assertEquals($mcrypt->getSalt(), substr($this->salt, 0, $mcrypt->getSaltSize()));
-        $this->assertTrue($mcrypt->getPadding() instanceof PKCS7);
+        $this->assertInstanceOf('Zend\Crypt\Symmetric\Padding\PKCS7', $mcrypt->getPadding());
     }
 
     public function testConstructWrongParam()
@@ -168,10 +166,10 @@ class McryptTest extends \PHPUnit_Framework_TestCase
                 $this->mcrypt->setAlgorithm($algo);
                 $this->mcrypt->setMode($mode);
                 $encrypted = $this->mcrypt->encrypt($this->plaintext);
-                $this->assertTrue(!empty($encrypted));
+                $this->assertNotEmpty($encrypted);
                 $decrypted = $this->mcrypt->decrypt($encrypted);
-                $this->assertTrue($decrypted !== false);
-                $this->assertEquals($decrypted, $this->plaintext);
+                $this->assertNotFalse($decrypted);
+                $this->assertEquals($this->plaintext, $decrypted);
             }
         }
     }

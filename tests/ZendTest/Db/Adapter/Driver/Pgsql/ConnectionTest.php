@@ -43,7 +43,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         try {
             $resource = $this->connection->getResource();
             // connected with empty string
-            $this->assertTrue(is_resource($resource));
+            $this->assertInternalType('resource', $resource);
         } catch (AdapterException\RuntimeException $exc) {
             // If it throws an exception it has failed to connect
             $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');

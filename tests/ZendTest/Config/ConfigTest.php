@@ -268,17 +268,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'data3'  => 'someValue'
             );
         $config = new Config($configArray);
-        $this->assertTrue(count($config) === count($configArray));
-        $count = 0;
+        $this->assertEquals(count($configArray), count($config));
         foreach ($config as $key => $value) {
-            if ($key === 'false1') {
-                $this->assertTrue($value === false);
-            } else {
-                $this->assertTrue($value === 'someValue');
-            }
-            $count++;
+            $this->assertEquals($configArray[$key], $value);
         }
-        $this->assertTrue($count === 4);
     }
 
     public function testZf1019_HandlingInvalidKeyNames()
@@ -300,8 +293,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config($this->all);
         $value = $config->get('notthere', 'default');
-        $this->assertTrue($value === 'default');
-        $this->assertTrue($config->notThere === null);
+        $this->assertEquals('default', $value);
+        $this->assertNull($config->notThere);
     }
 
     public function testUnsetException()

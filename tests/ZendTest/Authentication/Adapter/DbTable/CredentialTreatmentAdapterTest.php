@@ -12,7 +12,6 @@ namespace ZendTest\Authentication\Adapter\DbTable;
 use Zend\Authentication;
 use Zend\Authentication\Adapter;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use Zend\Db\Sql\Select as DBSelect;
 
 /**
  * @group      Zend_Auth
@@ -172,7 +171,7 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterCanReturnDbSelectObject()
     {
-        $this->assertTrue($this->_adapter->getDbSelect() instanceof DBSelect);
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $this->_adapter->getDbSelect());
     }
 
     /**
@@ -292,8 +291,8 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setIdentity('my_username')
                        ->setCredential('my_password');
         $result = $this->_adapter->authenticate();
-        $this->assertTrue(in_array('More than one record matches the supplied identity.',
-                                   $result->getMessages()));
+        $this->assertContains('More than one record matches the supplied identity.',
+                                   $result->getMessages());
         $this->assertFalse($result->isValid());
     }
 
@@ -314,8 +313,8 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
                        ->setCredential('my_password')
                        ->setAmbiguityIdentity(true);
         $result = $this->_adapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+        $this->assertNotContains('More than one record matches the supplied identity.',
+                                    $result->getMessages());
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
 
@@ -327,8 +326,8 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
                        ->setCredential('my_otherpass')
                        ->setAmbiguityIdentity(true);
         $result2 = $this->_adapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+        $this->assertNotContains('More than one record matches the supplied identity.',
+                                    $result->getMessages());
         $this->assertTrue($result2->isValid());
         $this->assertEquals('my_username', $result2->getIdentity());
     }

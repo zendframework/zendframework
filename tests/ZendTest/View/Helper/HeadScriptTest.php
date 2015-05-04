@@ -57,7 +57,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
     public function testHeadScriptReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadScript);
+        $this->assertInstanceOf('Zend\View\Helper\HeadScript', $placeholder);
     }
 
     public function testSetPrependAppendAndOffsetSetThrowExceptionsOnInvalidItems()
@@ -272,7 +272,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
         $doc = new \DOMDocument;
         $dom = $doc->loadHtml($string);
-        $this->assertTrue($dom !== false);
+        $this->assertTrue($dom);
     }
 
     public function testCapturingCapturesToObject()

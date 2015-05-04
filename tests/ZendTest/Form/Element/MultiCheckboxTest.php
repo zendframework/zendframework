@@ -44,7 +44,7 @@ class MultiCheckboxTest extends TestCase
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertContains($class, $expectedClasses, $class);
             switch ($class) {
                 case 'Zend\Validator\Explode':
                     $inArrayValidator = $validator->getValidator();
@@ -186,6 +186,6 @@ class MultiCheckboxTest extends TestCase
         $optionValue = 'option3';
         $selectedOptions = array('option1', 'option3');
         $element->setValue($selectedOptions);
-        $this->assertTrue(in_array($optionValue, $element->getValue()));
+        $this->assertContains($optionValue, $element->getValue());
     }
 }

@@ -262,7 +262,7 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
         $this->assertTrue($inputFilter->has('foo'));
-        $this->assertTrue($inputFilter->get('foo') === $input);
+        $this->assertEquals($input, $inputFilter->get('foo'));
     }
 
     public function testFactoryAcceptsInputFilterInterface()
@@ -276,7 +276,7 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
         $this->assertTrue($inputFilter->has('foo'));
-        $this->assertTrue($inputFilter->get('foo') === $input);
+        $this->assertEquals($input, $inputFilter->get('foo'));
     }
 
     public function testFactoryWillCreateInputFilterAndAllInputObjectsFromGivenConfiguration()

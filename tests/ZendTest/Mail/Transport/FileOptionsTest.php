@@ -29,7 +29,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
     public function testDefaultCallbackIsSetByDefault()
     {
         $callback = $this->options->getCallback();
-        $this->assertTrue(is_callable($callback));
+        $this->assertInternalType('callable', $callback);
         $test     = call_user_func($callback, '');
         $this->assertRegExp('#^ZendMail_\d+_\d+\.eml$#', $test);
     }

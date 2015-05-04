@@ -103,7 +103,7 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
                 $messageKeys = array($messageKeys);
             }
             foreach ($messageKeys as $messageKey) {
-                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                $this->assertArrayHasKey($messageKey, $validator->getMessages());
             }
         }
     }
@@ -125,7 +125,7 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
                     $messageKeys = array($messageKeys);
                 }
                 foreach ($messageKeys as $messageKey) {
-                    $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                    $this->assertArrayHasKey($messageKey, $validator->getMessages());
                 }
             }
         }
@@ -260,7 +260,7 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\ImageSize(array('minWidth' => 100, 'minHeight' => 1000, 'maxWidth' => 10000, 'maxHeight' => 100000));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileImageSizeNotReadable', $validator->getMessages()));
+        $this->assertArrayHasKey('fileImageSizeNotReadable', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

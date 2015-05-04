@@ -75,7 +75,7 @@ class RemoteAddressTest extends TestCase
         $result = $this->remoteAddress->setTrustedProxies(array(
             '192.168.0.10', '192.168.0.1'
         ));
-        $this->assertTrue($result instanceof RemoteAddr);
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\RemoteAddress', $result);
     }
 
     public function testGetIpAddress()

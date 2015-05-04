@@ -25,7 +25,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertTrue($memObject instanceof Container\Movable);
+        $this->assertInstanceOf('Zend\Memory\Container\Movable', $memObject);
     }
 
     /**
@@ -50,7 +50,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
+        $this->assertInstanceOf('Zend\Memory\Value', $memObject->value);
         $this->assertEquals((string) $memObject->value, 'another value');
     }
 
@@ -84,8 +84,8 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memObject->touch();
 
         $this->assertTrue($memoryManager->processUpdatePassed);
-        $this->assertTrue($memoryManager->processedObject === $memObject);
-        $this->assertEquals($memoryManager->processedId, 10);
+        $this->assertEquals($memObject, $memoryManager->processedObject);
+        $this->assertEquals(10, $memoryManager->processedId);
     }
 
     /**
@@ -105,8 +105,8 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memObject->value[6] = '_';
 
         $this->assertTrue($memoryManager->processUpdatePassed);
-        $this->assertTrue($memoryManager->processedObject === $memObject);
-        $this->assertEquals($memoryManager->processedId, 10);
+        $this->assertEquals($memObject, $memoryManager->processedObject);
+        $this->assertEquals(10, $memoryManager->processedId);
     }
 
     public function testInvalidGetThrowException()

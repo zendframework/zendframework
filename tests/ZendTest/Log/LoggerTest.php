@@ -105,9 +105,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writers = $this->logger->getWriters();
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
+        $this->assertInstanceOf('Zend\Log\Writer\Noop', $writer);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);
     }
 
     public function testAddWriterWithPriority()
@@ -120,9 +120,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
+        $this->assertInstanceOf('Zend\Log\Writer\Noop', $writer);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);
     }
 
     public function testAddWithSamePriority()
@@ -135,9 +135,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);
         $writer = $writers->extract();
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\Noop);
+        $this->assertInstanceOf('Zend\Log\Writer\Noop', $writer);
     }
 
     public function testLogging()
@@ -260,7 +260,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $previous = Logger::registerErrorHandler($this->logger);
         $this->assertNotNull($previous);
-        $this->assertTrue(false !== $previous);
+        $this->assertNotFalse($previous);
 
         // check for single error handler instance
         $this->assertFalse(Logger::registerErrorHandler($this->logger));

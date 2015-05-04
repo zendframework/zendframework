@@ -83,7 +83,7 @@ class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
         $locator = new ClassFileLocator(__DIR__);
         foreach ($locator as $file) {
             $namespaces = $file->getNamespaces();
-            $this->assertTrue(count($namespaces) > 0);
+            $this->assertNotEmpty($namespaces);
         }
     }
 

@@ -29,7 +29,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         for ($length = 1; $length < 4096; $length++) {
             $rand = Rand::getBytes($length);
-            $this->assertTrue($rand !== false);
+            $this->assertNotFalse($rand);
             $this->assertEquals($length, strlen($rand));
         }
     }
@@ -38,7 +38,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getBoolean();
-            $this->assertTrue(is_bool($rand));
+            $this->assertInternalType('bool', $rand);
         }
     }
 
@@ -144,15 +144,17 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $values += Rand::getInteger(0, PHP_INT_MAX);
         }
 
-        $this->assertFalse($values === 0);
+        // It's not possible to test $values > 0 because $values may suffer a integer overflow
+        $this->assertNotEquals(0, $values);
     }
 
     public function testRandFloat()
     {
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getFloat();
-            $this->assertTrue(is_float($rand));
-            $this->assertTrue(($rand >= 0 && $rand <= 1));
+            $this->assertInternalType('float', $rand);
+            $this->assertGreaterThanOrEqual(0, $rand);
+            $this->assertLessThanOrEqual(1, $rand);
         }
     }
 
@@ -161,7 +163,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getString($length, '0123456789abcdef');
             $this->assertEquals(strlen($rand), $length);
-            $this->assertTrue(preg_match('#^[0-9a-f]+$#', $rand) === 1);
+            $this->assertEquals(1, preg_match('#^[0-9a-f]+$#', $rand));
         }
     }
 
@@ -170,7 +172,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
         for ($length = 1; $length < 512; $length++) {
             $rand = Rand::getString($length);
             $this->assertEquals(strlen($rand), $length);
-            $this->assertTrue(preg_match('#^[0-9a-zA-Z+/]+$#', $rand) === 1);
+            $this->assertEquals(1, preg_match('#^[0-9a-zA-Z+/]+$#', $rand));
         }
     }
 
@@ -183,7 +185,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         $source = new Math\Source\HashTiming;
         $rand = $source->generate(32);
-        $this->assertTrue(32 === strlen($rand));
+        $this->assertEquals(32, strlen($rand));
         $rand2 = $source->generate(32);
         $this->assertNotEquals($rand, $rand2);
     }
@@ -192,7 +194,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         $source = Math\Rand::getAlternativeGenerator();
         $rand = $source->generate(32);
-        $this->assertTrue(32 === strlen($rand));
+        $this->assertEquals(32, strlen($rand));
         $rand2 = $source->generate(32);
         $this->assertNotEquals($rand, $rand2);
     }

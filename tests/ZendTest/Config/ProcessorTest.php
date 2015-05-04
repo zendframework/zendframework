@@ -349,9 +349,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->process($config);
 
         $tokens = $processor->getTokens();
-        $this->assertTrue(is_array($tokens));
-        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
-        $this->assertTrue(!$processor->getUserOnly());
+        $this->assertInternalType('array', $tokens);
+        $this->assertContains('SOME_USERLAND_CONSTANT', $tokens);
+        $this->assertFalse($processor->getUserOnly());
 
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
@@ -370,8 +370,8 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $tokens = $processor->getTokens();
 
-        $this->assertTrue(is_array($tokens));
-        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
+        $this->assertInternalType('array', $tokens);
+        $this->assertContains('SOME_USERLAND_CONSTANT', $tokens);
         $this->assertTrue($processor->getUserOnly());
 
         $this->assertEquals('some constant value', $config->simple);
@@ -477,7 +477,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
 
-        $this->assertTrue($processor->getFilter() instanceof StringToLower);
+        $this->assertInstanceOf('Zend\Filter\StringToLower', $processor->getFilter());
         $processor->process($config);
 
         $this->assertEquals('some mixedcase value', $config->simple);

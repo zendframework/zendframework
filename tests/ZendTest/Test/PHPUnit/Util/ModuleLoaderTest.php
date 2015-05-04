@@ -47,7 +47,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
         $loader = new ModuleLoader(array('Baz'));
         $baz = $loader->getModule('Baz');
-        $this->assertTrue($baz instanceof \Baz\Module);
+        $this->assertInstanceOf('Baz\Module', $baz);
     }
 
     public function testCanNotLoadModule()
@@ -60,7 +60,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
     {
         $loader = new ModuleLoader(array('Baz' => __DIR__ . '/../../_files/Baz'));
         $baz = $loader->getModule('Baz');
-        $this->assertTrue($baz instanceof \Baz\Module);
+        $this->assertInstanceOf('Baz\Module', $baz);
     }
 
     public function testCanLoadModules()
@@ -70,9 +70,9 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
         $loader = new ModuleLoader(array('Baz', 'Foo'));
         $baz = $loader->getModule('Baz');
-        $this->assertTrue($baz instanceof \Baz\Module);
+        $this->assertInstanceOf('Baz\Module', $baz);
         $foo = $loader->getModule('Foo');
-        $this->assertTrue($foo instanceof \Foo\Module);
+        $this->assertInstanceOf('Foo\Module', $foo);
     }
 
     public function testCanLoadModulesWithPath()
@@ -83,7 +83,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
         ));
 
         $fooObject = $loader->getServiceManager()->get('FooObject');
-        $this->assertTrue($fooObject instanceof \stdClass);
+        $this->assertInstanceOf('stdClass', $fooObject);
     }
 
     public function testCanLoadModulesFromConfig()
@@ -91,7 +91,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
         $config = include __DIR__ . '/../../_files/application.config.php';
         $loader = new ModuleLoader($config);
         $baz = $loader->getModule('Baz');
-        $this->assertTrue($baz instanceof \Baz\Module);
+        $this->assertInstanceOf('Baz\Module', $baz);
     }
 
     public function testCanGetService()

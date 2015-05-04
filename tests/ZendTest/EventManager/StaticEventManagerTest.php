@@ -58,7 +58,7 @@ class StaticEventManagerTest extends TestCase
         $found     = false;
         $listeners = $events->getListeners('foo', 'bar');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
-        $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+        $this->assertNotEmpty($listeners, 'Empty listeners!');
         foreach ($listeners as $listener) {
             if ($expected === $listener->getCallback()) {
                 $found = true;
@@ -79,7 +79,7 @@ class StaticEventManagerTest extends TestCase
             $found     = false;
             $listeners = $events->getListeners('bar', $event);
             $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
-            $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+            $this->assertNotEmpty($listeners, 'Empty listeners!');
             foreach ($listeners as $listener) {
                 if ($expected === $listener->getCallback()) {
                     $found = true;
@@ -101,7 +101,7 @@ class StaticEventManagerTest extends TestCase
             $found     = false;
             $listeners = $events->getListeners($id, 'bar');
             $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
-            $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+            $this->assertNotEmpty($listeners, 'Empty listeners!');
             foreach ($listeners as $listener) {
                 if ($expected === $listener->getCallback()) {
                     $found = true;
@@ -124,7 +124,7 @@ class StaticEventManagerTest extends TestCase
                 $found     = false;
                 $listeners = $events->getListeners($resource, $event);
                 $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
-                $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+                $this->assertNotEmpty($listeners, 'Empty listeners!');
                 foreach ($listeners as $listener) {
                     if ($expected === $listener->getCallback()) {
                         $found = true;

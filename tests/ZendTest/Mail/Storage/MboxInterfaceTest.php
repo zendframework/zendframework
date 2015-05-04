@@ -79,7 +79,7 @@ class MboxInterfaceTest extends \PHPUnit_Framework_TestCase
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
         foreach ($list as $key => $message) {
-            $this->assertTrue($message instanceof Message\MessageInterface, 'value in iteration is not a mail message');
+            $this->assertInstanceOf('Zend\Mail\Storage\Message\MessageInterface', $message, 'value in iteration is not a mail message');
         }
     }
 
@@ -139,7 +139,7 @@ class MboxInterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
         $headers = $list[1]->getHeaders();
-        $this->assertTrue(count($headers) > 0);
+        $this->assertNotEmpty($headers);
     }
 
     public function testWrongHeader()

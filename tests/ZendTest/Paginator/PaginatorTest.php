@@ -551,15 +551,15 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     {
         // Current page number
         $this->paginator->setCurrentPageNumber(3.3);
-        $this->assertTrue($this->paginator->getCurrentPageNumber() == 3);
+        $this->assertEquals(3, $this->paginator->getCurrentPageNumber());
 
         // Item count per page
         $this->paginator->setItemCountPerPage(3.3);
-        $this->assertTrue($this->paginator->getItemCountPerPage() == 3);
+        $this->assertEquals(3, $this->paginator->getItemCountPerPage());
 
         // Page range
         $this->paginator->setPageRange(3.3);
-        $this->assertTrue($this->paginator->getPageRange() == 3);
+        $this->assertEquals(3, $this->paginator->getPageRange());
     }
 
     /**

@@ -59,7 +59,7 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
     public function testExplodeDnOperation($input, $expected)
     {
         $ret = Ldap\Dn::checkDn($input);
-        $this->assertTrue($ret === $expected);
+        $this->assertEquals($expected, $ret);
     }
 
     public function testExplodeDnCaseFold()

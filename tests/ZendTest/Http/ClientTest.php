@@ -264,7 +264,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $client->setMethod('GET')->send();
 
         // the last request should contain the Authorization header
-        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) !== false);
+        $this->assertContains($encoded, $client->getLastRawRequest());
     }
 
     public function testIfClientDoesNotForwardAuthenticationToForeignHost()
@@ -295,7 +295,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         // the last request should NOT contain the Authorization header,
         // because example.com is different from example.org
-        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+        $this->assertNotContains($encoded, $client->getLastRawRequest());
 
         // set up two responses that simulate a rediration from example.org to sub.example.org
         $testAdapter->setResponse(
@@ -315,7 +315,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         // the last request should contain the Authorization header,
         // because sub.example.org is a subdomain unter example.org
-        $this->assertFalse(strpos($client->getLastRawRequest(), $encoded) === false);
+        $this->assertContains($encoded, $client->getLastRawRequest());
 
         // set up two responses that simulate a rediration from sub.example.org to example.org
         $testAdapter->setResponse(
@@ -335,7 +335,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         // the last request should NOT contain the Authorization header,
         // because example.org is not a subdomain unter sub.example.org
-        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+        $this->assertNotContains($encoded, $client->getLastRawRequest());
     }
 
     public function testAdapterAlwaysReachableIfSpecified()

@@ -63,7 +63,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     public function testReplacementIsEmptyByDefault()
     {
         $replacement = $this->filter->getReplacement();
-        $this->assertTrue(empty($replacement));
+        $this->assertEmpty($replacement);
     }
 
     public function testReplacementAccessorsWork()

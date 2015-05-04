@@ -106,7 +106,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
 
-        $this->assertTrue(array_key_exists(Alpha::INVALID, $messages));
+        $this->assertArrayHasKey(Alpha::INVALID, $messages);
         $this->assertEquals('This is...', $messages[Alpha::INVALID]);
     }
 
@@ -118,7 +118,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $valid = new Between(1, 10);
         $this->assertFalse($valid->isValid(24));
         $message = current($valid->getMessages());
-        $this->assertTrue(strlen($message) <= 5);
+        $this->assertLessThanOrEqual(5, strlen($message));
     }
 
     public function testSetGetDefaultTranslator()

@@ -85,7 +85,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
+        $this->assertArrayHasKey('fooMessage', $messages);
         $this->assertContains('bar', $messages['fooMessage'], var_export($messages, 1));
         $this->assertContains('This is the translated message for ', $messages['fooMessage']);
     }
@@ -122,7 +122,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->validator->isValid(new \stdClass()));
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
+        $this->assertArrayHasKey('fooMessage', $messages);
     }
 
     public function testTranslatorEnabledPerDefault()
@@ -150,7 +150,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
+        $this->assertArrayHasKey('fooMessage', $messages);
         $this->assertContains('bar', $messages['fooMessage']);
         $this->assertContains('This is the translated message for ', $messages['fooMessage']);
 
@@ -159,7 +159,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
+        $this->assertArrayHasKey('fooMessage', $messages);
         $this->assertContains('bar', $messages['fooMessage']);
         $this->assertContains('bar was passed', $messages['fooMessage']);
     }

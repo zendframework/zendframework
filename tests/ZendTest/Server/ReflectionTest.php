@@ -22,10 +22,10 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     public function testReflectClass()
     {
         $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
-        $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
 
         $reflection = Reflection::reflectClass(new ReflectionTestClass());
-        $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
     }
 
     public function testReflectClassThrowsExceptionOnInvalidClass()
@@ -55,7 +55,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     public function testReflectFunction()
     {
         $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
-        $this->assertTrue($reflection instanceof Reflection\ReflectionFunction);
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $reflection);
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction()

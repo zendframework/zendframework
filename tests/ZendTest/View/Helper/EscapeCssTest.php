@@ -51,7 +51,7 @@ class EscapeCssTest extends TestCase
     {
         $this->helper->setEncoding('BIG5-HKSCS');
         $escaper = $this->helper->getEscaper();
-        $this->assertTrue($escaper instanceof \Zend\Escaper\Escaper);
+        $this->assertInstanceOf('Zend\Escaper\Escaper', $escaper);
         $this->assertEquals('big5-hkscs', $escaper->getEncoding());
     }
 
@@ -60,7 +60,7 @@ class EscapeCssTest extends TestCase
         $escaper = new \Zend\Escaper\Escaper('big5-hkscs');
         $this->helper->setEscaper($escaper);
         $escaper = $this->helper->getEscaper();
-        $this->assertTrue($escaper instanceof \Zend\Escaper\Escaper);
+        $this->assertInstanceOf('Zend\Escaper\Escaper', $escaper);
         $this->assertEquals('big5-hkscs', $escaper->getEncoding());
     }
 

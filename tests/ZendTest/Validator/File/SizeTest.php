@@ -200,7 +200,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Size(array('min' => 1, 'max' => 10000));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileSizeNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileSizeNotFound', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 

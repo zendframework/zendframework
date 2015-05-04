@@ -64,7 +64,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         );
         $this->adapter->setValidators($validators);
         $test = $this->adapter->getValidator('Upload');
-        $this->assertTrue($test instanceof FileValidator\Upload);
+        $this->assertInstanceOf('Zend\Validator\File\Upload', $test);
     }
 
     public function testSendingFiles()
@@ -231,23 +231,23 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $adapter = new AdapterProgressBar\Console();
         $status = array('progress' => $adapter, 'session' => 'upload');
         $status = HttpTestMockAdapter::getProgress($status);
-        $this->assertTrue(array_key_exists('total', $status));
-        $this->assertTrue(array_key_exists('current', $status));
-        $this->assertTrue(array_key_exists('rate', $status));
-        $this->assertTrue(array_key_exists('id', $status));
-        $this->assertTrue(array_key_exists('message', $status));
-        $this->assertTrue(array_key_exists('progress', $status));
-        $this->assertTrue($status['progress'] instanceof ProgressBar\ProgressBar);
+        $this->assertArrayHasKey('total', $status);
+        $this->assertArrayHasKey('current', $status);
+        $this->assertArrayHasKey('rate', $status);
+        $this->assertArrayHasKey('id', $status);
+        $this->assertArrayHasKey('message', $status);
+        $this->assertArrayHasKey('progress', $status);
+        $this->assertInstanceOf('Zend\ProgressBar\ProgressBar', $status['progress']);
 
         $this->adapter->switchApcToUP();
         $status = HttpTestMockAdapter::getProgress($status);
-        $this->assertTrue(array_key_exists('total', $status));
-        $this->assertTrue(array_key_exists('current', $status));
-        $this->assertTrue(array_key_exists('rate', $status));
-        $this->assertTrue(array_key_exists('id', $status));
-        $this->assertTrue(array_key_exists('message', $status));
-        $this->assertTrue(array_key_exists('progress', $status));
-        $this->assertTrue($status['progress'] instanceof ProgressBar\ProgressBar);
+        $this->assertArrayHasKey('total', $status);
+        $this->assertArrayHasKey('current', $status);
+        $this->assertArrayHasKey('rate', $status);
+        $this->assertArrayHasKey('id', $status);
+        $this->assertArrayHasKey('message', $status);
+        $this->assertArrayHasKey('progress', $status);
+        $this->assertInstanceOf('Zend\ProgressBar\ProgressBar', $status['progress']);
     }
 
     public function testValidationOfPhpExtendsFormError()

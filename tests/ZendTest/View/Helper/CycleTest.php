@@ -49,7 +49,7 @@ class CycleTest extends \PHPUnit_Framework_TestCase
     public function testCycleMethodReturnsObjectInstance()
     {
         $cycle = $this->helper->__invoke();
-        $this->assertTrue($cycle instanceof Helper\Cycle);
+        $this->assertInstanceOf('Zend\View\Helper\Cycle', $cycle);
     }
 
     public function testAssignAndGetValues()

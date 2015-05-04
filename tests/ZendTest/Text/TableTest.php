@@ -297,7 +297,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $row = new Table\Row();
         $row->createColumn('foo');
 
-        $this->assertTrue($row->getColumn(0) instanceof Table\Column);
+        $this->assertInstanceOf('Zend\Text\Table\Column', $row->getColumn(0));
     }
 
     public function testRowGetInvalidColumn()

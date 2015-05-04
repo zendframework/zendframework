@@ -167,7 +167,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new CompressFilter('bz2');
         $adapter = $filter->getAdapter();
-        $this->assertTrue($adapter instanceof \Zend\Filter\Compress\CompressionAlgorithmInterface);
+        $this->assertInstanceOf('Zend\Filter\Compress\CompressionAlgorithmInterface', $adapter);
         $this->assertEquals('Bz2', $filter->getAdapterName());
     }
 

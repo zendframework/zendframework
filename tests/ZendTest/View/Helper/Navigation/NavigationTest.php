@@ -442,13 +442,13 @@ class NavigationTest extends AbstractTest
 
         $render = $this->_helper->menu()->render($container);
 
-        $this->assertFalse(strpos($render, 'p2'));
+        $this->assertNotContains('p2', $render);
 
         $this->_helper->menu()->setRenderInvisible();
 
         $render = $this->_helper->menu()->render($container);
 
-        $this->assertTrue(strpos($render, 'p2') !== false);
+        $this->assertContains('p2', $render);
     }
 
     public function testMultipleNavigations()

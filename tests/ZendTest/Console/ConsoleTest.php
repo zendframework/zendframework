@@ -28,7 +28,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Console::isConsole());
         $className = Console::detectBestAdapter();
         $adpater = new $className;
-        $this->assertTrue($adpater instanceof Adapter\AdapterInterface);
+        $this->assertInstanceOf('Zend\Console\Adapter\AdapterInterface', $adpater);
 
         Console::overrideIsConsole(false);
 
@@ -56,7 +56,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testCanGetInstance()
     {
         $console = Console::getInstance();
-        $this->assertTrue($console instanceof Adapter\AdapterInterface);
+        $this->assertInstanceOf('Zend\Console\Adapter\AdapterInterface', $console);
     }
 
     public function testCanNotGetInstanceInNoConsoleMode()
@@ -69,14 +69,14 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testCanForceInstance()
     {
         $console = Console::getInstance('Posix');
-        $this->assertTrue($console instanceof Adapter\AdapterInterface);
-        $this->assertTrue($console instanceof Adapter\Posix);
+        $this->assertInstanceOf('Zend\Console\Adapter\AdapterInterface', $console);
+        $this->assertInstanceOf('Zend\Console\Adapter\Posix', $console);
 
         Console::overrideIsConsole(null);
         Console::resetInstance();
 
         $console = Console::getInstance('Windows');
-        $this->assertTrue($console instanceof Adapter\AdapterInterface);
-        $this->assertTrue($console instanceof Adapter\Windows);
+        $this->assertInstanceOf('Zend\Console\Adapter\AdapterInterface', $console);
+        $this->assertInstanceOf('Zend\Console\Adapter\Windows', $console);
     }
 }

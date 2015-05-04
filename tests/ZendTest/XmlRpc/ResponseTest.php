@@ -49,7 +49,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertTrue($this->_response instanceof Response);
+        $this->assertInstanceOf('Zend\XmlRpc\Response', $this->_response);
     }
 
     /**
@@ -166,10 +166,10 @@ EOD;
     {
         $sx = new \SimpleXMLElement($xml);
 
-        $this->assertTrue((bool) $sx->params);
-        $this->assertTrue((bool) $sx->params->param);
-        $this->assertTrue((bool) $sx->params->param->value);
-        $this->assertTrue((bool) $sx->params->param->value->string);
+        $this->assertNotFalse($sx->params);
+        $this->assertNotFalse($sx->params->param);
+        $this->assertNotFalse($sx->params->param->value);
+        $this->assertNotFalse($sx->params->param->value->string);
         $this->assertEquals('return value', (string) $sx->params->param->value->string);
     }
 
@@ -250,7 +250,7 @@ EOD;
         $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
         $this->_response->loadXml($payload);
         $value = $this->_response->getReturnValue();
-        $this->assertTrue(empty($value));
+        $this->assertEmpty($value);
         if (is_string($value)) {
             $this->assertNotContains('Local file inclusion', $value);
         }

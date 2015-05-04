@@ -186,4 +186,25 @@ EOS;
         $reflectionClass = new ClassReflection('ReflectionClass');
         $this->assertSame('', $reflectionClass->getContents());
     }
+
+    public function testGetTraits()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('This test requires PHP version 5.4+');
+        }
+
+        // PHP documentations mentions that getTraits() return NULL in case of error. I don't know how to cause such
+        // error so I test just normal behaviour.
+
+        $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestTraitClass4');
+        $traitsArray = $reflectionClass->getTraits();
+        $this->assertInternalType('array', $traitsArray);
+        $this->assertCount(1, $traitsArray);
+        $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $traitsArray[0]);
+
+        $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass');
+        $traitsArray = $reflectionClass->getTraits();
+        $this->assertInternalType('array', $traitsArray);
+        $this->assertCount(0, $traitsArray);
+    }
 }

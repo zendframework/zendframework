@@ -17,7 +17,7 @@
         "ircmaxell/random-lib": "~1.1",
         "mikey179/vfsStream": "~1.2",
         "fabpot/php-cs-fixer": "~1.0",
-        "phpunit/PHPUnit": "~4.0",
+        "phpunit/PHPUnit": "~4.6",
         "satooshi/php-coveralls": "dev-master",
         "phpunit/phpcov": "~2.0"
     },

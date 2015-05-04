@@ -167,7 +167,7 @@ class Links extends AbstractHelper
                 foreach ($pages as $page) {
                     $r = $this->renderLink($page, $attrib, $relation);
                     if ($r) {
-                        $output .= $indent . $r . self::EOL;
+                        $output .= $indent . $r . PHP_EOL;
                     }
                 }
             }
@@ -176,7 +176,7 @@ class Links extends AbstractHelper
         $this->root = null;
 
         // return output (trim last newline by spec)
-        return strlen($output) ? rtrim($output, self::EOL) : '';
+        return strlen($output) ? rtrim($output, PHP_EOL) : '';
     }
 
     /**

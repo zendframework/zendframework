@@ -57,10 +57,11 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisconnect()
     {
-        $this->markTestIncomplete(
-            'This test needs work.'
-        );
-        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\ConnectionInterface',$this->connection->disconnect());
+        if (! extension_loaded('pgsql')) {
+            $this->markTestSkipped('pgsql extension not loaded');
+        }
+        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\ConnectionInterface', $this->connection->disconnect());
+        $this->assertNull($this->connection->getResource());
     }
 
     /**

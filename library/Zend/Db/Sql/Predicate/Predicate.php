@@ -57,7 +57,7 @@ class Predicate extends PredicateSet
      */
     public function unnest()
     {
-        if ($this->unnest == null) {
+        if ($this->unnest === null) {
             throw new RuntimeException('Not nested');
         }
         $unnest       = $this->unnest;

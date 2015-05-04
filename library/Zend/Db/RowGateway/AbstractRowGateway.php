@@ -71,7 +71,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             throw new Exception\RuntimeException('This row object does not have a valid table set.');
         }
 
-        if ($this->primaryKeyColumn == null) {
+        if ($this->primaryKeyColumn === null) {
             throw new Exception\RuntimeException('This row object does not have a primary key column set.');
         } elseif (is_string($this->primaryKeyColumn)) {
             $this->primaryKeyColumn = (array) $this->primaryKeyColumn;

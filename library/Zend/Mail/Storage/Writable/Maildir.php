@@ -107,7 +107,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     {
         if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . $this->delim . $name;
-        } elseif ($parentFolder != null) {
+        } elseif ($parentFolder !== null) {
             $folder = rtrim($parentFolder, $this->delim) . $this->delim . $name;
         } else {
             $folder = $name;

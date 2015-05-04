@@ -123,7 +123,7 @@ class DerivedClassScanner extends ClassScanner
      */
     public function hasParentClass()
     {
-        return ($this->classScanner->getParentClass() != null);
+        return ($this->classScanner->getParentClass() !== null);
     }
 
     /**

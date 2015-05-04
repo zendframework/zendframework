@@ -42,7 +42,7 @@ class Placeholder extends AbstractHelper
      */
     public function __invoke($name = null)
     {
-        if ($name == null) {
+        if ($name === null) {
             throw new InvalidArgumentException(
                 'Placeholder: missing argument. $name is required by placeholder($name)'
             );

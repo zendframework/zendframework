@@ -179,7 +179,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             throw new Exception\RuntimeException('This statement has been prepared already');
         }
 
-        if ($sql == null) {
+        if ($sql === null) {
             $sql = $this->sql;
         }
 

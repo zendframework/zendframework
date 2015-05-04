@@ -333,7 +333,7 @@ class Json
         // If it is not a valid XML content, throw an exception.
         if (!$simpleXmlElementObject) {
             throw new RuntimeException('Function fromXml was called with an invalid XML formatted string.');
-        } // End of if ($simpleXmlElementObject == null)
+        } // End of if ($simpleXmlElementObject === null)
 
         // Call the recursive function to convert the XML into a PHP array.
         $resultArray = static::_processXml($simpleXmlElementObject, $ignoreXmlAttributes);

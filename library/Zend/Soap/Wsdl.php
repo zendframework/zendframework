@@ -587,7 +587,7 @@ class Wsdl
      */
     public function getSchema()
     {
-        if ($this->schema == null) {
+        if ($this->schema === null) {
             $this->addSchemaTypeSection();
         }
         return $this->schema;

@@ -92,7 +92,7 @@ class Update extends AbstractPreparableSql
      */
     public function set(array $values, $flag = self::VALUES_SET)
     {
-        if ($values == null) {
+        if ($values === null) {
             throw new Exception\InvalidArgumentException('set() expects an array of values');
         }
 

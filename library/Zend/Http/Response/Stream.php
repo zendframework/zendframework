@@ -174,7 +174,6 @@ class Stream extends Response
 
         if (!$headerComplete) {
             while (false !== ($nextLine = fgets($stream))) {
-
                 $headersString .= trim($nextLine)."\r\n";
                 if ($nextLine == "\r\n" || $nextLine == "\n") {
                     $headerComplete = true;
@@ -231,7 +230,7 @@ class Stream extends Response
      */
     public function getBody()
     {
-        if ($this->stream != null) {
+        if ($this->stream !== null) {
             $this->readStream();
         }
         return parent::getBody();

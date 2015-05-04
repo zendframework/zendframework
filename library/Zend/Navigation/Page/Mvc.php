@@ -226,11 +226,11 @@ class Mvc extends AbstractPage
         }
 
 
-        if (($param = $this->getController()) != null) {
+        if (($param = $this->getController()) !== null) {
             $params['controller'] = $param;
         }
 
-        if (($param = $this->getAction()) != null) {
+        if (($param = $this->getAction()) !== null) {
             $params['action'] = $param;
         }
 

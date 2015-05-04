@@ -375,7 +375,7 @@ class Image extends AbstractRenderer
             $color & 0x0000FF
         );
 
-        if ($font == null) {
+        if ($font === null) {
             $font = 3;
         }
         $position[0] += $this->leftOffset;

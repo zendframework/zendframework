@@ -62,13 +62,13 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertFalse((bool) $memObject->isLocked());
+        $this->assertFalse($memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((bool) $memObject->isLocked());
+        $this->assertTrue($memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((bool) $memObject->isLocked());
+        $this->assertFalse($memObject->isLocked());
     }
 
     /**

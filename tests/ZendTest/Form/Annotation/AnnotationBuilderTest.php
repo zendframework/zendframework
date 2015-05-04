@@ -11,7 +11,6 @@ namespace ZendTest\Form\Annotation;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Annotation;
-use Zend\Form\Element\Collection;
 use ZendTest\Form\TestAsset;
 
 class AnnotationBuilderTest extends TestCase

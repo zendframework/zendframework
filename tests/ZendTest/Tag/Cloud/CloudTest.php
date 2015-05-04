@@ -13,7 +13,6 @@ use stdClass;
 use Zend\Tag;
 use Zend\Tag\Cloud;
 use Zend\Tag\Cloud\DecoratorPluginManager;
-use Zend\Tag\Exception\InvalidArgumentException;
 
 /**
  * @group      Zend_Tag

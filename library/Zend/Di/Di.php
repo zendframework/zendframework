@@ -10,7 +10,6 @@
 namespace Zend\Di;
 
 use Closure;
-use ReflectionClass;
 use Zend\Di\Exception\RuntimeException as DiRuntimeException;
 use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
 

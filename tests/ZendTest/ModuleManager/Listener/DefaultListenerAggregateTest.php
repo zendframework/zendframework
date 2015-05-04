@@ -10,7 +10,6 @@
 namespace ZendTest\ModuleManager\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Loader\ModuleAutoloader;
 use Zend\Loader\AutoloaderFactory;
 use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\Listener\DefaultListenerAggregate;

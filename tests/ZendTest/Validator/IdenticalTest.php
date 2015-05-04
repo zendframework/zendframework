@@ -10,7 +10,6 @@
 namespace ZendTest\Validator;
 
 use Zend\Stdlib\Parameters;
-use Zend\Validator\Exception\InvalidArgumentException;
 use Zend\Validator\Identical;
 
 /**

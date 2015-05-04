@@ -10,7 +10,6 @@
 namespace Zend\Text\Table;
 
 use Zend\Stdlib\StringUtils;
-use Zend\Text;
 
 /**
  * Column class for Zend\Text\Table\Row

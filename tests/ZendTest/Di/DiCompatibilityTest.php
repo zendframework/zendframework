@@ -12,7 +12,6 @@ namespace ZendTest\Di;
 use BadMethodCallException;
 use Exception;
 use PHPUnit_Framework_Error;
-use Zend\Di\Config;
 use Zend\Di\Di;
 
 class DiCompatibilityTest extends \PHPUnit_Framework_TestCase

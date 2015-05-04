@@ -9,9 +9,7 @@
 
 namespace ZendTest\ServiceManager\Di;
 
-use Zend\Di\Di;
 use Zend\ServiceManager\Di\DiServiceFactory;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * @group Zend_ServiceManager

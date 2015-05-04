@@ -14,7 +14,6 @@ use stdClass;
 use Zend\EventManager\EventManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\CreateViewModelListener;
-use Zend\View\Model\ViewModel;
 
 class CreateViewModelListenerTest extends TestCase
 {

@@ -14,7 +14,6 @@ use Zend\Di\Di;
 use Zend\Mvc\Service\DiFactory;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Exception;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;

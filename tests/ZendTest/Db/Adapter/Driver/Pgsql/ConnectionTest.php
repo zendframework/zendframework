@@ -80,4 +80,28 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
             $getConnectionString->invoke($this->connection)
         );
     }
+
+    /**
+     * @expectedException \Zend\Db\Adapter\Exception\InvalidArgumentException
+     */
+    public function testSetConnectionTypeException()
+    {
+        if (! extension_loaded('pgsql')) {
+            $this->markTestSkipped('pgsql extension not loaded');
+        }
+        $this->connection->setType(3);
+    }
+
+    /**
+     * Test the connection type setter
+     */
+    public function testSetConnectionType()
+    {
+        if (! extension_loaded('pgsql')) {
+            $this->markTestSkipped('pgsql extension not loaded');
+        }
+        $type = PGSQL_CONNECT_FORCE_NEW;
+        $this->connection->setType($type);
+        $this->assertEquals($type, self::readAttribute($this->connection, 'type'));
+    }
 }

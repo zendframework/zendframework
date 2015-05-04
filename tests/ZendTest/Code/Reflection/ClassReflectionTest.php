@@ -198,13 +198,13 @@ EOS;
 
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestTraitClass4');
         $traitsArray = $reflectionClass->getTraits();
-        $this->assertTrue(is_array($traitsArray));
-        $this->assertEquals(1, count($traitsArray));
+        $this->assertInternalType('array', $traitsArray);
+        $this->assertCount(1, $traitsArray);
         $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $traitsArray[0]);
 
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass');
         $traitsArray = $reflectionClass->getTraits();
-        $this->assertTrue(is_array($traitsArray));
-        $this->assertEquals(0, count($traitsArray));
+        $this->assertInternalType('array', $traitsArray);
+        $this->assertCount(0, $traitsArray);
     }
 }

@@ -60,7 +60,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionConfigByDefault()
     {
         $config = $this->manager->getConfig();
-        $this->assertTrue($config instanceof Session\Config\SessionConfig);
+        $this->assertInstanceOf('Zend\Session\Config\SessionConfig', $config);
     }
 
     public function testCanPassConfigurationToConstructor()
@@ -73,7 +73,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
+        $this->assertInstanceOf('Zend\Session\Storage\SessionArrayStorage', $storage);
     }
 
     public function testCanPassStorageToConstructor()
@@ -172,7 +172,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $storage['foo'] = 'bar';
         $this->manager->writeClose();
-        $this->assertTrue(isset($storage['foo']) && $storage['foo'] == 'bar');
+        $this->assertArrayHasKey('foo', $storage);
+        $this->assertEquals('bar', $storage['foo']);
     }
 
     /**
@@ -202,7 +203,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(headers_sent());
         $this->manager->start();
         restore_error_handler();
-        $this->assertTrue(is_string($this->error));
+        $this->assertInternalType('string', $this->error);
         $this->assertContains('already sent', $this->error);
     }
 
@@ -487,7 +488,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         }
         $compare = $_SERVER['REQUEST_TIME'] + $ttl;
         $cookieTs = $ts->getTimestamp();
-        $this->assertTrue(in_array($cookieTs, range($compare, $compare + 10)), 'Session cookie: ' . var_export($headers, 1));
+        $this->assertContains($cookieTs, range($compare, $compare + 10), 'Session cookie: ' . var_export($headers, 1));
     }
 
     /**

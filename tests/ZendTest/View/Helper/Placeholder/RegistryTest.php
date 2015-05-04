@@ -66,7 +66,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->registry->containerExists('foo'));
         $container = $this->registry->createContainer('foo');
-        $this->assertTrue($container instanceof Container);
+        $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container', $container);
     }
 
     /**
@@ -76,7 +76,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->registry->containerExists('foo'));
         $container = $this->registry->getContainer('foo');
-        $this->assertTrue($container instanceof Container\AbstractContainer);
+        $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container\AbstractContainer', $container);
         $this->assertTrue($this->registry->containerExists('foo'));
     }
 
@@ -135,7 +135,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
         $container = $this->registry->createContainer('foo');
-        $this->assertTrue($container instanceof MockContainer);
+        $this->assertInstanceOf('ZendTest\View\Helper\Placeholder\MockContainer', $container);
     }
 
     /**

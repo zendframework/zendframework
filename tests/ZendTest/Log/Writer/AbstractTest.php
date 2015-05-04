@@ -44,13 +44,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAddMockFilterByName()
     {
         $instance = $this->_writer->addFilter('mock');
-        $this->assertTrue($instance instanceof ConcreteWriter);
+        $this->assertInstanceOf('ZendTest\Log\TestAsset\ConcreteWriter', $instance);
     }
 
     public function testAddRegexFilterWithParamsByName()
     {
         $instance = $this->_writer->addFilter('regex', array( 'regex' => '/mess/' ));
-        $this->assertTrue($instance instanceof ConcreteWriter);
+        $this->assertInstanceOf('ZendTest\Log\TestAsset\ConcreteWriter', $instance);
     }
 
     /**
@@ -61,7 +61,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $instance = $this->_writer->addFilter(1)
                                   ->setFormatter(new SimpleFormatter());
 
-        $this->assertTrue($instance instanceof ConcreteWriter);
+        $this->assertInstanceOf('ZendTest\Log\TestAsset\ConcreteWriter', $instance);
     }
 
     public function testConvertErrorsToException()

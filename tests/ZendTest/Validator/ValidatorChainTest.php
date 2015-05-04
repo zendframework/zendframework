@@ -132,7 +132,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $valid = new Between(1, 10);
         $this->assertFalse($valid->isValid(24));
         $message = current($valid->getMessages());
-        $this->assertTrue(strlen($message) <= 5);
+        $this->assertLessThanOrEqual(5, strlen($message));
     }
 
     public function testSetGetDefaultTranslator()

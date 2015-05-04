@@ -117,7 +117,7 @@ class CanonTest extends \PHPUnit_Framework_TestCase
             $ldap->bind('BOGUS\\doesntmatter', 'doesntmatter');
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertTrue($zle->getCode() == Exception\LdapException::LDAP_X_DOMAIN_MISMATCH);
+            $this->assertEquals(Exception\LdapException::LDAP_X_DOMAIN_MISMATCH, $zle->getCode());
         }
     }
 

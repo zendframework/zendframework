@@ -28,7 +28,7 @@ class MonthSelectTest extends TestCase
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertContains($class, $expectedClasses, $class);
             switch ($class) {
                 case 'Zend\Validator\Regex':
                     $this->assertEquals('/^[0-9]{4}\-(0?[1-9]|1[012])$/', $validator->getPattern());

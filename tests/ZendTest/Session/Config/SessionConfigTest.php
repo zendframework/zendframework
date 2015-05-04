@@ -392,7 +392,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     {
         $value = !ini_get('session.use_cookies');
         $this->config->setUseCookies($value);
-        $this->assertEquals($value, (bool) $this->config->getUseCookies());
+        $this->assertEquals($value, $this->config->getUseCookies());
     }
 
     public function testUseCookiesAltersIniSetting()

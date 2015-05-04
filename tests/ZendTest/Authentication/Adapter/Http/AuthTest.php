@@ -440,7 +440,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // Check to see if the expected challenge matches the actual
         $headers = $headers->get('Www-Authenticate');
-        $this->assertTrue($headers instanceof \ArrayIterator);
+        $this->assertInstanceOf('ArrayIterator', $headers);
         $this->assertEquals(1, count($headers));
         $header = $headers[0]->getFieldValue();
         $this->assertContains($expected['type'], $header, $header);

@@ -39,12 +39,12 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     {
         /** Without caching */
         $memoryManager = new Memory\MemoryManager();
-        $this->assertTrue($memoryManager instanceof Memory\MemoryManager);
+        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
         unset($memoryManager);
 
         /** Caching using 'File' backend */
         $memoryManager = new Memory\MemoryManager($this->_cache);
-        $this->assertTrue($memoryManager instanceof Memory\MemoryManager);
+        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
         unset($memoryManager);
     }
 
@@ -73,19 +73,19 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->_cache);
 
         $memObject1 = $memoryManager->create('Value of object 1');
-        $this->assertTrue($memObject1 instanceof Container\AccessController);
+        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject1);
         $this->assertEquals($memObject1->getRef(), 'Value of object 1');
 
         $memObject2 = $memoryManager->create();
-        $this->assertTrue($memObject2 instanceof Container\AccessController);
+        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject2);
         $this->assertEquals($memObject2->getRef(), '');
 
         $memObject3 = $memoryManager->createLocked('Value of object 3');
-        $this->assertTrue($memObject3 instanceof Container\Locked);
+        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject3);
         $this->assertEquals($memObject3->getRef(), 'Value of object 3');
 
         $memObject4 = $memoryManager->createLocked();
-        $this->assertTrue($memObject4 instanceof Container\Locked);
+        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject4);
         $this->assertEquals($memObject4->getRef(), '');
     }
 

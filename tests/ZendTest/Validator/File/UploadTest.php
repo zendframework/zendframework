@@ -82,51 +82,51 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test'));
-        $this->assertTrue(array_key_exists('fileUploadErrorAttack', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorAttack', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test2'));
-        $this->assertTrue(array_key_exists('fileUploadErrorIniSize', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorIniSize', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test3'));
-        $this->assertTrue(array_key_exists('fileUploadErrorFormSize', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorFormSize', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test4'));
-        $this->assertTrue(array_key_exists('fileUploadErrorPartial', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorPartial', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test5'));
-        $this->assertTrue(array_key_exists('fileUploadErrorNoFile', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorNoFile', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test6'));
-        $this->assertTrue(array_key_exists('fileUploadErrorUnknown', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorUnknown', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test7'));
-        $this->assertTrue(array_key_exists('fileUploadErrorNoTmpDir', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorNoTmpDir', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test8'));
-        $this->assertTrue(array_key_exists('fileUploadErrorCantWrite', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorCantWrite', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test9'));
-        $this->assertTrue(array_key_exists('fileUploadErrorExtension', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorExtension', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test1'));
-        $this->assertTrue(array_key_exists('fileUploadErrorAttack', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorAttack', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('tmp_test1'));
-        $this->assertTrue(array_key_exists('fileUploadErrorAttack', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorAttack', $validator->getMessages());
 
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid('test000'));
-        $this->assertTrue(array_key_exists('fileUploadErrorFileNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorFileNotFound', $validator->getMessages());
     }
 
     /**
@@ -242,7 +242,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileUploadErrorFileNotFound', $validator->getMessages()));
+        $this->assertArrayHasKey('fileUploadErrorFileNotFound', $validator->getMessages());
         $this->assertContains("nofile.mo'", current($validator->getMessages()));
     }
 

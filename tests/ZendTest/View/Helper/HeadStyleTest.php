@@ -56,7 +56,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testHeadStyleReturnsObjectInstance()
     {
         $placeholder = $this->helper->__invoke();
-        $this->assertTrue($placeholder instanceof Helper\HeadStyle);
+        $this->assertInstanceOf('Zend\View\Helper\HeadStyle', $placeholder);
     }
 
     public function testAppendPrependAndSetThrowExceptionsWhenNonStyleValueProvided()
@@ -93,7 +93,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = $values[$i];
 
-            $this->assertTrue($item instanceof \stdClass);
+            $this->assertInstanceOf('stdClass', $item);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -110,7 +110,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($i + 1, count($values));
             $item = array_shift($values);
 
-            $this->assertTrue($item instanceof \stdClass);
+            $this->assertInstanceOf('stdClass', $item);
             $this->assertObjectHasAttribute('content', $item);
             $this->assertObjectHasAttribute('attributes', $item);
             $this->assertEquals($string, $item->content);
@@ -129,7 +129,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($values));
         $item = array_shift($values);
 
-        $this->assertTrue($item instanceof \stdClass);
+        $this->assertInstanceOf('stdClass', $item);
         $this->assertObjectHasAttribute('content', $item);
         $this->assertObjectHasAttribute('attributes', $item);
         $this->assertEquals($string, $item->content);
@@ -204,9 +204,9 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
                      ->__invoke($style3, 'APPEND');
         $this->assertEquals(3, count($this->helper));
         $values = $this->helper->getArrayCopy();
-        $this->assertTrue((bool) strstr($values[0]->content, $style2));
-        $this->assertTrue((bool) strstr($values[1]->content, $style1));
-        $this->assertTrue((bool) strstr($values[2]->content, $style3));
+        $this->assertContains($values[0]->content, $style2);
+        $this->assertContains($values[1]->content, $style1);
+        $this->assertContains($values[2]->content, $style3);
     }
 
     public function testToStyleGeneratesValidHtml()
@@ -221,7 +221,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->toString();
         $doc  = new \DOMDocument;
         $dom  = $doc->loadHtml($html);
-        $this->assertTrue(($dom !== false));
+        $this->assertTrue($dom);
 
         $styles = substr_count($html, '<style type="text/css"');
         $this->assertEquals(3, $styles);

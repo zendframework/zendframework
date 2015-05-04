@@ -23,7 +23,7 @@ class LockedTest extends \PHPUnit_Framework_TestCase
     {
         $memObject = new Container\Locked('0123456789');
 
-        $this->assertTrue($memObject instanceof Container\Locked);
+        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject);
     }
 
     /**

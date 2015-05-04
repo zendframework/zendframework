@@ -129,7 +129,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     public function testHashIsGeneratedOnFirstRetrieval()
     {
         $hash = $this->validator->getHash();
-        $this->assertFalse(empty($hash));
+        $this->assertNotEmpty($hash);
         $test = $this->validator->getHash();
         $this->assertEquals($hash, $test);
     }

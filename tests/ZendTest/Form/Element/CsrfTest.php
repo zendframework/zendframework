@@ -27,7 +27,7 @@ class CsrfTest extends TestCase
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
-            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            $this->assertContains($class, $expectedClasses, $class);
             switch ($class) {
                 case 'Zend\Validator\Csrf':
                     $this->assertEquals('foo', $validator->getName());

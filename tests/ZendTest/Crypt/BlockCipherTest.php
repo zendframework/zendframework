@@ -50,14 +50,14 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function testFactory()
     {
         $this->blockCipher = BlockCipher::factory('mcrypt', array('algo' => 'blowfish'));
-        $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
+        $this->assertInstanceOf('Zend\Crypt\Symmetric\Mcrypt', $this->blockCipher->getCipher());
         $this->assertEquals('blowfish', $this->blockCipher->getCipher()->getAlgorithm());
     }
 
     public function testFactoryEmptyOptions()
     {
         $this->blockCipher = BlockCipher::factory('mcrypt');
-        $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
+        $this->assertInstanceOf('Zend\Crypt\Symmetric\Mcrypt', $this->blockCipher->getCipher());
     }
 
     public function testSetKey()
@@ -135,7 +135,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
             $this->blockCipher->setCipherAlgorithm($algo);
             $encrypted = $this->blockCipher->encrypt($this->plaintext);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
         }
@@ -149,7 +149,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
             $this->blockCipher->setCipherAlgorithm($algo);
             $encrypted = $this->blockCipher->encrypt($this->plaintext);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
         }
@@ -175,7 +175,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $this->blockCipher->setCipherAlgorithm($algo);
 
             $encrypted = $this->blockCipher->encrypt($value);
-            $this->assertTrue(!empty($encrypted));
+            $this->assertNotEmpty($encrypted);
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($value, $decrypted);
         }
@@ -186,10 +186,10 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $this->blockCipher->setKey('test');
         $this->blockCipher->setKeyIteration(1000);
         $encrypted = $this->blockCipher->encrypt($this->plaintext);
-        $this->assertTrue(!empty($encrypted));
+        $this->assertNotEmpty($encrypted);
         // tamper the encrypted data
         $encrypted = substr($encrypted, -1);
         $decrypted = $this->blockCipher->decrypt($encrypted);
-        $this->assertTrue($decrypted === false);
+        $this->assertFalse($decrypted);
     }
 }

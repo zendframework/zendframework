@@ -136,7 +136,7 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\NotExists();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
-        $this->assertTrue(array_key_exists('fileNotExistsDoesExist', $validator->getMessages()));
+        $this->assertArrayHasKey('fileNotExistsDoesExist', $validator->getMessages());
         $this->assertContains("File exists", current($validator->getMessages()));
     }
 }

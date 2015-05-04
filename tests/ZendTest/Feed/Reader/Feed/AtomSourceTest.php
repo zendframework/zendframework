@@ -67,7 +67,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/title/atom10.xml')
         );
         $source = $feed->current()->getSource();
-        $this->assertTrue($source instanceof Reader\Feed\Atom\Source);
+        $this->assertInstanceOf('Zend\Feed\Reader\Feed\Atom\Source', $source);
     }
 
     /**

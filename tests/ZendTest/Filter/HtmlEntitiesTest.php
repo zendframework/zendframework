@@ -128,7 +128,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
     public function testFluentInterface()
     {
         $instance = $this->_filter->setCharSet('UTF-8')->setQuoteStyle(ENT_QUOTES)->setDoubleQuote(false);
-        $this->assertTrue($instance instanceof HtmlEntitiesFilter);
+        $this->assertInstanceOf('Zend\Filter\HtmlEntities', $instance);
     }
 
     /**
@@ -209,7 +209,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
         $result = $this->_filter->filter($string);
         restore_error_handler();
 
-        $this->assertTrue(strlen($result) > 0);
+        $this->assertGreaterThan(0, strlen($result));
     }
 
     /**
@@ -251,7 +251,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             $result = $this->_filter->filter($string);
             $this->fail('Expected exception from single non-utf-8 character');
         } catch (\Exception $e) {
-            $this->assertTrue($e instanceof Exception\DomainException);
+            $this->assertInstanceOf('Zend\Filter\Exception\DomainException', $e);
         }
     }
 

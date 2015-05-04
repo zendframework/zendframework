@@ -66,11 +66,11 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setUri($uristr);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof UriHttp, 'Returned value is not a Uri object as expected');
+        $this->assertInstanceOf('Zend\Uri\Http', $uri, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri()->toString();
-        $this->assertTrue(is_string($uri), 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
+        $this->assertInternalType('string', $uri, 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
         $this->assertEquals($uri, $uristr, 'Returned string is not the expected URI');
     }
 
@@ -85,7 +85,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setUri($uriobj);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof UriHttp, 'Returned value is not a Uri object as expected');
+        $this->assertInstanceOf('Zend\Uri\Http', $uri, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
     }
 
@@ -159,8 +159,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $cookies = $this->_client->getCookies();
 
         // Check we got the right cookiejar
-        $this->assertTrue((is_array($cookies) && $cookies['chocolate'] instanceof SetCookie), '$cookie is not an array of Zend\Http\Header\SetCookie');
-        $this->assertEquals(count($cookies), 2, '$cookies does not contain 2 SetCokie as expected');
+        $this->assertInternalType('array', $cookies);
+        $this->assertContainsOnlyInstancesOf('Zend\Http\Header\SetCookie', $cookies);
+        $this->assertCount(2, $cookies);
     }
 
     /**
@@ -178,7 +179,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->clearCookies();
         $cookies = $this->_client->getCookies();
 
-        $this->assertTrue(empty($cookies), 'Cookies is expected to be null but it is not');
+        $this->assertEquals(array(), $cookies, 'Cookies are expected to be an empty array but it is not');
     }
 
     /**
@@ -294,7 +295,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
 
         $response = $this->_client->send();
-        $this->assertTrue(($response === $this->_client->getResponse()),
+        $this->assertSame($response, $this->_client->getResponse(),
             'Response is expected to be identical to the result of getResponse()');
     }
 

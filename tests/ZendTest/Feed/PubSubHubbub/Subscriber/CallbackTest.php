@@ -74,12 +74,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCanSetHttpResponseObject()
     {
         $this->_callback->setHttpResponse(new HttpResponse);
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof HttpResponse);
+        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
     }
 
     public function testCanUsesDefaultHttpResponseObject()
     {
-        $this->assertTrue($this->_callback->getHttpResponse() instanceof HttpResponse);
+        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
     }
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()
@@ -246,7 +246,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->_get['hub_mode']);
         $this->_callback->handle($this->_get);
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 404);
+        $this->assertEquals(404, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     public function testRespondsToValidConfirmationWith200Response()
@@ -281,7 +281,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         $this->_callback->handle($this->_get);
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 200);
+        $this->assertEquals(200, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     public function testRespondsToValidConfirmationWithBodyContainingHubChallenge()
@@ -323,7 +323,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->_callback->handle($this->_get);
-        $this->assertTrue($this->_callback->getHttpResponse()->getContent() == 'abc');
+        $this->assertEquals('abc', $this->_callback->getHttpResponse()->getContent());
     }
 
     public function testRespondsToValidFeedUpdateRequestWith200Response()
@@ -356,7 +356,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1));
 
         $this->_callback->handle(array());
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 200);
+        $this->assertEquals(200, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     public function testRespondsToInvalidFeedUpdateNotPostWith404Response()
@@ -368,7 +368,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_callback->handle(array());
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 404);
+        $this->assertEquals(404, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     public function testRespondsToInvalidFeedUpdateWrongMimeWith404Response()
@@ -379,7 +379,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
         $this->_callback->handle(array());
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 404);
+        $this->assertEquals(404, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     /**
@@ -420,7 +420,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1));
 
         $this->_callback->handle(array());
-        $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 200);
+        $this->assertEquals(200, $this->_callback->getHttpResponse()->getStatusCode());
     }
 
     public function testRespondsToValidFeedUpdateWithXHubOnBehalfOfHeader()
@@ -455,7 +455,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1));
 
         $this->_callback->handle(array());
-        $this->assertTrue($this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of') == 1);
+        $this->assertEquals(1, $this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of'));
     }
 
     protected function _getCleanMock($className)

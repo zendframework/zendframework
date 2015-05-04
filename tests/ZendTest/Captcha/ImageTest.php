@@ -99,7 +99,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testCaptchaCreatesImage()
     {
         $this->captcha->generate();
-        $this->assertTrue(file_exists($this->testDir . "/" . $this->captcha->getId() . ".png"));
+        $this->assertFileExists($this->testDir . "/" . $this->captcha->getId() . '.png');
     }
 
     public function testCaptchaSetExpiration()
@@ -113,13 +113,13 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->captcha->generate();
         $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertFileExists($filename);
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
+        $this->assertFileNotExists($filename, "File $filename was found even after GC");
     }
 
     /**
@@ -134,26 +134,26 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         }
         $this->captcha->generate();
         $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
-        $this->assertTrue(file_exists($filename));
+        $this->assertFileExists($filename);
 
         //Create other cache file
         $otherFile = $this->testDir . "/zf10006.cache";
         file_put_contents($otherFile, '');
-        $this->assertTrue(file_exists($otherFile));
+        $this->assertFileExists($otherFile);
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
         sleep(2);
         $this->captcha->generate();
         clearstatcache();
-        $this->assertFalse(file_exists($filename), "File $filename was found even after GC");
-        $this->assertTrue(file_exists($otherFile), "File $otherFile was not found after GC");
+        $this->assertFileNotExists($filename, "File $filename was found even after GC");
+        $this->assertFileExists($otherFile, "File $otherFile was not found after GC");
     }
 
     public function testGenerateReturnsId()
     {
         $id = $this->captcha->generate();
-        $this->assertFalse(empty($id));
-        $this->assertTrue(is_string($id));
+        $this->assertNotEmpty($id);
+        $this->assertInternalType('string', $id);
         $this->id = $id;
     }
 
@@ -161,9 +161,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertFalse(empty($word));
-        $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 8);
+        $this->assertNotEmpty($word);
+        $this->assertInternalType('string', $word);
+        $this->assertEquals(8, strlen($word));
         $this->word = $word;
     }
 
@@ -172,8 +172,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->captcha->setWordLen(4);
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 4);
+        $this->assertInternalType('string', $word);
+        $this->assertEquals(4, strlen($word));
         $this->word = $word;
     }
 
@@ -184,10 +184,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $id2   = $this->captcha->generate();
         $word2 = $this->captcha->getWord();
 
-        $this->assertFalse(empty($id1));
-        $this->assertFalse(empty($id2));
-        $this->assertFalse($id1 == $id2);
-        $this->assertFalse($word1 == $word2);
+        $this->assertNotEmpty($id1);
+        $this->assertNotEmpty($id2);
+        $this->assertNotEquals($id1, $id2);
+        $this->assertNotEquals($word1, $word2);
     }
 
     public function testRenderInitializesSessionData()

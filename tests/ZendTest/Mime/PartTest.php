@@ -75,22 +75,22 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
         // Test Base64
         $fp = fopen($testfile, 'rb');
-        $this->assertTrue(is_resource($fp));
+        $this->assertInternalType('resource', $fp);
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_BASE64;
         $fp2 = $part->getEncodedStream();
-        $this->assertTrue(is_resource($fp2));
+        $this->assertInternalType('resource', $fp2);
         $encoded = stream_get_contents($fp2);
         fclose($fp);
         $this->assertEquals(base64_decode($encoded), $original);
 
         // test QuotedPrintable
         $fp = fopen($testfile, 'rb');
-        $this->assertTrue(is_resource($fp));
+        $this->assertInternalType('resource', $fp);
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
         $fp2 = $part->getEncodedStream();
-        $this->assertTrue(is_resource($fp2));
+        $this->assertInternalType('resource', $fp2);
         $encoded = stream_get_contents($fp2);
         fclose($fp);
         $this->assertEquals(quoted_printable_decode($encoded), $original);

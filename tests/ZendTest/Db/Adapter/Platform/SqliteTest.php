@@ -176,6 +176,6 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
 
         @unlink($filePath);
 
-        $this->assertFalse(file_exists($filePath));
+        $this->assertFileNotExists($filePath);
     }
 }

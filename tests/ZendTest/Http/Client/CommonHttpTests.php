@@ -314,7 +314,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->assertNotContains(serialize($params), $res->getBody(),
             "returned body contains GET or POST parameters (it shouldn't!)");
         $headerXFoo= $this->client->getHeader("X-Foo");
-        $this->assertTrue(empty($headerXFoo), "Header not preserved by reset");
+        $this->assertEmpty($headerXFoo, "Header not preserved by reset");
     }
 
     /**
@@ -900,8 +900,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $response = $this->client->send();
 
-        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInstanceOf('Zend\Http\Response\Stream', $response, 'Request did not return stream response!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $stream_name = $response->getStreamName();
 
@@ -927,8 +927,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $response = $this->client->send();
 
-        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInstanceOf('Zend\Http\Response\Stream', $response, 'Request did not return stream response!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $body = $response->getBody();
 
@@ -948,8 +948,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $response = $this->client->send();
 
-        $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
-        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        $this->assertInstanceOf('Zend\Http\Response\Stream', $response, 'Request did not return stream response!');
+        $this->assertInternalType('resource', $response->getStream(), 'Request does not contain stream!');
 
         $this->assertEquals($outfile, $response->getStreamName());
 

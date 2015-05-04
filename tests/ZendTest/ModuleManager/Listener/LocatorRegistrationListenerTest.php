@@ -136,9 +136,9 @@ class LocatorRegistrationListenerTest extends TestCase
         $instances = $registeredServices['instances'];
 
         $this->assertContains('zendmodulemanagermodulemanager', $aliases);
-        $this->assertFalse(in_array('modulemanager', $aliases));
+        $this->assertNotContains('modulemanager', $aliases);
 
         $this->assertContains('modulemanager', $instances);
-        $this->assertFalse(in_array('zendmodulemanagermodulemanager', $instances));
+        $this->assertNotContains('zendmodulemanagermodulemanager', $instances);
     }
 }

@@ -40,8 +40,8 @@ class FigletTest extends CommonWordTest
     public function testTimeoutPopulatedByDefault()
     {
         $ttl = $this->captcha->getTimeout();
-        $this->assertFalse(empty($ttl));
-        $this->assertTrue(is_int($ttl));
+        $this->assertNotEmpty($ttl);
+        $this->assertInternalType('integer', $ttl);
     }
 
     public function testCanSetTimeout()
@@ -55,8 +55,8 @@ class FigletTest extends CommonWordTest
     public function testGenerateReturnsId()
     {
         $id = $this->captcha->generate();
-        $this->assertFalse(empty($id));
-        $this->assertTrue(is_string($id));
+        $this->assertNotEmpty($id);
+        $this->assertInternalType('string', $id);
         $this->id = $id;
     }
 
@@ -64,9 +64,9 @@ class FigletTest extends CommonWordTest
     {
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertFalse(empty($word));
-        $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 8);
+        $this->assertNotEmpty($word);
+        $this->assertInternalType('string', $word);
+        $this->assertEquals(8, strlen($word));
         $this->word = $word;
     }
 
@@ -75,8 +75,8 @@ class FigletTest extends CommonWordTest
         $this->captcha->setWordLen(4);
         $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $this->assertTrue(is_string($word));
-        $this->assertTrue(strlen($word) == 4);
+        $this->assertInternalType('string', $word);
+        $this->assertEquals(4, strlen($word));
         $this->word = $word;
     }
 
@@ -87,10 +87,10 @@ class FigletTest extends CommonWordTest
         $id2 = $this->captcha->generate();
         $word2 = $this->captcha->getWord();
 
-        $this->assertFalse(empty($id1));
-        $this->assertFalse(empty($id2));
-        $this->assertFalse($id1 == $id2);
-        $this->assertFalse($word1 == $word2);
+        $this->assertNotEmpty($id1);
+        $this->assertNotEmpty($id2);
+        $this->assertNotEquals($id1, $id2);
+        $this->assertNotEquals($word1, $word2);
     }
 
     public function testGenerateInitializesSessionData()

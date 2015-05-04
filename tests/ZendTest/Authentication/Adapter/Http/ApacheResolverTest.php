@@ -10,7 +10,6 @@
 namespace ZendTest\Authentication\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http\ApacheResolver as Apache;
-use Zend\Authentication\Result as AuthResult;
 
 /**
  * @group      Zend_Auth
@@ -123,7 +122,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     {
         $this->_apache->setFile($file);
         $result = $this->_apache->resolve('test', null, 'password');
-        $this->assertTrue($result instanceof AuthResult);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid());
     }
 
@@ -137,7 +136,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     {
         $this->_apache->setFile($file);
         $result = $this->_apache->resolve('test', 'realm', 'password');
-        $this->assertTrue($result instanceof AuthResult);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid());
     }
 
@@ -150,7 +149,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     {
         $this->_apache->setFile($file);
         $result = $this->_apache->resolve('foo', null, 'password');
-        $this->assertTrue($result instanceof AuthResult);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertFalse($result->isValid());
     }
 
@@ -163,7 +162,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     {
         $this->_apache->setFile($file);
         $result = $this->_apache->resolve('test', null, 'bar');
-        $this->assertTrue($result instanceof AuthResult);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertFalse($result->isValid());
     }
 
@@ -174,7 +173,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     {
         $this->_apache->setFile($this->_digest);
         $result = $this->_apache->resolve('test', 'auth', 'password');
-        $this->assertTrue($result instanceof AuthResult);
+        $this->assertInstanceOf('Zend\Authentication\Result', $result);
         $this->assertTrue($result->isValid());
     }
 }

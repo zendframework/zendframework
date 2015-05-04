@@ -24,7 +24,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
-        $this->assertTrue($fault instanceof Server\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Server\Fault', $fault);
     }
 
     /**
@@ -117,9 +117,9 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         Observer::clearObserved();
         Server\Fault::detachObserver('ZendTest\\XmlRpc\\Server\\Observer');
 
-        $this->assertTrue(!empty($observed));
+        $this->assertNotEmpty($observed);
         $f = array_shift($observed);
-        $this->assertTrue($f instanceof Server\Fault);
+        $this->assertInstanceOf('Zend\XmlRpc\Server\Fault', $f);
         $this->assertEquals('Checking observers', $f->getMessage());
         $this->assertEquals(411, $f->getCode());
 
@@ -140,7 +140,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $e = new Server\Exception\RuntimeException('Checking observers', 411);
         $fault = Server\Fault::getInstance($e);
         $observed = Observer::getObserved();
-        $this->assertTrue(empty($observed));
+        $this->assertEmpty($observed);
 
         $this->assertFalse(Server\Fault::detachObserver('foo'));
     }

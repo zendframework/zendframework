@@ -46,9 +46,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
         $role = $this->_acl->addRole($roleGuest)
                           ->getRole($roleGuest->getRoleId());
-        $this->assertTrue($roleGuest === $role);
+        $this->assertEquals($roleGuest, $role);
         $role = $this->_acl->getRole($roleGuest);
-        $this->assertTrue($roleGuest === $role);
+        $this->assertEquals($roleGuest, $role);
     }
 
     /**
@@ -159,12 +159,12 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $roleRegistry->add($roleGuest)
                      ->add($roleMember, $roleGuest->getRoleId())
                      ->add($roleEditor, $roleMember);
-        $this->assertTrue(0 === count($roleRegistry->getParents($roleGuest)));
+        $this->assertEmpty($roleRegistry->getParents($roleGuest));
         $roleMemberParents = $roleRegistry->getParents($roleMember);
-        $this->assertTrue(1 === count($roleMemberParents));
+        $this->assertCount(1, $roleMemberParents);
         $this->assertTrue(isset($roleMemberParents['guest']));
         $roleEditorParents = $roleRegistry->getParents($roleEditor);
-        $this->assertTrue(1 === count($roleEditorParents));
+        $this->assertCount(1, $roleEditorParents);
         $this->assertTrue(isset($roleEditorParents['member']));
         $this->assertTrue($roleRegistry->inherits($roleMember, $roleGuest, true));
         $this->assertTrue($roleRegistry->inherits($roleEditor, $roleMember, true));
@@ -173,7 +173,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($roleRegistry->inherits($roleMember, $roleEditor));
         $this->assertFalse($roleRegistry->inherits($roleGuest, $roleEditor));
         $roleRegistry->remove($roleMember);
-        $this->assertTrue(0 === count($roleRegistry->getParents($roleEditor)));
+        $this->assertEmpty($roleRegistry->getParents($roleEditor));
         $this->assertFalse($roleRegistry->inherits($roleEditor, $roleGuest));
     }
 
@@ -192,17 +192,17 @@ class AclTest extends \PHPUnit_Framework_TestCase
                      ->add($roleParent2)
                      ->add($roleChild, array($roleParent1, $roleParent2));
         $roleChildParents = $roleRegistry->getParents($roleChild);
-        $this->assertTrue(2 === count($roleChildParents));
+        $this->assertCount(2, $roleChildParents);
         $i = 1;
         foreach ($roleChildParents as $roleParentId => $roleParent) {
-            $this->assertTrue("parent$i" === $roleParentId);
+            $this->assertEquals("parent$i", $roleParentId);
             $i++;
         }
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent1));
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
         $roleRegistry->remove($roleParent1);
         $roleChildParents = $roleRegistry->getParents($roleChild);
-        $this->assertTrue(1 === count($roleChildParents));
+        $this->assertCount(1, $roleChildParents);
         $this->assertTrue(isset($roleChildParents['parent2']));
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
     }
@@ -225,17 +225,17 @@ class AclTest extends \PHPUnit_Framework_TestCase
                 new \ArrayIterator(array($roleParent1, $roleParent2))
             );
         $roleChildParents = $roleRegistry->getParents($roleChild);
-        $this->assertTrue(2 === count($roleChildParents));
+        $this->assertCount(2, $roleChildParents);
         $i = 1;
         foreach ($roleChildParents as $roleParentId => $roleParent) {
-            $this->assertTrue("parent$i" === $roleParentId);
+            $this->assertEquals("parent$i", $roleParentId);
             $i++;
         }
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent1));
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
         $roleRegistry->remove($roleParent1);
         $roleChildParents = $roleRegistry->getParents($roleChild);
-        $this->assertTrue(1 === count($roleChildParents));
+        $this->assertCount(1, $roleChildParents);
         $this->assertTrue(isset($roleChildParents['parent2']));
         $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
     }
@@ -279,9 +279,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $resourceArea = new Resource\GenericResource('area');
         $resource = $this->_acl->addResource($resourceArea)
                           ->getResource($resourceArea->getResourceId());
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
         $resource = $this->_acl->getResource($resourceArea);
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
     }
 
     /**
@@ -305,9 +305,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $resourceArea = new Resource\GenericResource('area');
         $resource = $this->_acl->addResource($resourceArea)
                                ->getResource($resourceArea->getResourceId());
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
         $resource = $this->_acl->getResource($resourceArea);
-        $this->assertTrue($resourceArea === $resource);
+        $this->assertEquals($resourceArea, $resource);
     }
 
     /**

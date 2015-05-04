@@ -54,8 +54,8 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
     public function testParametersShouldBeEmptyArrayByDefault()
     {
         $params = $this->prototype->getParameters();
-        $this->assertTrue(is_array($params));
-        $this->assertTrue(empty($params));
+        $this->assertInternalType('array', $params);
+        $this->assertEmpty($params);
     }
 
     public function testPrototypeShouldAllowAddingSingleParameters()
@@ -63,7 +63,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->testParametersShouldBeEmptyArrayByDefault();
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
-        $this->assertTrue(is_array($params));
+        $this->assertInternalType('array', $params);
         $this->assertEquals(1, count($params));
         $this->assertEquals('string', $params[0]);
 
@@ -103,7 +103,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->prototype->addParameters(array('string', 'array'));
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertTrue($parameter instanceof Method\Parameter);
+            $this->assertInstanceOf('Zend\Server\Method\Parameter', $parameter);
         }
     }
 

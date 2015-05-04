@@ -42,8 +42,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $response = $select->show();
         $text = ob_get_clean();
-        $this->assertTrue((bool) preg_match('#0\) foo#', $text));
-        $this->assertTrue((bool) preg_match('#1\) bar#', $text));
+        $this->assertContains('0) foo', $text);
+        $this->assertContains('1) bar', $text);
         $this->assertEquals('0', $response);
     }
 
@@ -56,8 +56,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $response = $select->show();
         $text = ob_get_clean();
-        $this->assertTrue((bool) preg_match('#2\) foo#', $text));
-        $this->assertTrue((bool) preg_match('#6\) bar#', $text));
+        $this->assertContains('2) foo', $text);
+        $this->assertContains('6) bar', $text);
         $this->assertEquals('2', $response);
     }
 }

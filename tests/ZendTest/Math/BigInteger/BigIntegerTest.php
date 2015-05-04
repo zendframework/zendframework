@@ -25,7 +25,7 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
         }
 
         $bigInt = BigInt::factory('Bcmath');
-        $this->assertTrue($bigInt instanceof Adapter\Bcmath);
+        $this->assertInstanceOf('Zend\Math\BigInteger\Adapter\Bcmath', $bigInt);
     }
 
     public function testFactoryCreatesGmpAdapter()
@@ -35,7 +35,7 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
         }
 
         $bigInt = BigInt::factory('Gmp');
-        $this->assertTrue($bigInt instanceof Adapter\Gmp);
+        $this->assertInstanceOf('Zend\Math\BigInteger\Adapter\Gmp', $bigInt);
     }
 
     public function testFactoryUsesDefaultAdapter()
@@ -43,7 +43,7 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('bcmath') && !extension_loaded('gmp')) {
             $this->markTestSkipped('Missing bcmath or gmp extensions');
         }
-        $this->assertTrue(BigInt::factory() instanceof AdapterInterface);
+        $this->assertInstanceOf('Zend\Math\BigInteger\Adapter\AdapterInterface', BigInt::factory());
     }
 
     public function testFactoryUnknownAdapterRaisesServiceManagerException()

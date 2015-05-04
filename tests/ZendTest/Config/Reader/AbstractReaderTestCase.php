@@ -46,6 +46,6 @@ abstract class AbstractReaderTestCase extends TestCase
     public function testFromEmptyString()
     {
         $config = $this->reader->fromString('');
-        $this->assertTrue(!$config);
+        $this->assertEmpty($config);
     }
 }

@@ -99,7 +99,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                        ->setMethod('bar')
                        ->setType('instance');
         $test = $this->callback->toArray();
-        $this->assertTrue(is_array($test));
+        $this->assertInternalType('array', $test);
         $this->assertEquals('Foo', $test['class']);
         $this->assertEquals('bar', $test['method']);
         $this->assertEquals('instance', $test['type']);

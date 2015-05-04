@@ -219,7 +219,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         $validator->enableHeaderCheck();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
         $error = $validator->getMessages();
-        $this->assertTrue(array_key_exists('fileIsCompressedFalseType', $error));
+        $this->assertArrayHasKey('fileIsCompressedFalseType', $error);
     }
 
     public function testOptionsAtConstructor()
@@ -256,7 +256,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\IsCompressed();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileIsCompressedNotReadable', $validator->getMessages()));
+        $this->assertArrayHasKey('fileIsCompressedNotReadable', $validator->getMessages());
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

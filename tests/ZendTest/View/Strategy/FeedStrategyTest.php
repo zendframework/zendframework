@@ -83,7 +83,7 @@ class FeedStrategyTest extends TestCase
     {
         $content = $this->response->getContent();
         $headers = $this->response->getHeaders();
-        $this->assertTrue(empty($content));
+        $this->assertEmpty($content);
         $this->assertFalse($headers->has('content-type'));
     }
 

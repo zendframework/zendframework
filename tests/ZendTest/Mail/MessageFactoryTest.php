@@ -9,9 +9,6 @@
 
 namespace ZendTest\Mail;
 
-use Zend\Mail\Address;
-use Zend\Mail\AddressList;
-use Zend\Mail\Message;
 use Zend\Mail\MessageFactory;
 
 /**

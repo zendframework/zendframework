@@ -10,7 +10,6 @@
 namespace ZendTest\Serializer\Adapter;
 
 use Zend\Serializer;
-use Zend\Serializer\Exception;
 
 /**
  * @group      Zend_Serializer

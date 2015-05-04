@@ -9,7 +9,6 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use MongoClient;
 use Zend\Cache\Storage\Adapter\MongoDb;
 use Zend\Cache\Storage\Adapter\MongoDbOptions;
 

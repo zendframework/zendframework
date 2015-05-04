@@ -10,7 +10,6 @@
 namespace ZendTest\Form\View\Helper;
 
 use Zend\Form\Element;
-use Zend\Form\Form;
 use Zend\Form\View\Helper\FormLabel as FormLabelHelper;
 
 class FormLabelTest extends CommonTestCase

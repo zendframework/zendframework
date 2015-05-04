@@ -9,8 +9,6 @@
 
 namespace ZendTest\Db\Sql\Ddl\Constraint;
 
-use Zend\Db\Sql\Ddl\Constraint\AbstractConstraint;
-
 class AbstractConstraintTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \Zend\Db\Sql\Ddl\Constraint\AbstractConstraint */

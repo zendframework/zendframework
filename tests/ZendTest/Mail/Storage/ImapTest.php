@@ -12,7 +12,6 @@ namespace ZendTest\Mail\Storage;
 use Zend\Config;
 use Zend\Mail\Protocol;
 use Zend\Mail\Storage;
-use Zend\Mail\Storage\Exception;
 
 class ImapTest extends \PHPUnit_Framework_TestCase
 {

@@ -21,8 +21,8 @@ before_script:
 
 script:
   # Run tests for the various components in parallel
-  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1; fi
-  - if [[ $TRAVIS_PHP_VERSION != '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist {};' || exit 1; fi
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist --colors=always --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1; fi
+  - if [[ $TRAVIS_PHP_VERSION != '5.6' ]]; then ls -d tests/ZendTest/* | grep -v 'tests/ZendTest/_files' | grep -v 'tests/ZendTest/AllTests' | parallel --gnu -P 0 'echo "Running {} tests"; php ./vendor/bin/phpunit -c tests/phpunit.xml.dist --colors=always {};' || exit 1; fi
 
   # Run coding standard checks in parallel
   - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then ls -d library/Zend/* tests/ZendTest/* bin | parallel --gnu -P 0 'echo "Running {} CS checks"; php ./vendor/bin/php-cs-fixer fix {} -v --diff --dry-run --config-file=.php_cs;' || exit 1; fi

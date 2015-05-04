@@ -9,8 +9,6 @@
 
 namespace ZendTest\Cache\Pattern;
 
-use Zend\Cache;
-
 /**
  * @group      Zend_Cache
  */

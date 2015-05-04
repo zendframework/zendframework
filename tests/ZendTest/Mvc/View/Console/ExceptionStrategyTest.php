@@ -15,8 +15,6 @@ use Zend\EventManager\EventManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Console\ExceptionStrategy;
-use Zend\View\Model;
-use Zend\View\Model\ConsoleModel;
 
 class ExceptionStrategyTest extends TestCase
 {

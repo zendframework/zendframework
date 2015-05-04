@@ -10,7 +10,6 @@
 namespace ZendTest\Tag;
 
 use Zend\Tag;
-use Zend\Tag\Exception\InvalidArgumentException;
 
 /**
  * @group      Zend_Tag

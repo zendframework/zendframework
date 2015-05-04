@@ -129,7 +129,9 @@ class PartialLoop extends Partial
         $this->setObjectKey(null);
 
         $this->nestingLevel -= 1;
-        $this->objectKey = $this->objectKeyStack[$this->nestingLevel];
+        if (isset($this->objectKeyStack[$this->nestingLevel])) {
+            $this->objectKey = $this->objectKeyStack[$this->nestingLevel];
+        }
 
         return $this;
     }

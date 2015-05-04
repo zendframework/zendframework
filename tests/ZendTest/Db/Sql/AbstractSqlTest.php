@@ -141,13 +141,37 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expressionString, $sqlString);
     }
 
+    public function testProcessExpressionWorksWithNamedParameterPrefix()
+    {
+        $parameterContainer = new ParameterContainer();
+        $namedParameterPrefix = uniqid();
+        $expression = new Expression('FROM_UNIXTIME(?)', array(10000000));
+        $this->invokeProcessExpressionMethod($expression, $parameterContainer, $namedParameterPrefix);
+
+        $this->assertSame($namedParameterPrefix . '1', key($parameterContainer->getNamedArray()));
+    }
+
+    public function testProcessExpressionWorksWithNamedParameterPrefixContainingWhitespace()
+    {
+        $parameterContainer = new ParameterContainer();
+        $namedParameterPrefix = "string\ncontaining white space";
+        $expression = new Expression('FROM_UNIXTIME(?)', array(10000000));
+        $this->invokeProcessExpressionMethod($expression, $parameterContainer, $namedParameterPrefix);
+
+        $this->assertSame('string__containing__white__space1', key($parameterContainer->getNamedArray()));
+    }
+
     /**
      * @param \Zend\Db\Sql\ExpressionInterface $expression
-     * @param \Zend\Db\Adapter\Adapter|null $adapter
-     * @return \Zend\Db\Adapter\StatementContainer
+     * @param \Zend\Db\Adapter\ParameterContainer $parameterContainer
+     * @param string $namedParameterPrefix
+     * @return \Zend\Db\Adapter\StatementContainer|string
      */
-    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $parameterContainer = null)
-    {
+    protected function invokeProcessExpressionMethod(
+        ExpressionInterface $expression,
+        $parameterContainer = null,
+        $namedParameterPrefix = null
+    ) {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
         return $method->invoke(
@@ -155,7 +179,8 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
             $expression,
             new TrustingSql92Platform,
             $this->mockDriver,
-            $parameterContainer
+            $parameterContainer,
+            $namedParameterPrefix
         );
     }
 }

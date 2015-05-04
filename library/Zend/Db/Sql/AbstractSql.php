@@ -106,6 +106,8 @@ abstract class AbstractSql implements SqlInterface
 
         if ($parameterContainer && ((!is_string($namedParameterPrefix) || $namedParameterPrefix == ''))) {
             $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
+        } else {
+            $namedParameterPrefix = preg_replace('/\s/', '__', $namedParameterPrefix);
         }
 
         $sql = '';

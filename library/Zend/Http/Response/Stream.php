@@ -174,7 +174,6 @@ class Stream extends Response
 
         if (!$headerComplete) {
             while (false !== ($nextLine = fgets($stream))) {
-
                 $headersString .= trim($nextLine)."\r\n";
                 if ($nextLine == "\r\n" || $nextLine == "\n") {
                     $headerComplete = true;

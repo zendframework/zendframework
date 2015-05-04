@@ -1257,7 +1257,7 @@ class FormTest extends TestCase
         $this->form->setInputFilter($inputFilter);
 
         $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $this->form->getInputFilter()->get('items'));
-        $this->assertCount(1, $this->form->getInputFilter()->get('items')->getInputs());
+        $this->assertCount(1, $this->form->getInputFilter()->get('items')->getInputFilter()->getInputs());
     }
 
     public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()
@@ -1874,6 +1874,29 @@ class FormTest extends TestCase
 
         $isValid = $this->form->isValid();
         $this->assertEquals($data, $this->form->getData());
+    }
+
+    public function testFormWithCollectionsAndNestedFieldsetsWithInputFilterProviderInterface()
+    {
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'nested_fieldset_with_input_filter_provider',
+            'options' => array(
+                'label' => 'InputFilterProviderFieldset',
+                'count' => 1,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\InputFilterProviderFieldset'
+                )
+            ),
+        ));
+
+        $this->assertTrue(
+            $this->form->getInputFilter()
+                ->get('nested_fieldset_with_input_filter_provider')
+                ->getInputFilter()
+                ->get('foo')
+            instanceof \Zend\InputFilter\Input
+        );
     }
 
     public function testFormElementValidatorsMergeIntoAppliedInputFilter()

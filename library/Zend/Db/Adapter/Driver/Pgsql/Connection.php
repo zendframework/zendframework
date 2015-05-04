@@ -57,7 +57,7 @@ class Connection extends AbstractConnection
      */
     public function setType($type)
     {
-        if($type !== PGSQL_CONNECT_FORCE_NEW && $type !== PGSQL_CONNECT_ASYNC) {
+        if ($type !== PGSQL_CONNECT_FORCE_NEW && $type !== PGSQL_CONNECT_ASYNC) {
             throw new Exception\InvalidArgumentException('Connection type is not valid. (See: http://php.net/manual/en/function.pg-connect.php)');
         }
         $this->type = $type;

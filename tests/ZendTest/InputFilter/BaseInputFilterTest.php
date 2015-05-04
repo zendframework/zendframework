@@ -626,22 +626,6 @@ class BaseInputFilterTest extends TestCase
         $this->assertFalse($filter->isValid());
     }
 
-    public function testValidationMarksInputInvalidWhenNotRequiredAndAllowEmptyFlagIsFalse()
-    {
-        $filter = new InputFilter();
-
-        $foo   = new Input();
-        $foo->setRequired(false);
-        $foo->setAllowEmpty(false);
-
-        $filter->add($foo, 'foo');
-
-        $data = array('foo' => '');
-        $filter->setData($data);
-
-        $this->assertFalse($filter->isValid());
-    }
-
     public static function contextDataProvider()
     {
         return array(

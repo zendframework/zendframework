@@ -168,7 +168,7 @@ class Wsdl
      * @param  array $classMap
      * @return self
      */
-    public function setClassMap($classMap)
+    public function setClassMap(array $classMap)
     {
         $this->classMap = $classMap;
         return $this;

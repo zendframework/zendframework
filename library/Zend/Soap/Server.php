@@ -974,7 +974,7 @@ class Server implements ZendServerServer
      * Validate and register fault exception
      *
      * @param  string|array $class Exception class or array of exception classes
-     * @return self
+     * @return $this
      * @throws Exception\InvalidArgumentException
      */
     public function registerFaultException($class)

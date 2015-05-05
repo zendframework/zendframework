@@ -19,6 +19,7 @@ class MimeVersion implements HeaderInterface
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'mime-version') {
@@ -68,6 +69,9 @@ class MimeVersion implements HeaderInterface
      */
     public function setVersion($version)
     {
+        if (! preg_match('/^[1-9]\d*\.\d+$/', $version)) {
+            throw new Exception\InvalidArgumentException('Invalid MIME-Version value detected');
+        }
         $this->version = $version;
         return $this;
     }

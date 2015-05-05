@@ -695,4 +695,52 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setBody($mimeMessage);
         $this->assertEquals('', $this->message->getBodyText());
     }
+
+    public function messageRecipients()
+    {
+        return array(
+            'setFrom' => array('setFrom'),
+            'addFrom' => array('addFrom'),
+            'setTo' => array('setTo'),
+            'addTo' => array('addTo'),
+            'setCc' => array('setCc'),
+            'addCc' => array('addCc'),
+            'setBcc' => array('setBcc'),
+            'addBcc' => array('addBcc'),
+            'setReplyTo' => array('setReplyTo'),
+            'setSender' => array('setSender'),
+        );
+    }
+
+    /**
+     * @group ZF2015-04
+     * @dataProvider messageRecipients
+     */
+    public function testRaisesExceptionWhenAttemptingToSerializeMessageWithCRLFInjectionViaHeader($recipientMethod)
+    {
+        $subject = array(
+            'test1',
+            'Content-Type: text/html; charset = "iso-8859-1"',
+            '',
+            '<html><body><iframe src="http://example.com/"></iframe></body></html> <!--',
+        );
+        $this->message->{$recipientMethod}(implode(Headers::EOL, $subject));
+        $this->setExpectedException('Zend\Mail\Header\Exception\RuntimeException');
+        $this->assertNotContains(Headers::EOL . Headers::EOL, $this->message->getHeaders()->toString());
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testDetectsCRLFInjectionViaSubject()
+    {
+        $subject = array(
+            'test1',
+            'Content-Type: text/html; charset = "iso-8859-1"',
+            '',
+            '<html><body><iframe src="http://example.com/"></iframe></body></html> <!--',
+        );
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $this->message->setSubject(implode(Headers::EOL, $subject));
+    }
 }

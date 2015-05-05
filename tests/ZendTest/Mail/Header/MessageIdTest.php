@@ -33,4 +33,47 @@ class MessageIdTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('@', $messageid->getFieldValue());
     }
+
+
+    public function headerLines()
+    {
+        return array(
+            'newline'      => array("Message-ID: foo\nbar"),
+            'cr-lf'        => array("Message-ID: bar\r\nfoo"),
+            'cr-lf-wsp'    => array("Message-ID: bar\r\n\r\n baz"),
+            'multiline'    => array("Message-ID: baz\r\nbar\r\nbau"),
+        );
+    }
+
+    /**
+     * @dataProvider headerLines
+     * @group ZF2015-04
+     */
+    public function testFromStringPreventsCrlfInjectionOnDetection($header)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $messageid = Header\MessageId::fromString($header);
+    }
+
+    public function invalidIdentifiers()
+    {
+        return array(
+            'newline'      => array("foo\nbar"),
+            'cr-lf'        => array("bar\r\nfoo"),
+            'cr-lf-wsp'    => array("bar\r\n\r\n baz"),
+            'multiline'    => array("baz\r\nbar\r\nbau"),
+            'folding'      => array("bar\r\n baz"),
+        );
+    }
+
+    /**
+     * @dataProvider invalidIdentifiers
+     * @group ZF2015-04
+     */
+    public function testInvalidIdentifierRaisesException($id)
+    {
+        $header = new Header\MessageId();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $header->setId($id);
+    }
 }

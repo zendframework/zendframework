@@ -134,4 +134,14 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Date: Sun Nov 6 08:49:37 1994', $dateHeader->toString());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     * @expectedException Zend\Http\Header\Exception\InvalidArgumentException
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $header = Date::fromString("Date: Sun, 06 Nov 1994 08:49:37 GMT\r\n\r\nevilContent");
+    }
 }

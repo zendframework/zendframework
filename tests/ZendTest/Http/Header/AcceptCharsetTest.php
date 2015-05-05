@@ -41,7 +41,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8, unicode-1-1', $acceptCharsetHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
     public function testCanParseCommaSeparatedValues()
     {
@@ -74,5 +74,26 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($acceptHeader->hasCharset('iso-8859-5'));
         $this->assertTrue($acceptHeader->hasCharset('unicode-1-1'));
         $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8, *;q=0.4', $acceptHeader->toString());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = AcceptCharset::fromString("Accept-Charset: iso-8859-5\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaSetters()
+    {
+        $header = new AcceptCharset();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid type');
+        $header->addCharset("\niso\r-8859-\r\n5");
     }
 }

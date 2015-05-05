@@ -44,4 +44,14 @@ class LastModifiedTest extends \PHPUnit_Framework_TestCase
      * Implementation specific tests are covered by DateTest
      * @see ZendTest\Http\Header\DateTest
      */
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     * @expectedException Zend\Http\Header\Exception\InvalidArgumentException
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $header = LastModified::fromString("Last-Modified: Sun, 06 Nov 1994 08:49:37 GMT\r\n\r\nevilContent");
+    }
 }

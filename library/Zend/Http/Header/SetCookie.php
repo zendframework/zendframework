@@ -153,6 +153,7 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        HeaderValue::assertValid($value);
 
         // some sites return set-cookie::value, this is to get rid of the second :
         $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;
@@ -190,8 +191,17 @@ class SetCookie implements MultipleHeaderInterface
      * @param   string              $maxAge
      * @param   int                 $version
      */
-    public function __construct($name = null, $value = null, $expires = null, $path = null, $domain = null, $secure = false, $httponly = false, $maxAge = null, $version = null)
-    {
+    public function __construct(
+        $name = null,
+        $value = null,
+        $expires = null,
+        $path = null,
+        $domain = null,
+        $secure = false,
+        $httponly = false,
+        $maxAge = null,
+        $version = null
+    ) {
         $this->type = 'Cookie';
 
         $this->setName($name)
@@ -231,7 +241,7 @@ class SetCookie implements MultipleHeaderInterface
         $fieldValue = $this->getName() . '=' . $value;
 
         $version = $this->getVersion();
-        if ($version!==null) {
+        if ($version !== null) {
             $fieldValue .= '; Version=' . $version;
         }
 
@@ -273,6 +283,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setName($name)
     {
+        HeaderValue::assertValid($name);
         $this->name = $name;
         return $this;
     }
@@ -291,6 +302,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setValue($value)
     {
+        HeaderValue::assertValid($value);
         $this->value = $value;
         return $this;
     }
@@ -419,6 +431,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setDomain($domain)
     {
+        HeaderValue::assertValid($domain);
         $this->domain = $domain;
         return $this;
     }
@@ -437,6 +450,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setPath($path)
     {
+        HeaderValue::assertValid($path);
         $this->path = $path;
         return $this;
     }
@@ -455,6 +469,9 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setSecure($secure)
     {
+        if (null !== $secure) {
+            $secure = (bool) $secure;
+        }
         $this->secure = $secure;
         return $this;
     }
@@ -485,6 +502,9 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setHttponly($httponly)
     {
+        if (null !== $httponly) {
+            $httponly = (bool) $httponly;
+        }
         $this->httponly = $httponly;
         return $this;
     }

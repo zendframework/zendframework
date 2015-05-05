@@ -117,4 +117,14 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($uri->isAbsolute());
         $this->assertEquals('/path/to', $locationHeader->getUri());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testCRLFAttack()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Location::fromString("Location: http://www.example.com/path\r\n\r\nevilContent");
+    }
 }

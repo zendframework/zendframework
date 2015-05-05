@@ -41,4 +41,23 @@ class OriginTest extends \PHPUnit_Framework_TestCase
         $OriginHeader = Origin::fromString('Origin: http://zend.org');
         $this->assertEquals('http://zend.org', $OriginHeader->getFieldValue());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     * @expectedException Zend\Uri\Exception\InvalidUriPartException
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $header = Origin::fromString("Origin: http://zend.org\r\n\r\nevilContent");
+    }
+    
+    /**
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructor()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new Origin("http://zend.org\r\n\r\nevilContent");
+    }
 }

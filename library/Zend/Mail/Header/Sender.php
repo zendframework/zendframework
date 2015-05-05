@@ -27,8 +27,10 @@ class Sender implements HeaderInterface
 
     public static function fromString($headerLine)
     {
-        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        list($name, $value) = GenericHeader::splitHeaderLine($decodedLine);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $decodedValue = HeaderWrap::mimeDecodeValue($value);
+        $wasEncoded = ($decodedValue !== $value);
+        $value = $decodedValue;
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
@@ -36,7 +38,7 @@ class Sender implements HeaderInterface
         }
 
         $header = new static();
-        if ($decodedLine != $headerLine) {
+        if ($wasEncoded) {
             $header->setEncoding('UTF-8');
         }
 
@@ -67,6 +69,10 @@ class Sender implements HeaderInterface
 
         $email = sprintf('<%s>', $this->address->getEmail());
         $name  = $this->address->getName();
+
+        HeaderValue::assertValid($email);
+        HeaderValue::assertValid($name);
+
         if (!empty($name)) {
             $encoding = $this->getEncoding();
             if ($format == HeaderInterface::FORMAT_ENCODED

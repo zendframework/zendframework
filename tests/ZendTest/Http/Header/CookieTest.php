@@ -67,6 +67,26 @@ class CookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Cookie: foo=bar', $cookieHeader->toString());
     }
 
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Cookie::fromString("Cookie: foo=bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructorValue()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new Cookie(array("foo=bar\r\n\r\nevilContent"));
+    }
+
 //    /**
 //     * Cookie creation and data accessors tests
 //     */

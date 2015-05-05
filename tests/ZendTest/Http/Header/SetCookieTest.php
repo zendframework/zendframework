@@ -19,8 +19,15 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     public function testSetCookieConstructor()
     {
         $setCookieHeader = new SetCookie(
-            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT',
-            '/accounts', 'docs.foo.com', true, true, 99, 9
+            'myname',
+            'myvalue',
+            'Wed, 13-Jan-2021 22:23:01 GMT',
+            '/accounts',
+            'docs.foo.com',
+            true,
+            true,
+            99,
+            9
         );
         $this->assertEquals('myname', $setCookieHeader->getName());
         $this->assertEquals('myvalue', $setCookieHeader->getValue());
@@ -275,7 +282,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Check that setCookie does not fail when an expiry date which is bigger then 2038 is supplied (effect only 32bit systems)
+     * Check that setCookie does not fail when an expiry date which is bigger
+     * then 2038 is supplied (effect only 32bit systems)
      */
     public function testSetCookieSetExpiresWithStringDateBiggerThen2038()
     {
@@ -290,13 +298,27 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     public function testIsValidForRequestSubdomainMatch()
     {
         $setCookieHeader = new SetCookie(
-            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT',
-            '/accounts', '.foo.com', true, true, 99, 9
+            'myname',
+            'myvalue',
+            'Wed,
+            13-Jan-2021 22:23:01 GMT',
+            '/accounts',
+            '.foo.com',
+            true,
+            true,
+            99,
+            9
         );
         $this->assertTrue($setCookieHeader->isValidForRequest('bar.foo.com', '/accounts', true));
-        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foooo.com', '/accounts', true)); // false because of domain
-        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foo.com', '/accounts', false)); // false because of isSecure
-        $this->assertFalse($setCookieHeader->isValidForRequest('bar.foo.com', '/somethingelse', true)); // false because of path
+        $this->assertFalse(
+            $setCookieHeader->isValidForRequest('bar.foooo.com', '/accounts', true)
+        ); // false because of domain
+        $this->assertFalse(
+            $setCookieHeader->isValidForRequest('bar.foo.com', '/accounts', false)
+        ); // false because of isSecure
+        $this->assertFalse(
+            $setCookieHeader->isValidForRequest('bar.foo.com', '/somethingelse', true)
+        ); // false because of path
     }
 
     /** Implementation specific tests here */
@@ -304,7 +326,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF2-169
      */
-    public function testZF2_169()
+    public function test169()
     {
         $cookie = 'Set-Cookie: leo_auth_token=example; Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/';
         $setCookieHeader = SetCookie::fromString($cookie);
@@ -391,6 +413,47 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
         $regExp = sprintf('#^%s=%s; Domain=#',$cookieName,urlencode($jsonData));
         $this->assertRegExp($regExp,$cookie->getFieldValue());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = SetCookie::fromString("Set-Cookie: leo_auth_token=example;\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructor()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new SetCookie("leo_auth_token", "example\r\n\r\nevilContent");
+    }
+
+    public function setterInjections()
+    {
+        return array(
+            'name'   => array('setName', "\r\nThis\rIs\nThe\r\nName"),
+            'domain' => array('setDomain', "\r\nexample\r.\nco\r\n.uk"),
+            'path'   => array('setPath', "\r\n/\rbar\n/foo\r\n/baz"),
+        );
+    }
+
+    /**
+     * @dataProvider setterInjections
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaSetters($method, $value)
+    {
+        $header = new SetCookie();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header->{$method}($value);
     }
 
     /**

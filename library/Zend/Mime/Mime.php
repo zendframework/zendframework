@@ -181,28 +181,29 @@ class Mime
         $str = str_replace(array('?', ' ', '_'), array('=3F', '=20', '=5F'), $str);
 
         // initialize first line, we need it anyways
-        $lines = array(0 => "");
+        $lines = array(0 => '');
 
         // Split encoded text into separate lines
-        $tmp = "";
+        $tmp = '';
         while (strlen($str) > 0) {
-            $currentLine = max(count($lines)-1, 0);
+            $currentLine = max(count($lines) - 1, 0);
             $token       = static::getNextQuotedPrintableToken($str);
-            $str         = substr($str, strlen($token));
+            $substr      = substr($str, strlen($token));
+            $str         = (false === $substr) ? '' : $substr;
 
             $tmp .= $token;
-            if ($token == '=20') {
+            if ($token === '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
                 if (strlen($lines[$currentLine] . $tmp) > $lineLength) {
-                    $lines[$currentLine+1] = $tmp;
+                    $lines[$currentLine + 1] = $tmp;
                 } else {
                     $lines[$currentLine] .= $tmp;
                 }
-                $tmp = "";
+                $tmp = '';
             }
             // don't forget to append the rest to the last line
-            if (strlen($str) == 0) {
+            if (strlen($str) === 0) {
                 $lines[$currentLine] .= $tmp;
             }
         }
@@ -223,7 +224,7 @@ class Mime
      */
     private static function getNextQuotedPrintableToken($str)
     {
-        if (substr($str, 0, 1) == "=") {
+        if (substr($str, 0, 1) === "=") {
             $token = substr($str, 0, 3);
         } else {
             $token = substr($str, 0, 1);

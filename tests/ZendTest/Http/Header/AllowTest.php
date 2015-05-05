@@ -82,4 +82,46 @@ class AllowTest extends \PHPUnit_Framework_TestCase
         $allowHeader->allowMethods(array('GET', 'POST', 'TRACE'));
         $this->assertTrue($allowHeader->isAllowedMethod('TRACE'));
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid method');
+        $header = Allow::fromString("Allow: GET\r\n\r\nevilContent");
+    }
+
+    public function injectionMethods()
+    {
+        return array(
+            'string' => array("\rG\r\nE\nT"),
+            'array' => array(array("\rG\r\nE\nT")),
+        );
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @dataProvider injectionMethods
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaAllowMethods($methods)
+    {
+        $header = new Allow();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid method');
+        $header->allowMethods($methods);
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @dataProvider injectionMethods
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaDisallowMethods($methods)
+    {
+        $header = new Allow();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid method');
+        $header->disallowMethods($methods);
+    }
 }

@@ -80,21 +80,6 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isSuccess(), 'Response is an error, but isSuccess() returned true');
     }
 
-
-    public function testMultilineHeader()
-    {
-        $values   = $this->readResponse('response_multiline_header');
-        $response = Stream::fromStream($values['data'], $values['stream']);
-
-        // Make sure we got the corrent no. of headers
-        $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
-
-        // Check header integrity
-        $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
-    }
-
-
     /**
      * Helper function: read test response from file
      *

@@ -41,7 +41,7 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Language: da;q=0.8, en-gb', $acceptLanguageHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
     public function testCanParseCommaSeparatedValues()
     {
@@ -90,5 +90,26 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en', $res[1]->getPrimaryTag());
 
         $this->assertTrue($accept->hasLanguage('nl'));
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = AcceptLanguage::fromString("Accept-Language: da\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaSetters()
+    {
+        $header = new AcceptLanguage();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid type');
+        $header->addLanguage("\nen\r-\r\nus");
     }
 }

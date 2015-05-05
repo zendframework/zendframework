@@ -173,8 +173,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
 
-        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException',
-                                    'Not valid or not supported HTTP version');
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Not valid or not supported HTTP version'
+        );
         $request->setVersion('1.2');
     }
 
@@ -259,5 +261,29 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             }
         }
         return $return;
+    }
+
+    public function testromStringFactoryCreatesSingleObjectWithHeaderFolding()
+    {
+        $request = Request::fromString("GET /foo HTTP/1.1\r\nFake: foo\r\n -bar");
+        $headers = $request->getHeaders();
+        $this->assertEquals(1, $headers->count());
+
+        $header = $headers->get('fake');
+        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
+        $this->assertEquals('Fake', $header->getFieldName());
+        $this->assertEquals('foo-bar', $header->getFieldValue());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testCRLFAttack()
+    {
+        $this->setExpectedException('Zend\Http\Exception\RuntimeException');
+        $request = Request::fromString(
+            "GET /foo HTTP/1.1\r\nHost: example.com\r\nX-Foo: This\ris\r\n\r\nCRLF\nInjection"
+        );
     }
 }

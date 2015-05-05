@@ -41,7 +41,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Encoding: compress;q=0.5, gzip', $acceptEncodingHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
     public function testCanParseCommaSeparatedValues()
     {
@@ -74,5 +74,26 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($acceptHeader->hasEncoding('compress'));
         $this->assertTrue($acceptHeader->hasEncoding('gzip'));
         $this->assertEquals('Accept-Encoding: compress;q=0.8, *;q=0.4', $acceptHeader->toString());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = AcceptEncoding::fromString("Accept-Encoding: compress\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaSetters()
+    {
+        $header = new AcceptEncoding();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid type');
+        $header->addEncoding("\nc\rom\r\npress");
     }
 }

@@ -332,33 +332,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group 5253
-     */
-    public function testMultilineHeaderNoSpaces()
-    {
-        $response = Response::fromString($this->readResponse('response_multiline_header_nospace'));
-
-        // Make sure we got the corrent no. of headers
-        $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
-
-        // Check header integrity
-        $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
-    }
-
-    public function testMultilineHeader()
-    {
-        $response = Response::fromString($this->readResponse('response_multiline_header'));
-
-        // Make sure we got the corrent no. of headers
-        $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
-
-        // Check header integrity
-        $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
-    }
-
-    /**
      * Make sure a response with some leading whitespace in the response body
      * does not get modified (see ZF-1924)
      *
@@ -383,6 +356,30 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $response = Response::fromString($this->readResponse('response_multibyte_body'));
         $this->assertEquals($md5, md5($response->getBody()));
+    }
+
+    public function testromStringFactoryCreatesSingleObjectWithHeaderFolding()
+    {
+        $request = Response::fromString("HTTP/1.1 200 OK\r\nFake: foo\r\n -bar");
+        $headers = $request->getHeaders();
+        $this->assertEquals(1, $headers->count());
+
+        $header = $headers->get('fake');
+        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
+        $this->assertEquals('Fake', $header->getFieldName());
+        $this->assertEquals('foo-bar', $header->getFieldValue());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackWhenDeserializing()
+    {
+        $this->setExpectedException('Zend\Http\Exception\RuntimeException');
+        $response = Response::fromString(
+            "HTTP/1.1 200 OK\r\nAllow: POST\r\nX-Foo: This\ris\r\n\r\nCRLF\nInjection"
+        );
     }
 
     /**

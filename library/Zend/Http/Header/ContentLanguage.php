@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class ContentLanguage implements HeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $value;
 
     public static function fromString($headerLine)
@@ -24,7 +26,10 @@ class ContentLanguage implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-language') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Language string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid header line for Content-Language string: "%s"',
+                $name
+            ));
         }
 
         // @todo implementation details
@@ -35,7 +40,10 @@ class ContentLanguage implements HeaderInterface
 
     public function __construct($value = null)
     {
-        $this->value = $value;
+        if ($value) {
+            HeaderValue::assertValid($value);
+            $this->value = $value;
+        }
     }
 
     public function getFieldName()

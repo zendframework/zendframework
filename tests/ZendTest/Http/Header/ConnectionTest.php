@@ -52,4 +52,25 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connectionHeader->setPersistent(false);
         $this->assertEquals('close', $connectionHeader->getFieldValue());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Connection::fromString("Connection: close\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaSetters()
+    {
+        $header = new Connection();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header->setValue("close\r\n\r\nevilContent");
+    }
 }

@@ -117,4 +117,47 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $result = $header->match($criteria);
         $this->assertEquals('application/vnd.*+json', $result);
     }
+
+    public function contentTypeParameterExamples()
+    {
+        return array(
+            'no-quotes' => array('Content-Type: foo/bar; param=baz', 'baz'),
+            'with-quotes' => array('Content-Type: foo/bar; param="baz"', 'baz'),
+            'with-equals' => array('Content-Type: foo/bar; param=baz=bat', 'baz=bat'),
+            'with-equals-and-quotes' => array('Content-Type: foo/bar; param="baz=bat"', 'baz=bat'),
+        );
+    }
+
+    /**
+     * @dataProvider contentTypeParameterExamples
+     */
+    public function testContentTypeParsesParametersCorrectly($headerString, $expectedParameterValue)
+    {
+        $contentTypeHeader = ContentType::fromString($headerString);
+
+        $parameters = $contentTypeHeader->getParameters();
+
+        $this->assertArrayHasKey('param', $parameters);
+        $this->assertSame($expectedParameterValue, $parameters['param']);
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = ContentType::fromString("Content-Type: foo/bar;\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructor()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new ContentType("foo/bar\r\n\r\nevilContent");
+    }
 }

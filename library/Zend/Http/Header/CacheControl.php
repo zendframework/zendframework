@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class CacheControl implements HeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $value;
 
     /**
@@ -41,6 +43,7 @@ class CacheControl implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
         }
 
+        HeaderValue::assertValid($value);
         $directives = static::parseValue($value);
 
         // @todo implementation details
@@ -83,6 +86,10 @@ class CacheControl implements HeaderInterface
      */
     public function addDirective($key, $value = true)
     {
+        HeaderValue::assertValid($key);
+        if (! is_bool($value)) {
+            HeaderValue::assertValid($value);
+        }
         $this->directives[$key] = $value;
         return $this;
     }

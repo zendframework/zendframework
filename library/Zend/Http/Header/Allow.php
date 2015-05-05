@@ -110,6 +110,12 @@ class Allow implements HeaderInterface
     {
         foreach ((array) $allowedMethods as $method) {
             $method = trim(strtoupper($method));
+            if (preg_match('/\s/', $method)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to whitelist method; "%s" is not a valid method',
+                    $method
+                ));
+            }
             $this->methods[$method] = true;
         }
 
@@ -126,6 +132,12 @@ class Allow implements HeaderInterface
     {
         foreach ((array) $disallowedMethods as $method) {
             $method = trim(strtoupper($method));
+            if (preg_match('/\s/', $method)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to blacklist method; "%s" is not a valid method',
+                    $method
+                ));
+            }
             $this->methods[$method] = false;
         }
 

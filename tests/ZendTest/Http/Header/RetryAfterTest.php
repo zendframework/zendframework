@@ -52,4 +52,14 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
         $retryAfterHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
         $this->assertEquals('Retry-After: Sun, 06 Nov 1994 08:49:37 GMT', $retryAfterHeader->toString());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     * @expectedException Zend\Http\Header\Exception\InvalidArgumentException
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $header = RetryAfter::fromString("Retry-After: 10\r\n\r\nevilContent");
+    }
 }

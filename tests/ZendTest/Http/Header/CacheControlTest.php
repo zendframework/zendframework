@@ -44,7 +44,7 @@ class CacheControlTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Cache-Control: xxx', $cacheControlHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
     public function testCacheControlIsEmpty()
     {
@@ -97,5 +97,26 @@ class CacheControlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $cacheControlHeader->getDirective('b'));
         $this->assertTrue($cacheControlHeader->hasDirective('c'));
         $this->assertEquals('bar, baz', $cacheControlHeader->getDirective('c'));
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = CacheControl::fromString("Cache-Control: xxx\r\n\r\n");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testProtectsFromCRLFAttackViaSetters()
+    {
+        $header = new CacheControl();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header->addDirective("\rsome\r\ninvalid\nkey", "\ra\r\nCRLF\ninjection");
     }
 }

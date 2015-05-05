@@ -59,4 +59,15 @@ class HeaderWrapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
         $this->assertEquals($string, iconv_mime_decode($test, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'));
     }
+
+    public function testMimeDecoding()
+    {
+        $expected = str_repeat('foobarblahblahblah baz bat', 3);
+        $encoded = "=?UTF-8?Q?foobarblahblahblah=20baz=20batfoobarblahblahblah=20baz=20?=\r\n"
+                    . " =?UTF-8?Q?batfoobarblahblahblah=20baz=20bat?=";
+
+        $decoded = HeaderWrap::mimeDecodeValue($encoded);
+
+        $this->assertEquals($expected, $decoded);
+    }
 }

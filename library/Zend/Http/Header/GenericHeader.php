@@ -88,9 +88,6 @@ class GenericHeader implements HeaderInterface
             throw new Exception\InvalidArgumentException('Header name must be a string');
         }
 
-        // Pre-filter to normalize valid characters, change underscore to dash
-        $fieldName = str_replace('_', '-', $fieldName);
-
         /*
          * Following RFC 2616 section 4.2
          *
@@ -99,7 +96,7 @@ class GenericHeader implements HeaderInterface
          *
          * @see http://tools.ietf.org/html/rfc2616#section-2.2 for token definition.
          */
-        if (!preg_match('/^[!#-\'*+\-\.0-9A-Z\^-z|~]+$/', $fieldName)) {
+        if (!preg_match('/^[!#$%&\'*+\-\.\^_`|~0-9a-zA-Z]+$/', $fieldName)) {
             throw new Exception\InvalidArgumentException(
                 'Header name must be a valid RFC 2616 (section 4.2) field-name.'
             );
@@ -128,6 +125,7 @@ class GenericHeader implements HeaderInterface
     public function setFieldValue($fieldValue)
     {
         $fieldValue = (string) $fieldValue;
+        HeaderValue::assertValid($fieldValue);
 
         if (preg_match('/^\s+$/', $fieldValue)) {
             $fieldValue = '';

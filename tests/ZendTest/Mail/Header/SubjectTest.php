@@ -33,4 +33,45 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
         $subject      = Header\Subject::fromString($headerString);
         $this->assertEquals('', $subject->getFieldValue());
     }
+
+    public function headerLines()
+    {
+        return array(
+            'newline'      => array("Subject: xxx yyy\n"),
+            'cr-lf'        => array("Subject: xxx yyy\r\n"),
+            'cr-lf-wsp'    => array("Subject: xxx yyy\r\n\r\n"),
+            'multiline'    => array("Subject: xxx\r\ny\r\nyy"),
+        );
+    }
+
+    /**
+     * @dataProvider headerLines
+     * @group ZF2015-04
+     */
+    public function testFromStringRaisesExceptionOnCrlfInjectionDetection($header)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $subject = Header\Subject::fromString($header);
+    }
+
+    public function invalidSubjects()
+    {
+        return array(
+            'newline'      => array("xxx yyy\n"),
+            'cr-lf'        => array("xxx yyy\r\n"),
+            'cr-lf-wsp'    => array("xxx yyy\r\n\r\n"),
+            'multiline'    => array("xxx\r\ny\r\nyy"),
+        );
+    }
+
+    /**
+     * @dataProvider invalidSubjects
+     * @group ZF2015-04
+     */
+    public function testSettingSubjectRaisesExceptionOnCrlfInjection($value)
+    {
+        $header = new Header\Subject();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $header->setSubject($value);
+    }
 }

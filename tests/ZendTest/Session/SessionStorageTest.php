@@ -10,7 +10,6 @@
 namespace ZendTest\Session;
 
 use Zend\Session\Storage\SessionStorage;
-use Zend\Session\Storage\ArrayStorage;
 
 /**
  * @group      Zend_Session

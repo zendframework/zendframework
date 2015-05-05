@@ -12,7 +12,6 @@ namespace ZendTest\Session;
 use Zend\Session\Container;
 use Zend\Session\Config\StandardConfig;
 use Zend\Session\ManagerInterface as Manager;
-use Zend\Session;
 
 /**
  * @group      Zend_Session

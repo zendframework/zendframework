@@ -12,7 +12,6 @@ namespace ZendTest\Http\Client;
 use Zend\Uri\Http as UriHttp;
 use Zend\Http\Client as HTTPClient;
 use Zend\Http;
-use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 
 /**

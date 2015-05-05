@@ -10,7 +10,6 @@
 namespace ZendTest\Console;
 
 use Zend\Console\Console;
-use Zend\Console\Adapter;
 
 /**
  * @group      Zend_Console

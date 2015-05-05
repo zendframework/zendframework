@@ -14,10 +14,8 @@ use stdClass;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManager;
-use Zend\EventManager\ResponseCollection;
 use Zend\EventManager\SharedEventManager;
 use Zend\EventManager\StaticEventManager;
-use Zend\Stdlib\CallbackHandler;
 
 /**
  * @group      Zend_EventManager

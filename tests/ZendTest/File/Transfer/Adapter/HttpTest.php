@@ -11,7 +11,6 @@ namespace ZendTest\File\Transfer\Adapter;
 
 use Zend\File\Transfer\Adapter;
 use Zend\File\Transfer\Exception\RuntimeException;
-use Zend\ProgressBar;
 use Zend\ProgressBar\Adapter as AdapterProgressBar;
 use Zend\Validator\File as FileValidator;
 

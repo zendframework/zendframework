@@ -10,8 +10,6 @@
 namespace ZendTest\Math\BigInteger;
 
 use Zend\Math\BigInteger\BigInteger as BigInt;
-use Zend\Math\BigInteger\Adapter;
-use Zend\Math\BigInteger\Adapter\AdapterInterface;
 
 /**
  * @group      Zend_Math

@@ -165,6 +165,7 @@ class Wsdl
     /**
      * Set the class map of php to wsdl mappings..
      *
+     * @param  array $classMap
      * @return self
      */
     public function setClassMap($classMap)

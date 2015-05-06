@@ -30,7 +30,7 @@ use Zend\View\Variables;
  *
  * Convenience methods for build in helpers (@see __call):
  *
- * @method \Zend\View\Helper\BasePath basePath($file = null)
+ * @method string|null basePath($file = null)
  * @method \Zend\View\Helper\Cycle cycle(array $data = array(), $name = \Zend\View\Helper\Cycle::DEFAULT_NAME)
  * @method \Zend\View\Helper\DeclareVars declareVars()
  * @method \Zend\View\Helper\Doctype doctype($doctype = null)

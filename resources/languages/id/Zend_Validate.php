@@ -23,10 +23,10 @@ return array(
     // Zend\I18n\Validator\DateTime
     "The input does not appear to be a valid datetime" => "Isian tidak tampak sebagai datetime yang valid",
 
-    // Zend\I18n\Validator\Float
+    // Zend\I18n\Validator\IsFloat
     "The input does not appear to be a float" => "Isian tidak tampak sebagai float",
 
-    // Zend\I18n\Validator\Int
+    // Zend\I18n\Validator\IsInt
     "Invalid type given. String or integer expected" => "Tipe yang diberikan tidak valid. Diharapkan string atau integer",
     "The input does not appear to be an integer" => "Isian tidak tampak sebagai integer",
 
@@ -245,6 +245,11 @@ return array(
     // Zend\Validator\StringLength
     "The input is less than %min% characters long" => "Isian kurang dari %min% panjang karakter",
     "The input is more than %max% characters long" => "Isian lebih dari %max% panjang karakter",
+
+    // Zend\Validator\Timezone
+    "Invalid timezone given." => "Zona waktu yang diberikan tidak valid.",
+    "Invalid timezone location given." => "Lokasi zona waktu yang diberikan tidak valid.",
+    "Invalid timezone abbreviation given." => "Singkatan zona waktu yang diberikan tidak valid.",
 
     // Zend\Validator\Uri
     "The input does not appear to be a valid Uri" => "Isian tidak tampak sebagai Uri yang valid",

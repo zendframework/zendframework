@@ -72,7 +72,6 @@ class Converter
      * By setting the <var>$type</var>-parameter the conversion of a certain
      * type can be forced
      *
-     * @todo write more tests
      *
      * @param mixed $value The value to convert
      * @param int   $type  The conversion type to use

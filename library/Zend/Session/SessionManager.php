@@ -145,12 +145,7 @@ class SessionManager extends AbstractManager
                 continue;
             }
 
-            $referenceValue = null;
-            if (is_array($validatorValues) && array_key_exists($validator, $validatorValues)) {
-                $referenceValue = $validatorValues[$validator];
-            }
-
-            $validator = new $validator($referenceValue);
+            $validator = new $validator(null);
             $validatorChain->attach('session.validate', array($validator, 'isValid'));
         }
     }

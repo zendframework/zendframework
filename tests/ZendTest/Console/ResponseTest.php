@@ -44,6 +44,25 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->response, $this->response->sendContent());
     }
 
+    public function testGetErrorLevelDefault()
+    {
+        $this->assertSame(0, $this->response->getErrorLevel());
+    }
+
+    public function testSetErrorLevel()
+    {
+        $errorLevel = 2;
+        $this->response->setErrorLevel($errorLevel);
+        $this->assertSame($errorLevel, $this->response->getErrorLevel());
+    }
+
+    public function testSetErrorLevelWithNonIntValueIsNotSet()
+    {
+        $errorLevel = '2String';
+        $this->response->setErrorLevel($errorLevel);
+        $this->assertSame(0, $this->response->getErrorLevel());
+    }
+
     /*
     public function testSetContentWithExit()
     {

@@ -11,7 +11,6 @@ namespace ZendTest\View\Helper;
 
 use Zend\View\Helper;
 
-
 /**
  * Test class for Zend\View\Helper\InlineScript.
  *

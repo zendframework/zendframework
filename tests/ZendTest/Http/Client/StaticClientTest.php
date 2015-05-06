@@ -12,7 +12,6 @@ namespace ZendTest\Http\Client;
 use Zend\Http\ClientStatic as HTTPClient;
 use Zend\Http\Client;
 
-
 /**
  * This are the test for the prototype of Zend\Http\Client
  *

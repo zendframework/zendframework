@@ -962,7 +962,7 @@ class Server implements ZendServerServer
      * In debug mode, all exceptions are send to the client.
      *
      * @param  bool $debug
-     * @return $this
+     * @return self
      */
     public function setDebugMode($debug)
     {
@@ -974,7 +974,7 @@ class Server implements ZendServerServer
      * Validate and register fault exception
      *
      * @param  string|array $class Exception class or array of exception classes
-     * @return $this
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function registerFaultException($class)

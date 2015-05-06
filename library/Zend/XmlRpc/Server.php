@@ -494,7 +494,7 @@ class Server extends AbstractServer
      * arguments
      *
      * @param  bool|null $flag
-     * @return $this
+     * @return self
      */
     public function sendArgumentsToAllMethods($flag = null)
     {

@@ -14,10 +14,6 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\InitializableInterface;
 
-/**
- * @todo       How should we deal with required input when data is missing?
- *             should a message be returned? if so, what message?
- */
 class BaseInputFilter implements
     InputFilterInterface,
     UnknownInputsCapableInterface,
@@ -316,29 +312,30 @@ class BaseInputFilter implements
         if (is_array($name)) {
             $inputs = array();
             foreach ($name as $key => $value) {
-                if (!$this->has($key)) {
+                if (! $this->has($key)) {
                     $inputs[] = $value;
-                } else {
-                    $inputs[] = $key;
-
-                    if (!$this->inputs[$key] instanceof InputFilterInterface) {
-                        throw new Exception\InvalidArgumentException(
-                            sprintf(
-                                'Input "%s" must implement InputFilterInterface',
-                                $key
-                            )
-                        );
-                    }
-                    // Recursively populate validation groups for sub input filters
-                    $this->inputs[$key]->setValidationGroup($value);
+                    continue;
                 }
-            }
 
+                $inputs[] = $key;
+
+                if (! $this->inputs[$key] instanceof InputFilterInterface) {
+                    throw new Exception\InvalidArgumentException(
+                        sprintf(
+                            'Input "%s" must implement InputFilterInterface',
+                            $key
+                        )
+                    );
+                }
+
+                // Recursively populate validation groups for sub input filters
+                $this->inputs[$key]->setValidationGroup($value);
+            }
         } else {
             $inputs = func_get_args();
         }
 
-        if (!empty($inputs)) {
+        if (! empty($inputs)) {
             $this->validateValidationGroup($inputs);
             $this->validationGroup = $inputs;
         }

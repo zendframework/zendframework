@@ -21,7 +21,7 @@ class MongoDbOptions extends AdapterOptions
     /**
      * The mongo DB resource manager
      *
-     * @var null|MongoDbResourceManager 
+     * @var null|MongoDbResourceManager
      */
     private $resourceManager;
 

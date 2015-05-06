@@ -53,6 +53,11 @@ return array(
     "The input is not between '%min%' and '%max%', inclusively" => "L'entrada no és entre '%min%' i '%max%', inclusivament",
     "The input is not strictly between '%min%' and '%max%'" => "L'entrada no és estrictament entre '%min%' i '%max%'",
 
+    // Zend\Validator\Bitwise
+    "The input has no common bit set with '%control%'" => "L'entrada no té cap bit en comú amb '%control%'",
+    "The input doesn't have the same bits set as '%control%'" => "L'entrada no té els mateixos bits que '%control%'",
+    "The input has common bit set with '%control%'" => "L'entrada té bits en comú amb '%control%'",
+
     // Zend\Validator\Callback
     "The input is not valid" => "L'entrada no és vàlida",
     "An exception has been raised within the callback" => "S'ha llançat una excepció en el callback",
@@ -75,6 +80,9 @@ return array(
     "The input does not fit the date format '%format%'" => "L'entrada no s'ajusta al format de la data '%format%'",
 
     // Zend\Validator\DateStep
+    "Invalid type given. String, integer, array or DateTime expected" => "Tipus no vàlid donat. S'espera una cadena de text, un enter, un array o DateTime",
+    "The input does not appear to be a valid date" => "L'entrada no sembla ser una data vàlida",
+    "The input does not fit the date format '%format%'" => "L'entrada no s'ajusta al format de data '%format%'",
     "The input is not a valid step" => "L'entrada no és un pas vàlid",
 
     // Zend\Validator\Db\AbstractDb

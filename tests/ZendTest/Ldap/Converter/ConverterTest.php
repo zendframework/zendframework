@@ -11,6 +11,7 @@ namespace ZendTest\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
+use stdClass;
 use Zend\Ldap\Converter\Converter;
 
 /**
@@ -126,17 +127,42 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     public function toLdapProvider()
     {
         return array(
-            array(null, array('value' => null,
-                              'type'  => 0)),
-            array('19700101000000Z', array('value'=> 0,
-                                           'type' => 2)),
-            array('0', array('value'=> 0,
-                             'type' => 0)),
-            array('FALSE', array('value'=> 0,
-                                 'type' => 1)),
-            array('19700101000000Z', array('value'=> DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
-                                           'type' => 0)),
-
+            array(null, array(
+                'value' => null,
+                'type'  => 0,
+            )),
+            array('19700101000000Z', array(
+                'value'=> 0,
+                'type' => 2,
+            )),
+            array('0', array(
+                'value'=> 0,
+                'type' => 0,
+            )),
+            array('FALSE', array(
+                'value'=> 0,
+                'type' => 1,
+            )),
+            array('19700101000000Z', array(
+                'value'=> DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
+                'type' => 0,
+            )),
+            array(Converter::toldapBoolean(true), array(
+                'value' => (bool) true,
+                'type' => 0
+            )),
+            array(Converter::toLdapSerialize(new stdClass()), array(
+                'value' => new stdClass(),
+                'type' => 0,
+            )),
+            array(Converter::toLdapSerialize(array('foo')), array(
+                'value' => array('foo'),
+                'type' => 0,
+            )),
+            array(stream_get_contents(fopen(__FILE__, 'r')), array(
+                'value' => fopen(__FILE__, 'r'),
+                'type' => 0,
+            )),
         );
     }
 

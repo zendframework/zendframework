@@ -51,12 +51,12 @@ class InputFilterPluginManager extends AbstractPluginManager
     /**
      * Inject this and populate the factory with filter chain and validator chain
      *
-     * @param $inputfilter
+     * @param $inputFilter
      */
-    public function populateFactory($inputfilter)
+    public function populateFactory($inputFilter)
     {
-        if ($inputfilter instanceof InputFilter) {
-            $factory = $inputfilter->getFactory();
+        if ($inputFilter instanceof InputFilter) {
+            $factory = $inputFilter->getFactory();
 
             $factory->setInputFilterManager($this);
 
@@ -73,7 +73,7 @@ class InputFilterPluginManager extends AbstractPluginManager
     public function validatePlugin($plugin)
     {
         if ($plugin instanceof InputFilterInterface || $plugin instanceof InputInterface) {
-            // Hook to perform various initialization, when the inputfilter is not created through the factory
+            // Hook to perform various initialization, when the inputFilter is not created through the factory
             if ($plugin instanceof InitializableInterface) {
                 $plugin->init();
             }

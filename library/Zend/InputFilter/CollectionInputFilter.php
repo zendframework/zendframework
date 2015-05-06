@@ -200,11 +200,8 @@ class CollectionInputFilter extends InputFilter
     public function setValidationGroup($name)
     {
         if ($name === self::VALIDATE_ALL) {
-            $this->validationGroup = null;
-
-            return $this;
+            $name = null;
         }
-
         $this->validationGroup = $name;
 
         return $this;

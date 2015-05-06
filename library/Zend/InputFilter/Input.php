@@ -13,7 +13,9 @@ use Zend\Filter\FilterChain;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\ValidatorChain;
 
-class Input implements InputInterface, EmptyContextInterface
+class Input implements
+    InputInterface,
+    EmptyContextInterface
 {
     /**
      * @var bool
@@ -102,7 +104,7 @@ class Input implements InputInterface, EmptyContextInterface
 
     /**
      * @param bool $continueIfEmpty
-     * @return \Zend\InputFilter\Input
+     * @return Input
      */
     public function setContinueIfEmpty($continueIfEmpty)
     {

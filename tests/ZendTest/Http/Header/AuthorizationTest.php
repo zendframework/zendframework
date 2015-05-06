@@ -28,20 +28,17 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
 
     public function testAuthorizationGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Authorization needs to be completed');
-
-        $authorizationHeader = new Authorization();
+        $authorizationHeader = new Authorization('xxx');
         $this->assertEquals('xxx', $authorizationHeader->getFieldValue());
     }
 
     public function testAuthorizationToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('Authorization needs to be completed');
+        $authorizationHeader = new Authorization('xxx');
+        $this->assertEquals('Authorization: xxx', $authorizationHeader->toString());
 
-        $authorizationHeader = new Authorization();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Authorization: xxx', $authorizationHeader->toString());
+        $authorizationHeader = Authorization::fromString('Authorization: xxx2');
+        $this->assertEquals('Authorization: xxx2', $authorizationHeader->toString());
     }
 
     /** Implmentation specific tests here */

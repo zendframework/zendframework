@@ -209,8 +209,8 @@ class Collection extends Fieldset
         }
 
         // Check to see if elements have been replaced or removed
-        $removed = array();
-        foreach ($this->iterator as $name => $elementOrFieldset) {
+        $toRemove = array();
+        foreach ($this as $name => $elementOrFieldset) {
             if (isset($data[$name])) {
                 continue;
             }
@@ -222,10 +222,10 @@ class Collection extends Fieldset
                 ));
             }
 
-            $removed[] = $name;
+            $toRemove[] = $name;
         }
 
-        foreach ($removed as $name) {
+        foreach ($toRemove as $name) {
             $this->remove($name);
         }
 
@@ -387,7 +387,8 @@ class Collection extends Fieldset
     }
 
     /**
-     * If set to true, a template prototype is automatically added to the form to ease the creation of dynamic elements through JavaScript
+     * If set to true, a template prototype is automatically added to the form
+     * to ease the creation of dynamic elements through JavaScript
      *
      * @param bool $shouldCreateTemplate
      * @return Collection
@@ -490,7 +491,8 @@ class Collection extends Fieldset
 
         parent::prepareElement($form);
 
-        // The template element has been prepared, but we don't want it to be rendered nor validated, so remove it from the list
+        // The template element has been prepared, but we don't want it to be
+        // rendered nor validated, so remove it from the list.
         if ($this->shouldCreateTemplate) {
             $this->remove($this->templatePlaceholder);
         }

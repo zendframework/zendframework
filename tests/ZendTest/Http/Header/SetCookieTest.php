@@ -202,14 +202,14 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
             . ' Secure; HttpOnly';
         $this->assertSame($target, $setCookieHeader->getFieldValue()); // attributes set
 
-        $setCookieHeader->setExpires(NULL);
-        $setCookieHeader->setDomain(NULL);
-        $setCookieHeader->setPath(NULL);
-        $setCookieHeader->setSecure(NULL);
-        $setCookieHeader->setHttponly(NULL);
+        $setCookieHeader->setExpires(null);
+        $setCookieHeader->setDomain(null);
+        $setCookieHeader->setPath(null);
+        $setCookieHeader->setSecure(null);
+        $setCookieHeader->setHttponly(null);
         $this->assertSame('myname=myvalue', $setCookieHeader->getFieldValue()); // attributes unset
 
-        $setCookieHeader->setValue(NULL);
+        $setCookieHeader->setValue(null);
         $this->assertSame('myname=', $setCookieHeader->getFieldValue());
         $this->assertNull($setCookieHeader->getValue());
         $this->assertNull($setCookieHeader->getExpires());

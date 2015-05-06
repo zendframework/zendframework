@@ -263,7 +263,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams(array(true, NULL, 'bar'))
+                ->setParams(array(true, null, 'bar'))
                 ->setId('foo');
         $response = $this->server->handle();
         $this->assertInstanceOf('Zend\Json\Server\Response', $response);

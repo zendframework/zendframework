@@ -65,8 +65,8 @@ class SocketTest extends CommonHttpTests
     public function testDefaultConfig()
     {
         $config = $this->_adapter->getConfig();
-        $this->assertEquals(TRUE, $config['sslverifypeer']);
-        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
+        $this->assertEquals(true, $config['sslverifypeer']);
+        $this->assertEquals(false, $config['sslallowselfsigned']);
     }
 
     public function testConnectingViaSslEnforcesDefaultSslOptionsOnContext()

@@ -19,9 +19,9 @@ class MongoDbOptions extends AdapterOptions
     private $namespaceSeparator = ':';
 
     /**
-     * The redis resource manager
+     * The mongo DB resource manager
      *
-     * @var null|RedisResourceManager
+     * @var null|MongoDbResourceManager
      */
     private $resourceManager;
 
@@ -101,7 +101,7 @@ class MongoDbOptions extends AdapterOptions
     }
 
     /**
-     * Set the redis resource id
+     * Set the mongodb resource id
      *
      * @param string $resourceId
      *

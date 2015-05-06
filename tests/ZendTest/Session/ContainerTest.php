@@ -63,7 +63,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @param  \PHPUnit_Framework_TestResult $result
      * @return void
      */
-    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    public function run(\PHPUnit_Framework_TestResult $result = null)
     {
         $this->setPreserveGlobalState(false);
 

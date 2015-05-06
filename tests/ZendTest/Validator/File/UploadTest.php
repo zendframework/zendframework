@@ -219,7 +219,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFilesReturnsEmptyArrayWhenFilesSuperglobalIsNull()
     {
-        $_FILES = NULL;
+        $_FILES = null;
         $validator = new File\Upload();
         $validator->setFiles();
         $this->assertEquals(array(), $validator->getFiles());
@@ -231,7 +231,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
     public function testGetFilesReturnsEmptyArrayAfterSetFilesIsCalledWithNull()
     {
         $validator = new File\Upload();
-        $validator->setFiles(NULL);
+        $validator->setFiles(null);
         $this->assertEquals(array(), $validator->getFiles());
     }
 

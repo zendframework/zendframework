@@ -597,14 +597,14 @@ class DiTest extends \PHPUnit_Framework_TestCase
                             0 => 'd',
                             1 => 'ZendTest\Di\TestAsset\DummyInterface',
                             2 => true,
-                            3 => NULL,
+                            3 => null,
                         ),
                     ),
                 ),
             ),
             'ZendTest\Di\TestAsset\DummyInterface' => array(
                 'supertypes' => array(),
-                'instantiator' => NULL,
+                'instantiator' => null,
                 'methods' => array(),
                 'parameters' => array(),
             ),
@@ -974,8 +974,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
             'instantiator' => '__construct',
             'methods' => array('__construct' => true),
             'parameters' => array( '__construct' => array(
-                "$retrievedInstanceClass::__construct:0" => array('a', $sharedInstanceClass, true, NULL),
-                "$retrievedInstanceClass::__construct:1" => array('params', NULL, false, array()),
+                "$retrievedInstanceClass::__construct:0" => array('a', $sharedInstanceClass, true, null),
+                "$retrievedInstanceClass::__construct:1" => array('params', null, false, array()),
             )),
         ));
 

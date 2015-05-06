@@ -403,11 +403,11 @@ class ArrayUtilsTest extends TestCase
      */
     public function testInvalidArraysAlwaysReturnFalse($test)
     {
-        $this->assertFalse(ArrayUtils::hasStringKeys($test, False));
-        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, False));
-        $this->assertFalse(ArrayUtils::hasNumericKeys($test, False));
-        $this->assertFalse(ArrayUtils::isList($test, False));
-        $this->assertFalse(ArrayUtils::isHashTable($test, False));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, false));
+        $this->assertFalse(ArrayUtils::isList($test, false));
+        $this->assertFalse(ArrayUtils::isHashTable($test, false));
 
         $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
         $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));

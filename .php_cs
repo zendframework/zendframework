@@ -41,6 +41,7 @@ $config->fixers(
         'join_function',
         'line_after_namespace',
         'linefeed',
+        'lowercase_constants',
         'lowercase_keywords',
         'parenthesis',
         'multiple_use',

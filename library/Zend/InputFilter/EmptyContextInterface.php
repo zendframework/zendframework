@@ -11,7 +11,14 @@ namespace Zend\InputFilter;
 
 interface EmptyContextInterface
 {
+    /**
+     * @param bool $continueIfEmpty
+     * @return self
+     */
     public function setContinueIfEmpty($continueIfEmpty);
 
+    /**
+     * @return bool
+     */
     public function continueIfEmpty();
 }

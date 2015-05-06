@@ -15,6 +15,19 @@ namespace Zend\InputFilter;
  */
 interface UnknownInputsCapableInterface
 {
+    /**
+     * Is the data set has unknown input ?
+     *
+     * @throws Exception\RuntimeException
+     * @return bool
+     */
     public function hasUnknown();
+
+    /**
+     * Return the unknown input
+     *
+     * @throws Exception\RuntimeException
+     * @return array
+     */
     public function getUnknown();
 }

@@ -15,5 +15,10 @@ namespace Zend\InputFilter;
  */
 interface ReplaceableInputInterface
 {
+    /**
+     * @param $input
+     * @param $name
+     * @return self
+     */
     public function replace($input, $name);
 }

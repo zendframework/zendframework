@@ -13,7 +13,6 @@ use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Memory;
 
-
 /**
  * @group      Zend_Memory
  */

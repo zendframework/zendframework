@@ -13,7 +13,6 @@ use Zend\Http\Client as HTTPClient;
 use Zend\Http\Client\Adapter;
 use Zend\Http\Request;
 
-
 /**
  * This are the test for the prototype of Zend\Http\Client
  *

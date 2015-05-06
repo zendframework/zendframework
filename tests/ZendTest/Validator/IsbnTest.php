@@ -11,7 +11,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Isbn;
 
-
 /**
  * @group      Zend_Validator
  */

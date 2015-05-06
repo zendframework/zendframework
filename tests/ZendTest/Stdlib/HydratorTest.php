@@ -29,7 +29,6 @@ use ZendTest\Stdlib\TestAsset\ArraySerializable as ArraySerializableAsset;
 use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
 use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
 
-
 /**
  * @group      Zend_Stdlib
  */

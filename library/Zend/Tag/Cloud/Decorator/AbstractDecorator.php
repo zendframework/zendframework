@@ -160,6 +160,12 @@ abstract class AbstractDecorator implements Decorator
         }
     }
 
+    /**
+     * Wrap html with tag
+     *
+     * @param  string $html
+     * @return string
+     */
     protected function wrapTag($html)
     {
         $escaper = $this->getEscaper();

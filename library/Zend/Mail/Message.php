@@ -372,7 +372,8 @@ class Message
             if (!$body instanceof Mime\Message) {
                 if (!method_exists($body, '__toString')) {
                     throw new Exception\InvalidArgumentException(sprintf(
-                        '%s expects object arguments of type Zend\Mime\Message or implementing __toString(); object of type "%s" received',
+                        '%s expects object arguments of type Zend\Mime\Message or implementing __toString();'
+                        . ' object of type "%s" received',
                         __METHOD__,
                         get_class($body)
                     ));
@@ -510,7 +511,8 @@ class Message
         }
         if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a string, AddressInterface, array, AddressList, or Traversable as its first argument; received "%s"',
+                '%s expects a string, AddressInterface, array, AddressList, or Traversable as its first argument;'
+                . ' received "%s"',
                 $callingMethod,
                 (is_object($emailOrAddressOrList) ? get_class($emailOrAddressOrList) : gettype($emailOrAddressOrList))
             ));

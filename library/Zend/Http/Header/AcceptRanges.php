@@ -24,7 +24,9 @@ class AcceptRanges implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-ranges') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Accept-Ranges string');
+            throw new Exception\InvalidArgumentException(
+                'Invalid header line for Accept-Ranges string'
+            );
         }
 
         $header = new static($value);
@@ -34,7 +36,9 @@ class AcceptRanges implements HeaderInterface
 
     public function __construct($rangeUnit = null)
     {
-        $this->rangeUnit = $rangeUnit;
+        if ($rangeUnit) {
+            $this->setRangeUnit($rangeUnit);
+        }
     }
 
     public function getFieldName()
@@ -49,6 +53,7 @@ class AcceptRanges implements HeaderInterface
 
     public function setRangeUnit($rangeUnit)
     {
+        HeaderValue::assertValid($rangeUnit);
         $this->rangeUnit = $rangeUnit;
         return $this;
     }

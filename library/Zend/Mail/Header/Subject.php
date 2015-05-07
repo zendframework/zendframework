@@ -25,8 +25,10 @@ class Subject implements UnstructuredInterface
 
     public static function fromString($headerLine)
     {
-        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        list($name, $value) = GenericHeader::splitHeaderLine($decodedLine);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $decodedValue = HeaderWrap::mimeDecodeValue($value);
+        $wasEncoded = ($decodedValue !== $value);
+        $value = $decodedValue;
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'subject') {
@@ -34,7 +36,7 @@ class Subject implements UnstructuredInterface
         }
 
         $header = new static();
-        if ($decodedLine != $headerLine) {
+        if ($wasEncoded) {
             $header->setEncoding('UTF-8');
         }
         $header->setSubject($value);
@@ -69,7 +71,11 @@ class Subject implements UnstructuredInterface
 
     public function setSubject($subject)
     {
-        $this->subject = (string) $subject;
+        $subject = (string) $subject;
+        if (! HeaderValue::isValid($subject)) {
+            throw new Exception\InvalidArgumentException('Invalid Subject value detected');
+        }
+        $this->subject = $subject;
         return $this;
     }
 

@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class AuthenticationInfo implements HeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+    */
     protected $value;
 
     public static function fromString($headerLine)
@@ -24,7 +26,10 @@ class AuthenticationInfo implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'authentication-info') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Authentication-Info string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid header line for Authentication-Info string: "%s"',
+                $name
+            ));
         }
 
         // @todo implementation details
@@ -35,7 +40,10 @@ class AuthenticationInfo implements HeaderInterface
 
     public function __construct($value = null)
     {
-        $this->value = $value;
+        if ($value) {
+            HeaderValue::assertValid($value);
+            $this->value = $value;
+        }
     }
 
     public function getFieldName()

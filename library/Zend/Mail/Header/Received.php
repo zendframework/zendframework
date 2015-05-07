@@ -24,6 +24,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'received') {
@@ -37,6 +38,9 @@ class Received implements HeaderInterface, MultipleHeadersInterface
 
     public function __construct($value = '')
     {
+        if (! HeaderValue::isValid($value)) {
+            throw new Exception\InvalidArgumentException('Invalid Received value provided');
+        }
         $this->value = $value;
     }
 
@@ -77,7 +81,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
     {
         $strings = array($this->toString());
         foreach ($headers as $header) {
-            if (!$header instanceof Received) {
+            if (! $header instanceof Received) {
                 throw new Exception\RuntimeException(
                     'The Received multiple header implementation can only accept an array of Received headers'
                 );

@@ -54,6 +54,7 @@ abstract class AbstractLocation implements HeaderInterface
             );
         }
 
+        HeaderValue::assertValid($uri);
         $locationHeader->setUri(trim($uri));
 
         return $locationHeader;

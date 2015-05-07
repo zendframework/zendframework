@@ -69,6 +69,8 @@ abstract class AbstractAccept implements HeaderInterface
             $value = $headerLine;
         }
 
+        HeaderValue::assertValid($value);
+
         foreach ($this->getFieldValuePartsFromHeaderLine($value) as $value) {
             $this->addFieldValuePartToQueue($value);
         }
@@ -108,7 +110,6 @@ abstract class AbstractAccept implements HeaderInterface
         $out = array();
         foreach ($values[0] as $value) {
             $value = trim($value);
-
             $out[] = $this->parseFieldValuePart($value);
         }
 

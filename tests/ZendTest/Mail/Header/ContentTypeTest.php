@@ -52,7 +52,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'Content-Type: multipart/alternative; boundary="Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD";'
         );
         $params = $contentTypeHeader->getParameters();
-        $this->assertEquals($params, array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
+        $this->assertEquals(array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'), $params);
     }
 
     public function testProvidingParametersIntroducesHeaderFolding()
@@ -62,7 +62,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $header->addParameter('charset', 'us-ascii');
         $string = $header->toString();
 
-        $this->assertContains("Content-Type: application/x-unit-test;\r\n", $string);
+        $this->assertContains("Content-Type: application/x-unit-test;", $string);
         $this->assertContains(";\r\n charset=\"us-ascii\"", $string);
     }
 
@@ -101,5 +101,65 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
 
         $header->setType('message/rfc822');
         $this->assertEquals('Content-Type: message/rfc822', $header->toString());
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testFromStringRaisesExceptionForInvalidName()
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'header name');
+        $header = ContentType::fromString('Content-Type' . chr(32) . ': text/html');
+    }
+
+    public function headerLines()
+    {
+        return array(
+            'newline'      => array("Content-Type: text/html;\nlevel=1"),
+            'cr-lf'        => array("Content-Type: text/html\r\n;level=1",),
+            'multiline'    => array("Content-Type: text/html;\r\nlevel=1\r\nq=0.1"),
+        );
+    }
+
+    /**
+     * @dataProvider headerLines
+     * @group ZF2015-04
+     */
+    public function testFromStringRaisesExceptionForNonFoldingMultilineValues($headerLine)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'header value');
+        $header = ContentType::fromString($headerLine);
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testFromStringHandlesContinuations()
+    {
+        $header = ContentType::fromString("Content-Type: text/html;\r\n level=1");
+        $this->assertEquals('text/html', $header->getType());
+        $this->assertEquals(array('level' => '1'), $header->getParameters());
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testAddParameterRaisesInvalidArgumentExceptionForInvalidParameterName()
+    {
+        $header = new ContentType();
+        $header->setType('text/html');
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'parameter name');
+        $header->addParameter("b\r\na\rr\n", "baz");
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testAddParameterRaisesInvalidArgumentExceptionForInvalidParameterValue()
+    {
+        $header = new ContentType();
+        $header->setType('text/html');
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'parameter value');
+        $header->addParameter('foo', "\nbar\r\nbaz\r");
     }
 }

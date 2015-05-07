@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class ContentEncoding implements HeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $value;
 
     public static function fromString($headerLine)
@@ -24,7 +26,9 @@ class ContentEncoding implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Encoding string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException(
+                'Invalid header line for Content-Encoding string: "' . $name . '"'
+            );
         }
 
         // @todo implementation details
@@ -35,7 +39,10 @@ class ContentEncoding implements HeaderInterface
 
     public function __construct($value = null)
     {
-        $this->value = $value;
+        if ($value) {
+            HeaderValue::assertValid($value);
+            $this->value = $value;
+        }
     }
 
     public function getFieldName()

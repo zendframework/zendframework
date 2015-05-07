@@ -19,6 +19,7 @@ class MessageId implements HeaderInterface
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'message-id') {
@@ -69,8 +70,13 @@ class MessageId implements HeaderInterface
             $id = $this->createMessageId();
         }
 
-        $id = sprintf('<%s>', $id);
-        $this->messageId = $id;
+        if (! HeaderValue::isValid($id)
+            || preg_match("/[\r\n]/", $id)
+        ) {
+            throw new Exception\InvalidArgumentException('Invalid ID detected');
+        }
+
+        $this->messageId = sprintf('<%s>', $id);
         return $this;
     }
 

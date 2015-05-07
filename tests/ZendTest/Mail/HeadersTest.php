@@ -107,7 +107,10 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     public function testHeadersHasAndGetWorkProperly()
     {
         $headers = new Mail\Headers();
-        $headers->addHeaders(array($f = new Header\GenericHeader('Foo', 'bar'), new Header\GenericHeader('Baz', 'baz')));
+        $headers->addHeaders(array(
+            $f = new Header\GenericHeader('Foo', 'bar'),
+            new Header\GenericHeader('Baz', 'baz'),
+        ));
         $this->assertFalse($headers->has('foobar'));
         $this->assertTrue($headers->has('foo'));
         $this->assertTrue($headers->has('Foo'));
@@ -276,8 +279,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     public function testCastingToArrayReturnsMultiHeadersAsArrays()
     {
         $headers = new Mail\Headers();
-        $received1 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id BBBBBBBBBBB\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:27 -0600 (CST)");
-        $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id AAAAAAAAAAA\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
+        $received1 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\n by framework (Postfix) with ESMTP id BBBBBBBBBBB\r\n for <zend@framework>; Mon, 21 Nov 2011 12:50:27 -0600 (CST)");
+        $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\n by framework (Postfix) with ESMTP id AAAAAAAAAAA\r\n for <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
         $headers->addHeader($received1);
         $headers->addHeader($received2);
         $array   = $headers->toArray();
@@ -293,8 +296,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     public function testCastingToStringReturnsAllMultiHeaderValues()
     {
         $headers = new Mail\Headers();
-        $received1 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id BBBBBBBBBBB\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:27 -0600 (CST)");
-        $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id AAAAAAAAAAA\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
+        $received1 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\n by framework (Postfix) with ESMTP id BBBBBBBBBBB\r\n for <zend@framework>; Mon, 21 Nov 2011 12:50:27 -0600 (CST)");
+        $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\n by framework (Postfix) with ESMTP id AAAAAAAAAAA\r\n for <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
         $headers->addHeader($received1);
         $headers->addHeader($received2);
         $string  = $headers->toString();
@@ -349,5 +352,76 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers2->removeHeader('Bcc');
         $this->assertTrue($headers->has('Bcc'));
         $this->assertFalse($headers2->has('Bcc'));
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackFromString()
+    {
+        $this->setExpectedException('Zend\Mail\Exception\RuntimeException');
+        Mail\Headers::fromString("Fake: foo-bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeaderLineSingle()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaderLine("Fake: foo-bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeaderLineWithValue()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaderLine('Fake', "foo-bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeaderLineMultiple()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaderLine('Fake', array("foo-bar\r\n\r\nevilContent"));
+        $headers->forceLoading();
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeadersSingle()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaders(array("Fake: foo-bar\r\n\r\nevilContent"));
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeadersWithValue()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaders(array('Fake' => "foo-bar\r\n\r\nevilContent"));
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testHeaderCrLfAttackAddHeadersMultiple()
+    {
+        $headers = new Mail\Headers();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $headers->addHeaders(array('Fake' => array("foo-bar\r\n\r\nevilContent")));
+        $headers->forceLoading();
     }
 }

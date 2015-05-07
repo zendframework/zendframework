@@ -64,4 +64,14 @@ class RefererTest extends \PHPUnit_Framework_TestCase
         $refererHeader->setUri('http://www.example.com/path?query#fragment');
         $this->assertEquals('Referer: http://www.example.com/path?query', $refererHeader->toString());
     }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testCRLFAttack()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Referer::fromString("Referer: http://www.example.com/\r\n\r\nevilContent");
+    }
 }

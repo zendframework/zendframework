@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class TE implements HeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $value;
 
     public static function fromString($headerLine)
@@ -35,7 +37,10 @@ class TE implements HeaderInterface
 
     public function __construct($value = null)
     {
-        $this->value = $value;
+        if ($value) {
+            HeaderValue::assertValid($value);
+            $this->value = $value;
+        }
     }
 
     public function getFieldName()

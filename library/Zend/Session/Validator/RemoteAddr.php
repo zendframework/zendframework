@@ -50,6 +50,8 @@ class RemoteAddr implements SessionValidator
     /**
      * Constructor
      * get the current user IP and store it in the session as 'valid data'
+     *
+     * @param null|string $data
      */
     public function __construct($data = null)
     {

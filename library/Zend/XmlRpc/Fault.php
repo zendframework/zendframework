@@ -83,6 +83,8 @@ class Fault
     /**
      * Constructor
      *
+     * @param int    $code
+     * @param string $message
      */
     public function __construct($code = 404, $message = '')
     {

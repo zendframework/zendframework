@@ -1,5 +1,72 @@
 # CHANGELOG
 
+## 2.4.1 (2015-05-07)
+
+- [7361: Missing parameter annotation in PHPDoc in Zend\Http\PhpEnvironment\Request](https://github.com/zendframework/zf2/pull/7361)
+- [7376: Fixes DocBlock for BasePath helper in PhpRenderer](https://github.com/zendframework/zf2/pull/7376)
+- [7378: Change year on comment](https://github.com/zendframework/zf2/pull/7378)
+- [7380: Remove unused code](https://github.com/zendframework/zf2/pull/7380)
+- [7383: Fixes typos](https://github.com/zendframework/zf2/pull/7383)
+- [7391: update composer's branch-alias](https://github.com/zendframework/zf2/pull/7391)
+- [7392: improvments for Zend\InputFilter](https://github.com/zendframework/zf2/pull/7392)
+- [7393: implements @todo write more tests for Zend\Ldap\Converter::toLdap()](https://github.com/zendframework/zf2/pull/7393)
+- [7394: fixed return type on disconnect method in pgsql connection](https://github.com/zendframework/zf2/pull/7394)
+- [7396: added connection type to allow force new connection](https://github.com/zendframework/zf2/pull/7396)
+- [7397: &#91;travis&#92; Remove some old hacks](https://github.com/zendframework/zf2/pull/7397)
+- [7398: &#91;travis&#92; Enable memcache and redis services](https://github.com/zendframework/zf2/pull/7398)
+- [7406: Update AutoDiscover.php](https://github.com/zendframework/zf2/pull/7406)
+- [7407: Sql-query breaks on 2.4.0 compare to 2.3.7](https://github.com/zendframework/zf2/issues/7407)
+- [7408: Zend\Code\Generator\ClassGenerator can not generate final classes](https://github.com/zendframework/zf2/pull/7408)
+- [7412: Use === and !== in null checks instead of == and !=](https://github.com/zendframework/zf2/pull/7412)
+- [7413: increase loop performance by assign count() to variable](https://github.com/zendframework/zf2/pull/7413)
+- [7415: XMLRPC Incompatibility with HHVM](https://github.com/zendframework/zf2/pull/7415)
+- [7417: replace self::EOL with PHP&#95;EOL as AbstractHtmlElement::EOL is deprecated](https://github.com/zendframework/zf2/pull/7417)
+- [7419: Updated the CA language pack](https://github.com/zendframework/zf2/pull/7419)
+- [7420: implements tests's @todo of ZendTest\Http\Header\AuthorizationTest](https://github.com/zendframework/zf2/pull/7420)
+- [7422: Get correct expression string when Zend\Db\Sql\Expression is used](https://github.com/zendframework/zf2/pull/7422)
+- [7423: Test for percentage sign in Zend\Db\Sql\Expression](https://github.com/zendframework/zf2/pull/7423)
+- [7425: update variable name : $myParams to $pageParams](https://github.com/zendframework/zf2/pull/7425)
+- [7426: Fixed form collections with nested fieldsets that implements InputfilterProviderInterface](https://github.com/zendframework/zf2/pull/7426)
+- [7431: zf7428 fixed issue with inconsistent getTrait() behaviour #7428](https://github.com/zendframework/zf2/pull/7431)
+- [7432: update Zend&#95;Validate.php resource file for 2.4](https://github.com/zendframework/zf2/pull/7432)
+- [7433: Update Zend&#95;Validate.php for &quot;id&quot; for 2.4](https://github.com/zendframework/zf2/pull/7433)
+- [7436: remove version&#95;compare check for PHP &gt;=5.3.7](https://github.com/zendframework/zf2/pull/7436)
+- [7446: bugfix removing multiple fieldsets does't work](https://github.com/zendframework/zf2/pull/7446)
+- [7451: partialLoop notice #7450](https://github.com/zendframework/zf2/pull/7451)
+- [7453: update url to 'current' at INSTALL.md](https://github.com/zendframework/zf2/pull/7453)
+- [7460: Update PHP CS Fixer to v1.7](https://github.com/zendframework/zf2/pull/7460)
+- [7461: CS: The PHP constants true, false, and null MUST be in lower case.](https://github.com/zendframework/zf2/pull/7461)
+- [7462: CS: single&#95;line&#95;after&#95;imports](https://github.com/zendframework/zf2/pull/7462)
+- [7468: Replace whitespace in the parameter prefix option passed to AbstractSql::processExpression](https://github.com/zendframework/zf2/pull/7468)
+- [7474: Implement expected Input::isValid workflow](https://github.com/zendframework/zf2/pull/7474)
+- [7476: &#91;test&#92; Replace assert(True|False) with more appropriate assertions where possible](https://github.com/zendframework/zf2/pull/7476)
+- [7477: &#91;travis&#92; Colorize PHPUnit output (requires PHPUnit ~4.6)](https://github.com/zendframework/zf2/pull/7477)
+- [7478: &#91;memory&#92; isLocked sometimes return integer instead bool](https://github.com/zendframework/zf2/pull/7478)
+- [7480: &#91;travis-ci&#92;&nbsp;HHVM nightly is not supported](https://github.com/zendframework/zf2/pull/7480)
+- [7481: CS remove unused uses](https://github.com/zendframework/zf2/pull/7481)
+- [7482: Fix undefined PGSQL&#95;CONNECT&#95;ASYNC only present in PHP 5.6](https://github.com/zendframework/zf2/pull/7482)
+- [7483: &#91;#7396&#92; Functionality only works in PHP &gt;= 5.6](https://github.com/zendframework/zf2/pull/7483)
+- [7485: &#91;config&#92;&#91;test&#92; Fix assertContains should be assertArrayHasKey](https://github.com/zendframework/zf2/pull/7485)
+- [7489: Updated phpDoc and removed duplicates](https://github.com/zendframework/zf2/pull/7489)
+- [7490: mongo: mentions of redis removed](https://github.com/zendframework/zf2/pull/7490)
+- [7492: &#91;stdlib&#92;&#91;test&#92; Fix Deprecated notice for Non-static method called static](https://github.com/zendframework/zf2/pull/7492)
+- [7493: &#91;travis-ci&#92; Print list of PEAR packages installed and their versions](https://github.com/zendframework/zf2/pull/7493)
+- [7494: &#91;db&#92;&#91;pgsql&#92;&#91;test&#92; Fix testDisconnect](https://github.com/zendframework/zf2/pull/7494)
+- [7495: &#91;console&#92; Assert only int error levels are set](https://github.com/zendframework/zf2/pull/7495)
+
+### SECURITY UPDATES
+
+- **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
+  Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
+  Splitting). Both components were updated to perform header value validations
+  to ensure no values contain characters not detailed in their corresponding
+  specifications, and will raise exceptions on detection. Each also provides new
+  facilities for both validating and filtering header values prior to injecting
+  them into header classes.
+
+  If you use either `Zend\Mail` or `Zend\Http` (which includes users of
+  `Zend\Mvc`), we recommend upgrading immediately.
+
 ## 2.4.0 (2015-03-31)
 
 - [4122: Update EM-&gt;trigerUntil to be an alias of trigger](https://github.com/zendframework/zf2/pull/4122)
@@ -312,6 +379,21 @@
 - [7369: Composer update to 2.4-RC3](https://github.com/zendframework/zf2/pull/7369)
 - [7374: Adjust ContentType regex to allow quoted strings and equals](https://github.com/zendframework/zf2/pull/7374)
 - [7375: Correcting](https://github.com/zendframework/zf2/pull/7375)
+
+## 2.3.8 (2015-05-07)
+
+### SECURITY UPDATES
+
+- **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
+  Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
+  Splitting). Both components were updated to perform header value validations
+  to ensure no values contain characters not detailed in their corresponding
+  specifications, and will raise exceptions on detection. Each also provides new
+  facilities for both validating and filtering header values prior to injecting
+  them into header classes.
+
+  If you use either `Zend\Mail` or `Zend\Http` (which includes users of
+  `Zend\Mvc`), we recommend upgrading immediately.
 
 ## 2.3.7 (2015-03-12)
 

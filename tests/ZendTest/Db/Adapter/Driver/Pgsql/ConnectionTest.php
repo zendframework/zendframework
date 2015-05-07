@@ -53,15 +53,11 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test disconnect method to return instance of ConnectionInterface
-     * @TODO Exception was raised due to invalid resource. Add resource to make this test pass.
      */
     public function testDisconnect()
     {
-        if (! extension_loaded('pgsql')) {
-            $this->markTestSkipped('pgsql extension not loaded');
-        }
+        include_once 'pgsqlMockFunctions.php';
         $this->assertSame($this->connection, $this->connection->disconnect());
-        $this->assertNull($this->connection->getResource());
     }
 
     /**

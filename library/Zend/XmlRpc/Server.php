@@ -492,6 +492,9 @@ class Server extends AbstractServer
      * how to handle arguments. If set to true, all methods including constructor
      * will receive the arguments. If set to false, only constructor will receive the
      * arguments
+     *
+     * @param  bool|null $flag
+     * @return self
      */
     public function sendArgumentsToAllMethods($flag = null)
     {

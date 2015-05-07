@@ -960,7 +960,9 @@ class Server implements ZendServerServer
     /**
      * Set the debug mode.
      * In debug mode, all exceptions are send to the client.
-     * @param bool $debug
+     *
+     * @param  bool $debug
+     * @return self
      */
     public function setDebugMode($debug)
     {

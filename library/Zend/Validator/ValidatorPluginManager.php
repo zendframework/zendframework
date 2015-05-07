@@ -105,7 +105,6 @@ class ValidatorPluginManager extends AbstractPluginManager
         'isfloat'                  => 'Zend\I18n\Validator\IsFloat',
         'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
         'isint'                    => 'Zend\I18n\Validator\IsInt',
-        'ip'                       => 'Zend\Validator\Ip',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
         'phonenumber'              => 'Zend\I18n\Validator\PhoneNumber',

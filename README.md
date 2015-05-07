@@ -11,41 +11,13 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.4.1*
+*Zend Framework 2.4.2dev*
 
-This is the first maintenance release in the version 2.4 series.
+This is the second maintenance release in the version 2.4 series.
 
-07 May 2015
+DD MMM YYYY
 
-### UPDATES IN 2.4.1
-
-This release contains the following security fixes:
-
-- **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
-  Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
-  Splitting). Both components were updated to perform header value validations
-  to ensure no values contain characters not detailed in their corresponding
-  specifications, and will raise exceptions on detection. Each also provides new
-  facilities for both validating and filtering header values prior to injecting
-  them into header classes.
-
-  If you use either `Zend\Mail` or `Zend\Http` (which includes users of
-  `Zend\Mvc`), we recommend upgrading immediately.
-
-Other important changes:
-
-- [#7422](https://github.com/zendframework/zf2/pull/7422) fixes a regression in
-  `Zend\Db\Sql\Expression` whereby placeholders were being double
-  percent-encoded.
-- [#7426](https://github.com/zendframework/zf2/pull/7426) fixes a regression in
-  `Zend\Form` whereby input filters attached to collections were no longer
-  being added to the form, leading to incorrect validation and the inability
-  to bind data to nested fieldsets.
-- [#7446](https://github.com/zendframework/zf2/pull/7446) fixes a regression in
-  `Zend\Form` with regards to removal of multiple elements at once.
-- [#7474](https://github.com/zendframework/zf2/pull/7474) fixes a regression in
-  `Zend\InputFilter` which broke the relationship between required inputs that
-  were allowed empty, leading to false identification of invalid inputs.
+### UPDATES IN 2.4.2
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

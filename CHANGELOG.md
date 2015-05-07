@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2.3.8 (2015-05-07)
+
+### SECURITY UPDATES
+
+- **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
+  Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
+  Splitting). Both components were updated to perform header value validations
+  to ensure no values contain characters not detailed in their corresponding
+  specifications, and will raise exceptions on detection. Each also provides new
+  facilities for both validating and filtering header values prior to injecting
+  them into header classes.
+
+  If you use either `Zend\Mail` or `Zend\Http` (which includes users of
+  `Zend\Mvc`), we recommend upgrading immediately.
+
 ## 2.3.7 (2015-03-12)
 
 - [7255: Revert BC break against AbstractRestfulController](https://github.com/zendframework/zf2/pull/7255)

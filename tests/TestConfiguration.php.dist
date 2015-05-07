@@ -134,7 +134,7 @@ defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_R
 defined('TESTS_ZEND_CRYPT_OPENSSL_CONF') || define('TESTS_ZEND_CRYPT_OPENSSL_CONF', false);
 
 /**
- * Zend\Db\Adapter\Pdo\Mysql and Zend\Db\Adapter\Mysqli
+ * Zend\Db\Adapter\Pdo\Pdo and Zend\Db\Adapter\Driver\Mysqli
  *
  * There are separate properties to enable tests for the PDO_MYSQL adapter and
  * the native Mysqli adapters, but the other properties are shared between the
@@ -149,7 +149,7 @@ defined('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT', 3306);
 
 /**
- * Zend\Db\Adapter\Pdo\Sqlite
+ * Zend\Db\Adapter\Pdo\Pdo
  *
  * Username and password are irrelevant for SQLite.
  */
@@ -157,7 +157,7 @@ defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_DB_ADA
 defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE', ':memory:');
 
 /**
- * Zend\Db\Adapter\Pdo\Mssql
+ * Zend\Db\Adapter\Driver\Pdo\Pdo
  *
  * Note that you need to patch your ntwdblib.dll, the one that
  * comes with PHP does not work. See user comments at
@@ -170,7 +170,7 @@ defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PASSWORD') || define('TESTS_ZEND_DB_ADA
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE', 'test');
 
 /**
- * Zend\Db\Adapter\Pdo\Pgsql
+ * Zend\Db\Adapter\Driver\Pdo\Pdo
  */
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME', '127.0.0.1');
@@ -179,7 +179,7 @@ defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD') || define('TESTS_ZEND_DB_ADA
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE', 'postgres');
 
 /**
- * Zend\Db\Adapter\Oracle and Zend\Db\Adapter\Pdo\Oci
+ * Zend\Db\Adapter\Driver\Oci8 and Zend\Db\Adapter\Pdo\Pdo
  *
  * There are separate properties to enable tests for the PDO_OCI adapter and
  * the native Oracle adapter, but the other properties are shared between the
@@ -193,7 +193,7 @@ defined('TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_SID') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_SID', 'xe');
 
 /**
- * Zend\Db\Adapter\Db2 and Zend\Db\Adapter\Pdo\Ibm
+ * Zend\Db\Adapter\Driver\IbmDb2 and Zend\Db\Adapter\Driver\Pdo\Pdo
  * There are separate properties to enable tests for the PDO_IBM adapter and
  * the native DB2 adapter, but the other properties are shared between the
  * two related Zend\Db adapters.
@@ -207,7 +207,7 @@ defined('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_D
 defined('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
 /**
- * Zend\Db\Adapter\Sqlsrv
+ * Zend\Db\Adapter\Driver\Sqlsrv
  * Note: Make sure that you create the "test" database and set a
  * username and password
  *
@@ -263,7 +263,7 @@ defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASE
 defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', false);
 
 /**
- * Zend\Http\Client\Proxy tests
+ * Zend\Http\Client\Adapter\Proxy tests
  *
  * HTTP proxy to be used for testing the Proxy adapter. Set to a string of
  * the form 'host:port'. Set to null to skip HTTP proxy tests.
@@ -468,7 +468,7 @@ defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_Z
 defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
 
 /**
- * Zend\Validate tests
+ * Zend\Validator tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network
  * connectivity.

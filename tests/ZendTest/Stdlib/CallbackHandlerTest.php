@@ -85,7 +85,7 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $error   = false;
         set_error_handler(function ($errno, $errstr) use (&$error) {
             $error = true;
-        }, E_STRICT);
+        }, E_STRICT|E_DEPRECATED);
         $handler->call();
         restore_error_handler();
         $this->assertTrue($error);

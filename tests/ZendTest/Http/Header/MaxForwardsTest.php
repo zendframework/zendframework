@@ -44,5 +44,25 @@ class MaxForwardsTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Max-Forwards: xxx', $maxForwardsHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = MaxForwards::fromString("Max-Forwards: xxx\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructorValue()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new MaxForwards("xxx\r\n\r\nevilContent");
+    }
 }

@@ -44,5 +44,25 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Range: xxx', $rangeHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Range::fromString("Range: xxx\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructorValue()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new Range("xxx\r\n\r\nevilContent");
+    }
 }

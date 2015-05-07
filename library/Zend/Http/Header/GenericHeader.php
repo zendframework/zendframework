@@ -126,6 +126,7 @@ class GenericHeader implements HeaderInterface
     public function setFieldValue($fieldValue)
     {
         $fieldValue = (string) $fieldValue;
+        HeaderValue::assertValid($fieldValue);
 
         if (preg_match('/^\s+$/', $fieldValue)) {
             $fieldValue = '';

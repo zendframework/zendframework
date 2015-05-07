@@ -15,7 +15,9 @@ namespace Zend\Http\Header;
  */
 class ProxyAuthenticate implements MultipleHeaderInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $value;
 
     public static function fromString($headerLine)
@@ -24,7 +26,10 @@ class ProxyAuthenticate implements MultipleHeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'proxy-authenticate') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authenticate string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid header line for Proxy-Authenticate string: "%s"',
+                $name
+            ));
         }
 
         // @todo implementation details
@@ -35,7 +40,10 @@ class ProxyAuthenticate implements MultipleHeaderInterface
 
     public function __construct($value = null)
     {
-        $this->value = $value;
+        if ($value) {
+            HeaderValue::assertValid($value);
+            $this->value = $value;
+        }
     }
 
     public function getFieldName()
@@ -59,7 +67,8 @@ class ProxyAuthenticate implements MultipleHeaderInterface
         foreach ($headers as $header) {
             if (!$header instanceof ProxyAuthenticate) {
                 throw new Exception\RuntimeException(
-                    'The ProxyAuthenticate multiple header implementation can only accept an array of ProxyAuthenticate headers'
+                    'The ProxyAuthenticate multiple header implementation can only accept'
+                    . ' an array of ProxyAuthenticate headers'
                 );
             }
             $strings[] = $header->toString();

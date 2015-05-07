@@ -97,4 +97,52 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains("Content-Transfer-Encoding: quoted-printable", $string);
     }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testFromStringRaisesExceptionOnInvalidHeaderName()
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        ContentTransferEncoding::fromString('Content-Transfer-Encoding' . chr(32) . ': 8bit');
+    }
+
+    public function headerLines()
+    {
+        return array(
+            'newline' => array("Content-Transfer-Encoding: 8bit\n7bit"),
+            'cr-lf' => array("Content-Transfer-Encoding: 8bit\r\n7bit"),
+            'multiline' => array("Content-Transfer-Encoding: 8bit\r\n7bit\r\nUTF-8"),
+        );
+    }
+
+    /**
+     * @dataProvider headerLines
+     * @group ZF2015-04
+     * @expectedException Zend\Mail\Header\Exception\InvalidArgumentException
+     */
+    public function testFromStringRaisesExceptionForInvalidMultilineValues($headerLine)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        ContentTransferEncoding::fromString($headerLine);
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testFromStringRaisesExceptionForContinuations()
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'expects');
+        ContentTransferEncoding::fromString("Content-Transfer-Encoding: 8bit\r\n 7bit");
+    }
+
+    /**
+     * @group ZF2015-04
+     */
+    public function testSetTransferEncodingRaisesExceptionForInvalidValues()
+    {
+        $header = new ContentTransferEncoding();
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'expects');
+        $header->setTransferEncoding("8bit\r\n 7bit");
+    }
 }

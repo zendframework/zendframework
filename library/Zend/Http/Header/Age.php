@@ -79,6 +79,9 @@ class Age implements HeaderInterface
      */
     public function setDeltaSeconds($delta)
     {
+        if (! is_int($delta) && ! is_numeric($delta)) {
+            throw new Exception\InvalidArgumentException('Invalid delta provided');
+        }
         $this->deltaSeconds = (int) $delta;
         return $this;
     }

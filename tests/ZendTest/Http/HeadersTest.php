@@ -38,18 +38,6 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
-    public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLine()
-    {
-        $headers = Headers::fromString("Fake: foo-bar,\r\n      blah-blah");
-        $this->assertEquals(1, $headers->count());
-
-        $header = $headers->get('fake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Fake', $header->getFieldName());
-        // any leading space MAY be replaced by a single space @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
-        $this->assertRegexp("#foo-bar,\r\n\s+blah-blah#", $header->getFieldValue());
-    }
-
     public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLine()
     {
         $headers = Headers::fromString("Fake: foo-bar\r\n\r\n");
@@ -61,15 +49,15 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
-    public function testHeadersFromStringFactoryRespectsSpecAllowedMultiLineHeaders()
+    public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderFolding()
     {
-        $headers = Headers::fromString("Foo: foo-bar\r\nX-Another: another\r\n X-Actually-A-Continuation:ofSomeKindOfValue\r\nX-Another: another\r\n");
-        $this->assertEquals(3, $headers->count());
+        $headers = Headers::fromString("Fake: foo\r\n -bar");
+        $this->assertEquals(1, $headers->count());
 
-        // check continued header
-        $header = $headers->get('X-Another');
-        $this->assertEquals('X-Another', $header->getFieldName());
-        $this->assertRegexp("#another\r\n\s+X-Actually-A-Continuation:ofSomeKindOfValue#", $header->getFieldValue());
+        $header = $headers->get('fake');
+        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
+        $this->assertEquals('Fake', $header->getFieldName());
+        $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryThrowsExceptionOnMalformedHeaderLine()
@@ -108,7 +96,10 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     public function testHeadersHasAndGetWorkProperly()
     {
         $headers = new Headers();
-        $headers->addHeaders(array($f = new Header\GenericHeader('Foo', 'bar'), new Header\GenericHeader('Baz', 'baz')));
+        $headers->addHeaders(array(
+            $f = new Header\GenericHeader('Foo', 'bar'),
+            new Header\GenericHeader('Baz', 'baz'),
+        ));
         $this->assertFalse($headers->has('foobar'));
         $this->assertTrue($headers->has('foo'));
         $this->assertTrue($headers->has('Foo'));
@@ -286,5 +277,15 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     {
         $headers = Headers::fromString('Fake: 0');
         $this->assertSame('0', $headers->get('Fake')->getFieldValue());
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testCRLFAttack()
+    {
+        $this->setExpectedException('Zend\Http\Exception\RuntimeException');
+        $headers = Headers::fromString("Fake: foo-bar\r\n\r\nevilContent");
     }
 }

@@ -44,5 +44,25 @@ class IfMatchTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('If-Match: xxx', $ifMatchHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = IfMatch::fromString("If-Match: xxx\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructor()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new IfMatch("xxx\r\n\r\nevilContent");
+    }
 }

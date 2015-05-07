@@ -55,11 +55,9 @@ class Connection implements HeaderInterface
      */
     public function setPersistent($flag)
     {
-        if ((bool) $flag === true) {
-            $this->value = self::CONNECTION_KEEP_ALIVE;
-        } else {
-            $this->value = self::CONNECTION_CLOSE;
-        }
+        $this->value = (bool) $flag
+            ? self::CONNECTION_KEEP_ALIVE
+            : self::CONNECTION_CLOSE;
         return $this;
     }
 
@@ -82,6 +80,7 @@ class Connection implements HeaderInterface
      */
     public function setValue($value)
     {
+        HeaderValue::assertValid($value);
         $this->value = strtolower($value);
         return $this;
     }

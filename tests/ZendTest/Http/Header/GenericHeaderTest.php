@@ -59,6 +59,48 @@ class GenericHeaderTest extends TestCase
     }
 
     /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = GenericHeader::fromString("X_Foo_Bar: Bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaConstructor()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = new GenericHeader('X_Foo_Bar', "Bar\r\n\r\nevilContent");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testProtectsFromCRLFAttackViaSetFieldName()
+    {
+        $header = new GenericHeader();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid');
+        $header->setFieldName("\rX-\r\nFoo-\nBar");
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testProtectsFromCRLFAttackViaSetFieldValue()
+    {
+        $header = new GenericHeader();
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header->setFieldValue("\rSome\r\nCLRF\nAttack");
+    }
+
+    /**
      * Valid field name characters.
      *
      * @return string[]

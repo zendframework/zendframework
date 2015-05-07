@@ -92,4 +92,32 @@ abstract class HeaderWrap
     {
         return Mime::encodeQuotedPrintableHeader($value, $encoding, $lineLength, Headers::EOL);
     }
+
+    /**
+     * MIME-decode a value
+     *
+     * Performs quoted-printable decoding on a value.
+     *
+     * @param  string $value
+     * @return string Returns the mime encode value without the last line ending
+     */
+    public static function mimeDecodeValue($value)
+    {
+        $decodedValue = iconv_mime_decode($value, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+
+        return $decodedValue;
+    }
+
+    /**
+     * Test if is possible apply MIME-encoding
+     *
+     * @param string $value
+     * @return bool
+     */
+    public static function canBeEncoded($value)
+    {
+        $encoded = iconv_mime_encode('x-test', $value, array('scheme' => 'Q'));
+
+        return (false !== $encoded);
+    }
 }

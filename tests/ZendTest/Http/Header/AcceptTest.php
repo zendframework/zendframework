@@ -54,7 +54,8 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         // @todo set some values, then test output
         $this->assertEquals(
             'Accept: text/html;q=0.8, application/json, application/atom+xml;q=0.9',
-            $acceptHeader->toString());
+            $acceptHeader->toString()
+        );
 
         $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
         $acceptHeader->addMediaType('\\', 0.9);
@@ -74,7 +75,9 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
     public function testPrioritizesValuesBasedOnQParameter()
     {
-        $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
+        $header   = Accept::fromString(
+            'Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c'
+        );
         $expected = array(
             'text/html',
             'text/x-c',
@@ -97,16 +100,18 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                      ->addMediaType('application/atom+xml', 0.9);
 
         $this->assertEquals(
-                        'Accept: text/html;q=0.8;level=1, '
-                           .'text/html;q=0.4;level=2, application/atom+xml;q=0.9',
-                        $acceptHeader->toString()
-                );
+            'Accept: text/html;q=0.8;level=1, '
+            . 'text/html;q=0.4;level=2, application/atom+xml;q=0.9',
+            $acceptHeader->toString()
+        );
     }
 
     public function testPrioritizedLevel()
     {
-        $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,'
-                                     .'text/html;level=2;q=0.4, */*;q=0.5');
+        $header = Accept::fromString(
+            'Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,'
+            . 'text/html;level=2;q=0.4, */*;q=0.5'
+        );
 
         $expected = array(
             'text/html;level=1',
@@ -163,7 +168,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept: application/*, text/*;q=0.8, */*;q=0.4', $acceptHeader->toString());
     }
 
-
     public function testMatchWildCard()
     {
         $acceptHeader = Accept::fromString('Accept: */*');
@@ -184,16 +188,14 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($acceptHeader->hasMediaType('text/*'));
     }
 
-
     public function testParsingAndAssemblingQuotedStrings()
     {
-        $acceptStr = 'Accept: application/vnd.foobar+html;q=1;version="2\\'
-                   . chr(22).'3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
+        $acceptStr = 'Accept: application/vnd.foobar+html;q=1;version="2'
+                   . '\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
         $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': ' . $acceptHeader->getFieldValue());
     }
-
 
     public function testMatchReturnsMatchedAgainstObject()
     {
@@ -203,12 +205,12 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $res = $acceptHeader->match('text/html; _randomValue=foobar');
         $this->assertInstanceOf(
-                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
-                $res->getMatchedAgainst()
+            'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+            $res->getMatchedAgainst()
         );
         $this->assertEquals(
-                'foobar',
-                $res->getMatchedAgainst()->getParams()->_randomValue
+            'foobar',
+            $res->getMatchedAgainst()->getParams()->_randomValue
         );
 
         $acceptStr = 'Accept: */*; ';
@@ -216,16 +218,15 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $res = $acceptHeader->match('text/html; _foo=bar');
         $this->assertInstanceOf(
-                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
-                $res->getMatchedAgainst()
+            'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+            $res->getMatchedAgainst()
         );
 
         $this->assertEquals(
-                'bar',
-                $res->getMatchedAgainst()->getParams()->_foo
+            'bar',
+            $res->getMatchedAgainst()->getParams()->_foo
         );
     }
-
 
     public function testVersioning()
     {
@@ -401,7 +402,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testPrioritizing_2()
+    public function testPrioritizing2()
     {
         $accept = Accept::fromString("Accept: application/text, \tapplication/*");
         $res = $accept->getPrioritized();
@@ -453,5 +454,15 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $acceptHdr->match('image'));
         //  $this->assertEquals($expected, $this->_handler->match('text'));
+    }
+
+    /**
+     * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
+     * @group ZF2015-04
+     */
+    public function testPreventsCRLFAttackViaFromString()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $header = Accept::fromString("Accept: application/text\r\n\r\nevilContent");
     }
 }

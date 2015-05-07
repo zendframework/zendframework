@@ -48,4 +48,45 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests here */
+
+    public function headerLines()
+    {
+        return array(
+            'newline'      => array("Received: xx\nx"),
+            'cr-lf'        => array("Received: xxx\r\n"),
+            'cr-lf-fold'   => array("Received: xxx\r\n\r\n zzz"),
+            'cr-lf-x2'     => array("Received: xx\r\n\r\nx"),
+            'multiline'    => array("Received: x\r\nx\r\nx"),
+        );
+    }
+
+    /**
+     * @dataProvider headerLines
+     * @group ZF2015-04
+     */
+    public function testRaisesExceptionViaFromStringOnDetectionOfCrlfInjection($header)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        $received = Header\Received::fromString($header);
+    }
+
+    public function invalidValues()
+    {
+        return array(
+            'newline'      => array("xx\nx"),
+            'cr-lf'        => array("xxx\r\n"),
+            'cr-lf-wsp'    => array("xx\r\n\r\nx"),
+            'multiline'    => array("x\r\nx\r\nx"),
+        );
+    }
+
+    /**
+     * @dataProvider invalidValues
+     * @group ZF2015-04
+     */
+    public function testConstructorRaisesExceptionOnValueWithCRLFInjectionAttempt($value)
+    {
+        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
+        new Header\Received($value);
+    }
 }

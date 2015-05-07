@@ -22,6 +22,7 @@ class Date implements HeaderInterface
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {
@@ -35,6 +36,9 @@ class Date implements HeaderInterface
 
     public function __construct($value)
     {
+        if (! HeaderValue::isValid($value)) {
+            throw new Exception\InvalidArgumentException('Invalid Date header value detected');
+        }
         $this->value = $value;
     }
 

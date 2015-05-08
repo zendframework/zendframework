@@ -724,9 +724,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             '',
             '<html><body><iframe src="http://example.com/"></iframe></body></html> <!--',
         );
+        $this->setExpectedException('Zend\Mail\Exception\InvalidArgumentException');
         $this->message->{$recipientMethod}(implode(Headers::EOL, $subject));
-        $this->setExpectedException('Zend\Mail\Header\Exception\RuntimeException');
-        $this->assertNotContains(Headers::EOL . Headers::EOL, $this->message->getHeaders()->toString());
     }
 
     /**
@@ -740,7 +739,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             '',
             '<html><body><iframe src="http://example.com/"></iframe></body></html> <!--',
         );
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
         $this->message->setSubject(implode(Headers::EOL, $subject));
+
+        $serializedHeaders = $this->message->getHeaders()->toString();
+        $this->assertContains('example' , $serializedHeaders);
+        $this->assertNotContains("\r\n<html>" , $serializedHeaders);
     }
 }

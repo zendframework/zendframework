@@ -80,9 +80,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
      * @group ZF2015-04
-     *
      * @dataProvider valuesProvider
-     *
      * @param mixed $value
      * @param string $serialized
      */

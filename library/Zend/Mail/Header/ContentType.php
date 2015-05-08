@@ -124,8 +124,8 @@ class ContentType implements HeaderInterface
      * @param  string $name
      * @param  string $value
      * @return ContentType
-     * @throws InvalidArgumentException for parameter names that do not follow RFC 2822
-     * @throws InvalidArgumentException for parameter values that do not follow RFC 2822
+     * @throws Exception\InvalidArgumentException for parameter names that do not follow RFC 2822
+     * @throws Exception\InvalidArgumentException for parameter values that do not follow RFC 2822
      */
     public function addParameter($name, $value)
     {

@@ -89,7 +89,7 @@ class AllowTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreventsCRLFAttackViaFromString()
     {
-        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'valid method');
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException', 'Invalid header value detected');
         $header = Allow::fromString("Allow: GET\r\n\r\nevilContent");
     }
 

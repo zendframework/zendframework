@@ -76,7 +76,6 @@ class GenericHeaderTest extends TestCase
     /**
      * @dataProvider validFieldValuesProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $encodedValue
      * @param string $encoding
@@ -92,7 +91,6 @@ class GenericHeaderTest extends TestCase
     /**
      * @dataProvider validFieldValuesProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $encodedValue
      * @param string $encoding

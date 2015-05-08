@@ -30,7 +30,6 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validSubjectValuesProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $encodedValue
      * @param string $encoding
@@ -46,7 +45,6 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidSubjectValuesProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $expectedException
      * @param string|null $expectedExceptionMessage
@@ -63,7 +61,6 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validSubjectValuesProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $encodedValue
      * @param string $encoding

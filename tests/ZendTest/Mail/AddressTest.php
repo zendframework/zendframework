@@ -11,9 +11,6 @@ namespace ZendTest\Mail;
 
 use Zend\Mail\Address;
 
-/**
- * @group      Zend_Mail
- */
 class AddressTest extends \PHPUnit_Framework_TestCase
 {
     public function testDoesNotRequireNameForInstantiation()
@@ -39,7 +36,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidSenderDataProvider
      * @group ZF2015-04
-     *
      * @param string $email
      * @param null|string $name
      */

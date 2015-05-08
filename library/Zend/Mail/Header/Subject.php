@@ -69,7 +69,7 @@ class Subject implements UnstructuredInterface
 
     public function getEncoding()
     {
-        if (!$this->encoding) {
+        if (! $this->encoding) {
             $this->encoding = Mime::isPrintable($this->subject) ? 'ASCII' : 'UTF-8';
         }
 
@@ -78,14 +78,15 @@ class Subject implements UnstructuredInterface
 
     public function setSubject($subject)
     {
-        $subject  = (string) $subject;
+        $subject = (string) $subject;
 
-        if (!HeaderWrap::canBeEncoded($subject)) {
+        if (! HeaderWrap::canBeEncoded($subject)) {
             throw new Exception\InvalidArgumentException(
                 'Subject value must be composed of printable US-ASCII or UTF-8 characters.'
             );
         }
-        $this->subject = $subject;
+
+        $this->subject  = $subject;
         $this->encoding = null;
 
         return $this;

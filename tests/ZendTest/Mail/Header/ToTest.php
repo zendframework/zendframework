@@ -9,8 +9,6 @@
 
 namespace ZendTest\Mail\Header;
 
-use Zend\Mail\Address;
-use Zend\Mail\AddressList;
 use Zend\Mail\Header;
 
 /**

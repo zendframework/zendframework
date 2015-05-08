@@ -32,7 +32,7 @@ class Address implements Address\AddressInterface
             throw new Exception\InvalidArgumentException('Email must be a valid email address');
         }
 
-        if (preg_match("/[\r|\n]/", $email)) {
+        if (preg_match("/[\r\n]/", $email)) {
             throw new Exception\InvalidArgumentException('CRLF injection detected');
         }
 
@@ -46,7 +46,7 @@ class Address implements Address\AddressInterface
                 throw new Exception\InvalidArgumentException('Name must be a string');
             }
 
-            if (preg_match("/[\r|\n]/", $name)) {
+            if (preg_match("/[\r\n]/", $name)) {
                 throw new Exception\InvalidArgumentException('CRLF injection detected');
             }
 

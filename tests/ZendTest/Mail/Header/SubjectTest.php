@@ -27,51 +27,83 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
 
-    public function testAllowsEmptyValueWhenParsing()
+    /**
+     * @dataProvider validSubjectValuesProvider
+     * @group ZF2015-04
+     * @param string $decodedValue
+     * @param string $encodedValue
+     * @param string $encoding
+     */
+    public function testParseValidSubjectHeader($decodedValue, $encodedValue, $encoding)
     {
-        $headerString = 'Subject:';
-        $subject      = Header\Subject::fromString($headerString);
-        $this->assertEquals('', $subject->getFieldValue());
-    }
+        $header = Header\Subject::fromString('Subject:' . $encodedValue);
 
-    public function headerLines()
-    {
-        return array(
-            'newline'      => array("Subject: xxx yyy\n"),
-            'cr-lf'        => array("Subject: xxx yyy\r\n"),
-            'cr-lf-wsp'    => array("Subject: xxx yyy\r\n\r\n"),
-            'multiline'    => array("Subject: xxx\r\ny\r\nyy"),
-        );
+        $this->assertEquals($decodedValue, $header->getFieldValue());
+        $this->assertEquals($encoding, $header->getEncoding());
     }
 
     /**
-     * @dataProvider headerLines
+     * @dataProvider invalidSubjectValuesProvider
      * @group ZF2015-04
+     * @param string $decodedValue
+     * @param string $expectedException
+     * @param string|null $expectedExceptionMessage
      */
-    public function testFromStringRaisesExceptionOnCrlfInjectionDetection($header)
-    {
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
-        $subject = Header\Subject::fromString($header);
-    }
-
-    public function invalidSubjects()
-    {
-        return array(
-            'newline'      => array("xxx yyy\n"),
-            'cr-lf'        => array("xxx yyy\r\n"),
-            'cr-lf-wsp'    => array("xxx yyy\r\n\r\n"),
-            'multiline'    => array("xxx\r\ny\r\nyy"),
-        );
+    public function testParseInvalidSubjectHeaderThrowException(
+        $decodedValue,
+        $expectedException,
+        $expectedExceptionMessage
+    ) {
+        $this->setExpectedException($expectedException, $expectedExceptionMessage);
+        Header\Subject::fromString('Subject:' . $decodedValue);
     }
 
     /**
-     * @dataProvider invalidSubjects
+     * @dataProvider validSubjectValuesProvider
      * @group ZF2015-04
+     * @param string $decodedValue
+     * @param string $encodedValue
+     * @param string $encoding
      */
-    public function testSettingSubjectRaisesExceptionOnCrlfInjection($value)
+    public function testSetSubjectValidValue($decodedValue, $encodedValue, $encoding)
     {
         $header = new Header\Subject();
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
-        $header->setSubject($value);
+        $header->setSubject($decodedValue);
+
+        $this->assertEquals($decodedValue, $header->getFieldValue());
+        $this->assertEquals('Subject: ' . $encodedValue, $header->toString());
+        $this->assertEquals($encoding, $header->getEncoding());
+    }
+
+    public function validSubjectValuesProvider()
+    {
+        return array(
+            // Description => [decoded format, encoded format, encoding],
+            'Empty' => array('', '', 'ASCII'),
+
+            // Encoding cases
+            'ASCII charset' => array('azAZ09-_', 'azAZ09-_', 'ASCII'),
+            'UTF-8 charset' => array('ázÁZ09-_', '=?UTF-8?Q?=C3=A1z=C3=81Z09-=5F?=', 'UTF-8'),
+
+            // CRLF @group ZF2015-04 cases
+            'newline' => array("xxx yyy\n", '=?UTF-8?Q?xxx=20yyy=0A?=', 'UTF-8'),
+            'cr-lf' => array("xxx yyy\r\n", '=?UTF-8?Q?xxx=20yyy=0D=0A?=', 'UTF-8'),
+            'cr-lf-wsp' => array("xxx yyy\r\n\r\n", '=?UTF-8?Q?xxx=20yyy=0D=0A=0D=0A?=', 'UTF-8'),
+            'multiline' => array("xxx\r\ny\r\nyy", '=?UTF-8?Q?xxx=0D=0Ay=0D=0Ayy?=', 'UTF-8'),
+        );
+    }
+
+    public function invalidSubjectValuesProvider()
+    {
+        $invalidArgumentException = 'Zend\Mail\Header\Exception\InvalidArgumentException';
+        $invalidHeaderValueDetected = 'Invalid header value detected';
+
+        return array(
+            // Description => [decoded format, exception class, exception message],
+            'newline' => array("xxx yyy\n", $invalidArgumentException, $invalidHeaderValueDetected),
+            'cr-lf' => array("xxx yyy\r\n", $invalidArgumentException, $invalidHeaderValueDetected),
+            'cr-lf-wsp' => array("xxx yyy\r\n\r\n", $invalidArgumentException, $invalidHeaderValueDetected),
+            'multiline' => array("xxx\r\ny\r\nyy", $invalidArgumentException, $invalidHeaderValueDetected),
+        );
     }
 }

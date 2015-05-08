@@ -10,7 +10,14 @@
 namespace Zend\Mail\Header;
 
 use Zend\Mail;
+use Zend\Mime\Mime;
 
+/**
+ * Sender header class methods.
+ *
+ * @see https://tools.ietf.org/html/rfc2822 RFC 2822
+ * @see https://tools.ietf.org/html/rfc2047 RFC 2047
+ */
 class Sender implements HeaderInterface
 {
     /**
@@ -21,37 +28,34 @@ class Sender implements HeaderInterface
     /**
      * Header encoding
      *
-     * @var string
+     * @var null|string
      */
-    protected $encoding = 'ASCII';
+    protected $encoding;
 
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
-        $decodedValue = HeaderWrap::mimeDecodeValue($value);
-        $wasEncoded = ($decodedValue !== $value);
-        $value = $decodedValue;
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
             throw new Exception\InvalidArgumentException('Invalid header line for Sender string');
         }
 
-        $header = new static();
-        if ($wasEncoded) {
-            $header->setEncoding('UTF-8');
-        }
+        $header      = new static();
+        $senderName  = '';
+        $senderEmail = '';
 
         // Check for address, and set if found
         if (preg_match('/^(?P<name>.*?)<(?P<email>[^>]+)>$/', $value, $matches)) {
-            $name = $matches['name'];
-            if (empty($name)) {
-                $name = null;
-            } else {
-                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+            $senderName = trim($matches['name']);
+            if (empty($senderName)) {
+                $senderName = null;
             }
-            $header->setAddress($matches['email'], $name);
+            $senderEmail = $matches['email'];
         }
+
+        $header->setAddress($senderEmail, $senderName);
 
         return $header;
     }
@@ -63,25 +67,23 @@ class Sender implements HeaderInterface
 
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        if (!$this->address instanceof Mail\Address\AddressInterface) {
+        if (! $this->address instanceof Mail\Address\AddressInterface) {
             return '';
         }
 
         $email = sprintf('<%s>', $this->address->getEmail());
         $name  = $this->address->getName();
 
-        HeaderValue::assertValid($email);
-        HeaderValue::assertValid($name);
-
         if (!empty($name)) {
-            $encoding = $this->getEncoding();
-            if ($format == HeaderInterface::FORMAT_ENCODED
-                && 'ASCII' !== $encoding
-            ) {
-                $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
+            if ($format == HeaderInterface::FORMAT_ENCODED) {
+                $encoding = $this->getEncoding();
+                if ('ASCII' !== $encoding) {
+                    $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
+                }
             }
             $email = sprintf('%s %s', $name, $email);
         }
+
         return $email;
     }
 
@@ -93,6 +95,12 @@ class Sender implements HeaderInterface
 
     public function getEncoding()
     {
+        if (! $this->encoding) {
+            $this->encoding = Mime::isPrintable($this->getFieldValue(HeaderInterface::FORMAT_RAW))
+                ? 'ASCII'
+                : 'UTF-8';
+        }
+
         return $this->encoding;
     }
 

@@ -26,20 +26,16 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     /**
      * Header encoding
      *
-     * @var string
+     * @var null|string
      */
-    protected $encoding = 'ASCII';
+    protected $encoding;
 
     public static function fromString($headerLine)
     {
         list($name, $value) = self::splitHeaderLine($headerLine);
-        $decodedValue = HeaderWrap::mimeDecodeValue($value);
-        $wasEncoded = ($decodedValue !== $value);
-        $value = $decodedValue;
+        $value  = HeaderWrap::mimeDecodeValue($value);
         $header = new static($name, $value);
-        if ($wasEncoded) {
-            $header->setEncoding('UTF-8');
-        }
+
         return $header;
     }
 
@@ -128,21 +124,17 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
      */
     public function setFieldValue($fieldValue)
     {
-        $fieldValue  = (string) $fieldValue;
+        $fieldValue = (string) $fieldValue;
 
-        // Raw values will be encoded when cast to string; as such we need to
-        // mark them as quoted-printable to allow validation to work correctly.
-        if (!HeaderWrap::canBeEncoded($fieldValue)) {
+        if (! HeaderWrap::canBeEncoded($fieldValue)) {
             throw new Exception\InvalidArgumentException(
                 'Header value must be composed of printable US-ASCII characters and valid folding sequences.'
             );
         }
 
-        if (!Mime::isPrintable($fieldValue)) {
-            $this->setEncoding('UTF-8');
-        }
-
         $this->fieldValue = $fieldValue;
+        $this->encoding   = null;
+
         return $this;
     }
 
@@ -163,19 +155,20 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function getEncoding()
     {
+        if (! $this->encoding) {
+            $this->encoding = Mime::isPrintable($this->fieldValue) ? 'ASCII' : 'UTF-8';
+        }
+
         return $this->encoding;
     }
 
     public function toString()
     {
-        $name  = $this->getFieldName();
+        $name = $this->getFieldName();
         if (empty($name)) {
-          throw new Exception\RuntimeException('Header name is not set, use setFieldName()');
+            throw new Exception\RuntimeException('Header name is not set, use setFieldName()');
         }
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
-        if (empty($value)) {
-          throw new Exception\RuntimeException('Header value is not set, use setFieldValue()');
-        }
 
         return $name . ': ' . $value;
     }

@@ -17,25 +17,17 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
     public static function fromString($headerLine)
     {
         list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
-        $decodedValue = HeaderWrap::mimeDecodeValue($fieldValue);
-        $wasEncoded = ($decodedValue !== $fieldValue);
-        $fieldValue = $decodedValue;
+        $fieldValue = HeaderWrap::mimeDecodeValue($fieldValue);
 
         if (strpos($fieldValue, ',')) {
             $headers = array();
-            $encoding = ($wasEncoded) ? 'UTF-8' : 'ASCII';
             foreach (explode(',', $fieldValue) as $multiValue) {
-                $header = new static($fieldName, $multiValue);
-                $headers[] = $header->setEncoding($encoding);
+                $headers[] = new static($fieldName, $multiValue);
             }
             return $headers;
-        } else {
-            $header = new static($fieldName, $fieldValue);
-            if ($wasEncoded) {
-                $header->setEncoding('UTF-8');
-            }
-            return $header;
         }
+
+        return new static($fieldName, $fieldValue);
     }
 
     /**
@@ -47,16 +39,18 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
      */
     public function toStringMultipleHeaders(array $headers)
     {
-        $name  = $this->getFieldName();
+        $name   = $this->getFieldName();
         $values = array($this->getFieldValue(HeaderInterface::FORMAT_ENCODED));
+
         foreach ($headers as $header) {
-            if (!$header instanceof static) {
+            if (! $header instanceof static) {
                 throw new Exception\InvalidArgumentException(
                     'This method toStringMultipleHeaders was expecting an array of headers of the same type'
                 );
             }
             $values[] = $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
+
         return $name . ': ' . implode(',', $values);
     }
 }

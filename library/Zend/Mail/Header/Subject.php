@@ -9,6 +9,14 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mime\Mime;
+
+/**
+ * Subject header class methods.
+ *
+ * @see https://tools.ietf.org/html/rfc2822 RFC 2822
+ * @see https://tools.ietf.org/html/rfc2047 RFC 2047
+ */
 class Subject implements UnstructuredInterface
 {
     /**
@@ -19,16 +27,14 @@ class Subject implements UnstructuredInterface
     /**
      * Header encoding
      *
-     * @var string
+     * @var null|string
      */
-    protected $encoding = 'ASCII';
+    protected $encoding;
 
     public static function fromString($headerLine)
     {
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
-        $decodedValue = HeaderWrap::mimeDecodeValue($value);
-        $wasEncoded = ($decodedValue !== $value);
-        $value = $decodedValue;
+        $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'subject') {
@@ -36,9 +42,6 @@ class Subject implements UnstructuredInterface
         }
 
         $header = new static();
-        if ($wasEncoded) {
-            $header->setEncoding('UTF-8');
-        }
         $header->setSubject($value);
 
         return $header;
@@ -66,16 +69,26 @@ class Subject implements UnstructuredInterface
 
     public function getEncoding()
     {
+        if (! $this->encoding) {
+            $this->encoding = Mime::isPrintable($this->subject) ? 'ASCII' : 'UTF-8';
+        }
+
         return $this->encoding;
     }
 
     public function setSubject($subject)
     {
         $subject = (string) $subject;
-        if (! HeaderValue::isValid($subject)) {
-            throw new Exception\InvalidArgumentException('Invalid Subject value detected');
+
+        if (! HeaderWrap::canBeEncoded($subject)) {
+            throw new Exception\InvalidArgumentException(
+                'Subject value must be composed of printable US-ASCII or UTF-8 characters.'
+            );
         }
-        $this->subject = $subject;
+
+        $this->subject  = $subject;
+        $this->encoding = null;
+
         return $this;
     }
 

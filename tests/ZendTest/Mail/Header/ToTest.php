@@ -9,8 +9,6 @@
 
 namespace ZendTest\Mail\Header;
 
-use Zend\Mail\Address;
-use Zend\Mail\AddressList;
 use Zend\Mail\Header;
 
 /**
@@ -51,20 +49,5 @@ class ToTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
         Header\To::fromString($header);
-    }
-
-    /**
-     * @group ZF2015-04
-     */
-    public function testPreventsCRLFInjectionViaAddressValues()
-    {
-        $address = new Address("foo\r@\r\nexample\n.com", "This\ris\r\na\nCRLF Attack");
-        $addressList = new AddressList();
-        $addressList->add($address);
-        $header = new Header\To();
-        $header->setAddressList($addressList);
-
-        $this->setExpectedException('Zend\Mail\Header\Exception\RuntimeException');
-        $headerLine = $header->toString();
     }
 }

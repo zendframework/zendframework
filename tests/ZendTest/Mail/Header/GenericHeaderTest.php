@@ -74,6 +74,56 @@ class GenericHeaderTest extends TestCase
     }
 
     /**
+     * @dataProvider validFieldValuesProvider
+     * @group ZF2015-04
+     * @param string $decodedValue
+     * @param string $encodedValue
+     * @param string $encoding
+     */
+    public function testParseValidSubjectHeader($decodedValue, $encodedValue, $encoding)
+    {
+        $header = GenericHeader::fromString('Foo:' . $encodedValue);
+
+        $this->assertEquals($decodedValue, $header->getFieldValue());
+        $this->assertEquals($encoding, $header->getEncoding());
+    }
+
+    /**
+     * @dataProvider validFieldValuesProvider
+     * @group ZF2015-04
+     * @param string $decodedValue
+     * @param string $encodedValue
+     * @param string $encoding
+     */
+    public function testSetFieldValueValidValue($decodedValue, $encodedValue, $encoding)
+    {
+        $header = new GenericHeader('Foo');
+        $header->setFieldValue($decodedValue);
+
+        $this->assertEquals($decodedValue, $header->getFieldValue());
+        $this->assertEquals('Foo: ' . $encodedValue, $header->toString());
+        $this->assertEquals($encoding, $header->getEncoding());
+    }
+
+    public function validFieldValuesProvider()
+    {
+        return array(
+            // Description => [decoded format, encoded format, encoding],
+            //'Empty' => array('', '', 'ASCII'),
+
+            // Encoding cases
+            'ASCII charset' => array('azAZ09-_', 'azAZ09-_', 'ASCII'),
+            'UTF-8 charset' => array('ázÁZ09-_', '=?UTF-8?Q?=C3=A1z=C3=81Z09-=5F?=', 'UTF-8'),
+
+            // CRLF @group ZF2015-04 cases
+            'newline' => array("xxx yyy\n", '=?UTF-8?Q?xxx=20yyy=0A?=', 'UTF-8'),
+            'cr-lf' => array("xxx yyy\r\n", '=?UTF-8?Q?xxx=20yyy=0D=0A?=', 'UTF-8'),
+            'cr-lf-wsp' => array("xxx yyy\r\n\r\n", '=?UTF-8?Q?xxx=20yyy=0D=0A=0D=0A?=', 'UTF-8'),
+            'multiline' => array("xxx\r\ny\r\nyy", '=?UTF-8?Q?xxx=0D=0Ay=0D=0Ayy?=', 'UTF-8'),
+        );
+    }
+
+    /**
      * @group ZF2015-04
      */
     public function testCastingToStringHandlesContinuationsProperly()

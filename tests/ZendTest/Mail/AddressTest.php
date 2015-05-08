@@ -35,4 +35,37 @@ class AddressTest extends \PHPUnit_Framework_TestCase
         $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
         $this->assertEquals('ZF DevTeam <zf-devteam@zend.com>', $address->toString());
     }
+
+    /**
+     * @dataProvider invalidSenderDataProvider
+     * @group ZF2015-04
+     *
+     * @param string $email
+     * @param null|string $name
+     */
+    public function testSetAddressInvalidAddressObject($email, $name)
+    {
+        $this->setExpectedException('Zend\Mail\Exception\InvalidArgumentException');
+        new Address($email, $name);
+    }
+
+    public function invalidSenderDataProvider()
+    {
+        return array(
+            // Description => [sender address, sender name],
+            'Empty' => array('', null),
+            'any ASCII' => array('azAZ09-_', null),
+            'any UTF-8' => array('ázÁZ09-_', null),
+
+            // CRLF @group ZF2015-04 cases
+            array("foo@bar\n", null),
+            array("foo@bar\r", null),
+            array("foo@bar\r\n", null),
+            array("foo@bar", "\r"),
+            array("foo@bar", "\n"),
+            array("foo@bar", "\r\n"),
+            array("foo@bar", "foo\r\nevilBody"),
+            array("foo@bar", "\r\nevilBody"),
+        );
+    }
 }

@@ -47,7 +47,7 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataInvalidEncodings
      */
-    public function testContentTransferEncodingFromStringCreateExcaption($encoding)
+    public function testContentTransferEncodingFromStringCreateException($encoding)
     {
         $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
         $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: '.$encoding);

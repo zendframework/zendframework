@@ -742,7 +742,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setSubject(implode(Headers::EOL, $subject));
 
         $serializedHeaders = $this->message->getHeaders()->toString();
-        $this->assertContains('example' , $serializedHeaders);
-        $this->assertNotContains("\r\n<html>" , $serializedHeaders);
+        $this->assertContains('example', $serializedHeaders);
+        $this->assertNotContains("\r\n<html>", $serializedHeaders);
     }
 }

@@ -27,7 +27,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validSenderDataProvider
      * @group ZF2015-04
-     *
      * @param string $email
      * @param null|string $name
      * @param string $expectedFieldValue,
@@ -53,7 +52,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidSenderEncodedDataProvider
      * @group ZF2015-04
-     *
      * @param string $decodedValue
      * @param string $expectedException
      * @param string|null $expectedExceptionMessage
@@ -70,7 +68,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validSenderDataProvider
      * @group ZF2015-04
-     *
      * @param string $email
      * @param null|string $name
      * @param string $encodedValue
@@ -90,7 +87,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidSenderDataProvider
      * @group ZF2015-04
-     *
      * @param string $email
      * @param null|string $name
      */
@@ -104,7 +100,6 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validSenderDataProvider
      * @group ZF2015-04
-     *
      * @param string $email
      * @param null|string $name
      * @param string $expectedFieldValue,
@@ -128,9 +123,27 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             // Description => [sender address, sender name, getFieldValue, encoded version, encoding],
-            'ASCII address' => array('foo@bar', null, '<foo@bar>', '<foo@bar>', 'ASCII'),
-            'ASCII name' => array('foo@bar', 'foo', 'foo <foo@bar>', 'foo <foo@bar>', 'ASCII'),
-            'UTF-8 name' => array('foo@bar', 'ázÁZ09', 'ázÁZ09 <foo@bar>', '=?UTF-8?Q?=C3=A1z=C3=81Z09?= <foo@bar>', 'UTF-8'),
+            'ASCII address' => array(
+                'foo@bar',
+                null,
+                '<foo@bar>',
+                '<foo@bar>',
+                'ASCII'
+            ),
+            'ASCII name' => array(
+                'foo@bar',
+                'foo',
+                'foo <foo@bar>',
+                'foo <foo@bar>',
+                'ASCII'
+            ),
+            'UTF-8 name' => array(
+                'foo@bar',
+                'ázÁZ09',
+                'ázÁZ09 <foo@bar>',
+                '=?UTF-8?Q?=C3=A1z=C3=81Z09?= <foo@bar>',
+                'UTF-8'
+            ),
         );
     }
 

@@ -33,7 +33,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public static function fromString($headerLine)
     {
         list($name, $value) = self::splitHeaderLine($headerLine);
-        $value = HeaderWrap::mimeDecodeValue($value);
+        $value  = HeaderWrap::mimeDecodeValue($value);
         $header = new static($name, $value);
 
         return $header;
@@ -124,16 +124,16 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
      */
     public function setFieldValue($fieldValue)
     {
-        $fieldValue  = (string) $fieldValue;
+        $fieldValue = (string) $fieldValue;
 
-        if (!HeaderWrap::canBeEncoded($fieldValue)) {
+        if (! HeaderWrap::canBeEncoded($fieldValue)) {
             throw new Exception\InvalidArgumentException(
                 'Header value must be composed of printable US-ASCII characters and valid folding sequences.'
             );
         }
 
         $this->fieldValue = $fieldValue;
-        $this->encoding = null;
+        $this->encoding   = null;
 
         return $this;
     }
@@ -155,7 +155,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function getEncoding()
     {
-        if (!$this->encoding) {
+        if (! $this->encoding) {
             $this->encoding = Mime::isPrintable($this->fieldValue) ? 'ASCII' : 'UTF-8';
         }
 
@@ -164,7 +164,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function toString()
     {
-        $name  = $this->getFieldName();
+        $name = $this->getFieldName();
         if (empty($name)) {
             throw new Exception\RuntimeException('Header name is not set, use setFieldName()');
         }

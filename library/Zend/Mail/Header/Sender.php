@@ -42,10 +42,10 @@ class Sender implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Sender string');
         }
 
-        $header = new static();
-
-        $senderName = '';
+        $header      = new static();
+        $senderName  = '';
         $senderEmail = '';
+
         // Check for address, and set if found
         if (preg_match('/^(?P<name>.*?)<(?P<email>[^>]+)>$/', $value, $matches)) {
             $senderName = trim($matches['name']);
@@ -67,7 +67,7 @@ class Sender implements HeaderInterface
 
     public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        if (!$this->address instanceof Mail\Address\AddressInterface) {
+        if (! $this->address instanceof Mail\Address\AddressInterface) {
             return '';
         }
 
@@ -83,6 +83,7 @@ class Sender implements HeaderInterface
             }
             $email = sprintf('%s %s', $name, $email);
         }
+
         return $email;
     }
 
@@ -94,8 +95,10 @@ class Sender implements HeaderInterface
 
     public function getEncoding()
     {
-        if (!$this->encoding) {
-            $this->encoding = Mime::isPrintable($this->getFieldValue(HeaderInterface::FORMAT_RAW)) ? 'ASCII' : 'UTF-8';
+        if (! $this->encoding) {
+            $this->encoding = Mime::isPrintable($this->getFieldValue(HeaderInterface::FORMAT_RAW))
+                ? 'ASCII'
+                : 'UTF-8';
         }
 
         return $this->encoding;

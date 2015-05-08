@@ -28,7 +28,7 @@ class Address implements Address\AddressInterface
     public function __construct($email, $name = null)
     {
         $emailAddressValidator = new EmailAddressValidator(Hostname::ALLOW_LOCAL);
-        if (!is_string($email) || empty($email)) {
+        if (! is_string($email) || empty($email)) {
             throw new Exception\InvalidArgumentException('Email must be a valid email address');
         }
 
@@ -36,13 +36,13 @@ class Address implements Address\AddressInterface
             throw new Exception\InvalidArgumentException('CRLF injection detected');
         }
 
-        if (!$emailAddressValidator->isValid($email)) {
+        if (! $emailAddressValidator->isValid($email)) {
             $invalidMessages = $emailAddressValidator->getMessages();
             throw new Exception\InvalidArgumentException(array_shift($invalidMessages));
         }
 
         if (null !== $name) {
-            if (!is_string($name)) {
+            if (! is_string($name)) {
                 throw new Exception\InvalidArgumentException('Name must be a string');
             }
 
@@ -89,7 +89,6 @@ class Address implements Address\AddressInterface
             return $string;
         }
 
-        $string = $name . ' ' . $string;
-        return $string;
+        return $name . ' ' . $string;
     }
 }

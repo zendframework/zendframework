@@ -80,11 +80,24 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     /**
      * @see http://en.wikipedia.org/wiki/HTTP_response_splitting
      * @group ZF2015-04
+     *
+     * @dataProvider valuesProvider
+     *
+     * @param mixed $value
+     * @param string $serialized
      */
-    public function testPreventsCRLFAttackViaConstructorValue()
+    public function testSerialization($value, $serialized)
     {
-        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
-        $header = new Cookie(array("foo=bar\r\n\r\nevilContent"));
+        $header = new Cookie(array($value));
+        $this->assertEquals('Cookie: ' . $serialized, $header->toString());
+    }
+
+    public function valuesProvider()
+    {
+        return array(
+            // Description => [raw value, serialized]
+            'CRLF characters' => array("foo=bar\r\n\r\nevilContent", '0=foo%3Dbar%0D%0A%0D%0AevilContent'),
+        );
     }
 
 //    /**

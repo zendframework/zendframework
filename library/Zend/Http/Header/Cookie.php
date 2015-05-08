@@ -74,38 +74,7 @@ class Cookie extends ArrayObject implements HeaderInterface
 
     public function __construct(array $array = array())
     {
-        parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
-        $this->exchangeArray($array);
-    }
-
-    /**
-     * Ensure all keys and values are valid.
-     *
-     * @param array $array
-     * @return array the old array.
-     */
-    public function exchangeArray($array)
-    {
-        foreach ($array as $key => $value) {
-            HeaderValue::assertValid($key);
-            HeaderValue::assertValid($value);
-        }
-
-        return parent::exchangeArray($array);
-    }
-
-    /**
-     * Ensure both key and value are valid.
-     *
-     * @param string $key
-     * @param string $value
-     * @return void
-     */
-    public function offsetSet($key, $value)
-    {
-        HeaderValue::assertValid($key);
-        HeaderValue::assertValid($value);
-        parent::offsetSet($key, $value);
+        parent::__construct($array, ArrayObject::ARRAY_AS_PROPS);
     }
 
     public function setEncodeValue($encodeValue)

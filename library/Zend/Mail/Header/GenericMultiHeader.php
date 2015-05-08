@@ -17,23 +17,18 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
     public static function fromString($headerLine)
     {
         list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
-        $decodedValue = HeaderWrap::mimeDecodeValue($fieldValue);
-        $wasEncoded = ($decodedValue !== $fieldValue);
-        $fieldValue = $decodedValue;
+        $fieldValue = HeaderWrap::mimeDecodeValue($fieldValue);
 
         if (strpos($fieldValue, ',')) {
             $headers = array();
-            $encoding = ($wasEncoded) ? 'UTF-8' : 'ASCII';
             foreach (explode(',', $fieldValue) as $multiValue) {
                 $header = new static($fieldName, $multiValue);
-                $headers[] = $header->setEncoding($encoding);
+                $headers[] = $header;
             }
             return $headers;
         } else {
             $header = new static($fieldName, $fieldValue);
-            if ($wasEncoded) {
-                $header->setEncoding('UTF-8');
-            }
+
             return $header;
         }
     }

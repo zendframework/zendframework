@@ -23,7 +23,7 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Mail\Header\ContentTransferEncoding', $contentTransferEncodingHeader);
     }
 
-    public function testContentTransferEncodingFromStringCreateExcaption()
+    public function testContentTransferEncodingFromStringCreateException()
     {
         $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException');
         $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: 9bit');

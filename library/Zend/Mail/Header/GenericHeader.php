@@ -156,11 +156,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public function getEncoding()
     {
         if (!$this->encoding) {
-            if (Mime::isPrintable($this->fieldValue)) {
-                $this->setEncoding('ASCII');
-            } else {
-                $this->setEncoding('UTF-8');
-            }
+            $this->encoding = Mime::isPrintable($this->fieldValue) ? 'ASCII' : 'UTF-8';
         }
 
         return $this->encoding;

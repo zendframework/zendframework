@@ -94,11 +94,7 @@ class Sender implements HeaderInterface
     public function getEncoding()
     {
         if (!$this->encoding) {
-            if (Mime::isPrintable($this->getFieldValue(HeaderInterface::FORMAT_RAW))) {
-                $this->setEncoding('ASCII');
-            } else {
-                $this->setEncoding('UTF-8');
-            }
+            $this->encoding = Mime::isPrintable($this->getFieldValue(HeaderInterface::FORMAT_RAW)) ? 'ASCII' : 'UTF-8';
         }
 
         return $this->encoding;

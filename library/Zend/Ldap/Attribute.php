@@ -197,7 +197,7 @@ class Attribute
             } else {
                 return $return;
             }
-        } catch (Exception\InvalidArgumentException $e) {
+        } catch (Converter\Exception\InvalidArgumentException $e) {
             return $value;
         }
     }

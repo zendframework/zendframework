@@ -51,6 +51,14 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($value);
     }
 
+    public function testInvalidValue()
+    {
+        $data  = array('uid' => array('45678+'));
+        $value = Attribute::getAttribute($data, 'uid', 0);
+
+        $this->assertEquals('45678+', $value);
+    }
+
     public function testGetNonExistentAttribute()
     {
         $data  = array('uid' => array('value'));

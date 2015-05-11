@@ -11,20 +11,13 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.4.2*
+*Zend Framework 2.4.3dev*
 
-This is the second maintenance release in the version 2.4 series.
+This is the third maintenance release in the version 2.4 series.
 
-11 May 2015
+DD MMM YYYY
 
-### UPDATES IN 2.4.2
-
-This release fixes issues introduced when correcting
-[ZF2015-04](http://framework.zend.com/security/advisory/ZF2015-04), including:
-
-- [#7506](https://github.com/zendframework/zf2/pull/7506) resolves issues when UTF-8 values are used in Mail headers, particularly addresses.
-- [#7507](https://github.com/zendframework/zf2/pull/7507) ensures that array values can be used with cookies.
-- [#7514](https://github.com/zendframework/zf2/pull/7514) ensures that multipart MIME messages can be added to `Zend\Mail\Message` instances in such a way that they do not conflict with ZF2015-04.
+### UPDATES IN 2.4.3
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

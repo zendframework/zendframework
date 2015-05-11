@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.3.9 (2015-05-11)
+
+- [#7506](https://github.com/zendframework/zf2/pull/7506) resolves issues when UTF-8 values are used in Mail headers, particularly addresses.
+- [#7507](https://github.com/zendframework/zf2/pull/7507) ensures that array values can be used with cookies.
+- [#7514](https://github.com/zendframework/zf2/pull/7514) ensures that multipart MIME messages can be added to `Zend\Mail\Message` instances in such a way that they do not conflict with ZF2015-04.
+
 ## 2.3.8 (2015-05-07)
 
 ### SECURITY UPDATES

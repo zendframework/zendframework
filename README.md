@@ -11,15 +11,15 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.8*
+*Zend Framework 2.3.9*
 
-This is the eighth maintenance release for the version 2.3 series.
+This is the ninth maintenance release for the version 2.3 series.
 
-07 May 2015
+11 May 2015
 
-### UPDATES IN 2.3.8
+### UPDATES IN 2.3.9
 
-This release contains the following security fixes:
+This release contains the following security fixes introduced in 2.3.8:
 
 - **ZF2015-04**: `Zend\Mail` and `Zend\Http` were both susceptible to CRLF
   Injection Attack vectors (for HTTP, this is often referred to as HTTP Response
@@ -32,6 +32,16 @@ This release contains the following security fixes:
   If you use either `Zend\Mail` or `Zend\Http` (which includes users of
   `Zend\Mvc`), we recommend upgrading immediately.
 
+Additionally, this release fixes several issues raised by the patch for the
+above security fix, including:
+
+- [#7506](https://github.com/zendframework/zf2/pull/7506) resolves issues when
+  UTF-8 values are used in Mail headers, particularly addresses.
+- [#7507](https://github.com/zendframework/zf2/pull/7507) ensures that array
+  values can be used with cookies.
+- [#7514](https://github.com/zendframework/zf2/pull/7514) ensures that multipart
+  MIME messages can be added to `Zend\Mail\Message` instances in such a way that
+  they do not conflict with ZF2015-04.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

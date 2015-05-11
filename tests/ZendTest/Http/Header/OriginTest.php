@@ -51,7 +51,7 @@ class OriginTest extends \PHPUnit_Framework_TestCase
     {
         $header = Origin::fromString("Origin: http://zend.org\r\n\r\nevilContent");
     }
-    
+
     /**
      * @group ZF2015-04
      */

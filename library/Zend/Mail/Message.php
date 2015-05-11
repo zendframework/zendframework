@@ -403,7 +403,7 @@ class Message
         $parts = $this->body->getParts();
         if (!empty($parts)) {
             $part = array_shift($parts);
-            $headers->addHeaders($part->getHeadersArray());
+            $headers->addHeaders($part->getHeadersArray("\r\n"));
         }
         return $this;
     }

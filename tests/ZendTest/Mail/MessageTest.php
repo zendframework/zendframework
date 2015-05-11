@@ -745,4 +745,39 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('example', $serializedHeaders);
         $this->assertNotContains("\r\n<html>", $serializedHeaders);
     }
+
+    public function testHeaderUnfoldingWorksAsExpectedForMultipartMessages()
+    {
+        $text = new MimePart('Test content');
+        $text->type = Mime::TYPE_TEXT;
+        $text->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+        $text->disposition = Mime::DISPOSITION_INLINE;
+        $text->charset = 'UTF-8';
+        
+        $html = new MimePart('<b>Test content</b>');
+        $html->type = Mime::TYPE_HTML;
+        $html->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+        $html->disposition = Mime::DISPOSITION_INLINE;
+        $html->charset = 'UTF-8';
+
+        $multipartContent = new MimeMessage();
+        $multipartContent->addPart($text);
+        $multipartContent->addPart($html);
+
+        $multipartPart = new MimePart($multipartContent->generateMessage());
+        $multipartPart->charset = 'UTF-8';
+        $multipartPart->type = 'multipart/alternative';
+        $multipartPart->boundary = $multipartContent->getMime()->boundary();
+
+        $message = new MimeMessage();
+        $message->addPart($multipartPart);
+
+        $this->message->getHeaders()->addHeaderLine('Content-Transfer-Encoding', Mime::ENCODING_QUOTEDPRINTABLE);
+        $this->message->setBody($message);
+
+        $contentType = $this->message->getHeaders()->get('Content-Type');
+        $this->assertInstanceOf('Zend\Mail\Header\ContentType', $contentType);
+        $this->assertContains('multipart/alternative', $contentType->getFieldValue());
+        $this->assertContains($multipartContent->getMime()->boundary(), $contentType->getFieldValue());
+    }
 }

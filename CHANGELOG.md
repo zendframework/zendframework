@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.4.2 (2015-05-11)
+
+- [7503: Mail header - boundary issue (related to ZF2015-04)](https://github.com/zendframework/zf2/issues/7503)
+- [7506: &#91;mail&#92; Fix set UTF-8 values to headers. Fix #7501](https://github.com/zendframework/zf2/pull/7506)
+- [7507: &#91;http&#92; Allow serialize any character on cookies](https://github.com/zendframework/zf2/pull/7507)
+- [7510: &#91;mail/mime&#92; Fix content-type has invalid characters in field value. Fix #7503](https://github.com/zendframework/zf2/pull/7510)
+- [7512: \Zend\Ldap\Attribute::valueFromLdap catching wrong exception](https://github.com/zendframework/zf2/issues/7512)
+- [7513: &#91;ldap&#92; Fix exceptions while parsing are not captured.](https://github.com/zendframework/zf2/pull/7513)
+- [7514: &#91;#7503&#92; Pass the `\r\n` sequence to Part::getHeadersAsArray()](https://github.com/zendframework/zf2/pull/7514)
+
 ## 2.4.1 (2015-05-07)
 
 - [7361: Missing parameter annotation in PHPDoc in Zend\Http\PhpEnvironment\Request](https://github.com/zendframework/zf2/pull/7361)
@@ -379,6 +389,12 @@
 - [7369: Composer update to 2.4-RC3](https://github.com/zendframework/zf2/pull/7369)
 - [7374: Adjust ContentType regex to allow quoted strings and equals](https://github.com/zendframework/zf2/pull/7374)
 - [7375: Correcting](https://github.com/zendframework/zf2/pull/7375)
+
+## 2.3.9 (2015-05-11)
+
+- [#7506](https://github.com/zendframework/zf2/pull/7506) resolves issues when UTF-8 values are used in Mail headers, particularly addresses.
+- [#7507](https://github.com/zendframework/zf2/pull/7507) ensures that array values can be used with cookies.
+- [#7514](https://github.com/zendframework/zf2/pull/7514) ensures that multipart MIME messages can be added to `Zend\Mail\Message` instances in such a way that they do not conflict with ZF2015-04.
 
 ## 2.3.8 (2015-05-07)
 

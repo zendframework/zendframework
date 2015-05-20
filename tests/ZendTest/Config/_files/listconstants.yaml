@@ -1,4 +1,0 @@
-production:
-    paths:
-        - ZEND_CONFIG_YAML_TEST_PATH
-        - ZEND_CONFIG_YAML_TEST_PATH/library/test

@@ -1,4 +1,0 @@
-<?php
-echo implode(', ', array_map(
-        create_function('$a', 'return $a->getLabel();'),
-        $this->vars()->pages));

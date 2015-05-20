@@ -1,7 +1,0 @@
-<?php
-use Zend\Log;
-
-$content = $this->render($this->content);
-$logger = new Log\Logger(new Log\Writer\Stream(__DIR__ . '/view.log'));
-$logger->log(var_export($content, 1), Log\Logger::DEBUG);
-$logger->log(var_export(__FILE__, 1), Log\Logger::DEBUG);

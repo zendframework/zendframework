@@ -8,3 +8,4 @@
 build/
 nbproject
 tmp/
+vendor/

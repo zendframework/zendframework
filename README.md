@@ -19,11 +19,15 @@ DD MMM YYYY
 
 ### UPDATES IN 2.5.0
 
+This release modifies Zend Framework to be a metapackage, with dependencies on
+each of the individual components that comprised Zend Framework in previous
+versions.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS
 
-Zend Framework 2 requires PHP 5.3.23 or later; we recommend using the
+Zend Framework 2 requires PHP 5.5 or later; we recommend using the
 latest PHP version whenever possible.
 
 ### INSTALLATION
@@ -32,8 +36,8 @@ Please see [INSTALL.md](INSTALL.md).
 
 ### CONTRIBUTING
 
-If you wish to contribute to Zend Framework, please read both the
-[CONTRIBUTING.md](CONTRIBUTING.md) and [README-GIT.md](README-GIT.md) file.
+If you wish to contribute to Zend Framework, please read the
+[CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ### QUESTIONS AND FEEDBACK
 
@@ -70,7 +74,7 @@ For sensitive email communications, please use [our PGP key](http://framework.ze
 ### LICENSE
 
 The files in this archive are released under the Zend Framework license.
-You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
+You can find a copy of this license in [LICENSE.md](LICENSE.md).
 
 ### ACKNOWLEDGEMENTS
 

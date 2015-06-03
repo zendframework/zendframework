@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.5.0 (2015-06-03)
+
+- [7072: Split Framework](https://github.com/zendframework/zf2/issues/7072)
+- [7095: Drop PHP 5.3 support](https://github.com/zendframework/zf2/issues/7095)
+- [7119: #7095 - bumping minimum PHP version requirement to 5.4.0](https://github.com/zendframework/zf2/pull/7119)
+- [7542: &#91;WIP&#92; Make ZF2 a meta-package](https://github.com/zendframework/zf2/pull/7542)
+
 ## 2.4.2 (2015-05-11)
 
 - [7503: Mail header - boundary issue (related to ZF2015-04)](https://github.com/zendframework/zf2/issues/7503)

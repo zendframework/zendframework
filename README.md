@@ -34,6 +34,61 @@ latest PHP version whenever possible.
 
 Please see [INSTALL.md](INSTALL.md).
 
+### COMPONENTS
+
+This package is a metapackage aggregating the following components:
+
+- [zend-authentication](https://github.com/zendframework/zend-authentication)
+- [zend-barcode](https://github.com/zendframework/zend-barcode)
+- [zend-cache](https://github.com/zendframework/zend-cache)
+- [zend-captcha](https://github.com/zendframework/zend-captcha)
+- [zend-code](https://github.com/zendframework/zend-code)
+- [zend-config](https://github.com/zendframework/zend-config)
+- [zend-console](https://github.com/zendframework/zend-console)
+- [zend-crypt](https://github.com/zendframework/zend-crypt)
+- [zend-db](https://github.com/zendframework/zend-db)
+- [zend-debug](https://github.com/zendframework/zend-debug)
+- [zend-di](https://github.com/zendframework/zend-di)
+- [zend-dom](https://github.com/zendframework/zend-dom)
+- [zend-escaper](https://github.com/zendframework/zend-escaper)
+- [zend-eventmanager](https://github.com/zendframework/zend-eventmanager)
+- [zend-feed](https://github.com/zendframework/zend-feed)
+- [zend-file](https://github.com/zendframework/zend-file)
+- [zend-filter](https://github.com/zendframework/zend-filter)
+- [zend-form](https://github.com/zendframework/zend-form)
+- [zend-http](https://github.com/zendframework/zend-http)
+- [zend-i18n](https://github.com/zendframework/zend-i18n)
+- [zend-inputfilter](https://github.com/zendframework/zend-inputfilter)
+- [zend-json](https://github.com/zendframework/zend-json)
+- [zend-ldap](https://github.com/zendframework/zend-ldap)
+- [zend-loader](https://github.com/zendframework/zend-loader)
+- [zend-log](https://github.com/zendframework/zend-log)
+- [zend-mail](https://github.com/zendframework/zend-mail)
+- [zend-math](https://github.com/zendframework/zend-math)
+- [zend-memory](https://github.com/zendframework/zend-memory)
+- [zend-mime](https://github.com/zendframework/zend-mime)
+- [zend-modulemanager](https://github.com/zendframework/zend-modulemanager)
+- [zend-mvc](https://github.com/zendframework/zend-mvc)
+- [zend-navigation](https://github.com/zendframework/zend-navigation)
+- [zend-paginator](https://github.com/zendframework/zend-paginator)
+- [zend-permissions-acl](https://github.com/zendframework/zend-permissions-acl)
+- [zend-permissions-rbac](https://github.com/zendframework/zend-permissions-rbac)
+- [zend-progressbar](https://github.com/zendframework/zend-progressbar)
+- [zend-serializer](https://github.com/zendframework/zend-serializer)
+- [zend-server](https://github.com/zendframework/zend-server)
+- [zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
+- [zend-session](https://github.com/zendframework/zend-session)
+- [zend-soap](https://github.com/zendframework/zend-soap)
+- [zend-stdlib](https://github.com/zendframework/zend-stdlib)
+- [zend-tag](https://github.com/zendframework/zend-tag)
+- [zend-test](https://github.com/zendframework/zend-test)
+- [zend-text](https://github.com/zendframework/zend-text)
+- [zend-uri](https://github.com/zendframework/zend-uri)
+- [zend-validator](https://github.com/zendframework/zend-validator)
+- [zend-version](https://github.com/zendframework/zend-version)
+- [zend-view](https://github.com/zendframework/zend-view)
+- [zend-xmlrpc](https://github.com/zendframework/zend-xmlrpc)
+
 ### CONTRIBUTING
 
 If you wish to contribute to Zend Framework, please read the

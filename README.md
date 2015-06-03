@@ -4,11 +4,11 @@
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.5.0dev*
+*Zend Framework 2.5.0*
 
 This is the fifth minor (feature) release for the version 2 series.
 
-DD MMM YYYY
+03 June 2015
 
 ### UPDATES IN 2.5.0
 

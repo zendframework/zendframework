@@ -88,6 +88,7 @@ This package is a metapackage aggregating the following components:
 - [zend-version](https://github.com/zendframework/zend-version)
 - [zend-view](https://github.com/zendframework/zend-view)
 - [zend-xmlrpc](https://github.com/zendframework/zend-xmlrpc)
+- [ZendXml](https://github.com/zendframework/ZendXml)
 
 ### CONTRIBUTING
 

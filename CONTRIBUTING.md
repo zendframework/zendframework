@@ -72,6 +72,7 @@ be made accordingly.
 - [zend-version](https://github.com/zendframework/zend-version)
 - [zend-view](https://github.com/zendframework/zend-view)
 - [zend-xmlrpc](https://github.com/zendframework/zend-xmlrpc)
+- [ZendXml](https://github.com/zendframework/ZendXml)
 
 ## Reporting Potential Security Issues
 

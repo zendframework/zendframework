@@ -28,27 +28,23 @@ use Zend\Loader\StandardAutoloader;
  * --overwrite|-w               Whether or not to overwrite existing map file
  */
 
-$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
-if (is_dir($zfLibraryPath)) {
-    // Try to load StandardAutoloader from library
-    if (false === include($zfLibraryPath . '/Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via library; aborting' . PHP_EOL;
-        exit(2);
-    }
+// Setup/verify autoloading
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    // Local install
+    require __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(getcwd() . '/vendor/autoload.php')) {
+    // Root project is current working directory
+    require getcwd() . '/vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    // Relative to composer install
+    require __DIR__ . '/../../../autoload.php';
 } else {
-    // Try to load StandardAutoloader from include_path
-    if (false === include('Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via include_path; aborting' . PHP_EOL;
-        exit(2);
-    }
+    fwrite(STDERR, "Unable to setup autoloading; aborting\n");
+    exit(2);
 }
 
 $libraryPath = getcwd();
 $viewPath    = getcwd() . '/view';
-
-// Setup autoloading
-$loader = new StandardAutoloader(array('autoregister_zf' => true));
-$loader->register();
 
 $rules = array(
     'help|h'            => 'Get usage message',

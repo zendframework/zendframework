@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rss version="0.94"
-xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <atom:link rel="self" href="http://www.example.com/feed/rss"/>
-    </channel>
-</rss>

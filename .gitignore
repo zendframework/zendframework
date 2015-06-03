@@ -8,3 +8,5 @@
 build/
 nbproject
 tmp/
+vendor/
+composer.lock

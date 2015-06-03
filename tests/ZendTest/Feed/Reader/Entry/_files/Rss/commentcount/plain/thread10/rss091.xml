@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rss version="0.91"
-    xmlns:thread="http://purl.org/syndication/thread/1.0">
-    <channel>
-        <item>
-            <thread:total>321</thread:total>
-        </item>
-    </channel>
-</rss>

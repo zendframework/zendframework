@@ -62,8 +62,11 @@ class PriorityList implements Iterator, Countable
      */
     public function insert($name, $value, $priority = 0)
     {
+        if (!isset($this->items[$name])) {
+            $this->count++;
+        }
+
         $this->sorted = false;
-        $this->count++;
 
         $this->items[$name] = array(
             'data'     => $value,

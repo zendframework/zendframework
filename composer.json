@@ -33,7 +33,6 @@
         "zendframework/zend-i18n-resources": "~2.5.0",
         "zendframework/zend-inputfilter": "~2.5.0",
         "zendframework/zend-json": "~2.5.0",
-        "zendframework/zend-ldap": "~2.5.0",
         "zendframework/zend-loader": "~2.5.0",
         "zendframework/zend-log": "~2.5.0",
         "zendframework/zend-mail": "~2.5.0",
@@ -62,6 +61,9 @@
         "zendframework/zend-view": "~2.5.0",
         "zendframework/zend-xmlrpc": "~2.5.0",
         "zendframework/zendxml": "~1.0"
+    },
+    "suggest": {
+        "zendframework/zend-ldap": "zend-ldap component ~2.5.0, if you need LDAP features"
     },
     "bin": [
         "bin/classmap_generator.php",

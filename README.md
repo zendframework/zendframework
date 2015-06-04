@@ -4,17 +4,19 @@
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.5.0*
+*Zend Framework 2.5.1*
 
-This is the fifth minor (feature) release for the version 2 series.
+This is the first maintenance release for the version 2.5 series.
 
-03 June 2015
+04 June 2015
 
-### UPDATES IN 2.5.0
+### UPDATES IN 2.5.1
 
-This release modifies Zend Framework to be a metapackage, with dependencies on
-each of the individual components that comprised Zend Framework in previous
-versions.
+- [#7571](https://github.com/zendframework/zf2/pull/7571) makes `zend-ldap` an
+  optional dependency instead of a hard dependency, as `zend-ldap` has a hard
+  requirement on `ext-ldap`, blocking installation for many users. If you use
+  `zend-ldap`, you will need to call `composer require zendframework/zend-ldap`
+  after upgrading to 2.5.1.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

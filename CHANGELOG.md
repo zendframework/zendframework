@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.5.0 (2015-06-04)
+## 2.5.1 (2015-06-04)
 
 - [#7571](https://github.com/zendframework/zf2/pull/7571) makes `zend-ldap` an optional dependency instead of a hard dependency, as `zend-ldap` has a hard requirement on `ext-ldap`, blocking installation for many users. If you use `zend-ldap`, you will need to call `composer require zendframework/zend-ldap` after upgrading to 2.5.1.
 

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.8 (2015-09-15)
+
+- [zend-validator/25: validate against DateTimeImmutable instead of DateTimeInterface](https://github.com/zendframework/zend-validator/pull/25)
+
 ## 2.4.7 (2015-08-11)
 
 - [15: validateInputs must allow ArrayAccess for $data](https://github.com/zendframework/zend-inputfilter/pull/15)

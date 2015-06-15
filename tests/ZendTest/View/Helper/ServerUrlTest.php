@@ -219,4 +219,12 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $url->setUseProxy(true);
         $this->assertEquals('http://www.secondhost.org:8888', $url->__invoke());
     }
+
+    public function testUsesHostHeaderWhenPortForwardingDetected()
+    {
+        $_SERVER['HTTP_HOST'] = 'localhost:10088';
+        $_SERVER['SERVER_PORT'] = 10081;
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('http://localhost:10088', $url->__invoke());
+    }
 }

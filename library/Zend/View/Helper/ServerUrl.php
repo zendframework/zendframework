@@ -79,12 +79,23 @@ class ServerUrl extends AbstractHelper
 
         if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
             // Detect if the port is set in SERVER_PORT and included in HTTP_HOST
-            if (isset($_SERVER['SERVER_PORT'])) {
-                $portStr = ':' . $_SERVER['SERVER_PORT'];
-                if (substr($_SERVER['HTTP_HOST'], 0-strlen($portStr), strlen($portStr)) == $portStr) {
-                    $this->setHost(substr($_SERVER['HTTP_HOST'], 0, 0-strlen($portStr)));
+            if (isset($_SERVER['SERVER_PORT'])
+                && preg_match('/^(?P<host>.*?):(?P<port>\d+)$/', $_SERVER['HTTP_HOST'], $matches)
+            ) {
+                // If they are the same, set the host to just the hostname
+                // portion of the Host header.
+                if ((int) $matches['port'] === (int) $_SERVER['SERVER_PORT']) {
+                    $this->setHost($matches['host']);
                     return;
                 }
+
+                // At this point, we have a SERVER_PORT that differs from the
+                // Host header, indicating we likely have a port-forwarding
+                // situation. As such, we'll set the host and port from the
+                // matched values.
+                $this->setPort((int) $matches['port']);
+                $this->setHost($matches['host']);
+                return;
             }
 
             $this->setHost($_SERVER['HTTP_HOST']);

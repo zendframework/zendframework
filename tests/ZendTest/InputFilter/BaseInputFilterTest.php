@@ -641,8 +641,10 @@ class BaseInputFilterTest extends TestCase
     /**
      * @dataProvider contextDataProvider()
      */
+    // @codingStandardsIgnoreStart
     public function testValidationMarksInputValidWhenAllowEmptyFlagIsTrueAndContinueIfEmptyIsTrueAndContextValidatesEmptyField($allowEmpty, $blankIsValid, $valid)
     {
+        // @codingStandardsIgnoreEnd
         $filter = new InputFilter();
 
         $data = array(
@@ -963,5 +965,59 @@ class BaseInputFilterTest extends TestCase
                ->setData(array('foo' => 'nonempty'));
 
         $this->assertFalse($filter->isValid());
+    }
+
+    /**
+     * @group 7
+     */
+    public function testMissingRequiredAllowedEmptyValueShouldMarkInputFilterInvalid()
+    {
+        $foo = new Input('foo');
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input('bar');
+        $bar->setRequired(true);
+        $bar->setAllowEmpty(true);
+
+        $filter = new InputFilter();
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filter->setData(array('foo' => 'xyz'));
+        $this->assertFalse($filter->isValid(), 'Missing required value should mark input filter as invalid');
+    }
+
+    public function emptyValuesForValidation()
+    {
+        return array(
+            'null'         => array(null),
+            'empty-string' => array(''),
+        );
+    }
+
+    /**
+     * @group 7
+     * @dataProvider emptyValuesForValidation
+     */
+    public function testEmptyValuePassedForRequiredButAllowedEmptyInputShouldMarkInputFilterValid($value)
+    {
+        $foo = new Input('foo');
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input('bar');
+        $bar->setRequired(true);
+        $bar->setAllowEmpty(true);
+
+        $filter = new InputFilter();
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filter->setData(array(
+            'foo' => 'xyz',
+            'bar' => $value,
+        ));
+        $this->assertTrue($filter->isValid(), 'Empty value should mark input filter as valid');
     }
 }

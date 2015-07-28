@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.5 (2015-07-28)
+
+- [7: Ensure Required, AllowEmpty validation combo works](https://github.com/zendframework/zend-inputfilter/pull/7)
+
 ## 2.4.4 (2015-07-21)
 
 - Fix count increment on insert in PriorityList

@@ -241,13 +241,15 @@ class BaseInputFilter implements
         $valid               = true;
 
         foreach ($inputs as $name) {
-            $input      = $this->inputs[$name];
+            $input       = $this->inputs[$name];
+            $hasFallback = ($input instanceof Input && $input->hasFallback());
 
-            // If the value is required, but not present in the data set,
-            // validation fails.
+            // If the value is required, not present in the data set, and
+            // has no fallback, validation fails.
             if (!array_key_exists($name, $data)
                 && $input instanceof InputInterface
                 && $input->isRequired()
+                && !$hasFallback
             ) {
                 $input->setErrorMessage('Value is required');
                 $this->invalidInputs[$name] = $input;
@@ -257,6 +259,18 @@ class BaseInputFilter implements
                 }
 
                 $valid = false;
+                continue;
+            }
+
+            // If the value is required, not present in the data set, and
+            // has a fallback, validation passes, and we set the input
+            // value to the fallback.
+            if (!array_key_exists($name, $data)
+                && $input instanceof InputInterface
+                && $input->isRequired()
+                && $hasFallback
+            ) {
+                $input->setValue($input->getFallbackValue());
                 continue;
             }
 

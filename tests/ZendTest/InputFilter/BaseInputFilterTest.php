@@ -1020,4 +1020,80 @@ class BaseInputFilterTest extends TestCase
         ));
         $this->assertTrue($filter->isValid(), 'Empty value should mark input filter as valid');
     }
+
+    /**
+     * @group 10
+     */
+    public function testMissingRequiredWithFallbackShouldMarkInputValid()
+    {
+        $foo = new Input('foo');
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input('bar');
+        $bar->setRequired(true);
+        $bar->setFallbackValue('baz');
+
+        $filter = new InputFilter();
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filter->setData(['foo' => 'xyz']);
+        $this->assertTrue($filter->isValid(), 'Missing input with fallback value should mark input filter as valid');
+        $data = $filter->getValues();
+        $this->assertArrayHasKey('bar', $data);
+        $this->assertEquals($bar->getFallbackValue(), $data['bar']);
+    }
+
+    /**
+     * @group 10
+     */
+    public function testMissingRequiredThatAllowsEmptyWithFallbackShouldMarkInputValid()
+    {
+        $foo = new Input('foo');
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input('bar');
+        $bar->setRequired(true);
+        $bar->setAllowEmpty(true);
+        $bar->setFallbackValue('baz');
+
+        $filter = new InputFilter();
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filter->setData(['foo' => 'xyz']);
+        $this->assertTrue($filter->isValid(), 'Missing input with fallback value should mark input filter as valid');
+        $data = $filter->getValues();
+        $this->assertArrayHasKey('bar', $data);
+        $this->assertEquals($bar->getFallbackValue(), $data['bar']);
+    }
+
+    /**
+     * @group 10
+     */
+    public function testEmptyRequiredValueWithFallbackShouldMarkInputValid()
+    {
+        $foo = new Input('foo');
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input('bar');
+        $bar->setRequired(true);
+        $bar->setFallbackValue('baz');
+
+        $filter = new InputFilter();
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filter->setData([
+            'foo' => 'xyz',
+            'bar' => null,
+        ]);
+        $this->assertTrue($filter->isValid(), 'Empty input with fallback value should mark input filter as valid');
+        $data = $filter->getValues();
+        $this->assertArrayHasKey('bar', $data);
+        $this->assertEquals($bar->getFallbackValue(), $data['bar']);
+    }
 }

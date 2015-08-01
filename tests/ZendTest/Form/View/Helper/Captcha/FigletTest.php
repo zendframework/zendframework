@@ -18,6 +18,7 @@ class FigletTest extends CommonTestCase
 {
     public function setUp()
     {
+        $this->markTestSkipped('Unable to run Figlet captcha tests due to dependency on test asset from zend-captcha');
         $this->helper  = new FigletCaptchaHelper();
         $this->captcha = new FigletCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',

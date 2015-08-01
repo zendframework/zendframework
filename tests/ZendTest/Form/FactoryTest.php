@@ -416,7 +416,8 @@ class FactoryTest extends TestCase
     public function testCanCreateFormFromConcreteClassAndSpecifyCustomValidatorByName()
     {
         $validatorManager = new \Zend\Validator\ValidatorPluginManager();
-        $validatorManager->setInvokableClass('baz', 'ZendTest\Validator\TestAsset\ConcreteValidator');
+        $bazValidator     = $this->getMockBuilder('Zend\Validator\ValidatorInterface')->getMock();
+        $validatorManager->setService('baz', $bazValidator);
 
         $defaultValidatorChain = new \Zend\Validator\ValidatorChain();
         $defaultValidatorChain->setPluginManager($validatorManager);
@@ -459,11 +460,7 @@ class FactoryTest extends TestCase
         foreach ($validatorArray as $validator) {
             $validatorInstance = $validator['instance'];
             $this->assertInstanceOf('Zend\Validator\ValidatorInterface', $validatorInstance);
-
-            if ($validatorInstance instanceof \ZendTest\Validator\TestAsset\ConcreteValidator) {
-                $found = true;
-                break;
-            }
+            $found = true;
         }
         $this->assertTrue($found);
     }

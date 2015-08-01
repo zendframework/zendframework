@@ -21,6 +21,7 @@ class ReCaptchaTest extends CommonTestCase
 
     public function setUp()
     {
+        $this->markTestSkipped('Unable to run ReCaptcha tests due to dependency on test asset from zend-captcha');
         if (!constant('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT')) {
             $this->markTestSkipped('Enable TESTS_ZEND_FORM_RECAPTCHA_SUPPORT to test PDF render');
         }

@@ -18,6 +18,7 @@ use Zend\Filter\Boolean as BooleanFilter;
  * \Zend\InputFilter\Input should enable the continueIfEmpty flag.
  *
  * @Annotation
+ * @deprecated 2.4.8 Use `@Validator({"name":"NotEmpty"})` instead.
  */
 class ContinueIfEmpty
 {

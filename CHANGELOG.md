@@ -8,6 +8,8 @@
 - [zend-inputfilter/22: ensure fallback values work as per pre-2.4 behavior](https://github.com/zendframework/zend-inputfilter/pull/22)
 - [zend-inputfilter/31: update the InputFilterInterface::add() docblock to match implementations](https://github.com/zendframework/zend-inputfilter/pull/31)
 - [zend-inputfilter/25: Fix how missing optoinal fields are validated to match pre 2.4.0 behavior](https://github.com/zendframework/zend-inputfilter/pull/26)
+- [zend-form/12: deprecate AllowEmpty and ContinueIfEmpty annotations, per zend-inputfilter#26](https://github.com/zendframework/zend-form/pull/12)
+- [zend-form/9: fix typos in aria attribute names of AbstractHelper](https://github.com/zendframework/zend-form/pull/9)
 
 ## 2.4.7 (2015-08-11)
 

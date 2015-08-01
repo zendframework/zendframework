@@ -18,6 +18,7 @@ class DumbTest extends CommonTestCase
 {
     public function setUp()
     {
+        $this->markTestSkipped('Unable to run "dump" captcha tests due to dependency on test asset from zend-captcha');
         $this->helper  = new DumbCaptchaHelper();
         $this->captcha = new DumbCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',

@@ -22,6 +22,7 @@ class ImageTest extends CommonTestCase
 
     public function setUp()
     {
+        $this->markTestSkipped('Unable to run Image captcha tests due to dependency on test asset from zend-captcha');
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
             return;

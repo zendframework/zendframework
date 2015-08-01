@@ -76,6 +76,7 @@ class FormCaptchaTest extends CommonTestCase
 
     public function testPassingElementWithDumbCaptchaRendersCorrectly()
     {
+        $this->markTestSkipped('Unable to run form captcha tests due to dependency on test asset from zend-captcha');
         $captcha = new Captcha\Dumb(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
@@ -90,6 +91,7 @@ class FormCaptchaTest extends CommonTestCase
 
     public function testPassingElementWithFigletCaptchaRendersCorrectly()
     {
+        $this->markTestSkipped('Unable to run form captcha tests due to dependency on test asset from zend-captcha');
         $captcha = new Captcha\Figlet(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));

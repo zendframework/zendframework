@@ -134,6 +134,7 @@ class FormElementTest extends TestCase
 
     public function testRendersCaptchaAsExpected()
     {
+        $this->markTestSkipped('Unable to run form captcha tests due to dependency on test asset from zend-captcha');
         $captcha = new Captcha\Dumb(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));

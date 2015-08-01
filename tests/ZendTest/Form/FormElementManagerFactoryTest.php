@@ -35,6 +35,9 @@ class FormElementManagerFactoryTest extends TestCase
 
     public function setUp()
     {
+        $this->markTestSkipped('This test needs to be moved to the zend-mvc package');
+
+        /*
         $formElementManagerFactory = new FormElementManagerFactory();
         $config = new ArrayObject(array('di' => array()));
         $services = $this->services = new ServiceManager();
@@ -48,15 +51,18 @@ class FormElementManagerFactoryTest extends TestCase
         $this->manager = $services->get('FormElementManager');
 
         $this->standaloneManager = new FormElementManager();
+         */
     }
 
     public function tearDown()
     {
+        /*
         $ref = new \ReflectionClass('Zend\Validator\Csrf');
         $hashCache = $ref->getProperty('hashCache');
         $hashCache->setAccessible(true);
         $hashCache->setValue(new Csrf, array());
         SessionContainer::setDefaultManager(null);
+         */
     }
 
     public function testWillInstantiateFormFromInvokable()

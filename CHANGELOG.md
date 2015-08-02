@@ -29,7 +29,7 @@
 - [7380: Remove unused code](https://github.com/zendframework/zf2/pull/7380)
 - [7383: Fixes typos](https://github.com/zendframework/zf2/pull/7383)
 - [7391: update composer's branch-alias](https://github.com/zendframework/zf2/pull/7391)
-- [7392: improvments for Zend\InputFilter](https://github.com/zendframework/zf2/pull/7392)
+- [7392: improvements for Zend\InputFilter](https://github.com/zendframework/zf2/pull/7392)
 - [7393: implements @todo write more tests for Zend\Ldap\Converter::toLdap()](https://github.com/zendframework/zf2/pull/7393)
 - [7394: fixed return type on disconnect method in pgsql connection](https://github.com/zendframework/zf2/pull/7394)
 - [7396: added connection type to allow force new connection](https://github.com/zendframework/zf2/pull/7396)

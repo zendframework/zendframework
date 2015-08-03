@@ -60,7 +60,7 @@
         "zendframework/zend-version": "~2.5.0",
         "zendframework/zend-view": "~2.5.0",
         "zendframework/zend-xmlrpc": "~2.5.0",
-        "zendframework/zendxml": "~1.0"
+        "zendframework/zendxml": "^1.0.1"
     },
     "suggest": {
         "zendframework/zend-ldap": "zend-ldap component ~2.5.0, if you need LDAP features"

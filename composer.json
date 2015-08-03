@@ -10,7 +10,7 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zendxml": "~1.0-dev"
+        "zendframework/zendxml": "^1.0.1"
     },
     "require-dev": {
         "doctrine/annotations": "~1.0",

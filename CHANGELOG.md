@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.6 (2015-08-03)
+
+- Take fallback value into account
+
 ## 2.4.5 (2015-07-28)
 
 - [7: Ensure Required, AllowEmpty validation combo works](https://github.com/zendframework/zend-inputfilter/pull/7)

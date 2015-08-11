@@ -9,12 +9,19 @@
 
 namespace ZendTest\InputFilter;
 
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use PHPUnit_Framework_TestCase as TestCase;
-use RuntimeException;
-use Zend\Filter;
+use stdClass;
+use Zend\Filter\FilterChain;
 use Zend\InputFilter\Input;
-use Zend\Validator;
+use Zend\InputFilter\InputInterface;
+use Zend\Validator\NotEmpty as NotEmptyValidator;
+use Zend\Validator\ValidatorChain;
+use Zend\Validator\ValidatorInterface;
 
+/**
+ * @covers Zend\InputFilter\Input
+ */
 class InputTest extends TestCase
 {
     /**
@@ -25,6 +32,21 @@ class InputTest extends TestCase
     public function setUp()
     {
         $this->input = new Input('foo');
+    }
+
+    public function assertRequiredValidationErrorMessage(Input $input, $message = '')
+    {
+        $message  = $message ?: 'Expected failure message for required input';
+        $message .= ';';
+
+        $messages = $input->getMessages();
+        $this->assertInternalType('array', $messages, $message . ' non-array messages array');
+
+        $notEmpty         = new NotEmptyValidator();
+        $messageTemplates = $notEmpty->getOption('messageTemplates');
+        $this->assertSame(array(
+            NotEmptyValidator::IS_EMPTY => $messageTemplates[NotEmptyValidator::IS_EMPTY],
+        ), $messages, $message . ' missing NotEmpty::IS_EMPTY key and/or contains additional messages');
     }
 
     public function testConstructorRequiresAName()
@@ -48,14 +70,14 @@ class InputTest extends TestCase
 
     public function testCanInjectFilterChain()
     {
-        $chain = new Filter\FilterChain();
+        $chain = $this->createFilterChainMock();
         $this->input->setFilterChain($chain);
         $this->assertSame($chain, $this->input->getFilterChain());
     }
 
     public function testCanInjectValidatorChain()
     {
-        $chain = new Validator\ValidatorChain();
+        $chain = $this->createValidatorChainMock();
         $this->input->setValidatorChain($chain);
         $this->assertSame($chain, $this->input->getValidatorChain());
     }
@@ -84,101 +106,227 @@ class InputTest extends TestCase
 
     public function testContinueIfEmptyFlagIsFalseByDefault()
     {
-        $input = new Input('foo');
+        $input = $this->input;
         $this->assertFalse($input->continueIfEmpty());
     }
 
     public function testContinueIfEmptyFlagIsMutable()
     {
-        $input = new Input('foo');
+        $input = $this->input;
         $input->setContinueIfEmpty(true);
         $this->assertTrue($input->continueIfEmpty());
     }
 
-    public function testNotEmptyValidatorNotInjectedIfContinueIfEmptyIsTrue()
+    /**
+     * @dataProvider setValueProvider
+     */
+    public function testSetFallbackValue($fallbackValue)
     {
-        $input = new Input('foo');
+        $input = $this->input;
+
+        $return = $input->setFallbackValue($fallbackValue);
+        $this->assertSame($input, $return, 'setFallbackValue() must return it self');
+
+        $this->assertEquals($fallbackValue, $input->getFallbackValue(), 'getFallbackValue() value not match');
+        $this->assertEquals(true, $input->hasFallback(), 'hasFallback() value not match');
+    }
+
+    /**
+     * @dataProvider fallbackValueVsIsValidProvider
+     */
+    public function testFallbackValueVsIsValidRules($required, $fallbackValue, $originalValue, $isValid, $expectedValue)
+    {
+        $input = $this->input;
         $input->setContinueIfEmpty(true);
-        $input->setValue('');
+
+        $input->setRequired($required);
+        $input->setValidatorChain($this->createValidatorChainMock($isValid, $originalValue));
+        $input->setFallbackValue($fallbackValue);
+        $input->setValue($originalValue);
+
+        $this->assertTrue(
+            $input->isValid(),
+            'isValid() should be return always true when fallback value is set. Detail: ' .
+            json_encode($input->getMessages())
+        );
+        $this->assertEquals(array(), $input->getMessages(), 'getMessages() should be empty because the input is valid');
+        $this->assertSame($expectedValue, $input->getRawValue(), 'getRawValue() value not match');
+        $this->assertSame($expectedValue, $input->getValue(), 'getValue() value not match');
+    }
+
+    /**
+     * @dataProvider fallbackValueVsIsValidProvider
+     */
+    public function testFallbackValueVsIsValidRulesWhenValueNotSet($required, $fallbackValue)
+    {
+        $expectedValue = $fallbackValue; // Should always return the fallback value
+
+        $input = $this->input;
+        $input->setContinueIfEmpty(true);
+
+        $input->setRequired($required);
+        $input->setValidatorChain($this->createValidatorChainMock(null));
+        $input->setFallbackValue($fallbackValue);
+
+        $this->assertTrue(
+            $input->isValid(),
+            'isValid() should be return always true when fallback value is set. Detail: ' .
+            json_encode($input->getMessages())
+        );
+        $this->assertEquals(array(), $input->getMessages(), 'getMessages() should be empty because the input is valid');
+        $this->assertSame($expectedValue, $input->getRawValue(), 'getRawValue() value not match');
+        $this->assertSame($expectedValue, $input->getValue(), 'getValue() value not match');
+    }
+
+    public function testRequiredWithoutFallbackAndValueNotSetThenFail()
+    {
+        $input = $this->input;
+        $input->setRequired(true);
+
+        $this->assertFalse(
+            $input->isValid(),
+            'isValid() should be return always false when no fallback value, is required, and not data is set.'
+        );
+        $this->assertRequiredValidationErrorMessage($input);
+    }
+
+    public function testRequiredWithoutFallbackAndValueNotSetThenFailReturnsCustomErrorMessageWhenSet()
+    {
+        $input = $this->input;
+        $input->setRequired(true);
+        $input->setErrorMessage('FAILED TO VALIDATE');
+
+        $this->assertFalse(
+            $input->isValid(),
+            'isValid() should be return always false when no fallback value, is required, and not data is set.'
+        );
+        $this->assertSame(array('FAILED TO VALIDATE'), $input->getMessages());
+    }
+
+    /**
+     * @group 28
+     * @group 60
+     */
+    public function testRequiredWithoutFallbackAndValueNotSetProvidesNotEmptyValidatorIsEmptyErrorMessage()
+    {
+        $input = $this->input;
+        $input->setRequired(true);
+
+        $this->assertFalse(
+            $input->isValid(),
+            'isValid() should always return false when no fallback value is present, '
+            . 'the input is required, and no data is set.'
+        );
+        $this->assertRequiredValidationErrorMessage($input);
+    }
+
+    /**
+     * @group 28
+     * @group 60
+     */
+    public function testRequiredWithoutFallbackAndValueNotSetProvidesCustomErrorMessageWhenSet()
+    {
+        $input = $this->input;
+        $input->setRequired(true);
+        $input->setErrorMessage('FAILED TO VALIDATE');
+
+        $this->assertFalse(
+            $input->isValid(),
+            'isValid() should always return false when no fallback value is present, '
+            . 'the input is required, and no data is set.'
+        );
+        $this->assertSame(array('FAILED TO VALIDATE'), $input->getMessages());
+    }
+
+    public function testNotRequiredWithoutFallbackAndValueNotSetThenIsValid()
+    {
+        $input = $this->input;
+        $input->setRequired(false);
+        $input->setAllowEmpty(false);
+        $input->setContinueIfEmpty(true);
+
+        // Validator should not to be called
+        $input->getValidatorChain()
+            ->attach($this->createValidatorMock(null, null))
+        ;
+        $this->assertTrue(
+            $input->isValid(),
+            'isValid() should be return always true when is not required, and no data is set. Detail: ' .
+            json_encode($input->getMessages())
+        );
+        $this->assertEquals(array(), $input->getMessages(), 'getMessages() should be empty because the input is valid');
+    }
+
+    /**
+     * @dataProvider emptyValueProvider
+     */
+    public function testNotEmptyValidatorNotInjectedIfContinueIfEmptyIsTrue($value)
+    {
+        $input = $this->input;
+        $input->setContinueIfEmpty(true);
+        $input->setValue($value);
         $input->isValid();
         $validators = $input->getValidatorChain()
                                 ->getValidators();
         $this->assertEmpty($validators);
     }
 
-    public function testValueIsNullByDefault()
+    public function testDefaultGetValue()
     {
         $this->assertNull($this->input->getValue());
     }
 
     public function testValueMayBeInjected()
     {
-        $this->input->setValue('bar');
-        $this->assertEquals('bar', $this->input->getValue());
+        $valueRaw = $this->getDummyValue();
+
+        $this->input->setValue($valueRaw);
+        $this->assertEquals($valueRaw, $this->input->getValue());
     }
 
     public function testRetrievingValueFiltersTheValue()
     {
-        $this->input->setValue('bar');
-        $filter = new Filter\StringToUpper();
-        $this->input->getFilterChain()->attach($filter);
-        $this->assertEquals('BAR', $this->input->getValue());
+        $valueRaw = $this->getDummyValue();
+        $valueFiltered = $this->getDummyValue(false);
+
+        $filterChain = $this->createFilterChainMock($valueRaw, $valueFiltered);
+
+        $this->input->setFilterChain($filterChain);
+        $this->input->setValue($valueRaw);
+
+        $this->assertSame($valueFiltered, $this->input->getValue());
     }
 
     public function testCanRetrieveRawValue()
     {
-        $this->input->setValue('bar');
-        $filter = new Filter\StringToUpper();
-        $this->input->getFilterChain()->attach($filter);
-        $this->assertEquals('bar', $this->input->getRawValue());
-    }
+        $valueRaw = $this->getDummyValue();
 
-    public function testIsValidReturnsFalseIfValidationChainFails()
-    {
-        $this->input->setValue('bar');
-        $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->assertFalse($this->input->isValid());
-    }
+        $filterChain = $this->createFilterChainMock();
 
-    public function testIsValidReturnsTrueIfValidationChainSucceeds()
-    {
-        $this->input->setValue('123');
-        $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->assertTrue($this->input->isValid());
+        $this->input->setFilterChain($filterChain);
+        $this->input->setValue($valueRaw);
+
+        $this->assertEquals($valueRaw, $this->input->getRawValue());
     }
 
     public function testValidationOperatesOnFilteredValue()
     {
-        $this->input->setValue(' 123 ');
-        $filter = new Filter\StringTrim();
-        $this->input->getFilterChain()->attach($filter);
-        $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->assertTrue($this->input->isValid());
-    }
+        $valueRaw = $this->getDummyValue();
+        $valueFiltered = $this->getDummyValue(false);
 
-    public function testGetMessagesReturnsValidationMessages()
-    {
-        $this->input->setValue('bar');
-        $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->assertFalse($this->input->isValid());
-        $messages = $this->input->getMessages();
-        $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $messages);
-    }
+        $filterChain = $this->createFilterChainMock($valueRaw, $valueFiltered);
 
-    public function testSpecifyingMessagesToInputReturnsThoseOnFailedValidation()
-    {
-        $this->input->setValue('bar');
-        $validator = new Validator\Digits();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->input->setErrorMessage('Please enter only digits');
-        $this->assertFalse($this->input->isValid());
-        $messages = $this->input->getMessages();
-        $this->assertArrayNotHasKey(Validator\Digits::NOT_DIGITS, $messages);
-        $this->assertContains('Please enter only digits', $messages);
+        $validatorChain = $this->createValidatorChainMock(true, $valueFiltered);
+
+        $this->input->setAllowEmpty(true);
+        $this->input->setFilterChain($filterChain);
+        $this->input->setValidatorChain($validatorChain);
+        $this->input->setValue($valueRaw);
+
+        $this->assertTrue(
+            $this->input->isValid(),
+            'isValid() value not match. Detail . ' . json_encode($this->input->getMessages())
+        );
     }
 
     public function testBreakOnFailureFlagIsOffByDefault()
@@ -192,10 +340,13 @@ class InputTest extends TestCase
         $this->assertTrue($this->input->breakOnFailure());
     }
 
-    public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
+    /**
+     * @dataProvider emptyValueProvider
+     */
+    public function testNotEmptyValidatorAddedWhenIsValidIsCalled($value)
     {
         $this->assertTrue($this->input->isRequired());
-        $this->input->setValue('');
+        $this->input->setValue($value);
         $validatorChain = $this->input->getValidatorChain();
         $this->assertEquals(0, count($validatorChain->getValidators()));
 
@@ -209,15 +360,15 @@ class InputTest extends TestCase
         $this->assertEquals(1, count($validatorChain->getValidators()));
     }
 
-    public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()
+    /**
+     * @dataProvider emptyValueProvider
+     */
+    public function testRequiredNotEmptyValidatorNotAddedWhenOneExists($value)
     {
-        $this->assertTrue($this->input->isRequired());
-        $this->input->setValue('');
+        $this->input->setRequired(true);
+        $this->input->setValue($value);
 
-        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
-        $notEmptyMock->expects($this->exactly(1))
-                     ->method('isValid')
-                     ->will($this->returnValue(false));
+        $notEmptyMock = $this->createNonEmptyValidatorMock(false, $value);
 
         $validatorChain = $this->input->getValidatorChain();
         $validatorChain->prependValidator($notEmptyMock);
@@ -228,127 +379,23 @@ class InputTest extends TestCase
         $this->assertEquals($notEmptyMock, $validators[0]['instance']);
     }
 
-    public function emptyValuesProvider()
-    {
-        return array(
-            array(null),
-            array(''),
-            array(array()),
-        );
-    }
-
     /**
-     * @dataProvider emptyValuesProvider
+     * @dataProvider emptyValueProvider
      */
-    public function testValidatorSkippedIfValueIsEmptyAndAllowedAndNotContinue($emptyValue)
+    public function testDoNotInjectNotEmptyValidatorIfAnywhereInChain($valueRaw, $valueFiltered)
     {
-        $validator = function () {
-            return false;
-        };
-        $this->input->setAllowEmpty(true)
-            ->setContinueIfEmpty(false)
-            ->setValue($emptyValue)
-            ->getValidatorChain()->attach(new Validator\Callback($validator));
-
-        $this->assertTrue($this->input->isValid());
-    }
-
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testAllowEmptyOptionSet($emptyValue)
-    {
-        $this->input->setAllowEmpty(true);
-        $this->input->setValue($emptyValue);
-        $this->assertTrue($this->input->isValid());
-    }
-
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testAllowEmptyOptionNotSet($emptyValue)
-    {
-        $this->input->setAllowEmpty(false);
-        $this->input->setValue($emptyValue);
-        $this->assertFalse($this->input->isValid());
-    }
-
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
-    {
-        $message = 'failure by explicit validator';
-        $validator = new Validator\Callback(function ($value) {
-            return false;
-        });
-        $validator->setMessage($message);
-        $this->input->setAllowEmpty(true)
-                    ->setContinueIfEmpty(true)
-                    ->setValue($emptyValue)
-                    ->getValidatorChain()->attach($validator);
-        $this->assertFalse($this->input->isValid());
-        // Test reason for validation failure; ensures that failure was not
-        // caused by accidentally injected NotEmpty validator
-        $this->assertEquals(array('callbackValue' => $message), $this->input->getMessages());
-    }
-
-    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
-    {
-        $this->input->setValue('nonempty')
-                    ->getFilterChain()->attach(new Filter\Callback(function () {
-                        return '';
-                    }));
-        $this->assertFalse($this->input->isValid());
-    }
-
-    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
-    {
-        $this->input->setValue('')
-                    ->getFilterChain()->attach(new Filter\Callback(function () {
-                        return 'nonempty';
-                    }));
-        $this->assertTrue($this->input->isValid());
-    }
-
-    public function testMerge()
-    {
-        $input = new Input('foo');
-        $input->setValue(' 123 ');
-        $filter = new Filter\StringTrim();
-        $input->getFilterChain()->attach($filter);
-        $validator = new Validator\Digits();
-        $input->getValidatorChain()->attach($validator);
-
-        $input2 = new Input('bar');
-        $input2->merge($input);
-        $validatorChain = $input->getValidatorChain();
-        $filterChain    = $input->getFilterChain();
-
-        $this->assertEquals(' 123 ', $input2->getRawValue());
-        $this->assertEquals(1, $validatorChain->count());
-        $this->assertEquals(1, $filterChain->count());
-
-        $validators = $validatorChain->getValidators();
-        $this->assertInstanceOf('Zend\Validator\Digits', $validators[0]['instance']);
-
-        $filters = $filterChain->getFilters()->toArray();
-        $this->assertInstanceOf('Zend\Filter\StringTrim', $filters[0]);
-    }
-
-    public function testDoNotInjectNotEmptyValidatorIfAnywhereInChain()
-    {
-        $this->assertTrue($this->input->isRequired());
-        $this->input->setValue('');
-
-        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
-        $notEmptyMock->expects($this->exactly(1))
-                     ->method('isValid')
-                     ->will($this->returnValue(false));
-
+        $filterChain = $this->createFilterChainMock($valueRaw, $valueFiltered);
         $validatorChain = $this->input->getValidatorChain();
-        $validatorChain->attach(new Validator\Digits());
+
+        $this->input->setRequired(true);
+        $this->input->setFilterChain($filterChain);
+        $this->input->setValue($valueRaw);
+
+        $notEmptyMock = $this->createNonEmptyValidatorMock(false, $valueFiltered);
+
+        $validatorChain->attach($this->createValidatorMock(true));
         $validatorChain->attach($notEmptyMock);
+
         $this->assertFalse($this->input->isValid());
 
         $validators = $validatorChain->getValidators();
@@ -356,502 +403,480 @@ class InputTest extends TestCase
         $this->assertEquals($notEmptyMock, $validators[1]['instance']);
     }
 
-    public function dataFallbackValue()
+    /**
+     * @group 7448
+     * @dataProvider isRequiredVsAllowEmptyVsContinueIfEmptyVsIsValidProvider
+     */
+    public function testIsRequiredVsAllowEmptyVsContinueIfEmptyVsIsValid(
+        $required,
+        $allowEmpty,
+        $continueIfEmpty,
+        $validator,
+        $value,
+        $expectedIsValid,
+        $expectedMessages
+    ) {
+        $this->input->setRequired($required);
+        $this->input->setAllowEmpty($allowEmpty);
+        $this->input->setContinueIfEmpty($continueIfEmpty);
+        $this->input->getValidatorChain()
+            ->attach($validator)
+        ;
+        $this->input->setValue($value);
+
+        $this->assertEquals(
+            $expectedIsValid,
+            $this->input->isValid(),
+            'isValid() value not match. Detail: ' . json_encode($this->input->getMessages())
+        );
+        $this->assertEquals($expectedMessages, $this->input->getMessages(), 'getMessages() value not match');
+        $this->assertEquals($value, $this->input->getRawValue(), 'getRawValue() must return the value always');
+        $this->assertEquals($value, $this->input->getValue(), 'getValue() must return the filtered value always');
+    }
+
+    /**
+     * @dataProvider setValueProvider
+     */
+    public function testSetValuePutInputInTheDesiredState($value)
+    {
+        $input = $this->input;
+        $this->assertFalse($input->hasValue(), 'Input should not have value by default');
+
+        $input->setValue($value);
+        $this->assertTrue($input->hasValue(), "hasValue() didn't return true when value was set");
+    }
+
+    /**
+     * @dataProvider setValueProvider
+     */
+    public function testResetValueReturnsInputValueToDefaultValue($value)
+    {
+        $input = $this->input;
+        $originalInput = clone $input;
+        $this->assertFalse($input->hasValue(), 'Input should not have value by default');
+
+        $input->setValue($value);
+        $this->assertTrue($input->hasValue(), "hasValue() didn't return true when value was set");
+
+        $return = $input->resetValue();
+        $this->assertSame($input, $return, 'resetValue() must return itself');
+        $this->assertEquals($originalInput, $input, 'Input was not reset to the default value state');
+    }
+
+    public function testMerge()
+    {
+        $sourceRawValue = $this->getDummyValue();
+
+        $source = $this->createInputInterfaceMock();
+        $source->method('getName')->willReturn('bazInput');
+        $source->method('getErrorMessage')->willReturn('bazErrorMessage');
+        $source->method('breakOnFailure')->willReturn(true);
+        $source->method('isRequired')->willReturn(true);
+        $source->method('getRawValue')->willReturn($sourceRawValue);
+        $source->method('getFilterChain')->willReturn($this->createFilterChainMock());
+        $source->method('getValidatorChain')->willReturn($this->createValidatorChainMock());
+
+        $targetFilterChain = $this->createFilterChainMock();
+        $targetFilterChain->expects(TestCase::once())
+            ->method('merge')
+            ->with($source->getFilterChain())
+        ;
+
+        $targetValidatorChain = $this->createValidatorChainMock();
+        $targetValidatorChain->expects(TestCase::once())
+            ->method('merge')
+            ->with($source->getValidatorChain())
+        ;
+
+        $target = $this->input;
+        $target->setName('fooInput');
+        $target->setErrorMessage('fooErrorMessage');
+        $target->setBreakOnFailure(false);
+        $target->setRequired(false);
+        $target->setFilterChain($targetFilterChain);
+        $target->setValidatorChain($targetValidatorChain);
+
+        $return = $target->merge($source);
+        $this->assertSame($target, $return, 'merge() must return it self');
+
+        $this->assertEquals('bazInput', $target->getName(), 'getName() value not match');
+        $this->assertEquals('bazErrorMessage', $target->getErrorMessage(), 'getErrorMessage() value not match');
+        $this->assertEquals(true, $target->breakOnFailure(), 'breakOnFailure() value not match');
+        $this->assertEquals(true, $target->isRequired(), 'isRequired() value not match');
+        $this->assertEquals($sourceRawValue, $target->getRawValue(), 'getRawValue() value not match');
+        $this->assertTrue($target->hasValue(), 'hasValue() value not match');
+    }
+
+    /**
+     * Specific Input::merge extras
+     */
+    public function testInputMergeWithoutValues()
+    {
+        $source = new Input();
+        $source->setContinueIfEmpty(true);
+        $this->assertFalse($source->hasValue(), 'Source should not have a value');
+
+        $target = $this->input;
+        $target->setContinueIfEmpty(false);
+        $this->assertFalse($target->hasValue(), 'Target should not have a value');
+
+        $return = $target->merge($source);
+        $this->assertSame($target, $return, 'merge() must return it self');
+
+        $this->assertEquals(true, $target->continueIfEmpty(), 'continueIfEmpty() value not match');
+        $this->assertFalse($target->hasValue(), 'hasValue() value not match');
+    }
+
+    /**
+     * Specific Input::merge extras
+     */
+    public function testInputMergeWithSourceValue()
+    {
+        $source = new Input();
+        $source->setContinueIfEmpty(true);
+        $source->setValue(array('foo'));
+
+        $target = $this->input;
+        $target->setContinueIfEmpty(false);
+        $this->assertFalse($target->hasValue(), 'Target should not have a value');
+
+        $return = $target->merge($source);
+        $this->assertSame($target, $return, 'merge() must return it self');
+
+        $this->assertEquals(true, $target->continueIfEmpty(), 'continueIfEmpty() value not match');
+        $this->assertEquals(array('foo'), $target->getRawValue(), 'getRawValue() value not match');
+        $this->assertTrue($target->hasValue(), 'hasValue() value not match');
+    }
+
+    /**
+     * Specific Input::merge extras
+     */
+    public function testInputMergeWithTargetValue()
+    {
+        $source = new Input();
+        $source->setContinueIfEmpty(true);
+        $this->assertFalse($source->hasValue(), 'Source should not have a value');
+
+        $target = $this->input;
+        $target->setContinueIfEmpty(false);
+        $target->setValue(array('foo'));
+
+        $return = $target->merge($source);
+        $this->assertSame($target, $return, 'merge() must return it self');
+
+        $this->assertEquals(true, $target->continueIfEmpty(), 'continueIfEmpty() value not match');
+        $this->assertEquals(array('foo'), $target->getRawValue(), 'getRawValue() value not match');
+        $this->assertTrue($target->hasValue(), 'hasValue() value not match');
+    }
+
+    public function fallbackValueVsIsValidProvider()
+    {
+        $required = true;
+        $isValid = true;
+
+        $originalValue = 'fooValue';
+        $fallbackValue = 'fooFallbackValue';
+
+        // @codingStandardsIgnoreStart
+        return array(
+            // Description => [$inputIsRequired, $fallbackValue, $originalValue, $isValid, $expectedValue]
+            'Required: T, Input: Invalid. getValue: fallback' => array( $required, $fallbackValue, $originalValue, !$isValid, $fallbackValue),
+            'Required: T, Input: Valid. getValue: original' =>   array( $required, $fallbackValue, $originalValue,  $isValid, $originalValue),
+            'Required: F, Input: Invalid. getValue: fallback' => array(!$required, $fallbackValue, $originalValue, !$isValid, $fallbackValue),
+            'Required: F, Input: Valid. getValue: original' =>   array(!$required, $fallbackValue, $originalValue,  $isValid, $originalValue),
+        );
+        // @codingStandardsIgnoreEnd
+    }
+
+    public function setValueProvider()
+    {
+        $emptyValues = $this->emptyValueProvider();
+        $mixedValues = $this->mixedValueProvider();
+
+        $values = array_merge($emptyValues, $mixedValues);
+
+        return $values;
+    }
+
+    public function isRequiredVsAllowEmptyVsContinueIfEmptyVsIsValidProvider()
+    {
+        $allValues = $this->setValueProvider();
+        $emptyValues = $this->emptyValueProvider();
+        $nonEmptyValues = array_diff_key($allValues, $emptyValues);
+
+        $isRequired = true;
+        $aEmpty = true;
+        $cIEmpty = true;
+        $isValid = true;
+
+        $validatorMsg = array('FooValidator' => 'Invalid Value');
+        $notEmptyMsg = array('isEmpty' => "Value is required and can't be empty");
+
+        $self = $this;
+        $validatorNotCall = function ($value, $context = null) use ($self) {
+            return $self->createValidatorMock(null, $value, $context);
+        };
+        $validatorInvalid = function ($value, $context = null) use ($self, $validatorMsg) {
+            return $self->createValidatorMock(false, $value, $context, $validatorMsg);
+        };
+        $validatorValid = function ($value, $context = null) use ($self) {
+            return $self->createValidatorMock(true, $value, $context);
+        };
+
+        // @codingStandardsIgnoreStart
+        $dataTemplates = array(
+            // Description => [$isRequired, $allowEmpty, $continueIfEmpty, $validator, [$values], $expectedIsValid, $expectedMessages]
+            'Required: T; AEmpty: T; CIEmpty: T; Validator: T'                   => array( $isRequired,  $aEmpty,  $cIEmpty, $validatorValid  , $allValues     ,  $isValid, array()),
+            'Required: T; AEmpty: T; CIEmpty: T; Validator: F'                   => array( $isRequired,  $aEmpty,  $cIEmpty, $validatorInvalid, $allValues     , !$isValid, $validatorMsg),
+
+            'Required: T; AEmpty: T; CIEmpty: F; Validator: X, Value: Empty'     => array( $isRequired,  $aEmpty, !$cIEmpty, $validatorNotCall, $emptyValues   ,  $isValid, array()),
+            'Required: T; AEmpty: T; CIEmpty: F; Validator: T, Value: Not Empty' => array( $isRequired,  $aEmpty, !$cIEmpty, $validatorValid  , $nonEmptyValues,  $isValid, array()),
+            'Required: T; AEmpty: T; CIEmpty: F; Validator: F, Value: Not Empty' => array( $isRequired,  $aEmpty, !$cIEmpty, $validatorInvalid, $nonEmptyValues, !$isValid, $validatorMsg),
+
+            'Required: T; AEmpty: F; CIEmpty: T; Validator: T'                   => array( $isRequired, !$aEmpty,  $cIEmpty, $validatorValid  , $allValues     ,  $isValid, array()),
+            'Required: T; AEmpty: F; CIEmpty: T; Validator: F'                   => array( $isRequired, !$aEmpty,  $cIEmpty, $validatorInvalid, $allValues     , !$isValid, $validatorMsg),
+
+            'Required: T; AEmpty: F; CIEmpty: F; Validator: X, Value: Empty'     => array( $isRequired, !$aEmpty, !$cIEmpty, $validatorNotCall, $emptyValues   , !$isValid, $notEmptyMsg),
+            'Required: T; AEmpty: F; CIEmpty: F; Validator: T, Value: Not Empty' => array( $isRequired, !$aEmpty, !$cIEmpty, $validatorValid  , $nonEmptyValues,  $isValid, array()),
+            'Required: T; AEmpty: F; CIEmpty: F; Validator: F, Value: Not Empty' => array( $isRequired, !$aEmpty, !$cIEmpty, $validatorInvalid, $nonEmptyValues, !$isValid, $validatorMsg),
+
+            'Required: F; AEmpty: T; CIEmpty: T; Validator: T'                   => array(!$isRequired,  $aEmpty,  $cIEmpty, $validatorValid  , $allValues     ,  $isValid, array()),
+            'Required: F; AEmpty: T; CIEmpty: T; Validator: F'                   => array(!$isRequired,  $aEmpty,  $cIEmpty, $validatorInvalid, $allValues     , !$isValid, $validatorMsg),
+
+            'Required: F; AEmpty: T; CIEmpty: F; Validator: X, Value: Empty'     => array(!$isRequired,  $aEmpty, !$cIEmpty, $validatorNotCall, $emptyValues   ,  $isValid, array()),
+            'Required: F; AEmpty: T; CIEmpty: F; Validator: T, Value: Not Empty' => array(!$isRequired,  $aEmpty, !$cIEmpty, $validatorValid  , $nonEmptyValues,  $isValid, array()),
+            'Required: F; AEmpty: T; CIEmpty: F; Validator: F, Value: Not Empty' => array(!$isRequired,  $aEmpty, !$cIEmpty, $validatorInvalid, $nonEmptyValues, !$isValid, $validatorMsg),
+
+            'Required: F; AEmpty: F; CIEmpty: T; Validator: T'                   => array(!$isRequired, !$aEmpty,  $cIEmpty, $validatorValid  , $allValues     ,  $isValid, array()),
+            'Required: F; AEmpty: F; CIEmpty: T; Validator: F'                   => array(!$isRequired, !$aEmpty,  $cIEmpty, $validatorInvalid, $allValues     , !$isValid, $validatorMsg),
+
+            'Required: F; AEmpty: F; CIEmpty: F; Validator: X, Value: Empty'     => array(!$isRequired, !$aEmpty, !$cIEmpty, $validatorNotCall, $emptyValues   ,  $isValid, array()),
+            'Required: F; AEmpty: F; CIEmpty: F; Validator: T, Value: Not Empty' => array(!$isRequired, !$aEmpty, !$cIEmpty, $validatorValid  , $nonEmptyValues,  $isValid, array()),
+            'Required: F; AEmpty: F; CIEmpty: F; Validator: F, Value: Not Empty' => array(!$isRequired, !$aEmpty, !$cIEmpty, $validatorInvalid, $nonEmptyValues, !$isValid, $validatorMsg),
+        );
+        // @codingStandardsIgnoreEnd
+
+        // Expand data template matrix for each possible input value.
+        // Description => [$isRequired, $allowEmpty, $continueIfEmpty, $validator, $value, $expectedIsValid]
+        $dataSets = array();
+        foreach ($dataTemplates as $dataTemplateDescription => $dataTemplate) {
+            foreach ($dataTemplate[4] as $valueDescription => $value) {
+                $tmpTemplate = $dataTemplate;
+                $tmpTemplate[3] = $dataTemplate[3]($value['filtered']); // Get validator mock for each data set
+                $tmpTemplate[4] = $value['raw']; // expand value
+
+                $dataSets[$dataTemplateDescription . ' / ' . $valueDescription] = $tmpTemplate;
+            }
+        }
+
+        return $dataSets;
+    }
+
+    public function emptyValueProvider()
     {
         return array(
-            array(
-                'fallbackValue' => null
+            // Description => [$value]
+            'null' => array(
+                'raw' => null,
+                'filtered' => null,
             ),
-            array(
-                'fallbackValue' => ''
+            '""' => array(
+                'raw' => '',
+                'filtered' => '',
             ),
-            array(
-                'fallbackValue' => 'some value'
+//            '"0"' => array('0'),
+//            '0' => array(0),
+//            '0.0' => array(0.0),
+//            'false' => array(false),
+            '[]' => array(
+                'raw' => array(),
+                'filtered' => array(),
             ),
         );
     }
 
-    /**
-     * @dataProvider dataFallbackValue
-     */
-    public function testFallbackValue($fallbackValue)
+    public function mixedValueProvider()
     {
-        $this->input->setFallbackValue($fallbackValue);
-        $validator = new Validator\Date();
-        $this->input->getValidatorChain()->attach($validator);
-        $this->input->setValue('123'); // not a date
-
-        $this->assertTrue($this->input->isValid());
-        $this->assertEmpty($this->input->getMessages());
-        $this->assertSame($fallbackValue, $this->input->getValue());
-    }
-
-    public function testMergeRetainsContinueIfEmptyFlag()
-    {
-        $input = new Input('foo');
-        $input->setContinueIfEmpty(true);
-
-        $input2 = new Input('bar');
-        $input2->merge($input);
-        $this->assertTrue($input2->continueIfEmpty());
-    }
-
-    public function testMergeRetainsAllowEmptyFlag()
-    {
-        $input = new Input('foo');
-        $input->setRequired(true);
-        $input->setAllowEmpty(true);
-
-        $input2 = new Input('bar');
-        $input2->setRequired(true);
-        $input2->setAllowEmpty(false);
-        $input2->merge($input);
-
-        $this->assertTrue($input2->isRequired());
-        $this->assertTrue($input2->allowEmpty());
-    }
-
-    /**
-     * @group 7445
-     */
-    public function testInputIsValidWhenUsingSetRequiredAtStart()
-    {
-        $input = new Input();
-        $input->setName('foo')
-              ->setRequired(false)
-              ->setAllowEmpty(false)
-              ->setContinueIfEmpty(false);
-
-        $this->assertTrue($input->isValid());
-    }
-
-    /**
-     * @group 7445
-     */
-    public function testInputIsValidWhenUsingSetRequiredAtEnd()
-    {
-        $input = new Input();
-        $input->setName('foo')
-              ->setAllowEmpty(false)
-              ->setContinueIfEmpty(false)
-              ->setRequired(false);
-
-        $this->assertTrue($input->isValid());
-    }
-
-    public function whenRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
-    {
-        $validator = new Validator\Callback(function ($value) {
-            throw new RuntimeException('Validator executed when it should not be');
-        });
-
-        $requiredFirst = new Input('foo');
-        $requiredFirst->setRequired(true)
-            ->setAllowEmpty(true)
-            ->setContinueIfEmpty(false)
-            ->getValidatorChain()->attach($validator);
-
-        $requiredLast = new Input('foo');
-        $requiredLast->setAllowEmpty(true)
-            ->setContinueIfEmpty(false)
-            ->setRequired(true)
-            ->getValidatorChain()->attach($validator);
-
         return array(
-            'required-first-null'  => array($requiredFirst, null),
-            'required-last-null'   => array($requiredLast, null),
-            'required-first-empty' => array($requiredFirst, ''),
-            'required-last-empty'  => array($requiredLast, ''),
-            'required-first-array' => array($requiredFirst, array()),
-            'required-last-array'  => array($requiredLast, array()),
+            // Description => [$value]
+            '"0"' => array(
+                'raw' => '0',
+                'filtered' => '0',
+            ),
+            '0' => array(
+                'raw' => 0,
+                'filtered' => 0,
+            ),
+            '0.0' => array(
+                'raw' => 0.0,
+                'filtered' => 0.0,
+            ),
+//            TODO enable me
+//            'false' => array(
+//                'raw' => false,
+//                'filtered' => false,
+//            ),
+            'php' => array(
+                'raw' => 'php',
+                'filtered' => 'php',
+            ),
+//            TODO enable me
+//            'whitespace' => array(
+//                'raw' => ' ',
+//                'filtered' => ' ',
+//            ),
+            '1' => array(
+                'raw' => 1,
+                'filtered' => 1,
+            ),
+            '1.0' => array(
+                'raw' => 1.0,
+                'filtered' => 1.0,
+            ),
+            'true' => array(
+                'raw' => true,
+                'filtered' => true,
+            ),
+            '["php"]' => array(
+                'raw' => array('php'),
+                'filtered' => array('php'),
+            ),
+            'object' => array(
+                'raw' => new stdClass(),
+                'filtered' => new stdClass(),
+            ),
+            // @codingStandardsIgnoreStart
+//            TODO Skip HHVM failure enable me
+//            'callable' => array(
+//                'raw' => function () {},
+//                'filtered' => function () {},
+//            ),
+            // @codingStandardsIgnoreEnd
         );
     }
 
     /**
-     * @group 7448
-     * @dataProvider whenRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun
+     * @return InputInterface|MockObject
      */
-    public function testWhenRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun($input, $value)
+    public function createInputInterfaceMock()
     {
-        $input->setValue($value);
-        $this->assertTrue($input->isValid());
-    }
+        /** @var InputInterface|MockObject $source */
+        $source = $this->getMock('Zend\InputFilter\InputInterface');
 
-    public function whenRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun()
-    {
-        $alwaysInvalid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return false;
-        });
-
-        $emptyIsValid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return true;
-        });
-
-        $requiredFirstInvalid = new Input('foo');
-        $requiredFirstValid   = new Input('foo');
-        foreach (array($requiredFirstValid, $requiredFirstInvalid) as $input) {
-            $input->setRequired(true)
-                ->setAllowEmpty(true)
-                ->setContinueIfEmpty(true);
-        }
-
-        $requiredLastInvalid = new Input('foo');
-        $requiredLastValid   = new Input('foo');
-        foreach (array($requiredLastValid, $requiredLastInvalid) as $input) {
-            $input->setAllowEmpty(true)
-                ->setContinueIfEmpty(true)
-                ->setRequired(true);
-        }
-
-        foreach (array($requiredFirstValid, $requiredLastValid) as $input) {
-            $input->getValidatorChain()->attach($emptyIsValid);
-        }
-
-        foreach (array($requiredFirstInvalid, $requiredLastInvalid) as $input) {
-            $input->getValidatorChain()->attach($alwaysInvalid);
-        }
-
-        return array(
-            'required-first-null-valid'    => array($requiredFirstValid, null, 'assertTrue'),
-            'required-first-null-invalid'  => array($requiredFirstInvalid, null, 'assertFalse'),
-            'required-last-null-valid'     => array($requiredLastValid, null, 'assertTrue'),
-            'required-last-null-invalid'   => array($requiredLastInvalid, null, 'assertFalse'),
-            'required-first-empty-valid'   => array($requiredFirstValid, '', 'assertTrue'),
-            'required-first-empty-invalid' => array($requiredFirstInvalid, '', 'assertFalse'),
-            'required-last-empty-valid'    => array($requiredLastValid, '', 'assertTrue'),
-            'required-last-empty-invalid'  => array($requiredLastInvalid, '', 'assertFalse'),
-            'required-first-array-valid'   => array($requiredFirstValid, array(), 'assertTrue'),
-            'required-first-array-invalid' => array($requiredFirstInvalid, array(), 'assertFalse'),
-            'required-last-array-valid'    => array($requiredLastValid, array(), 'assertTrue'),
-            'required-last-array-invalid'  => array($requiredLastInvalid, array(), 'assertFalse'),
-        );
+        return $source;
     }
 
     /**
-     * @group 7448
-     * @dataProvider whenRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun
+     * @param mixed $valueRaw
+     * @param mixed $valueFiltered
+     *
+     * @return FilterChain|MockObject
      */
-    public function testWhenRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun($input, $value, $assertion)
+    public function createFilterChainMock($valueRaw = null, $valueFiltered = null)
     {
-        $input->setValue($value);
-        $this->{$assertion}($input->isValid());
-    }
+        /** @var FilterChain|MockObject $filterChain */
+        $filterChain = $this->getMock('Zend\Filter\FilterChain');
 
-    public function whenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
-    {
-        $validator = new Validator\Callback(function ($value) {
-            throw new RuntimeException('Validator executed when it should not be');
-        });
+        $filterChain->method('filter')
+            ->with($valueRaw)
+            ->willReturn($valueFiltered)
+        ;
 
-        $requiredFirst = new Input('foo');
-        $requiredFirst->setRequired(true)
-            ->setAllowEmpty(false)
-            ->setContinueIfEmpty(false)
-            ->getValidatorChain()->attach($validator);
-
-        $requiredLast = new Input('foo');
-        $requiredLast->setAllowEmpty(false)
-            ->setContinueIfEmpty(false)
-            ->setRequired(true)
-            ->getValidatorChain()->attach($validator);
-
-        return array(
-            'required-first-null'  => array($requiredFirst, null),
-            'required-last-null'   => array($requiredLast, null),
-            'required-first-empty' => array($requiredFirst, ''),
-            'required-last-empty'  => array($requiredLast, ''),
-            'required-first-array' => array($requiredFirst, array()),
-            'required-last-array'  => array($requiredLast, array()),
-        );
+        return $filterChain;
     }
 
     /**
-     * @group 7448
-     * @dataProvider whenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun
+     * @param null|bool $isValid If set stub isValid method for return the argument value.
+     * @param mixed $value
+     * @param mixed $context
+     * @param string[] $messages
+     *
+     * @return ValidatorChain|MockObject
      */
-    public function testWhenRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun($input, $value)
+    public function createValidatorChainMock($isValid = null, $value = null, $context = null, $messages = array())
     {
-        $input->setValue($value);
-        $this->assertFalse($input->isValid());
-    }
+        /** @var ValidatorChain|MockObject $validatorChain */
+        $validatorChain = $this->getMock('Zend\Validator\ValidatorChain');
 
-    public function whenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun()
-    {
-        $alwaysInvalid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return false;
-        });
-
-        $emptyIsValid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return true;
-        });
-
-        $requiredFirstInvalid = new Input('foo');
-        $requiredFirstValid   = new Input('foo');
-        foreach (array($requiredFirstValid, $requiredFirstInvalid) as $input) {
-            $input->setRequired(true)
-                ->setAllowEmpty(false)
-                ->setContinueIfEmpty(true);
+        if (($isValid === false) || ($isValid === true)) {
+            $validatorChain->expects($this->once())
+                ->method('isValid')
+                ->with($value, $context)
+                ->willReturn($isValid)
+            ;
+        } else {
+            $validatorChain->expects($this->never())
+                ->method('isValid')
+                ->with($value, $context)
+            ;
         }
 
-        $requiredLastInvalid = new Input('foo');
-        $requiredLastValid   = new Input('foo');
-        foreach (array($requiredLastValid, $requiredLastInvalid) as $input) {
-            $input->setAllowEmpty(false)
-                ->setContinueIfEmpty(true)
-                ->setRequired(true);
-        }
+        $validatorChain->method('getMessages')
+            ->willReturn($messages)
+        ;
 
-        foreach (array($requiredFirstValid, $requiredLastValid) as $input) {
-            $input->getValidatorChain()->attach($emptyIsValid);
-        }
-
-        foreach (array($requiredFirstInvalid, $requiredLastInvalid) as $input) {
-            $input->getValidatorChain()->attach($alwaysInvalid);
-        }
-
-        return array(
-            'required-first-null-valid'    => array($requiredFirstValid, null, 'assertTrue'),
-            'required-first-null-invalid'  => array($requiredFirstInvalid, null, 'assertFalse'),
-            'required-last-null-valid'     => array($requiredLastValid, null, 'assertTrue'),
-            'required-last-null-invalid'   => array($requiredLastInvalid, null, 'assertFalse'),
-            'required-first-empty-valid'   => array($requiredFirstValid, '', 'assertTrue'),
-            'required-first-empty-invalid' => array($requiredFirstInvalid, '', 'assertFalse'),
-            'required-last-empty-valid'    => array($requiredLastValid, '', 'assertTrue'),
-            'required-last-empty-invalid'  => array($requiredLastInvalid, '', 'assertFalse'),
-            'required-first-array-valid'   => array($requiredFirstValid, array(), 'assertTrue'),
-            'required-first-array-invalid' => array($requiredFirstInvalid, array(), 'assertFalse'),
-            'required-last-array-valid'    => array($requiredLastValid, array(), 'assertTrue'),
-            'required-last-array-invalid'  => array($requiredLastInvalid, array(), 'assertFalse'),
-        );
+        return $validatorChain;
     }
 
     /**
-     * @group 7448
-     * @dataProvider whenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun
+     * @param null|bool $isValid
+     * @param mixed $value
+     * @param mixed $context
+     * @param string[] $messages
+     *
+     * @return ValidatorInterface|MockObject
      */
-    public function testWhenRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun($input, $value, $assertion)
+    public function createValidatorMock($isValid, $value = 'not-set', $context = null, $messages = array())
     {
-        $input->setValue($value);
-        $this->{$assertion}($input->isValid());
-    }
+        /** @var ValidatorInterface|MockObject $validator */
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
 
-    public function whenNotRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
-    {
-        $validator = new Validator\Callback(function ($value) {
-            throw new RuntimeException('Validator executed when it should not be');
-        });
+        if (($isValid === false) || ($isValid === true)) {
+            $isValidMethod = $validator->expects($this->once())
+                ->method('isValid')
+                ->willReturn($isValid)
+            ;
+        } else {
+            $isValidMethod = $validator->expects($this->never())
+                ->method('isValid')
+            ;
+        }
+        if ($value !== 'not-set') {
+            $isValidMethod->with($value, $context);
+        }
 
-        $requiredFirst = new Input('foo');
-        $requiredFirst->setRequired(false)
-            ->setAllowEmpty(true)
-            ->setContinueIfEmpty(false)
-            ->getValidatorChain()->attach($validator);
+        $validator->method('getMessages')
+            ->willReturn($messages)
+        ;
 
-        $requiredLast = new Input('foo');
-        $requiredLast->setAllowEmpty(true)
-            ->setContinueIfEmpty(false)
-            ->setRequired(false)
-            ->getValidatorChain()->attach($validator);
-
-        return array(
-            'required-first-null'  => array($requiredFirst, null),
-            'required-last-null'   => array($requiredLast, null),
-            'required-first-empty' => array($requiredFirst, ''),
-            'required-last-empty'  => array($requiredLast, ''),
-            'required-first-array' => array($requiredFirst, array()),
-            'required-last-array'  => array($requiredLast, array()),
-        );
+        return $validator;
     }
 
     /**
-     * @group 7448
-     * @dataProvider whenNotRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun
+     * @param bool $isValid
+     * @param mixed $value
+     * @param mixed $context
+     *
+     * @return NotEmptyValidator|MockObject
      */
-    public function testWhenNotRequiredAndAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun($input, $value)
+    public function createNonEmptyValidatorMock($isValid, $value, $context = null)
     {
-        $input->setValue($value);
-        $this->assertTrue($input->isValid());
+        /** @var NotEmptyValidator|MockObject $notEmptyMock */
+        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
+        $notEmptyMock->expects($this->once())
+            ->method('isValid')
+            ->with($value, $context)
+            ->willReturn($isValid)
+        ;
+
+        return $notEmptyMock;
     }
 
-    public function whenNotRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun()
+    public function getDummyValue($raw = true)
     {
-        $validator = new Validator\Callback(function ($value) {
-            throw new RuntimeException('Validator executed when it should not be');
-        });
-
-        $requiredFirst = new Input('foo');
-        $requiredFirst->setRequired(false)
-            ->setAllowEmpty(false)
-            ->setContinueIfEmpty(false)
-            ->getValidatorChain()->attach($validator);
-
-        $requiredLast = new Input('foo');
-        $requiredLast->setAllowEmpty(false)
-            ->setContinueIfEmpty(false)
-            ->setRequired(false)
-            ->getValidatorChain()->attach($validator);
-
-        return array(
-            'required-first-null'  => array($requiredFirst, null),
-            'required-last-null'   => array($requiredLast, null),
-            'required-first-empty' => array($requiredFirst, ''),
-            'required-last-empty'  => array($requiredLast, ''),
-            'required-first-array' => array($requiredFirst, array()),
-            'required-last-array'  => array($requiredLast, array()),
-        );
-    }
-
-    /**
-     * @group 7448
-     * @dataProvider whenNotRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun
-     */
-    public function testWhenNotRequiredAndNotAllowEmptyAndNotContinueIfEmptyValidatorsAreNotRun($input, $value)
-    {
-        $input->setValue($value);
-        $this->assertTrue($input->isValid());
-    }
-
-    public function whenNotRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun()
-    {
-        $alwaysInvalid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return false;
-        });
-
-        $emptyIsValid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return true;
-        });
-
-        $requiredFirstInvalid = new Input('foo');
-        $requiredFirstValid   = new Input('foo');
-        foreach (array($requiredFirstValid, $requiredFirstInvalid) as $input) {
-            $input->setRequired(false)
-                ->setAllowEmpty(true)
-                ->setContinueIfEmpty(true);
+        if ($raw) {
+            return 'foo';
         }
-
-        $requiredLastInvalid = new Input('foo');
-        $requiredLastValid   = new Input('foo');
-        foreach (array($requiredLastValid, $requiredLastInvalid) as $input) {
-            $input->setAllowEmpty(true)
-                ->setContinueIfEmpty(true)
-                ->setRequired(false);
-        }
-
-        foreach (array($requiredFirstValid, $requiredLastValid) as $input) {
-            $input->getValidatorChain()->attach($emptyIsValid);
-        }
-
-        foreach (array($requiredFirstInvalid, $requiredLastInvalid) as $input) {
-            $input->getValidatorChain()->attach($alwaysInvalid);
-        }
-
-        return array(
-            'required-first-null-valid'    => array($requiredFirstValid, null, 'assertTrue'),
-            'required-first-null-invalid'  => array($requiredFirstInvalid, null, 'assertFalse'),
-            'required-last-null-valid'     => array($requiredLastValid, null, 'assertTrue'),
-            'required-last-null-invalid'   => array($requiredLastInvalid, null, 'assertFalse'),
-            'required-first-empty-valid'   => array($requiredFirstValid, '', 'assertTrue'),
-            'required-first-empty-invalid' => array($requiredFirstInvalid, '', 'assertFalse'),
-            'required-last-empty-valid'    => array($requiredLastValid, '', 'assertTrue'),
-            'required-last-empty-invalid'  => array($requiredLastInvalid, '', 'assertFalse'),
-            'required-first-array-valid'   => array($requiredFirstValid, array(), 'assertTrue'),
-            'required-first-array-invalid' => array($requiredFirstInvalid, array(), 'assertFalse'),
-            'required-last-array-valid'    => array($requiredLastValid, array(), 'assertTrue'),
-            'required-last-array-invalid'  => array($requiredLastInvalid, array(), 'assertFalse'),
-        );
-    }
-
-    /**
-     * @group 7448
-     * @dataProvider whenNotRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun
-     */
-    public function testWhenNotRequiredAndAllowEmptyAndContinueIfEmptyValidatorsAreRun($input, $value, $assertion)
-    {
-        $input->setValue($value);
-        $this->{$assertion}($input->isValid());
-    }
-
-    public function whenNotRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun()
-    {
-        $alwaysInvalid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return false;
-        });
-
-        $emptyIsValid = new Validator\Callback(function ($value) {
-            if (! empty($value)) {
-                throw new RuntimeException('Unexpected non-empty value provided to validate');
-            }
-            return true;
-        });
-
-        $requiredFirstInvalid = new Input('foo');
-        $requiredFirstValid   = new Input('foo');
-        foreach (array($requiredFirstValid, $requiredFirstInvalid) as $input) {
-            $input->setRequired(false)
-                ->setAllowEmpty(false)
-                ->setContinueIfEmpty(true);
-        }
-
-        $requiredLastInvalid = new Input('foo');
-        $requiredLastValid   = new Input('foo');
-        foreach (array($requiredLastValid, $requiredLastInvalid) as $input) {
-            $input->setAllowEmpty(false)
-                ->setContinueIfEmpty(true)
-                ->setRequired(false);
-        }
-
-        foreach (array($requiredFirstValid, $requiredLastValid) as $input) {
-            $input->getValidatorChain()->attach($emptyIsValid);
-        }
-
-        foreach (array($requiredFirstInvalid, $requiredLastInvalid) as $input) {
-            $input->getValidatorChain()->attach($alwaysInvalid);
-        }
-
-        return array(
-            'required-first-null-valid'    => array($requiredFirstValid, null, 'assertTrue'),
-            'required-first-null-invalid'  => array($requiredFirstInvalid, null, 'assertFalse'),
-            'required-last-null-valid'     => array($requiredLastValid, null, 'assertTrue'),
-            'required-last-null-invalid'   => array($requiredLastInvalid, null, 'assertFalse'),
-            'required-first-empty-valid'   => array($requiredFirstValid, '', 'assertTrue'),
-            'required-first-empty-invalid' => array($requiredFirstInvalid, '', 'assertFalse'),
-            'required-last-empty-valid'    => array($requiredLastValid, '', 'assertTrue'),
-            'required-last-empty-invalid'  => array($requiredLastInvalid, '', 'assertFalse'),
-            'required-first-array-valid'   => array($requiredFirstValid, array(), 'assertTrue'),
-            'required-first-array-invalid' => array($requiredFirstInvalid, array(), 'assertFalse'),
-            'required-last-array-valid'    => array($requiredLastValid, array(), 'assertTrue'),
-            'required-last-array-invalid'  => array($requiredLastInvalid, array(), 'assertFalse'),
-        );
-    }
-
-    /**
-     * @group 7448
-     * @dataProvider whenNotRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun
-     */
-    public function testWhenNotRequiredAndNotAllowEmptyAndContinueIfEmptyValidatorsAreRun($input, $value, $assertion)
-    {
-        $input->setValue($value);
-        $this->{$assertion}($input->isValid());
+        return 'filtered';
     }
 }

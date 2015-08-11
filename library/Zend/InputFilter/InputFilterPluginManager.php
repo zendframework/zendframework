@@ -24,7 +24,7 @@ class InputFilterPluginManager extends AbstractPluginManager
     /**
      * Default set of plugins
      *
-     * @var array
+     * @var string[]
      */
     protected $invokableClasses = array(
         'inputfilter' => 'Zend\InputFilter\InputFilter',
@@ -83,8 +83,10 @@ class InputFilterPluginManager extends AbstractPluginManager
         }
 
         throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement Zend\InputFilter\InputFilterInterface',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin))
+            'Plugin of type %s is invalid; must implement %s or %s',
+            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            'Zend\InputFilter\InputFilterInterface',
+            'Zend\InputFilter\InputInterface'
         ));
     }
 }

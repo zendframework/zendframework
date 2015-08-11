@@ -32,6 +32,16 @@ class ArrayInput extends Input
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function resetValue()
+    {
+        $this->value = array();
+        $this->hasValue = false;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getValue()
@@ -50,6 +60,22 @@ class ArrayInput extends Input
      */
     public function isValid($context = null)
     {
+        $hasValue = $this->hasValue();
+        $required = $this->isRequired();
+        $hasFallback = $this->hasFallback();
+
+        if (! $hasValue && $hasFallback) {
+            $this->setValue($this->getFallbackValue());
+            return true;
+        }
+
+        if (! $hasValue && $required) {
+            if ($this->errorMessage === null) {
+                $this->errorMessage = $this->prepareRequiredValidationFailureMessage();
+            }
+            return false;
+        }
+
         if (!$this->continueIfEmpty() && !$this->allowEmpty()) {
             $this->injectNotEmptyValidator();
         }
@@ -58,15 +84,19 @@ class ArrayInput extends Input
         $result    = true;
         foreach ($values as $value) {
             $empty = ($value === null || $value === '' || $value === array());
+            if ($empty && !$this->isRequired() && !$this->continueIfEmpty()) {
+                $result = true;
+                continue;
+            }
             if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
                 $result = true;
                 continue;
             }
             $result = $validator->isValid($value, $context);
             if (!$result) {
-                if ($this->hasFallback()) {
+                if ($hasFallback) {
                     $this->setValue($this->getFallbackValue());
-                    $result = true;
+                    return true;
                 }
                 break;
             }

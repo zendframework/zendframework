@@ -4,6 +4,10 @@
 
 - [zend-validator/25: validate against DateTimeImmutable instead of DateTimeInterface](https://github.com/zendframework/zend-validator/pull/25)
 - [zend-validator/35: treat 0.0 as non-empty, restoring pre-2.4 behavior](https://github.com/zendframework/zend-validator/pull/35)
+- [zend-inputfilter/26: deprecate "magic" logic for auto-attaching NonEmpty validators in favor of explicit attachment](https://github.com/zendframework/zend-inputfilter/pull/26)
+- [zend-inputfilter/22: ensure fallback values work as per pre-2.4 behavior](https://github.com/zendframework/zend-inputfilter/pull/22)
+- [zend-inputfilter/31: update the InputFilterInterface::add() docblock to match implementations](https://github.com/zendframework/zend-inputfilter/pull/31)
+- [zend-inputfilter/25: Fix how missing optoinal fields are validated to match pre 2.4.0 behavior](https://github.com/zendframework/zend-inputfilter/pull/26)
 
 ## 2.4.7 (2015-08-11)
 

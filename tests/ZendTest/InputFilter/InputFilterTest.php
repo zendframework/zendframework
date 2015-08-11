@@ -9,110 +9,73 @@
 
 namespace ZendTest\InputFilter;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Filter;
-use Zend\InputFilter\CollectionInputFilter;
+use ArrayIterator;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 
-class InputFilterTest extends TestCase
+/**
+ * @covers Zend\InputFilter\InputFilter
+ */
+class InputFilterTest extends BaseInputFilterTest
 {
     /**
      * @var InputFilter
      */
-    protected $filter;
+    protected $inputFilter;
 
     public function setUp()
     {
-        $this->filter = new InputFilter();
+        $this->inputFilter = new InputFilter();
     }
 
     public function testLazilyComposesAFactoryByDefault()
     {
-        $factory = $this->filter->getFactory();
+        $factory = $this->inputFilter->getFactory();
         $this->assertInstanceOf('Zend\InputFilter\Factory', $factory);
     }
 
     public function testCanComposeAFactory()
     {
-        $factory = new Factory();
-        $this->filter->setFactory($factory);
-        $this->assertSame($factory, $this->filter->getFactory());
+        $factory = $this->createFactoryMock();
+        $this->inputFilter->setFactory($factory);
+        $this->assertSame($factory, $this->inputFilter->getFactory());
     }
 
-    public function testCanAddUsingSpecification()
+    public function inputProvider()
     {
-        $this->filter->add(array(
-            'name' => 'foo',
-        ));
-        $this->assertTrue($this->filter->has('foo'));
-        $foo = $this->filter->get('foo');
-        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $foo);
+        $dataSets = parent::inputProvider();
+
+        $inputSpecificationAsArray = array(
+            'name' => 'inputFoo',
+        );
+        $inputSpecificationAsTraversable = new ArrayIterator($inputSpecificationAsArray);
+
+        $inputSpecificationResult = new Input('inputFoo');
+        $inputSpecificationResult->getFilterChain(); // Fill input with a default chain just for make the test pass
+        $inputSpecificationResult->getValidatorChain(); // Fill input with a default chain just for make the test pass
+
+        // @codingStandardsIgnoreStart
+        $inputFilterDataSets = array(
+            // Description => [input, expected name, $expectedReturnInput]
+            'array' =>        array($inputSpecificationAsArray        , 'inputFoo', $inputSpecificationResult),
+            'Traversable' =>  array($inputSpecificationAsTraversable  , 'inputFoo', $inputSpecificationResult),
+        );
+        // @codingStandardsIgnoreEnd
+        $dataSets = array_merge($dataSets, $inputFilterDataSets);
+
+        return $dataSets;
     }
 
     /**
-     * @covers \Zend\InputFilter\BaseInputFilter::getValue
-     *
-     * @group 6028
+     * @return Factory|MockObject
      */
-    public function testGetValueReturnsArrayIfNestedInputFilters()
+    protected function createFactoryMock()
     {
-        $inputFilter = new InputFilter();
-        $inputFilter->add(new Input(), 'name');
+        /** @var Factory|MockObject $factory */
+        $factory = $this->getMock('Zend\InputFilter\Factory');
 
-        $this->filter->add($inputFilter, 'people');
-
-        $data = array(
-            'people' => array(
-                 'name' => 'Wanderson'
-            )
-        );
-
-        $this->filter->setData($data);
-        $this->assertTrue($this->filter->isValid());
-
-        $this->assertInternalType('array', $this->filter->getValue('people'));
-    }
-
-    /**
-     * @group ZF2-5648
-     */
-    public function testCountZeroValidateInternalInputWithCollectionInputFilter()
-    {
-        $inputFilter = new InputFilter();
-        $inputFilter->add(new Input(), 'name');
-
-        $collection = new CollectionInputFilter();
-        $collection->setInputFilter($inputFilter);
-        $collection->setCount(0);
-
-        $this->filter->add($collection, 'people');
-
-        $data = array(
-            'people' => array(
-                array(
-                    'name' => 'Wanderson',
-                ),
-            ),
-        );
-        $this->filter->setData($data);
-
-        $this->assertTrue($this->filter->isvalid());
-        $this->assertSame($data, $this->filter->getValues());
-    }
-
-    public function testCanUseContextPassedToInputFilter()
-    {
-        $context = new \stdClass();
-
-        $input = $this->getMock('Zend\InputFilter\InputInterface');
-        $input->expects($this->once())->method('isValid')->with($context)->will($this->returnValue(true));
-        $input->expects($this->any())->method('getRawValue')->will($this->returnValue('Mwop'));
-
-        $this->filter->add($input, 'username');
-        $this->filter->setData(array('username' => 'Mwop'));
-
-        $this->filter->isValid($context);
+        return $factory;
     }
 }

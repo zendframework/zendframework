@@ -113,16 +113,28 @@ class FileInput extends Input
     public function isValid($context = null)
     {
         $rawValue        = $this->getRawValue();
+        $hasValue        = $this->hasValue();
         $empty           = $this->isEmptyFile($rawValue);
         $required        = $this->isRequired();
         $allowEmpty      = $this->allowEmpty();
         $continueIfEmpty = $this->continueIfEmpty();
 
+        if (! $hasValue && ! $required) {
+            return true;
+        }
+
+        if (! $hasValue && $required && ! $this->hasFallback()) {
+            if ($this->errorMessage === null) {
+                $this->errorMessage = $this->prepareRequiredValidationFailureMessage();
+            }
+            return false;
+        }
+
         if ($empty && ! $required && ! $continueIfEmpty) {
             return true;
         }
 
-        if ($empty && $required && $allowEmpty && ! $continueIfEmpty) {
+        if ($empty && $allowEmpty && ! $continueIfEmpty) {
             return true;
         }
 
@@ -181,6 +193,8 @@ class FileInput extends Input
     }
 
     /**
+     * @deprecated 2.4.8 See note on parent class. Removal does not affect this class.
+     *
      * No-op, NotEmpty validator does not apply for FileInputs.
      * See also: BaseInputFilter::isValid()
      *

@@ -10,12 +10,11 @@
 namespace Zend\InputFilter;
 
 use Traversable;
-use Zend\Filter\Exception;
 use Zend\Filter\FilterChain;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\ValidatorInterface;
-use Zend\Validator\ValidatorChain;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\ValidatorChain;
+use Zend\Validator\ValidatorInterface;
 
 class Factory
 {
@@ -171,19 +170,20 @@ class Factory
 
         if (isset($inputSpecification['type'])) {
             $class = $inputSpecification['type'];
-
-            if ($this->getInputFilterManager()->has($class)) {
-                return $this->createInputFilter($inputSpecification);
-            }
-
-            if (!class_exists($class)) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Input factory expects the "type" to be a valid class; received "%s"',
-                    $class
-                ));
-            }
         }
-        $input = new $class();
+
+        $managerInstance = null;
+        if ($this->getInputFilterManager()->has($class)) {
+            $managerInstance = $this->getInputFilterManager()->get($class);
+        }
+        if (! $managerInstance && ! class_exists($class)) {
+            throw new Exception\RuntimeException(sprintf(
+                'Input factory expects the "type" to be a valid class or a plugin name; received "%s"',
+                $class
+            ));
+        }
+
+        $input = $managerInstance ?: new $class;
 
         if ($input instanceof InputFilterInterface) {
             return $this->createInputFilter($inputSpecification);
@@ -211,9 +211,6 @@ class Factory
                     break;
                 case 'required':
                     $input->setRequired($value);
-                    if (isset($inputSpecification['allow_empty'])) {
-                        $input->setAllowEmpty($inputSpecification['allow_empty']);
-                    }
                     break;
                 case 'allow_empty':
                     $input->setAllowEmpty($value);
@@ -222,12 +219,26 @@ class Factory
                     }
                     break;
                 case 'continue_if_empty':
+                    if (!$input instanceof Input) {
+                        throw new Exception\RuntimeException(sprintf(
+                            '%s "continue_if_empty" can only set to inputs of type "%s"',
+                            __METHOD__,
+                            'Zend\InputFilter\Input'
+                        ));
+                    }
                     $input->setContinueIfEmpty($inputSpecification['continue_if_empty']);
                     break;
                 case 'error_message':
                     $input->setErrorMessage($value);
                     break;
                 case 'fallback_value':
+                    if (!$input instanceof Input) {
+                        throw new Exception\RuntimeException(sprintf(
+                            '%s "fallback_value" can only set to inputs of type "%s"',
+                            __METHOD__,
+                            'Zend\InputFilter\Input'
+                        ));
+                    }
                     $input->setFallbackValue($value);
                     break;
                 case 'break_on_failure':
@@ -375,7 +386,7 @@ class Factory
 
     /**
      * @param  ValidatorChain    $chain
-     * @param  array|Traversable $validators
+     * @param  string[]|ValidatorInterface[] $validators
      * @throws Exception\RuntimeException
      * @return void
      */

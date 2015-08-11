@@ -9,15 +9,29 @@
 
 namespace ZendTest\InputFilter;
 
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Filter\FilterPluginManager;
+use Zend\InputFilter\InputFilterAbstractServiceFactory;
 use Zend\InputFilter\InputFilterPluginManager;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Validator\ValidatorInterface;
 use Zend\Validator\ValidatorPluginManager;
-use Zend\InputFilter\InputFilterAbstractServiceFactory;
 
+/**
+ * @covers Zend\InputFilter\InputFilterAbstractServiceFactory
+ */
 class InputFilterAbstractServiceFactoryTest extends TestCase
 {
+    /** @var ServiceManager */
+    protected $services;
+
+    /** @var InputFilterPluginManager */
+    protected $filters;
+
+    /** @var InputFilterAbstractServiceFactory */
+    protected $factory;
+
     public function setUp()
     {
         $this->services = new ServiceManager();
@@ -79,6 +93,7 @@ class InputFilterAbstractServiceFactoryTest extends TestCase
         $filters->setService('foo', $filter);
 
         $validators = new ValidatorPluginManager();
+        /** @var ValidatorInterface|MockObject $validator */
         $validator  = $this->getMock('Zend\Validator\ValidatorInterface');
         $validators->setService('foo', $validator);
 
@@ -127,6 +142,7 @@ class InputFilterAbstractServiceFactoryTest extends TestCase
         $filters->setService('foo', $filter);
 
         $validators = new ValidatorPluginManager();
+        /** @var ValidatorInterface|MockObject $validator */
         $validator  = $this->getMock('Zend\Validator\ValidatorInterface');
         $validators->setService('foo', $validator);
 

@@ -224,12 +224,12 @@ class BaseInputFilter implements
     /**
      * Validate a set of inputs against the current data
      *
-     * @param  array      $inputs
-     * @param  array      $data
+     * @param  array $inputs
+     * @param  array|ArrayAccess $data
      * @param  mixed|null $context
      * @return bool
      */
-    protected function validateInputs(array $inputs, array $data = array(), $context = null)
+    protected function validateInputs(array $inputs, $data = array(), $context = null)
     {
         // backwards compatibility
         if (empty($data)) {

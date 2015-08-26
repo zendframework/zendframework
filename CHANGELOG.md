@@ -3,6 +3,7 @@
 ## 2.4.8 (2015-09-15)
 
 - [zend-validator/25: validate against DateTimeImmutable instead of DateTimeInterface](https://github.com/zendframework/zend-validator/pull/25)
+- [zend-validator/35: treat 0.0 as non-empty, restoring pre-2.4 behavior](https://github.com/zendframework/zend-validator/pull/35)
 
 ## 2.4.7 (2015-08-11)
 

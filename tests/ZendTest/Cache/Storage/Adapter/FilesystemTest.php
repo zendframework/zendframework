@@ -237,7 +237,7 @@ class FilesystemTest extends CommonAdapterTest
     public function testSetUmask()
     {
         $this->_options->setUmask(023);
-        $this->assertSame(023, $this->_options->getUmask());
+        $this->assertSame(021, $this->_options->getUmask());
 
         $this->_options->setUmask(false);
         $this->assertFalse($this->_options->getUmask());

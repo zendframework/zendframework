@@ -16,6 +16,14 @@
 - [zend-http/23: fixes the SetCookie header to allow multiline values (as they are always encoded)](https://github.com/zendframework/zend-http/pull/23)
 - [zend-mvc/27: fixes DefaultRenderingStrategy errors due to controllers returning non-view model results](https://github.com/zendframework/zend-mvc/pull/27)
 
+### SECURITY UPDATES
+
+- **ZF2015-07**: The filesystem storage adapter of `Zend\Cache` was creating
+  directories with a liberal umask that could lead to local arbitrary code
+  execution and/or local privilege escalation. This release contains a patch
+  that ensures the directories are created using permissions of 0775 and files
+  using 0664 (essentially umask 0002). 
+
 ## 2.4.7 (2015-08-11)
 
 - [15: validateInputs must allow ArrayAccess for $data](https://github.com/zendframework/zend-inputfilter/pull/15)

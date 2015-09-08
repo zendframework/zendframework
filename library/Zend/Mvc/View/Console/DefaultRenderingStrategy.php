@@ -15,6 +15,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ConsoleModel as ConsoleViewModel;
+use Zend\View\Model\ModelInterface;
 
 class DefaultRenderingStrategy extends AbstractListenerAggregate
 {
@@ -42,7 +43,7 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
         // marshal arguments
         $response  = $e->getResponse();
 
-        if (empty($result)) {
+        if (!$result instanceof ModelInterface) {
             // There is absolutely no result, so there's nothing to display.
             // We will return an empty response object
             return $response;
@@ -51,6 +52,7 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
         // Collect results from child models
         $responseText = '';
         if ($result->hasChildren()) {
+            /* @var ModelInterface $child */
             foreach ($result->getChildren() as $child) {
                 // Do not use ::getResult() method here as we cannot be sure if
                 // children are also console models.

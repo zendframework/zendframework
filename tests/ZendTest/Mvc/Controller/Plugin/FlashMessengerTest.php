@@ -10,7 +10,7 @@
 namespace ZendTest\Mvc\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
-use ZendTest\Session\TestAsset\TestManager as SessionManager;
+use ZendTest\Mvc\TestAsset\SessionManager;
 
 class FlashMessengerTest extends \PHPUnit_Framework_TestCase
 {

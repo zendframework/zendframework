@@ -25,7 +25,7 @@ use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\Parameters;
 use Zend\Validator\NotEmpty;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
-use ZendTest\Session\TestAsset\TestManager as SessionManager;
+use ZendTest\Mvc\TestAsset\SessionManager;
 
 class FilePostRedirectGetTest extends TestCase
 {
@@ -407,6 +407,6 @@ class FilePostRedirectGetTest extends TestCase
 
         $messages = $form->getMessages();
         $this->assertTrue(isset($messages['collection'][1]['text'][NotEmpty::IS_EMPTY]));
-        $this->assertTrue(isset($messages['collection'][1]['file'][NotEmpty::IS_EMPTY]));
+        $this->assertTrue(isset($messages['collection'][1]['file'][NotEmpty::IS_EMPTY]), var_export($messages['collection'][1], 1));
     }
 }

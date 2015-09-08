@@ -22,7 +22,7 @@ use Zend\Mvc\Router\Http\TreeRouteStack;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Stdlib\Parameters;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
-use ZendTest\Session\TestAsset\TestManager as SessionManager;
+use ZendTest\Mvc\TestAsset\SessionManager;
 
 class PostRedirectGetTest extends TestCase
 {

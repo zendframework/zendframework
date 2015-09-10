@@ -517,6 +517,12 @@ class Message
                 (is_object($emailOrAddressOrList) ? get_class($emailOrAddressOrList) : gettype($emailOrAddressOrList))
             ));
         }
+
+        if (is_string($emailOrAddressOrList) && $name === null) {
+            $addressList->addFromString($emailOrAddressOrList);
+            return;
+        }
+
         $addressList->add($emailOrAddressOrList, $name);
     }
 

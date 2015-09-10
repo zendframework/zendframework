@@ -10,6 +10,9 @@
 - [zend-inputfilter/25: Fix how missing optoinal fields are validated to match pre 2.4.0 behavior](https://github.com/zendframework/zend-inputfilter/pull/26)
 - [zend-form/12: deprecate AllowEmpty and ContinueIfEmpty annotations, per zend-inputfilter#26](https://github.com/zendframework/zend-form/pull/12)
 - [zend-form/9: fix typos in aria attribute names of AbstractHelper](https://github.com/zendframework/zend-form/pull/9)
+- [zend-mail/26: fixes the ContentType header to properly handle encoded parameter values](https://github.com/zendframework/zend-mail/pull/26)
+- [zend-mail/11: fixes the Sender header to allow mailbox addresses without TLDs](https://github.com/zendframework/zend-mail/pull/11)
+- [zend-mail/24: fixes parsing of messages that contain an initial blank line before headers](https://github.com/zendframework/zend-mail/pull/24)
 
 ## 2.4.7 (2015-08-11)
 

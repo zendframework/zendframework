@@ -199,6 +199,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZF DevTeam', $address->getName());
     }
 
+    public function testCanAddFromAddressUsingEmailAndNameAsString()
+    {
+        $this->message->addFrom('ZF DevTeam <zf-devteam@example.com>');
+        $addresses = $this->message->getFrom();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@example.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
+    }
+
     public function testCanAddFromAddressUsingAddressObject()
     {
         $address = new Address('zf-devteam@example.com', 'ZF DevTeam');

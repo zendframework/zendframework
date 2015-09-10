@@ -10,37 +10,21 @@
 namespace ZendTest\Mail\Header;
 
 use Zend\Mail\Header\ContentType;
+use Zend\Mail\Header\Exception\InvalidArgumentException;
+use Zend\Mail\Header\HeaderInterface;
+use Zend\Mail\Header\UnstructuredInterface;
 
 /**
  * @group      Zend_Mail
  */
 class ContentTypeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testContentTypeFromStringCreatesValidContentTypeHeader()
+    public function testImplementsHeaderInterface()
     {
-        $contentTypeHeader = ContentType::fromString('Content-Type: xxx/yyy');
-        $this->assertInstanceOf('Zend\Mail\Header\HeaderInterface', $contentTypeHeader);
-        $this->assertInstanceOf('Zend\Mail\Header\ContentType', $contentTypeHeader);
-    }
+        $header = new ContentType();
 
-    public function testContentTypeGetFieldNameReturnsHeaderName()
-    {
-        $contentTypeHeader = new ContentType();
-        $this->assertEquals('Content-Type', $contentTypeHeader->getFieldName());
-    }
-
-    public function testContentTypeGetFieldValueReturnsProperValue()
-    {
-        $contentTypeHeader = new ContentType();
-        $contentTypeHeader->setType('foo/bar');
-        $this->assertEquals('foo/bar', $contentTypeHeader->getFieldValue());
-    }
-
-    public function testContentTypeToStringReturnsHeaderFormattedString()
-    {
-        $contentTypeHeader = new ContentType();
-        $contentTypeHeader->setType('foo/bar');
-        $this->assertEquals("Content-Type: foo/bar", $contentTypeHeader->toString());
+        $this->assertInstanceOf('Zend\Mail\Header\UnstructuredInterface', $header);
+        $this->assertInstanceOf('Zend\Mail\Header\HeaderInterface', $header);
     }
 
     /**
@@ -55,26 +39,6 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'), $params);
     }
 
-    public function testProvidingParametersIntroducesHeaderFolding()
-    {
-        $header = new ContentType();
-        $header->setType('application/x-unit-test');
-        $header->addParameter('charset', 'us-ascii');
-        $string = $header->toString();
-
-        $this->assertContains("Content-Type: application/x-unit-test;", $string);
-        $this->assertContains(";\r\n charset=\"us-ascii\"", $string);
-    }
-
-    public function testExtractsExtraInformationFromContentType()
-    {
-        $contentTypeHeader = ContentType::fromString(
-            'Content-Type: multipart/alternative; boundary="Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD"'
-        );
-        $params = $contentTypeHeader->getParameters();
-        $this->assertEquals($params, array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
-    }
-
     public function testExtractsExtraInformationWithoutBeingConfusedByTrailingSemicolon()
     {
         $header = ContentType::fromString('Content-Type: application/pdf;name="foo.pdf";');
@@ -82,53 +46,46 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group #2728
-     *
-     * Tests setting different MIME types
+     * @dataProvider setTypeProvider
      */
-    public function testSetContentType()
+    public function testFromString($type, $parameters, $fieldValue, $expectedToString)
+    {
+        $header = ContentType::fromString($expectedToString);
+
+        $this->assertInstanceOf('Zend\Mail\Header\ContentType', $header);
+        $this->assertEquals('Content-Type', $header->getFieldName(), 'getFieldName() value not match');
+        $this->assertEquals($type, $header->getType(), 'getType() value not match');
+        $this->assertEquals($fieldValue, $header->getFieldValue(), 'getFieldValue() value not match');
+        $this->assertEquals($parameters, $header->getParameters(), 'getParameters() value not match');
+        $this->assertEquals($expectedToString, $header->toString(), 'toString() value not match');
+    }
+
+    /**
+     * @dataProvider setTypeProvider
+     */
+    public function testSetType($type, $parameters, $fieldValue, $expectedToString)
     {
         $header = new ContentType();
 
-        $header->setType('application/vnd.ms-excel');
-        $this->assertEquals('Content-Type: application/vnd.ms-excel', $header->toString());
+        $header->setType($type);
+        foreach ($parameters as $name => $value) {
+            $header->addParameter($name, $value);
+        }
 
-        $header->setType('application/rss+xml');
-        $this->assertEquals('Content-Type: application/rss+xml', $header->toString());
-
-        $header->setType('video/mp4');
-        $this->assertEquals('Content-Type: video/mp4', $header->toString());
-
-        $header->setType('message/rfc822');
-        $this->assertEquals('Content-Type: message/rfc822', $header->toString());
+        $this->assertEquals('Content-Type', $header->getFieldName(), 'getFieldName() value not match');
+        $this->assertEquals($type, $header->getType(), 'getType() value not match');
+        $this->assertEquals($fieldValue, $header->getFieldValue(), 'getFieldValue() value not match');
+        $this->assertEquals($parameters, $header->getParameters(), 'getParameters() value not match');
+        $this->assertEquals($expectedToString, $header->toString(), 'toString() value not match');
     }
 
     /**
-     * @group ZF2015-04
+     * @dataProvider invalidHeaderLinesProvider
      */
-    public function testFromStringRaisesExceptionForInvalidName()
+    public function testFromStringThrowException($headerLine, $expectedException, $exceptionMessage)
     {
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'header name');
-        $header = ContentType::fromString('Content-Type' . chr(32) . ': text/html');
-    }
-
-    public function headerLines()
-    {
-        return array(
-            'newline'      => array("Content-Type: text/html;\nlevel=1"),
-            'cr-lf'        => array("Content-Type: text/html\r\n;level=1",),
-            'multiline'    => array("Content-Type: text/html;\r\nlevel=1\r\nq=0.1"),
-        );
-    }
-
-    /**
-     * @dataProvider headerLines
-     * @group ZF2015-04
-     */
-    public function testFromStringRaisesExceptionForNonFoldingMultilineValues($headerLine)
-    {
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'header value');
-        $header = ContentType::fromString($headerLine);
+        $this->setExpectedException($expectedException, $exceptionMessage);
+        ContentType::fromString($headerLine);
     }
 
     /**
@@ -142,24 +99,66 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2015-04
+     * @dataProvider invalidParametersProvider
      */
-    public function testAddParameterRaisesInvalidArgumentExceptionForInvalidParameterName()
+    public function testAddParameterThrowException($paramName, $paramValue, $expectedException, $exceptionMessage)
     {
         $header = new ContentType();
         $header->setType('text/html');
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'parameter name');
-        $header->addParameter("b\r\na\rr\n", "baz");
+
+        $this->setExpectedException($expectedException, $exceptionMessage);
+        $header->addParameter($paramName, $paramValue);
     }
 
-    /**
-     * @group ZF2015-04
-     */
-    public function testAddParameterRaisesInvalidArgumentExceptionForInvalidParameterValue()
+    public function setTypeProvider()
     {
-        $header = new ContentType();
-        $header->setType('text/html');
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'parameter value');
-        $header->addParameter('foo', "\nbar\r\nbaz\r");
+        $foldingHeaderLine = "Content-Type: foo/baz;\r\n charset=\"us-ascii\"";
+        $foldingFieldValue = "foo/baz;\r\n charset=\"us-ascii\"";
+
+        $encodedHeaderLine = "Content-Type: foo/baz;\r\n name=\"=?UTF-8?Q?=C3=93?=\"";
+        $encodedFieldValue = "foo/baz;\r\n name=\"Ó\"";
+
+        // @codingStandardsIgnoreStart
+        return array(
+            // Description => [$type, $parameters, $fieldValue, toString()]
+            // @group #2728
+            'foo/a.b-c' => array('foo/a.b-c', array(), 'foo/a.b-c', 'Content-Type: foo/a.b-c'),
+            'foo/a+b'   => array('foo/a+b'  , array(), 'foo/a+b'  , 'Content-Type: foo/a+b'),
+            'foo/baz'   => array('foo/baz'  , array(), 'foo/baz'  , 'Content-Type: foo/baz'),
+            'parameter use header folding' => array('foo/baz'  , array('charset' => 'us-ascii'), $foldingFieldValue, $foldingHeaderLine),
+            'encoded characters' => array('foo/baz'  , array('name' => 'Ó'), $encodedFieldValue, $encodedHeaderLine),
+        );
+        // @codingStandardsIgnoreEnd
+    }
+
+    public function invalidParametersProvider()
+    {
+        $invalidArgumentException = 'Zend\Mail\Header\Exception\InvalidArgumentException';
+
+        // @codingStandardsIgnoreStart
+        return array(
+            // Description => [param name, param value, expected exception, exception message contain]
+
+            // @group ZF2015-04
+            'invalid name' => array("b\r\na\rr\n", 'baz', $invalidArgumentException, 'parameter name'),
+        );
+        // @codingStandardsIgnoreEnd
+    }
+
+    public function invalidHeaderLinesProvider()
+    {
+        $invalidArgumentException = 'Zend\Mail\Header\Exception\InvalidArgumentException';
+
+        // @codingStandardsIgnoreStart
+        return array(
+            // Description => [header line, expected exception, exception message contain]
+
+            // @group ZF2015-04
+            'invalid name' => array('Content-Type' . chr(32) . ': text/html', $invalidArgumentException, 'header name'),
+            'newline'   => array("Content-Type: text/html;\nlevel=1", $invalidArgumentException, 'header value'),
+            'cr-lf'     => array("Content-Type: text/html\r\n;level=1", $invalidArgumentException, 'header value'),
+            'multiline' => array("Content-Type: text/html;\r\nlevel=1\r\nq=0.1", $invalidArgumentException, 'header value'),
+        );
+        // @codingStandardsIgnoreEnd
     }
 }

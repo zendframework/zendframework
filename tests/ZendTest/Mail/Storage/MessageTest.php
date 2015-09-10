@@ -39,40 +39,40 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->fail('no exception raised while loading unknown file');
     }
 
-    public function testIsMultipart()
+    /**
+     * @dataProvider filesProvider
+     */
+    public function testIsMultipart($params)
     {
-        $message = new Message(array('file' => $this->_file));
-
+        $message = new Message($params);
         $this->assertTrue($message->isMultipart());
     }
 
-    public function testGetHeader()
+    /**
+     * @dataProvider filesProvider
+     */
+    public function testGetHeader($params)
     {
-        $message = new Message(array('file' => $this->_file));
-
+        $message = new Message($params);
         $this->assertEquals($message->subject, 'multipart');
     }
 
-    public function testGetDecodedHeader()
+    /**
+     * @dataProvider filesProvider
+     */
+    public function testGetDecodedHeader($params)
     {
-        $message = new Message(array('file' => $this->_file));
-
+        $message = new Message($params);
         $this->assertEquals('Peter Müller <peter-mueller@example.com>', $message->from);
     }
 
-    public function testGetHeaderAsArray()
+    /**
+     * @dataProvider filesProvider
+     */
+    public function testGetHeaderAsArray($params)
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals($message->getHeader('subject', 'array'), array('multipart'));
-    }
-
-    public function testGetHeaderFromOpenFile()
-    {
-        $fh = fopen($this->_file, 'r');
-        $message = new Message(array('file' => $fh));
-
-        $this->assertEquals($message->subject, 'multipart');
+        $message = new Message($params);
+        $this->assertEquals(array('multipart'), $message->getHeader('subject', 'array'), 'getHeader() value not match');
     }
 
     public function testGetFirstPart()
@@ -427,5 +427,19 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $raw = file_get_contents($this->_file);
         $raw = "From foo@example.com  Sun Jan 01 00:00:00 2000\n" . $raw;
         $message = new Message(array('raw' => $raw, 'strict' => true));
+    }
+
+    public function filesProvider()
+    {
+        $filePath = __DIR__ . '/../_files/mail.txt';
+        $fileBlankLineOnTop = __DIR__ . '/../_files/mail_blank_top_line.txt';
+
+        return array(
+            // Description => [params]
+            'resource'                    => array(array('file' => fopen($filePath, 'r'))),
+            'file path'                   => array(array('file' => $filePath)),
+            'raw'                         => array(array('raw'  => file_get_contents($filePath))),
+            'file with blank line on top' => array(array('file' => $fileBlankLineOnTop)),
+        );
     }
 }

@@ -42,6 +42,8 @@ class Message extends Part implements Message\MessageInterface
             } else {
                 $params['raw'] = stream_get_contents($params['file']);
             }
+
+            $params['raw'] = ltrim($params['raw']);
         }
 
         if (!empty($params['flags'])) {

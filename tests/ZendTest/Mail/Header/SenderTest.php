@@ -31,7 +31,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validSenderDataProvider
+     * @dataProvider validSenderHeaderDataProvider
      * @group ZF2015-04
      * @param string $email
      * @param null|string $name
@@ -39,7 +39,7 @@ class SenderTest extends \PHPUnit_Framework_TestCase
      * @param string $encodedValue
      * @param string $encoding
      */
-    public function testParseValidSenderHeader($email, $name, $expectedFieldValue, $encodedValue, $encoding)
+    public function testParseValidSenderHeader($expectedFieldValue, $encodedValue, $encoding)
     {
         $header = Header\Sender::fromString('Sender:' . $encodedValue);
 
@@ -143,6 +143,20 @@ class SenderTest extends \PHPUnit_Framework_TestCase
                 'UTF-8'
             ),
         );
+    }
+
+    public function validSenderHeaderDataProvider()
+    {
+        return array_merge(array_map(function ($parameters) {
+            return array_slice($parameters, 2);
+        }, $this->validSenderDataProvider()), array(
+            // Per RFC 2822, 3.4 and 3.6.2, "Sender: foo@bar" is valid.
+            'Unbracketed email' => array(
+                '<foo@bar>',
+                'foo@bar',
+                'ASCII'
+            )
+        ));
     }
 
     public function invalidSenderDataProvider()

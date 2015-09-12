@@ -431,8 +431,15 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreventsCRLFAttackViaConstructor()
     {
-        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
         $header = new SetCookie("leo_auth_token", "example\r\n\r\nevilContent");
+        $this->assertEquals('Set-Cookie: leo_auth_token=example%0D%0A%0D%0AevilContent', $header->toString());
+    }
+
+    public function testPreventsCRLFAttackViaSetValue()
+    {
+        $header = new SetCookie("leo_auth_token");
+        $header->setValue("example\r\n\r\nevilContent");
+        $this->assertEquals('Set-Cookie: leo_auth_token=example%0D%0A%0D%0AevilContent', $header->toString());
     }
 
     public function setterInjections()

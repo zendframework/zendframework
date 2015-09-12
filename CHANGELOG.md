@@ -13,6 +13,7 @@
 - [zend-mail/26: fixes the ContentType header to properly handle encoded parameter values](https://github.com/zendframework/zend-mail/pull/26)
 - [zend-mail/11: fixes the Sender header to allow mailbox addresses without TLDs](https://github.com/zendframework/zend-mail/pull/11)
 - [zend-mail/24: fixes parsing of messages that contain an initial blank line before headers](https://github.com/zendframework/zend-mail/pull/24)
+- [zend-http/23: fixes the SetCookie header to allow multiline values (as they are always encoded)](https://github.com/zendframework/zend-http/pull/23)
 
 ## 2.4.7 (2015-08-11)
 

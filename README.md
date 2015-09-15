@@ -11,13 +11,21 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.4.7*
+*Zend Framework 2.4.8*
 
 This is a maintenance release in the version 2.4 series.
 
-11 August 2015
+15 September 2015
 
-### UPDATES IN 2.4.7
+### UPDATES IN 2.4.8
+
+This release contains a security fix:
+
+- **ZF2015-07**: The filesystem storage adapter of `Zend\Cache` was creating
+  directories with a liberal umask that could lead to local arbitrary code
+  execution and/or local privilege escalation. This release contains a patch
+  that ensures the directories are created using permissions of 0775 and files
+  using 0664 (essentially umask 0002). 
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

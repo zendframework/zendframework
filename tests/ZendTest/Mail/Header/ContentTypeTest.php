@@ -10,9 +10,6 @@
 namespace ZendTest\Mail\Header;
 
 use Zend\Mail\Header\ContentType;
-use Zend\Mail\Header\Exception\InvalidArgumentException;
-use Zend\Mail\Header\HeaderInterface;
-use Zend\Mail\Header\UnstructuredInterface;
 
 /**
  * @group      Zend_Mail

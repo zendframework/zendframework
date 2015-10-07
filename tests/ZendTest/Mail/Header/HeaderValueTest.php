@@ -30,7 +30,8 @@ class HeaderValueTest extends TestCase
             array("This is a\r\r test", "This is a test"),
             array("This is a \r\r\n test", "This is a \r\n test"),
             array("This is a \r\n\r\ntest", "This is a test"),
-            array("This is a \r\n\n\r\n test", "This is a \r\n test")
+            array("This is a \r\n\n\r\n test", "This is a \r\n test"),
+            array("This is a test\r\n", "This is a test"),
         );
     }
 
@@ -50,13 +51,18 @@ class HeaderValueTest extends TestCase
             array("This is a\r test", 'assertFalse'),
             array("This is a\n\r test", 'assertFalse'),
             array("This is a\r\n  test", 'assertTrue'),
+            array("This is a\r\n\ttest", 'assertTrue'),
             array("This is a \r\ntest", 'assertFalse'),
             array("This is a \r\n\n test", 'assertFalse'),
             array("This is a\n\n test", 'assertFalse'),
             array("This is a\r\r test", 'assertFalse'),
             array("This is a \r\r\n test", 'assertFalse'),
             array("This is a \r\n\r\ntest", 'assertFalse'),
-            array("This is a \r\n\n\r\n test", 'assertFalse')
+            array("This is a \r\n\n\r\n test", 'assertFalse'),
+            array("This\tis\ta test", 'assertTrue'),
+            array("This is\ta \r\n test", 'assertTrue'),
+            array("This\tis\ta\ntest", 'assertFalse'),
+            array("This is a \r\t\n \r\n test", 'assertFalse'),
         );
     }
 
@@ -81,7 +87,7 @@ class HeaderValueTest extends TestCase
             array("This is a\r\r test"),
             array("This is a \r\r\n test"),
             array("This is a \r\n\r\ntest"),
-            array("This is a \r\n\n\r\n test")
+            array("This is a \r\n\n\r\n test"),
         );
     }
 

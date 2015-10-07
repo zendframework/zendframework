@@ -763,7 +763,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $text->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
         $text->disposition = Mime::DISPOSITION_INLINE;
         $text->charset = 'UTF-8';
-        
+
         $html = new MimePart('<b>Test content</b>');
         $html->type = Mime::TYPE_HTML;
         $html->encoding = Mime::ENCODING_QUOTEDPRINTABLE;

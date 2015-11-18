@@ -79,18 +79,19 @@ class PrivateKey extends AbstractKey
      * Encrypt using this key
      *
      * @param  string $data
+     * @param  integer $padding
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
-    public function encrypt($data)
+    public function encrypt($data, $padding = OPENSSL_PKCS1_PADDING)
     {
         if (empty($data)) {
             throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
         }
 
         $encrypted = '';
-        $result = openssl_private_encrypt($data, $encrypted, $this->getOpensslKeyResource());
+        $result = openssl_private_encrypt($data, $encrypted, $this->getOpensslKeyResource(), $padding);
         if (false === $result) {
             throw new Exception\RuntimeException(
                 'Can not encrypt; openssl ' . openssl_error_string()
@@ -102,13 +103,18 @@ class PrivateKey extends AbstractKey
 
     /**
      * Decrypt using this key
+     * Starting in 2.4.9/2.5.2, we changed the default padding to
+     * OPENSSL_PKCS1_OAEP_PADDING to prevent Bleichenbacher's chosen-ciphertext
+     * attack.
      *
+     * @see http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf
      * @param  string $data
+     * @param  integer $padding
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
-    public function decrypt($data)
+    public function decrypt($data, $padding = OPENSSL_PKCS1_OAEP_PADDING)
     {
         if (!is_string($data)) {
             throw new Exception\InvalidArgumentException('The data to decrypt must be a string');
@@ -118,7 +124,7 @@ class PrivateKey extends AbstractKey
         }
 
         $decrypted = '';
-        $result = openssl_private_decrypt($data, $decrypted, $this->getOpensslKeyResource());
+        $result = openssl_private_decrypt($data, $decrypted, $this->getOpensslKeyResource(), $padding);
         if (false === $result) {
             throw new Exception\RuntimeException(
                 'Can not decrypt; openssl ' . openssl_error_string()

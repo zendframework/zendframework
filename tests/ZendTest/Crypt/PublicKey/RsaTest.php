@@ -116,13 +116,15 @@ CERT;
 
         $this->userOpenSslConf = realpath(__DIR__ . '/../_files/openssl.cnf');
 
+        $this->privateKey = new Rsa\PrivateKey($this->testPemString);
+
         $rsaOptions = new RsaOptions(array(
-            'private_key'   => new Rsa\PrivateKey($this->testPemString),
+            'private_key'   => $this->privateKey
         ));
         $this->rsa = new Rsa($rsaOptions);
 
         $rsaOptions = new RsaOptions(array(
-            'private_key'   => new Rsa\PrivateKey($this->testPemString),
+            'private_key'   => $this->privateKey,
             'binary_output' => false
         ));
         $this->rsaBase64Out = new Rsa($rsaOptions);
@@ -413,7 +415,7 @@ CERT;
     public function testZf3492Base64DetectDecrypt()
     {
         $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
-        $this->assertEquals('1234567890', $this->rsa->decrypt($data));
+        $this->assertEquals('1234567890', $this->rsa->decrypt($data, null, Rsa::MODE_AUTO, OPENSSL_PKCS1_PADDING));
     }
 
     public function testZf3492Base64DetectVerify()
@@ -425,7 +427,7 @@ CERT;
     public function testDecryptBase64()
     {
         $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
-        $this->assertEquals('1234567890', $this->rsa->decrypt($data, null, Rsa::MODE_BASE64));
+        $this->assertEquals('1234567890', $this->rsa->decrypt($data, null, Rsa::MODE_BASE64, OPENSSL_PKCS1_PADDING));
     }
 
     public function testDecryptCorruptBase64()
@@ -438,7 +440,7 @@ CERT;
     public function testDecryptRaw()
     {
         $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
-        $this->assertEquals('1234567890', $this->rsa->decrypt(base64_decode($data), null, Rsa::MODE_RAW));
+        $this->assertEquals('1234567890', $this->rsa->decrypt(base64_decode($data), null, Rsa::MODE_RAW, OPENSSL_PKCS1_PADDING));
     }
 
     public function testDecryptCorruptRaw()

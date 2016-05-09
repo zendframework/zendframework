@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.10 (2016-05-09)
+
+- Fix HeaderValue throwing an exception on legal characters
+
 ## 2.4.9 (2015-11-23)
 
 ### SECURITY UPDATES

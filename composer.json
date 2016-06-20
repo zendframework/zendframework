@@ -68,7 +68,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.5-dev",
-            "dev-develop": "2.6-dev"
+            "dev-develop": "3.0-dev"
         }
     }
 }

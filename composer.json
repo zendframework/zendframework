@@ -1,7 +1,7 @@
 {
     "name": "zendframework/zendframework",
     "description": "Zend Framework",
-    "type": "library",
+    "type": "metapackage",
     "keywords": [
         "framework",
         "zf2",

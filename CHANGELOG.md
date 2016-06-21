@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 3.0.0 (TBD)
+
+- Updates the minimum supported PHP version to 5.6.
+- Updates all components to latest versions, including v3 releases where
+  present. Also adds the following components:
+  - zend-mvc-console
+  - zend-mvc-plugins
+  - zend-mvc-form
+  - zend-mvc-i18n
+  - zend-json-server
+  - zend-xml2json
+  - zend-diactoros
+  - zend-stratigility
+  - zend-psr7bridge
+  - zend-hydrator
+  - zend-servicemanager-di
+- Removes all `bin/*` scripts.
+
 ## 2.5.3 (2016-01-27)
 
 - [#7665](https://github.com/zendframework/zf2/pull/7665) updates component version constraints from `~2.5.0` to `^2.5` to ensure the latest security updates are always installed.

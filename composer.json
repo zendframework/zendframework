@@ -38,7 +38,7 @@
         "zendframework/zend-json": "^3.0",
         "zendframework/zend-json-server": "^3.0",
         "zendframework/zend-loader": "^2.5.1",
-        "zendframework/zend-log": "^2.8.2",
+        "zendframework/zend-log": "^2.9",
         "zendframework/zend-mail": "^2.7.1",
         "zendframework/zend-math": "^3.0",
         "zendframework/zend-memory": "^2.5.2",

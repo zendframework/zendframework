@@ -44,7 +44,7 @@
         "zendframework/zend-memory": "^2.5.2",
         "zendframework/zend-mime": "^2.6",
         "zendframework/zend-modulemanager": "^2.7.2",
-        "zendframework/zend-mvc": "^3.0",
+        "zendframework/zend-mvc": "^3.0.1",
         "zendframework/zend-mvc-console": "^1.1.9",
         "zendframework/zend-mvc-form": "^1.0",
         "zendframework/zend-mvc-i18n": "^1.0",

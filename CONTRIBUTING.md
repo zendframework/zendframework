@@ -86,7 +86,7 @@ be made accordingly.
 
 If you have encountered a potential security vulnerability, please **DO NOT**
 report it on public issue trackers; instead, send it to us at
-[zf-security@zend.com](mailto:zf-security@zend.com) instead.  We will work with
+[zf-security@zend.com](mailto:zf-security@zend.com) instead. We will work with
 you to verify the vulnerability and patch it as soon as possible.
 
 When reporting issues, please provide the following information:

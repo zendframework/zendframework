@@ -58,6 +58,11 @@ Since Zend Framework is designed with a use-at-will architecture and
 components are loosely coupled, you can select and use only those
 components that are needed for your project.
 
+#### MIGRATION
+
+For detailed information on migration from v2 to v3, please [read our Migration
+Guide](https://docs.zendframework.com/tutorials/migration/to-v3/overview/).
+
 ### COMPONENTS
 
 This package is a metapackage aggregating the following components:

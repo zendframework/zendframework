@@ -27,6 +27,18 @@ shipped with Zend Framework; in most cases, you will want a subset, and these
 may be installed separately; see https://docs.zendframework.com/ for a list of
 available packages and installation instructions for each.
 
+We recommend using either the zend-mvc skeleton application:
+
+```bash
+$ composer create-project zendframework/skeleton-application project
+```
+
+or the Expressive skeleton application:
+
+```bash
+$ composer create-project zendframework/zend-expressive-skeleton project
+```
+
 The primary use case for installing the entire framework is when upgrading from
 a version 2 release.
 
@@ -38,10 +50,8 @@ $ composer require zendframework/zendframework
 
 #### GETTING STARTED
 
-A great place to get up-to-speed quickly is the Zend Framework
-QuickStart:
-
-- https://docs.zendframework.com/tutorials/getting-started/overview/
+A great place to get up-to-speed quickly is the [Zend Framework
+QuickStart](https://docs.zendframework.com/tutorials/getting-started/overview/).
 
 The QuickStart covers some of the most commonly used components of ZF.
 Since Zend Framework is designed with a use-at-will architecture and

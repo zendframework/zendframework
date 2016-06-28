@@ -5,19 +5,17 @@
 If you wish to contribute to Zend Framework, please be sure to
 read/subscribe to the following resources:
 
- -  [Coding Standards](https://github.com/zendframework/zf2/wiki/Coding-Standards)
- -  [Contributor's Guide](http://framework.zend.com/participate/contributor-guide)
- -  ZF Contributor's mailing list:
-    Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
-    Subscribe: zf-contributors-subscribe@lists.zend.com
- -  ZF Contributor's IRC channel:
-    #zftalk.dev on Freenode.net
+ - [Coding Standards](https://github.com/zendframework/zendframework/wiki/Coding-Standards)
+ - [Contributor's Guide](http://framework.zend.com/participate/contributor-guide)
+ - ZF Contributor's IRC channel: #zftalk.dev on Freenode.net
+ - [Code of Conduct](http://github.com/zendframework/zendframework/blob/master/CONDUCT.md)
 
-If you are working on new features or refactoring [create a proposal](https://github.com/zendframework/zf2/issues/new).
+If you are working on new features or refactoring, please create an issue
+detailing the changes on the relevant component repository, as linked below.
 
 ## Components
 
-This package is primarily a meta-package, declaring a host of ZF components as
+This package is a meta-package, declaring a host of ZF components as
 dependencies. These are listed below, with links to each repository; most issues
 and pull requests rightfully belong against the individual components and should
 be made accordingly.
@@ -33,6 +31,7 @@ be made accordingly.
 - [zend-db](https://github.com/zendframework/zend-db)
 - [zend-debug](https://github.com/zendframework/zend-debug)
 - [zend-di](https://github.com/zendframework/zend-di)
+- [zend-diactoros](https://github.com/zendframework/zend-diactoros)
 - [zend-dom](https://github.com/zendframework/zend-dom)
 - [zend-escaper](https://github.com/zendframework/zend-escaper)
 - [zend-eventmanager](https://github.com/zendframework/zend-eventmanager)
@@ -41,10 +40,12 @@ be made accordingly.
 - [zend-filter](https://github.com/zendframework/zend-filter)
 - [zend-form](https://github.com/zendframework/zend-form)
 - [zend-http](https://github.com/zendframework/zend-http)
+- [zend-hydrator](https://github.com/zendframework/zend-hydrator)
 - [zend-i18n](https://github.com/zendframework/zend-i18n)
+- [zend-i18n-resources](https://github.com/zendframework/zend-i18n-resources)
 - [zend-inputfilter](https://github.com/zendframework/zend-inputfilter)
 - [zend-json](https://github.com/zendframework/zend-json)
-- [zend-ldap](https://github.com/zendframework/zend-ldap)
+- [zend-json-server](https://github.com/zendframework/zend-json-server)
 - [zend-loader](https://github.com/zendframework/zend-loader)
 - [zend-log](https://github.com/zendframework/zend-log)
 - [zend-mail](https://github.com/zendframework/zend-mail)
@@ -53,32 +54,40 @@ be made accordingly.
 - [zend-mime](https://github.com/zendframework/zend-mime)
 - [zend-modulemanager](https://github.com/zendframework/zend-modulemanager)
 - [zend-mvc](https://github.com/zendframework/zend-mvc)
+- [zend-mvc-console](https://github.com/zendframework/zend-mvc-console)
+- [zend-mvc-form](https://github.com/zendframework/zend-mvc-form)
+- [zend-mvc-i18n](https://github.com/zendframework/zend-mvc-i18n)
+- [zend-mvc-plugins](https://github.com/zendframework/zend-mvc-plugins)
 - [zend-navigation](https://github.com/zendframework/zend-navigation)
 - [zend-paginator](https://github.com/zendframework/zend-paginator)
 - [zend-permissions-acl](https://github.com/zendframework/zend-permissions-acl)
 - [zend-permissions-rbac](https://github.com/zendframework/zend-permissions-rbac)
 - [zend-progressbar](https://github.com/zendframework/zend-progressbar)
+- [zend-psr7bridge](https://github.com/zendframework/zend-psr7bridge)
 - [zend-serializer](https://github.com/zendframework/zend-serializer)
 - [zend-server](https://github.com/zendframework/zend-server)
 - [zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
+- [zend-servicemanager-di](https://github.com/zendframework/zend-servicemanager-di)
 - [zend-session](https://github.com/zendframework/zend-session)
 - [zend-soap](https://github.com/zendframework/zend-soap)
 - [zend-stdlib](https://github.com/zendframework/zend-stdlib)
+- [zend-stratigility](https://github.com/zendframework/zend-stratigility)
 - [zend-tag](https://github.com/zendframework/zend-tag)
 - [zend-test](https://github.com/zendframework/zend-test)
 - [zend-text](https://github.com/zendframework/zend-text)
 - [zend-uri](https://github.com/zendframework/zend-uri)
 - [zend-validator](https://github.com/zendframework/zend-validator)
-- [zend-version](https://github.com/zendframework/zend-version)
 - [zend-view](https://github.com/zendframework/zend-view)
+- [zend-xml2json](https://github.com/zendframework/zend-xml2json)
 - [zend-xmlrpc](https://github.com/zendframework/zend-xmlrpc)
-- [ZendXml](https://github.com/zendframework/ZendXml)
+- [zendxml](https://github.com/zendframework/zendxml)
 
 ## Reporting Potential Security Issues
 
-If you have encountered a potential security vulnerability, please **DO NOT** report it on the public
-issue tracker: send it to us at [zf-security@zend.com](mailto:zf-security@zend.com) instead.
-We will work with you to verify the vulnerability and patch it as soon as possible.
+If you have encountered a potential security vulnerability, please **DO NOT**
+report it on public issue trackers; instead, send it to us at
+[zf-security@zend.com](mailto:zf-security@zend.com) instead. We will work with
+you to verify the vulnerability and patch it as soon as possible.
 
 When reporting issues, please provide the following information:
 
@@ -100,19 +109,19 @@ pull your work into the master repository. We recommend using
 [GitHub](https://github.com), as that is where the component is already hosted.
 
 1. Setup a [GitHub account](http://github.com/), if you haven't yet
-2. Fork the repository (http://github.com/zendframework/zf2)
+2. Fork the relevant repository
 3. Clone the canonical repository locally and enter it.
 
    ```console
-   $ git clone git://github.com:zendframework/zf2.git
-   $ cd zf2
+   $ git clone git://github.com/zendframework/{component}.git
+   $ cd {component}
    ```
 
 4. Add a remote to your fork; substitute your GitHub username in the command
    below.
 
    ```console
-   $ git remote add {username} git@github.com:{username}/zf2.git
+   $ git remote add {username} git@github.com:{username}/{component}.git
    $ git fetch {username}
    ```
 

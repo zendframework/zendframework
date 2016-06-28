@@ -1,16 +1,16 @@
 ![Logo](https://raw.githubusercontent.com/zendframework/zf2/234b554f2ca202095aea32e4fa557553f8849664/resources/ZendFramework-logo.png)
 
-# Welcome to the *Zend Framework 3.0* Release!
+# Welcome to the *Zend Framework 3.1* Release!
 
 ## RELEASE INFORMATION
 
-*Zend Framework 3.0.0*
+*Zend Framework 3.1.0dev*
 
-This is the third major release for Zend Framework.
+This is the first minor release for the Zend Framework 3 series.
 
-28 June 2016
+DD MMM YYYY
 
-### UPDATES IN 3.0.0
+### UPDATES IN 3.1.0
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

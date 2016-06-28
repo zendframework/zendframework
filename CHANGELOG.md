@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.1 (TBD)
+
+- in progress
+
 ## 3.0.0 (2016-06-28)
 
 - [Read the migration documentation](https://docs.zendframework.com/tutorials/migration/to-v3/overview/).

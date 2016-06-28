@@ -1,7 +1,11 @@
 # CHANGELOG
 
-## 3.0.0 (TBD)
+## 3.0.0 (2016-06-28)
 
+- [Read the migration documentation](https://docs.zendframework.com/tutorials/migration/to-v3/overview/).
+- [Read the recommended quick start](https://docs.zendframework.com/tutorials/getting-started/overview/)
+- Marks the package as a Composer metapackage; this means the package itself
+  will not be installed, only the requirements it defines.
 - Updates the minimum supported PHP version to 5.6.
 - Updates all components to latest versions, including v3 releases where
   present. Also adds the following components:

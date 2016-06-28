@@ -4,11 +4,11 @@
 
 ## RELEASE INFORMATION
 
-*Zend Framework 3.0.0dev*
+*Zend Framework 3.0.0*
 
 This is the third major release for Zend Framework.
 
-DD MMM YYYY
+28 June 2016
 
 ### UPDATES IN 3.0.0
 

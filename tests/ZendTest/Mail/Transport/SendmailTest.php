@@ -10,6 +10,7 @@
 namespace ZendTest\Mail\Transport;
 
 use Zend\Mail\Message;
+use Zend\Mail\Transport\Exception\RuntimeException;
 use Zend\Mail\Transport\Sendmail;
 
 /**
@@ -127,5 +128,29 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
         $message->setEncoding('UTF-8');
         $this->transport->send($message);
         $this->assertEquals('=?UTF-8?Q?Testing=20Zend\Mail\Transport\Sendmail?=', $this->subject);
+    }
+
+    public function testCodeInjectionInFromHeader()
+    {
+        $message = $this->getMessage();
+        $message->setBody('This is the text of the email.');
+        $message->setFrom('"AAA\" code injection"@domain', 'Sender\'s name');
+        $message->addTo('hacker@localhost', 'Name of recipient');
+        $message->setSubject('TestSubject');
+
+        $this->setExpectedException(RuntimeException::class);
+        $this->transport->send($message);
+    }
+
+    public function testValidEmailLocaDomainInFromHeader()
+    {
+        $message = $this->getMessage();
+        $message->setBody('This is the text of the email.');
+        $message->setFrom('"foo-bar"@domain', 'Foo Bar');
+        $message->addTo('hacker@localhost', 'Name of recipient');
+        $message->setSubject('TestSubject');
+
+        $this->transport->send($message);
+        $this->assertContains('From: Foo Bar <"foo-bar"@domain>', $this->additional_headers);
     }
 }

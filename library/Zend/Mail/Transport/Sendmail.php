@@ -14,6 +14,7 @@ use Zend\Mail;
 use Zend\Mail\Address\AddressInterface;
 use Zend\Mail\Exception;
 use Zend\Mail\Header\HeaderInterface;
+use Zend\Mail\Transport\Exception\RuntimeException;
 
 /**
  * Class for sending email via the PHP internal mail() function
@@ -226,6 +227,16 @@ class Sendmail implements TransportInterface
         $headers = clone $message->getHeaders();
         $headers->removeHeader('To');
         $headers->removeHeader('Subject');
+
+        // Sanitize the From header
+        $from = $headers->get('From');
+        if ($from) {
+            foreach ($from->getAddressList() as $address) {
+                if (preg_match('/\\\"/', $address->getEmail())) {
+                    throw new RuntimeException('Potential code injection in From header');
+                }
+            }
+        }
         return $headers->toString();
     }
 

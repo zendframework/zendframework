@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.11 (2016-12-19)
+
+- Fixes ZF2016-04 vulnerability
+
 ## 2.4.10 (2016-05-09)
 
 - Fix HeaderValue throwing an exception on legal characters

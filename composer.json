@@ -16,7 +16,7 @@
         "zendframework/zend-cache": "^2.7.1",
         "zendframework/zend-captcha": "^2.6",
         "zendframework/zend-code": "^3.0.2",
-        "zendframework/zend-config": "^2.6",
+        "zendframework/zend-config": "^3.0",
         "zendframework/zend-console": "^2.6",
         "zendframework/zend-crypt": "^3.0",
         "zendframework/zend-db": "^2.8.1",

@@ -138,7 +138,7 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
         $message->addTo('hacker@localhost', 'Name of recipient');
         $message->setSubject('TestSubject');
 
-        $this->setExpectedException(RuntimeException::class);
+        $this->setExpectedException('Zend\Mail\Transport\Exception\RuntimeException');
         $this->transport->send($message);
     }
 

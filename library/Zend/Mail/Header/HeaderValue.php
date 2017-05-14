@@ -87,7 +87,7 @@ final class HeaderValue
                 $lf = ord($value[$i + 1]);
                 $sp = ord($value[$i + 2]);
 
-                if ($lf !== 10 || ! in_array($sp, [9, 32], true)) {
+                if ($lf !== 10 || ! in_array($sp, array(9, 32), true)) {
                     return false;
                 }
 

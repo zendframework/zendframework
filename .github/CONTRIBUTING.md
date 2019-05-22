@@ -1,14 +1,17 @@
-# CONTRIBUTING
+# CONTRIBUTING to Zend Framework Repositories
+
+This documentation outlines the general procedure for contributing to the
+various Zend Framework components and repositories.
 
 ## RESOURCES
 
 If you wish to contribute to Zend Framework, please be sure to
 read/subscribe to the following resources:
 
- - [Coding Standards](https://github.com/zendframework/zendframework/wiki/Coding-Standards)
- - [Contributor's Guide](http://framework.zend.com/participate/contributor-guide)
- - ZF Contributor's IRC channel: #zftalk.dev on Freenode.net
- - [Code of Conduct](http://github.com/zendframework/zendframework/blob/master/CONDUCT.md)
+ - [Coding Standards](https://github.com/zendframework/zend-coding-standard)
+ - [Forums](https://discourse.zendframework.com/c/contributors)
+ - [Chat](https://zendframework-slack.herokuapp.com)
+ - [Code of Conduct](CODE_OF_CONDUCT.md)
 
 If you are working on new features or refactoring, please create an issue
 detailing the changes on the relevant component repository, as linked below.

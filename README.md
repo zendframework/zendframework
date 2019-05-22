@@ -132,7 +132,7 @@ This package is a metapackage aggregating the following components:
 ### CONTRIBUTING
 
 If you wish to contribute to Zend Framework, please read the
-[CONTRIBUTING.md](CONTRIBUTING.md) and [CONDUCT.md](CONDUCT.md) files.
+[CONTRIBUTING.md](.github/CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) files.
 
 ### QUESTIONS AND FEEDBACK
 
@@ -163,7 +163,7 @@ them with a chance to upgrade and/or update in order to protect their
 applications.
 
 For sensitive email communications, please use
-[our PGP key](http://framework.zend.com/zf-security-pgp-key.asc).
+[our PGP key](https://framework.zend.com/zf-security-pgp-key.asc).
 
 ### LICENSE
 
